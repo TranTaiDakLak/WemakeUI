@@ -56,17 +56,16 @@ function toggle() {
   flex-direction: column;
 }
 .gbox-header {
-  padding: 8px 14px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--wx-brand-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
+  padding: var(--wx-space-2) var(--wx-space-4);
+  font-size: var(--wx-fs-13);
+  font-weight: var(--wx-fw-semibold);
+  color: var(--wx-content-primary);
+  letter-spacing: var(--wx-tracking-normal);
   background: var(--wx-surface-sunken);
   border-bottom: 1px solid var(--wx-border-subtle);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--wx-space-2);
 }
 .gbox-header--clickable {
   cursor: pointer;

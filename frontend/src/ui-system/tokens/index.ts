@@ -44,3 +44,39 @@ export type { SemanticColorToken, SemanticGradientToken } from './semantic'
 // ── Layer 3: Theme Tokens ──────────────────────────────
 export { lightTheme, getDensityVars } from './theme'
 export type { ThemeConfig } from './theme'
+
+// ── Layer 4: Master spec scales (phase 0) ──────────────
+export { space, spaceVar } from './spacing'
+export type { SpaceToken } from './spacing'
+
+export {
+  fontSize,
+  lineHeight,
+  fontWeight,
+  tracking,
+  fsVar,
+  lhVar,
+  fwVar,
+  trackingVar,
+} from './typographyScale'
+export type {
+  FontSizeToken,
+  LineHeightToken,
+  FontWeightToken,
+  TrackingToken,
+} from './typographyScale'
+
+export {
+  duration,
+  easing,
+  dVar,
+  easeVar,
+  transition,
+} from './motionScale'
+export type { DurationToken, EasingToken } from './motionScale'
+
+export { componentRadius, radiusOf, radiusVar } from './radiusMap'
+export type { RadiusKey, ComponentRadiusKey } from './radiusMap'
+
+export { componentShadow, shadowVar, shadowOf } from './elevationMap'
+export type { ShadowKey, ComponentShadowKey } from './elevationMap'

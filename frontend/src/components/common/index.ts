@@ -17,3 +17,24 @@ export { default as BaseTooltip } from './BaseTooltip.vue'
 export { default as BaseBadge } from './BaseBadge.vue'
 export { default as BaseProgress } from './BaseProgress.vue'
 export { default as BaseSkeleton } from './BaseSkeleton.vue'
+
+/* ── phase 1 additions ─────────────────────────────────── */
+export { default as BaseTextarea }    from './BaseTextarea.vue'
+export { default as BaseAvatar }      from './BaseAvatar.vue'
+export { default as BaseAvatarGroup } from './BaseAvatarGroup.vue'
+export { default as BaseSpinner }     from './BaseSpinner.vue'
+export { default as BaseTag }         from './BaseTag.vue'
+export { default as ShimmerBlock }    from './ShimmerBlock.vue'
+
+/* ── phase 2 additions ─────────────────────────────────── */
+export { default as BaseDrawer }      from './BaseDrawer.vue'
+export { default as BasePopover }     from './BasePopover.vue'
+export { default as BaseAccordion }   from './BaseAccordion.vue'
+export { default as BaseBreadcrumb }  from './BaseBreadcrumb.vue'
+export { default as BasePagination }  from './BasePagination.vue'
+export { default as CommandPalette }  from './CommandPalette.vue'
+export type { PaletteItem }           from './CommandPalette.vue'
+
+/* ── phase 3 additions (form & layout primitives) ──────── */
+export { default as BaseCard }  from './BaseCard.vue'
+export { default as BasePanel } from './BasePanel.vue'

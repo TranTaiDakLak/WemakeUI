@@ -165,6 +165,103 @@
   --wx-density-avatar-size: 32px;
   --wx-density-gap: 8px;
   --wx-density-container-pad: 16px;
+
+  /* ════════════════════════════════════════════════════════
+     PHASE 0 — WemakeUI master spec additions
+     - 4pt spacing scale  (--wx-space-*)
+     - typography scale   (--wx-fs-*, --wx-lh-*, --wx-fw-*, --wx-tracking-*)
+     - motion scale       (--wx-d-*, --wx-ease-*)
+     - semantic alias     (--wx-content-*, --wx-bg-*)
+     ════════════════════════════════════════════════════════ */
+
+  /* ── Spacing — 4pt grid ─────────────────────────────── */
+  --wx-space-0: 0;
+  --wx-space-1: 4px;
+  --wx-space-2: 8px;
+  --wx-space-3: 12px;
+  --wx-space-4: 16px;
+  --wx-space-5: 24px;
+  --wx-space-6: 32px;
+  --wx-space-7: 40px;
+  --wx-space-8: 48px;
+  --wx-space-9: 64px;
+  --wx-space-10: 80px;
+  --wx-space-11: 96px;
+  --wx-space-12: 128px;
+
+  /* ── Typography — numeric scale ──────────────────────── */
+  --wx-fs-12: 12px;
+  --wx-fs-13: 13px;
+  --wx-fs-14: 14px;
+  --wx-fs-15: 15px;
+  --wx-fs-16: 16px;
+  --wx-fs-18: 18px;
+  --wx-fs-20: 20px;
+  --wx-fs-24: 24px;
+  --wx-fs-28: 28px;
+  --wx-fs-32: 32px;
+  --wx-fs-40: 40px;
+  --wx-fs-48: 48px;
+  --wx-fs-64: 64px;
+
+  --wx-lh-tight: 1.2;
+  --wx-lh-snug: 1.35;
+  --wx-lh-normal: 1.5;
+  --wx-lh-relaxed: 1.7;
+
+  --wx-fw-regular: 400;
+  --wx-fw-medium: 500;
+  --wx-fw-semibold: 600;
+  --wx-fw-bold: 700;
+
+  --wx-tracking-tight: -0.01em;
+  --wx-tracking-normal: 0;
+  --wx-tracking-wide: 0.02em;
+
+  /* ── Motion — duration & easing ──────────────────────── */
+  --wx-d-instant: 0ms;
+  --wx-d-micro: 100ms;
+  --wx-d-fast: 150ms;
+  --wx-d-normal: 250ms;
+  --wx-d-slow: 400ms;
+  --wx-d-decorative: 700ms;
+
+  --wx-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --wx-ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --wx-ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --wx-ease-bounce: cubic-bezier(0.16, 1, 0.3, 1);
+  --wx-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Semantic alias — content (text) ─────────────────── */
+  --wx-content-primary: var(--wx-text-primary);
+  --wx-content-secondary: var(--wx-text-secondary);
+  --wx-content-muted: var(--wx-text-muted);
+  --wx-content-disabled: var(--wx-text-disabled);
+  --wx-content-inverse: var(--wx-text-inverse);
+  --wx-content-link: var(--wx-text-link);
+
+  /* ── Semantic alias — background ─────────────────────── */
+  --wx-bg-base: var(--wx-surface-base);
+  --wx-bg-raised: var(--wx-surface-elevated);
+  --wx-bg-sunken: var(--wx-surface-sunken);
+  --wx-bg-overlay: var(--wx-surface-overlay);
+}
+
+/* ────────────────────────────────────────────────────────
+   prefers-reduced-motion → tắt tất cả duration phase 0
+   ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --wx-d-micro: 0ms;
+    --wx-d-fast: 0ms;
+    --wx-d-normal: 0ms;
+    --wx-d-slow: 0ms;
+    --wx-d-decorative: 0ms;
+    --wx-duration-fast: 0ms;
+    --wx-duration-normal: 0ms;
+    --wx-duration-slow: 0ms;
+    --wx-duration-decorative: 0ms;
+  }
 }
 
 /* ================================================================

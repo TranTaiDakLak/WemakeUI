@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import BaseToast from './components/common/BaseToast.vue'
-import { useThemeStore } from './stores/theme'
+import { useTheme } from './ui-system/composables/useTheme'
 
-useThemeStore()
+useTheme()
 </script>
 
 <template>

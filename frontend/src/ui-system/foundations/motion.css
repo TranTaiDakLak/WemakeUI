@@ -1,0 +1,111 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ *  WemakeUI — Motion utilities (phase 0)
+ *
+ *  Generic transition classes & helpers built on --wx-d-* / --wx-ease-*.
+ *  prefers-reduced-motion already collapses durations to 0ms in tokens.css.
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ── Transition utilities ─────────────────────────────── */
+.wx-transition,
+[data-wx-transition] {
+  transition-property: color, background-color, border-color, box-shadow,
+    transform, opacity, filter;
+  transition-duration: var(--wx-d-fast);
+  transition-timing-function: var(--wx-ease-standard);
+}
+
+.wx-transition--micro    { transition-duration: var(--wx-d-micro); }
+.wx-transition--fast     { transition-duration: var(--wx-d-fast); }
+.wx-transition--normal   { transition-duration: var(--wx-d-normal); }
+.wx-transition--slow     { transition-duration: var(--wx-d-slow); }
+.wx-transition--decorate { transition-duration: var(--wx-d-decorative); }
+
+.wx-ease--standard   { transition-timing-function: var(--wx-ease-standard); }
+.wx-ease--decelerate { transition-timing-function: var(--wx-ease-decelerate); }
+.wx-ease--accelerate { transition-timing-function: var(--wx-ease-accelerate); }
+.wx-ease--bounce     { transition-timing-function: var(--wx-ease-bounce); }
+.wx-ease--spring     { transition-timing-function: var(--wx-ease-spring); }
+
+/* ── Vue <Transition> helpers ─────────────────────────── */
+
+/* fade */
+.wx-fade-enter-active,
+.wx-fade-leave-active {
+  transition: opacity var(--wx-d-fast) var(--wx-ease-standard);
+}
+.wx-fade-enter-from,
+.wx-fade-leave-to { opacity: 0; }
+
+/* scale-fade — modal */
+.wx-scale-fade-enter-active {
+  transition: opacity var(--wx-d-normal) var(--wx-ease-decelerate),
+              transform var(--wx-d-normal) var(--wx-ease-decelerate);
+}
+.wx-scale-fade-leave-active {
+  transition: opacity var(--wx-d-fast) var(--wx-ease-accelerate),
+              transform var(--wx-d-fast) var(--wx-ease-accelerate);
+}
+.wx-scale-fade-enter-from,
+.wx-scale-fade-leave-to {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+/* slide-up — bulk action bar, bottom sheet */
+.wx-slide-up-enter-active,
+.wx-slide-up-leave-active {
+  transition: opacity var(--wx-d-normal) var(--wx-ease-standard),
+              transform var(--wx-d-normal) var(--wx-ease-standard);
+}
+.wx-slide-up-enter-from,
+.wx-slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+/* slide-down — banner, dropdown */
+.wx-slide-down-enter-active,
+.wx-slide-down-leave-active {
+  transition: opacity var(--wx-d-fast) var(--wx-ease-standard),
+              transform var(--wx-d-fast) var(--wx-ease-standard);
+}
+.wx-slide-down-enter-from,
+.wx-slide-down-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* slide-right — drawer right */
+.wx-slide-right-enter-active,
+.wx-slide-right-leave-active {
+  transition: transform var(--wx-d-normal) var(--wx-ease-standard);
+}
+.wx-slide-right-enter-from,
+.wx-slide-right-leave-to {
+  transform: translateX(100%);
+}
+
+/* shimmer — skeleton */
+@keyframes wx-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.wx-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--wx-surface-sunken) 0%,
+    var(--wx-surface-elevated) 50%,
+    var(--wx-surface-sunken) 100%
+  );
+  background-size: 200% 100%;
+  animation: wx-shimmer 1.4s linear infinite;
+}
+
+/* pulse — optimistic state */
+@keyframes wx-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4); }
+  50%      { box-shadow: 0 0 0 6px rgba(0, 123, 255, 0); }
+}
+.wx-pulse { animation: wx-pulse 1.4s var(--wx-ease-standard) infinite; }

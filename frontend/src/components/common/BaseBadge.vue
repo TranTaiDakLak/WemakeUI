@@ -1,7 +1,8 @@
 <script setup lang="ts">
 defineProps<{
   text?: string | number
-  variant?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'ghost'
+  variant?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'ghost' | 'neutral'
+  size?: 'sm' | 'md'
   dot?: boolean
   pulsing?: boolean
 }>()
@@ -12,6 +13,7 @@ defineProps<{
     class="base-badge"
     :class="[
       `base-badge--${variant ?? 'primary'}`,
+      `base-badge--${size ?? 'md'}`,
       { 'base-badge--dot': dot, 'base-badge--pulsing': pulsing }
     ]"
   >
@@ -39,6 +41,10 @@ defineProps<{
 .base-badge--danger { background: rgba(239, 68, 68, 0.15); color: var(--wx-danger-solid); }
 .base-badge--info { background: rgba(59, 130, 246, 0.15); color: var(--wx-brand-primary); }
 .base-badge--ghost { background: transparent; color: var(--wx-text-secondary); border: 1px solid var(--wx-border-default); }
+.base-badge--neutral { background: var(--wx-neutral-bg); color: var(--wx-neutral-text); border: 1px solid var(--wx-neutral-border); }
+
+.base-badge--sm { font-size: 10px; padding: 1px 6px; }
+.base-badge--md { font-size: 11px; padding: 2px 8px; }
 
 /* Dot Variant */
 .base-badge--dot {

@@ -89,6 +89,19 @@
   --wx-scrollbar-thumb: #475569;
   --wx-scrollbar-thumb-hover: #64748b;
 
+  /* ── Semantic alias dark (re-bind to dark text/surface) ── */
+  --wx-content-primary: var(--wx-text-primary);
+  --wx-content-secondary: var(--wx-text-secondary);
+  --wx-content-muted: var(--wx-text-muted);
+  --wx-content-disabled: var(--wx-text-disabled);
+  --wx-content-inverse: var(--wx-text-inverse);
+  --wx-content-link: var(--wx-text-link);
+
+  --wx-bg-base: var(--wx-surface-base);
+  --wx-bg-raised: var(--wx-surface-elevated);
+  --wx-bg-sunken: var(--wx-surface-sunken);
+  --wx-bg-overlay: var(--wx-surface-overlay);
+
   /* ── Body override ──────────────────────────────────── */
   color-scheme: dark;
 }

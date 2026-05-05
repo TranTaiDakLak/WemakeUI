@@ -4,7 +4,7 @@ import { computed } from 'vue'
 const props = withDefaults(defineProps<{
   value: number
   max?: number
-  variant?: 'primary' | 'success' | 'warning' | 'error'
+  variant?: 'primary' | 'success' | 'warning' | 'error' | 'danger'
   size?: 'sm' | 'md' | 'lg'
   striped?: boolean
   animated?: boolean
@@ -69,7 +69,8 @@ const percent = computed(() => Math.min(100, Math.max(0, (props.value / props.ma
 .base-progress__fill--primary { background: var(--brand-primary); }
 .base-progress__fill--success { background: var(--success-color); }
 .base-progress__fill--warning { background: var(--warning-color); }
-.base-progress__fill--error { background: var(--error-color); }
+.base-progress__fill--error,
+.base-progress__fill--danger { background: var(--error-color); }
 
 /* Striped */
 .base-progress__fill--striped {

@@ -18,11 +18,35 @@ import './style.css'
 // ── Common Components ──────────────────────────────────────────
 export * from './components/common'
 
+// ── Layout Components ──────────────────────────────────────────
+export * from './components/layout'
+
+// ── Platform Components ────────────────────────────────────────
+export * from './components/platform'
+
+// ── Data Components (phase 4) ──────────────────────────────────
+export * from './components/data'
+
+// ── Chart Components ───────────────────────────────────────────
+export * from './components/charts'
+
+// ── Phase 5 — Feedback / Async / Permission ────────────────────
+export * from './components/feedback'
+export * from './components/async'
+export * from './components/permission'
+
 // ── Composables ────────────────────────────────────────────────
 export * from './composables'
 
+// ── Directives ─────────────────────────────────────────────────
+export { vCan, vFlag, registerDirectives } from './directives'
+
 // ── Design Tokens ──────────────────────────────────────────────
 export * from './ui-system/tokens'
+
+// ── Theme Composable ───────────────────────────────────────────
+export { useTheme } from './ui-system/composables/useTheme'
+export type { Theme } from './ui-system/composables/useTheme'
 
 // ── Utilities ──────────────────────────────────────────────────
 export { cn } from './ui-system/utils'

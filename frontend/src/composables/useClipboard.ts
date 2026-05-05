@@ -1,6 +1,7 @@
 /**
  * Composable for clipboard operations.
- * Works in both Wails WebView (non-HTTPS) and dev browser,
+ * Cross-platform: works in browsers, mobile WebViews, and desktop
+ * shells (Wails / Tauri / Electron) including non-HTTPS contexts,
  * with fallback to textarea + execCommand.
  */
 export function useClipboard() {
@@ -14,7 +15,7 @@ export function useClipboard() {
         navigator.clipboard.writeText(text)
         return true
       }
-      // Fallback: textarea + execCommand (for non-HTTPS / Wails WebView)
+      // Fallback: textarea + execCommand (for non-HTTPS / desktop WebView)
       const ta = document.createElement('textarea')
       ta.value = text
       ta.style.position = 'fixed'

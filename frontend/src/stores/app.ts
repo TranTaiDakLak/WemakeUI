@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
 export const useAppStore = defineStore('app', () => {
-  const appName = ref('WeConnect')
-  const appVersion = ref('1.0.0')
+  const appName = ref('WemakeUI')
+  const appVersion = ref('0.1.0')
 
   /* ── Sidebar ─────────────────────────── */
   const sidebarCollapsed = ref(false)
@@ -13,12 +13,12 @@ export const useAppStore = defineStore('app', () => {
     sidebarCollapsed.value = !sidebarCollapsed.value
   }
 
-  /* ── Mock user ───────────────────────── */
-  const user = ref({
-    name: 'Hoàng Phong',
-    email: 'hoangphong@wemake.vn',
-    avatar: '',
-  })
+  /* ── Optional user (set by host app) ── */
+  const user = ref<{ name: string; email: string; avatar?: string } | null>(null)
+
+  function setUser(value: typeof user.value) {
+    user.value = value
+  }
 
   return {
     appName,
@@ -27,5 +27,6 @@ export const useAppStore = defineStore('app', () => {
     sidebarWidth,
     toggleSidebar,
     user,
+    setUser,
   }
 })

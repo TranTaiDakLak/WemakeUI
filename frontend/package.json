@@ -1,30 +1,81 @@
 {
-  "name": "frontend",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@wemake/ui",
+  "private": false,
+  "version": "0.1.0",
+  "description": "WemakeUI — cross-platform Vue 3 UI kit for web, mobile, and desktop applications.",
   "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "vue3",
+    "ui",
+    "ui-kit",
+    "components",
+    "design-system",
+    "cross-platform",
+    "web",
+    "mobile",
+    "desktop"
+  ],
+  "files": [
+    "dist-lib",
+    "src"
+  ],
+  "main": "./dist-lib/wemake-ui.umd.js",
+  "module": "./dist-lib/wemake-ui.es.js",
+  "types": "./dist-lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist-lib/index.d.ts",
+      "import": "./dist-lib/wemake-ui.es.js",
+      "require": "./dist-lib/wemake-ui.umd.js"
+    },
+    "./style.css": "./dist-lib/style.css",
+    "./tokens": {
+      "types": "./src/ui-system/tokens/index.ts",
+      "import": "./src/ui-system/tokens/index.ts"
+    },
+    "./foundations": "./src/ui-system/foundations/index.ts",
+    "./foundations/style.css": "./src/style.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:app": "vue-tsc --noEmit && vite build",
+    "build:lib": "vue-tsc --noEmit && vite build --mode lib",
+    "build": "npm run build:app",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.0"
+  },
+  "peerDependenciesMeta": {
+    "vue-router": {
+      "optional": true
+    },
+    "pinia": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@vueuse/core": "^14.2.1",
-    "lucide-vue-next": "^1.0.0",
+    "lucide-vue-next": "^1.0.0"
+  },
+  "optionalDependencies": {
     "pinia": "^3.0.4",
-    "vue": "^3.2.37",
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@babel/types": "^7.18.10",
     "@vitejs/plugin-vue": "^3.0.3",
+    "pinia": "^3.0.4",
     "typescript": "^4.6.4",
     "vite": "^3.0.7",
+    "vue": "^3.2.37",
+    "vue-router": "^4.6.4",
     "vue-tsc": "^1.8.27"
-  },
-  "description": "This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.",
-  "main": "postcss.config.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  }
 }

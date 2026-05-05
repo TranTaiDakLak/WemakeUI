@@ -2,13 +2,12 @@ import { ref, computed } from 'vue'
 import type { CellRef } from '../types'
 
 /**
- * Composable for row highlighting and cell selection.
- * Matches C# WeFacebook dgvAccount_SelectionChanged behavior:
- * - Click = select one row
- * - Shift+Click = range select
- * - Ctrl+Click = toggle
- * - Drag = range highlight
- * - Cell click with Shift/Ctrl for multi-cell
+ * Row highlighting + cell selection for data grids.
+ * - Click          → select one row
+ * - Shift+Click    → range select
+ * - Ctrl/Cmd+Click → toggle
+ * - Drag           → range highlight
+ * - Cell click     → Shift/Ctrl for multi-cell
  */
 export function useSelection(columnKeys: readonly string[]) {
   // Row highlighting ("Bôi đen")

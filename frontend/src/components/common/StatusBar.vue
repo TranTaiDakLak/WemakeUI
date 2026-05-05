@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { AccountStats } from '../../types'
+import type { GridStats } from '../../types'
 
 const props = withDefaults(defineProps<{
-  stats?: AccountStats
+  stats?: GridStats
   statusText?: string
   userName?: string
   expiryDate?: string

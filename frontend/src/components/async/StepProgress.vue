@@ -90,6 +90,14 @@ function stepOverride(s: Props['steps'][number]) {
   flex: 1;
   min-width: 0;
 }
+
+/* Horizontal: marker on top, body centered below — prevents text overlap */
+.wx-step-progress[data-orientation='horizontal'] .wx-step {
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding-bottom: var(--wx-space-2);
+}
 .wx-step-progress[data-orientation='vertical'] .wx-step {
   align-items: flex-start;
   padding-bottom: var(--wx-space-4);
@@ -123,14 +131,30 @@ function stepOverride(s: Props['steps'][number]) {
   padding-top: 2px;
   min-width: 0;
 }
+/* Horizontal body: centered, truncate long labels */
+.wx-step-progress[data-orientation='horizontal'] .wx-step__body {
+  text-align: center;
+  padding-top: var(--wx-space-2);
+  width: 100%;
+}
 .wx-step__label {
   font-size: var(--wx-fs-13);
   font-weight: var(--wx-fw-medium);
   color: var(--wx-text-secondary);
 }
+.wx-step-progress[data-orientation='horizontal'] .wx-step__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .wx-step__desc {
   font-size: var(--wx-fs-12);
   color: var(--wx-text-muted);
+}
+.wx-step-progress[data-orientation='horizontal'] .wx-step__desc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .wx-step__connector {
@@ -139,14 +163,23 @@ function stepOverride(s: Props['steps'][number]) {
   z-index: 0;
   transition: background var(--wx-d-fast) var(--wx-ease-standard);
 }
+/* Horizontal connector: from right edge of this marker to left edge of next marker */
 .wx-step-progress[data-orientation='horizontal'] .wx-step__connector {
   height: 2px;
   top: 11px;
-  left: calc(24px + var(--wx-space-2));
-  right: calc(-1 * var(--wx-space-2));
+  left: calc(50% + 12px);
+  right: calc(-50% + 12px);
 }
-.wx-step-progress[data-orientation='horizontal'][data-size='sm'] .wx-step__connector { top: 9px; left: calc(20px + var(--wx-space-2)); }
-.wx-step-progress[data-orientation='horizontal'][data-size='lg'] .wx-step__connector { top: 15px; left: calc(32px + var(--wx-space-2)); }
+.wx-step-progress[data-orientation='horizontal'][data-size='sm'] .wx-step__connector {
+  top: 9px;
+  left: calc(50% + 10px);
+  right: calc(-50% + 10px);
+}
+.wx-step-progress[data-orientation='horizontal'][data-size='lg'] .wx-step__connector {
+  top: 15px;
+  left: calc(50% + 16px);
+  right: calc(-50% + 16px);
+}
 .wx-step-progress[data-orientation='vertical'] .wx-step__connector {
   width: 2px;
   left: 11px;

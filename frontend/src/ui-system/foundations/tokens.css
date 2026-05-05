@@ -19,6 +19,18 @@
   --wx-brand-accent: #06b6d4;
   --wx-brand-focus: #007bff;
 
+  /* Brand color scale (Tailwind blue) */
+  --wx-brand-50:  #eff6ff;
+  --wx-brand-100: #dbeafe;
+  --wx-brand-200: #bfdbfe;
+  --wx-brand-300: #93c5fd;
+  --wx-brand-400: #60a5fa;
+  --wx-brand-500: #3b82f6;
+  --wx-brand-600: #2563eb;
+  --wx-brand-700: #1d4ed8;
+  --wx-brand-800: #1e40af;
+  --wx-brand-900: #1e3a8a;
+
   /* ── Gradients ──────────────────────────────────────── */
   --wx-gradient-bg: linear-gradient(to right, #7ecff1, #9cc9f5, #95def5);
   --wx-gradient-header: linear-gradient(to right, #06b6d4, #3b82f6, #2563eb);
@@ -87,6 +99,16 @@
   --wx-neutral-text: #4b5563;
   --wx-neutral-solid: #6b7280;
   --wx-neutral-border: #e5e7eb;
+
+  /* ── Status aliases (--wx-status-* → canonical tokens) ─ */
+  --wx-status-success-text: var(--wx-success-text);
+  --wx-status-success-border: var(--wx-success-solid);
+  --wx-status-danger-text: var(--wx-danger-text);
+  --wx-status-danger-border: var(--wx-danger-solid);
+  --wx-status-warning-text: var(--wx-warning-text);
+  --wx-status-warning-border: var(--wx-warning-solid);
+  --wx-status-info-text: var(--wx-info-text);
+  --wx-status-info-border: var(--wx-info-solid);
 
   /* ── Interactive States ─────────────────────────────── */
   --wx-selected-bg: #ecf3fd;

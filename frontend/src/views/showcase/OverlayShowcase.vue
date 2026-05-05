@@ -120,8 +120,8 @@ const popForm = reactive({ name: '', tag: '' })
         <div class="row">
           <BaseButton variant="success" @click="showToast('success', 'đã lưu thành công')">success</BaseButton>
           <BaseButton variant="danger"  @click="showToast('error',   'không lưu được')">error</BaseButton>
-          <BaseButton                   @click="showToast('warning', 'sắp hết hạn dùng thử')">warning</BaseButton>
-          <BaseButton variant="ghost"   @click="showToast('info',    'có cập nhật mới')">info</BaseButton>
+          <button class="toast-btn toast-btn--warning" @click="showToast('warning', 'sắp hết hạn dùng thử')">warning</button>
+          <button class="toast-btn toast-btn--info"    @click="showToast('info',    'có cập nhật mới')">info</button>
           <BaseButton variant="secondary" @click="
             showToast('info','toast 1');
             showToast('success','toast 2');
@@ -271,6 +271,16 @@ const popForm = reactive({ name: '', tag: '' })
   font-size: var(--wx-fs-14);
   margin: 0 0 var(--wx-space-3);
 }
+.toast-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0 var(--wx-space-4); height: 36px; border-radius: var(--wx-radius-md);
+  font-size: var(--wx-fs-14); font-weight: var(--wx-fw-medium); font-family: var(--wx-font-primary);
+  border: none; cursor: pointer; transition: filter 0.15s;
+}
+.toast-btn:hover { filter: brightness(1.1); }
+.toast-btn--warning { background: var(--wx-warning-solid); color: #fff; }
+.toast-btn--info    { background: var(--wx-info-solid);    color: #fff; }
+
 .row {
   display: flex;
   flex-wrap: wrap;

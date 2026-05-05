@@ -9,9 +9,9 @@ const mobileOpen = ref(false)
 
 const NAV = [
   { label: 'Tính năng', href: '#/landing/features' },
-  { label: 'Giá',       href: '#/landing/pricing' },
+  { label: 'Giá',       href: '#/app/pricing' },
   { label: 'Blog',      href: '#/landing/blog' },
-  { label: 'Tài liệu',  href: '#/landing/docs' },
+  { label: 'Tài liệu',  href: '#/landing/api' },
   { label: 'Liên hệ',   href: '#/landing/contact' },
 ]
 

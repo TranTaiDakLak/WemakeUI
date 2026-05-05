@@ -40,6 +40,8 @@ const { isDark, toggleTheme } = useTheme()
 
 <style scoped>
 .topbar {
+  position: sticky;
+  top: 0;
   height: var(--wx-density-header-height, 56px);
   display: flex;
   align-items: center;

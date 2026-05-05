@@ -38,3 +38,8 @@ export type { PaletteItem }           from './CommandPalette.vue'
 /* ── phase 3 additions (form & layout primitives) ──────── */
 export { default as BaseCard }  from './BaseCard.vue'
 export { default as BasePanel } from './BasePanel.vue'
+
+/* ── phase 9 additions (form popup patterns) ───────────── */
+export { default as FormModal }     from './FormModal.vue'
+export { default as FormDrawer }    from './FormDrawer.vue'
+export { default as ConfirmDialog } from './ConfirmDialog.vue'

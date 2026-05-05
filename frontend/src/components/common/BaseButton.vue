@@ -1,10 +1,12 @@
 <script setup lang="ts">
-const props = defineProps<{
-  variant?: 'primary' | 'secondary' | 'danger' | 'ghost' | 'text' | 'success' | 'cta'
-  size?: 'sm' | 'md' | 'lg'
+defineProps<{
+  variant?: 'primary' | 'secondary' | 'neutral' | 'ghost' | 'danger' | 'success' | 'warning' | 'cta' | 'link' | 'text'
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'icon'
+  type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
   loading?: boolean
   icon?: string
+  iconRight?: string
   block?: boolean
 }>()
 
@@ -19,17 +21,17 @@ defineEmits<{
     :class="[
       `wx-btn--${variant ?? 'primary'}`,
       `wx-btn--${size ?? 'md'}`,
-      { 'wx-btn--loading': loading, 'wx-btn--block': block }
+      { 'wx-btn--loading': loading, 'wx-btn--block': block },
     ]"
+    :type="type ?? 'button'"
     :disabled="disabled || loading"
     @click="$emit('click', $event)"
   >
-    <span v-if="loading" class="wx-btn__spinner" />
-    <span v-if="icon && !loading" class="wx-btn__icon" v-html="icon" />
-    <span class="wx-btn__label"><slot /></span>
-
-    <!-- Shine sweep for gradient buttons -->
-    <span v-if="variant === 'primary' || variant === 'cta'" class="wx-btn__shine" />
+    <span v-if="loading" class="wx-btn__spinner" aria-hidden="true" />
+    <span v-else-if="icon" class="wx-btn__icon" v-html="icon" aria-hidden="true" />
+    <span v-if="$slots.default" class="wx-btn__label"><slot /></span>
+    <span v-if="iconRight && !loading" class="wx-btn__icon" v-html="iconRight" aria-hidden="true" />
+    <span v-if="variant === 'primary' || variant === 'cta'" class="wx-btn__shine" aria-hidden="true" />
   </button>
 </template>
 
@@ -39,129 +41,198 @@ defineEmits<{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: var(--wx-space-2, 8px);
   border: none;
-  border-radius: 12px;
-  font-family: var(--wx-font-primary, 'Inter', sans-serif);
-  font-weight: 700;
+  border-radius: var(--wx-radius-lg);
+  font-family: var(--wx-font-primary);
+  font-weight: var(--wx-fw-semibold);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background var(--wx-duration-fast) var(--wx-easing-default),
+    box-shadow var(--wx-duration-fast) var(--wx-easing-default),
+    transform var(--wx-duration-fast) var(--wx-easing-default),
+    border-color var(--wx-duration-fast) var(--wx-easing-default),
+    filter var(--wx-duration-fast) var(--wx-easing-default),
+    color var(--wx-duration-fast) var(--wx-easing-default);
   white-space: nowrap;
   line-height: 1;
   overflow: hidden;
+  letter-spacing: var(--wx-tracking-normal, 0);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Accessibility: focus ring */
+.wx-btn:focus-visible {
+  outline: 2px solid var(--wx-brand-focus);
+  outline-offset: 2px;
 }
 
 .wx-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: not-allowed;
   pointer-events: none;
 }
 
 .wx-btn:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: scale(0.975);
 }
 
 .wx-btn--block { width: 100%; }
 
-/* ── Sizes (match WX: sm/md/lg) ── */
-.wx-btn--sm { padding: 6px 12px; font-size: 12px; gap: 6px; }
-.wx-btn--md { padding: 10px 20px; font-size: 14px; gap: 8px; }
-.wx-btn--lg { padding: 14px 24px; font-size: 16px; gap: 10px; }
+/* ── Sizes ── */
+.wx-btn--sm   { padding: 6px 13px;  font-size: var(--wx-fs-12); gap: 5px;  min-height: 30px; }
+.wx-btn--md   { padding: 9px 18px;  font-size: var(--wx-fs-14); gap: 7px;  min-height: 36px; }
+.wx-btn--lg   { padding: 11px 22px; font-size: var(--wx-fs-15); gap: 8px;  min-height: 42px; }
+.wx-btn--xl   { padding: 14px 28px; font-size: var(--wx-fs-16); gap: 10px; min-height: 52px; border-radius: var(--wx-radius-xl); }
+.wx-btn--icon {
+  padding: 0;
+  width: 36px; height: 36px;
+  border-radius: var(--wx-radius-md);
+  flex-shrink: 0;
+}
 
-/* ── Primary — cyan→blue gradient + glow ── */
+/* ── Primary — gradient button token ── */
 .wx-btn--primary {
-  background: linear-gradient(to right, #06b6d4, #3b82f6);
-  color: #fff;
-  box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.25);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--wx-gradient-button);
+  color: var(--wx-text-inverse);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(37, 99, 235, 0.28);
 }
 .wx-btn--primary:hover:not(:disabled) {
-  box-shadow: 0 15px 25px -5px rgba(59, 130, 246, 0.4);
-  filter: brightness(1.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 20px -2px rgba(37, 99, 235, 0.42);
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+}
+.wx-btn--primary:active:not(:disabled) {
+  filter: brightness(0.95);
+  transform: scale(0.975);
 }
 
 /* ── CTA — deeper gradient ── */
 .wx-btn--cta {
-  background: linear-gradient(to right, #00d2ff, #3a7bd5, #0052D4);
-  color: #fff;
-  box-shadow: 0 10px 20px -5px rgba(58, 123, 213, 0.4);
+  background: var(--wx-gradient-cta);
+  color: var(--wx-text-inverse);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 14px -2px rgba(58, 123, 213, 0.35);
 }
 .wx-btn--cta:hover:not(:disabled) {
-  box-shadow: 0 15px 25px -5px rgba(58, 123, 213, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 22px -2px rgba(58, 123, 213, 0.5);
   transform: translateY(-1px);
 }
+.wx-btn--cta:active:not(:disabled) {
+  transform: translateY(0) scale(0.975);
+}
 
-/* ── Secondary — white card ── */
+/* ── Secondary — surface card ── */
 .wx-btn--secondary {
-  background: #fff;
-  color: #334155;
-  font-weight: 600;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background: var(--wx-surface-elevated);
+  color: var(--wx-text-primary);
+  border: 1px solid var(--wx-border-default);
+  box-shadow: var(--wx-shadow-sm);
 }
 .wx-btn--secondary:hover:not(:disabled) {
-  background: #f8fafc;
-  border-color: #cbd5e1;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  background: var(--wx-hover-bg);
+  box-shadow: var(--wx-shadow-md);
+  transform: translateY(-1px);
+}
+.wx-btn--secondary:active:not(:disabled) {
+  transform: scale(0.975);
+}
+
+/* ── Neutral — subtle filled ── */
+.wx-btn--neutral {
+  background: var(--wx-neutral-bg);
+  color: var(--wx-neutral-text);
+  border: 1px solid var(--wx-neutral-border);
+}
+.wx-btn--neutral:hover:not(:disabled) {
+  background: var(--wx-hover-bg);
+  color: var(--wx-text-primary);
+  border-color: var(--wx-border-default);
 }
 
 /* ── Ghost — transparent ── */
 .wx-btn--ghost {
   background: transparent;
-  color: #4b5563;
-  font-weight: 500;
+  color: var(--wx-text-secondary);
 }
 .wx-btn--ghost:hover:not(:disabled) {
-  background: #f3f4f6;
-  color: #111827;
+  background: var(--wx-hover-bg);
+  color: var(--wx-text-primary);
 }
 
-/* ── Text — minimal ── */
-.wx-btn--text {
-  background: transparent;
-  color: #6b7280;
-  font-weight: 500;
-}
-.wx-btn--text:hover:not(:disabled) {
-  background: #f3f4f6;
-  color: #374151;
-}
-
-/* ── Danger — rose→red gradient ── */
+/* ── Danger — gradient ── */
 .wx-btn--danger {
-  background: linear-gradient(to right, #f43f5e, #dc2626);
-  color: #fff;
-  box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.25);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--wx-gradient-danger);
+  color: var(--wx-text-inverse);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(220, 38, 38, 0.25);
 }
 .wx-btn--danger:hover:not(:disabled) {
-  box-shadow: 0 15px 25px -5px rgba(239, 68, 68, 0.4);
-  filter: brightness(1.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 20px -2px rgba(220, 38, 38, 0.4);
+  filter: brightness(1.07);
+  transform: translateY(-1px);
 }
+.wx-btn--danger:active:not(:disabled) { transform: scale(0.975); }
 
-/* ── Success — emerald→green gradient ── */
+/* ── Success — gradient ── */
 .wx-btn--success {
-  background: linear-gradient(to right, #10b981, #059669);
-  color: #fff;
-  box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.25);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--wx-gradient-success);
+  color: var(--wx-text-inverse);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(22, 163, 74, 0.25);
 }
 .wx-btn--success:hover:not(:disabled) {
-  box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.4);
-  filter: brightness(1.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 20px -2px rgba(22, 163, 74, 0.4);
+  filter: brightness(1.07);
 }
 
-/* ── Shine sweep ── */
+/* ── Warning — gradient ── */
+.wx-btn--warning {
+  background: var(--wx-gradient-warning);
+  color: var(--wx-text-inverse);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(217, 119, 6, 0.25);
+}
+.wx-btn--warning:hover:not(:disabled) {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 20px -2px rgba(217, 119, 6, 0.4);
+  filter: brightness(1.07);
+}
+
+/* ── Link / Text — text link minimal ── */
+.wx-btn--text {
+  background: transparent;
+  color: var(--wx-text-secondary);
+  padding-left: 4px;
+  padding-right: 4px;
+  font-weight: var(--wx-fw-medium);
+  overflow: visible;
+}
+.wx-btn--text:hover:not(:disabled) {
+  background: var(--wx-hover-bg);
+  color: var(--wx-text-primary);
+}
+
+.wx-btn--link {
+  background: transparent;
+  color: var(--wx-text-link);
+  padding-left: 4px;
+  padding-right: 4px;
+  font-weight: var(--wx-fw-medium);
+  overflow: visible;
+}
+.wx-btn--link:hover:not(:disabled) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Shine sweep — primary & cta only ── */
 .wx-btn__shine {
   position: absolute;
   inset: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(calc(-100% - 2px));
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
   pointer-events: none;
-  transition: transform 0.7s ease;
+  transition: transform var(--wx-duration-decorative) var(--wx-easing-accelerate, ease-in);
 }
 .wx-btn:hover .wx-btn__shine {
-  transform: translateX(100%);
+  transform: translateX(calc(100% + 2px));
 }
 
 /* ── Spinner ── */
@@ -170,29 +241,33 @@ defineEmits<{
   height: 14px;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-top-color: currentColor;
-  border-radius: 50%;
-  animation: wx-spin 0.6s linear infinite;
+  border-radius: var(--wx-radius-full);
+  animation: wx-btn-spin 0.6s linear infinite;
+  flex-shrink: 0;
 }
-@keyframes wx-spin { to { transform: rotate(360deg); } }
+@keyframes wx-btn-spin { to { transform: rotate(360deg); } }
 
 .wx-btn__icon {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
 }
+
 .wx-btn__label {
   position: relative;
   z-index: 1;
 }
 
-/* ── Dark mode overrides ── */
+/* ── Dark mode ── */
 .wx-dark .wx-btn--secondary {
   background: var(--wx-surface-elevated);
   color: var(--wx-text-primary);
   border-color: var(--wx-border-default);
 }
-.wx-dark .wx-btn--secondary:hover:not(:disabled) {
-  background: var(--wx-hover-bg);
-}
+.wx-dark .wx-btn--secondary:hover:not(:disabled) { background: var(--wx-hover-bg); }
+.wx-dark .wx-btn--neutral { background: var(--wx-neutral-bg); color: var(--wx-neutral-text); }
 .wx-dark .wx-btn--ghost:hover:not(:disabled) {
   background: var(--wx-hover-bg);
   color: var(--wx-text-primary);

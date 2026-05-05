@@ -87,7 +87,9 @@ function onClick(e: MouseEvent) {
     </header>
 
     <div class="wx-card__body" data-part="body">
-      <slot />
+      <slot name="body">
+        <slot />
+      </slot>
     </div>
 
     <footer v-if="$slots.footer" class="wx-card__footer" data-part="footer">

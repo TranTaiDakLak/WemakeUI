@@ -3,7 +3,7 @@
  * Phase 1 — Base primitives showcase.
  * Hiển thị 15 primitive với các state (default / hover / focus / disabled / loading / invalid / empty).
  */
-import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
+import { ref, reactive } from 'vue'
 import AppTopbar from '../../components/layout/AppTopbar.vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import {
@@ -41,65 +41,12 @@ const planRadioOptions = [
   { value: 'custom', label: 'tuỳ chỉnh' },
 ]
 
-/* ─── anchor nav ──────────────────────────────────────── */
-const sections = [
-  { id: 'button', label: 'button' },
-  { id: 'input', label: 'input' },
-  { id: 'textarea', label: 'textarea' },
-  { id: 'select', label: 'select' },
-  { id: 'checkbox', label: 'checkbox' },
-  { id: 'radio', label: 'radio' },
-  { id: 'toggle', label: 'toggle' },
-  { id: 'badge', label: 'badge' },
-  { id: 'avatar', label: 'avatar' },
-  { id: 'spinner', label: 'spinner' },
-  { id: 'tag', label: 'tag' },
-  { id: 'progress', label: 'progress' },
-  { id: 'skeleton', label: 'skeleton' },
-  { id: 'shimmer', label: 'shimmer' },
-  { id: 'loading', label: 'loading' },
-] as const
-
-const activeId = ref<string>('button')
-
-function jumpTo(id: string, e: MouseEvent) {
-  // hash router xài '#/...' nên href '#button' bị router nuốt → tự scroll
-  e.preventDefault()
-  const el = document.getElementById(id)
-  if (!el) return
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  activeId.value = id
-}
-
-let io: IntersectionObserver | null = null
-onMounted(() => {
-  io = new IntersectionObserver(
-    (entries) => {
-      // phần tử nào có ratio cao nhất + đang giao nhau → là section đang xem
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
-      if (visible) activeId.value = (visible.target as HTMLElement).id
-    },
-    {
-      // trigger khi section chạm 1/3 phía trên viewport
-      rootMargin: '-80px 0px -55% 0px',
-      threshold: [0, 0.25, 0.5, 0.75, 1],
-    },
-  )
-  sections.forEach((s) => {
-    const el = document.getElementById(s.id)
-    if (el) io!.observe(el)
-  })
-})
-onBeforeUnmount(() => io?.disconnect())
 </script>
 
 <template>
   <div class="page">
     <AppTopbar title="WemakeUI" subtitle="phase 1 — base primitives" />
 
-    <div class="layout">
     <main class="main">
       <PageHeader
         title="phase 1 — base primitives"
@@ -110,22 +57,30 @@ onBeforeUnmount(() => io?.disconnect())
       <section id="button" class="card">
         <h2 class="h">1. button — variant × size × state</h2>
 
-        <h3 class="sub">variant (7)</h3>
+        <h3 class="sub">variant (9) — dùng tab để thấy focus ring</h3>
         <div class="row">
           <BaseButton variant="primary">primary</BaseButton>
           <BaseButton variant="secondary">secondary</BaseButton>
+          <BaseButton variant="neutral">neutral</BaseButton>
           <BaseButton variant="success">success</BaseButton>
           <BaseButton variant="danger">danger</BaseButton>
+          <BaseButton variant="warning">warning</BaseButton>
           <BaseButton variant="ghost">ghost</BaseButton>
-          <BaseButton variant="text">text</BaseButton>
+          <BaseButton variant="link">link</BaseButton>
           <BaseButton variant="cta">cta</BaseButton>
         </div>
 
-        <h3 class="sub">size (3)</h3>
-        <div class="row">
-          <BaseButton size="sm">small</BaseButton>
-          <BaseButton size="md">medium</BaseButton>
-          <BaseButton size="lg">large</BaseButton>
+        <h3 class="sub">size (5)</h3>
+        <div class="row" style="align-items:flex-end">
+          <BaseButton size="sm">sm</BaseButton>
+          <BaseButton size="md">md</BaseButton>
+          <BaseButton size="lg">lg</BaseButton>
+          <BaseButton size="xl">xl</BaseButton>
+          <BaseButton size="icon" variant="secondary">
+            <template #default>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </template>
+          </BaseButton>
         </div>
 
         <h3 class="sub">state</h3>
@@ -135,11 +90,20 @@ onBeforeUnmount(() => io?.disconnect())
           <BaseButton disabled>disabled</BaseButton>
           <BaseButton variant="primary" loading>đang lưu</BaseButton>
           <BaseButton variant="secondary" disabled>không khả dụng</BaseButton>
+          <BaseButton variant="danger" loading>đang xoá</BaseButton>
+        </div>
+
+        <h3 class="sub">with icon</h3>
+        <div class="row">
+          <BaseButton icon='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>'>thêm mới</BaseButton>
+          <BaseButton variant="secondary" icon='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'>chỉnh sửa</BaseButton>
+          <BaseButton variant="danger" icon-right='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>'>xoá</BaseButton>
         </div>
 
         <h3 class="sub">block</h3>
         <div class="block-row">
           <BaseButton block>full width primary</BaseButton>
+          <BaseButton block variant="secondary">full width secondary</BaseButton>
         </div>
       </section>
 
@@ -359,9 +323,11 @@ onBeforeUnmount(() => io?.disconnect())
         <BaseProgress :value="100" variant="error" show-label />
 
         <h3 class="sub">size</h3>
-        <BaseProgress :value="55" size="sm" />
-        <BaseProgress :value="55" size="md" />
-        <BaseProgress :value="55" size="lg" />
+        <div class="progress-stack">
+          <div class="progress-row"><span class="progress-label">sm</span><BaseProgress :value="55" size="sm" /></div>
+          <div class="progress-row"><span class="progress-label">md</span><BaseProgress :value="55" size="md" /></div>
+          <div class="progress-row"><span class="progress-label">lg</span><BaseProgress :value="55" size="lg" /></div>
+        </div>
 
         <h3 class="sub">animated stripes</h3>
         <BaseProgress :value="65" striped animated />
@@ -425,19 +391,6 @@ onBeforeUnmount(() => io?.disconnect())
       </section>
 
     </main>
-
-    <!-- ── Anchor nav ───────────────────────────── -->
-    <nav class="anchor" aria-label="mục lục">
-      <p class="anchor-title">mục lục</p>
-      <a
-        v-for="s in sections"
-        :key="s.id"
-        :href="`#${s.id}`"
-        :data-active="activeId === s.id"
-        @click="jumpTo(s.id, $event)"
-      >{{ s.label }}</a>
-    </nav>
-    </div>
   </div>
 </template>
 
@@ -448,18 +401,10 @@ onBeforeUnmount(() => io?.disconnect())
   color: var(--wx-content-primary);
   font-family: var(--wx-font-primary);
 }
-.layout {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--wx-space-4);
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 var(--wx-space-4) var(--wx-space-9);
-}
 .main {
-  flex: 1;
-  min-width: 0;
-  padding-top: var(--wx-space-5);
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--wx-space-5) var(--wx-space-4) var(--wx-space-9);
   display: flex;
   flex-direction: column;
   gap: var(--wx-space-5);
@@ -570,6 +515,11 @@ code {
   align-items: center;
   gap: var(--wx-space-3);
 }
+.progress-stack { display: flex; flex-direction: column; gap: var(--wx-space-3); }
+.progress-row { display: flex; align-items: center; gap: var(--wx-space-3); }
+.progress-label { font-size: var(--wx-fs-11); font-family: var(--wx-font-mono); color: var(--wx-content-muted); width: 20px; flex-shrink: 0; }
+.progress-row > :last-child { flex: 1; }
+
 .shimmer-list-col {
   flex: 1;
   display: flex;
@@ -577,51 +527,4 @@ code {
   gap: var(--wx-space-1);
 }
 
-/* ── anchor nav ─── */
-.anchor {
-  position: sticky;
-  top: 72px;
-  width: 148px;
-  flex-shrink: 0;
-  padding-top: var(--wx-space-5);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: var(--wx-fs-12);
-  max-height: calc(100vh - 88px);
-  overflow-y: auto;
-}
-.anchor-title {
-  font-size: var(--wx-fs-11);
-  font-weight: var(--wx-fw-semibold);
-  color: var(--wx-content-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0 var(--wx-space-2) var(--wx-space-2);
-  margin: 0;
-}
-.anchor a {
-  display: block;
-  color: var(--wx-content-secondary);
-  text-decoration: none;
-  padding: 5px var(--wx-space-2);
-  border-radius: var(--wx-radius-sm);
-  border-left: 2px solid transparent;
-  transition:
-    background var(--wx-d-micro) var(--wx-ease-standard),
-    color var(--wx-d-micro) var(--wx-ease-standard),
-    border-color var(--wx-d-micro) var(--wx-ease-standard);
-  cursor: pointer;
-  white-space: nowrap;
-}
-.anchor a:hover {
-  background: var(--wx-hover-bg);
-  color: var(--wx-content-primary);
-}
-.anchor a[data-active="true"] {
-  color: var(--wx-brand-600);
-  border-left-color: var(--wx-brand-600);
-  font-weight: var(--wx-fw-semibold);
-}
-@media (max-width: 1100px) { .anchor { display: none; } }
 </style>

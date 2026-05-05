@@ -112,6 +112,29 @@ const routes: RouteRecordRaw[] = [
         name: 'ShowcasePlatform',
         component: () => import('../views/showcase/PlatformShowcase.vue'),
       },
+      /* ── phase 8 — DX / observability ─────────────────── */
+      {
+        path: 'showcase/dev-panel',
+        name: 'ShowcaseDevPanel',
+        component: () => import('../views/showcase/DevPanelShowcase.vue'),
+      },
+      {
+        path: 'showcase/observability',
+        name: 'ShowcaseObservability',
+        component: () => import('../views/showcase/ObservabilityShowcase.vue'),
+      },
+      /* ── phase 9 — form popup patterns ─────────────────── */
+      {
+        path: 'showcase/patterns',
+        name: 'ShowcasePatterns',
+        component: () => import('../views/showcase/PatternShowcase.vue'),
+      },
+      /* ── template gallery ───────────────────────────────── */
+      {
+        path: 'showcase/templates',
+        name: 'TemplateGallery',
+        component: () => import('../views/showcase/TemplateGallery.vue'),
+      },
     ],
   },
   /* Legacy showcase — không có sidebar wrapper */

@@ -33,7 +33,7 @@ const sections: SidebarSection[] = [
   {
     label: 'WeConnect',
     items: [
-      { id: 'admin',        label: 'Tổng quan',      icon: ICON.home,     href: '#/weconnect/admin' },
+      { id: 'admin',        label: 'Tổng quan',      icon: ICON.home,     href: '#/weconnect' },
       { id: 'accounts',     label: 'Tài khoản',      icon: ICON.users,    href: '#/weconnect/accounts' },
       { id: 'campaigns',    label: 'Chiến dịch',     icon: ICON.campaign, href: '#/weconnect/campaigns', badge: 2 },
       { id: 'contacts',     label: 'Danh bạ',        icon: ICON.contacts, href: '#/weconnect/contacts' },
@@ -47,12 +47,14 @@ const sections: SidebarSection[] = [
       { id: 'console',      label: 'Console / Log',  icon: ICON.console,  href: '#/weconnect/console' },
       { id: 'scheduler',    label: 'Lịch tác vụ',   icon: ICON.clock,    href: '#/weconnect/scheduler' },
       { id: 'integrations', label: 'Tích hợp',       icon: ICON.link,     href: '#/weconnect/integrations' },
-      { id: 'canvas',       label: 'Automation canvas', icon: ICON.canvas, href: '#/weconnect/canvas' },
+      { id: 'automation',   label: 'Automation canvas', icon: ICON.canvas, href: '#/weconnect/automation' },
     ],
   },
 ]
 
-const activeId = computed(() => route.path.split('/').pop() || 'admin')
+const activeId = computed(() =>
+  route.path === '/weconnect' ? 'admin' : (route.path.split('/').pop() || 'admin')
+)
 </script>
 
 <template>

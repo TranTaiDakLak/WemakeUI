@@ -1,0 +1,100 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ *  WX UI SYSTEM — Dark Mode Foundation
+ *  Apply via: <html class="wx-dark"> or data-wx-theme="dark"
+ *  
+ *  All token overrides for the dark theme.
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+.wx-dark,
+[data-wx-theme="dark"] {
+  /* ── Brand ──────────────────────────────────────────── */
+  --wx-brand-primary: #60a5fa;
+  --wx-brand-accent: #22d3ee;
+  --wx-brand-focus: #3b82f6;
+
+  /* ── Gradients ──────────────────────────────────────── */
+  --wx-gradient-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  --wx-gradient-header: linear-gradient(to right, #0891b2, #2563eb, #1d4ed8);
+
+  /* ── Text ───────────────────────────────────────────── */
+  --wx-text-primary: #f1f5f9;
+  --wx-text-secondary: #94a3b8;
+  --wx-text-muted: #64748b;
+  --wx-text-disabled: #475569;
+  --wx-text-inverse: #0f172a;
+  --wx-text-link: #60a5fa;
+
+  /* ── Surface ────────────────────────────────────────── */
+  --wx-surface-base: #1e293b;
+  --wx-surface-elevated: #334155;
+  --wx-surface-sunken: #0f172a;
+  --wx-surface-overlay: rgba(0, 0, 0, 0.6);
+
+  /* ── Border ─────────────────────────────────────────── */
+  --wx-border-default: #334155;
+  --wx-border-subtle: #1e293b;
+  --wx-border-focus: #3b82f6;
+  --wx-border-glass: rgba(255, 255, 255, 0.1);
+  --wx-border-glass-light: rgba(255, 255, 255, 0.05);
+
+  /* ── Glass ──────────────────────────────────────────── */
+  --wx-glass-heavy-bg: rgba(30, 41, 59, 0.8);
+  --wx-glass-heavy-border: rgba(255, 255, 255, 0.1);
+  --wx-glass-medium-bg: rgba(30, 41, 59, 0.6);
+  --wx-glass-medium-border: rgba(255, 255, 255, 0.08);
+  --wx-glass-light-bg: rgba(30, 41, 59, 0.4);
+  --wx-glass-light-border: rgba(255, 255, 255, 0.06);
+  --wx-glass-subtle-bg: rgba(30, 41, 59, 0.3);
+  --wx-glass-subtle-border: rgba(255, 255, 255, 0.04);
+
+  /* ── Feedback ───────────────────────────────────────── */
+  --wx-success-bg: rgba(16, 185, 129, 0.15);
+  --wx-success-text: #34d399;
+  --wx-success-border: rgba(16, 185, 129, 0.3);
+  --wx-danger-bg: rgba(239, 68, 68, 0.15);
+  --wx-danger-text: #f87171;
+  --wx-danger-border: rgba(239, 68, 68, 0.3);
+  --wx-warning-bg: rgba(245, 158, 11, 0.15);
+  --wx-warning-text: #fbbf24;
+  --wx-warning-border: rgba(245, 158, 11, 0.3);
+  --wx-info-bg: rgba(59, 130, 246, 0.15);
+  --wx-info-text: #60a5fa;
+  --wx-info-border: rgba(59, 130, 246, 0.3);
+  --wx-neutral-bg: rgba(100, 116, 139, 0.15);
+  --wx-neutral-text: #94a3b8;
+  --wx-neutral-border: rgba(100, 116, 139, 0.3);
+
+  /* ── Interactive States ─────────────────────────────── */
+  --wx-selected-bg: rgba(59, 130, 246, 0.2);
+  --wx-selected-text: #60a5fa;
+  --wx-hover-bg: rgba(255, 255, 255, 0.05);
+  --wx-hover-text: #93c5fd;
+  --wx-active-bg: rgba(59, 130, 246, 0.3);
+  --wx-active-text: #93c5fd;
+  --wx-disabled-bg: rgba(51, 65, 85, 0.5);
+  --wx-disabled-text: #475569;
+
+  /* ── Elevation ──────────────────────────────────────── */
+  --wx-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --wx-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --wx-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --wx-shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.5);
+  --wx-shadow-2xl: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --wx-shadow-brand: 0 4px 15px rgba(59, 130, 246, 0.3);
+
+  /* ── Scrollbar ──────────────────────────────────────── */
+  --wx-scrollbar-track: #1e293b;
+  --wx-scrollbar-thumb: #475569;
+  --wx-scrollbar-thumb-hover: #64748b;
+
+  /* ── Body override ──────────────────────────────────── */
+  color-scheme: dark;
+}
+
+/* ── Dark mode Tailwind overrides ─────────────────────── */
+.wx-dark {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}

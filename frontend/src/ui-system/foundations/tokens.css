@@ -1,0 +1,204 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ *  WX UI SYSTEM — CSS Custom Properties (tokens.css)
+ *  Complete set of design tokens as CSS variables.
+ *  Import ONCE at app root via main.ts.
+ *
+ *  Usage:
+ *    import '@/ui-system/foundations/tokens.css'
+ *    .card { background: var(--wx-surface-base); }
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ================================================================
+   ROOT — Default (light) theme
+   ================================================================ */
+:root {
+  /* ── Brand ──────────────────────────────────────────── */
+  --wx-brand-primary: #2563eb;
+  --wx-brand-accent: #06b6d4;
+  --wx-brand-focus: #007bff;
+
+  /* ── Gradients ──────────────────────────────────────── */
+  --wx-gradient-bg: linear-gradient(to right, #7ecff1, #9cc9f5, #95def5);
+  --wx-gradient-header: linear-gradient(to right, #06b6d4, #3b82f6, #2563eb);
+  --wx-gradient-cta: linear-gradient(to right, #00d2ff, #3a7bd5, #0052D4);
+  --wx-gradient-button: linear-gradient(to right, #06b6d4, #2563eb);
+  --wx-gradient-accent: linear-gradient(to right, #44c3f9, #007bff);
+  --wx-gradient-text: linear-gradient(to right, #06b6d4, #2563eb);
+  --wx-gradient-divider: linear-gradient(to right, transparent, #e5e7eb, transparent);
+  --wx-gradient-success: linear-gradient(to right, #10b981, #059669);
+  --wx-gradient-danger: linear-gradient(to right, #f43f5e, #dc2626);
+  --wx-gradient-warning: linear-gradient(to right, #fb923c, #f59e0b);
+
+  /* ── Text ───────────────────────────────────────────── */
+  --wx-text-primary: #1e293b;
+  --wx-text-secondary: #6b7280;
+  --wx-text-muted: #9ca3af;
+  --wx-text-disabled: #d1d5db;
+  --wx-text-inverse: #ffffff;
+  --wx-text-link: #2563eb;
+
+  /* ── Surface ────────────────────────────────────────── */
+  --wx-surface-base: #ffffff;
+  --wx-surface-elevated: #ffffff;
+  --wx-surface-sunken: #f8fafc;
+  --wx-surface-overlay: rgba(0, 0, 0, 0.2);
+
+  /* ── Border ─────────────────────────────────────────── */
+  --wx-border-default: #e5e7eb;
+  --wx-border-subtle: #f3f4f6;
+  --wx-border-focus: #007bff;
+  --wx-border-glass: rgba(255, 255, 255, 0.5);
+  --wx-border-glass-light: rgba(255, 255, 255, 0.3);
+
+  /* ── Glass ──────────────────────────────────────────── */
+  --wx-glass-heavy-bg: rgba(255, 255, 255, 0.6);
+  --wx-glass-heavy-blur: 25px;
+  --wx-glass-heavy-border: rgba(255, 255, 255, 0.5);
+  --wx-glass-medium-bg: rgba(255, 255, 255, 0.4);
+  --wx-glass-medium-blur: 12px;
+  --wx-glass-medium-border: rgba(255, 255, 255, 0.6);
+  --wx-glass-light-bg: rgba(255, 255, 255, 0.2);
+  --wx-glass-light-blur: 12px;
+  --wx-glass-light-border: rgba(255, 255, 255, 0.3);
+  --wx-glass-subtle-bg: rgba(255, 255, 255, 0.1);
+  --wx-glass-subtle-blur: 8px;
+  --wx-glass-subtle-border: rgba(255, 255, 255, 0.2);
+
+  /* ── Feedback ───────────────────────────────────────── */
+  --wx-success-bg: #f0fdf4;
+  --wx-success-text: #16a34a;
+  --wx-success-solid: #22c55e;
+  --wx-success-border: #dcfce7;
+  --wx-danger-bg: #fef2f2;
+  --wx-danger-text: #dc2626;
+  --wx-danger-solid: #ef4444;
+  --wx-danger-border: #fee2e2;
+  --wx-warning-bg: #fffbeb;
+  --wx-warning-text: #d97706;
+  --wx-warning-solid: #f59e0b;
+  --wx-warning-border: #fef3c7;
+  --wx-info-bg: #eff6ff;
+  --wx-info-text: #2563eb;
+  --wx-info-solid: #3b82f6;
+  --wx-info-border: #dbeafe;
+  --wx-neutral-bg: #f9fafb;
+  --wx-neutral-text: #4b5563;
+  --wx-neutral-solid: #6b7280;
+  --wx-neutral-border: #e5e7eb;
+
+  /* ── Interactive States ─────────────────────────────── */
+  --wx-selected-bg: #ecf3fd;
+  --wx-selected-text: #007bff;
+  --wx-hover-bg: #f6faff;
+  --wx-hover-text: #6e98f1;
+  --wx-active-bg: #dbeafe;
+  --wx-active-text: #1d4ed8;
+  --wx-disabled-bg: #f3f4f6;
+  --wx-disabled-text: #9ca3af;
+
+  /* ── Radius ─────────────────────────────────────────── */
+  --wx-radius-none: 0;
+  --wx-radius-sm: 4px;
+  --wx-radius-md: 8px;
+  --wx-radius-lg: 12px;
+  --wx-radius-xl: 16px;
+  --wx-radius-2xl: 24px;
+  --wx-radius-3xl: 30px;
+  --wx-radius-4xl: 32px;
+  --wx-radius-full: 9999px;
+
+  /* ── Elevation ──────────────────────────────────────── */
+  --wx-shadow-none: none;
+  --wx-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --wx-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --wx-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.04);
+  --wx-shadow-xl: 0 20px 40px -5px rgba(59, 130, 246, 0.15);
+  --wx-shadow-2xl: 0 20px 50px rgba(59, 130, 246, 0.15);
+  --wx-shadow-brand: 0 4px 15px rgba(59, 130, 246, 0.4);
+  --wx-shadow-focus: 0 0 0 3px rgba(0, 123, 255, 0.25);
+
+  /* ── Typography ─────────────────────────────────────── */
+  --wx-font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --wx-font-display: "Nunito", sans-serif;
+  --wx-font-mono: ui-monospace, SFMono-Regular, monospace;
+
+  /* ── Motion ─────────────────────────────────────────── */
+  --wx-duration-fast: 150ms;
+  --wx-duration-normal: 300ms;
+  --wx-duration-slow: 500ms;
+  --wx-duration-decorative: 700ms;
+  --wx-easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --wx-easing-out: ease-out;
+  --wx-easing-bounce: cubic-bezier(0.16, 1, 0.3, 1);
+  --wx-easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Z-Index ────────────────────────────────────────── */
+  --wx-z-behind: -1;
+  --wx-z-base: 0;
+  --wx-z-raised: 10;
+  --wx-z-dropdown: 50;
+  --wx-z-sticky: 100;
+  --wx-z-header: 200;
+  --wx-z-overlay: 500;
+  --wx-z-modal: 1000;
+  --wx-z-popover: 1100;
+  --wx-z-toast: 1200;
+  --wx-z-tooltip: 1300;
+  --wx-z-topmost: 9999;
+
+  /* ── Scrollbar ──────────────────────────────────────── */
+  --wx-scrollbar-track: #f0f0f0;
+  --wx-scrollbar-thumb: #b5b5b5;
+  --wx-scrollbar-thumb-hover: #9a9a9a;
+  --wx-scrollbar-width: 12px;
+
+  /* ── Density (default mode) ─────────────────────────── */
+  --wx-density-header-height: 56px;
+  --wx-density-row-height: 40px;
+  --wx-density-input-height: 36px;
+  --wx-density-cell-px: 12px;
+  --wx-density-cell-py: 8px;
+  --wx-density-font-size: 14px;
+  --wx-density-icon-size: 16px;
+  --wx-density-avatar-size: 32px;
+  --wx-density-gap: 8px;
+  --wx-density-container-pad: 16px;
+}
+
+/* ================================================================
+   DENSITY: Compact (extension popup)
+   Apply via: <html class="wx-compact"> or data-wx-density="compact"
+   ================================================================ */
+.wx-compact,
+[data-wx-density="compact"] {
+  --wx-density-header-height: 48px;
+  --wx-density-row-height: 32px;
+  --wx-density-input-height: 28px;
+  --wx-density-cell-px: 8px;
+  --wx-density-cell-py: 4px;
+  --wx-density-font-size: 11px;
+  --wx-density-icon-size: 14px;
+  --wx-density-avatar-size: 24px;
+  --wx-density-gap: 4px;
+  --wx-density-container-pad: 12px;
+}
+
+/* ================================================================
+   DENSITY: Comfortable (relaxed desktop)
+   Apply via: <html class="wx-comfortable"> or data-wx-density="comfortable"
+   ================================================================ */
+.wx-comfortable,
+[data-wx-density="comfortable"] {
+  --wx-density-header-height: 64px;
+  --wx-density-row-height: 48px;
+  --wx-density-input-height: 44px;
+  --wx-density-cell-px: 16px;
+  --wx-density-cell-py: 12px;
+  --wx-density-font-size: 15px;
+  --wx-density-icon-size: 20px;
+  --wx-density-avatar-size: 40px;
+  --wx-density-gap: 12px;
+  --wx-density-container-pad: 24px;
+}

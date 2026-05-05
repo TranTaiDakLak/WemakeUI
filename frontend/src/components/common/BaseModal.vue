@@ -1,0 +1,344 @@
+<script setup lang="ts">
+import { ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import type { ModalSize } from '../../types'
+
+const props = withDefaults(defineProps<{
+  show: boolean
+  title: string
+  size?: ModalSize
+  showSave?: boolean
+  saveLabel?: string
+  closeLabel?: string
+  loading?: boolean
+}>(), {
+  size: 'md',
+  showSave: false,
+  saveLabel: 'Lưu',
+  closeLabel: 'Đóng',
+  loading: false,
+})
+
+const emit = defineEmits<{
+  close: []
+  save: []
+}>()
+
+const sizeMap: Record<ModalSize, string> = {
+  sm: '480px',
+  md: '680px',
+  lg: '920px',
+  xl: '1140px',
+  full: '95%',
+}
+
+// ── z-index stacking ──
+let zIndex = 500
+const modalStack: number[] = []
+
+function pushZ(): number {
+  zIndex += 10
+  modalStack.push(zIndex)
+  return zIndex
+}
+function popZ() {
+  modalStack.pop()
+  if (modalStack.length) zIndex = modalStack[modalStack.length - 1]
+  else zIndex = 500
+}
+
+const currentZ = ref(500)
+
+watch(() => props.show, (val) => {
+  if (val) {
+    currentZ.value = pushZ()
+    nextTick(trapFocusInit)
+  } else {
+    popZ()
+  }
+})
+
+// ── ESC close ──
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape' && props.show) {
+    emit('close')
+  }
+  // Focus trap
+  if (e.key === 'Tab' && props.show) {
+    trapFocusHandle(e)
+  }
+}
+
+onMounted(() => document.addEventListener('keydown', onKeydown))
+onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown))
+
+// ── Focus Trap ──
+const dialogRef = ref<HTMLElement>()
+
+function getFocusables(): HTMLElement[] {
+  if (!dialogRef.value) return []
+  return Array.from(dialogRef.value.querySelectorAll<HTMLElement>(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  ))
+}
+
+function trapFocusInit() {
+  const els = getFocusables()
+  if (els.length) els[0].focus()
+}
+
+function trapFocusHandle(e: KeyboardEvent) {
+  const els = getFocusables()
+  if (!els.length) return
+  const first = els[0]
+  const last = els[els.length - 1]
+  if (e.shiftKey) {
+    if (document.activeElement === first) {
+      e.preventDefault()
+      last.focus()
+    }
+  } else {
+    if (document.activeElement === last) {
+      e.preventDefault()
+      first.focus()
+    }
+  }
+}
+
+// ── Draggable ──
+const dragOffset = ref({ x: 0, y: 0 })
+const isDragging = ref(false)
+const dragStart = ref({ x: 0, y: 0 })
+
+function onDragStart(e: MouseEvent) {
+  if ((e.target as HTMLElement).closest('.modal-close')) return
+  isDragging.value = true
+  dragStart.value = { x: e.clientX - dragOffset.value.x, y: e.clientY - dragOffset.value.y }
+  document.addEventListener('mousemove', onDragMove)
+  document.addEventListener('mouseup', onDragEnd)
+}
+
+function onDragMove(e: MouseEvent) {
+  if (!isDragging.value) return
+  dragOffset.value = {
+    x: e.clientX - dragStart.value.x,
+    y: e.clientY - dragStart.value.y
+  }
+}
+
+function onDragEnd() {
+  isDragging.value = false
+  document.removeEventListener('mousemove', onDragMove)
+  document.removeEventListener('mouseup', onDragEnd)
+}
+
+// Reset position when closed
+watch(() => props.show, (val) => {
+  if (!val) dragOffset.value = { x: 0, y: 0 }
+})
+</script>
+
+<template>
+  <transition name="modal">
+    <div v-if="props.show" class="modal-overlay" :style="{ zIndex: currentZ }" @click.self="emit('close')">
+      <div
+        ref="dialogRef"
+        class="modal-dialog"
+        :style="{
+          maxWidth: sizeMap[props.size],
+          transform: `translate(${dragOffset.x}px, ${dragOffset.y}px)`
+        }"
+      >
+        <!-- Header (draggable) -->
+        <div class="modal-header" @mousedown="onDragStart" :class="{ 'modal-header--dragging': isDragging }">
+          <span class="modal-title">{{ props.title }}</span>
+          <slot name="header-extra" />
+          <button class="modal-close" @click="emit('close')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Body -->
+        <div class="modal-body">
+          <slot />
+        </div>
+
+        <!-- Footer -->
+        <div class="modal-footer">
+          <slot name="footer">
+            <button
+              v-if="props.showSave"
+              class="modal-btn modal-btn--save"
+              :disabled="props.loading"
+              @click="emit('save')"
+            >
+              <span v-if="props.loading" class="modal-spinner" />
+              {{ props.saveLabel }}
+            </button>
+            <button class="modal-btn modal-btn--close" @click="emit('close')">
+              {{ props.closeLabel }}
+            </button>
+          </slot>
+        </div>
+      </div>
+    </div>
+  </transition>
+</template>
+
+<style scoped>
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.modal-dialog {
+  background: var(--wx-surface-base);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-2xl, 16px);
+  box-shadow: var(--wx-shadow-xl);
+  width: 90%;
+  max-height: 85%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* ── Header — WX gradient style ── */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--wx-gradient-header);
+  border-bottom: none;
+  flex-shrink: 0;
+  cursor: grab;
+  user-select: none;
+}
+.modal-header--dragging { cursor: grabbing; }
+
+.modal-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--wx-text-inverse);
+  letter-spacing: 0.2px;
+}
+
+.modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: var(--wx-radius-md);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all var(--wx-duration-fast) var(--wx-easing-default);
+}
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--wx-text-inverse);
+  transform: scale(1.1);
+}
+.modal-close:active {
+  transform: scale(0.9);
+}
+
+/* ── Body ── */
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* ── Footer ── */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 20px;
+  border-top: 1px solid var(--wx-border-subtle);
+  background: var(--wx-surface-sunken);
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.modal-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--wx-font-primary);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.modal-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.modal-btn--save {
+  background: linear-gradient(to right, #06b6d4, #3b82f6);
+  color: #fff;
+  box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.modal-btn--save:hover:not(:disabled) {
+  box-shadow: 0 15px 25px -5px rgba(59, 130, 246, 0.4);
+  filter: brightness(1.05);
+}
+.modal-btn--save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.modal-btn--close {
+  background: linear-gradient(to right, #f43f5e, #dc2626);
+  color: #fff;
+  box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.modal-btn--close:hover {
+  box-shadow: 0 15px 25px -5px rgba(239, 68, 68, 0.4);
+  filter: brightness(1.05);
+}
+
+/* Save spinner */
+.modal-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--wx-text-inverse);
+  border-radius: var(--wx-radius-full);
+  animation: modal-spin 0.6s linear infinite;
+}
+@keyframes modal-spin { to { transform: rotate(360deg); } }
+
+/* Transition — WX scale-up */
+.modal-enter-active { transition: opacity 0.25s var(--wx-easing-default); }
+.modal-leave-active { transition: opacity 0.15s var(--wx-easing-default); }
+.modal-enter-from, .modal-leave-to { opacity: 0; }
+.modal-enter-active .modal-dialog { animation: wxModalIn 0.3s var(--wx-easing-default); }
+.modal-leave-active .modal-dialog { animation: wxModalOut 0.15s ease-in forwards; }
+@keyframes wxModalIn {
+  from { transform: translateY(-16px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+@keyframes wxModalOut {
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to { transform: translateY(8px) scale(0.97); opacity: 0; }
+}
+</style>

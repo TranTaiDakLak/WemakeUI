@@ -12,6 +12,10 @@ export default defineConfig(({ mode }) => {
       vue(),
       ...(isLib ? [dts({ include: ['src'], tsconfigPath: './tsconfig.json', rollupTypes: true })] : []),
     ],
+    server: {
+      port: 4000,
+      strictPort: false,
+    },
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),

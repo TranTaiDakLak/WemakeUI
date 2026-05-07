@@ -1,14 +1,17 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
 import { fileURLToPath, URL } from 'node:url'
 import { resolve } from 'node:path'
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const isLib = mode === 'lib'
 
   return {
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      ...(isLib ? [dts({ include: ['src'], tsconfigPath: './tsconfig.json', rollupTypes: true })] : []),
+    ],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),

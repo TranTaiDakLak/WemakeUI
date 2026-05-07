@@ -1,6 +1,6 @@
 # WEMAKEUI — Platform State
 > **Single source of truth.** Cập nhật mỗi khi có thay đổi architecture hoặc hoàn thành phase.
-> Last updated: 2026-05-06 (audit: route guards + notification center + saas store đã DONE)
+> Last updated: 2026-05-07 (stack upgrade: Vite 3→6, TypeScript 4→5, vue-tsc 1→2, vite-plugin-dts 4 — index.d.ts generation fixed)
 
 ---
 

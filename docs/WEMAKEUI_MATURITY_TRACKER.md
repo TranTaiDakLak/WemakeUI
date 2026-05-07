@@ -1,6 +1,6 @@
 # WEMAKEUI — Maturity Tracker
 > Track trạng thái thật sự của từng hệ thống. Cập nhật sau mỗi phase.
-> Last updated: 2026-05-06 (re-audit: auth/notification/store sections corrected)
+> Last updated: 2026-05-07 (stack upgrade: Vite 6, TypeScript 5, vite-plugin-dts 4 — TypeScript definitions generation hoạt động)
 
 ---
 

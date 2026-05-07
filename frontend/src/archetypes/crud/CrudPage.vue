@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watchEffect, ref, watch, useSlots } from 'vue'
+import { computed, watchEffect, ref, watch, useSlots, type ComputedRef } from 'vue'
 import type { CrudPageConfig, RowId } from '@/schemas/crud.schema'
 import { useCrudState } from '@/composables/useCrudState'
 import { useFilter } from '@/composables/useFilter'
@@ -59,8 +59,8 @@ const paginated = computed(() => {
 const _isAllSelected = computed(() => isAllSelected(paginated.value as any))
 const _isIndeterminate = computed(() => isIndeterminate(paginated.value as any))
 
-const slots = useSlots()
-const hasRowActions = computed(() =>
+const slots: ReturnType<typeof useSlots> = useSlots()
+const hasRowActions: ComputedRef<boolean> = computed(() =>
   !!(props.config.editForm || props.config.delete || slots['row-actions'])
 )
 
@@ -491,7 +491,7 @@ defineExpose({ openAdd: handleOpenAdd })
     :intent="activeBulkConfirmConfig!.confirm!.intent ?? 'warning'"
     confirm-label="Xác nhận"
     :loading="bulkActionLoading"
-    @update:modelValue="v => { if (!v) activeBulkKey = null }"
+    @update:modelValue="(v: boolean) => { if (!v) activeBulkKey = null }"
     @confirm="doRunBulkAction(activeBulkKey!)"
   />
 </template>

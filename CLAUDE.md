@@ -1,11 +1,22 @@
 # CLAUDE.md — Central Contract
 
 > **Project:** WemakeUI · **Type:** Cross-platform Vue 3 UI library
-> **Stack:** Vue 3 (Composition API + `<script setup>` + TypeScript) · Pinia (optional) · Vue Router 4 (optional) · Vite · CSS variables
+> **Stack:** Vue 3 (Composition API + `<script setup>` + TypeScript 5) · Pinia (optional) · Vue Router 4 (optional) · Vite 6 · CSS variables
 > **Targets:** Web · Mobile (Capacitor / Ionic / PWA) · Desktop (Wails / Tauri / Electron)
-> **Last updated:** 2026-05-05
+> **Last updated:** 2026-05-07
 
 WemakeUI là bộ UI kit Vue 3 + Design System tách ra từ WeConnect desktop. Mục tiêu: dùng được trên mọi nền tảng — Web app, Mobile shell, Desktop wrapper — mà không phụ thuộc backend cụ thể.
+
+## Stack versions
+
+| Package | Version |
+|---------|---------|
+| vite | ^6.4.x |
+| @vitejs/plugin-vue | ^5.2.x |
+| typescript | ^5.9.x |
+| vue-tsc | ^2.2.x |
+| vite-plugin-dts | ^4.5.x |
+| vue (peer) | ^3.2.0 |
 
 ## Commands
 
@@ -17,7 +28,16 @@ cd frontend && npm run build:app      # build demo → dist/
 cd frontend && npm run build:lib      # build publishable library → dist-lib/
 ```
 
-> **Quality Gate:** `cd frontend && npm run typecheck && npm run build:app` phải PASS trước khi claim done.
+> **Quality Gate:** `cd frontend && npm run typecheck && npm run build:lib` phải PASS trước khi claim done.
+
+## Library output (dist-lib/)
+
+| File | Mô tả |
+|------|-------|
+| `wemake-ui.es.js` | ESM bundle |
+| `wemake-ui.umd.js` | UMD bundle |
+| `ui.css` | Toàn bộ styles gộp (import qua `@wemake/ui/style.css`) |
+| `index.d.ts` | TypeScript definitions (generated bởi vite-plugin-dts) |
 
 ## Rules
 

@@ -30,13 +30,21 @@
       "import": "./dist-lib/wemake-ui.es.js",
       "require": "./dist-lib/wemake-ui.umd.js"
     },
-    "./style.css": "./dist-lib/style.css",
+    "./style.css": "./dist-lib/ui.css",
     "./tokens": {
       "types": "./src/ui-system/tokens/index.ts",
       "import": "./src/ui-system/tokens/index.ts"
     },
     "./foundations": "./src/ui-system/foundations/index.ts",
     "./foundations/style.css": "./src/style.css"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TranTaiDakLak/WemakeUI.git"
   },
   "sideEffects": [
     "**/*.css"
@@ -47,7 +55,8 @@
     "build:app": "vue-tsc --noEmit && vite build",
     "build:lib": "vue-tsc --noEmit && vite build --mode lib",
     "build": "npm run build:app",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "prepare": "npm run build:lib"
   },
   "peerDependencies": {
     "vue": "^3.2.0"
@@ -70,12 +79,13 @@
   },
   "devDependencies": {
     "@babel/types": "^7.18.10",
-    "@vitejs/plugin-vue": "^3.0.3",
+    "@vitejs/plugin-vue": "^5.2.4",
     "pinia": "^3.0.4",
-    "typescript": "^4.6.4",
-    "vite": "^3.0.7",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.2",
+    "vite-plugin-dts": "^4.5.4",
     "vue": "^3.2.37",
     "vue-router": "^4.6.4",
-    "vue-tsc": "^1.8.27"
+    "vue-tsc": "^2.2.12"
   }
 }

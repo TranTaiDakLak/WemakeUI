@@ -264,7 +264,7 @@ function trapFocusHandle(e: KeyboardEvent) {
 .modal-btn {
   padding: 10px 20px;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--wx-radius-lg);
   font-family: var(--wx-font-primary);
   font-size: 14px;
   font-weight: 700;

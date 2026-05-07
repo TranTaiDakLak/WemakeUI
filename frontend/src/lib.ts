@@ -12,7 +12,7 @@
  */
 
 // ── Foundation styles (tokens, dark mode, layout, surfaces…) ────
-import './ui-system/foundations'
+import './ui-system/foundations/index.css'
 import './style.css'
 
 // ── Common Components ──────────────────────────────────────────

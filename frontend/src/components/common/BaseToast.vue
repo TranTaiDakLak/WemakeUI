@@ -37,11 +37,11 @@ const iconMap: Record<string, string> = {
 <style scoped>
 .wx-toast-container {
   position: fixed;
-  top: 16px;
+  bottom: 16px;
   right: 16px;
   z-index: 10000;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 8px;
   pointer-events: none;
   max-width: 380px;

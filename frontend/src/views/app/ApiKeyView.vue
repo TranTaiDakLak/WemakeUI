@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseCard, BaseInput, BaseTag } from '../../components/common'
 
 const KEYS = ref([
@@ -17,7 +17,7 @@ function revokeKey(id: number) { KEYS.value = KEYS.value.map(k => k.id === id ? 
 </script>
 
 <template>
-  <AppLayout current="API key" page-title="Quản lý API key" page-description="Tạo và quản lý khoá API để tích hợp ứng dụng">
+  <AppPageLayout section="app" current="API key" page-title="Quản lý API key" page-description="Tạo và quản lý khoá API để tích hợp ứng dụng">
     <template #actions>
       <BaseButton size="sm" variant="primary" @click="showCreate = !showCreate">+ Tạo khoá mới</BaseButton>
     </template>
@@ -79,7 +79,7 @@ function revokeKey(id: number) { KEYS.value = KEYS.value.map(k => k.id === id ? 
         <pre class="code-block">GET /api/v1/resource?api_key=&lt;your-api-key&gt;</pre>
       </template>
     </BaseCard>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

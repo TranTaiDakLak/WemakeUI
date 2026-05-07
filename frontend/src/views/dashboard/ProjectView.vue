@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** dashboard/project — timeline, tasks, sprint burndown */
-import DashboardLayout from '../_layouts/DashboardLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseTag, BaseButton, BaseAvatar, BaseAvatarGroup, BaseProgress } from '../../components/common'
 import { sparkPath } from '../_layouts/dashboard-widgets'
 
@@ -30,7 +30,7 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
 </script>
 
 <template>
-  <DashboardLayout
+  <AppPageLayout section="dashboards"
     current="Dự án"
     page-title="Sprint #18 — WemakeUI v0.6"
     page-description="Đang chạy sprint 2 tuần · 9/12 task hoàn thành."
@@ -124,7 +124,7 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
         </tbody>
       </table>
     </BasePanel>
-  </DashboardLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

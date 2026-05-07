@@ -3,10 +3,10 @@ import { ref, computed } from 'vue'
 import PageHeader from '../../../components/layout/PageHeader.vue'
 import { GroupBox, BaseButton } from '../../../components/common'
 import {
-  LineChart, AreaChart, BarChart, PieChart,
+  LineChart, AreaChart, BarChart, PieChart, DonutChart,
   Sparkline, Gauge, Heatmap,
 } from '../../../components/charts'
-import type { LineSeries, BarItem, BarSeries, PieSlice, HeatmapCell } from '../../../components/charts'
+import type { LineSeries, BarItem, BarSeries, PieSlice, DonutSlice, HeatmapCell } from '../../../components/charts'
 
 /* ── Line / Area data ────────────────────────────── */
 const months = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12']
@@ -91,6 +91,13 @@ const trafficData: PieSlice[] = [
   { label: 'Referral', value: 1890 },
   { label: 'Social', value: 1240 },
   { label: 'Email', value: 680 },
+]
+
+const donutData: DonutSlice[] = [
+  { label: 'Chức năng A', value: 42, color: '#2563eb' },
+  { label: 'Chức năng B', value: 28, color: '#10b981' },
+  { label: 'Chức năng C', value: 18, color: '#f59e0b' },
+  { label: 'Chức năng D', value: 12, color: '#ef4444' },
 ]
 
 /* ── Sparkline data ──────────────────────────────── */
@@ -195,7 +202,7 @@ const stacked = ref(false)
           <PieChart :data="pieData" :size="220" show-labels />
         </GroupBox>
 
-        <GroupBox title="DonutChart">
+        <GroupBox title="PieChart — donut mode">
           <PieChart
             :data="trafficData"
             :size="220"
@@ -205,6 +212,23 @@ const stacked = ref(false)
           />
         </GroupBox>
       </div>
+
+      <GroupBox title="DonutChart — ring chart (vòng dày, legend dưới)">
+        <div class="donut-demo-row">
+          <div class="donut-demo-item">
+            <p class="demo-label">Mặc định (thickness 0.45)</p>
+            <DonutChart :data="donutData" :size="240" />
+          </div>
+          <div class="donut-demo-item">
+            <p class="demo-label">Vòng mỏng hơn (thickness 0.3)</p>
+            <DonutChart :data="donutData" :size="240" :thickness="0.3" />
+          </div>
+          <div class="donut-demo-item">
+            <p class="demo-label">Có nhãn trung tâm</p>
+            <DonutChart :data="donutData" :size="240" center-label="Tổng" :center-value="100" />
+          </div>
+        </div>
+      </GroupBox>
 
       <GroupBox title="Gauge — system metrics">
         <div class="gauge-row">
@@ -368,5 +392,27 @@ const stacked = ref(false)
   font-size: 11px;
   font-weight: 600;
   color: var(--wx-text-muted);
+}
+
+.donut-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: space-around;
+  padding: 8px 0;
+}
+
+.donut-demo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.demo-label {
+  margin: 0;
+  font-size: 12px;
+  color: var(--wx-text-muted);
+  font-weight: 600;
 }
 </style>

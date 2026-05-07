@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import WeConnectLayout from '../_layouts/WeConnectLayout.vue'
-import { BaseButton, BaseBadge, BaseCard, BaseToggle } from '../../components/common'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
+import { BaseButton, BaseBadge, BaseCard, BaseToggle, BaseSelectMenu } from '../../components/common'
 
 interface Integration {
   id: number
@@ -56,7 +56,7 @@ const TYPE_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'neutral'> =
 </script>
 
 <template>
-  <WeConnectLayout current="integrations" page-title="Tích hợp" page-description="Kết nối với các dịch vụ bên ngoài và quản lý webhook">
+  <AppPageLayout section="weconnect" current="integrations" page-title="Tích hợp" page-description="Kết nối với các dịch vụ bên ngoài và quản lý webhook">
     <template #actions>
       <BaseButton size="sm" variant="primary">+ Thêm tích hợp</BaseButton>
     </template>
@@ -111,9 +111,10 @@ const TYPE_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'neutral'> =
             </div>
             <div class="form-field">
               <label>Sự kiện</label>
-              <select v-model="newEvent" class="wx-input">
-                <option v-for="ev in ALL_EVENTS" :key="ev" :value="ev">{{ ev }}</option>
-              </select>
+              <BaseSelectMenu
+                v-model="newEvent"
+                :options="ALL_EVENTS.map(ev => ({ value: ev, label: ev }))"
+              />
             </div>
             <div class="wh-form-btns">
               <BaseButton size="sm" variant="ghost" @click="showAddWebhook = false">Huỷ</BaseButton>
@@ -139,7 +140,7 @@ const TYPE_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'neutral'> =
         </tbody>
       </table>
     </div>
-  </WeConnectLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

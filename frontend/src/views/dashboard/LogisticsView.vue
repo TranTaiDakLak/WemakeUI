@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** dashboard/logistics — bản đồ giao hàng, hiệu suất kho */
-import DashboardLayout from '../_layouts/DashboardLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseTag, BaseButton, BaseProgress } from '../../components/common'
 
 const warehouses = [
@@ -42,7 +42,7 @@ const cities = [
 </script>
 
 <template>
-  <DashboardLayout
+  <AppPageLayout section="dashboards"
     current="Vận chuyển"
     page-title="Logistics"
     page-description="Theo dõi đơn hàng và hiệu suất kho theo thời gian thực."
@@ -125,7 +125,7 @@ const cities = [
         </tbody>
       </table>
     </BasePanel>
-  </DashboardLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

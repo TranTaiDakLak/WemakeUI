@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseInput, BaseTag } from '../../components/common'
 
 const search = ref('')
@@ -29,7 +29,7 @@ const filtered = computed(() => LOGS.filter(l => {
 </script>
 
 <template>
-  <AppLayout current="audit log" page-title="Audit log" page-description="Theo dõi mọi hành động trong hệ thống">
+  <AppPageLayout section="app" current="audit log" page-title="Audit log" page-description="Theo dõi mọi hành động trong hệ thống">
     <template #actions>
       <BaseButton size="sm" variant="ghost">Xuất CSV</BaseButton>
     </template>
@@ -85,7 +85,7 @@ const filtered = computed(() => LOGS.filter(l => {
         </tbody>
       </table>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

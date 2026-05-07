@@ -62,6 +62,7 @@ function close() {
     :title="title"
     size="sm"
     :loading="loading"
+    :intent="intent === 'info' ? 'default' : intent"
     @close="close"
   >
     <div class="cd-body">

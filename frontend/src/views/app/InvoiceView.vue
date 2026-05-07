@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseCard } from '../../components/common'
 
 const INVOICES = [
@@ -27,7 +27,7 @@ function fmt(n: number) { return n.toLocaleString('vi-VN') + ' ₫' }
 </script>
 
 <template>
-  <AppLayout current="hoá đơn" page-title="Quản lý hoá đơn" page-description="Tạo và theo dõi trạng thái thanh toán">
+  <AppPageLayout section="app" current="hoá đơn" page-title="Quản lý hoá đơn" page-description="Tạo và theo dõi trạng thái thanh toán">
     <template #actions>
       <BaseButton size="sm" variant="primary">+ Tạo hoá đơn</BaseButton>
     </template>
@@ -66,7 +66,7 @@ function fmt(n: number) { return n.toLocaleString('vi-VN') + ' ₫' }
         </tbody>
       </table>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

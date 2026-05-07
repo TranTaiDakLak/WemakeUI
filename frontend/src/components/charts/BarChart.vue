@@ -88,6 +88,10 @@ const bars = computed(() => {
 })
 
 const hover = ref<{ idx: number } | null>(null)
+
+const emit = defineEmits<{
+  'click-bar': [item: BarItem]
+}>()
 </script>
 
 <template>
@@ -150,6 +154,7 @@ const hover = ref<{ idx: number } | null>(null)
             rx="3"
             @mouseenter="hover = { idx: i }"
             @mouseleave="hover = null"
+            @click="emit('click-bar', { label: b.label, value: b.value, color: b.color })"
           />
         </g>
       </svg>

@@ -7,7 +7,7 @@ import { ref, reactive } from 'vue'
 import AppTopbar from '../../components/layout/AppTopbar.vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import {
-  BaseButton, BaseInput, BaseSelect, BaseCheckbox, BaseRadio, BaseToggle,
+  BaseButton, BaseInput, BaseSelectMenu, BaseCheckbox, BaseRadio, BaseToggle,
   BaseBadge, BaseProgress, BaseSkeleton,
   BaseTextarea, BaseAvatar, BaseAvatarGroup, BaseSpinner, BaseTag, ShimmerBlock,
 } from '../../components/common'
@@ -144,9 +144,9 @@ const planRadioOptions = [
       <section id="select" class="card">
         <h2 class="h">4. select</h2>
         <div class="grid-3">
-          <BaseSelect v-model="form.select" :options="planOptions" label="gói" />
-          <BaseSelect :options="planOptions" placeholder="chưa chọn" label="empty" />
-          <BaseSelect v-model="form.select" :options="planOptions" label="disabled" disabled />
+          <BaseSelectMenu v-model="form.select" :options="planOptions" label="gói" />
+          <BaseSelectMenu :options="planOptions" placeholder="chưa chọn" label="empty" />
+          <BaseSelectMenu v-model="form.select" :options="planOptions" label="disabled" disabled />
         </div>
       </section>
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, reactive, computed, watchEffect } from 'vue'
-import WeConnectLayout from '../_layouts/WeConnectLayout.vue'
+import { ref, reactive, computed, watchEffect, onMounted } from 'vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import {
-  BaseButton, BaseInput, BaseSelect, BaseTextarea,
+  BaseButton, BaseInput, BaseSelectMenu, BaseTextarea,
   BaseBadge, BaseTag, BaseProgress,
   FormField, FormModal, FormDrawer, ConfirmDialog,
 } from '../../components/common'
@@ -162,6 +162,7 @@ const bulkLoading   = ref(false)
 const editTarget   = ref<Campaign | null>(null)
 const detailTarget = ref<Campaign | null>(null)
 const deleteTarget = ref<Campaign | null>(null)
+const highlightId  = ref<number | null>(null)
 
 /* ── Form ── */
 const FORM_STATUS_OPTIONS = [
@@ -213,7 +214,12 @@ function openAdd() { resetForm(); addOpen.value = true }
 
 function openEdit(c: Campaign) { fillForm(c); editTarget.value = c; editOpen.value = true }
 
-function openDetail(c: Campaign) { detailTarget.value = c; detailOpen.value = true }
+function openDetail(c: Campaign) {
+  highlightId.value = c.id
+  detailTarget.value = c
+  detailOpen.value = true
+  setTimeout(() => { highlightId.value = null }, 600)
+}
 
 function openEditFromDetail() {
   if (!detailTarget.value) return
@@ -327,10 +333,14 @@ function handleBulkActivate() {
   selected.value = []
   showToast('success', `Đã kích hoạt ${count} chiến dịch`)
 }
+
+/* ── Table loading state ── */
+const tableLoading = ref(true)
+onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
 </script>
 
 <template>
-  <WeConnectLayout
+  <AppPageLayout section="weconnect"
     current="campaigns"
     page-title="Chiến dịch tin nhắn"
     page-description="Tạo và theo dõi chiến dịch gửi tin hàng loạt"
@@ -348,13 +358,13 @@ function handleBulkActivate() {
         clearable
         style="max-width: 260px;"
       />
-      <BaseSelect
+      <BaseSelectMenu
         v-model="statusFilter"
         :options="STATUS_FILTER_OPTIONS"
         size="sm"
         style="width: 180px;"
       />
-      <BaseSelect
+      <BaseSelectMenu
         v-model="platformFilter"
         :options="PLATFORM_FILTER_OPTIONS"
         size="sm"
@@ -365,7 +375,23 @@ function handleBulkActivate() {
 
     <!-- ── Table ── -->
     <div class="table-wrap">
-      <div class="table-scroll">
+      <!-- Loading skeleton -->
+      <Transition name="skel-fade">
+        <div v-if="tableLoading" class="table-skel">
+          <div v-for="n in 6" :key="n" class="skel-row">
+            <div class="skel-cell skel-chk" />
+            <div class="skel-cell skel-wide" />
+            <div class="skel-cell skel-sm" />
+            <div class="skel-cell skel-sm" />
+            <div class="skel-cell skel-prog" />
+            <div class="skel-cell skel-xs" />
+            <div class="skel-cell skel-md" />
+          </div>
+        </div>
+      </Transition>
+
+      <Transition name="tbl-fade">
+        <div v-if="!tableLoading" class="table-scroll">
         <table class="ct-table">
           <thead>
             <tr>
@@ -387,12 +413,13 @@ function handleBulkActivate() {
               <th class="col-actions"></th>
             </tr>
           </thead>
-          <tbody>
+          <TransitionGroup tag="tbody" name="row-fade" appear>
             <tr
-              v-for="c in filtered"
+              v-for="(c, idx) in filtered"
               :key="c.id"
+              :style="{ '--i': idx }"
               class="ct-row"
-              :class="{ 'ct-row--selected': selected.includes(c.id) }"
+              :class="{ 'ct-row--selected': selected.includes(c.id), 'row--hl': highlightId === c.id }"
               @click="openDetail(c)"
             >
               <!-- Checkbox -->
@@ -463,12 +490,13 @@ function handleBulkActivate() {
                 </div>
               </td>
             </tr>
-          </tbody>
+          </TransitionGroup>
         </table>
       </div>
+      </Transition>
 
       <!-- Empty state -->
-      <div v-if="filtered.length === 0" class="empty-state">
+      <div v-if="!tableLoading && filtered.length === 0" class="empty-state">
         <div class="empty-state__icon">📣</div>
         <p class="empty-state__text">Không tìm thấy chiến dịch nào</p>
         <BaseButton
@@ -480,7 +508,7 @@ function handleBulkActivate() {
         </BaseButton>
       </div>
     </div>
-  </WeConnectLayout>
+  </AppPageLayout>
 
   <!-- ── Bulk Action Bar ── -->
   <BulkActionBar :count="selected.length" :show="selected.length > 0" @clear="clearSelection">
@@ -510,7 +538,7 @@ function handleBulkActivate() {
       </FormField>
       <div class="form-row-2">
         <FormField label="Nền tảng">
-          <BaseSelect v-model="form.platform" :options="FORM_PLATFORM_OPTIONS" />
+          <BaseSelectMenu v-model="form.platform" :options="FORM_PLATFORM_OPTIONS" />
         </FormField>
         <FormField label="Tổng tin nhắn" hint="Số lượng người nhận">
           <BaseInput v-model="form.totalTarget" type="number" placeholder="0" />
@@ -543,10 +571,10 @@ function handleBulkActivate() {
       </FormField>
       <div class="form-row-2">
         <FormField label="Nền tảng">
-          <BaseSelect v-model="form.platform" :options="FORM_PLATFORM_OPTIONS" />
+          <BaseSelectMenu v-model="form.platform" :options="FORM_PLATFORM_OPTIONS" />
         </FormField>
         <FormField label="Trạng thái">
-          <BaseSelect v-model="form.status" :options="FORM_STATUS_OPTIONS" />
+          <BaseSelectMenu v-model="form.status" :options="FORM_STATUS_OPTIONS" />
         </FormField>
       </div>
       <div class="form-row-2">
@@ -758,7 +786,7 @@ function handleBulkActivate() {
 /* Row states */
 .ct-row {
   cursor: pointer;
-  transition: background var(--wx-duration-micro) var(--wx-easing-default);
+  transition: background var(--wx-d-micro, 100ms) var(--wx-ease-standard);
 }
 .ct-row:last-child td { border-bottom: none; }
 .ct-row:hover td { background: var(--wx-hover-bg); }
@@ -769,7 +797,7 @@ function handleBulkActivate() {
   display: flex;
   gap: var(--wx-space-1);
   opacity: 0;
-  transition: opacity var(--wx-duration-micro);
+  transition: opacity var(--wx-d-micro, 100ms);
 }
 .ct-row:hover .row-actions { opacity: 1; }
 
@@ -1026,5 +1054,69 @@ function handleBulkActivate() {
   padding-top: var(--wx-space-5);
   border-top: 1px solid var(--wx-border-subtle);
   margin-top: auto;
+}
+
+/* ── Table skeleton ── */
+.table-skel { padding: var(--wx-space-1) 0; }
+.skel-row {
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-4);
+  padding: 14px var(--wx-space-4);
+  border-bottom: 1px solid var(--wx-border-subtle);
+  background: linear-gradient(
+    90deg,
+    var(--wx-surface-sunken) 25%,
+    var(--wx-surface-elevated) 50%,
+    var(--wx-surface-sunken) 75%
+  );
+  background-size: 400% 100%;
+  animation: skelShimmer 1.4s ease-in-out infinite;
+}
+.skel-row:last-child { border-bottom: none; }
+@keyframes skelShimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+.skel-cell { height: 12px; border-radius: var(--wx-radius-sm); background: var(--wx-border-default); opacity: 0.55; flex-shrink: 0; }
+.skel-chk  { width: 16px; }
+.skel-wide { flex: 1; min-width: 160px; }
+.skel-md   { width: 100px; }
+.skel-sm   { width: 72px; }
+.skel-xs   { width: 52px; }
+.skel-prog { width: 130px; }
+
+/* ── Row-fade TransitionGroup ── */
+.row-fade-enter-active {
+  animation: rowFadeIn var(--wx-d-normal, 250ms) var(--wx-ease-decelerate) both;
+  animation-delay: calc(var(--i, 0) * var(--wx-stagger-xs, 30ms));
+}
+.row-fade-leave-active { transition: opacity var(--wx-d-fast, 150ms) var(--wx-ease-accelerate); }
+.row-fade-leave-to     { opacity: 0; }
+.row-fade-move         { transition: transform var(--wx-d-normal, 250ms) var(--wx-ease-standard); }
+
+@keyframes rowFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* ── Skeleton / table crossfade ── */
+.skel-fade-leave-active { transition: opacity var(--wx-d-micro, 100ms) var(--wx-ease-accelerate); }
+.skel-fade-leave-to     { opacity: 0; }
+.tbl-fade-enter-active  { transition: opacity var(--wx-d-fast, 150ms) var(--wx-ease-decelerate); }
+.tbl-fade-enter-from    { opacity: 0; }
+
+/* ── Row click highlight ── */
+@keyframes row-hl {
+  0%, 40% { background-color: var(--wx-brand-50, #eff6ff); }
+  100%    { background-color: transparent; }
+}
+.row--hl td { animation: row-hl 600ms var(--wx-ease-standard) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .row-fade-enter-active { animation: none; }
+  .row-fade-leave-active, .row-fade-move { transition: none; }
+  .skel-fade-leave-active, .tbl-fade-enter-active { transition: none; }
+  .row--hl td { animation: none; }
 }
 </style>

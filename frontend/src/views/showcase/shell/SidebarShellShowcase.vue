@@ -10,7 +10,7 @@ import {
 } from '../../../components/layout'
 import type { SidebarSection } from '../../../components/layout'
 import {
-  BaseCard, BasePanel, BaseButton, BaseInput, BaseSelect,
+  BaseCard, BasePanel, BaseButton, BaseInput, BaseSelectMenu,
   BaseBadge, BaseTag, FormField, BaseToggle, BaseTextarea,
 } from '../../../components/common'
 
@@ -114,7 +114,6 @@ function onSelect(item: { id: string }) {
     <template #topbar>
       <AppTopbar title="WemakeUI" subtitle="sidebar shell demo">
         <template #actions>
-          <RouterLink to="/" class="back-link">← sitemap</RouterLink>
         </template>
       </AppTopbar>
     </template>
@@ -214,7 +213,7 @@ function onSelect(item: { id: string }) {
           </FormField>
 
           <FormField label="Gói dịch vụ">
-            <BaseSelect v-model="form.plan" :options="planOpts" />
+            <BaseSelectMenu v-model="form.plan" :options="planOpts" />
           </FormField>
 
           <FormField
@@ -257,16 +256,6 @@ function onSelect(item: { id: string }) {
 </template>
 
 <style scoped>
-.back-link {
-  font-size: var(--wx-fs-13);
-  color: var(--wx-text-inverse);
-  text-decoration: none;
-  opacity: 0.85;
-  padding: 4px 10px;
-  border-radius: var(--wx-radius-md);
-  background: rgba(255, 255, 255, 0.12);
-}
-.back-link:hover { opacity: 1; }
 
 .sub-sidebar {
   display: flex;

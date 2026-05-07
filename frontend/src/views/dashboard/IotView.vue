@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /** dashboard/iot — metrics realtime, sparkline, alert feed */
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import DashboardLayout from '../_layouts/DashboardLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseTag, BaseButton } from '../../components/common'
 import { sparkPath, sparkArea } from '../_layouts/dashboard-widgets'
 
@@ -55,7 +55,7 @@ const aVariant = (s: string) => ({ critical: 'danger', warning: 'warning', info:
 </script>
 
 <template>
-  <DashboardLayout
+  <AppPageLayout section="dashboards"
     current="IoT"
     page-title="IoT realtime"
     page-description="Giám sát cảm biến phòng server — cập nhật mỗi 2.5 giây."
@@ -100,7 +100,7 @@ const aVariant = (s: string) => ({ critical: 'danger', warning: 'warning', info:
         </li>
       </ul>
     </BasePanel>
-  </DashboardLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

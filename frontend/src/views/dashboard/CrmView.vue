@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** dashboard/crm — pipeline kanban + leads table */
-import DashboardLayout from '../_layouts/DashboardLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BaseTag, BaseButton, BaseAvatar, BaseAvatarGroup } from '../../components/common'
 
 const stages = [
@@ -34,7 +34,7 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
 </script>
 
 <template>
-  <DashboardLayout
+  <AppPageLayout section="dashboards"
     current="CRM"
     page-title="Pipeline bán hàng"
     page-description="Theo dõi deals theo stage — kéo thả để cập nhật."
@@ -101,7 +101,7 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
         </li>
       </ul>
     </BaseCard>
-  </DashboardLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

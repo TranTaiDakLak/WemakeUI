@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** dashboard/overview — 4 KPI gradient + chart đường + donut + recent activity */
-import DashboardLayout from '../_layouts/DashboardLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseButton, BaseTag, BaseAvatar, BaseAvatarGroup } from '../../components/common'
 import { sparkPath, sparkArea, seriesUp, seriesDown, seriesFlat, seriesVolatile } from '../_layouts/dashboard-widgets'
 
@@ -28,7 +28,7 @@ const activity = [
 </script>
 
 <template>
-  <DashboardLayout
+  <AppPageLayout section="dashboards"
     current="Tổng quan"
     page-title="Tổng quan"
     page-description="Bức tranh nhanh về doanh nghiệp của bạn — 7 ngày qua."
@@ -120,7 +120,7 @@ const activity = [
         </li>
       </ul>
     </BasePanel>
-  </DashboardLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

@@ -70,9 +70,6 @@ function onCardClick(card: KanbanCard) {
     <AppTopbar title="WemakeUI · Kanban" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="Kanban board" description="Drag-drop card giữa các column. HTML5 native drag-drop, không phụ thuộc thư viện.">
-        <template #actions>
-          <button class="back-btn" @click="router.push('/showcase/data')">← Phase 4</button>
-        </template>
       </PageHeader>
 
       <GroupBox title="Project tracker (kéo thả thử)">
@@ -98,15 +95,4 @@ function onCardClick(card: KanbanCard) {
   gap: var(--space-md);
 }
 .muted { color: var(--wx-text-muted); font-size: 12px; }
-.back-btn {
-  padding: 6px 12px;
-  border: 1px solid var(--wx-border-default);
-  background: var(--wx-surface-base);
-  border-radius: var(--wx-radius-md);
-  font-size: 12px;
-  cursor: pointer;
-  font-family: var(--wx-font-primary);
-  color: var(--wx-text-secondary);
-}
-.back-btn:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); }
 </style>

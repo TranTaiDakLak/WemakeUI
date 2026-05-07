@@ -1,18 +1,27 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
+defineOptions({ inheritAttrs: false })
+
 const props = defineProps<{
   modelValue?: string | number
-  type?: 'text' | 'number' | 'password' | 'email'
+  type?: 'text' | 'number' | 'password' | 'email' | 'search' | 'tel' | 'url'
   label?: string
   placeholder?: string
   error?: string
+  /** error styling without message text — complementary to FormField :error */
+  invalid?: boolean
+  /** success state with check icon */
+  success?: boolean
   disabled?: boolean
+  readonly?: boolean
   size?: 'sm' | 'md'
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   'update:modelValue': [value: string | number]
+  'blur': [event: FocusEvent]
+  'focus': [event: FocusEvent]
 }>()
 
 const showPassword = ref(false)
@@ -21,29 +30,65 @@ const inputType = computed(() => {
   if (props.type === 'password') return showPassword.value ? 'text' : 'password'
   return props.type ?? 'text'
 })
+
+const hasError = computed(() => Boolean(props.error) || props.invalid)
 </script>
 
 <template>
   <div class="base-input" :class="[`base-input--${size ?? 'md'}`]">
     <label v-if="label" class="base-input__label">{{ label }}</label>
-    <div class="base-input__wrapper" :class="{ 'base-input__wrapper--error': error }">
+    <div
+      class="base-input__wrapper"
+      :class="{
+        'base-input__wrapper--error': hasError,
+        'base-input__wrapper--success': success && !hasError,
+        'base-input__wrapper--disabled': disabled,
+      }"
+    >
       <input
+        v-bind="$attrs"
         class="form-input base-input__field"
-        :class="{ 'base-input__field--has-toggle': type === 'password' }"
+        :class="{
+          'base-input__field--has-toggle': type === 'password',
+          'base-input__field--has-icon': success && !hasError,
+        }"
         :type="inputType"
         :value="modelValue"
         :placeholder="placeholder"
         :disabled="disabled"
-        @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+        :readonly="readonly"
+        :aria-invalid="hasError ? 'true' : undefined"
+        @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+        @blur="emit('blur', $event)"
+        @focus="emit('focus', $event)"
       />
+
+      <!-- success check -->
+      <span v-if="success && !hasError" class="base-input__icon base-input__icon--success" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </span>
+
+      <!-- password toggle -->
       <button
         v-if="type === 'password'"
         type="button"
         class="base-input__eye"
         tabindex="-1"
+        :aria-label="showPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'"
         @click="showPassword = !showPassword"
       >
-        {{ showPassword ? '◉' : '○' }}
+        <!-- eye open -->
+        <svg v-if="showPassword" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <!-- eye off -->
+        <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+          <line x1="1" y1="1" x2="23" y2="23"/>
+        </svg>
       </button>
     </div>
     <span v-if="error" class="base-input__error">{{ error }}</span>
@@ -71,58 +116,96 @@ const inputType = computed(() => {
 
 .base-input__field {
   width: 100%;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
-  background: var(--wx-surface-sunken);
+  background: var(--wx-surface-elevated);
   color: var(--wx-text-primary);
   font-family: var(--wx-font-primary);
   font-size: 13px;
-  transition: border-color var(--wx-duration-fast), box-shadow var(--wx-duration-fast);
+  transition:
+    border-color var(--wx-duration-fast, 150ms) var(--wx-ease-standard, cubic-bezier(.4,0,.2,1)),
+    box-shadow var(--wx-duration-fast, 150ms) var(--wx-ease-standard, cubic-bezier(.4,0,.2,1));
 }
 
 .base-input__field:focus {
   outline: none;
-  border-color: var(--wx-brand-focus);
-  box-shadow: var(--wx-shadow-focus);
+  border-color: var(--wx-brand-600, #2563eb);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16), 0 0 0 1px rgba(37, 99, 235, 0.30);
 }
 
-.base-input__field--has-toggle {
-  padding-right: 30px;
-}
+.base-input__field--has-toggle { padding-right: 36px; }
+.base-input__field--has-icon   { padding-right: 36px; }
 
+/* error state */
 .base-input__wrapper--error .base-input__field {
-  border-color: var(--wx-danger-solid);
-  box-shadow: 0 0 0 3px var(--wx-danger-bg);
+  border-color: var(--wx-danger-solid, #dc2626);
+  box-shadow: 0 0 0 3px var(--wx-danger-bg, #fee2e2);
+}
+.base-input__wrapper--error .base-input__field:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-danger-solid, #dc2626) 25%, transparent);
+}
+
+/* success state */
+.base-input__wrapper--success .base-input__field {
+  border-color: var(--wx-success-border, #86efac);
+  box-shadow: 0 0 0 3px var(--wx-success-bg, #f0fdf4);
+}
+
+/* disabled */
+.base-input__wrapper--disabled .base-input__field {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* right icons */
+.base-input__eye,
+.base-input__icon {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
 }
 
 .base-input__eye {
-  position: absolute;
-  right: 6px;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--wx-text-muted);
-  font-size: 14px;
-  padding: 2px;
-  line-height: 1;
-  transition: color var(--wx-duration-fast);
+  padding: 0;
+  border-radius: var(--wx-radius-sm);
+  transition: color var(--wx-duration-fast, 150ms);
 }
-.base-input__eye:hover {
-  color: var(--wx-text-primary);
+.base-input__eye:hover { color: var(--wx-text-primary); }
+
+.base-input__icon--success {
+  color: var(--wx-success-text, #16a34a);
+  animation: icon-pop var(--wx-duration-fast, 150ms) var(--wx-ease-decelerate, cubic-bezier(0,0,.2,1));
+}
+@keyframes icon-pop {
+  from { opacity: 0; transform: scale(.6); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 .base-input__error {
   font-size: 11px;
-  color: var(--wx-danger-text);
+  color: var(--wx-danger-text, #dc2626);
 }
 
 /* ── Size sm ── */
 .base-input--sm .base-input__field {
-  padding: 4px 8px;
-  font-size: 11px;
+  padding: 5px 10px;
+  font-size: 12px;
 }
-.base-input--sm .base-input__label {
-  font-size: 11px;
+.base-input--sm .base-input__label { font-size: 11px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .base-input__field {
+    transition: none;
+  }
+  .base-input__icon--success { animation: none; }
 }
 </style>

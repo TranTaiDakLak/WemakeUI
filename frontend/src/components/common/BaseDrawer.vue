@@ -141,7 +141,10 @@ onBeforeUnmount(() => {
   position: fixed;
   background: var(--wx-bg-base);
   color: var(--wx-content-primary);
-  box-shadow: var(--wx-shadow-xl);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  box-shadow:
+    0 20px 50px rgba(37, 99, 235, 0.25),
+    0 8px 24px rgba(37, 99, 235, 0.15);
   z-index: calc(var(--wx-z-overlay) + 1);
   display: flex;
   flex-direction: column;

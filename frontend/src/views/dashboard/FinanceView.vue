@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** dashboard/finance — số dư, dòng tiền, giao dịch */
-import DashboardLayout from '../_layouts/DashboardLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseTag, BaseButton } from '../../components/common'
 import { sparkPath, sparkArea, seriesUp, seriesDown, seriesVolatile } from '../_layouts/dashboard-widgets'
 
@@ -22,7 +22,7 @@ const tx = [
 </script>
 
 <template>
-  <DashboardLayout
+  <AppPageLayout section="dashboards"
     current="Tài chính"
     page-title="Tổng quan tài chính"
     page-description="Số dư, dòng tiền và giao dịch — cập nhật 5 phút."
@@ -98,7 +98,7 @@ const tx = [
         </ul>
       </BasePanel>
     </div>
-  </DashboardLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

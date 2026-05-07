@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseInput, BaseTag, BaseBadge } from '../../components/common'
 
 const query = ref('dashboard')
@@ -27,7 +27,7 @@ const TYPE_ICONS: Record<string, string> = { trang: '📄', component: '🧩', '
 </script>
 
 <template>
-  <AppLayout current="tìm kiếm" page-title="Kết quả tìm kiếm" page-description="Tìm trang, component, tài liệu và người dùng">
+  <AppPageLayout section="app" current="tìm kiếm" page-title="Kết quả tìm kiếm" page-description="Tìm trang, component, tài liệu và người dùng">
     <div class="search-wrap">
       <div class="search-bar">
         <BaseInput v-model="query" placeholder="Tìm kiếm..." size="md" clearable style="max-width: 600px; width: 100%;" />
@@ -65,7 +65,7 @@ const TYPE_ICONS: Record<string, string> = { trang: '📄', component: '🧩', '
         </div>
       </div>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

@@ -40,7 +40,7 @@ defineEmits<{
 
 .base-toggle__label {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--wx-text-secondary);
   user-select: none;
 }
 </style>

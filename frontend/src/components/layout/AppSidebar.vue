@@ -110,9 +110,9 @@ function isGroupExpanded(item: SidebarItem): boolean {
 
 function toggleGroup(item: SidebarItem) {
   if (collapsed.value) {
-    // collapsed → click parent = navigate parent (không expand)
-    onSelect(item)
-    return
+    // collapsed → expand sidebar trước, rồi mở group
+    collapsed.value = false
+    userToggled.value = true
   }
   if (expandedGroups.value.has(item.id)) {
     expandedGroups.value.delete(item.id)
@@ -293,11 +293,27 @@ watch(() => props.activeId, () => {
                     role="list"
                   >
                     <li v-for="child in item.children" :key="child.id">
+                      <a
+                        v-if="child.href"
+                        :href="child.href"
+                        class="wx-sidebar__link wx-sidebar__link--child"
+                        :class="{
+                          'wx-sidebar__link--active': child.id === props.activeId,
+                          'wx-sidebar__link--disabled': child.disabled,
+                        }"
+                        :title="child.label"
+                        @click="onSelect(child)"
+                      >
+                        <span class="wx-sidebar__child-bullet" aria-hidden="true" />
+                        <span class="wx-sidebar__label">{{ child.label }}</span>
+                        <span v-if="child.badge !== undefined" class="wx-sidebar__badge">{{ child.badge }}</span>
+                      </a>
                       <button
+                        v-else
                         type="button"
                         class="wx-sidebar__link wx-sidebar__link--child"
                         :class="{
-                          'wx-sidebar__link--active': child.id === activeId,
+                          'wx-sidebar__link--active': child.id === props.activeId,
                           'wx-sidebar__link--disabled': child.disabled,
                         }"
                         :disabled="child.disabled"
@@ -305,10 +321,7 @@ watch(() => props.activeId, () => {
                       >
                         <span class="wx-sidebar__child-bullet" aria-hidden="true" />
                         <span class="wx-sidebar__label">{{ child.label }}</span>
-                        <span
-                          v-if="child.badge !== undefined"
-                          class="wx-sidebar__badge"
-                        >{{ child.badge }}</span>
+                        <span v-if="child.badge !== undefined" class="wx-sidebar__badge">{{ child.badge }}</span>
                       </button>
                     </li>
                   </ul>

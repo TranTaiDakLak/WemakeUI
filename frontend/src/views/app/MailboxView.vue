@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseAvatar, BaseInput } from '../../components/common'
 
 const FOLDERS = [
@@ -29,7 +29,7 @@ import { computed } from 'vue'
 </script>
 
 <template>
-  <AppLayout current="hộp thư" page-title="Hộp thư" page-description="Quản lý email nội bộ và thông báo">
+  <AppPageLayout section="app" current="hộp thư" page-title="Hộp thư" page-description="Quản lý email nội bộ và thông báo">
     <template #actions>
       <BaseButton size="sm" variant="primary">+ Soạn thư</BaseButton>
     </template>
@@ -93,7 +93,7 @@ import { computed } from 'vue'
         </div>
       </div>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

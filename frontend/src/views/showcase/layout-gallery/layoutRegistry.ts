@@ -1,18 +1,13 @@
 export type LayoutMode   = 'light' | 'dark' | 'both'
 export type LayoutStatus = 'ready' | 'draft'
 
-/** Sub-group cho WeConnect: khớp đúng sidebar gốc */
-export type WCGroup = 'WeConnect' | 'Hệ thống'
-
 export type LayoutCategory =
-  | 'WeConnect'   // messaging automation platform — 10 trang
-  | 'Dashboard'   // generic analytics/business dashboards
-  | 'Auth'        // login, register, otp, onboarding
-  | 'App'         // profile, settings, files, wiki...
-  | 'Communication' // mailbox, chat
-  | 'Billing'     // pricing, invoices
-  | 'Landing'     // marketing pages
-  | 'Error'       // 404, 500, maintenance
+  | 'WeConnect'      // Facebook automation platform — full tool set
+  | 'WeDashboard'    // WeConnect KPI dashboard
+  | 'ChartDashboard' // Analytics & chart-heavy dashboards
+  | 'Dashboard'      // Full comprehensive dashboard layouts
+  | 'PageTemplates'  // Auth, App, Landing, Error standalone pages
+  | 'Forms'          // Form templates — basic, advanced, modal & drawer
 
 /* ── Một variant = một cách bố cục cụ thể ── */
 export interface LayoutVariant {
@@ -34,27 +29,25 @@ export interface LayoutPage {
   title: string
   description: string
   category: LayoutCategory
-  /** Sub-group trong category (chỉ dùng cho WeConnect) */
-  group?: WCGroup
+  /** Sub-group trong category (WeConnect: 'WeConnect'|'Hệ thống', PageTemplates: 'Auth'|'App'|'Communication'|'Billing'|'Landing'|'Error') */
+  group?: string
   variants: LayoutVariant[]
   tags?: string[]
 }
 
 export const CATEGORY_META: Record<LayoutCategory, { color: string; label: string; desc: string }> = {
-  WeConnect:     { color: '#8b5cf6', label: 'WeConnect',     desc: 'WhatsApp automation platform — 10 trang' },
-  Dashboard:     { color: '#0ea5e9', label: 'Dashboard',     desc: 'Tổng quan analytics/business' },
-  Auth:          { color: '#6366f1', label: 'Auth',          desc: 'Đăng nhập, đăng ký, xác thực' },
-  App:           { color: '#10b981', label: 'App',           desc: 'Profile, settings, files, wiki...' },
-  Communication: { color: '#f97316', label: 'Communication', desc: 'Email, chat, messenger' },
-  Billing:       { color: '#84cc16', label: 'Billing',       desc: 'Pricing, invoices, payment' },
-  Landing:       { color: '#14b8a6', label: 'Landing',       desc: 'Marketing, blog, about' },
-  Error:         { color: '#94a3b8', label: 'Error',         desc: '404, 500, maintenance...' },
+  WeConnect:     { color: '#8b5cf6', label: 'WeConnect',       desc: 'Nền tảng automation — tài khoản, chiến dịch, datagrid, context menu, statusbar' },
+  WeDashboard:   { color: '#2563eb', label: 'KPI Dashboard',   desc: 'KPI cards, sparkline, activity feed — dashboard tổng quan hệ thống WeConnect' },
+  ChartDashboard:{ color: '#0ea5e9', label: 'Phân tích',       desc: 'Analytics, Finance, Ecommerce, CRM, Project — dashboard nặng biểu đồ' },
+  Dashboard:     { color: '#f59e0b', label: 'Tổng hợp',        desc: 'Dashboard đa năng với KPI, area chart, activity feed, top list' },
+  PageTemplates: { color: '#6366f1', label: 'Trang đơn',       desc: 'Auth · App · Billing · Landing · Error — các trang độc lập tiêu chuẩn' },
+  Forms:         { color: '#f97316', label: 'Form mẫu',        desc: 'Controls, validation, wizard, file upload, modal & drawer — form patterns đầy đủ' },
 }
 
 export const layoutPages: LayoutPage[] = [
 
   /* ════════════════════════════════════════════════
-     WECONNECT — WhatsApp automation platform
+     WECONNECT — Facebook automation platform
      Sidebar gốc:
        Group "WeConnect": Tổng quan / Tài khoản / Chiến dịch / Danh bạ / Phiên kết nối
        Group "Hệ thống":  Plugin / Console / Lịch tác vụ / Tích hợp / Automation canvas
@@ -71,12 +64,12 @@ export const layoutPages: LayoutPage[] = [
         id: 'wc-admin-v1',
         label: 'KPI cards + Sparkline + Activity feed',
         description: '4 KPI (accounts / sessions / campaigns / delivery rate) với sparkline chart, recent activity timeline.',
-        route: '/weconnect',
+        route: '/dashboard/weconnect-v1',
         status: 'ready',
         mode: 'both',
-        components: ['BaseCard', 'BaseBadge', 'Sparkline'],
+        components: ['BaseCard', 'Sparkline'],
         patterns: ['KpiGrid', 'SparklineCard', 'ActivityFeed'],
-        file: 'src/views/weconnect/AdminView.vue',
+        file: 'src/views/dashboard/WeDashboardV1View.vue',
         prompt: 'WeConnect dashboard: 4 KPI cards (Tài khoản hoạt động / Phiên kết nối hôm nay / Chiến dịch đang chạy / Tỷ lệ giao thành công), mỗi card có sparkline 24h, bên dưới là activity feed với màu theo type (campaign/account/plugin/error/session).',
       },
     ],
@@ -85,22 +78,22 @@ export const layoutPages: LayoutPage[] = [
   {
     id: 'wc-accounts',
     title: 'Tài khoản',
-    description: 'Quản lý tài khoản WhatsApp/WhatsApp Business: kết nối QR, trạng thái, số session, tìm kiếm.',
+    description: 'Quản lý tài khoản Facebook: kết nối, trạng thái, tìm kiếm, bulk action, context menu 14 nhóm.',
     category: 'WeConnect',
     group: 'WeConnect',
-    tags: ['accounts', 'whatsapp', 'qr', 'connection'],
+    tags: ['accounts', 'facebook', 'datagrid', 'context-menu'],
     variants: [
       {
         id: 'wc-accounts-table',
-        label: 'Table + QR connect modal',
-        description: 'Bảng tài khoản, badge trạng thái (connected/disconnected/qr_pending), nút kết nối mới.',
-        route: '/weconnect/accounts',
+        label: 'DataGrid + MenuStrip + ActionBar + StatusBar',
+        description: 'Bảng tài khoản virtual scroll, badge trạng thái, context menu 14 nhóm, 10 modal.',
+        route: '/weconnect',
         status: 'ready',
         mode: 'both',
-        components: ['BaseButton', 'BaseBadge', 'BaseAvatar', 'BaseInput'],
-        patterns: ['AccountTable', 'StatusBadge', 'QrModal', 'SearchBar'],
-        file: 'src/views/weconnect/AccountsView.vue',
-        prompt: 'Accounts table: search bar, badge tổng kết nối, bảng có avatar + tên + loại (WA/WA Business) + badge trạng thái + số session + thời gian cuối, action: QR reconnect / disconnect.',
+        components: ['BaseButton', 'BaseBadge', 'BaseDataGrid', 'BaseInput'],
+        patterns: ['AccountTable', 'StatusBadge', 'ContextMenu', 'SearchBar', 'StatusBar'],
+        file: 'src/views/weconnect/AdminView.vue',
+        prompt: 'Accounts table: MenuStrip 6 mục, ActionBar run/stop + search + category, DataGrid virtual scroll với context menu 14 nhóm, StatusBar tổng kết.',
       },
     ],
   },
@@ -119,7 +112,7 @@ export const layoutPages: LayoutPage[] = [
         route: '/weconnect/campaigns',
         status: 'ready',
         mode: 'both',
-        components: ['BaseButton', 'BaseSelect', 'BaseBadge', 'BaseProgress', 'FormModal', 'ConfirmDialog', 'BulkActionBar'],
+        components: ['BaseButton', 'BaseSelectMenu', 'BaseBadge', 'BaseProgress', 'FormModal', 'ConfirmDialog', 'BulkActionBar'],
         patterns: ['TableFilter', 'InlineProgress', 'BulkPause', 'BulkActivate', 'BulkDelete'],
         file: 'src/views/weconnect/CampaignsView.vue',
         prompt: 'Campaigns: search + platform select (Zalo/Facebook/SMS/Email) + status select, table có inline progress bar 6px cho running/completed/paused, checkbox multi-select, bulk action bar với pause/activate/delete.',
@@ -141,7 +134,7 @@ export const layoutPages: LayoutPage[] = [
         route: '/weconnect/contacts',
         status: 'ready',
         mode: 'both',
-        components: ['BaseButton', 'BaseInput', 'BaseSelect', 'BaseBadge', 'FormModal', 'FormDrawer', 'ConfirmDialog', 'BulkActionBar'],
+        components: ['BaseButton', 'BaseInput', 'BaseSelectMenu', 'BaseBadge', 'FormModal', 'FormDrawer', 'ConfirmDialog', 'BulkActionBar'],
         patterns: ['FullCRUD', 'MultiSelect', 'RowActionsOnHover', 'DetailDrawer', 'BulkDelete'],
         file: 'src/views/weconnect/ContactsView.vue',
         prompt: 'Contacts CRUD: search + filter, checkbox multi-select, row actions (edit/delete) chỉ hiện khi hover, Add modal, Edit modal, Detail drawer có "Chỉnh sửa" button, Delete confirm dialog, Bulk action bar.',
@@ -152,10 +145,10 @@ export const layoutPages: LayoutPage[] = [
   {
     id: 'wc-sessions',
     title: 'Phiên kết nối',
-    description: 'Giám sát session WhatsApp đang hoạt động realtime: uptime, tin nhắn đã gửi, thiết bị, trạng thái.',
+    description: 'Giám sát session đang hoạt động realtime: uptime, tin nhắn đã gửi, thiết bị, trạng thái.',
     category: 'WeConnect',
     group: 'WeConnect',
-    tags: ['sessions', 'realtime', 'monitor', 'whatsapp'],
+    tags: ['sessions', 'realtime', 'monitor'],
     variants: [
       {
         id: 'wc-sessions-cards',
@@ -207,7 +200,7 @@ export const layoutPages: LayoutPage[] = [
         route: '/weconnect/console',
         status: 'ready',
         mode: 'both',
-        components: ['BaseButton', 'BaseSelect', 'BaseBadge'],
+        components: ['BaseButton', 'BaseSelectMenu', 'BaseBadge'],
         patterns: ['LogViewer', 'LevelFilter', 'AutoScroll'],
         file: 'src/views/weconnect/ConsoleView.vue',
       },
@@ -270,7 +263,7 @@ export const layoutPages: LayoutPage[] = [
         route: '/weconnect/automation',
         status: 'ready',
         mode: 'both',
-        components: ['BaseButton', 'BaseBadge', 'BaseCard', 'BaseSelect'],
+        components: ['BaseButton', 'BaseBadge', 'BaseCard', 'BaseSelectMenu'],
         patterns: ['FlowNode', 'NodeConnector', 'TriggerNode', 'ActionNode', 'ConditionNode'],
         file: 'src/views/weconnect/AutomationCanvasView.vue',
         prompt: 'Automation canvas: toolbar trên (zoom/undo/save), canvas infinite scroll, node types: Trigger (xanh) / Condition (vàng) / Action (tím), kéo thả từ panel bên trái, kết nối bằng bezier curve.',
@@ -279,15 +272,38 @@ export const layoutPages: LayoutPage[] = [
   },
 
   /* ════════════════════════════════════════════════
-     DASHBOARD — generic business dashboards
-     (KHÔNG phải WeConnect — đây là dashboard dạng
-      analytics/business/ecommerce/saas)
+     WEDASHBOARD — WeDashboard branded KPI templates
+  ════════════════════════════════════════════════ */
+  {
+    id: 'dash-weconnect',
+    title: 'WeConnect Dashboard',
+    description: 'Dashboard overview cho hệ thống Facebook automation: KPI cards với sparkline, quick stats, activity feed.',
+    category: 'WeDashboard',
+    tags: ['dashboard', 'kpi', 'sparkline', 'messaging', 'facebook'],
+    variants: [
+      {
+        id: 'dash-weconnect-v1',
+        label: 'KPI 4-col + Quick stats + Activity feed',
+        description: '4 KPI cards (tài khoản / phiên / chiến dịch / tỷ lệ giao), sparkline 24h, recent activity feed, quick stats panel.',
+        route: '/dashboard/weconnect-v1',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseCard', 'Sparkline'],
+        patterns: ['KpiGrid', 'SparklineCard', 'ActivityFeed', 'QuickStats'],
+        file: 'src/views/dashboard/WeDashboardV1View.vue',
+        prompt: 'WeConnect dashboard v1: 4 KPI cards với sparkline 24h (Tài khoản hoạt động / Phiên kết nối hôm nay / Chiến dịch đang chạy / Tỷ lệ giao thành công), bên dưới 2 cột: trái là activity feed với màu dot theo type, phải là quick stats (Tổng TK / Chiến dịch hoàn thành / Tin nhắn đã gửi / Uptime).',
+      },
+    ],
+  },
+
+  /* ════════════════════════════════════════════════
+     CHART DASHBOARD — Analytics & chart-heavy
   ════════════════════════════════════════════════ */
   {
     id: 'dash-analytics',
     title: 'Analytics Dashboard',
     description: 'Phân tích traffic, funnel conversion, retention, cohort. Dùng cho SaaS/web product.',
-    category: 'Dashboard',
+    category: 'ChartDashboard',
     tags: ['analytics', 'chart', 'funnel', 'retention'],
     variants: [
       {
@@ -296,19 +312,9 @@ export const layoutPages: LayoutPage[] = [
         route: '/dashboard/analytics',
         status: 'ready',
         mode: 'both',
-        components: ['BaseCard', 'BaseBadge', 'BaseSelect'],
+        components: ['BaseCard', 'BaseBadge', 'BaseSelectMenu'],
         patterns: ['LineChart', 'BarChart', 'FunnelChart', 'DateRangeFilter'],
         file: 'src/views/dashboard/AnalyticsView.vue',
-      },
-      {
-        id: 'dash-overview-v1',
-        label: 'Overview — KPI + Activity + Top list',
-        route: '/dashboard/overview',
-        status: 'ready',
-        mode: 'both',
-        components: ['BaseCard', 'BaseBadge', 'BaseProgress', 'BaseAvatar'],
-        patterns: ['StatGrid', 'AreaChart', 'ActivityFeed', 'TopList'],
-        file: 'src/views/dashboard/OverviewView.vue',
       },
     ],
   },
@@ -317,7 +323,7 @@ export const layoutPages: LayoutPage[] = [
     id: 'dash-finance',
     title: 'Finance Dashboard',
     description: 'Doanh thu, P&L, budget so thực tế, cash flow. Dùng cho finance/accounting team.',
-    category: 'Dashboard',
+    category: 'ChartDashboard',
     tags: ['finance', 'revenue', 'pnl', 'budget'],
     variants: [
       {
@@ -326,7 +332,7 @@ export const layoutPages: LayoutPage[] = [
         route: '/dashboard/finance',
         status: 'ready',
         mode: 'both',
-        components: ['BaseCard', 'BaseBadge', 'BaseSelect'],
+        components: ['BaseCard', 'BaseBadge', 'BaseSelectMenu'],
         patterns: ['RevenueChart', 'PnlTable', 'BudgetBar'],
         file: 'src/views/dashboard/FinanceView.vue',
       },
@@ -347,7 +353,7 @@ export const layoutPages: LayoutPage[] = [
     id: 'dash-ecommerce',
     title: 'E-commerce Dashboard',
     description: 'Doanh thu, đơn hàng, top sản phẩm, tỷ lệ chuyển đổi. Dùng cho shop online.',
-    category: 'Dashboard',
+    category: 'ChartDashboard',
     tags: ['ecommerce', 'orders', 'products', 'revenue'],
     variants: [
       {
@@ -367,7 +373,7 @@ export const layoutPages: LayoutPage[] = [
     id: 'dash-crm',
     title: 'CRM Dashboard',
     description: 'Pipeline deals, win rate, top contacts. Dùng cho sales team.',
-    category: 'Dashboard',
+    category: 'ChartDashboard',
     tags: ['crm', 'pipeline', 'deals', 'sales'],
     variants: [
       {
@@ -387,7 +393,7 @@ export const layoutPages: LayoutPage[] = [
     id: 'dash-project',
     title: 'Project Dashboard',
     description: 'Task board, timeline, team workload. Dùng cho project management.',
-    category: 'Dashboard',
+    category: 'ChartDashboard',
     tags: ['project', 'kanban', 'gantt', 'tasks'],
     variants: [
       {
@@ -404,13 +410,39 @@ export const layoutPages: LayoutPage[] = [
   },
 
   /* ════════════════════════════════════════════════
-     AUTH
+     DASHBOARD — Full comprehensive layouts
   ════════════════════════════════════════════════ */
+  {
+    id: 'dash-overview',
+    title: 'Overview Dashboard',
+    description: 'Dashboard tổng hợp: KPI, area chart, activity feed, top list. Dùng cho business overview.',
+    category: 'Dashboard',
+    tags: ['overview', 'kpi', 'activity', 'stats'],
+    variants: [
+      {
+        id: 'dash-overview-v1',
+        label: 'Overview — KPI + Activity + Top list',
+        route: '/dashboard/overview',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseCard', 'BaseBadge', 'BaseProgress', 'BaseAvatar'],
+        patterns: ['StatGrid', 'AreaChart', 'ActivityFeed', 'TopList'],
+        file: 'src/views/dashboard/OverviewView.vue',
+      },
+    ],
+  },
+
+  /* ════════════════════════════════════════════════
+     PAGE TEMPLATES — Standalone pages
+  ════════════════════════════════════════════════ */
+
+  /* Auth group */
   {
     id: 'auth-login',
     title: 'Login',
     description: 'Đăng nhập với nhiều phong cách bố cục.',
-    category: 'Auth',
+    category: 'PageTemplates',
+    group: 'Auth',
     tags: ['login', 'signin', 'auth'],
     variants: [
       {
@@ -436,6 +468,18 @@ export const layoutPages: LayoutPage[] = [
         file: 'src/views/auth/LoginV2View.vue',
       },
       {
+        id: 'login-v3',
+        label: 'Centered — Animated Login / Sign up switch',
+        description: 'Form căn giữa với segmented switch, bidirectional slide animation, toast state.',
+        route: '/auth/login-v3',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseButton', 'BaseInput', 'BaseCheckbox', 'FormField'],
+        patterns: ['SegmentedSwitch', 'AnimatedFormTransition', 'FormValidation', 'ToastFeedback'],
+        file: 'src/views/auth/LoginV3View.vue',
+        prompt: 'LoginV3: form căn giữa, segmented switch Login/Đăng ký, animation trượt 2 chiều (login→signup forward, signup→login backward), validate inline, toast success/error, social buttons, reduced-motion support.',
+      },
+      {
         id: 'login-dark',
         label: 'Dark — Glass morphism',
         status: 'draft',
@@ -451,7 +495,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'auth-register',
     title: 'Register',
     description: 'Đăng ký tài khoản.',
-    category: 'Auth',
+    category: 'PageTemplates',
+    group: 'Auth',
     tags: ['register', 'signup'],
     variants: [
       {
@@ -471,7 +516,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'auth-otp',
     title: 'OTP / 2FA',
     description: 'Xác thực 2 yếu tố.',
-    category: 'Auth',
+    category: 'PageTemplates',
+    group: 'Auth',
     tags: ['otp', '2fa', 'verify'],
     variants: [
       {
@@ -501,7 +547,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'auth-onboarding',
     title: 'Onboarding',
     description: 'Welcome flow cho user mới.',
-    category: 'Auth',
+    category: 'PageTemplates',
+    group: 'Auth',
     tags: ['onboarding', 'wizard', 'setup'],
     variants: [
       {
@@ -531,7 +578,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'auth-recovery',
     title: 'Forgot / Reset Password',
     description: 'Quên mật khẩu và đặt lại.',
-    category: 'Auth',
+    category: 'PageTemplates',
+    group: 'Auth',
     tags: ['forgot', 'reset', 'recovery'],
     variants: [
       {
@@ -557,14 +605,13 @@ export const layoutPages: LayoutPage[] = [
     ],
   },
 
-  /* ════════════════════════════════════════════════
-     APP PAGES
-  ════════════════════════════════════════════════ */
+  /* App group */
   {
     id: 'app-settings',
     title: 'Settings',
     description: 'Cài đặt nhiều section: profile, security, notifications, billing, danger zone.',
-    category: 'App',
+    category: 'PageTemplates',
+    group: 'App',
     tags: ['settings', 'profile', 'config'],
     variants: [
       {
@@ -573,7 +620,7 @@ export const layoutPages: LayoutPage[] = [
         route: '/app/settings',
         status: 'ready',
         mode: 'both',
-        components: ['BaseButton', 'BaseInput', 'BaseToggle', 'BaseSelect', 'BaseCard'],
+        components: ['BaseButton', 'BaseInput', 'BaseToggle', 'BaseSelectMenu', 'BaseCard'],
         patterns: ['SettingsSection', 'InlineForm', 'DangerZone'],
         file: 'src/views/app/SettingsView.vue',
         prompt: 'Settings: left sidebar nav 5 mục, mỗi section = BaseCard với form fields, danger zone cuối trang, save/cancel sticky bottom.',
@@ -585,7 +632,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'app-profile',
     title: 'Profile',
     description: 'Hồ sơ cá nhân: cover, avatar, bio, stats.',
-    category: 'App',
+    category: 'PageTemplates',
+    group: 'App',
     tags: ['profile', 'user', 'bio'],
     variants: [
       {
@@ -615,7 +663,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'app-files',
     title: 'File Manager',
     description: 'Quản lý file: grid/list, breadcrumb, upload zone.',
-    category: 'App',
+    category: 'PageTemplates',
+    group: 'App',
     tags: ['files', 'upload', 'storage'],
     variants: [
       {
@@ -635,7 +684,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'app-wiki',
     title: 'Wiki / Docs',
     description: 'Tài liệu nội bộ: sidebar mục lục, article body.',
-    category: 'App',
+    category: 'PageTemplates',
+    group: 'App',
     tags: ['wiki', 'docs', 'knowledge'],
     variants: [
       {
@@ -655,7 +705,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'app-organization',
     title: 'Organization',
     description: 'Quản lý team, phân quyền, mời thành viên.',
-    category: 'App',
+    category: 'PageTemplates',
+    group: 'App',
     tags: ['org', 'team', 'roles', 'members'],
     variants: [
       {
@@ -664,21 +715,20 @@ export const layoutPages: LayoutPage[] = [
         route: '/app/organization',
         status: 'ready',
         mode: 'both',
-        components: ['BaseCard', 'BaseAvatar', 'BaseBadge', 'BaseButton', 'BaseSelect'],
+        components: ['BaseCard', 'BaseAvatar', 'BaseBadge', 'BaseButton', 'BaseSelectMenu'],
         patterns: ['MemberTable', 'RolePicker', 'InviteModal'],
         file: 'src/views/app/OrganizationView.vue',
       },
     ],
   },
 
-  /* ════════════════════════════════════════════════
-     COMMUNICATION
-  ════════════════════════════════════════════════ */
+  /* Communication group */
   {
     id: 'com-mailbox',
     title: 'Mailbox',
     description: 'Email client 3-panel: folders / list / detail.',
-    category: 'Communication',
+    category: 'PageTemplates',
+    group: 'Communication',
     tags: ['email', 'mailbox', '3-panel'],
     variants: [
       {
@@ -698,7 +748,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'com-chat',
     title: 'Chat',
     description: 'Messenger: contact list, bubble thread, composer.',
-    category: 'Communication',
+    category: 'PageTemplates',
+    group: 'Communication',
     tags: ['chat', 'messenger', 'realtime'],
     variants: [
       {
@@ -714,14 +765,13 @@ export const layoutPages: LayoutPage[] = [
     ],
   },
 
-  /* ════════════════════════════════════════════════
-     BILLING
-  ════════════════════════════════════════════════ */
+  /* Billing group */
   {
     id: 'billing-pricing',
     title: 'Pricing',
     description: '3 tier cards, toggle monthly/yearly, feature list.',
-    category: 'Billing',
+    category: 'PageTemplates',
+    group: 'Billing',
     tags: ['pricing', 'plans', 'tier'],
     variants: [
       {
@@ -741,7 +791,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'billing-invoices',
     title: 'Invoices',
     description: 'Danh sách hóa đơn, status badge, tải PDF.',
-    category: 'Billing',
+    category: 'PageTemplates',
+    group: 'Billing',
     tags: ['invoice', 'billing', 'payment'],
     variants: [
       {
@@ -757,14 +808,13 @@ export const layoutPages: LayoutPage[] = [
     ],
   },
 
-  /* ════════════════════════════════════════════════
-     LANDING
-  ════════════════════════════════════════════════ */
+  /* Landing group */
   {
     id: 'landing-saas',
     title: 'SaaS Landing',
     description: 'Marketing page: hero, features, pricing teaser, CTA.',
-    category: 'Landing',
+    category: 'PageTemplates',
+    group: 'Landing',
     tags: ['landing', 'saas', 'marketing', 'hero'],
     variants: [
       {
@@ -794,7 +844,8 @@ export const layoutPages: LayoutPage[] = [
     id: 'landing-blog',
     title: 'Blog',
     description: 'Blog list và bài viết chi tiết.',
-    category: 'Landing',
+    category: 'PageTemplates',
+    group: 'Landing',
     tags: ['blog', 'article', 'cms'],
     variants: [
       {
@@ -820,14 +871,13 @@ export const layoutPages: LayoutPage[] = [
     ],
   },
 
-  /* ════════════════════════════════════════════════
-     ERROR
-  ════════════════════════════════════════════════ */
+  /* Error group */
   {
     id: 'error-pages',
     title: 'Error Pages',
     description: '404, 500, 403, 503 Maintenance, Coming Soon, Offline.',
-    category: 'Error',
+    category: 'PageTemplates',
+    group: 'Error',
     tags: ['error', '404', '500', 'maintenance'],
     variants: [
       { id: 'err-404', label: '404 — Not found',      route: '/error/404',           status: 'ready', mode: 'both', components: ['BaseButton'], patterns: ['ErrorLayout'], file: 'src/views/error/NotFoundView.vue' },
@@ -838,6 +888,270 @@ export const layoutPages: LayoutPage[] = [
       { id: 'err-offline', label: 'Offline',          route: '/error/offline',       status: 'ready', mode: 'both', components: ['BaseButton'], patterns: ['OfflineState'], file: 'src/views/error/OfflineView.vue' },
     ],
   },
+  /* Showcase group */
+  {
+    id: 'showcase-animations',
+    title: 'Animation System',
+    description: 'Motion tokens, Vue Transition patterns, hover effects, loading states, form feedback — tham chiếu và demo live.',
+    category: 'PageTemplates',
+    group: 'Showcase',
+    tags: ['animation', 'motion', 'transition', 'hover', 'skeleton', 'loading'],
+    variants: [
+      {
+        id: 'animations-v1',
+        label: 'Motion reference — tokens + live demo',
+        description: 'Toàn bộ animation patterns với live preview, code copy, token badges.',
+        route: '/showcase/animations',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseButton', 'BaseSpinner', 'BaseSkeleton'],
+        patterns: ['MotionTokens', 'VueTransition', 'HoverEffect', 'LoadingState', 'FormFeedback', 'ReducedMotion'],
+        file: 'src/views/showcase/AnimationShowcase.vue',
+        prompt: 'Animation showcase: motion token table (d-*/ease-*), Vue Transition demos (fade/scale/slide-up/drawer), CSS hover effects, skeleton shimmer/pulse, error shake, success check SVG animation. Mỗi item có live preview + code snippet + reduced-motion note.',
+      },
+    ],
+  },
+
+  /* ════════════════════════════════════════════════
+     FORMS — Phoenix-style form templates
+     Sub-groups: Basic / Advanced / Modal & Drawer
+  ════════════════════════════════════════════════ */
+
+  /* Basic group */
+  {
+    id: 'form-control',
+    title: 'Form Controls',
+    description: 'Tất cả form controls cơ bản: input, textarea, select, toggle, checkbox. Reference khi xây dựng form.',
+    category: 'Forms',
+    group: 'Basic',
+    tags: ['input', 'textarea', 'select', 'toggle', 'checkbox', 'form'],
+    variants: [
+      {
+        id: 'form-control-v1',
+        label: 'All controls — states + sizes',
+        description: 'Text inputs, textarea, select, toggle. States: default/disabled/readonly/error/hint. Sizes: sm/md/lg.',
+        route: '/forms/control',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseInput', 'BaseTextarea', 'BaseSelectMenu', 'BaseToggle', 'FormField', 'BaseButton'],
+        patterns: ['FormLayout', 'FieldState', 'SizeVariant', 'FocusGlow'],
+        file: 'src/views/forms/FormControlView.vue',
+      },
+    ],
+  },
+
+  {
+    id: 'form-input-group',
+    title: 'Input Groups',
+    description: 'Input với icon/text prefix/suffix và button addon. CSS-only pattern, không cần component riêng.',
+    category: 'Forms',
+    group: 'Basic',
+    tags: ['input-group', 'addon', 'prefix', 'suffix', 'icon', 'password'],
+    variants: [
+      {
+        id: 'input-group-v1',
+        label: 'Icon prefix · Text prefix · Suffix button · Password toggle',
+        route: '/forms/input-group',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseButton'],
+        patterns: ['InputAddon', 'IconPrefix', 'ButtonSuffix', 'PrefixSuffix', 'PasswordToggle'],
+        file: 'src/views/forms/InputGroupView.vue',
+      },
+    ],
+  },
+
+  {
+    id: 'form-select',
+    title: 'Select',
+    description: 'BaseSelectMenu với nhiều kiểu dữ liệu, placeholder, states và size variants.',
+    category: 'Forms',
+    group: 'Basic',
+    tags: ['select', 'dropdown', 'options', 'placeholder'],
+    variants: [
+      {
+        id: 'select-v1',
+        label: 'Country · Timezone · Role · Currency — sizes + states',
+        route: '/forms/select',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseSelectMenu', 'FormField'],
+        patterns: ['SelectOptions', 'Placeholder', 'SizeVariant', 'DisabledState'],
+        file: 'src/views/forms/SelectView.vue',
+      },
+    ],
+  },
+
+  {
+    id: 'form-checks',
+    title: 'Checks, Radio & Toggle',
+    description: 'Checkbox list với mô tả, radio group dọc/ngang, toggle switches — phổ biến trong form cài đặt.',
+    category: 'Forms',
+    group: 'Basic',
+    tags: ['checkbox', 'radio', 'toggle', 'permissions', 'notifications'],
+    variants: [
+      {
+        id: 'checks-v1',
+        label: 'Checkbox list · Radio vertical/horizontal · Toggle list',
+        route: '/forms/checks',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseCheckbox', 'BaseRadio', 'BaseToggle', 'FormField'],
+        patterns: ['CheckList', 'RadioGroup', 'ToggleList'],
+        file: 'src/views/forms/ChecksView.vue',
+      },
+    ],
+  },
+
+  {
+    id: 'form-floating-labels',
+    title: 'Floating Labels',
+    description: 'Label trôi lên khi focus/có nội dung — CSS-only với :placeholder-shown + :focus.',
+    category: 'Forms',
+    group: 'Basic',
+    tags: ['floating-label', 'css-only', 'placeholder-shown', 'animation'],
+    variants: [
+      {
+        id: 'floating-v1',
+        label: 'Input · Email · Phone · Select · Textarea',
+        route: '/forms/floating-labels',
+        status: 'ready',
+        mode: 'both',
+        components: [],
+        patterns: ['FloatingLabel', 'CssOnly', 'placeholder-shown', 'FocusGlow'],
+        file: 'src/views/forms/FloatingLabelsView.vue',
+      },
+    ],
+  },
+
+  /* Advanced group */
+  {
+    id: 'form-validation',
+    title: 'Form Validation',
+    description: 'Client-side validation với error shake, password strength meter và success check SVG animation.',
+    category: 'Forms',
+    group: 'Advanced',
+    tags: ['validation', 'error', 'shake', 'password-strength', 'success-check'],
+    variants: [
+      {
+        id: 'validation-v1',
+        label: 'Error shake · Password strength · Success check',
+        route: '/forms/validation',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseInput', 'FormField', 'BaseButton'],
+        patterns: ['ErrorShake', 'PasswordStrength', 'SuccessCheck', 'SubmitValidation'],
+        file: 'src/views/forms/ValidationView.vue',
+      },
+    ],
+  },
+
+  {
+    id: 'form-wizard',
+    title: 'Multi-step Wizard',
+    description: 'Form nhiều bước với step indicator, slide transition có chiều. Phổ biến cho onboarding, checkout.',
+    category: 'Forms',
+    group: 'Advanced',
+    tags: ['wizard', 'multi-step', 'stepper', 'onboarding', 'transition'],
+    variants: [
+      {
+        id: 'wizard-v1',
+        label: '3-step — Info → Settings → Confirm',
+        route: '/forms/wizard',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseInput', 'BaseSelectMenu', 'BaseToggle', 'FormField', 'BaseButton'],
+        patterns: ['MultiStepWizard', 'DirectionTransition', 'StepIndicator', 'ReviewStep'],
+        file: 'src/views/forms/WizardView.vue',
+      },
+    ],
+  },
+
+  {
+    id: 'form-file-upload',
+    title: 'File Upload',
+    description: 'Drag & drop zone, progress bar giả lập, danh sách file theo loại. Thuần HTML5 + CSS.',
+    category: 'Forms',
+    group: 'Advanced',
+    tags: ['file-upload', 'drag-drop', 'progress', 'dropzone'],
+    variants: [
+      {
+        id: 'file-upload-v1',
+        label: 'Drop zone + Progress + File list',
+        route: '/forms/file-upload',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseButton'],
+        patterns: ['DragDrop', 'FileInput', 'ProgressBar', 'TransitionGroup'],
+        file: 'src/views/forms/FileUploadView.vue',
+      },
+    ],
+  },
+
+  /* Modal & Drawer group */
+  {
+    id: 'form-add-modal',
+    title: 'Add Modal Form',
+    description: 'Data table + BaseModal thêm mới. Pattern CRUD chuẩn — modal với form nhập liệu + loading state.',
+    category: 'Forms',
+    group: 'Modal & Drawer',
+    tags: ['modal', 'add', 'crud', 'create', 'table'],
+    variants: [
+      {
+        id: 'add-modal-v1',
+        label: 'Members table + Add modal',
+        route: '/forms/add-modal',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseModal', 'BaseInput', 'BaseSelectMenu', 'FormField', 'BaseButton'],
+        patterns: ['AddModal', 'DataTable', 'LoadingState', 'CRUDCreate'],
+        file: 'src/views/forms/AddModalFormView.vue',
+      },
+    ],
+  },
+
+  {
+    id: 'form-edit-modal',
+    title: 'Edit Modal Form',
+    description: 'Click hàng mở modal pre-populated + nút Xóa với confirm dialog riêng.',
+    category: 'Forms',
+    group: 'Modal & Drawer',
+    tags: ['modal', 'edit', 'crud', 'update', 'delete', 'confirm'],
+    variants: [
+      {
+        id: 'edit-modal-v1',
+        label: 'Products table + Edit modal + Delete confirm',
+        route: '/forms/edit-modal',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseModal', 'BaseInput', 'BaseSelectMenu', 'FormField', 'BaseButton'],
+        patterns: ['EditModal', 'ConfirmDelete', 'PrePopulate', 'CRUDUpdate'],
+        file: 'src/views/forms/EditModalFormView.vue',
+      },
+    ],
+  },
+
+  {
+    id: 'form-drawer',
+    title: 'Drawer Form',
+    description: 'Settings card + BaseDrawer từ bên phải. Phù hợp cho cài đặt chi tiết không che khuất nội dung.',
+    category: 'Forms',
+    group: 'Modal & Drawer',
+    tags: ['drawer', 'settings', 'slide-in', 'panel'],
+    variants: [
+      {
+        id: 'drawer-v1',
+        label: 'Settings card + Drawer from right',
+        route: '/forms/drawer-form',
+        status: 'ready',
+        mode: 'both',
+        components: ['BaseDrawer', 'BaseInput', 'BaseSelectMenu', 'BaseToggle', 'BaseTextarea', 'FormField'],
+        patterns: ['DrawerForm', 'SettingsPanel', 'FooterSlot', 'SlideinPanel'],
+        file: 'src/views/forms/DrawerFormView.vue',
+      },
+    ],
+  },
+
 ]
 
 export const CATEGORIES = Object.keys(CATEGORY_META) as LayoutCategory[]

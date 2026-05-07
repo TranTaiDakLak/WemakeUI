@@ -3,7 +3,7 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import AppTopbar from '../components/layout/AppTopbar.vue'
 import PageHeader from '../components/layout/PageHeader.vue'
 import {
-  BaseButton, BaseInput, BaseSelect, BaseToggle,
+  BaseButton, BaseInput, BaseSelectMenu, BaseToggle,
   BaseCheckbox, BaseRadio, BaseTabs, BaseBadge,
   BaseProgress, BaseModal, BaseDropdown, BaseTooltip,
   BaseSkeleton, BaseDataGrid, ContextMenu, StatusBar,
@@ -345,14 +345,14 @@ onMounted(() => {
         <GroupBox title="Theme & Locale">
           <div class="row">
             <FormField label="Chế độ giao diện" layout="vertical">
-              <BaseSelect
+              <BaseSelectMenu
                 :model-value="theme"
                 :options="themeOptions"
                 @update:model-value="(v) => setTheme(v as 'light' | 'dark' | 'system')"
               />
             </FormField>
             <FormField label="Ngôn ngữ" layout="vertical">
-              <BaseSelect :model-value="localeValue" :options="localeOptions" @update:model-value="changeLocale" />
+              <BaseSelectMenu :model-value="localeValue" :options="localeOptions" @update:model-value="changeLocale" />
             </FormField>
             <FormField label="Trạng thái hiện tại" layout="vertical">
               <div class="row">
@@ -522,16 +522,16 @@ onMounted(() => {
         <GroupBox title="BaseSelect">
           <div class="cols-2">
             <FormField label="Cơ bản" layout="vertical">
-              <BaseSelect v-model="inputDemo.selectVal" :options="planOpts" />
+              <BaseSelectMenu v-model="inputDemo.selectVal" :options="planOpts" />
             </FormField>
             <FormField label="Có nhóm (optgroup)" layout="vertical">
-              <BaseSelect v-model="inputDemo.selectGroupVal" :options="fruitOpts" />
+              <BaseSelectMenu v-model="inputDemo.selectGroupVal" :options="fruitOpts" />
             </FormField>
             <FormField label="Disabled" layout="vertical">
-              <BaseSelect :model-value="'pro'" :options="planOpts" disabled />
+              <BaseSelectMenu :model-value="'pro'" :options="planOpts" disabled />
             </FormField>
             <FormField label="Size sm" layout="vertical">
-              <BaseSelect v-model="inputDemo.selectVal" :options="planOpts" size="sm" />
+              <BaseSelectMenu v-model="inputDemo.selectVal" :options="planOpts" size="sm" />
             </FormField>
           </div>
         </GroupBox>
@@ -615,7 +615,7 @@ onMounted(() => {
             <BaseInput v-model="regForm.password" type="password" placeholder="••••••••" />
           </FormField>
           <FormField label="Quốc gia" layout="vertical">
-            <BaseSelect v-model="regForm.country" :options="countryOpts" />
+            <BaseSelectMenu v-model="regForm.country" :options="countryOpts" />
           </FormField>
           <FormField label="Gói dịch vụ" layout="vertical">
             <BaseRadio v-model="regForm.plan" name="plan" :options="planOpts" />
@@ -657,7 +657,7 @@ onMounted(() => {
             <BaseInput model-value="user@wemake.vn" size="sm" />
           </FormField>
           <FormField label="Múi giờ">
-            <BaseSelect :model-value="'vn'" :options="countryOpts" size="sm" />
+            <BaseSelectMenu :model-value="'vn'" :options="countryOpts" size="sm" />
           </FormField>
           <FormField label="Thông báo email">
             <BaseToggle :model-value="true" />
@@ -805,8 +805,8 @@ onMounted(() => {
             <div class="cols-2">
               <FormField label="Tên" layout="vertical"><BaseInput model-value="Nguyễn Văn A" /></FormField>
               <FormField label="Email" layout="vertical"><BaseInput model-value="a@wemake.vn" /></FormField>
-              <FormField label="Vai trò" layout="vertical"><BaseSelect :model-value="'pro'" :options="planOpts" /></FormField>
-              <FormField label="Quốc gia" layout="vertical"><BaseSelect :model-value="'vn'" :options="countryOpts" /></FormField>
+              <FormField label="Vai trò" layout="vertical"><BaseSelectMenu :model-value="'pro'" :options="planOpts" /></FormField>
+              <FormField label="Quốc gia" layout="vertical"><BaseSelectMenu :model-value="'vn'" :options="countryOpts" /></FormField>
             </div>
             <p class="muted" style="margin-top: 12px;">Modal có thể kéo thả tiêu đề, ESC để đóng, focus trap khi Tab.</p>
           </BaseModal>

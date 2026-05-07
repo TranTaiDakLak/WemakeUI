@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseCard, BaseToggle } from '../../components/common'
 
 const annual = ref(false)
@@ -34,7 +34,7 @@ const faqs = [
 </script>
 
 <template>
-  <AppLayout current="gói dịch vụ" page-title="Gói dịch vụ" page-description="Chọn gói phù hợp với quy mô của bạn">
+  <AppPageLayout section="app" current="gói dịch vụ" page-title="Gói dịch vụ" page-description="Chọn gói phù hợp với quy mô của bạn">
     <div class="pricing-wrap">
       <div class="billing-toggle">
         <span :class="{ muted: annual }">Thanh toán tháng</span>
@@ -82,7 +82,7 @@ const faqs = [
         </div>
       </div>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

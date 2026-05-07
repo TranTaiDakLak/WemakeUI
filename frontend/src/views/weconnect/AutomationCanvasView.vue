@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import WeConnectLayout from '../_layouts/WeConnectLayout.vue'
-import { BaseButton, BaseBadge } from '../../components/common'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
+import { BaseButton, BaseBadge, BaseSelectMenu } from '../../components/common'
 
 interface NodeDef {
   id: string
@@ -101,7 +101,7 @@ function addNode() {
 </script>
 
 <template>
-  <WeConnectLayout current="automation" page-title="Automation Canvas" page-description="Thiết kế luồng tự động hoá bằng kéo thả node">
+  <AppPageLayout section="weconnect" current="automation" page-title="Automation Canvas" page-description="Thiết kế luồng tự động hoá bằng kéo thả node">
     <template #actions>
       <BaseButton size="sm" variant="ghost" @click="runFlow">{{ running ? '⏳ Đang chạy...' : '▶ Chạy luồng' }}</BaseButton>
       <BaseButton size="sm" variant="primary">Lưu luồng</BaseButton>
@@ -111,9 +111,12 @@ function addNode() {
       <div class="canvas-sidebar">
         <div class="sidebar-title">Node mới</div>
         <div class="add-form">
-          <select v-model="addType" class="wx-select">
-            <option v-for="t in NODE_TYPES" :key="t" :value="t">{{ t }}</option>
-          </select>
+          <BaseSelectMenu
+            v-model="addType"
+            size="sm"
+            style="width:100%"
+            :options="NODE_TYPES.map(t => ({ value: t, label: t }))"
+          />
           <input v-model="addLabel" class="wx-input" placeholder="Tên node..." @keyup.enter="addNode" />
           <BaseButton size="sm" variant="primary" @click="addNode">Thêm</BaseButton>
         </div>
@@ -186,7 +189,7 @@ function addNode() {
         </svg>
       </div>
     </div>
-  </WeConnectLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

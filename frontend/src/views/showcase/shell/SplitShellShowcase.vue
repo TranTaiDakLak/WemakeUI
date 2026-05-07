@@ -127,7 +127,6 @@ function toggleStar(id: string) {
           <BaseButton variant="ghost" size="sm" @click="showSheetOnMobile = true">
             Mở bottom sheet
           </BaseButton>
-          <RouterLink to="/" class="back-link">← sitemap</RouterLink>
         </template>
       </AppTopbar>
     </template>
@@ -290,16 +289,6 @@ function toggleStar(id: string) {
 </template>
 
 <style scoped>
-.back-link {
-  font-size: var(--wx-fs-13);
-  color: var(--wx-text-inverse);
-  text-decoration: none;
-  opacity: 0.85;
-  padding: 4px 10px;
-  border-radius: var(--wx-radius-md);
-  background: rgba(255, 255, 255, 0.12);
-}
-.back-link:hover { opacity: 1; }
 
 /* ── master ── */
 .master-head {

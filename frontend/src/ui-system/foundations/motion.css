@@ -109,3 +109,49 @@
   50%      { box-shadow: 0 0 0 6px rgba(0, 123, 255, 0); }
 }
 .wx-pulse { animation: wx-pulse 1.4s var(--wx-ease-standard) infinite; }
+
+/* ── Scroll Reveal ────────────────────────────────────── */
+@keyframes wx-reveal-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+@keyframes wx-reveal-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes wx-live-ping {
+  0%        { transform: scale(1); opacity: 0.9; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+.wx-reveal {
+  opacity: 0;
+}
+.wx-reveal.is-revealed {
+  animation: wx-reveal-up var(--wx-d-normal, 240ms) var(--wx-ease-decelerate, cubic-bezier(0, 0, 0.2, 1)) both;
+  animation-delay: var(--stagger-delay, 0ms);
+}
+.wx-reveal--fade.is-revealed {
+  animation-name: wx-reveal-in;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wx-reveal { opacity: 1 !important; }
+  .wx-reveal.is-revealed { animation: none !important; }
+}
+
+/* ── Live ping dot ────────────────────────────────────── */
+.wx-live-ping {
+  position: relative;
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.wx-live-ping::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: currentColor;
+  animation: wx-live-ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}

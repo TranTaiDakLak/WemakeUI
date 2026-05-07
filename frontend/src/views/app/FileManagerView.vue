@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseInput, BaseTag, BaseBadge } from '../../components/common'
 
 const view = ref<'grid' | 'list'>('grid')
@@ -31,7 +31,7 @@ function toggleSelect(id: number) {
 </script>
 
 <template>
-  <AppLayout current="tệp quản lý" page-title="Quản lý tệp" page-description="Lưu trữ và chia sẻ tài liệu của bạn">
+  <AppPageLayout section="app" current="tệp quản lý" page-title="Quản lý tệp" page-description="Lưu trữ và chia sẻ tài liệu của bạn">
     <template #actions>
       <BaseButton size="sm" variant="ghost">+ Thư mục mới</BaseButton>
       <BaseButton size="sm" variant="primary">⬆ Tải lên</BaseButton>
@@ -95,7 +95,7 @@ function toggleSelect(id: number) {
         </tbody>
       </table>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

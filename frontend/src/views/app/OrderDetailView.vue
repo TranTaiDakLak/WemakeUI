@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseCard } from '../../components/common'
 
 const ORDER = {
@@ -36,7 +36,7 @@ function fmt(n: number) { return n.toLocaleString('vi-VN') + ' ₫' }
 </script>
 
 <template>
-  <AppLayout current="đơn hàng" page-title="Chi tiết đơn hàng" :page-description="`Mã đơn: ${ORDER.id}`">
+  <AppPageLayout section="app" current="đơn hàng" page-title="Chi tiết đơn hàng" :page-description="`Mã đơn: ${ORDER.id}`">
     <template #actions>
       <BaseButton size="sm" variant="ghost">In hoá đơn</BaseButton>
       <BaseButton size="sm" variant="secondary">Liên hệ hỗ trợ</BaseButton>
@@ -121,7 +121,7 @@ function fmt(n: number) { return n.toLocaleString('vi-VN') + ' ₫' }
         </BaseCard>
       </div>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

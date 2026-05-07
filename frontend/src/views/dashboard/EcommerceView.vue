@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** dashboard/ecommerce — doanh thu, đơn, tồn kho, top sản phẩm */
-import DashboardLayout from '../_layouts/DashboardLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseTag, BaseButton, BaseAvatar, BaseProgress } from '../../components/common'
 import { sparkPath, sparkArea, seriesUp, seriesDown, seriesVolatile } from '../_layouts/dashboard-widgets'
 
@@ -33,7 +33,7 @@ const products = [
 </script>
 
 <template>
-  <DashboardLayout
+  <AppPageLayout section="dashboards"
     current="Bán hàng"
     page-title="Tổng quan bán hàng"
     page-description="Đơn hàng, doanh thu và tồn kho — cập nhật realtime."
@@ -129,7 +129,7 @@ const products = [
         </ul>
       </BasePanel>
     </div>
-  </DashboardLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

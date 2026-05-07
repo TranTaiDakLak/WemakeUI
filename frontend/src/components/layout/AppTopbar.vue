@@ -15,6 +15,7 @@ const { isDark, toggleTheme } = useTheme()
 <template>
   <header class="topbar no-select app-drag">
     <div class="topbar-left">
+      <slot name="left" />
       <h1 class="topbar-title">{{ title }}</h1>
       <span v-if="subtitle" class="topbar-subtitle">{{ subtitle }}</span>
     </div>

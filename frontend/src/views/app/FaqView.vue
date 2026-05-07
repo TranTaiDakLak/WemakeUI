@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseAccordion, BaseInput, BaseTag } from '../../components/common'
 
 const search = ref('')
@@ -32,7 +32,7 @@ const accordionItems = computed(() => filtered.value.map(f => ({
 </script>
 
 <template>
-  <AppLayout current="FAQ" page-title="FAQ / Trung tâm hỗ trợ" page-description="Câu hỏi thường gặp và hướng dẫn sử dụng">
+  <AppPageLayout section="app" current="FAQ" page-title="FAQ / Trung tâm hỗ trợ" page-description="Câu hỏi thường gặp và hướng dẫn sử dụng">
     <div class="faq-wrap">
       <div class="faq-search-bar">
         <BaseInput v-model="search" placeholder="Tìm câu hỏi..." clearable style="max-width: 480px;" />
@@ -58,7 +58,7 @@ const accordionItems = computed(() => filtered.value.map(f => ({
         <a href="#/landing/contact" class="cta-link">Liên hệ hỗ trợ →</a>
       </div>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

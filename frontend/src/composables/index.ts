@@ -44,3 +44,13 @@ export {
   resetFlags,
 } from './useFlag'
 export type { FlagValue } from './useFlag'
+
+/* ── phase 11 — motion + scroll ───────────────────────── */
+export { useScrollReveal } from './useScrollReveal'
+export type { ScrollRevealOptions } from './useScrollReveal'
+export { useStagger } from './useStagger'
+
+/* ── phase 9 — form / crud state ──────────────────────── */
+export { useCrudState } from './useCrudState'
+export { useFilter } from './useFilter'
+export { useFormState } from './useFormState'

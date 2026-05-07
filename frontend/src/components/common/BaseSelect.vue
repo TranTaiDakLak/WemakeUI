@@ -52,27 +52,51 @@ defineEmits<{
 }
 
 .base-select__label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-size: var(--wx-fs-12);
+  font-weight: var(--wx-fw-semibold);
+  color: var(--wx-text-secondary);
 }
 
 .base-select__field {
   width: 100%;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  padding: 8px 32px 8px 12px;
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-md);
+  background-color: var(--wx-surface-elevated);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 8px center;
-  padding-right: 28px;
+  background-position: right 10px center;
+  color: var(--wx-text-primary);
+  font-family: var(--wx-font-primary);
+  font-size: var(--wx-fs-13);
+  transition:
+    border-color var(--wx-d-fast) var(--wx-ease-standard),
+    box-shadow   var(--wx-d-fast) var(--wx-ease-standard);
+}
+
+.base-select__field:focus {
+  outline: none;
+  border-color: var(--wx-brand-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-brand-primary) 18%, transparent);
+}
+
+.base-select__field:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 /* ── Size sm ── */
 .base-select--sm .base-select__field {
-  padding: 4px 28px 4px 8px;
-  font-size: 11px;
+  padding: 5px 28px 5px 10px;
+  font-size: var(--wx-fs-12);
 }
 .base-select--sm .base-select__label {
-  font-size: 11px;
+  font-size: var(--wx-fs-11);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .base-select__field { transition: none; }
 }
 </style>

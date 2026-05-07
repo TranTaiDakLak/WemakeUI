@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -21,6 +22,11 @@ const routes: RouteRecordRaw[] = [
         path: 'showcase/primitives',
         name: 'ShowcasePrimitives',
         component: () => import('../views/showcase/PrimitivesShowcase.vue'),
+      },
+      {
+        path: 'showcase/cards',
+        name: 'ShowcaseCards',
+        component: () => import('../views/showcase/CardShowcase.vue'),
       },
       /* ── phase 2 ────────────────────────────────────── */
       {
@@ -90,6 +96,11 @@ const routes: RouteRecordRaw[] = [
         name: 'ShowcaseDataGallery',
         component: () => import('../views/showcase/data/GalleryView.vue'),
       },
+      {
+        path: 'showcase/data/crud',
+        name: 'ShowcaseDataCrud',
+        component: () => import('../views/showcase/data/CrudTableView.vue'),
+      },
       /* ── phase 4.5 — chart system ───────────────────── */
       {
         path: 'showcase/charts',
@@ -152,6 +163,8 @@ const routes: RouteRecordRaw[] = [
   /* auth (10 trang) */
   { path: '/auth/login',     name: 'AuthLogin',     component: () => import('../views/auth/LoginView.vue') },
   { path: '/auth/login-v2',  name: 'AuthLoginV2',   component: () => import('../views/auth/LoginV2View.vue') },
+  { path: '/auth/login-v3',  name: 'AuthLoginV3',   component: () => import('../views/auth/LoginV3View.vue') },
+  { path: '/showcase/animations', name: 'ShowcaseAnimations', component: () => import('../views/showcase/AnimationShowcase.vue') },
   { path: '/auth/register',  name: 'AuthRegister',  component: () => import('../views/auth/RegisterView.vue') },
   { path: '/auth/forgot',    name: 'AuthForgot',    component: () => import('../views/auth/ForgotPasswordView.vue') },
   { path: '/auth/reset',     name: 'AuthReset',     component: () => import('../views/auth/ResetPasswordView.vue') },
@@ -181,6 +194,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/dashboard/logistics',  name: 'DashLogistics',  component: () => import('../views/dashboard/LogisticsView.vue') },
   { path: '/dashboard/helpdesk',   name: 'DashHelpdesk',   component: () => import('../views/dashboard/HelpdeskView.vue') },
   { path: '/dashboard/iot',        name: 'DashIot',        component: () => import('../views/dashboard/IotView.vue') },
+  { path: '/dashboard/weconnect-v1', name: 'DashWeDashboardV1', component: () => import('../views/dashboard/WeDashboardV1View.vue') },
 
   /* ── phase 7 — app pages (20) ───────────────────────────────── */
   { path: '/app/profile',       name: 'AppProfile',       component: () => import('../views/app/ProfileView.vue') },
@@ -203,6 +217,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/app/learning',      name: 'AppLearning',      component: () => import('../views/app/LearningView.vue') },
   { path: '/app/map',           name: 'AppMap',           component: () => import('../views/app/MapView.vue') },
   { path: '/app/calendar',      name: 'AppCalendar',      component: () => import('../views/app/CalendarAppView.vue') },
+  { path: '/app/contacts',      name: 'AppContacts',      component: () => import('../views/app/ContactsView.vue') },
 
   /* ── phase 7 — landing pages (10) ──────────────────────────── */
   { path: '/landing',           name: 'LandingSaas',      component: () => import('../views/landing/LandingSaasView.vue') },
@@ -215,6 +230,39 @@ const routes: RouteRecordRaw[] = [
   { path: '/landing/policy',    name: 'LandingPolicy',    component: () => import('../views/landing/PolicyView.vue') },
   { path: '/landing/api',       name: 'LandingApi',       component: () => import('../views/landing/LandingApiView.vue') },
   { path: '/landing/features',  name: 'LandingFeatures',  component: () => import('../views/landing/FeaturesView.vue') },
+
+  /* ── forms (11) ─────────────────────────────────────────────── */
+  { path: '/forms/control',        name: 'FormsControl',      component: () => import('../views/forms/FormControlView.vue') },
+  { path: '/forms/input-group',    name: 'FormsInputGroup',   component: () => import('../views/forms/InputGroupView.vue') },
+  { path: '/forms/select',         name: 'FormsSelect',       component: () => import('../views/forms/SelectView.vue') },
+  { path: '/forms/checks',         name: 'FormsChecks',       component: () => import('../views/forms/ChecksView.vue') },
+  { path: '/forms/floating-labels',name: 'FormsFloating',     component: () => import('../views/forms/FloatingLabelsView.vue') },
+  { path: '/forms/validation',     name: 'FormsValidation',   component: () => import('../views/forms/ValidationView.vue') },
+  { path: '/forms/wizard',         name: 'FormsWizard',       component: () => import('../views/forms/WizardView.vue') },
+  { path: '/forms/file-upload',    name: 'FormsFileUpload',   component: () => import('../views/forms/FileUploadView.vue') },
+  { path: '/forms/add-modal',      name: 'FormsAddModal',     component: () => import('../views/forms/AddModalFormView.vue') },
+  { path: '/forms/edit-modal',     name: 'FormsEditModal',    component: () => import('../views/forms/EditModalFormView.vue') },
+  { path: '/forms/drawer-form',    name: 'FormsDrawer',       component: () => import('../views/forms/DrawerFormView.vue') },
+
+  /* ── phase 10 — SaaS internal tool pages ───────────────────── */
+  { path: '/saas/dashboard',    name: 'SaasDashboard',    component: () => import('../views/saas/DashboardView.vue') },
+  { path: '/saas/members',      name: 'SaasMembers',      component: () => import('../views/saas/MembersView.vue') },
+  { path: '/saas/products',     name: 'SaasProducts',     component: () => import('../views/saas/ProductsView.vue') },
+  { path: '/saas/transactions', name: 'SaasTransactions', component: () => import('../views/saas/TransactionsView.vue') },
+  { path: '/saas/versions',     name: 'SaasVersions',     component: () => import('../views/saas/VersionsView.vue') },
+  { path: '/saas/statistics',   name: 'SaasStatistics',   component: () => import('../views/saas/StatisticsView.vue') },
+  { path: '/saas/settings',     name: 'SaasSettings',     component: () => import('../views/saas/SettingsView.vue') },
+
+  /* ── phase 11 — dashboard v2 (archetype-based) ─────────────── */
+  { path: '/dashboard/wed-v2', name: 'WeDashboardV2', component: () => import('../views/dashboard/WeDashboardV2View.vue') },
+
+  /* ── phase 12 — Wemake marketing ecosystem ──────────────────── */
+  { path: '/home',            name: 'MarketingHome',          component: () => import('../views/marketing/HomeView.vue') },
+  { path: '/products',        name: 'MarketingProducts',      component: () => import('../views/marketing/ProductsView.vue') },
+  { path: '/products/:slug',  name: 'MarketingProductDetail', component: () => import('../views/marketing/ProductDetailView.vue') },
+  { path: '/faqs',            name: 'MarketingFAQ',           component: () => import('../views/marketing/FAQView.vue') },
+  { path: '/partners',        name: 'MarketingPartners',      component: () => import('../views/marketing/PartnersView.vue') },
+  { path: '/contact',         name: 'MarketingContact',       component: () => import('../views/marketing/ContactView.vue') },
 
   /* ── phase 7 — weconnect pages (10) ────────────────────────── */
   { path: '/weconnect',               name: 'WCAdmin',        component: () => import('../views/weconnect/AdminView.vue') },
@@ -232,6 +280,17 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+})
+
+/* ── Auth guard for private sections ── */
+const PRIVATE_PREFIXES = ['/saas', '/weconnect', '/dashboard']
+
+router.beforeEach((to) => {
+  const auth = useAuthStore()
+  const isPrivate = PRIVATE_PREFIXES.some(p => to.path.startsWith(p))
+  if (isPrivate && !auth.isLoggedIn) {
+    return { path: '/auth/login', query: { redirect: to.fullPath } }
+  }
 })
 
 export default router

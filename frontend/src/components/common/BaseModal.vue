@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, watch, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import type { ModalSize } from '../../types'
+
+type ModalIntent = 'default' | 'danger' | 'warning'
 
 const props = withDefaults(defineProps<{
   show: boolean
@@ -10,12 +12,32 @@ const props = withDefaults(defineProps<{
   saveLabel?: string
   closeLabel?: string
   loading?: boolean
+  intent?: ModalIntent
 }>(), {
   size: 'md',
   showSave: false,
   saveLabel: 'Lưu',
   closeLabel: 'Đóng',
   loading: false,
+  intent: 'default',
+})
+
+const intentDialogStyle = computed(() => {
+  if (props.intent === 'danger') return {
+    border: '1px solid rgba(239, 68, 68, 0.40)',
+    boxShadow: '0 20px 50px rgba(220, 38, 38, 0.25), 0 8px 24px rgba(220, 38, 38, 0.15)',
+  }
+  if (props.intent === 'warning') return {
+    border: '1px solid rgba(249, 115, 22, 0.22)',
+    boxShadow: '0 20px 50px rgba(234, 88, 12, 0.12), 0 8px 24px rgba(234, 88, 12, 0.08)',
+  }
+  return {}
+})
+
+const intentHeaderStyle = computed(() => {
+  if (props.intent === 'danger')  return { borderBottomColor: 'rgba(239, 68, 68, 0.20)' }
+  if (props.intent === 'warning') return { borderBottomColor: 'rgba(249, 115, 22, 0.12)' }
+  return {}
 })
 
 const emit = defineEmits<{
@@ -104,52 +126,19 @@ function trapFocusHandle(e: KeyboardEvent) {
   }
 }
 
-// ── Draggable ──
-const dragOffset = ref({ x: 0, y: 0 })
-const isDragging = ref(false)
-const dragStart = ref({ x: 0, y: 0 })
-
-function onDragStart(e: MouseEvent) {
-  if ((e.target as HTMLElement).closest('.modal-close')) return
-  isDragging.value = true
-  dragStart.value = { x: e.clientX - dragOffset.value.x, y: e.clientY - dragOffset.value.y }
-  document.addEventListener('mousemove', onDragMove)
-  document.addEventListener('mouseup', onDragEnd)
-}
-
-function onDragMove(e: MouseEvent) {
-  if (!isDragging.value) return
-  dragOffset.value = {
-    x: e.clientX - dragStart.value.x,
-    y: e.clientY - dragStart.value.y
-  }
-}
-
-function onDragEnd() {
-  isDragging.value = false
-  document.removeEventListener('mousemove', onDragMove)
-  document.removeEventListener('mouseup', onDragEnd)
-}
-
-// Reset position when closed
-watch(() => props.show, (val) => {
-  if (!val) dragOffset.value = { x: 0, y: 0 }
-})
 </script>
 
 <template>
+  <Teleport to="body">
   <transition name="modal">
     <div v-if="props.show" class="modal-overlay" :style="{ zIndex: currentZ }" @click.self="emit('close')">
       <div
         ref="dialogRef"
         class="modal-dialog"
-        :style="{
-          maxWidth: sizeMap[props.size],
-          transform: `translate(${dragOffset.x}px, ${dragOffset.y}px)`
-        }"
+        :style="[{ maxWidth: sizeMap[props.size] }, intentDialogStyle]"
       >
-        <!-- Header (draggable) -->
-        <div class="modal-header" @mousedown="onDragStart" :class="{ 'modal-header--dragging': isDragging }">
+        <!-- Header -->
+        <div class="modal-header" :style="intentHeaderStyle">
           <span class="modal-title">{{ props.title }}</span>
           <slot name="header-extra" />
           <button class="modal-close" @click="emit('close')">
@@ -184,6 +173,7 @@ watch(() => props.show, (val) => {
       </div>
     </div>
   </transition>
+  </Teleport>
 </template>
 
 <style scoped>
@@ -200,9 +190,11 @@ watch(() => props.show, (val) => {
 
 .modal-dialog {
   background: var(--wx-surface-base);
-  border: 1px solid var(--wx-border-default);
+  border: 1px solid rgba(59, 130, 246, 0.25);
   border-radius: var(--wx-radius-2xl, 16px);
-  box-shadow: var(--wx-shadow-xl);
+  box-shadow:
+    0 20px 50px rgba(37, 99, 235, 0.25),
+    0 8px 24px rgba(37, 99, 235, 0.15);
   width: 90%;
   max-height: 85%;
   display: flex;
@@ -211,24 +203,21 @@ watch(() => props.show, (val) => {
   will-change: transform;
 }
 
-/* ── Header — WX gradient style ── */
+/* ── Header ── */
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  background: var(--wx-gradient-header);
-  border-bottom: none;
+  background: var(--wx-surface-base);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.15);
   flex-shrink: 0;
-  cursor: grab;
-  user-select: none;
 }
-.modal-header--dragging { cursor: grabbing; }
 
 .modal-title {
   font-size: 15px;
   font-weight: 700;
-  color: var(--wx-text-inverse);
+  color: var(--wx-text-primary);
   letter-spacing: 0.2px;
 }
 
@@ -241,13 +230,13 @@ watch(() => props.show, (val) => {
   border: none;
   border-radius: var(--wx-radius-md);
   background: transparent;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--wx-text-muted);
   cursor: pointer;
-  transition: all var(--wx-duration-fast) var(--wx-easing-default);
+  transition: all var(--wx-d-fast, 150ms) var(--wx-ease-standard);
 }
 .modal-close:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: var(--wx-text-inverse);
+  background: var(--wx-surface-hover);
+  color: var(--wx-text-primary);
   transform: scale(1.1);
 }
 .modal-close:active {
@@ -280,7 +269,7 @@ watch(() => props.show, (val) => {
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--wx-d-fast, 150ms) var(--wx-ease-standard);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -328,17 +317,21 @@ watch(() => props.show, (val) => {
 @keyframes modal-spin { to { transform: rotate(360deg); } }
 
 /* Transition — WX scale-up */
-.modal-enter-active { transition: opacity 0.25s var(--wx-easing-default); }
-.modal-leave-active { transition: opacity 0.15s var(--wx-easing-default); }
+.modal-enter-active { transition: opacity var(--wx-d-normal, 250ms) var(--wx-ease-decelerate); }
+.modal-leave-active { transition: opacity var(--wx-d-fast, 150ms) var(--wx-ease-accelerate); }
 .modal-enter-from, .modal-leave-to { opacity: 0; }
-.modal-enter-active .modal-dialog { animation: wxModalIn 0.3s var(--wx-easing-default); }
-.modal-leave-active .modal-dialog { animation: wxModalOut 0.15s ease-in forwards; }
+.modal-enter-active .modal-dialog { animation: wxModalIn var(--wx-d-normal, 250ms) var(--wx-ease-decelerate); }
+.modal-leave-active .modal-dialog { animation: wxModalOut var(--wx-d-fast, 150ms) var(--wx-ease-accelerate) forwards; }
 @keyframes wxModalIn {
   from { transform: translateY(-16px) scale(0.95); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
 }
 @keyframes wxModalOut {
   from { transform: translateY(0) scale(1); opacity: 1; }
-  to { transform: translateY(8px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(8px) scale(0.97); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal-enter-active .modal-dialog,
+  .modal-leave-active .modal-dialog { animation: none; }
 }
 </style>

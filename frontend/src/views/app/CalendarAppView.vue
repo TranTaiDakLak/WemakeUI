@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge } from '../../components/common'
 import { BaseCalendar } from '../../components/data'
 import type { CalendarEvent } from '../../components/data'
@@ -20,7 +20,7 @@ const EVENTS: CalendarEvent[] = [
 </script>
 
 <template>
-  <AppLayout current="lịch" page-title="Lịch công việc" page-description="Quản lý sự kiện và cuộc họp">
+  <AppPageLayout section="app" current="lịch" page-title="Lịch công việc" page-description="Quản lý sự kiện và cuộc họp">
     <template #actions>
       <BaseButton size="sm" variant="primary">+ Sự kiện mới</BaseButton>
     </template>
@@ -33,7 +33,7 @@ const EVENTS: CalendarEvent[] = [
     </div>
 
     <BaseCalendar :events="EVENTS" />
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

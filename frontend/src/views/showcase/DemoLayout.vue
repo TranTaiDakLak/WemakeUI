@@ -1,565 +1,97 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { computed } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
+import { AppShell, AppSidebar } from '../../components/layout'
+import type { SidebarSection, SidebarItem } from '../../components/layout'
 import { phases } from './_phases-data'
-import type { ShowcaseRoute } from './_phases-data'
 
-const route = useRoute()
-const collapsed = ref(false)
+const route   = useRoute()
+const activeId = computed(() => route.path)
 
-function toggleSidebar() {
-  collapsed.value = !collapsed.value
+/* ── Helper: convert phases → SidebarItem[] (leaf nodes) ── */
+function phaseItems(nums: number[]): SidebarItem[] {
+  return phases
+    .filter(p => nums.includes(p.n))
+    .flatMap(p => p.routes)
+    .map(r => ({
+      id:    r.path,
+      label: r.navLabel ?? r.label.split(' — ')[0],
+      href:  '#' + r.path,
+    }))
 }
 
-function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+/* ── Helper: create collapsible group item ── */
+function group(id: string, label: string, nums: number[]): SidebarItem {
+  return { id, label, children: phaseItems(nums) }
 }
 
-function getNavLabel(r: ShowcaseRoute): string {
-  return r.navLabel ?? r.label.split(' — ')[0]
-}
+const ICON_HOME = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`
+const ICON_GRID = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>`
+const ICON_BOX  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`
+const ICON_DATA = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`
+const ICON_PAT  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`
+const ICON_CODE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`
+const ICON_LOCK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
+const ICON_WARN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`
+const ICON_DASH = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>`
+const ICON_APP  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg>`
+const ICON_LAND = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`
+const ICON_WC   = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`
 
-/* ── Sidebar groups ── */
-type SidebarGroup =
-  | { type?: 'phases'; key: string; label: string; phaseNums: readonly number[] }
-  | { type: 'link';   key: string; label: string; to: string; icon?: string }
-
-const GROUPS: SidebarGroup[] = [
-  { key: 'foundations', label: 'Foundations', phaseNums: [0] },
-  { key: 'components',  label: 'Components',  phaseNums: [1, 2, 3] },
-  { key: 'data',        label: 'Data',        phaseNums: [4] },
-  { key: 'charts',      label: 'Charts',      phaseNums: [4.5] },
-  { key: 'patterns',      label: 'Patterns',      phaseNums: [5] },
-  { type: 'link', key: 'form-patterns', label: 'Form Patterns',  to: '/showcase/patterns' },
-  { type: 'link', key: 'gallery',       label: 'Layout Gallery', to: '/showcase/templates' },
-  { type: 'link', key: 'weconnect',     label: 'WeConnect',      to: '/weconnect' },
-  { key: 'developer',   label: 'Developer',   phaseNums: [8] },
-]
-
-const groupedPhases = computed(() =>
-  GROUPS.map(g => ({
-    ...g,
-    phases: g.type === 'link' ? [] : phases.filter(p => (g as { phaseNums: readonly number[] }).phaseNums.includes(p.n)),
-  }))
-)
-
-/* ── Expand/collapse state — persisted to localStorage ────────── */
-const STORAGE_KEY = 'wx-sidebar-groups-v1'
-
-function loadState(): Record<string, boolean> {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) return JSON.parse(raw) as Record<string, boolean>
-  } catch { /* ignore parse errors */ }
-  return {}
-}
-
-function saveState(state: Record<string, boolean>) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)) } catch { /* ignore */ }
-}
-
-const expandedGroups = ref<Record<string, boolean>>(loadState())
-
-watch(expandedGroups, val => saveState(val), { deep: true })
-
-/* Auto-expand the group that contains the currently active route */
-watch(
-  () => route.path,
-  (currentPath) => {
-    for (const g of groupedPhases.value) {
-      if (!g.phases.length) continue
-      const hasActive = g.phases.some(p => p.routes.some(r => r.path === currentPath))
-      if (hasActive) expandedGroups.value[g.key] = true
-    }
+const SECTIONS: SidebarSection[] = [
+  /* ── Top ── */
+  {
+    items: [
+      { id: '/', label: 'Sitemap', icon: ICON_HOME, href: '#/' },
+    ],
   },
-  { immediate: true }
-)
-
-function toggleGroup(key: string) {
-  expandedGroups.value[key] = !expandedGroups.value[key]
-}
-
-function isExpanded(key: string): boolean {
-  return !!expandedGroups.value[key]
-}
+  /* ── Demo Apps — entry points, mỗi app có sidebar riêng ── */
+  {
+    label: 'Demo Apps',
+    items: [
+      { id: '/home',               label: 'Trang chủ',      icon: ICON_HOME, href: '#/home' },
+      { id: '/saas/dashboard',     label: 'SaaS Dashboard', icon: ICON_DASH, href: '#/saas/dashboard' },
+      { id: '/dashboard/overview', label: 'Dashboards',     icon: ICON_DASH, href: '#/dashboard/overview' },
+      { id: '/app/profile',        label: 'App Pages',      icon: ICON_APP,  href: '#/app/profile' },
+      { id: '/weconnect',          label: 'WeConnect',      icon: ICON_WC,   href: '#/weconnect' },
+    ],
+  },
+  /* ── Component library ── */
+  {
+    label: 'Library',
+    items: [
+      { ...group('grp-foundations', 'Foundations',   [0]),        icon: ICON_GRID },
+      { ...group('grp-components',  'Components',    [1, 2, 3]),  icon: ICON_BOX  },
+      { ...group('grp-data',        'Data & Charts', [4, 4.5]),   icon: ICON_DATA },
+      { ...group('grp-patterns',    'Patterns',      [5, 9, 9.5]),icon: ICON_PAT  },
+      { ...group('grp-developer',   'Developer',     [8]),        icon: ICON_CODE },
+    ],
+  },
+  /* ── Standalone pages (Auth/Error/Landing không có sidebar riêng) ── */
+  {
+    label: 'Pages',
+    items: [
+      { ...group('grp-auth',    'Auth',          [6.1]), icon: ICON_LOCK },
+      { ...group('grp-errors',  'Error Pages',   [6.2]), icon: ICON_WARN },
+      { ...group('grp-landing', 'Landing Pages', [7.2]), icon: ICON_LAND },
+    ],
+  },
+]
 </script>
 
 <template>
-  <div class="dl" :class="{ 'dl--collapsed': collapsed }">
-    <aside class="dl-sidebar">
+  <AppShell variant="sidebar">
+    <template #sidebar>
+      <AppSidebar
+        :sections="SECTIONS"
+        :active-id="activeId"
+        brand="WemakeUI"
+        :logo-gradient="true"
+        collapse-position="header"
+      />
 
-      <!-- ── Brand header ───────────────────────────────────────── -->
-      <div class="dl-head">
-        <RouterLink to="/" class="dl-brand" :title="collapsed ? 'WemakeUI' : ''">
-          <span class="dl-brand-icon">⚡</span>
-          <span v-if="!collapsed" class="dl-brand-name">WemakeUI</span>
-        </RouterLink>
-        <button
-          class="dl-toggle"
-          :aria-label="collapsed ? 'Mở rộng sidebar' : 'Thu gọn sidebar'"
-          @click="toggleSidebar"
-        >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path
-              :d="collapsed ? 'M5 2.5L9 7L5 11.5' : 'M9 2.5L5 7L9 11.5'"
-              stroke="currentColor" stroke-width="1.6"
-              stroke-linecap="round" stroke-linejoin="round"
-            />
-          </svg>
-        </button>
-      </div>
+    </template>
 
-      <!-- ── Nav ───────────────────────────────────────────────── -->
-      <nav class="dl-nav" aria-label="Showcase navigation">
-
-        <!-- Home / Sitemap -->
-        <RouterLink
-          to="/"
-          class="dl-home"
-          exact-active-class="dl-item--active"
-          :title="collapsed ? 'Sitemap' : ''"
-        >
-          <svg
-            class="dl-home-icon"
-            width="14" height="14" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor"
-            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-          <span v-if="!collapsed" class="dl-item-label">Sitemap</span>
-        </RouterLink>
-
-        <!-- Groups -->
-        <div v-for="g in groupedPhases" :key="g.key" class="dl-group">
-
-          <!-- Link-type group: single RouterLink, no collapsible -->
-          <template v-if="g.type === 'link'">
-            <RouterLink
-              v-if="!collapsed"
-              :to="(g as any).to"
-              class="dl-group-head dl-group-head--link"
-              active-class="dl-group-head--active"
-            >
-              <span class="dl-group-label">{{ g.label }}</span>
-              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true" opacity=".5">
-                <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </RouterLink>
-            <RouterLink v-else :to="(g as any).to" class="dl-group-dot" :title="g.label" />
-          </template>
-
-          <!-- Phase-type group: collapsible -->
-          <template v-else>
-          <button
-            v-if="!collapsed"
-            class="dl-group-head"
-            :aria-expanded="isExpanded(g.key)"
-            :aria-controls="`grp-${g.key}`"
-            @click="toggleGroup(g.key)"
-          >
-            <span class="dl-group-label">{{ g.label }}</span>
-            <svg
-              class="dl-chevron"
-              :class="{ 'dl-chevron--open': isExpanded(g.key) }"
-              width="12" height="12" viewBox="0 0 12 12"
-              fill="none" aria-hidden="true"
-            >
-              <path
-                d="M3 4.5L6 7.5L9 4.5"
-                stroke="currentColor" stroke-width="1.4"
-                stroke-linecap="round" stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-          <div v-else class="dl-group-dot" :title="g.label" />
-
-          <!-- Route list (visible when expanded and not collapsed) -->
-          <div
-            v-if="!collapsed && isExpanded(g.key)"
-            :id="`grp-${g.key}`"
-            class="dl-group-body"
-          >
-            <template v-for="p in g.phases" :key="p.n">
-              <!--
-                Phase sub-label: only when group has multiple phases
-                AND this phase has ≥ 2 routes (avoids label above a single item).
-              -->
-              <div
-                v-if="g.phases.length > 1 && p.routes.length >= 2"
-                class="dl-sub-label"
-              >{{ p.title }}</div>
-
-              <template v-for="r in p.routes" :key="r.path">
-                <RouterLink
-                  :to="r.path"
-                  class="dl-item"
-                  exact-active-class="dl-item--active"
-                  :title="r.label"
-                >
-                  <span class="dl-item-label">{{ getNavLabel(r) }}</span>
-                </RouterLink>
-                <!-- Anchor sub-items: shown only when route is exactly active -->
-                <div
-                  v-if="r.anchors?.length && route.path === r.path"
-                  class="dl-anchors"
-                >
-                  <button
-                    v-for="a in r.anchors"
-                    :key="a.id"
-                    class="dl-anchor"
-                    @click="scrollToSection(a.id)"
-                  >{{ a.label }}</button>
-                </div>
-              </template>
-            </template>
-          </div>
-          </template><!-- end phase-type group -->
-
-        </div>
-      </nav>
-
-      <!-- ── Footer ────────────────────────────────────────────── -->
-      <div v-if="!collapsed" class="dl-foot">
-        <RouterLink to="/legacy" class="dl-foot-link">↳ Showcase v0 (legacy)</RouterLink>
-      </div>
-
-    </aside>
-
-    <main class="dl-main">
-      <RouterView />
-    </main>
-  </div>
+    <RouterView />
+  </AppShell>
 </template>
-
-<style scoped>
-/* ── Shell ───────────────────────────────────────────────── */
-.dl {
-  display: flex;
-  min-height: 100vh;
-  background: var(--wx-bg-sunken);
-}
-
-.dl-main {
-  flex: 1;
-  min-width: 0;
-  overflow-x: hidden;
-}
-
-/* ── Sidebar ─────────────────────────────────────────────── */
-.dl-sidebar {
-  width: 240px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  background: var(--wx-bg-base);
-  border-right: 1px solid var(--wx-border-subtle);
-  position: sticky;
-  top: 0;
-  max-height: 100vh;
-  overflow: hidden;
-  transition: width var(--wx-d-normal) var(--wx-ease-standard);
-  z-index: var(--wx-z-sticky);
-}
-
-.dl--collapsed .dl-sidebar { width: 56px; }
-
-/* ── Brand header ────────────────────────────────────────── */
-.dl-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 var(--wx-space-3);
-  height: 52px;
-  border-bottom: 1px solid var(--wx-border-subtle);
-  flex-shrink: 0;
-}
-
-.dl-brand {
-  display: flex;
-  align-items: center;
-  gap: var(--wx-space-2);
-  text-decoration: none;
-  color: inherit;
-  min-width: 0;
-  flex: 1;
-}
-
-.dl-brand-icon {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--wx-gradient-button);
-  border-radius: var(--wx-radius-md);
-  font-size: 13px;
-  flex-shrink: 0;
-}
-
-.dl-brand-name {
-  font-size: var(--wx-fs-13);
-  font-weight: var(--wx-fw-semibold);
-  color: var(--wx-content-primary);
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.dl-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border: none;
-  background: transparent;
-  border-radius: var(--wx-radius-sm);
-  color: var(--wx-content-muted);
-  cursor: pointer;
-  flex-shrink: 0;
-  transition:
-    background var(--wx-d-fast) var(--wx-ease-standard),
-    color     var(--wx-d-fast) var(--wx-ease-standard);
-}
-.dl-toggle:hover {
-  background: var(--wx-hover-bg);
-  color: var(--wx-content-primary);
-}
-
-/* ── Nav scroll container ────────────────────────────────── */
-.dl-nav {
-  flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: var(--wx-space-3) var(--wx-space-2);
-  display: flex;
-  flex-direction: column;
-}
-
-.dl-nav::-webkit-scrollbar            { width: 3px; }
-.dl-nav::-webkit-scrollbar-track      { background: transparent; }
-.dl-nav::-webkit-scrollbar-thumb      { background: var(--wx-scrollbar-thumb); border-radius: var(--wx-radius-full); }
-.dl-nav::-webkit-scrollbar-thumb:hover { background: var(--wx-scrollbar-thumb-hover); }
-
-/* ── Home/Sitemap link ───────────────────────────────────── */
-.dl-home {
-  display: flex;
-  align-items: center;
-  gap: var(--wx-space-2);
-  padding: var(--wx-space-2) var(--wx-space-3);
-  border-radius: var(--wx-radius-md);
-  text-decoration: none;
-  color: var(--wx-content-secondary);
-  font-size: var(--wx-fs-13);
-  font-weight: var(--wx-fw-medium);
-  font-family: var(--wx-font-primary);
-  margin-bottom: var(--wx-space-2);
-  transition:
-    background var(--wx-d-fast) var(--wx-ease-standard),
-    color     var(--wx-d-fast) var(--wx-ease-standard);
-}
-.dl-home:hover { background: var(--wx-hover-bg); color: var(--wx-content-primary); }
-.dl-home.dl-item--active {
-  background: var(--wx-info-bg);
-  color: var(--wx-brand-primary);
-  box-shadow: inset 3px 0 0 var(--wx-brand-primary);
-}
-
-.dl-home-icon { flex-shrink: 0; }
-
-.dl--collapsed .dl-home {
-  justify-content: center;
-  padding: var(--wx-space-2);
-  margin-bottom: var(--wx-space-1);
-}
-
-/* ── Groups ──────────────────────────────────────────────── */
-.dl-group { display: flex; flex-direction: column; }
-
-/* 24px breathing room between each group */
-.dl-group + .dl-group { margin-top: var(--wx-space-5); }
-.dl--collapsed .dl-group + .dl-group { margin-top: 0; }
-
-.dl-group-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: var(--wx-space-1) var(--wx-space-3);
-  margin-bottom: var(--wx-space-1);
-  background: none;
-  border: none;
-  border-radius: var(--wx-radius-sm);
-  cursor: pointer;
-  font-family: var(--wx-font-primary);
-  user-select: none;
-  transition: background var(--wx-d-fast) var(--wx-ease-standard);
-}
-.dl-group-head:hover { background: var(--wx-hover-bg); }
-.dl-group-head:hover .dl-group-label { color: var(--wx-content-secondary); }
-.dl-group-head--link { text-decoration: none; }
-.dl-group-head--link.dl-group-head--active .dl-group-label { color: var(--wx-brand-primary); }
-
-.dl-group-label {
-  font-size: 10px;
-  font-weight: var(--wx-fw-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--wx-content-muted);
-  line-height: var(--wx-lh-tight);
-  transition: color var(--wx-d-fast) var(--wx-ease-standard);
-}
-
-.dl-chevron {
-  color: var(--wx-content-muted);
-  opacity: 0.5;
-  flex-shrink: 0;
-  transform: rotate(-90deg);
-  transition: transform var(--wx-d-fast) var(--wx-ease-standard);
-}
-.dl-chevron--open { transform: rotate(0deg); }
-
-.dl-group-body {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: var(--wx-space-1);
-}
-
-/* Collapsed: thin divider per group */
-.dl-group-dot {
-  height: 1px;
-  background: var(--wx-border-subtle);
-  margin: var(--wx-space-2) var(--wx-space-3);
-}
-
-/* ── Phase sub-label (inside multi-phase groups) ─────────── */
-.dl-sub-label {
-  font-size: 10px;
-  font-weight: var(--wx-fw-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--wx-content-muted);
-  opacity: 0.5;
-  padding: var(--wx-space-3) var(--wx-space-3) var(--wx-space-1);
-  line-height: var(--wx-lh-tight);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: var(--wx-space-1);
-}
-.dl-sub-label:first-child { margin-top: 0; }
-
-/* ── Route items ─────────────────────────────────────────── */
-.dl-item {
-  display: flex;
-  align-items: center;
-  padding: var(--wx-space-2) var(--wx-space-3);
-  border-radius: var(--wx-radius-md);
-  text-decoration: none;
-  color: var(--wx-content-secondary);
-  font-size: var(--wx-fs-13);
-  font-weight: var(--wx-fw-regular);
-  font-family: var(--wx-font-primary);
-  line-height: var(--wx-lh-snug);
-  min-height: 30px;
-  white-space: nowrap;
-  overflow: hidden;
-  transition:
-    background var(--wx-d-fast) var(--wx-ease-standard),
-    color     var(--wx-d-fast) var(--wx-ease-standard);
-}
-
-/* hover: lighter bg, primary text */
-.dl-item:hover {
-  background: var(--wx-hover-bg);
-  color: var(--wx-content-primary);
-}
-
-/* active: clearly stronger than hover — brand bg + left indicator + weight bump */
-.dl-item--active {
-  background: var(--wx-info-bg);
-  color: var(--wx-brand-primary);
-  font-weight: var(--wx-fw-medium);
-  box-shadow: inset 3px 0 0 var(--wx-brand-primary);
-}
-
-.dl-item-label {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ── Anchor sub-items ────────────────────────────────────── */
-.dl-anchors {
-  display: flex;
-  flex-direction: column;
-  padding-left: var(--wx-space-4);
-  padding-bottom: var(--wx-space-1);
-}
-
-.dl-anchor {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: var(--wx-space-1) var(--wx-space-3);
-  font-size: var(--wx-fs-12);
-  font-family: var(--wx-font-primary);
-  color: var(--wx-content-muted);
-  background: transparent;
-  border: none;
-  border-radius: var(--wx-radius-sm);
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: var(--wx-lh-normal);
-  transition:
-    color     var(--wx-d-fast) var(--wx-ease-standard),
-    background var(--wx-d-fast) var(--wx-ease-standard);
-}
-.dl-anchor:hover {
-  color: var(--wx-content-primary);
-  background: var(--wx-hover-bg);
-}
-
-/* ── Footer ──────────────────────────────────────────────── */
-.dl-foot {
-  padding: var(--wx-space-3) var(--wx-space-4);
-  border-top: 1px solid var(--wx-border-subtle);
-  flex-shrink: 0;
-}
-
-.dl-foot-link {
-  font-size: var(--wx-fs-12);
-  color: var(--wx-content-muted);
-  text-decoration: none;
-  transition: color var(--wx-d-fast) var(--wx-ease-standard);
-}
-.dl-foot-link:hover { color: var(--wx-content-link); }
-
-/* ── Reduced motion ──────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  .dl-sidebar,
-  .dl-toggle,
-  .dl-home,
-  .dl-group-head,
-  .dl-chevron,
-  .dl-item,
-  .dl-anchor,
-  .dl-foot-link { transition: none; }
-}
-
-/* ── Mobile: force collapsed ─────────────────────────────── */
-@media (max-width: 768px) {
-  .dl-sidebar        { width: 56px; }
-  .dl-toggle         { display: none; }
-  .dl-brand-name     { display: none; }
-  .dl-group-head     { display: none; }
-  .dl-group-body     { display: none; }
-  .dl-group-dot      { display: block; }
-  .dl-foot           { display: none; }
-  .dl-home           { justify-content: center; padding: var(--wx-space-2); }
-  .dl-home .dl-item-label { display: none; }
-}
-</style>

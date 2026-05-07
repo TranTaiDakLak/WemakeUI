@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseAvatar, BaseInput, BaseButton, BaseBadge } from '../../components/common'
 
 const CONTACTS = [
@@ -29,7 +29,7 @@ function send() {
 </script>
 
 <template>
-  <AppLayout current="nhắn tin" page-title="Nhắn tin" page-description="Tin nhắn nội bộ với đồng nghiệp">
+  <AppPageLayout section="app" current="nhắn tin" page-title="Nhắn tin" page-description="Tin nhắn nội bộ với đồng nghiệp">
     <div class="chat-wrap">
       <!-- contact list -->
       <aside class="contact-list">
@@ -83,7 +83,7 @@ function send() {
         </div>
       </div>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

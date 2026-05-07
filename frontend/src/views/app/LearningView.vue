@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseTag, BaseProgress, BaseCard, BaseTabs } from '../../components/common'
 
 const tab = ref('khoa-hoc')
@@ -30,7 +30,7 @@ const displaying = computed(() => tab.value === 'khoa-hoc' ? COURSES : tab.value
 </script>
 
 <template>
-  <AppLayout current="học tập" page-title="Trung tâm học tập" page-description="Nâng cao kỹ năng với các khoá học được tuyển chọn">
+  <AppPageLayout section="app" current="học tập" page-title="Trung tâm học tập" page-description="Nâng cao kỹ năng với các khoá học được tuyển chọn">
     <BaseTabs v-model="tab" :tabs="tabs" />
 
     <div class="courses-grid">
@@ -68,7 +68,7 @@ const displaying = computed(() => tab.value === 'khoa-hoc' ? COURSES : tab.value
         </template>
       </BaseCard>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

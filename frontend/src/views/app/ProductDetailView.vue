@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseTag, BaseProgress, BaseCard } from '../../components/common'
 
 const qty = ref(1)
@@ -23,7 +23,7 @@ const avgRating = (RATINGS.reduce((s, r, i) => s + r * ratingCounts[i], 0) / tot
 </script>
 
 <template>
-  <AppLayout current="sản phẩm" page-title="Chi tiết sản phẩm" page-description="Áo thun premium — WemakeUI Collection 2026">
+  <AppPageLayout section="app" current="sản phẩm" page-title="Chi tiết sản phẩm" page-description="Áo thun premium — WemakeUI Collection 2026">
     <div class="product-layout">
       <!-- images -->
       <div class="product-images">
@@ -132,7 +132,7 @@ const avgRating = (RATINGS.reduce((s, r, i) => s + r * ratingCounts[i], 0) / tot
         </div>
       </template>
     </BaseCard>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

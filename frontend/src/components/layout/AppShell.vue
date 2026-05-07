@@ -349,4 +349,9 @@ const cssVars = computed(() => ({
   }
   .wx-shell__split-handle { display: none; }
 }
+
+@media (max-width: 480px) {
+  /* Ẩn hoàn toàn sidebar trên điện thoại nhỏ — dùng topbar để navigate */
+  .wx-shell__sidebar { display: none; }
+}
 </style>

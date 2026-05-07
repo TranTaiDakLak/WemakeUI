@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** dashboard/analytics — traffic, page views, bounce, funnel, heatmap */
-import DashboardLayout from '../_layouts/DashboardLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BaseTag, BaseButton, BaseProgress } from '../../components/common'
 import { sparkPath, sparkArea, seriesUp, seriesVolatile } from '../_layouts/dashboard-widgets'
 
@@ -32,7 +32,7 @@ function intensity(d: number, h: number): number {
 </script>
 
 <template>
-  <DashboardLayout
+  <AppPageLayout section="dashboards"
     current="Phân tích"
     page-title="Phân tích traffic"
     page-description="Hiểu hành vi người dùng — cập nhật mỗi 5 phút."
@@ -131,7 +131,7 @@ function intensity(d: number, h: number): number {
         </div>
       </div>
     </BaseCard>
-  </DashboardLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

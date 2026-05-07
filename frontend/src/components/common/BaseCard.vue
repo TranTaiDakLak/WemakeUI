@@ -108,6 +108,7 @@ function onClick(e: MouseEvent) {
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   background: var(--wx-surface-elevated);
   color: var(--wx-content-primary);
   font-family: var(--wx-font-primary);
@@ -196,10 +197,20 @@ function onClick(e: MouseEvent) {
   pointer-events: none;
 }
 
-.wx-card--hoverable:hover {
+/* default hover — blue glow ring for all non-disabled cards */
+.wx-card:not([data-state="disabled"]):not([data-state="loading"]):hover {
+  border-color: color-mix(in srgb, var(--wx-brand-primary) 50%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--wx-brand-primary) 12%, transparent),
+    var(--wx-shadow-md);
+}
+
+/* hoverable adds lift on top of the blue glow */
+.wx-card--hoverable:not([data-state="disabled"]):hover {
   transform: translateY(-2px);
-  box-shadow: var(--wx-shadow-lg);
-  border-color: var(--wx-border-default);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--wx-brand-primary) 12%, transparent),
+    var(--wx-shadow-lg);
 }
 
 .wx-card--clickable {

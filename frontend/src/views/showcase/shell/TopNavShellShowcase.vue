@@ -7,7 +7,7 @@ import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { AppShell, PageHeader } from '../../../components/layout'
 import {
-  BaseButton, BaseCard, BasePanel, BaseInput, BaseSelect, BaseToggle,
+  BaseButton, BaseCard, BasePanel, BaseInput, BaseSelectMenu, BaseToggle,
   BaseTag, BaseBadge, FormField, BaseTextarea, GroupBox,
 } from '../../../components/common'
 
@@ -69,7 +69,6 @@ function submit() {
           </li>
         </ul>
         <div class="nav-actions">
-          <RouterLink to="/" class="text-link">← sitemap</RouterLink>
           <BaseButton variant="ghost" size="sm">Đăng nhập</BaseButton>
           <BaseButton size="sm">Bắt đầu miễn phí</BaseButton>
         </div>
@@ -139,7 +138,7 @@ function submit() {
           <BaseInput v-model="form.email" type="email" placeholder="ban@congty.vn" />
         </FormField>
         <FormField label="Chủ đề">
-          <BaseSelect v-model="form.topic" :options="topicOpts" />
+          <BaseSelectMenu v-model="form.topic" :options="topicOpts" />
         </FormField>
         <FormField label="Nội dung" :error="errors.message" hint="Tối thiểu 10 ký tự." required>
           <BaseTextarea v-model="form.message" :rows="4" placeholder="Nhập tin nhắn của bạn…" />

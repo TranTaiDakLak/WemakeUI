@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** dashboard/helpdesk — ticket, SLA, agent performance */
-import DashboardLayout from '../_layouts/DashboardLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseTag, BaseButton, BaseAvatar, BaseProgress } from '../../components/common'
 
 const tickets = [
@@ -29,7 +29,7 @@ const agents = [
 </script>
 
 <template>
-  <DashboardLayout
+  <AppPageLayout section="dashboards"
     current="Helpdesk"
     page-title="Helpdesk"
     page-description="Theo dõi ticket, SLA và hiệu suất agent."
@@ -113,7 +113,7 @@ const agents = [
         </div>
       </div>
     </BaseCard>
-  </DashboardLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

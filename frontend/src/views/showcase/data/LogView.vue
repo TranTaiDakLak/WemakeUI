@@ -86,9 +86,6 @@ onBeforeUnmount(stopStream)
     <AppTopbar title="WemakeUI · LogViewer" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="LogViewer" description="Streaming log viewer với virtual scroll, level filter, search highlight, follow toggle, download .log.">
-        <template #actions>
-          <button class="back-btn" @click="router.push('/showcase/data')">← Phase 4</button>
-        </template>
       </PageHeader>
 
       <GroupBox title="Stream control">
@@ -129,15 +126,4 @@ onBeforeUnmount(stopStream)
 .muted { color: var(--wx-text-muted); font-size: 12px; }
 .muted code { font-family: var(--wx-font-mono); background: var(--wx-surface-sunken); padding: 1px 4px; border-radius: 3px; }
 .muted mark { background: var(--wx-warning-bg); color: var(--wx-warning-text); padding: 0 4px; border-radius: 3px; }
-.back-btn {
-  padding: 6px 12px;
-  border: 1px solid var(--wx-border-default);
-  background: var(--wx-surface-base);
-  border-radius: var(--wx-radius-md);
-  font-size: 12px;
-  cursor: pointer;
-  font-family: var(--wx-font-primary);
-  color: var(--wx-text-secondary);
-}
-.back-btn:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); }
 </style>

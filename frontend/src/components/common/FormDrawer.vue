@@ -21,6 +21,7 @@ withDefaults(defineProps<{
   cancelLabel?: string
   danger?: boolean
   submitDisabled?: boolean
+  showSubmit?: boolean
 }>(), {
   placement: 'right',
   size: 'md',
@@ -29,6 +30,7 @@ withDefaults(defineProps<{
   cancelLabel: 'Huỷ',
   danger: false,
   submitDisabled: false,
+  showSubmit: true,
 })
 
 const emit = defineEmits<{
@@ -59,6 +61,7 @@ function close() {
         {{ cancelLabel }}
       </BaseButton>
       <BaseButton
+        v-if="showSubmit"
         :variant="danger ? 'danger' : 'primary'"
         :loading="loading"
         :disabled="submitDisabled"

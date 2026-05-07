@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
 import type { ColumnConfig } from '../../types'
+import BaseSelectMenu from '@/components/common/BaseSelectMenu.vue'
 
 export type DataGridDensity = 'sm' | 'md' | 'lg'
 
@@ -391,16 +392,15 @@ function downloadFile(content: string, type: string, name: string) {
           >{{ d }}</button>
         </div>
         <!-- Saved views -->
-        <select
+        <BaseSelectMenu
           v-if="savedViews.length"
           class="dgp-select"
-          @change="(e) => { const v = savedViews.find((x) => x.id === (e.target as HTMLSelectElement).value); if (v) applyView(v) }"
-        >
-          <option value="">Chọn view...</option>
-          <option v-for="v in savedViews" :key="v.id" :value="v.id">
-            {{ v.icon ?? '' }} {{ v.name }}
-          </option>
-        </select>
+          size="sm"
+          model-value=""
+          placeholder="Chọn view..."
+          :options="savedViews.map(v => ({ value: v.id, label: `${v.icon ?? ''} ${v.name}`.trim() }))"
+          @update:model-value="(id) => { const v = savedViews.find(x => x.id === id); if (v) applyView(v) }"
+        />
         <button type="button" class="dgp-tool-btn" @click="showSaveViewDialog = true">+ View</button>
         <!-- Export -->
         <button type="button" class="dgp-tool-btn" @click="exportCSV">CSV</button>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseInput, BaseCard } from '../../components/common'
 
 const search = ref('')
@@ -21,7 +21,7 @@ import { computed } from 'vue'
 </script>
 
 <template>
-  <AppLayout current="bản đồ" page-title="Bản đồ địa điểm" page-description="Xem vị trí các văn phòng, kho hàng và đại lý">
+  <AppPageLayout section="app" current="bản đồ" page-title="Bản đồ địa điểm" page-description="Xem vị trí các văn phòng, kho hàng và đại lý">
     <template #actions>
       <BaseButton size="sm" variant="primary">+ Thêm địa điểm</BaseButton>
     </template>
@@ -100,7 +100,7 @@ import { computed } from 'vue'
         </BaseCard>
       </div>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

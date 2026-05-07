@@ -79,6 +79,7 @@ withDefaults(defineProps<{
 </template>
 
 <style scoped>
+/* ── Shell ── */
 .auth-shell {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -87,8 +88,32 @@ withDefaults(defineProps<{
   color: var(--wx-content-primary);
   font-family: var(--wx-font-primary);
   position: relative;
+  overflow: hidden;
 }
 .auth-shell[data-no-aside="true"] { grid-template-columns: 1fr; }
+
+/* background blobs — brand blue palette, 10-18% opacity */
+.auth-shell::before,
+.auth-shell::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.auth-shell::before {
+  width: 640px; height: 640px;
+  background: var(--wx-brand-400, #60a5fa);
+  opacity: 0.13;
+  top: -240px; right: 60px;
+}
+.auth-shell::after {
+  width: 480px; height: 480px;
+  background: var(--wx-brand-accent, #06b6d4);
+  opacity: 0.10;
+  bottom: -200px; left: 80px;
+}
 
 .auth-home {
   position: absolute;
@@ -97,7 +122,7 @@ withDefaults(defineProps<{
   font-size: var(--wx-fs-13);
   color: var(--wx-content-link);
   text-decoration: none;
-  z-index: 2;
+  z-index: 10;
   background: var(--wx-surface-base);
   padding: 4px 10px;
   border-radius: var(--wx-radius-md);
@@ -105,9 +130,10 @@ withDefaults(defineProps<{
 }
 .auth-home:hover { background: var(--wx-surface-sunken); }
 
-/* ── aside ── */
+/* ── Aside (left branding panel) ── */
 .auth-aside {
   position: relative;
+  z-index: 1;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -115,8 +141,19 @@ withDefaults(defineProps<{
   padding: var(--wx-space-7);
 }
 .auth-aside[data-tone="gradient"] { background: var(--wx-gradient-bg); }
-.auth-aside[data-tone="brand"]    { background: var(--wx-gradient-button); color: white; }
+.auth-aside[data-tone="brand"]    { background: linear-gradient(145deg, #1e3a8a, #1d4ed8, #2563eb); color: white; }
 .auth-aside[data-tone="dark"]     { background: #0f172a; color: white; }
+
+/* glassmorphism content card — only on brand/dark tones */
+.auth-aside[data-tone="brand"] .auth-aside__content,
+.auth-aside[data-tone="dark"]  .auth-aside__content {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(135, 206, 250, 0.30);
+  border-radius: var(--wx-radius-2xl);
+  padding: var(--wx-space-6);
+}
 
 .auth-aside__content {
   max-width: 480px;
@@ -139,7 +176,8 @@ withDefaults(defineProps<{
 }
 .auth-aside[data-tone="brand"] .auth-brand__logo,
 .auth-aside[data-tone="dark"]  .auth-brand__logo {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.20);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.20);
 }
 .auth-brand__name {
   font-size: var(--wx-fs-18);
@@ -161,13 +199,21 @@ withDefaults(defineProps<{
   background-clip: text;
   color: transparent;
 }
-.auth-aside[data-tone="brand"] .auth-tagline em,
-.auth-aside[data-tone="dark"]  .auth-tagline em {
+/* brand tone: blue → cyan glow gradient */
+.auth-aside[data-tone="brand"] .auth-tagline em {
+  background: linear-gradient(to right, #7dd3fc, #38bdf8, #e0f2fe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.55));
+}
+.auth-aside[data-tone="dark"] .auth-tagline em {
   background: linear-gradient(to right, #fff, rgba(255,255,255,0.7));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
+
 .auth-blurb {
   margin: 0;
   font-size: var(--wx-fs-15);
@@ -175,7 +221,7 @@ withDefaults(defineProps<{
   color: var(--wx-content-secondary);
 }
 .auth-aside[data-tone="brand"] .auth-blurb,
-.auth-aside[data-tone="dark"]  .auth-blurb { color: rgba(255, 255, 255, 0.78); }
+.auth-aside[data-tone="dark"]  .auth-blurb { color: rgba(255, 255, 255, 0.80); }
 
 .auth-quote {
   margin: 0;
@@ -185,7 +231,11 @@ withDefaults(defineProps<{
   backdrop-filter: blur(8px);
 }
 .auth-aside[data-tone="brand"] .auth-quote,
-.auth-aside[data-tone="dark"]  .auth-quote { background: rgba(255, 255, 255, 0.12); }
+.auth-aside[data-tone="dark"]  .auth-quote {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
 .auth-quote blockquote {
   margin: 0 0 var(--wx-space-3);
   font-size: var(--wx-fs-14);
@@ -208,25 +258,36 @@ withDefaults(defineProps<{
   font-size: var(--wx-fs-13);
 }
 
-/* ── main (form) ── */
+/* ── Main (right form panel) ── */
 .auth-main {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--wx-space-7) var(--wx-space-5);
 }
-.auth-main[data-align="top"] { align-items: flex-start; padding-top: var(--wx-space-9); }
+.auth-main[data-align="top"] { align-items: flex-start; padding-top: var(--wx-space-6); }
 
+/* form card with colored depth shadow */
 .auth-main__inner {
   width: 100%;
-  max-width: 420px;
+  max-width: 460px;
   display: flex;
   flex-direction: column;
   gap: var(--wx-space-5);
+  background: var(--wx-surface-elevated, #fff);
+  border: 1px solid var(--wx-border-subtle);
+  border-radius: var(--wx-radius-2xl);
+  padding: var(--wx-space-7) var(--wx-space-6);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 51, 102, 0.05),
+    0 10px 20px -4px rgba(0, 51, 102, 0.08),
+    0 20px 40px -8px rgba(0, 51, 102, 0.12);
 }
 
 .auth-foot {
-  margin-top: var(--wx-space-3);
+  margin-top: var(--wx-space-2);
   padding-top: var(--wx-space-3);
   border-top: 1px solid var(--wx-border-subtle);
   font-size: var(--wx-fs-12);
@@ -241,6 +302,7 @@ withDefaults(defineProps<{
 @media (max-width: 880px) {
   .auth-shell { grid-template-columns: 1fr; }
   .auth-aside { display: none; }
-  .auth-main { padding: var(--wx-space-9) var(--wx-space-4); }
+  .auth-main { padding: var(--wx-space-6) var(--wx-space-4); }
+  .auth-main__inner { padding: var(--wx-space-6) var(--wx-space-5); }
 }
 </style>

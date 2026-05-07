@@ -44,9 +44,6 @@ function onDateClick(d: string) {
     <AppTopbar title="WemakeUI · Calendar" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="BaseCalendar" description="Calendar component với 2 view: month grid + agenda. Hỗ trợ events nhiều màu.">
-        <template #actions>
-          <button class="back-btn" @click="router.push('/showcase/data')">← Phase 4</button>
-        </template>
       </PageHeader>
 
       <GroupBox title="Calendar">
@@ -76,15 +73,4 @@ function onDateClick(d: string) {
 }
 p { font-size: 13px; margin: 4px 0; color: var(--wx-text-secondary); }
 p b { color: var(--wx-brand-primary); }
-.back-btn {
-  padding: 6px 12px;
-  border: 1px solid var(--wx-border-default);
-  background: var(--wx-surface-base);
-  border-radius: var(--wx-radius-md);
-  font-size: 12px;
-  cursor: pointer;
-  font-family: var(--wx-font-primary);
-  color: var(--wx-text-secondary);
-}
-.back-btn:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); }
 </style>

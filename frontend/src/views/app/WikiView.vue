@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseInput, BaseButton } from '../../components/common'
 
 const search = ref('')
@@ -113,7 +113,7 @@ import { computed } from 'vue'
 </script>
 
 <template>
-  <AppLayout current="wiki" page-title="Wiki / Tài liệu" page-description="Tài liệu hướng dẫn sử dụng và API reference">
+  <AppPageLayout section="app" current="wiki" page-title="Wiki / Tài liệu" page-description="Tài liệu hướng dẫn sử dụng và API reference">
     <template #actions>
       <BaseButton size="sm" variant="ghost">Chỉnh sửa trang</BaseButton>
     </template>
@@ -142,7 +142,7 @@ import { computed } from 'vue'
         <div class="article-body" v-html="renderMd(doc.body)" />
       </article>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

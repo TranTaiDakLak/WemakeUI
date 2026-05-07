@@ -89,10 +89,12 @@ onMounted(() => nextTick(updateIndicator))
   font-weight: 600;
   cursor: pointer;
   border-radius: var(--wx-radius-lg, 8px);
-  transition: color var(--wx-duration-fast) var(--wx-easing-default);
+  transition: color var(--wx-duration-fast) var(--wx-easing-default),
+              background var(--wx-duration-fast) var(--wx-easing-default);
 }
-.base-tabs__tab:hover:not(:disabled) {
-  color: var(--wx-text-primary);
+.base-tabs__tab:hover:not(:disabled):not(.base-tabs__tab--active) {
+  color: var(--wx-brand-primary);
+  background: color-mix(in srgb, var(--wx-brand-primary) 10%, transparent);
 }
 .base-tabs__tab--active {
   color: var(--wx-text-inverse);

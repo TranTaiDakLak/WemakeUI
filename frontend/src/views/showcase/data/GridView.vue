@@ -92,9 +92,6 @@ const selectedCount = computed(() => selected.value.size)
     <AppTopbar title="WemakeUI · DataGridPro" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="DataGridPro" description="Bảng dữ liệu nâng cao đầy đủ feature: sort, virtual scroll, resize, pin, reorder, multi-select, inline edit, saved views, export.">
-        <template #actions>
-          <button class="back-btn" @click="router.push('/showcase/data')">← Phase 4</button>
-        </template>
       </PageHeader>
 
       <GroupBox title="Tạo dữ liệu test">
@@ -157,15 +154,4 @@ const selectedCount = computed(() => selected.value.size)
 .row { display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center; }
 .muted { color: var(--wx-text-muted); font-size: 12px; }
 .muted b { color: var(--wx-brand-primary); }
-.back-btn {
-  padding: 6px 12px;
-  border: 1px solid var(--wx-border-default);
-  background: var(--wx-surface-base);
-  border-radius: var(--wx-radius-md);
-  font-size: 12px;
-  cursor: pointer;
-  font-family: var(--wx-font-primary);
-  color: var(--wx-text-secondary);
-}
-.back-btn:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); }
 </style>

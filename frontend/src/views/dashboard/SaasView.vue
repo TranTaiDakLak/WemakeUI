@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /** dashboard/saas — MRR, ARR, churn, plan distribution */
-import DashboardLayout from '../_layouts/DashboardLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseTag, BaseButton, BaseProgress } from '../../components/common'
 import { sparkPath, sparkArea, seriesUp, seriesDown, seriesFlat } from '../_layouts/dashboard-widgets'
 
@@ -23,7 +23,7 @@ const totalMrr = '1.562 triệu'
 </script>
 
 <template>
-  <DashboardLayout
+  <AppPageLayout section="dashboards"
     current="SaaS / billing"
     page-title="SaaS metrics"
     page-description="MRR, ARR, churn, retention — sức khoẻ business."
@@ -102,7 +102,7 @@ const totalMrr = '1.562 triệu'
         </tbody>
       </table>
     </BasePanel>
-  </DashboardLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

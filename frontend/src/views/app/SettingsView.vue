@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseInput, BaseToggle, BaseTabs, BaseCard, BaseBadge, FormField, GroupBox } from '../../components/common'
 
 const tab = ref('chung')
@@ -26,7 +26,7 @@ function save() { /* demo */ }
 </script>
 
 <template>
-  <AppLayout current="cài đặt" page-title="Cài đặt tài khoản" page-description="Quản lý hồ sơ, bảo mật và tuỳ chọn cá nhân">
+  <AppPageLayout section="app" current="cài đặt" page-title="Cài đặt tài khoản" page-description="Quản lý hồ sơ, bảo mật và tuỳ chọn cá nhân">
     <BaseTabs v-model="tab" :tabs="tabs" />
 
     <!-- Chung -->
@@ -150,7 +150,7 @@ function save() { /* demo */ }
         </div>
       </GroupBox>
     </template>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

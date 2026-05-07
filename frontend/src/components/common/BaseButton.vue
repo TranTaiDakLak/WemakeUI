@@ -48,12 +48,12 @@ defineEmits<{
   font-weight: var(--wx-fw-semibold);
   cursor: pointer;
   transition:
-    background var(--wx-duration-fast) var(--wx-easing-default),
-    box-shadow var(--wx-duration-fast) var(--wx-easing-default),
-    transform var(--wx-duration-fast) var(--wx-easing-default),
-    border-color var(--wx-duration-fast) var(--wx-easing-default),
-    filter var(--wx-duration-fast) var(--wx-easing-default),
-    color var(--wx-duration-fast) var(--wx-easing-default);
+    background   var(--wx-d-fast) var(--wx-ease-standard),
+    box-shadow   var(--wx-d-fast) var(--wx-ease-standard),
+    transform    var(--wx-d-fast) var(--wx-ease-standard),
+    border-color var(--wx-d-fast) var(--wx-ease-standard),
+    filter       var(--wx-d-fast) var(--wx-ease-standard),
+    color        var(--wx-d-fast) var(--wx-ease-standard);
   white-space: nowrap;
   line-height: 1;
   overflow: hidden;
@@ -96,11 +96,19 @@ defineEmits<{
 .wx-btn--primary {
   background: var(--wx-gradient-button);
   color: var(--wx-text-inverse);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(37, 99, 235, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 4px 14px -2px rgba(37, 99, 235, 0.45),
+    0 8px 24px -4px rgba(0, 51, 102, 0.20);
 }
 .wx-btn--primary:hover:not(:disabled) {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 20px -2px rgba(37, 99, 235, 0.42);
-  filter: brightness(1.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 2px 4px rgba(0, 0, 0, 0.12),
+    0 8px 22px -2px rgba(37, 99, 235, 0.55),
+    0 12px 32px -4px rgba(0, 51, 102, 0.25);
+  filter: brightness(1.06);
   transform: translateY(-1px);
 }
 .wx-btn--primary:active:not(:disabled) {
@@ -229,7 +237,7 @@ defineEmits<{
   transform: translateX(calc(-100% - 2px));
   background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
   pointer-events: none;
-  transition: transform var(--wx-duration-decorative) var(--wx-easing-accelerate, ease-in);
+  transition: transform var(--wx-d-decorative) var(--wx-ease-accelerate);
 }
 .wx-btn:hover .wx-btn__shine {
   transform: translateX(calc(100% + 2px));
@@ -258,6 +266,9 @@ defineEmits<{
 .wx-btn__label {
   position: relative;
   z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 /* ── Dark mode ── */

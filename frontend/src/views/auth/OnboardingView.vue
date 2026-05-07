@@ -3,7 +3,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
-import { BaseButton, BaseInput, BaseTag, BaseProgress, FormField, BaseSelect } from '../../components/common'
+import { BaseButton, BaseInput, BaseTag, BaseProgress, FormField, BaseSelectMenu } from '../../components/common'
 import { useTheme } from '../../ui-system/composables/useTheme'
 
 const step = ref<0 | 1 | 2 | 3 | 4>(0)
@@ -68,7 +68,7 @@ function back() {
         <BaseInput v-model="ws.subdomain" />
       </FormField>
       <FormField label="Quy mô team">
-        <BaseSelect v-model="ws.size" :options="sizeOpts" />
+        <BaseSelectMenu v-model="ws.size" :options="sizeOpts" />
       </FormField>
       <div class="auth-row">
         <BaseButton variant="ghost" @click="back">← Quay lại</BaseButton>

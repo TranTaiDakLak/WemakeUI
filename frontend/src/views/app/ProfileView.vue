@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseAvatar, BaseButton, BaseBadge, BaseTag, BaseCard } from '../../components/common'
 
 const stats = [
@@ -20,7 +20,7 @@ const recent = [
 </script>
 
 <template>
-  <AppLayout current="hồ sơ" page-title="Hồ sơ cá nhân" page-description="Thông tin cá nhân và lịch sử hoạt động">
+  <AppPageLayout section="app" current="hồ sơ" page-title="Hồ sơ cá nhân" page-description="Thông tin cá nhân và lịch sử hoạt động">
     <template #actions>
       <BaseButton size="sm" variant="secondary" tag="a" href="#/app/profile/edit">Chỉnh sửa</BaseButton>
     </template>
@@ -83,7 +83,7 @@ const recent = [
         </BaseCard>
       </div>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

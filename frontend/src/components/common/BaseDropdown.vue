@@ -70,12 +70,15 @@ onBeforeUnmount(() => document.removeEventListener('click', onClickOutside))
 .base-dropdown__content {
   position: absolute;
   z-index: 100;
-  margin-top: 4px;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-md);
+  margin-top: 6px;
+  background: var(--wx-surface-base);
+  border: 1px solid var(--wx-border-subtle);
+  border-radius: var(--wx-radius-xl);
+  box-shadow:
+    0 4px 6px -1px rgba(0,0,0,0.08),
+    0 10px 24px -4px rgba(0,0,0,0.12);
   min-width: 160px;
+  overflow: hidden;
 }
 
 .base-dropdown--bottom-start .base-dropdown__content { left: 0; top: 100%; }

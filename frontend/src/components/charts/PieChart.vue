@@ -56,6 +56,10 @@ const slices = computed(() => {
 })
 
 const hoverIdx = ref(-1)
+
+const emit = defineEmits<{
+  'click-slice': [slice: PieSlice]
+}>()
 </script>
 
 <template>
@@ -79,6 +83,7 @@ const hoverIdx = ref(-1)
             stroke-width="2"
             @mouseenter="hoverIdx = i"
             @mouseleave="hoverIdx = -1"
+            @click="emit('click-slice', slices[i])"
           />
         </g>
 
@@ -125,6 +130,7 @@ const hoverIdx = ref(-1)
         :class="{ 'pc-legend-item--dim': hoverIdx >= 0 && hoverIdx !== i }"
         @mouseenter="hoverIdx = i"
         @mouseleave="hoverIdx = -1"
+        @click="emit('click-slice', slices[i])"
       >
         <span class="pc-legend-dot" :style="{ background: s.color }" />
         <span class="pc-legend-label">{{ s.label }}</span>

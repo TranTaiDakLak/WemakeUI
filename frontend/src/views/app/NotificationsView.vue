@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseAvatar, BaseTabs } from '../../components/common'
 
 const tab = ref('tat-ca')
@@ -34,7 +34,7 @@ const TYPE_ICONS: Record<string, string> = {
 </script>
 
 <template>
-  <AppLayout current="thông báo" page-title="Trung tâm thông báo" page-description="Theo dõi hoạt động và cập nhật mới nhất">
+  <AppPageLayout section="app" current="thông báo" page-title="Trung tâm thông báo" page-description="Theo dõi hoạt động và cập nhật mới nhất">
     <template #actions>
       <BaseButton size="sm" variant="ghost" @click="markAllRead">Đánh dấu tất cả đã đọc</BaseButton>
     </template>
@@ -65,7 +65,7 @@ const TYPE_ICONS: Record<string, string> = {
         <p class="empty-text">Không có thông báo {{ tab === 'chua-doc' ? 'chưa đọc' : '' }}</p>
       </div>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

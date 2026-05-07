@@ -5,6 +5,7 @@
  *  typography, motion) — duyệt xem rồi mới sang phase 1.
  */
 import { ref } from 'vue'
+import { BaseSelectMenu } from '../../components/common'
 import AppTopbar from '../../components/layout/AppTopbar.vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { useTheme, type Theme } from '../../ui-system/composables/useTheme'
@@ -179,17 +180,21 @@ function bumpMotion() {
         <div class="motion-controls">
           <label>
             <span>duration</span>
-            <select v-model="motionDuration">
-              <option v-for="d in durationList" :key="d.name" :value="d.name">
-                {{ d.name }} — {{ d.ms }} ({{ d.use }})
-              </option>
-            </select>
+            <BaseSelectMenu
+              :model-value="motionDuration"
+              size="sm"
+              :options="durationList.map(d => ({ value: d.name, label: `${d.name} — ${d.ms} (${d.use})` }))"
+              @update:model-value="motionDuration = $event as typeof motionDuration"
+            />
           </label>
           <label>
             <span>easing</span>
-            <select v-model="motionEasing">
-              <option v-for="e in easingList" :key="e" :value="e">{{ e }}</option>
-            </select>
+            <BaseSelectMenu
+              :model-value="motionEasing"
+              size="sm"
+              :options="easingList.map(e => ({ value: e, label: e }))"
+              @update:model-value="motionEasing = $event as typeof motionEasing"
+            />
           </label>
           <button class="cta" @click="bumpMotion">chạy thử</button>
           <span class="motion-current">

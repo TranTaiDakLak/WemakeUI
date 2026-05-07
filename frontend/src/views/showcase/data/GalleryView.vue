@@ -33,9 +33,6 @@ const columns = ref(3)
     <AppTopbar title="WemakeUI · Gallery" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="Gallery / Media grid" description="Masonry layout với CSS columns. Lightbox keyboard nav (←→Esc).">
-        <template #actions>
-          <button class="back-btn" @click="router.push('/showcase/data')">← Phase 4</button>
-        </template>
       </PageHeader>
 
       <GroupBox title="Controls">
@@ -70,15 +67,4 @@ const columns = ref(3)
 }
 .row { display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center; font-size: 13px; }
 .muted { color: var(--wx-text-muted); font-size: 12px; }
-.back-btn {
-  padding: 6px 12px;
-  border: 1px solid var(--wx-border-default);
-  background: var(--wx-surface-base);
-  border-radius: var(--wx-radius-md);
-  font-size: 12px;
-  cursor: pointer;
-  font-family: var(--wx-font-primary);
-  color: var(--wx-text-secondary);
-}
-.back-btn:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); }
 </style>

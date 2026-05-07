@@ -68,6 +68,12 @@ export const phases: readonly ShowcasePhase[] = [
           { id: 'loading',  label: 'Loading' },
         ],
       },
+      {
+        path: '/showcase/cards',
+        navLabel: 'Card & GroupBox',
+        label: 'BaseCard · GroupBox — Surface Containers',
+        desc: 'header/body/footer slots, shadow, radius, states (selected/disabled/loading), hoverable, clickable, selection group, GroupBox collapsible',
+      },
     ],
   },
   {
@@ -112,6 +118,7 @@ export const phases: readonly ShowcasePhase[] = [
       { path: '/showcase/data/calendar', label: 'Calendar — Month Grid + Agenda',                    desc: 'month grid + agenda view, events nhiều màu' },
       { path: '/showcase/data/timeline', label: 'Timeline — Activity Feed',                          desc: 'group by day, dot icon variant, actor + timestamp' },
       { path: '/showcase/data/gallery',  label: 'Gallery — Masonry Grid + Lightbox',                 desc: 'CSS columns masonry + lightbox keyboard nav' },
+      { path: '/showcase/data/crud',     navLabel: 'CrudPage / Data Table', label: 'CrudPage — Config-driven CRUD Table',               desc: 'Bảng dữ liệu config-driven: search, filter, pagination, CRUD đầy đủ, bulk actions, density control' },
     ],
   },
   {

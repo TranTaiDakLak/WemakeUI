@@ -4,6 +4,7 @@ import {
   type FilterRule, type FilterGroup, type FilterFieldDef, type FilterOperator,
   OPERATORS_BY_TYPE, emptyGroup,
 } from './filter-types'
+import BaseSelectMenu from '@/components/common/BaseSelectMenu.vue'
 
 const props = withDefaults(defineProps<{
   modelValue: FilterGroup
@@ -142,39 +143,31 @@ function isGroup(r: FilterRule | FilterGroup): r is FilterGroup {
 
         <!-- Rule row -->
         <div v-else class="fb-rule">
-          <select
-            class="fb-input fb-input--field"
-            :value="item.field"
-            @change="onFieldChange(idx, ($event.target as HTMLSelectElement).value)"
-          >
-            <option v-for="f in fields" :key="f.key" :value="f.key">{{ f.label }}</option>
-          </select>
+          <BaseSelectMenu
+            class="fb-input--field"
+            size="sm"
+            :model-value="item.field"
+            :options="fields.map(f => ({ value: f.key, label: f.label }))"
+            @update:model-value="onFieldChange(idx, String($event))"
+          />
 
-          <select
-            class="fb-input fb-input--op"
-            :value="item.op"
-            @change="updateRule(idx, { op: ($event.target as HTMLSelectElement).value as FilterOperator })"
-          >
-            <option
-              v-for="op in OPERATORS_BY_TYPE[fieldMap.get(item.field)?.type ?? 'text']"
-              :key="op.value"
-              :value="op.value"
-            >{{ op.label }}</option>
-          </select>
+          <BaseSelectMenu
+            class="fb-input--op"
+            size="sm"
+            :model-value="item.op"
+            :options="OPERATORS_BY_TYPE[fieldMap.get(item.field)?.type ?? 'text']"
+            @update:model-value="updateRule(idx, { op: String($event) as FilterOperator })"
+          />
 
           <!-- Value input depends on field type and op -->
           <template v-if="(fieldMap.get(item.field)?.type ?? 'text') === 'enum'">
-            <select
-              class="fb-input fb-input--value"
-              :value="item.value"
-              @change="updateRule(idx, { value: ($event.target as HTMLSelectElement).value })"
-            >
-              <option
-                v-for="opt in fieldMap.get(item.field)?.options ?? []"
-                :key="opt.value"
-                :value="opt.value"
-              >{{ opt.label }}</option>
-            </select>
+            <BaseSelectMenu
+              class="fb-input--value"
+              size="sm"
+              :model-value="item.value as string"
+              :options="(fieldMap.get(item.field)?.options ?? []).map(o => ({ value: o.value, label: o.label }))"
+              @update:model-value="updateRule(idx, { value: String($event) })"
+            />
           </template>
 
           <template v-else-if="fieldMap.get(item.field)?.type === 'bool'">

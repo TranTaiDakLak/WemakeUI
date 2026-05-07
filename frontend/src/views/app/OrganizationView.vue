@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseAvatar, BaseAvatarGroup, BaseCard, BaseTabs } from '../../components/common'
 
 const tab = ref('thanh-vien')
@@ -33,7 +33,7 @@ const TEAMS = [
 </script>
 
 <template>
-  <AppLayout current="tổ chức" page-title="Tổ chức" page-description="Quản lý thành viên, nhóm và cài đặt tổ chức">
+  <AppPageLayout section="app" current="tổ chức" page-title="Tổ chức" page-description="Quản lý thành viên, nhóm và cài đặt tổ chức">
     <template #actions>
       <BaseButton size="sm" variant="primary">+ Mời thành viên</BaseButton>
     </template>
@@ -122,7 +122,7 @@ const TEAMS = [
         </template>
       </BaseCard>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

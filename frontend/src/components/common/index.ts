@@ -43,3 +43,16 @@ export { default as BasePanel } from './BasePanel.vue'
 export { default as FormModal }     from './FormModal.vue'
 export { default as FormDrawer }    from './FormDrawer.vue'
 export { default as ConfirmDialog } from './ConfirmDialog.vue'
+
+/* ── phase 10 additions (SaaS UI) ─────────────────────── */
+export { default as StatusChip }         from './StatusChip.vue'
+export { default as TagList }            from './TagList.vue'
+export { default as UserDropdown }       from './UserDropdown.vue'
+export { default as NotificationCenter } from './NotificationCenter.vue'
+
+/* ── phase 11 additions (upload + wizard) ──────────────── */
+export { default as BaseFileUpload } from './BaseFileUpload.vue'
+export { default as BaseWizard }     from './BaseWizard.vue'
+
+/* ── phase 12 additions (custom select menu) ───────────── */
+export { default as BaseSelectMenu } from './BaseSelectMenu.vue'

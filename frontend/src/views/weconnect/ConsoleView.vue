@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
-import WeConnectLayout from '../_layouts/WeConnectLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge } from '../../components/common'
 
 type LogLevel = 'info' | 'warn' | 'error' | 'debug' | 'success'
@@ -73,7 +73,7 @@ onUnmounted(() => clearInterval(interval))
 </script>
 
 <template>
-  <WeConnectLayout current="console" page-title="Console" page-description="Xem log thời gian thực từ tất cả session">
+  <AppPageLayout section="weconnect" current="console" page-title="Console" page-description="Xem log thời gian thực từ tất cả session">
     <template #actions>
       <BaseButton size="sm" :variant="paused ? 'primary' : 'ghost'" @click="paused = !paused">
         {{ paused ? '▶ Tiếp tục' : '⏸ Tạm dừng' }}
@@ -109,7 +109,7 @@ onUnmounted(() => clearInterval(interval))
         <span>{{ logs.length }} / 500 entries</span>
       </div>
     </div>
-  </WeConnectLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

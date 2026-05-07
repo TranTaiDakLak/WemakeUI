@@ -59,7 +59,7 @@
 /* Indeterminate variant */
 .wx-progress-bar-indeterminate .wx-progress-bar-fill {
   width: 40%;
-  animation: wx-progress-slide 1.5s var(--wx-easing-inOut) infinite;
+  animation: wx-progress-slide 1.5s linear infinite;
 }
 
 @keyframes wx-progress-slide {

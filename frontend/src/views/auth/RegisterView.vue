@@ -3,7 +3,7 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
-import { BaseButton, BaseInput, BaseSelect, FormField, BaseProgress, BaseTag } from '../../components/common'
+import { BaseButton, BaseInput, BaseSelectMenu, FormField, BaseProgress } from '../../components/common'
 
 const step = ref<1 | 2 | 3>(1)
 const account = ref({ email: '', password: '', confirm: '' })
@@ -66,7 +66,7 @@ function back() {
 </script>
 
 <template>
-  <AuthLayout align="top">
+  <AuthLayout>
     <header class="auth-head">
       <h1>Tạo tài khoản mới</h1>
       <p>Bước {{ step }}/3 — thông tin cơ bản, hồ sơ, hoàn tất.</p>
@@ -108,10 +108,10 @@ function back() {
         <BaseInput v-model="profile.phone" type="text" placeholder="+84 ..." />
       </FormField>
       <FormField label="Quốc gia">
-        <BaseSelect v-model="profile.country" :options="countryOpts" />
+        <BaseSelectMenu v-model="profile.country" :options="countryOpts" />
       </FormField>
       <FormField label="Vai trò">
-        <BaseSelect v-model="profile.role" :options="roleOpts" />
+        <BaseSelectMenu v-model="profile.role" :options="roleOpts" />
       </FormField>
       <div class="auth-row">
         <BaseButton variant="ghost" type="button" @click="back">← Quay lại</BaseButton>
@@ -124,7 +124,6 @@ function back() {
       <div class="finish-emoji">🎉</div>
       <h2>Sẵn sàng bắt đầu!</h2>
       <p>Tài khoản <strong>{{ account.email }}</strong> đã được tạo. Chúng tôi gửi email xác minh đến bạn.</p>
-      <BaseTag size="md" variant="success" text="đã tạo tài khoản" />
       <RouterLink to="/auth/email-verify" class="cta-link">
         <BaseButton block>Mở hộp thư xác minh →</BaseButton>
       </RouterLink>
@@ -198,9 +197,7 @@ function back() {
   align-items: center;
   text-align: center;
   gap: var(--wx-space-3);
-  padding: var(--wx-space-5);
-  background: var(--wx-surface-sunken);
-  border-radius: var(--wx-radius-xl);
+  padding: var(--wx-space-2) 0;
 }
 .finish-emoji { font-size: 48px; }
 .finish h2 { margin: 0; font-size: var(--wx-fs-20); font-weight: var(--wx-fw-semibold); }

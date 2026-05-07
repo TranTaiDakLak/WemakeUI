@@ -128,36 +128,42 @@ function next() { go(props.modelValue + 1) }
 }
 
 .wx-pagination__btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
   min-width: 32px;
   height: 32px;
   padding: 0 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--wx-border-default);
-  background: var(--wx-bg-base);
-  color: var(--wx-content-primary);
+  background: transparent;
+  color: var(--wx-content-secondary);
   font-size: var(--wx-fs-13);
   border-radius: var(--wx-radius-md);
   cursor: pointer;
   transition: background var(--wx-d-micro) var(--wx-ease-standard),
-              border-color var(--wx-d-micro) var(--wx-ease-standard),
               color var(--wx-d-micro) var(--wx-ease-standard);
+}
+.wx-pagination__btn:focus-visible {
+  outline: 2px solid var(--wx-border-focus);
+  outline-offset: 1px;
 }
 .wx-pagination[data-size="sm"] .wx-pagination__btn { min-width: 28px; height: 28px; font-size: var(--wx-fs-12); }
 
 .wx-pagination__btn:hover:not(:disabled):not([data-active]) {
-  background: var(--wx-hover-bg);
-  border-color: var(--wx-border-focus);
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--wx-content-primary);
 }
 .wx-pagination__btn:disabled {
-  opacity: 0.45;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 .wx-pagination__btn[data-active] {
   background: var(--wx-gradient-button);
-  color: var(--wx-content-inverse);
-  border-color: transparent;
+  color: #ffffff;
   font-weight: var(--wx-fw-semibold);
 }
 
@@ -179,6 +185,9 @@ function next() { go(props.modelValue + 1) }
 }
 
 .wx-pagination__loadmore {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
   height: 36px;
   padding: 0 var(--wx-space-4);
   border: 1px solid var(--wx-border-default);

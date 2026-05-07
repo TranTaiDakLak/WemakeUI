@@ -7,7 +7,7 @@ import { ref, reactive } from 'vue'
 import AppTopbar from '../../components/layout/AppTopbar.vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import {
-  BaseButton, BaseInput, BaseSelect, BaseToggle, BaseBadge, BaseTag,
+  BaseButton, BaseInput, BaseSelectMenu, BaseToggle, BaseBadge, BaseTag,
   FormField, FormModal, FormDrawer, ConfirmDialog,
 } from '../../components/common'
 import { useToast } from '../../composables/useToast'
@@ -204,7 +204,7 @@ const deptOptions = [
           <BaseInput v-model="addForm.email" type="email" placeholder="email@company.vn" />
         </FormField>
         <FormField label="Vai trò">
-          <BaseSelect v-model="addForm.role" :options="roleOptions" />
+          <BaseSelectMenu v-model="addForm.role" :options="roleOptions" />
         </FormField>
         <FormField label="Trạng thái">
           <div class="toggle-row">
@@ -232,7 +232,7 @@ const deptOptions = [
           <BaseInput v-model="editForm.email" type="email" />
         </FormField>
         <FormField label="Vai trò">
-          <BaseSelect v-model="editForm.role" :options="roleOptions" />
+          <BaseSelectMenu v-model="editForm.role" :options="roleOptions" />
         </FormField>
         <FormField label="Trạng thái">
           <div class="toggle-row">
@@ -267,10 +267,10 @@ const deptOptions = [
         <BaseInput v-model="drawerForm.phone" placeholder="0901 234 567" />
       </FormField>
       <FormField label="Phòng ban">
-        <BaseSelect v-model="drawerForm.department" :options="deptOptions" placeholder="chọn phòng ban" />
+        <BaseSelectMenu v-model="drawerForm.department" :options="deptOptions" placeholder="chọn phòng ban" />
       </FormField>
       <FormField label="Vai trò">
-        <BaseSelect v-model="drawerForm.role" :options="roleOptions" />
+        <BaseSelectMenu v-model="drawerForm.role" :options="roleOptions" />
       </FormField>
       <FormField label="Giới thiệu">
         <textarea

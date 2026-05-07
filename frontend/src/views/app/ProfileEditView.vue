@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import AppLayout from '../_layouts/AppLayout.vue'
+import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseAvatar, FormField, BaseInput, GroupBox } from '../../components/common'
 
 const router = useRouter()
@@ -18,7 +18,7 @@ function save() { router.push('/app/profile') }
 </script>
 
 <template>
-  <AppLayout current="chỉnh sửa hồ sơ" page-title="Chỉnh sửa hồ sơ" page-description="Cập nhật thông tin cá nhân và mạng xã hội">
+  <AppPageLayout section="app" current="chỉnh sửa hồ sơ" page-title="Chỉnh sửa hồ sơ" page-description="Cập nhật thông tin cá nhân và mạng xã hội">
     <template #actions>
       <BaseButton variant="ghost" @click="router.push('/app/profile')">Huỷ</BaseButton>
       <BaseButton variant="primary" @click="save">Lưu thay đổi</BaseButton>
@@ -78,7 +78,7 @@ function save() { router.push('/app/profile') }
         <BaseButton variant="ghost" size="lg" @click="router.push('/app/profile')">Huỷ bỏ</BaseButton>
       </div>
     </div>
-  </AppLayout>
+  </AppPageLayout>
 </template>
 
 <style scoped>

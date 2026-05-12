@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sản phẩm SaaS — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .prod-thumb { height:120px; border-radius:var(--wx-radius-md) var(--wx-radius-md) 0 0; display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">SaaS Admin</div>
+      <a href="dashboard.html" class="wx-nav-item"><span class="wx-nav-icon">📊</span><span>Bảng điều khiển</span></a>
+      <a href="members.html" class="wx-nav-item"><span class="wx-nav-icon">👥</span><span>Thành viên</span></a>
+      <a href="products.html" class="wx-nav-item active"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="transactions.html" class="wx-nav-item"><span class="wx-nav-icon">💳</span><span>Giao dịch</span></a>
+      <a href="versions.html" class="wx-nav-item"><span class="wx-nav-icon">🔖</span><span>Phiên bản</span></a>
+      <a href="statistics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Thống kê</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Sản phẩm SaaS</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Sản phẩm SaaS</h1>
+        <p class="text-muted" style="margin:0">Danh mục các sản phẩm và phụ kiện đang phân phối trên nền tảng.</p>
+      </div>
+
+      <div class="wx-grid-4 mb-4">
+        <div class="wx-stat-card"><div class="wx-stat-label">Tổng sản phẩm</div><div class="wx-stat-value">24</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Đang bán</div><div class="wx-stat-value">18</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Bản nháp</div><div class="wx-stat-value">4</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Ngừng bán</div><div class="wx-stat-value">2</div></div>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header">
+          <div class="flex items-center gap-2" style="width:100%">
+            <div class="ig flex-1" style="display:flex;align-items:stretch;border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-md);overflow:hidden;max-width:320px">
+              <span style="display:flex;align-items:center;padding:0 12px;background:var(--wx-surface-sunken);color:var(--wx-text-muted)">🔍</span>
+              <input type="text" class="wx-input" placeholder="Tìm sản phẩm..." style="border:none;border-radius:0">
+            </div>
+            <select class="wx-select" style="max-width:160px"><option>Tất cả trạng thái</option><option>Đang bán</option><option>Bản nháp</option><option>Ngừng bán</option></select>
+            <button class="wx-btn wx-btn-primary" style="margin-left:auto">➕ Thêm sản phẩm</button>
+          </div>
+        </div>
+        <div class="wx-card-body">
+          <div class="wx-grid-3">
+            <div class="wx-card" style="padding:0;overflow:hidden">
+              <div class="prod-thumb" style="background:linear-gradient(135deg,#60a5fa,#2563eb)">🚀</div>
+              <div style="padding:14px">
+                <div class="flex justify-between items-center"><span class="font-semibold">WeAnalytics Pro</span><span class="wx-badge wx-badge-neutral">v2.4.0</span></div>
+                <div class="font-bold mt-1" style="color:var(--wx-brand-primary)">₫299.000<span class="text-xs text-muted">/tháng</span></div>
+                <div class="flex justify-between items-center mt-2"><span class="wx-badge wx-badge-success">Đang bán</span><span class="text-xs text-muted">842 lượt bán</span></div>
+                <button class="wx-btn wx-btn-secondary wx-btn-sm wx-btn-full mt-2">Chỉnh sửa</button>
+              </div>
+            </div>
+            <div class="wx-card" style="padding:0;overflow:hidden">
+              <div class="prod-thumb" style="background:linear-gradient(135deg,#34d399,#059669)">💬</div>
+              <div style="padding:14px">
+                <div class="flex justify-between items-center"><span class="font-semibold">WeChat Suite</span><span class="wx-badge wx-badge-neutral">v1.8.2</span></div>
+                <div class="font-bold mt-1" style="color:var(--wx-brand-primary)">₫149.000<span class="text-xs text-muted">/tháng</span></div>
+                <div class="flex justify-between items-center mt-2"><span class="wx-badge wx-badge-success">Đang bán</span><span class="text-xs text-muted">1,204 lượt bán</span></div>
+                <button class="wx-btn wx-btn-secondary wx-btn-sm wx-btn-full mt-2">Chỉnh sửa</button>
+              </div>
+            </div>
+            <div class="wx-card" style="padding:0;overflow:hidden">
+              <div class="prod-thumb" style="background:linear-gradient(135deg,#f472b6,#db2777)">🛒</div>
+              <div style="padding:14px">
+                <div class="flex justify-between items-center"><span class="font-semibold">WeShop Commerce</span><span class="wx-badge wx-badge-neutral">v3.1.0</span></div>
+                <div class="font-bold mt-1" style="color:var(--wx-brand-primary)">₫499.000<span class="text-xs text-muted">/tháng</span></div>
+                <div class="flex justify-between items-center mt-2"><span class="wx-badge wx-badge-success">Đang bán</span><span class="text-xs text-muted">567 lượt bán</span></div>
+                <button class="wx-btn wx-btn-secondary wx-btn-sm wx-btn-full mt-2">Chỉnh sửa</button>
+              </div>
+            </div>
+            <div class="wx-card" style="padding:0;overflow:hidden">
+              <div class="prod-thumb" style="background:linear-gradient(135deg,#fbbf24,#d97706)">📊</div>
+              <div style="padding:14px">
+                <div class="flex justify-between items-center"><span class="font-semibold">WeReport Builder</span><span class="wx-badge wx-badge-neutral">v0.9.0</span></div>
+                <div class="font-bold mt-1" style="color:var(--wx-brand-primary)">₫199.000<span class="text-xs text-muted">/tháng</span></div>
+                <div class="flex justify-between items-center mt-2"><span class="wx-badge wx-badge-warning">Bản nháp</span><span class="text-xs text-muted">— lượt bán</span></div>
+                <button class="wx-btn wx-btn-secondary wx-btn-sm wx-btn-full mt-2">Chỉnh sửa</button>
+              </div>
+            </div>
+            <div class="wx-card" style="padding:0;overflow:hidden">
+              <div class="prod-thumb" style="background:linear-gradient(135deg,#a78bfa,#7c3aed)">🔐</div>
+              <div style="padding:14px">
+                <div class="flex justify-between items-center"><span class="font-semibold">WeAuth Security</span><span class="wx-badge wx-badge-neutral">v2.0.1</span></div>
+                <div class="font-bold mt-1" style="color:var(--wx-brand-primary)">₫89.000<span class="text-xs text-muted">/tháng</span></div>
+                <div class="flex justify-between items-center mt-2"><span class="wx-badge wx-badge-success">Đang bán</span><span class="text-xs text-muted">923 lượt bán</span></div>
+                <button class="wx-btn wx-btn-secondary wx-btn-sm wx-btn-full mt-2">Chỉnh sửa</button>
+              </div>
+            </div>
+            <div class="wx-card" style="padding:0;overflow:hidden">
+              <div class="prod-thumb" style="background:linear-gradient(135deg,#22d3ee,#0891b2)">☁️</div>
+              <div style="padding:14px">
+                <div class="flex justify-between items-center"><span class="font-semibold">WeCloud Storage</span><span class="wx-badge wx-badge-neutral">v4.2.0</span></div>
+                <div class="font-bold mt-1" style="color:var(--wx-brand-primary)">₫59.000<span class="text-xs text-muted">/tháng</span></div>
+                <div class="flex justify-between items-center mt-2"><span class="wx-badge wx-badge-success">Đang bán</span><span class="text-xs text-muted">1,876 lượt bán</span></div>
+                <button class="wx-btn wx-btn-secondary wx-btn-sm wx-btn-full mt-2">Chỉnh sửa</button>
+              </div>
+            </div>
+            <div class="wx-card" style="padding:0;overflow:hidden">
+              <div class="prod-thumb" style="background:linear-gradient(135deg,#fb7185,#e11d48)">📧</div>
+              <div style="padding:14px">
+                <div class="flex justify-between items-center"><span class="font-semibold">WeMail Campaign</span><span class="wx-badge wx-badge-neutral">v1.5.3</span></div>
+                <div class="font-bold mt-1" style="color:var(--wx-brand-primary)">₫129.000<span class="text-xs text-muted">/tháng</span></div>
+                <div class="flex justify-between items-center mt-2"><span class="wx-badge wx-badge-success">Đang bán</span><span class="text-xs text-muted">645 lượt bán</span></div>
+                <button class="wx-btn wx-btn-secondary wx-btn-sm wx-btn-full mt-2">Chỉnh sửa</button>
+              </div>
+            </div>
+            <div class="wx-card" style="padding:0;overflow:hidden">
+              <div class="prod-thumb" style="background:linear-gradient(135deg,#94a3b8,#475569)">🗂️</div>
+              <div style="padding:14px">
+                <div class="flex justify-between items-center"><span class="font-semibold">WeDocs Legacy</span><span class="wx-badge wx-badge-neutral">v0.4.2</span></div>
+                <div class="font-bold mt-1" style="color:var(--wx-brand-primary)">₫39.000<span class="text-xs text-muted">/tháng</span></div>
+                <div class="flex justify-between items-center mt-2"><span class="wx-badge wx-badge-danger">Ngừng bán</span><span class="text-xs text-muted">312 lượt bán</span></div>
+                <button class="wx-btn wx-btn-secondary wx-btn-sm wx-btn-full mt-2">Chỉnh sửa</button>
+              </div>
+            </div>
+            <div class="wx-card" style="padding:0;overflow:hidden">
+              <div class="prod-thumb" style="background:linear-gradient(135deg,#4ade80,#16a34a)">🤖</div>
+              <div style="padding:14px">
+                <div class="flex justify-between items-center"><span class="font-semibold">WeBot Assistant</span><span class="wx-badge wx-badge-neutral">v0.8.0</span></div>
+                <div class="font-bold mt-1" style="color:var(--wx-brand-primary)">₫249.000<span class="text-xs text-muted">/tháng</span></div>
+                <div class="flex justify-between items-center mt-2"><span class="wx-badge wx-badge-warning">Bản nháp</span><span class="text-xs text-muted">— lượt bán</span></div>
+                <button class="wx-btn wx-btn-secondary wx-btn-sm wx-btn-full mt-2">Chỉnh sửa</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

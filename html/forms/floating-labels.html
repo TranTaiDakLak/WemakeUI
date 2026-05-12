@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floating labels — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .fl { position:relative; }
+  .fl > .wx-input, .fl > .wx-textarea, .fl > .wx-select { padding-top:14px; }
+  .fl > label {
+    position:absolute; left:12px; top:11px; color:var(--wx-text-muted);
+    transition:.15s ease; pointer-events:none; background:var(--wx-surface-base,#fff);
+    padding:0 4px; font-size:var(--wx-fs-md);
+  }
+  .fl > .wx-input:focus + label,
+  .fl > .wx-input:not(:placeholder-shown) + label,
+  .fl > .wx-textarea:focus + label,
+  .fl > .wx-textarea:not(:placeholder-shown) + label {
+    top:-8px; font-size:11px; color:var(--wx-brand-primary);
+  }
+  .fl > .wx-select + label { top:-8px; font-size:11px; color:var(--wx-text-secondary); }
+  .fl > .wx-select:focus + label { color:var(--wx-brand-primary); }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item active"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Floating labels</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Floating labels</h1>
+        <p class="text-muted" style="margin:0">Nhãn trôi nổi lên trên khi trường được chọn hoặc đã có nội dung — tiết kiệm không gian và rõ ràng.</p>
+      </div>
+
+      <div class="wx-grid-2">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Thông tin tài khoản</h3></div>
+          <div class="wx-card-body">
+            <div class="wx-form-group fl">
+              <input type="text" class="wx-input" id="flName" placeholder=" " value="Trần Thị Bích">
+              <label for="flName">Họ và tên</label>
+            </div>
+            <div class="wx-form-group fl">
+              <input type="email" class="wx-input" id="flEmail" placeholder=" ">
+              <label for="flEmail">Địa chỉ email</label>
+            </div>
+            <div class="wx-form-group fl">
+              <input type="tel" class="wx-input" id="flPhone" placeholder=" " value="0912 345 678">
+              <label for="flPhone">Số điện thoại</label>
+            </div>
+            <div class="wx-form-group fl">
+              <input type="password" class="wx-input" id="flPw" placeholder=" ">
+              <label for="flPw">Mật khẩu</label>
+            </div>
+            <div class="wx-form-group fl">
+              <input type="text" class="wx-input" id="flCompany" placeholder=" " value="Công ty TNHH Wemake">
+              <label for="flCompany">Tên công ty</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Thông tin giao hàng</h3></div>
+          <div class="wx-card-body">
+            <div class="wx-form-group fl">
+              <input type="text" class="wx-input" id="flAddr" placeholder=" " value="123 Lê Lợi, Phường Bến Nghé">
+              <label for="flAddr">Địa chỉ</label>
+            </div>
+            <div class="wx-grid-2">
+              <div class="wx-form-group fl">
+                <input type="text" class="wx-input" id="flCity" placeholder=" ">
+                <label for="flCity">Thành phố</label>
+              </div>
+              <div class="wx-form-group fl">
+                <input type="text" class="wx-input" id="flZip" placeholder=" ">
+                <label for="flZip">Mã bưu chính</label>
+              </div>
+            </div>
+            <div class="wx-form-group fl">
+              <select class="wx-select" id="flCountry">
+                <option>Việt Nam</option>
+                <option>Singapore</option>
+                <option>Thái Lan</option>
+              </select>
+              <label for="flCountry">Quốc gia</label>
+            </div>
+            <div class="wx-form-group fl">
+              <textarea class="wx-textarea" id="flNote" rows="4" placeholder=" ">Giao trong giờ hành chính, gọi trước 15 phút.</textarea>
+              <label for="flNote">Ghi chú giao hàng</label>
+            </div>
+          </div>
+          <div class="wx-card-footer flex justify-end gap-2">
+            <button class="wx-btn wx-btn-ghost">Huỷ</button>
+            <button class="wx-btn wx-btn-primary">Lưu</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-alert wx-alert-info">💡 Mẹo: nhãn sẽ tự trôi lên khi trường có nội dung hoặc đang được focus. Hãy thử bấm vào một trường trống.</div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

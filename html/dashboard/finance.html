@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tài chính | WemakeUI Dashboard</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body class="wx-app">
+<div class="wx-shell">
+
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar>☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tổng quan</div>
+      <a href="overview.html" class="wx-nav-item"><span class="wx-nav-icon">📊</span><span>Tổng quan</span></a>
+      <a href="analytics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Phân tích</span></a>
+      <a href="ecommerce.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Thương mại</span></a>
+      <a href="crm.html" class="wx-nav-item"><span class="wx-nav-icon">👥</span><span>CRM</span></a>
+      <a href="project.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Dự án</span></a>
+      <div class="wx-nav-section-label">Tài chính &amp; Vận hành</div>
+      <a href="finance.html" class="wx-nav-item active"><span class="wx-nav-icon">💰</span><span>Tài chính</span></a>
+      <a href="saas.html" class="wx-nav-item"><span class="wx-nav-icon">☁️</span><span>SaaS</span></a>
+      <a href="logistics.html" class="wx-nav-item"><span class="wx-nav-icon">🚚</span><span>Vận chuyển</span></a>
+      <a href="helpdesk.html" class="wx-nav-item"><span class="wx-nav-icon">🎧</span><span>Hỗ trợ</span></a>
+      <a href="iot.html" class="wx-nav-item"><span class="wx-nav-icon">📡</span><span>IoT</span></a>
+      <div class="wx-nav-section-label">Đặc biệt</div>
+      <a href="weconnect-v1.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>WeDashboard v1</span></a>
+      <a href="weconnect-v2.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>WeDashboard v2</span></a>
+    </nav>
+  </aside>
+
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Tài chính</span>
+      <div class="wx-topbar-actions">
+        <button class="wx-topbar-btn" data-dark-toggle>🌙</button>
+      </div>
+    </div>
+
+    <div class="wx-content">
+
+      <!-- Stats -->
+      <div class="wx-grid-4" style="margin-bottom:1.5rem;">
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Doanh thu</div>
+          <div class="wx-stat-value">₫15.2 tỷ</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +14.8% năm nay</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Chi phí</div>
+          <div class="wx-stat-value">₫8.9 tỷ</div>
+          <div class="wx-stat-change wx-stat-change--down">▼ +6.2% năm nay</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Lợi nhuận ròng</div>
+          <div class="wx-stat-value">₫6.3 tỷ</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +28.4% năm nay</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Biên lợi nhuận</div>
+          <div class="wx-stat-value">+41.4%</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +4.2% so với mục tiêu</div>
+        </div>
+      </div>
+
+      <!-- Revenue vs Expense chart -->
+      <div class="wx-card" style="margin-bottom:1.5rem;">
+        <div class="wx-card-header" style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-weight:600;">Doanh thu vs Chi phí (2026)</span>
+          <div style="display:flex;gap:1rem;font-size:0.82rem;">
+            <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;background:var(--wx-primary,#6366f1);border-radius:2px;display:inline-block;"></span>Doanh thu</span>
+            <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;background:var(--wx-danger,#ef4444);border-radius:2px;display:inline-block;"></span>Chi phí</span>
+          </div>
+        </div>
+        <div class="wx-card-body">
+          <svg viewBox="0 0 560 140" style="width:100%;height:140px;" preserveAspectRatio="none">
+            <!-- Revenue bars -->
+            <rect x="10" y="40" width="30" height="80" fill="var(--wx-primary,#6366f1)" opacity="0.85" rx="3"/>
+            <rect x="85" y="30" width="30" height="90" fill="var(--wx-primary,#6366f1)" opacity="0.85" rx="3"/>
+            <rect x="160" y="25" width="30" height="95" fill="var(--wx-primary,#6366f1)" opacity="0.85" rx="3"/>
+            <rect x="235" y="20" width="30" height="100" fill="var(--wx-primary,#6366f1)" opacity="0.85" rx="3"/>
+            <rect x="310" y="15" width="30" height="105" fill="var(--wx-primary,#6366f1)" opacity="0.85" rx="3"/>
+            <!-- Expense bars -->
+            <rect x="45" y="60" width="30" height="60" fill="var(--wx-danger,#ef4444)" opacity="0.75" rx="3"/>
+            <rect x="120" y="55" width="30" height="65" fill="var(--wx-danger,#ef4444)" opacity="0.75" rx="3"/>
+            <rect x="195" y="50" width="30" height="70" fill="var(--wx-danger,#ef4444)" opacity="0.75" rx="3"/>
+            <rect x="270" y="52" width="30" height="68" fill="var(--wx-danger,#ef4444)" opacity="0.75" rx="3"/>
+            <rect x="345" y="48" width="30" height="72" fill="var(--wx-danger,#ef4444)" opacity="0.75" rx="3"/>
+            <!-- X labels -->
+            <text x="27" y="132" text-anchor="middle" font-size="9" fill="var(--wx-text-muted,#6b7280)">T1</text>
+            <text x="102" y="132" text-anchor="middle" font-size="9" fill="var(--wx-text-muted,#6b7280)">T2</text>
+            <text x="177" y="132" text-anchor="middle" font-size="9" fill="var(--wx-text-muted,#6b7280)">T3</text>
+            <text x="252" y="132" text-anchor="middle" font-size="9" fill="var(--wx-text-muted,#6b7280)">T4</text>
+            <text x="327" y="132" text-anchor="middle" font-size="9" fill="var(--wx-text-muted,#6b7280)">T5</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Transactions table -->
+      <div class="wx-card">
+        <div class="wx-card-header" style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-weight:600;">Giao dịch gần đây</span>
+          <button class="wx-btn wx-btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.8rem;">⬇ Xuất Excel</button>
+        </div>
+        <div class="wx-card-body" style="padding:0;">
+          <table class="wx-table" style="width:100%;">
+            <thead>
+              <tr>
+                <th>Ngày</th>
+                <th>Mô tả</th>
+                <th>Danh mục</th>
+                <th>Số tiền</th>
+                <th>Số dư</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>12/05/2026</td>
+                <td>Thanh toán đơn hàng #DH-20248</td>
+                <td><span class="wx-badge wx-badge-success">Doanh thu</span></td>
+                <td style="color:var(--wx-success,#22c55e);font-weight:600;">+₫52,000,000</td>
+                <td>₫6,352,480,000</td>
+              </tr>
+              <tr>
+                <td>12/05/2026</td>
+                <td>Chi phí server AWS tháng 5</td>
+                <td><span class="wx-badge wx-badge-danger">Chi phí IT</span></td>
+                <td style="color:var(--wx-danger,#ef4444);font-weight:600;">-₫18,500,000</td>
+                <td>₫6,300,480,000</td>
+              </tr>
+              <tr>
+                <td>11/05/2026</td>
+                <td>Hoa hồng đại lý Q2/2026</td>
+                <td><span class="wx-badge wx-badge-danger">Chi phí BH</span></td>
+                <td style="color:var(--wx-danger,#ef4444);font-weight:600;">-₫84,000,000</td>
+                <td>₫6,318,980,000</td>
+              </tr>
+              <tr>
+                <td>11/05/2026</td>
+                <td>Doanh thu SaaS tháng 5</td>
+                <td><span class="wx-badge wx-badge-success">Doanh thu</span></td>
+                <td style="color:var(--wx-success,#22c55e);font-weight:600;">+₫1,200,000,000</td>
+                <td>₫6,402,980,000</td>
+              </tr>
+              <tr>
+                <td>10/05/2026</td>
+                <td>Lương nhân viên tháng 5</td>
+                <td><span class="wx-badge wx-badge-warning">Nhân sự</span></td>
+                <td style="color:var(--wx-danger,#ef4444);font-weight:600;">-₫650,000,000</td>
+                <td>₫5,202,980,000</td>
+              </tr>
+              <tr>
+                <td>09/05/2026</td>
+                <td>Thu phí dịch vụ API Gateway</td>
+                <td><span class="wx-badge wx-badge-success">Doanh thu</span></td>
+                <td style="color:var(--wx-success,#22c55e);font-weight:600;">+₫285,000,000</td>
+                <td>₫5,852,980,000</td>
+              </tr>
+              <tr>
+                <td>08/05/2026</td>
+                <td>Chi phí marketing tháng 5</td>
+                <td><span class="wx-badge wx-badge-danger">Marketing</span></td>
+                <td style="color:var(--wx-danger,#ef4444);font-weight:600;">-₫120,000,000</td>
+                <td>₫5,567,980,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../js/wemake.js"></script>
+</body>
+</html>

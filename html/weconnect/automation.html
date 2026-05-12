@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tự động hóa — WeConnect</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">WC</div>
+      <span class="wx-sidebar-brand-text">WeConnect</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">WeConnect</div>
+      <a href="index.html" class="wx-nav-item"><span class="wx-nav-icon">🎛️</span><span>Bảng quản trị</span></a>
+      <a href="accounts.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Tài khoản</span></a>
+      <a href="sessions.html" class="wx-nav-item"><span class="wx-nav-icon">🔌</span><span>Phiên kết nối</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📇</span><span>Danh bạ</span></a>
+      <a href="campaigns.html" class="wx-nav-item"><span class="wx-nav-icon">📣</span><span>Chiến dịch</span></a>
+      <a href="plugins.html" class="wx-nav-item"><span class="wx-nav-icon">🧩</span><span>Plugin</span></a>
+      <a href="console.html" class="wx-nav-item"><span class="wx-nav-icon">⌨️</span><span>Console</span></a>
+      <a href="scheduler.html" class="wx-nav-item"><span class="wx-nav-icon">⏰</span><span>Lịch trình</span></a>
+      <a href="integrations.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>Tích hợp</span></a>
+      <a href="automation.html" class="wx-nav-item active"><span class="wx-nav-icon">⚡</span><span>Tự động hóa</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">AD</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Admin</div><div class="text-xs text-muted">Quản trị viên</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Tự động hóa</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Tự động hóa</h1>
+          <p class="text-muted" style="margin:0">Trình thiết kế luồng xử lý tin nhắn tự động · <strong>Luồng: Phản hồi báo giá</strong></p>
+        </div>
+        <div class="flex gap-2">
+          <button class="wx-btn wx-btn-secondary">💾 Lưu</button>
+          <button class="wx-btn wx-btn-secondary">▶ Chạy thử</button>
+          <button class="wx-btn wx-btn-primary">⚡ Kích hoạt</button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:flex-start">
+        <!-- left palette -->
+        <div style="width:200px;flex-shrink:0">
+          <div class="wx-card" style="margin:0">
+            <div class="wx-card-header"><div class="wx-card-title text-sm">Khối</div></div>
+            <div class="wx-card-body" style="padding:10px">
+              <div class="text-xs text-muted font-semibold mb-3" style="text-transform:uppercase;letter-spacing:.5px">Trigger</div>
+              <div class="wx-card" style="margin:0 0 8px;padding:8px 10px;cursor:grab;font-size:13px">📥 Tin nhắn đến</div>
+              <div class="wx-card" style="margin:0 0 8px;padding:8px 10px;cursor:grab;font-size:13px">⏰ Lịch trình</div>
+              <div class="wx-card" style="margin:0 0 14px;padding:8px 10px;cursor:grab;font-size:13px">🪝 Webhook</div>
+              <div class="text-xs text-muted font-semibold mb-3" style="text-transform:uppercase;letter-spacing:.5px">Action</div>
+              <div class="wx-card" style="margin:0 0 8px;padding:8px 10px;cursor:grab;font-size:13px">💬 Gửi tin nhắn</div>
+              <div class="wx-card" style="margin:0 0 8px;padding:8px 10px;cursor:grab;font-size:13px">🏷️ Gắn thẻ</div>
+              <div class="wx-card" style="margin:0 0 8px;padding:8px 10px;cursor:grab;font-size:13px">🔗 Gọi API</div>
+              <div class="wx-card" style="margin:0 0 14px;padding:8px 10px;cursor:grab;font-size:13px">⏳ Chờ</div>
+              <div class="text-xs text-muted font-semibold mb-3" style="text-transform:uppercase;letter-spacing:.5px">Logic</div>
+              <div class="wx-card" style="margin:0 0 8px;padding:8px 10px;cursor:grab;font-size:13px">❓ Điều kiện</div>
+              <div class="wx-card" style="margin:0 0 8px;padding:8px 10px;cursor:grab;font-size:13px">🔀 Phân nhánh</div>
+              <div class="wx-card" style="margin:0;padding:8px 10px;cursor:grab;font-size:13px">🔁 Vòng lặp</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- center canvas -->
+        <div class="flex-1" style="min-width:0">
+          <div style="position:relative;min-height:520px;border:1px solid var(--wx-border);border-radius:12px;background-color:var(--wx-bg-elevated, #fff);background-image:radial-gradient(circle, rgba(100,116,139,.25) 1px, transparent 1px);background-size:22px 22px;overflow:hidden">
+            <svg style="position:absolute;inset:0;pointer-events:none;width:100%;height:100%">
+              <path d="M 230 90 C 330 90, 330 90, 410 90" stroke="#94a3b8" stroke-width="2" fill="none"/>
+              <path d="M 630 90 C 720 90, 720 200, 410 230" stroke="#16a34a" stroke-width="2" fill="none" stroke-dasharray="0"/>
+              <path d="M 630 110 C 720 130, 720 340, 410 370" stroke="#94a3b8" stroke-width="2" fill="none"/>
+            </svg>
+
+            <!-- node 1: trigger -->
+            <div class="wx-card" style="position:absolute;left:30px;top:55px;width:200px;margin:0;border-left:3px solid #6366f1">
+              <div class="wx-card-body" style="padding:12px">
+                <div class="flex items-center gap-2 mb-3"><span>📥</span><span class="font-semibold text-sm">Tin nhắn đến</span></div>
+                <div class="text-xs text-muted">Khi có tin nhắn mới trên Facebook / Zalo</div>
+              </div>
+            </div>
+
+            <!-- node 2: condition -->
+            <div class="wx-card" style="position:absolute;left:410px;top:50px;width:220px;margin:0;border-left:3px solid #f59e0b">
+              <div class="wx-card-body" style="padding:12px">
+                <div class="flex items-center gap-2 mb-3"><span>❓</span><span class="font-semibold text-sm">Điều kiện</span></div>
+                <div class="text-xs text-muted">Nội dung chứa từ khóa <strong>"giá"</strong> hoặc <strong>"báo giá"</strong></div>
+                <div class="flex gap-2 mt-3"><span class="wx-badge wx-badge-success text-xs">Đúng</span><span class="wx-badge wx-badge-neutral text-xs">Sai</span></div>
+              </div>
+            </div>
+
+            <!-- node 3: action send quote -->
+            <div class="wx-card" style="position:absolute;left:230px;top:215px;width:200px;margin:0;border-left:3px solid #16a34a">
+              <div class="wx-card-body" style="padding:12px">
+                <div class="flex items-center gap-2 mb-3"><span>💬</span><span class="font-semibold text-sm">Gửi báo giá</span></div>
+                <div class="text-xs text-muted">Gửi mẫu tin "Bảng giá dịch vụ 2026" + PDF đính kèm</div>
+              </div>
+            </div>
+
+            <!-- node 4: action transfer agent -->
+            <div class="wx-card" style="position:absolute;left:230px;top:355px;width:200px;margin:0;border-left:3px solid #16a34a">
+              <div class="wx-card-body" style="padding:12px">
+                <div class="flex items-center gap-2 mb-3"><span>🔀</span><span class="font-semibold text-sm">Chuyển nhân viên</span></div>
+                <div class="text-xs text-muted">Chuyển hội thoại tới hàng đợi CSKH · gắn thẻ "Cần tư vấn"</div>
+              </div>
+            </div>
+
+            <!-- node 5: wait -->
+            <div class="wx-card" style="position:absolute;left:510px;top:355px;width:180px;margin:0;border-left:3px solid #0ea5e9">
+              <div class="wx-card-body" style="padding:12px">
+                <div class="flex items-center gap-2 mb-3"><span>⏳</span><span class="font-semibold text-sm">Chờ 5 phút</span></div>
+                <div class="text-xs text-muted">Nếu chưa phản hồi → gửi tin nhắc</div>
+              </div>
+            </div>
+
+            <div style="position:absolute;right:14px;bottom:14px;display:flex;gap:6px">
+              <button class="wx-btn wx-btn-icon wx-btn-sm" title="Phóng to">＋</button>
+              <button class="wx-btn wx-btn-icon wx-btn-sm" title="Thu nhỏ">－</button>
+              <button class="wx-btn wx-btn-icon wx-btn-sm" title="Vừa khung">⤢</button>
+            </div>
+          </div>
+
+          <div class="wx-card mt-4">
+            <div class="wx-card-header"><div class="wx-card-title">Lịch sử chạy</div></div>
+            <div class="wx-card-body" style="padding:0">
+              <table class="wx-table">
+                <thead><tr><th>Thời gian</th><th>Trigger</th><th>Kết quả</th><th>Số bước</th></tr></thead>
+                <tbody>
+                  <tr><td class="text-sm">12/05 14:02</td><td class="text-sm">Tin nhắn từ @huong.nguyen</td><td><span class="wx-badge wx-badge-success">Hoàn tất</span></td><td>4</td></tr>
+                  <tr><td class="text-sm">12/05 13:48</td><td class="text-sm">Tin nhắn từ @tranminh92</td><td><span class="wx-badge wx-badge-success">Hoàn tất</span></td><td>3</td></tr>
+                  <tr><td class="text-sm">12/05 13:30</td><td class="text-sm">Tin nhắn từ Wemake CSKH</td><td><span class="wx-badge wx-badge-warning">Chờ phản hồi</span></td><td>2</td></tr>
+                  <tr><td class="text-sm">12/05 12:55</td><td class="text-sm">Tin nhắn từ @kimyen.ly</td><td><span class="wx-badge wx-badge-success">Hoàn tất</span></td><td>4</td></tr>
+                  <tr><td class="text-sm">12/05 11:10</td><td class="text-sm">Tin nhắn từ @ngocnam.bui</td><td><span class="wx-badge wx-badge-danger">Lỗi gọi API</span></td><td>2</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- right properties -->
+        <div style="width:240px;flex-shrink:0">
+          <div class="wx-card" style="margin:0">
+            <div class="wx-card-header"><div class="wx-card-title text-sm">Thuộc tính</div></div>
+            <div class="wx-card-body">
+              <div class="text-xs text-muted mb-3">Đang chọn: <strong>Điều kiện</strong></div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Tên node</label>
+                <input class="wx-input w-full" value="Kiểm tra từ khóa giá">
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Loại</label>
+                <select class="wx-select w-full"><option>Điều kiện</option><option>Phân nhánh</option><option>Vòng lặp</option></select>
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Trường kiểm tra</label>
+                <select class="wx-select w-full"><option>Nội dung tin nhắn</option><option>Người gửi</option><option>Nền tảng</option><option>Thẻ liên hệ</option></select>
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Toán tử</label>
+                <select class="wx-select w-full"><option>Chứa</option><option>Bằng</option><option>Bắt đầu bằng</option><option>Khớp regex</option></select>
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Giá trị</label>
+                <input class="wx-input w-full" value="giá, báo giá, bảng giá">
+                <div class="wx-form-hint">Cách nhau bằng dấu phẩy</div>
+              </div>
+              <div class="wx-form-group">
+                <label class="flex items-center gap-3"><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label><span class="text-sm">Không phân biệt hoa thường</span></label>
+              </div>
+              <div class="wx-divider"></div>
+              <button class="wx-btn wx-btn-danger wx-btn-sm w-full mt-3">🗑 Xóa node</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

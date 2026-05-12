@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nhật ký hoạt động — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .ip-cell { font-family:var(--wx-font-mono);font-size:var(--wx-fs-sm);color:var(--wx-text-muted); }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item active"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Nhật ký hoạt động</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="wx-card mb-4">
+        <div class="wx-card-body">
+          <div class="flex items-center gap-2 flex-wrap">
+            <div class="wx-form-group" style="margin:0;">
+              <label class="wx-form-label">Từ ngày</label>
+              <input type="date" class="wx-input" value="2026-05-01">
+            </div>
+            <div class="wx-form-group" style="margin:0;">
+              <label class="wx-form-label">Đến ngày</label>
+              <input type="date" class="wx-input" value="2026-05-12">
+            </div>
+            <div class="wx-form-group" style="margin:0;">
+              <label class="wx-form-label">Người dùng</label>
+              <select class="wx-select" style="width:180px;">
+                <option>Tất cả người dùng</option>
+                <option>Nguyễn Văn A</option>
+                <option>Lê Thị Hương</option>
+                <option>Trần Văn Bình</option>
+              </select>
+            </div>
+            <div class="wx-form-group" style="margin:0;">
+              <label class="wx-form-label">Loại hành động</label>
+              <select class="wx-select" style="width:180px;">
+                <option>Tất cả</option>
+                <option>Đăng nhập</option>
+                <option>Cập nhật hồ sơ</option>
+                <option>Xóa tệp tin</option>
+                <option>Tạo API key</option>
+              </select>
+            </div>
+            <button class="wx-btn wx-btn-secondary" style="align-self:flex-end;">⬇ Xuất CSV</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-card">
+        <div class="wx-card-header"><span class="wx-card-title">Nhật ký gần đây</span></div>
+        <div class="wx-card-body" style="padding:0;">
+          <table class="wx-table">
+            <thead><tr><th>Thời gian</th><th>Người dùng</th><th>Hành động</th><th>Tài nguyên</th><th>Địa chỉ IP</th><th>Trạng thái</th></tr></thead>
+            <tbody>
+              <tr><td>12/05/2026 09:42</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">NA</span> Nguyễn Văn A</span></td><td>Đăng nhập</td><td>—</td><td class="ip-cell">203.162.4.18</td><td><span class="wx-badge wx-badge-success">Thành công</span></td></tr>
+              <tr><td>12/05/2026 09:15</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">LH</span> Lê Thị Hương</span></td><td>Cập nhật hồ sơ</td><td>users/le-thi-huong</td><td class="ip-cell">14.231.88.5</td><td><span class="wx-badge wx-badge-success">Thành công</span></td></tr>
+              <tr><td>12/05/2026 08:58</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">TB</span> Trần Văn Bình</span></td><td>Tải lên tệp tin</td><td>files/ngan-sach-q2.xlsx</td><td class="ip-cell">42.116.7.92</td><td><span class="wx-badge wx-badge-success">Thành công</span></td></tr>
+              <tr><td>11/05/2026 17:30</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">PT</span> Phạm Quốc Thắng</span></td><td>Tạo API key</td><td>api-keys/sk_live_q9m4k1</td><td class="ip-cell">118.69.220.41</td><td><span class="wx-badge wx-badge-success">Thành công</span></td></tr>
+              <tr><td>11/05/2026 16:12</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">NA</span> Nguyễn Văn A</span></td><td>Xóa tệp tin</td><td>files/ban-nhap-cu.docx</td><td class="ip-cell">203.162.4.18</td><td><span class="wx-badge wx-badge-success">Thành công</span></td></tr>
+              <tr><td>11/05/2026 14:05</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">NM</span> Ngô Minh Anh</span></td><td>Đăng nhập</td><td>—</td><td class="ip-cell">171.224.182.7</td><td><span class="wx-badge wx-badge-danger">Thất bại</span></td></tr>
+              <tr><td>11/05/2026 14:04</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">NM</span> Ngô Minh Anh</span></td><td>Đăng nhập</td><td>—</td><td class="ip-cell">171.224.182.7</td><td><span class="wx-badge wx-badge-success">Thành công</span></td></tr>
+              <tr><td>10/05/2026 11:48</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">LH</span> Lê Thị Hương</span></td><td>Mời thành viên</td><td>org/members · do-thanh-tung@wemakeui.vn</td><td class="ip-cell">14.231.88.5</td><td><span class="wx-badge wx-badge-success">Thành công</span></td></tr>
+              <tr><td>10/05/2026 10:22</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">TB</span> Trần Văn Bình</span></td><td>Đổi mật khẩu</td><td>users/tran-van-binh</td><td class="ip-cell">42.116.7.92</td><td><span class="wx-badge wx-badge-success">Thành công</span></td></tr>
+              <tr><td>09/05/2026 19:01</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">NA</span> Nguyễn Văn A</span></td><td>Thu hồi API key</td><td>api-keys/sk_test_z3p8w0</td><td class="ip-cell">203.162.4.18</td><td><span class="wx-badge wx-badge-success">Thành công</span></td></tr>
+              <tr><td>09/05/2026 15:37</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">PT</span> Phạm Quốc Thắng</span></td><td>Cập nhật cài đặt tổ chức</td><td>org/settings</td><td class="ip-cell">118.69.220.41</td><td><span class="wx-badge wx-badge-success">Thành công</span></td></tr>
+              <tr><td>08/05/2026 08:14</td><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">??</span> không xác định</span></td><td>Đăng nhập</td><td>—</td><td class="ip-cell">45.119.84.200</td><td><span class="wx-badge wx-badge-danger">Thất bại</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="wx-card-footer">
+          <span class="text-sm text-muted">Hiển thị 1–12 trong 1.284 bản ghi</span>
+          <div class="wx-pagination">
+            <button class="wx-page-btn">‹</button>
+            <button class="wx-page-btn active">1</button>
+            <button class="wx-page-btn">2</button>
+            <button class="wx-page-btn">3</button>
+            <button class="wx-page-btn">…</button>
+            <button class="wx-page-btn">107</button>
+            <button class="wx-page-btn">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wizard nhiều bước — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .wz-steps { display:flex; align-items:center; gap:0; margin-bottom:8px; }
+  .wz-step { display:flex; flex-direction:column; align-items:center; gap:6px; flex:1; position:relative; }
+  .wz-step:not(:last-child)::after { content:""; position:absolute; top:15px; left:calc(50% + 18px); right:calc(-50% + 18px); height:2px; background:var(--wx-border-default); }
+  .wz-dot { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; background:var(--wx-surface-sunken); color:var(--wx-text-muted); border:2px solid var(--wx-border-default); z-index:1; }
+  [data-step-dot].active .wz-dot { background:var(--wx-brand-primary); color:#fff; border-color:var(--wx-brand-primary); }
+  .wz-step-label { font-size:var(--wx-fs-xs); color:var(--wx-text-muted); text-align:center; }
+  [data-step-dot].active .wz-step-label { color:var(--wx-text-primary); font-weight:600; }
+  .review-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--wx-border-subtle,var(--wx-border-default)); font-size:var(--wx-fs-sm); }
+  .review-row:last-child { border-bottom:none; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item active"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Wizard nhiều bước</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Wizard nhiều bước</h1>
+        <p class="text-muted" style="margin:0">Quy trình đặt hàng 4 bước: thông tin → địa chỉ → thanh toán → xác nhận. Dùng nút Tiếp / Quay lại để di chuyển.</p>
+      </div>
+
+      <div class="wx-card" data-wizard style="max-width:760px;margin:0 auto">
+        <div class="wx-card-body">
+          <div class="wz-steps">
+            <div class="wz-step" data-step-dot><div class="wz-dot">1</div><div class="wz-step-label">Thông tin</div></div>
+            <div class="wz-step" data-step-dot><div class="wz-dot">2</div><div class="wz-step-label">Địa chỉ</div></div>
+            <div class="wz-step" data-step-dot><div class="wz-dot">3</div><div class="wz-step-label">Thanh toán</div></div>
+            <div class="wz-step" data-step-dot><div class="wz-dot">4</div><div class="wz-step-label">Xác nhận</div></div>
+          </div>
+          <div class="wx-progress mb-4"><div class="wx-progress-bar" style="width:25%"></div></div>
+
+          <!-- STEP 1 -->
+          <div data-step>
+            <h3 class="wx-card-title mb-3">Bước 1 — Thông tin liên hệ</h3>
+            <div class="wx-grid-2">
+              <div class="wx-form-group">
+                <label class="wx-form-label">Họ và tên <span class="required">*</span></label>
+                <input type="text" class="wx-input" value="Trần Thị Bích" placeholder="Nguyễn Văn A">
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Email <span class="required">*</span></label>
+                <input type="email" class="wx-input" value="bich.tran@wemake.vn" placeholder="ban@congty.vn">
+              </div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Số điện thoại <span class="required">*</span></label>
+              <input type="tel" class="wx-input" value="0912 345 678" placeholder="0912 345 678">
+              <div class="wx-form-hint">Dùng để liên hệ giao hàng.</div>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div data-step class="hidden">
+            <h3 class="wx-card-title mb-3">Bước 2 — Địa chỉ giao hàng</h3>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Địa chỉ <span class="required">*</span></label>
+              <input type="text" class="wx-input" value="123 Lê Lợi" placeholder="Số nhà, tên đường">
+            </div>
+            <div class="wx-grid-3">
+              <div class="wx-form-group">
+                <label class="wx-form-label">Tỉnh / TP <span class="required">*</span></label>
+                <select class="wx-select"><option>TP. Hồ Chí Minh</option><option>Hà Nội</option><option>Đà Nẵng</option></select>
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Quận / Huyện <span class="required">*</span></label>
+                <select class="wx-select"><option>Quận 1</option><option>Quận 3</option><option>Quận Bình Thạnh</option></select>
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Mã bưu chính</label>
+                <input type="text" class="wx-input" value="700000" placeholder="700000">
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div data-step class="hidden">
+            <h3 class="wx-card-title mb-3">Bước 3 — Thông tin thanh toán</h3>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Số thẻ <span class="required">*</span></label>
+              <input type="text" class="wx-input" value="4242 4242 4242 4242" placeholder="0000 0000 0000 0000">
+            </div>
+            <div class="wx-grid-2">
+              <div class="wx-form-group">
+                <label class="wx-form-label">Ngày hết hạn <span class="required">*</span></label>
+                <input type="text" class="wx-input" value="12/28" placeholder="MM/YY">
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">CVV <span class="required">*</span></label>
+                <input type="text" class="wx-input" value="123" placeholder="123">
+              </div>
+            </div>
+            <div class="wx-alert wx-alert-info">🔒 Thông tin thẻ được mã hoá an toàn.</div>
+          </div>
+
+          <!-- STEP 4 -->
+          <div data-step class="hidden">
+            <h3 class="wx-card-title mb-3">Bước 4 — Xác nhận đơn hàng</h3>
+            <div class="wx-card" style="background:var(--wx-surface-sunken)">
+              <div class="wx-card-body">
+                <div class="review-row"><span class="text-muted">Khách hàng</span><span class="font-semibold">Trần Thị Bích</span></div>
+                <div class="review-row"><span class="text-muted">Email</span><span>bich.tran@wemake.vn</span></div>
+                <div class="review-row"><span class="text-muted">Điện thoại</span><span>0912 345 678</span></div>
+                <div class="review-row"><span class="text-muted">Giao đến</span><span>123 Lê Lợi, Quận 1, TP.HCM</span></div>
+                <div class="review-row"><span class="text-muted">Thanh toán</span><span>Visa •••• 4242</span></div>
+                <div class="review-row"><span class="text-muted">Tổng cộng</span><span class="font-bold" style="color:var(--wx-brand-primary)">₫1.250.000</span></div>
+              </div>
+            </div>
+            <label class="flex items-center gap-2 text-sm mt-3"><input type="checkbox" class="wx-checkbox" checked> Tôi xác nhận đặt hàng và đồng ý điều khoản.</label>
+          </div>
+        </div>
+        <div class="wx-card-footer flex justify-between">
+          <button class="wx-btn wx-btn-secondary" data-prev-step>← Quay lại</button>
+          <div class="flex gap-2">
+            <button class="wx-btn wx-btn-primary" data-next-step>Tiếp tục →</button>
+            <button class="wx-btn wx-btn-primary">Hoàn tất ✓</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

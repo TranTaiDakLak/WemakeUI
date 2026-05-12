@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lịch trình — WeConnect</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">WC</div>
+      <span class="wx-sidebar-brand-text">WeConnect</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">WeConnect</div>
+      <a href="index.html" class="wx-nav-item"><span class="wx-nav-icon">🎛️</span><span>Bảng quản trị</span></a>
+      <a href="accounts.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Tài khoản</span></a>
+      <a href="sessions.html" class="wx-nav-item"><span class="wx-nav-icon">🔌</span><span>Phiên kết nối</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📇</span><span>Danh bạ</span></a>
+      <a href="campaigns.html" class="wx-nav-item"><span class="wx-nav-icon">📣</span><span>Chiến dịch</span></a>
+      <a href="plugins.html" class="wx-nav-item"><span class="wx-nav-icon">🧩</span><span>Plugin</span></a>
+      <a href="console.html" class="wx-nav-item"><span class="wx-nav-icon">⌨️</span><span>Console</span></a>
+      <a href="scheduler.html" class="wx-nav-item active"><span class="wx-nav-icon">⏰</span><span>Lịch trình</span></a>
+      <a href="integrations.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>Tích hợp</span></a>
+      <a href="automation.html" class="wx-nav-item"><span class="wx-nav-icon">⚡</span><span>Tự động hóa</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">AD</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Admin</div><div class="text-xs text-muted">Quản trị viên</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Lịch trình</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Lịch trình</h1>
+          <p class="text-muted" style="margin:0">Quản lý các tác vụ chạy tự động theo lịch</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="wx-btn wx-btn-primary">+ Tạo lịch trình</button>
+        </div>
+      </div>
+
+      <div class="wx-grid wx-grid-4 mb-5">
+        <div class="wx-stat-card"><div class="wx-stat-icon">⏰</div><div class="wx-stat-label">Lịch trình hoạt động</div><div class="wx-stat-value">14</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">🔁</div><div class="wx-stat-label">Chạy hôm nay</div><div class="wx-stat-value">48</div><div class="wx-stat-change positive">+6</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">⏳</div><div class="wx-stat-label">Sắp tới</div><div class="wx-stat-value">6</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">⚠️</div><div class="wx-stat-label">Thất bại</div><div class="wx-stat-value">2</div><div class="wx-stat-change negative">+2</div></div>
+      </div>
+
+      <div class="wx-grid wx-grid-2">
+        <div class="wx-card">
+          <div class="wx-card-header"><div class="wx-card-title">Lịch trình</div><span class="text-sm text-muted ml-auto">14 lịch trình</span></div>
+          <div class="wx-card-body" style="padding:0">
+            <table class="wx-table">
+              <thead><tr><th>Tên</th><th>Loại</th><th>Cron</th><th>Lần chạy tiếp</th><th>Cuối</th><th>Bật</th><th style="width:70px"></th></tr></thead>
+              <tbody>
+                <tr><td class="font-semibold text-sm">Gửi tin chào buổi sáng</td><td><span class="wx-badge wx-badge-info">Gửi tin nhắn</span></td><td class="font-mono text-xs">0 9 * * *</td><td class="text-sm">13/05 09:00</td><td>✓</td><td><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></td><td><button class="wx-btn wx-btn-icon wx-btn-sm">⋯</button></td></tr>
+                <tr><td class="font-semibold text-sm">Đồng bộ liên hệ CRM</td><td><span class="wx-badge wx-badge-primary">Đồng bộ</span></td><td class="font-mono text-xs">*/30 * * * *</td><td class="text-sm">12/05 14:30</td><td>✓</td><td><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></td><td><button class="wx-btn wx-btn-icon wx-btn-sm">⋯</button></td></tr>
+                <tr><td class="font-semibold text-sm">Báo cáo hiệu suất hàng ngày</td><td><span class="wx-badge wx-badge-warning">Báo cáo</span></td><td class="font-mono text-xs">0 8 * * *</td><td class="text-sm">13/05 08:00</td><td>✓</td><td><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></td><td><button class="wx-btn wx-btn-icon wx-btn-sm">⋯</button></td></tr>
+                <tr><td class="font-semibold text-sm">Dọn dẹp log cũ</td><td><span class="wx-badge wx-badge-neutral">Dọn dẹp</span></td><td class="font-mono text-xs">0 2 * * 0</td><td class="text-sm">18/05 02:00</td><td>✓</td><td><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></td><td><button class="wx-btn wx-btn-icon wx-btn-sm">⋯</button></td></tr>
+                <tr><td class="font-semibold text-sm">Gửi tin nhắn chiến dịch VIP</td><td><span class="wx-badge wx-badge-info">Gửi tin nhắn</span></td><td class="font-mono text-xs">0 10,15 * * 1-5</td><td class="text-sm">12/05 15:00</td><td>✗</td><td><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></td><td><button class="wx-btn wx-btn-icon wx-btn-sm">⋯</button></td></tr>
+                <tr><td class="font-semibold text-sm">Đồng bộ followers</td><td><span class="wx-badge wx-badge-primary">Đồng bộ</span></td><td class="font-mono text-xs">0 */6 * * *</td><td class="text-sm">12/05 18:00</td><td>✓</td><td><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></td><td><button class="wx-btn wx-btn-icon wx-btn-sm">⋯</button></td></tr>
+                <tr><td class="font-semibold text-sm">Báo cáo tuần</td><td><span class="wx-badge wx-badge-warning">Báo cáo</span></td><td class="font-mono text-xs">0 9 * * 1</td><td class="text-sm">19/05 09:00</td><td>✓</td><td><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></td><td><button class="wx-btn wx-btn-icon wx-btn-sm">⋯</button></td></tr>
+                <tr><td class="font-semibold text-sm">Backup cấu hình</td><td><span class="wx-badge wx-badge-neutral">Dọn dẹp</span></td><td class="font-mono text-xs">0 3 * * *</td><td class="text-sm">13/05 03:00</td><td>✓</td><td><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></td><td><button class="wx-btn wx-btn-icon wx-btn-sm">⋯</button></td></tr>
+                <tr><td class="font-semibold text-sm">Nhắc lịch hẹn khách hàng</td><td><span class="wx-badge wx-badge-info">Gửi tin nhắn</span></td><td class="font-mono text-xs">0 7 * * *</td><td class="text-sm">13/05 07:00</td><td>✓</td><td><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></td><td><button class="wx-btn wx-btn-icon wx-btn-sm">⋯</button></td></tr>
+                <tr><td class="font-semibold text-sm">Dọn cache plugin</td><td><span class="wx-badge wx-badge-neutral">Dọn dẹp</span></td><td class="font-mono text-xs">0 1 * * *</td><td class="text-sm">13/05 01:00</td><td>✓</td><td><label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label></td><td><button class="wx-btn wx-btn-icon wx-btn-sm">⋯</button></td></tr>
+              </tbody>
+            </table>
+            <div class="flex justify-between items-center p-4"><span class="text-sm text-muted">Hiển thị 1–10 trong 14</span><div class="wx-pagination"><button class="wx-page-btn" disabled>‹</button><button class="wx-page-btn active">1</button><button class="wx-page-btn">2</button><button class="wx-page-btn">›</button></div></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header"><div class="wx-card-title">Lịch sử chạy</div><button class="wx-btn wx-btn-ghost wx-btn-sm ml-auto">Làm mới</button></div>
+          <div class="wx-card-body">
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#16a34a;color:#fff">✓</div><div class="flex-1"><div class="text-sm"><strong>Đồng bộ liên hệ CRM</strong> · 1,204 bản ghi</div><div class="wx-activity-time">12/05 14:00 · 8.2s</div></div><span class="wx-badge wx-badge-success">Thành công</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#16a34a;color:#fff">✓</div><div class="flex-1"><div class="text-sm"><strong>Gửi tin chào buổi sáng</strong> · 3,210 tin</div><div class="wx-activity-time">12/05 09:00 · 4m 12s</div></div><span class="wx-badge wx-badge-success">Thành công</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#16a34a;color:#fff">✓</div><div class="flex-1"><div class="text-sm"><strong>Báo cáo hiệu suất hàng ngày</strong></div><div class="wx-activity-time">12/05 08:00 · 1.4s</div></div><span class="wx-badge wx-badge-success">Thành công</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#dc2626;color:#fff">✗</div><div class="flex-1"><div class="text-sm"><strong>Gửi tin nhắn chiến dịch VIP</strong> · lỗi xác thực phiên</div><div class="wx-activity-time">12/05 10:00 · 0.3s</div></div><span class="wx-badge wx-badge-danger">Thất bại</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#16a34a;color:#fff">✓</div><div class="flex-1"><div class="text-sm"><strong>Đồng bộ followers</strong> · 24 tài khoản</div><div class="wx-activity-time">12/05 06:00 · 22.7s</div></div><span class="wx-badge wx-badge-success">Thành công</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#16a34a;color:#fff">✓</div><div class="flex-1"><div class="text-sm"><strong>Backup cấu hình</strong></div><div class="wx-activity-time">12/05 03:00 · 2.1s</div></div><span class="wx-badge wx-badge-success">Thành công</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#16a34a;color:#fff">✓</div><div class="flex-1"><div class="text-sm"><strong>Dọn dẹp log cũ</strong> · 4.2 GB</div><div class="wx-activity-time">11/05 02:00 · 18.0s</div></div><span class="wx-badge wx-badge-success">Thành công</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#f59e0b;color:#fff">!</div><div class="flex-1"><div class="text-sm"><strong>Đồng bộ liên hệ CRM</strong> · 3 bản ghi bỏ qua</div><div class="wx-activity-time">11/05 14:00 · 9.1s</div></div><span class="wx-badge wx-badge-warning">Cảnh báo</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#16a34a;color:#fff">✓</div><div class="flex-1"><div class="text-sm"><strong>Nhắc lịch hẹn khách hàng</strong> · 142 tin</div><div class="wx-activity-time">11/05 07:00 · 11.3s</div></div><span class="wx-badge wx-badge-success">Thành công</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#dc2626;color:#fff">✗</div><div class="flex-1"><div class="text-sm"><strong>Báo cáo tuần</strong> · hết thời gian chờ</div><div class="wx-activity-time">06/05 09:00 · 30.0s</div></div><span class="wx-badge wx-badge-danger">Thất bại</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#16a34a;color:#fff">✓</div><div class="flex-1"><div class="text-sm"><strong>Dọn cache plugin</strong></div><div class="wx-activity-time">12/05 01:00 · 0.6s</div></div><span class="wx-badge wx-badge-success">Thành công</span></div>
+            <div class="wx-activity-item"><div class="wx-avatar wx-avatar-sm" style="background:#16a34a;color:#fff">✓</div><div class="flex-1"><div class="text-sm"><strong>Gửi tin chào buổi sáng</strong> · 3,180 tin</div><div class="wx-activity-time">11/05 09:00 · 4m 02s</div></div><span class="wx-badge wx-badge-success">Thành công</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

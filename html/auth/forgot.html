@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quên mật khẩu — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #eff6ff 0%, #ecfeff 50%, #f0fdf4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .forgot-card {
+      background: var(--wx-surface-base);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(37,99,235,0.1), 0 4px 16px rgba(0,0,0,0.06);
+      padding: 52px 44px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .forgot-icon-wrap {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 24px;
+      border: 4px solid rgba(37,99,235,0.1);
+    }
+
+    .forgot-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--wx-text-primary);
+      margin: 0 0 12px;
+    }
+    .forgot-desc {
+      font-size: 14px;
+      color: var(--wx-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 32px;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .auth-field {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .auth-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wx-text-primary);
+      margin-bottom: 6px;
+    }
+    .auth-input {
+      width: 100%;
+      height: 44px;
+      border: 1.5px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      padding: 0 14px;
+      font-size: 14px;
+      font-family: var(--wx-font-primary);
+      color: var(--wx-text-primary);
+      background: var(--wx-surface-sunken);
+      transition: all var(--wx-duration-fast);
+      box-sizing: border-box;
+    }
+    .auth-input:focus {
+      outline: none;
+      border-color: var(--wx-brand-primary);
+      box-shadow: var(--wx-shadow-focus);
+      background: var(--wx-surface-base);
+    }
+
+    .auth-btn-primary {
+      width: 100%;
+      height: 46px;
+      background: var(--wx-gradient-button);
+      color: #fff;
+      border: none;
+      border-radius: var(--wx-radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--wx-duration-fast), transform var(--wx-duration-fast);
+      margin-bottom: 20px;
+      box-shadow: var(--wx-shadow-brand);
+    }
+    .auth-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .forgot-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+      text-decoration: none;
+      transition: color var(--wx-duration-fast);
+    }
+    .forgot-back:hover { color: var(--wx-brand-primary); text-decoration: none; }
+
+    .forgot-hint {
+      margin-top: 24px;
+      padding: 12px 16px;
+      background: var(--wx-info-bg);
+      border: 1px solid var(--wx-info-border);
+      border-radius: var(--wx-radius-md);
+      font-size: 12px;
+      color: var(--wx-info-text);
+      text-align: left;
+      line-height: 1.5;
+      display: none;
+    }
+    .forgot-hint.show { display: block; }
+  </style>
+</head>
+<body>
+
+<div class="forgot-card">
+  <div class="forgot-icon-wrap">🔑</div>
+
+  <h1 class="forgot-title">Quên mật khẩu?</h1>
+  <p class="forgot-desc">
+    Không sao! Hãy nhập địa chỉ email đã đăng ký và chúng tôi sẽ gửi hướng dẫn đặt lại mật khẩu.
+  </p>
+
+  <form id="forgotForm" onsubmit="handleSubmit(event)">
+    <div class="auth-field">
+      <label for="email">Địa chỉ Email</label>
+      <input type="email" id="email" class="auth-input" placeholder="you@example.com" required>
+    </div>
+
+    <button type="submit" class="auth-btn-primary" id="submitBtn">
+      Gửi hướng dẫn đặt lại
+    </button>
+  </form>
+
+  <div class="forgot-hint" id="successHint">
+    ✅ Chúng tôi đã gửi email hướng dẫn đến địa chỉ bạn nhập. Vui lòng kiểm tra hộp thư đến (và thư rác).
+  </div>
+
+  <a href="login.html" class="forgot-back">
+    ← Quay lại đăng nhập
+  </a>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Đang gửi...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Đã gửi!';
+      document.getElementById('successHint').classList.add('show');
+    }, 1200);
+  }
+</script>
+</body>
+</html>

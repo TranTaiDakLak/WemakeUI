@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    .accordion-item { border:1px solid var(--wx-border-default); border-radius:var(--wx-radius-md); margin-bottom:8px; overflow:hidden; }
+    .accordion-head { width:100%; text-align:left; background:var(--wx-surface-base); border:none; padding:14px 16px; font-size:var(--wx-fs-md); font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:var(--wx-text-primary); transition:background 0.15s; }
+    .accordion-head:hover { background:var(--wx-hover-bg); }
+    .accordion-head.open { background:var(--wx-selected-bg); color:var(--wx-brand-primary); }
+    .accordion-body { padding:0 16px 14px 16px; font-size:var(--wx-fs-sm); color:var(--wx-text-secondary); line-height:1.7; display:none; background:var(--wx-surface-base); }
+    .accordion-body.open { display:block; }
+    .cat-chip { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:var(--wx-radius-full); border:1px solid var(--wx-border-default); background:var(--wx-surface-base); font-size:var(--wx-fs-sm); font-weight:500; cursor:pointer; transition:all 0.15s; color:var(--wx-text-secondary); }
+    .cat-chip:hover, .cat-chip.active { background:var(--wx-brand-primary); color:#fff; border-color:var(--wx-brand-primary); }
+  </style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item active"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:var(--wx-fs-sm);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Nguyễn Văn Thành</div>
+          <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Câu hỏi thường gặp</span>
+      <div class="wx-topbar-actions">
+        <button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button>
+      </div>
+    </div>
+    <div class="wx-content">
+      <div style="max-width:760px;margin:0 auto;">
+        <!-- Search -->
+        <div style="position:relative;margin-bottom:24px;">
+          <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;">🔍</span>
+          <input class="wx-input" style="height:44px;padding-left:40px;font-size:var(--wx-fs-md);" placeholder="Tìm kiếm câu hỏi...">
+        </div>
+
+        <!-- Category chips -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
+          <button class="cat-chip active">Tất cả</button>
+          <button class="cat-chip">Tài khoản</button>
+          <button class="cat-chip">Thanh toán</button>
+          <button class="cat-chip">Bảo mật</button>
+          <button class="cat-chip">Sản phẩm</button>
+          <button class="cat-chip">Kỹ thuật</button>
+          <button class="cat-chip">API</button>
+        </div>
+
+        <!-- Section: Tài khoản -->
+        <h3 style="font-size:var(--wx-fs-lg);font-weight:700;color:var(--wx-text-primary);margin:0 0 12px;display:flex;align-items:center;gap:8px;">👤 Tài khoản</h3>
+        <div style="margin-bottom:24px;">
+          <div class="accordion-item">
+            <button class="accordion-head open" onclick="toggleAcc(this)">Làm thế nào để tạo tài khoản mới? <span>▲</span></button>
+            <div class="accordion-body open">Truy cập trang đăng ký tại <strong>wemakeui.com/register</strong>, điền email và mật khẩu. Chúng tôi sẽ gửi email xác nhận trong vòng 2 phút. Sau khi xác nhận, bạn có thể đăng nhập và bắt đầu sử dụng miễn phí.</div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-head" onclick="toggleAcc(this)">Tôi quên mật khẩu phải làm gì? <span>▼</span></button>
+            <div class="accordion-body">Nhấp vào "Quên mật khẩu?" trên trang đăng nhập, nhập email đăng ký. Chúng tôi sẽ gửi link đặt lại mật khẩu trong vòng 5 phút. Link này có hiệu lực trong 24 giờ.</div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-head" onclick="toggleAcc(this)">Tôi có thể thay đổi email đăng nhập không? <span>▼</span></button>
+            <div class="accordion-body">Có. Vào Cài đặt > Thông tin hiển thị, thay đổi email và xác nhận qua email cũ. Lưu ý bạn cần quyền truy cập cả hai email để hoàn tất thay đổi.</div>
+          </div>
+        </div>
+
+        <!-- Section: Thanh toán -->
+        <h3 style="font-size:var(--wx-fs-lg);font-weight:700;color:var(--wx-text-primary);margin:0 0 12px;display:flex;align-items:center;gap:8px;">💳 Thanh toán</h3>
+        <div style="margin-bottom:24px;">
+          <div class="accordion-item">
+            <button class="accordion-head" onclick="toggleAcc(this)">Các phương thức thanh toán được chấp nhận? <span>▼</span></button>
+            <div class="accordion-body">Chúng tôi chấp nhận: Visa/Mastercard, thẻ nội địa Napas, chuyển khoản ngân hàng, ví điện tử MoMo và ZaloPay. Tất cả giao dịch được mã hóa SSL.</div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-head" onclick="toggleAcc(this)">Tôi có thể yêu cầu xuất hóa đơn VAT không? <span>▼</span></button>
+            <div class="accordion-body">Có. Sau khi thanh toán, vào Cài đặt > Thanh toán > Lịch sử, nhấp vào biểu tượng hóa đơn và điền thông tin công ty. Hóa đơn VAT sẽ được gửi qua email trong 3 ngày làm việc.</div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-head" onclick="toggleAcc(this)">Chính sách hoàn tiền như thế nào? <span>▼</span></button>
+            <div class="accordion-body">Nếu bạn không hài lòng trong 30 ngày đầu tiên, chúng tôi hoàn tiền 100% mà không cần giải thích. Liên hệ support@wemakeui.com để yêu cầu hoàn tiền.</div>
+          </div>
+        </div>
+
+        <!-- Section: Bảo mật -->
+        <h3 style="font-size:var(--wx-fs-lg);font-weight:700;color:var(--wx-text-primary);margin:0 0 12px;display:flex;align-items:center;gap:8px;">🔒 Bảo mật</h3>
+        <div style="margin-bottom:24px;">
+          <div class="accordion-item">
+            <button class="accordion-head" onclick="toggleAcc(this)">Dữ liệu của tôi được lưu trữ ở đâu? <span>▼</span></button>
+            <div class="accordion-body">Dữ liệu được lưu trữ trên máy chủ AWS đặt tại Singapore, đáp ứng yêu cầu GDPR và luật bảo vệ dữ liệu cá nhân Việt Nam. Sao lưu tự động mỗi ngày và giữ trong 30 ngày.</div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-head" onclick="toggleAcc(this)">Làm sao bật xác thực 2 yếu tố (2FA)? <span>▼</span></button>
+            <div class="accordion-body">Vào Cài đặt > Bảo mật > bật "Xác thực 2 yếu tố". Quét mã QR bằng Google Authenticator hoặc Authy. Sau đó nhập mã 6 số để xác nhận kích hoạt.</div>
+          </div>
+        </div>
+
+        <!-- Section: API -->
+        <h3 style="font-size:var(--wx-fs-lg);font-weight:700;color:var(--wx-text-primary);margin:0 0 12px;display:flex;align-items:center;gap:8px;">🔑 API & Tích hợp</h3>
+        <div style="margin-bottom:24px;">
+          <div class="accordion-item">
+            <button class="accordion-head" onclick="toggleAcc(this)">Làm thế nào để lấy API key? <span>▼</span></button>
+            <div class="accordion-body">Vào trang API Keys, nhấp "Tạo key mới", đặt tên và chọn quyền truy cập. Key sẽ chỉ hiển thị một lần — hãy lưu lại ngay. Nếu mất, bạn cần tạo key mới.</div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-head" onclick="toggleAcc(this)">Rate limit của API là bao nhiêu? <span>▼</span></button>
+            <div class="accordion-body">Gói Free: 100 request/phút. Gói Pro: 1,000 request/phút. Gói Enterprise: không giới hạn (theo thỏa thuận SLA). Vượt giới hạn sẽ nhận HTTP 429 Too Many Requests.</div>
+          </div>
+        </div>
+
+        <!-- Help CTA -->
+        <div style="text-align:center;padding:32px;background:var(--wx-info-bg);border:1px solid var(--wx-info-border);border-radius:var(--wx-radius-xl);">
+          <div style="font-size:32px;margin-bottom:12px;">💬</div>
+          <h3 style="font-size:var(--wx-fs-xl);font-weight:700;margin:0 0 8px;">Không tìm thấy câu trả lời?</h3>
+          <p style="color:var(--wx-text-muted);margin:0 0 16px;">Đội ngũ hỗ trợ của chúng tôi sẵn sàng giúp bạn 24/7</p>
+          <div style="display:flex;justify-content:center;gap:12px;">
+            <button class="wx-btn wx-btn-primary">💬 Chat với support</button>
+            <button class="wx-btn wx-btn-secondary">✉️ Gửi email</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+<script>
+function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  btn.classList.toggle('open');
+  btn.querySelector('span').textContent = isOpen ? '▼' : '▲';
+}
+</script>
+</body>
+</html>

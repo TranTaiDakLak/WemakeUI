@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Không tìm thấy trang | WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+  <div class="wx-error-page">
+    <div class="wx-error-blob" style="top:-80px;left:-80px;width:320px;height:320px;"></div>
+    <div class="wx-error-blob" style="bottom:-100px;right:-60px;width:400px;height:400px;opacity:0.4;"></div>
+
+    <div class="wx-error-box">
+      <div class="wx-error-code">404</div>
+      <h1 class="wx-error-title">Trang không tồn tại</h1>
+      <p class="wx-error-desc">
+        Trang bạn tìm kiếm đã được di chuyển hoặc không còn tồn tại.<br>
+        Vui lòng kiểm tra lại đường dẫn hoặc quay về trang chủ.
+      </p>
+
+      <div class="wx-error-actions">
+        <a href="../index.html" class="wx-btn wx-btn-primary">🏠 Về trang chủ</a>
+        <a href="javascript:history.back()" class="wx-btn wx-btn-secondary">← Quay lại</a>
+      </div>
+
+      <div class="wx-error-suggestions" style="margin-top:2rem;text-align:left;">
+        <p style="font-size:0.85rem;color:var(--wx-text-muted);margin-bottom:0.5rem;">Bạn có thể thử:</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.4rem;">
+          <li>
+            <a href="../dashboard/overview.html" style="color:var(--wx-primary);font-size:0.9rem;text-decoration:none;">
+              📊 Dashboard Overview
+            </a>
+          </li>
+          <li>
+            <a href="../index.html#sitemap" style="color:var(--wx-primary);font-size:0.9rem;text-decoration:none;">
+              🗺️ Sitemap
+            </a>
+          </li>
+          <li>
+            <a href="../auth/login.html" style="color:var(--wx-primary);font-size:0.9rem;text-decoration:none;">
+              🔐 Đăng nhập
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <p style="margin-top:2rem;font-size:0.75rem;color:var(--wx-text-muted);opacity:0.6;">
+        Error ID: <code>ERR-404-abc123</code>
+      </p>
+    </div>
+  </div>
+
+  <script src="../js/wemake.js"></script>
+</body>
+</html>

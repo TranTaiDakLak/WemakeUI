@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cài đặt — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+    .toggle-row { display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--wx-border-subtle); }
+    .toggle-row:last-child { border-bottom:none; }
+    .session-item { display:flex; align-items:center; gap:12px; padding:12px; background:var(--wx-surface-sunken); border-radius:var(--wx-radius-md); border:1px solid var(--wx-border-subtle); margin-bottom:8px; }
+    .integration-card { border:1px solid var(--wx-border-default); border-radius:var(--wx-radius-lg); padding:20px; background:var(--wx-surface-base); display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; }
+    .integration-logo { width:48px; height:48px; border-radius:var(--wx-radius-md); display:flex; align-items:center; justify-content:center; font-size:24px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  </style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item active"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:var(--wx-fs-sm);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Nguyễn Văn Thành</div>
+          <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Cài đặt</span>
+      <div class="wx-topbar-actions">
+        <button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button>
+      </div>
+    </div>
+    <div class="wx-content">
+      <div style="max-width:780px;margin:0 auto;">
+        <!-- Tabs -->
+        <div class="wx-tabs" style="margin-bottom:24px;">
+          <button class="wx-tab active" onclick="switchTab('chung',this)">Chung</button>
+          <button class="wx-tab" onclick="switchTab('bao-mat',this)">Bảo mật</button>
+          <button class="wx-tab" onclick="switchTab('thong-bao',this)">Thông báo</button>
+          <button class="wx-tab" onclick="switchTab('tich-hop',this)">Tích hợp</button>
+          <button class="wx-tab" onclick="switchTab('thanh-toan',this)">Thanh toán</button>
+        </div>
+
+        <!-- Chung -->
+        <div id="tab-chung" class="tab-content active">
+          <div class="wx-card" style="margin-bottom:16px;">
+            <div class="wx-card-header"><span class="wx-card-title">Thông tin hiển thị</span></div>
+            <div class="wx-card-body">
+              <div class="form-row">
+                <div class="wx-form-group">
+                  <label class="wx-form-label">Tên hiển thị</label>
+                  <input class="wx-input" type="text" value="Nguyễn Văn Thành">
+                </div>
+                <div class="wx-form-group">
+                  <label class="wx-form-label">Email</label>
+                  <input class="wx-input" type="email" value="thanh.nguyen@wemakeui.com">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="wx-form-group">
+                  <label class="wx-form-label">Ngôn ngữ</label>
+                  <select class="wx-input wx-select">
+                    <option selected>Tiếng Việt</option>
+                    <option>English</option>
+                  </select>
+                </div>
+                <div class="wx-form-group">
+                  <label class="wx-form-label">Múi giờ</label>
+                  <select class="wx-input wx-select">
+                    <option selected>Asia/Ho_Chi_Minh (GMT+7)</option>
+                    <option>UTC</option>
+                  </select>
+                </div>
+              </div>
+              <div class="toggle-row">
+                <div>
+                  <div style="font-size:var(--wx-fs-sm);font-weight:600;">Giao diện tối</div>
+                  <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Chuyển sang chế độ nền tối</div>
+                </div>
+                <label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label>
+              </div>
+              <div style="margin-top:16px;display:flex;justify-content:flex-end;">
+                <button class="wx-btn wx-btn-primary">💾 Lưu thay đổi</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bảo mật -->
+        <div id="tab-bao-mat" class="tab-content">
+          <div class="wx-card" style="margin-bottom:16px;">
+            <div class="wx-card-header"><span class="wx-card-title">Đổi mật khẩu</span></div>
+            <div class="wx-card-body">
+              <div class="wx-form-group">
+                <label class="wx-form-label">Mật khẩu hiện tại</label>
+                <input class="wx-input" type="password" placeholder="••••••••">
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Mật khẩu mới</label>
+                <input class="wx-input" type="password" placeholder="••••••••">
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Xác nhận mật khẩu mới</label>
+                <input class="wx-input" type="password" placeholder="••••••••">
+                <div class="wx-form-hint">Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số.</div>
+              </div>
+              <button class="wx-btn wx-btn-primary">🔐 Cập nhật mật khẩu</button>
+            </div>
+          </div>
+          <div class="wx-card" style="margin-bottom:16px;">
+            <div class="wx-card-header"><span class="wx-card-title">Xác thực 2 yếu tố (2FA)</span></div>
+            <div class="wx-card-body">
+              <div class="toggle-row">
+                <div>
+                  <div style="font-size:var(--wx-fs-sm);font-weight:600;">Bật xác thực 2 yếu tố</div>
+                  <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Tăng cường bảo mật bằng ứng dụng Google Authenticator hoặc SMS</div>
+                </div>
+                <label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label>
+              </div>
+            </div>
+          </div>
+          <div class="wx-card">
+            <div class="wx-card-header"><span class="wx-card-title">Phiên đăng nhập đang hoạt động</span></div>
+            <div class="wx-card-body">
+              <div class="session-item">
+                <span style="font-size:24px;">💻</span>
+                <div style="flex:1;">
+                  <div style="font-size:var(--wx-fs-sm);font-weight:600;">Chrome trên Windows 11</div>
+                  <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Hà Nội, Việt Nam • Hoạt động ngay bây giờ</div>
+                </div>
+                <span class="wx-badge wx-badge-success">Hiện tại</span>
+              </div>
+              <div class="session-item">
+                <span style="font-size:24px;">📱</span>
+                <div style="flex:1;">
+                  <div style="font-size:var(--wx-fs-sm);font-weight:600;">Safari trên iPhone 15</div>
+                  <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">TP. Hồ Chí Minh, Việt Nam • 2 giờ trước</div>
+                </div>
+                <button class="wx-btn wx-btn-danger wx-btn-sm">Thu hồi</button>
+              </div>
+              <div class="session-item">
+                <span style="font-size:24px;">🖥️</span>
+                <div style="flex:1;">
+                  <div style="font-size:var(--wx-fs-sm);font-weight:600;">Firefox trên macOS</div>
+                  <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Đà Nẵng, Việt Nam • 3 ngày trước</div>
+                </div>
+                <button class="wx-btn wx-btn-danger wx-btn-sm">Thu hồi</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thông báo -->
+        <div id="tab-thong-bao" class="tab-content">
+          <div class="wx-card">
+            <div class="wx-card-header"><span class="wx-card-title">Cài đặt thông báo</span></div>
+            <div class="wx-card-body">
+              <div class="toggle-row">
+                <div><div style="font-size:var(--wx-fs-sm);font-weight:600;">Thông báo tin nhắn mới</div><div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Nhận thông báo khi có tin nhắn mới trong chat</div></div>
+                <label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label>
+              </div>
+              <div class="toggle-row">
+                <div><div style="font-size:var(--wx-fs-sm);font-weight:600;">Thông báo đề cập (@mention)</div><div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Khi ai đó nhắc đến bạn trong bình luận</div></div>
+                <label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label>
+              </div>
+              <div class="toggle-row">
+                <div><div style="font-size:var(--wx-fs-sm);font-weight:600;">Thông báo task mới</div><div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Khi bạn được giao một nhiệm vụ mới</div></div>
+                <label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label>
+              </div>
+              <div class="toggle-row">
+                <div><div style="font-size:var(--wx-fs-sm);font-weight:600;">Thông báo hóa đơn</div><div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Khi hóa đơn được tạo, thanh toán hoặc quá hạn</div></div>
+                <label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label>
+              </div>
+              <div class="toggle-row">
+                <div><div style="font-size:var(--wx-fs-sm);font-weight:600;">Bản tin hàng tuần</div><div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Tóm tắt hoạt động và cập nhật tính năng</div></div>
+                <label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label>
+              </div>
+              <div class="toggle-row">
+                <div><div style="font-size:var(--wx-fs-sm);font-weight:600;">Cảnh báo bảo mật</div><div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Đăng nhập từ thiết bị lạ hoặc hoạt động bất thường</div></div>
+                <label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tích hợp -->
+        <div id="tab-tich-hop" class="tab-content">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+            <div class="integration-card">
+              <div class="integration-logo" style="background:#4A154B;">💜</div>
+              <div style="font-weight:700;">Slack</div>
+              <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Nhận thông báo qua kênh Slack</div>
+              <span class="wx-badge wx-badge-success">Đã kết nối</span>
+              <button class="wx-btn wx-btn-danger wx-btn-sm wx-btn-full">Ngắt kết nối</button>
+            </div>
+            <div class="integration-card">
+              <div class="integration-logo" style="background:#24292e;">🐙</div>
+              <div style="font-weight:700;">GitHub</div>
+              <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Liên kết repository và commit</div>
+              <span class="wx-badge wx-badge-success">Đã kết nối</span>
+              <button class="wx-btn wx-btn-danger wx-btn-sm wx-btn-full">Ngắt kết nối</button>
+            </div>
+            <div class="integration-card">
+              <div class="integration-logo" style="background:#1DA462;">📁</div>
+              <div style="font-weight:700;">Google Drive</div>
+              <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Đồng bộ tệp từ Google Drive</div>
+              <span class="wx-badge wx-badge-neutral">Chưa kết nối</span>
+              <button class="wx-btn wx-btn-primary wx-btn-sm wx-btn-full">Kết nối</button>
+            </div>
+            <div class="integration-card">
+              <div class="integration-logo" style="background:#0052CC;">🔵</div>
+              <div style="font-weight:700;">Jira</div>
+              <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Đồng bộ task với Jira</div>
+              <span class="wx-badge wx-badge-neutral">Chưa kết nối</span>
+              <button class="wx-btn wx-btn-primary wx-btn-sm wx-btn-full">Kết nối</button>
+            </div>
+            <div class="integration-card">
+              <div class="integration-logo" style="background:#FF6154;">🔴</div>
+              <div style="font-weight:700;">Zapier</div>
+              <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Tự động hóa quy trình làm việc</div>
+              <span class="wx-badge wx-badge-neutral">Chưa kết nối</span>
+              <button class="wx-btn wx-btn-primary wx-btn-sm wx-btn-full">Kết nối</button>
+            </div>
+            <div class="integration-card">
+              <div class="integration-logo" style="background:#172B4D;">🟦</div>
+              <div style="font-weight:700;">Trello</div>
+              <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Quản lý bảng Kanban với Trello</div>
+              <span class="wx-badge wx-badge-neutral">Chưa kết nối</span>
+              <button class="wx-btn wx-btn-primary wx-btn-sm wx-btn-full">Kết nối</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thanh toán -->
+        <div id="tab-thanh-toan" class="tab-content">
+          <div class="wx-card" style="margin-bottom:16px;">
+            <div class="wx-card-header"><span class="wx-card-title">Gói hiện tại</span></div>
+            <div class="wx-card-body">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:16px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:var(--wx-radius-lg);border:1px solid var(--wx-brand-200);">
+                <div>
+                  <div style="font-size:var(--wx-fs-2xl);font-weight:800;color:var(--wx-brand-primary);">Pro</div>
+                  <div style="font-size:var(--wx-fs-sm);color:var(--wx-text-secondary);">₫299,000 / tháng • Gia hạn 01/06/2026</div>
+                </div>
+                <button class="wx-btn wx-btn-primary">Nâng cấp Enterprise</button>
+              </div>
+            </div>
+          </div>
+          <div class="wx-card" style="margin-bottom:16px;">
+            <div class="wx-card-header"><span class="wx-card-title">Phương thức thanh toán</span></div>
+            <div class="wx-card-body">
+              <div style="display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-md);">
+                <span style="font-size:24px;">💳</span>
+                <div style="flex:1;"><div style="font-size:var(--wx-fs-sm);font-weight:600;">Visa •••• 4242</div><div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Hết hạn 12/2027</div></div>
+                <button class="wx-btn wx-btn-secondary wx-btn-sm">Thay đổi</button>
+              </div>
+            </div>
+          </div>
+          <div class="wx-card">
+            <div class="wx-card-header"><span class="wx-card-title">Lịch sử thanh toán</span></div>
+            <div class="wx-card-body" style="padding:0;">
+              <table class="wx-table">
+                <thead><tr><th>Ngày</th><th>Mô tả</th><th>Số tiền</th><th>Trạng thái</th><th></th></tr></thead>
+                <tbody>
+                  <tr><td>01/05/2026</td><td>WemakeUI Pro — Tháng 5/2026</td><td>₫299,000</td><td><span class="wx-badge wx-badge-success">Đã thanh toán</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">📄</button></td></tr>
+                  <tr><td>01/04/2026</td><td>WemakeUI Pro — Tháng 4/2026</td><td>₫299,000</td><td><span class="wx-badge wx-badge-success">Đã thanh toán</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">📄</button></td></tr>
+                  <tr><td>01/03/2026</td><td>WemakeUI Pro — Tháng 3/2026</td><td>₫299,000</td><td><span class="wx-badge wx-badge-success">Đã thanh toán</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">📄</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.wx-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

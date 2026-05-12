@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bản đồ — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .map-wrap { position:relative;border-radius:var(--wx-radius-xl);overflow:hidden;border:1px solid var(--wx-border-default); }
+  .map-area { min-height:540px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#e2e8f0,#f1f5f9);color:var(--wx-text-muted);background-image:linear-gradient(rgba(148,163,184,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.15) 1px,transparent 1px);background-size:40px 40px; }
+  .map-search { position:absolute;top:16px;left:16px;width:320px;max-width:calc(100% - 32px); }
+  .map-locs { position:absolute;top:16px;right:16px;width:300px;max-width:calc(100% - 32px); }
+  .loc-item { display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--wx-border-subtle);font-size:var(--wx-fs-sm);cursor:pointer; }
+  .loc-item:last-child{border-bottom:none;}
+  .map-zoom { position:absolute;bottom:16px;right:16px;display:flex;flex-direction:column;gap:1px;border-radius:var(--wx-radius-md);overflow:hidden;box-shadow:var(--wx-shadow-md); }
+  .map-zoom button { width:36px;height:36px;border:none;background:var(--wx-surface-base);font-size:18px;cursor:pointer; }
+  .map-zoom button:hover{background:var(--wx-hover-bg);}
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item active"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Bản đồ</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="map-wrap">
+        <div class="map-area">
+          <div style="font-size:48px;">🗺️</div>
+          <div class="font-semibold" style="font-size:var(--wx-fs-lg);">Bản đồ</div>
+          <div class="text-sm">(Khu vực bản đồ — tích hợp Google Maps / Leaflet)</div>
+        </div>
+
+        <div class="map-search">
+          <div class="wx-card"><div class="wx-card-body" style="padding:10px;">
+            <div style="position:relative;">
+              <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);">🔍</span>
+              <input class="wx-input" style="padding-left:34px;" placeholder="Tìm địa điểm, địa chỉ...">
+            </div>
+          </div></div>
+        </div>
+
+        <div class="map-locs">
+          <div class="wx-card"><div class="wx-card-body" style="padding:14px;">
+            <div class="font-semibold mb-2">Địa điểm gần đây</div>
+            <div class="loc-item"><span>📍</span><div><div class="font-semibold">Văn phòng WemakeUI</div><div class="text-xs text-muted">Tầng 12, Toà Sông Đà, Mỹ Đình, Hà Nội</div><div class="text-xs" style="color:var(--wx-brand-primary);">0.0 km</div></div></div>
+            <div class="loc-item"><span>📍</span><div><div class="font-semibold">Kho hàng số 1</div><div class="text-xs text-muted">KCN Quang Minh, Mê Linh, Hà Nội</div><div class="text-xs" style="color:var(--wx-brand-primary);">14.2 km</div></div></div>
+            <div class="loc-item"><span>📍</span><div><div class="font-semibold">Chi nhánh Cầu Giấy</div><div class="text-xs text-muted">Số 8 Phạm Hùng, Cầu Giấy, Hà Nội</div><div class="text-xs" style="color:var(--wx-brand-primary);">3.6 km</div></div></div>
+            <div class="loc-item"><span>📍</span><div><div class="font-semibold">Điểm giao hàng Đống Đa</div><div class="text-xs text-muted">45 Tây Sơn, Đống Đa, Hà Nội</div><div class="text-xs" style="color:var(--wx-brand-primary);">5.1 km</div></div></div>
+            <div class="loc-item"><span>📍</span><div><div class="font-semibold">Trung tâm bảo hành</div><div class="text-xs text-muted">120 Trần Duy Hưng, Cầu Giấy, Hà Nội</div><div class="text-xs" style="color:var(--wx-brand-primary);">4.0 km</div></div></div>
+          </div></div>
+        </div>
+
+        <div class="map-zoom">
+          <button title="Phóng to">+</button>
+          <button title="Thu nhỏ">−</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

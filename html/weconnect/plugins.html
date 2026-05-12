@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plugin — WeConnect</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">WC</div>
+      <span class="wx-sidebar-brand-text">WeConnect</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">WeConnect</div>
+      <a href="index.html" class="wx-nav-item"><span class="wx-nav-icon">🎛️</span><span>Bảng quản trị</span></a>
+      <a href="accounts.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Tài khoản</span></a>
+      <a href="sessions.html" class="wx-nav-item"><span class="wx-nav-icon">🔌</span><span>Phiên kết nối</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📇</span><span>Danh bạ</span></a>
+      <a href="campaigns.html" class="wx-nav-item"><span class="wx-nav-icon">📣</span><span>Chiến dịch</span></a>
+      <a href="plugins.html" class="wx-nav-item active"><span class="wx-nav-icon">🧩</span><span>Plugin</span></a>
+      <a href="console.html" class="wx-nav-item"><span class="wx-nav-icon">⌨️</span><span>Console</span></a>
+      <a href="scheduler.html" class="wx-nav-item"><span class="wx-nav-icon">⏰</span><span>Lịch trình</span></a>
+      <a href="integrations.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>Tích hợp</span></a>
+      <a href="automation.html" class="wx-nav-item"><span class="wx-nav-icon">⚡</span><span>Tự động hóa</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">AD</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Admin</div><div class="text-xs text-muted">Quản trị viên</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Plugin</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Plugin</h1>
+          <p class="text-muted" style="margin:0">Quản lý và cài đặt plugin mở rộng cho WeConnect</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="wx-btn wx-btn-secondary">📦 Cài đặt từ URL</button>
+        </div>
+      </div>
+
+      <div class="wx-tabs mb-4">
+        <button class="wx-tab active" data-tab="installed">Đã cài đặt <span class="wx-badge wx-badge-neutral">9</span></button>
+        <button class="wx-tab" data-tab="store">Cửa hàng</button>
+        <button class="wx-tab" data-tab="updates">Cập nhật <span class="wx-badge wx-badge-warning">3</span></button>
+      </div>
+
+      <div data-tab-panel="installed">
+        <div class="wx-grid wx-grid-3">
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">🤖</span><div class="flex-1"><div class="font-semibold">Auto-Reply Bot</div><span class="wx-badge wx-badge-neutral text-xs">v3.2.1</span></div></div>
+            <p class="text-sm text-muted mb-3">Tự động trả lời tin nhắn dựa trên từ khóa và mẫu câu trả lời.</p>
+            <div class="flex items-center justify-between"><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label><div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Gỡ</button></div></div>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">😊</span><div class="flex-1"><div class="font-semibold">Sentiment Analysis</div><span class="wx-badge wx-badge-neutral text-xs">v1.8.0</span></div></div>
+            <p class="text-sm text-muted mb-3">Phân tích cảm xúc tin nhắn đến, gắn nhãn tích cực / tiêu cực.</p>
+            <div class="flex items-center justify-between"><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label><div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Gỡ</button></div></div>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">🎯</span><div class="flex-1"><div class="font-semibold">Lead Scoring</div><span class="wx-badge wx-badge-neutral text-xs">v2.0.4</span></div></div>
+            <p class="text-sm text-muted mb-3">Chấm điểm tiềm năng khách hàng dựa trên hành vi tương tác.</p>
+            <div class="flex items-center justify-between"><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label><div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Gỡ</button></div></div>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">🛡️</span><div class="flex-1"><div class="font-semibold">Spam Filter</div><span class="wx-badge wx-badge-neutral text-xs">v4.1.0</span></div></div>
+            <p class="text-sm text-muted mb-3">Lọc và chặn tin nhắn rác, spam tự động trước khi xử lý.</p>
+            <div class="flex items-center justify-between"><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label><div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Gỡ</button></div></div>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">🌐</span><div class="flex-1"><div class="font-semibold">Translation</div><span class="wx-badge wx-badge-neutral text-xs">v1.5.2</span></div></div>
+            <p class="text-sm text-muted mb-3">Dịch tin nhắn tự động sang 40+ ngôn ngữ khi gửi và nhận.</p>
+            <div class="flex items-center justify-between"><label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label><div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Gỡ</button></div></div>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">📈</span><div class="flex-1"><div class="font-semibold">Analytics Pro</div><span class="wx-badge wx-badge-neutral text-xs">v5.3.0</span></div></div>
+            <p class="text-sm text-muted mb-3">Báo cáo nâng cao, biểu đồ chi tiết và xuất dữ liệu phân tích.</p>
+            <div class="flex items-center justify-between"><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label><div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Gỡ</button></div></div>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">🔄</span><div class="flex-1"><div class="font-semibold">CRM Sync</div><span class="wx-badge wx-badge-neutral text-xs">v2.7.1</span></div></div>
+            <p class="text-sm text-muted mb-3">Đồng bộ liên hệ và hội thoại hai chiều với hệ thống CRM.</p>
+            <div class="flex items-center justify-between"><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label><div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Gỡ</button></div></div>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">🪝</span><div class="flex-1"><div class="font-semibold">Webhook Relay</div><span class="wx-badge wx-badge-neutral text-xs">v1.2.0</span></div></div>
+            <p class="text-sm text-muted mb-3">Chuyển tiếp sự kiện đến các webhook bên ngoài theo bộ lọc.</p>
+            <div class="flex items-center justify-between"><label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label><div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Gỡ</button></div></div>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">🎨</span><div class="flex-1"><div class="font-semibold">Image Generator</div><span class="wx-badge wx-badge-neutral text-xs">v0.9.3</span></div></div>
+            <p class="text-sm text-muted mb-3">Tạo ảnh động bằng AI để chèn vào tin nhắn chiến dịch.</p>
+            <div class="flex items-center justify-between"><label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label><div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Gỡ</button></div></div>
+          </div></div>
+        </div>
+      </div>
+
+      <div data-tab-panel="store" class="hidden">
+        <div class="wx-grid wx-grid-3">
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">📅</span><div class="flex-1"><div class="font-semibold">Smart Scheduler</div><div class="text-xs text-muted">⭐ 4.8 · 12.4k cài đặt</div></div></div>
+            <p class="text-sm text-muted mb-3">Gợi ý thời điểm gửi tin tối ưu dựa trên dữ liệu tương tác.</p>
+            <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Cài đặt</button>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">💬</span><div class="flex-1"><div class="font-semibold">Chatbot GPT</div><div class="text-xs text-muted">⭐ 4.9 · 28.1k cài đặt</div></div></div>
+            <p class="text-sm text-muted mb-3">Tích hợp mô hình ngôn ngữ lớn để trả lời hội thoại tự nhiên.</p>
+            <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Cài đặt</button>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">📊</span><div class="flex-1"><div class="font-semibold">A/B Testing</div><div class="text-xs text-muted">⭐ 4.6 · 6.2k cài đặt</div></div></div>
+            <p class="text-sm text-muted mb-3">Chạy thử nghiệm A/B trên nội dung tin nhắn để tối ưu phản hồi.</p>
+            <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Cài đặt</button>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">🔔</span><div class="flex-1"><div class="font-semibold">Alert Center</div><div class="text-xs text-muted">⭐ 4.5 · 9.0k cài đặt</div></div></div>
+            <p class="text-sm text-muted mb-3">Cảnh báo real-time qua email/SMS khi phiên lỗi hoặc tỷ lệ giảm.</p>
+            <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Cài đặt</button>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">🗂️</span><div class="flex-1"><div class="font-semibold">Tag Manager Plus</div><div class="text-xs text-muted">⭐ 4.7 · 5.4k cài đặt</div></div></div>
+            <p class="text-sm text-muted mb-3">Tự động gắn thẻ liên hệ theo quy tắc và phân khúc nâng cao.</p>
+            <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Cài đặt</button>
+          </div></div>
+          <div class="wx-card"><div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><span class="text-2xl">📁</span><div class="flex-1"><div class="font-semibold">Media Library</div><div class="text-xs text-muted">⭐ 4.4 · 3.8k cài đặt</div></div></div>
+            <p class="text-sm text-muted mb-3">Quản lý kho ảnh, video dùng chung cho mọi chiến dịch.</p>
+            <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Cài đặt</button>
+          </div></div>
+        </div>
+      </div>
+
+      <div data-tab-panel="updates" class="hidden">
+        <div class="wx-card"><div class="wx-card-body">
+          <div class="flex items-center justify-between mb-4 pb-4" style="border-bottom:1px solid var(--wx-border)">
+            <div class="flex items-center gap-3"><span class="text-2xl">🤖</span><div><div class="font-semibold">Auto-Reply Bot</div><div class="text-xs text-muted">v3.2.1 → <strong>v3.3.0</strong> · Sửa lỗi xử lý emoji, thêm mẫu câu nhanh</div></div></div>
+            <button class="wx-btn wx-btn-primary wx-btn-sm">Cập nhật</button>
+          </div>
+          <div class="flex items-center justify-between mb-4 pb-4" style="border-bottom:1px solid var(--wx-border)">
+            <div class="flex items-center gap-3"><span class="text-2xl">📈</span><div><div class="font-semibold">Analytics Pro</div><div class="text-xs text-muted">v5.3.0 → <strong>v5.4.1</strong> · Bảng điều khiển mới, xuất Excel, sửa lỗi múi giờ</div></div></div>
+            <button class="wx-btn wx-btn-primary wx-btn-sm">Cập nhật</button>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3"><span class="text-2xl">🛡️</span><div><div class="font-semibold">Spam Filter</div><div class="text-xs text-muted">v4.1.0 → <strong>v4.2.0</strong> · Cập nhật danh sách chặn, cải thiện hiệu năng 30%</div></div></div>
+            <button class="wx-btn wx-btn-primary wx-btn-sm">Cập nhật</button>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

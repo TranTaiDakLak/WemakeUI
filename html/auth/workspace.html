@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chọn Workspace — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f0f9ff 0%, #ede9fe 50%, #ecfeff 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .workspace-card {
+      background: var(--wx-surface-base);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(37,99,235,0.12), 0 4px 20px rgba(0,0,0,0.06);
+      padding: 48px 44px;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .workspace-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .workspace-logo-mark {
+      width: 40px; height: 40px;
+      background: var(--wx-gradient-button);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #fff;
+    }
+    .workspace-logo-text {
+      font-weight: 800; font-size: 20px;
+      background: var(--wx-gradient-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .workspace-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .workspace-user-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 22px; color: #fff;
+      margin: 0 auto 12px;
+    }
+    .workspace-greeting {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--wx-text-primary);
+      margin-bottom: 4px;
+    }
+    .workspace-user-email {
+      font-size: 13px;
+      color: var(--wx-text-muted);
+    }
+
+    .workspace-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wx-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+
+    /* Search */
+    .workspace-search {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .workspace-search-icon {
+      position: absolute;
+      left: 12px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      color: var(--wx-text-muted);
+    }
+    .workspace-search input {
+      width: 100%;
+      height: 40px;
+      border: 1.5px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      padding: 0 14px 0 38px;
+      font-size: 13px;
+      font-family: var(--wx-font-primary);
+      color: var(--wx-text-primary);
+      background: var(--wx-surface-sunken);
+      box-sizing: border-box;
+      transition: all var(--wx-duration-fast);
+    }
+    .workspace-search input:focus {
+      outline: none;
+      border-color: var(--wx-brand-primary);
+      box-shadow: var(--wx-shadow-focus);
+      background: var(--wx-surface-base);
+    }
+
+    /* Workspace list */
+    .workspace-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    .workspace-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 1.5px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      cursor: pointer;
+      transition: all var(--wx-duration-fast);
+      background: var(--wx-surface-base);
+      text-decoration: none;
+    }
+    .workspace-item:hover {
+      border-color: var(--wx-brand-300);
+      background: var(--wx-brand-50);
+      box-shadow: var(--wx-shadow-md);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+    .workspace-item.active {
+      border-color: var(--wx-brand-primary);
+      background: var(--wx-brand-50);
+      box-shadow: var(--wx-shadow-focus);
+    }
+
+    .ws-avatar {
+      width: 44px; height: 44px;
+      border-radius: var(--wx-radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; color: #fff;
+      flex-shrink: 0;
+    }
+
+    .ws-info { flex: 1; min-width: 0; }
+    .ws-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--wx-text-primary);
+      margin-bottom: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .ws-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--wx-text-muted);
+    }
+    .ws-plan {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 7px;
+      border-radius: var(--wx-radius-full);
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .ws-plan.pro { background: #fdf4ff; color: #7c3aed; border: 1px solid #e9d5ff; }
+    .ws-plan.free { background: var(--wx-surface-sunken); color: var(--wx-text-muted); border: 1px solid var(--wx-border-default); }
+    .ws-plan.business { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+
+    .ws-arrow {
+      color: var(--wx-text-muted);
+      font-size: 18px;
+      transition: transform var(--wx-duration-fast), color var(--wx-duration-fast);
+    }
+    .workspace-item:hover .ws-arrow {
+      transform: translateX(3px);
+      color: var(--wx-brand-primary);
+    }
+
+    .ws-badge {
+      background: var(--wx-brand-50);
+      color: var(--wx-brand-primary);
+      border: 1px solid var(--wx-brand-200);
+      border-radius: var(--wx-radius-full);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 7px;
+    }
+
+    /* Divider */
+    .ws-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .ws-divider-line { flex: 1; height: 1px; background: var(--wx-border-default); }
+    .ws-divider-text { font-size: 12px; color: var(--wx-text-muted); white-space: nowrap; }
+
+    /* Create button */
+    .ws-create-btn {
+      width: 100%;
+      height: 46px;
+      border: 2px dashed var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      background: transparent;
+      color: var(--wx-text-secondary);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all var(--wx-duration-fast);
+      margin-bottom: 16px;
+    }
+    .ws-create-btn:hover {
+      border-color: var(--wx-brand-400);
+      color: var(--wx-brand-primary);
+      background: var(--wx-brand-50);
+    }
+
+    .workspace-footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--wx-text-muted);
+    }
+    .workspace-footer a { color: var(--wx-brand-primary); font-weight: 500; }
+  </style>
+</head>
+<body>
+
+<div class="workspace-card">
+  <div class="workspace-logo">
+    <div class="workspace-logo-mark">W</div>
+    <span class="workspace-logo-text">WemakeUI</span>
+  </div>
+
+  <!-- User greeting -->
+  <div class="workspace-header">
+    <div class="workspace-user-avatar">NA</div>
+    <div class="workspace-greeting">Chào mừng trở lại, Nguyễn Văn A!</div>
+    <div class="workspace-user-email">nguyen.van.a@wemakeui.vn</div>
+  </div>
+
+  <div class="workspace-title">Chọn workspace</div>
+
+  <!-- Search -->
+  <div class="workspace-search">
+    <span class="workspace-search-icon">🔍</span>
+    <input type="text" placeholder="Tìm kiếm workspace..." oninput="filterWs(this.value)">
+  </div>
+
+  <!-- Workspace list -->
+  <div class="workspace-list" id="wsList">
+
+    <a href="../dashboard/overview.html" class="workspace-item active">
+      <div class="ws-avatar" style="background: linear-gradient(135deg, #2563eb, #06b6d4);">W</div>
+      <div class="ws-info">
+        <div class="ws-name">WemakeUI Team <span class="ws-badge">Hiện tại</span></div>
+        <div class="ws-meta">
+          <span>👥 24 thành viên</span>
+          <span class="ws-plan business">Business</span>
+        </div>
+      </div>
+      <span class="ws-arrow">›</span>
+    </a>
+
+    <a href="../dashboard/overview.html" class="workspace-item">
+      <div class="ws-avatar" style="background: linear-gradient(135deg, #7c3aed, #a855f7);">T</div>
+      <div class="ws-info">
+        <div class="ws-name">TechViet Solutions</div>
+        <div class="ws-meta">
+          <span>👥 8 thành viên</span>
+          <span class="ws-plan pro">Pro</span>
+        </div>
+      </div>
+      <span class="ws-arrow">›</span>
+    </a>
+
+    <a href="../dashboard/overview.html" class="workspace-item">
+      <div class="ws-avatar" style="background: linear-gradient(135deg, #ea580c, #f97316);">S</div>
+      <div class="ws-info">
+        <div class="ws-name">Startup Labs</div>
+        <div class="ws-meta">
+          <span>👥 3 thành viên</span>
+          <span class="ws-plan free">Free</span>
+        </div>
+      </div>
+      <span class="ws-arrow">›</span>
+    </a>
+
+    <a href="../dashboard/overview.html" class="workspace-item">
+      <div class="ws-avatar" style="background: linear-gradient(135deg, #059669, #10b981);">D</div>
+      <div class="ws-info">
+        <div class="ws-name">Digital Agency VN</div>
+        <div class="ws-meta">
+          <span>👥 15 thành viên</span>
+          <span class="ws-plan pro">Pro</span>
+        </div>
+      </div>
+      <span class="ws-arrow">›</span>
+    </a>
+
+  </div>
+
+  <div class="ws-divider">
+    <div class="ws-divider-line"></div>
+    <span class="ws-divider-text">hoặc</span>
+    <div class="ws-divider-line"></div>
+  </div>
+
+  <button class="ws-create-btn" onclick="createWorkspace()">
+    ＋ Tạo workspace mới
+  </button>
+
+  <div class="workspace-footer">
+    <a href="login.html">← Đăng xuất</a> &nbsp;·&nbsp;
+    <a href="#">Quản lý tài khoản</a>
+  </div>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  function filterWs(q) {
+    const items = document.querySelectorAll('#wsList .workspace-item');
+    q = q.toLowerCase();
+    items.forEach(item => {
+      const name = item.querySelector('.ws-name').textContent.toLowerCase();
+      item.style.display = name.includes(q) ? '' : 'none';
+    });
+  }
+
+  function createWorkspace() {
+    const name = prompt('Tên workspace mới:', '');
+    if (name && name.trim()) {
+      alert('Workspace "' + name + '" đã được tạo thành công!');
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sắp ra mắt | WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+  <div class="wx-error-page">
+    <div class="wx-error-blob" style="top:-80px;left:-60px;width:340px;height:340px;background:var(--wx-primary);opacity:0.12;"></div>
+    <div class="wx-error-blob" style="bottom:-60px;right:-80px;width:380px;height:380px;background:var(--wx-accent,#8b5cf6);opacity:0.1;"></div>
+
+    <div class="wx-error-box">
+      <!-- Rocket emoji -->
+      <div style="font-size:5rem;line-height:1;margin-bottom:1rem;filter:drop-shadow(0 4px 16px rgba(139,92,246,0.4));animation:float 3s ease-in-out infinite;">🚀</div>
+
+      <h1 class="wx-error-title">Sắp ra mắt</h1>
+      <p class="wx-error-desc">
+        Chúng tôi đang hoàn thiện những điều tuyệt vời nhất.<br>
+        Hãy là người đầu tiên trải nghiệm!
+      </p>
+
+      <!-- Countdown -->
+      <div style="display:flex;gap:1rem;justify-content:center;margin:1.5rem 0;" id="countdown">
+        <div style="text-align:center;">
+          <div style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,var(--wx-primary),var(--wx-accent,#8b5cf6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" id="cd-days">15</div>
+          <div style="font-size:0.75rem;color:var(--wx-text-muted);margin-top:0.2rem;">Ngày</div>
+        </div>
+        <div style="font-size:2rem;font-weight:300;color:var(--wx-text-muted);align-self:flex-start;margin-top:0.2rem;">:</div>
+        <div style="text-align:center;">
+          <div style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,var(--wx-primary),var(--wx-accent,#8b5cf6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" id="cd-hours">06</div>
+          <div style="font-size:0.75rem;color:var(--wx-text-muted);margin-top:0.2rem;">Giờ</div>
+        </div>
+        <div style="font-size:2rem;font-weight:300;color:var(--wx-text-muted);align-self:flex-start;margin-top:0.2rem;">:</div>
+        <div style="text-align:center;">
+          <div style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,var(--wx-primary),var(--wx-accent,#8b5cf6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" id="cd-mins">42</div>
+          <div style="font-size:0.75rem;color:var(--wx-text-muted);margin-top:0.2rem;">Phút</div>
+        </div>
+        <div style="font-size:2rem;font-weight:300;color:var(--wx-text-muted);align-self:flex-start;margin-top:0.2rem;">:</div>
+        <div style="text-align:center;">
+          <div style="font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,var(--wx-primary),var(--wx-accent,#8b5cf6));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" id="cd-secs">00</div>
+          <div style="font-size:0.75rem;color:var(--wx-text-muted);margin-top:0.2rem;">Giây</div>
+        </div>
+      </div>
+
+      <!-- Email signup -->
+      <div style="margin:1.5rem 0;padding:1.2rem;background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:12px;">
+        <p style="font-size:0.88rem;font-weight:600;color:var(--wx-text);margin:0 0 0.8rem;">🔔 Nhận thông báo khi ra mắt</p>
+        <form id="notify-form" onsubmit="handleSubscribe(event)" style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+          <input
+            type="email"
+            id="notify-email"
+            placeholder="email@cua-ban.com"
+            required
+            style="
+              flex:1;min-width:180px;
+              padding:0.55rem 0.9rem;
+              border:1.5px solid var(--wx-border);
+              border-radius:8px;
+              background:var(--wx-surface);
+              color:var(--wx-text);
+              font-size:0.9rem;
+              outline:none;
+            "
+          >
+          <button type="submit" class="wx-btn wx-btn-primary" style="white-space:nowrap;">
+            📨 Đăng ký nhận tin
+          </button>
+        </form>
+        <p id="subscribe-msg" style="margin:0.6rem 0 0;font-size:0.82rem;color:var(--wx-success,#22c55e);min-height:1.2em;"></p>
+      </div>
+
+      <div class="wx-error-actions" style="justify-content:center;">
+        <a href="../index.html" class="wx-btn wx-btn-secondary">🏠 Về trang chủ</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+  </style>
+
+  <script src="../js/wemake.js"></script>
+  <script>
+    // Countdown to launch date (27 May 2026 14:00)
+    const launchDate = new Date('2026-05-27T14:00:00+07:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = launchDate - now;
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML = '<p style="font-size:1.2rem;font-weight:700;color:var(--wx-success,#22c55e)">🎉 Đã ra mắt!</p>';
+        return;
+      }
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      const secs = Math.floor((diff % 60000) / 1000);
+
+      document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+      document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const email = document.getElementById('notify-email').value;
+      const msg = document.getElementById('subscribe-msg');
+      msg.style.color = 'var(--wx-success,#22c55e)';
+      msg.textContent = `✅ ${email} đã đăng ký thành công! Chúng tôi sẽ thông báo khi ra mắt.`;
+      document.getElementById('notify-form').reset();
+    }
+  </script>
+</body>
+</html>

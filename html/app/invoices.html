@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hóa đơn — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item active"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Hóa đơn</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="wx-grid wx-grid-4 mb-4">
+        <div class="wx-stat-card"><div class="wx-stat-label">Tổng cộng</div><div class="wx-stat-value">₫48.2M</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Đã thanh toán</div><div class="wx-stat-value">₫38.7M</div><div class="wx-stat-change positive">▲ 12%</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Chờ thanh toán</div><div class="wx-stat-value">₫9.5M</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Quá hạn</div><div class="wx-stat-value">3 hóa đơn</div></div>
+      </div>
+
+      <div class="wx-card">
+        <div class="wx-card-header">
+          <span class="wx-card-title">Danh sách hóa đơn</span>
+          <div class="flex items-center gap-2">
+            <input class="wx-input" style="width:220px;" placeholder="🔍 Tìm theo mã, khách hàng...">
+            <select class="wx-select" style="width:170px;">
+              <option>Tất cả trạng thái</option>
+              <option>Đã thanh toán</option>
+              <option>Chờ thanh toán</option>
+              <option>Quá hạn</option>
+            </select>
+            <button class="wx-btn wx-btn-primary">+ Tạo hóa đơn</button>
+          </div>
+        </div>
+        <div class="wx-card-body" style="padding:0;">
+          <table class="wx-table">
+            <thead>
+              <tr><th>Mã HĐ</th><th>Khách hàng</th><th>Ngày tạo</th><th>Hạn TT</th><th style="text-align:right;">Số tiền</th><th>Trạng thái</th><th></th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>INV-2024-001</strong></td><td>Công ty CP Công nghệ Sao Việt</td><td>02/04/2026</td><td>16/04/2026</td><td style="text-align:right;">₫12.500.000</td><td><span class="wx-badge wx-badge-success">Đã thanh toán</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><strong>INV-2024-002</strong></td><td>Cửa hàng Thời trang Hạ Long</td><td>05/04/2026</td><td>19/04/2026</td><td style="text-align:right;">₫3.800.000</td><td><span class="wx-badge wx-badge-success">Đã thanh toán</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><strong>INV-2024-003</strong></td><td>Công ty TNHH Xây dựng Minh Long</td><td>10/04/2026</td><td>24/04/2026</td><td style="text-align:right;">₫9.250.000</td><td><span class="wx-badge wx-badge-warning">Chờ thanh toán</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><strong>INV-2024-004</strong></td><td>Nhà hàng Hương Sen</td><td>12/04/2026</td><td>26/04/2026</td><td style="text-align:right;">₫4.100.000</td><td><span class="wx-badge wx-badge-danger">Quá hạn</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><strong>INV-2024-005</strong></td><td>Công ty CP Dược phẩm An Khang</td><td>18/04/2026</td><td>02/05/2026</td><td style="text-align:right;">₫7.600.000</td><td><span class="wx-badge wx-badge-success">Đã thanh toán</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><strong>INV-2024-006</strong></td><td>Trường Mầm non Hoa Mai</td><td>22/04/2026</td><td>06/05/2026</td><td style="text-align:right;">₫2.300.000</td><td><span class="wx-badge wx-badge-warning">Chờ thanh toán</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><strong>INV-2024-007</strong></td><td>Công ty TNHH Vận tải Đông Á</td><td>28/04/2026</td><td>12/05/2026</td><td style="text-align:right;">₫5.900.000</td><td><span class="wx-badge wx-badge-danger">Quá hạn</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><strong>INV-2024-008</strong></td><td>Khách sạn Biển Xanh Resort</td><td>03/05/2026</td><td>17/05/2026</td><td style="text-align:right;">₫18.400.000</td><td><span class="wx-badge wx-badge-success">Đã thanh toán</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="wx-card-footer">
+          <span class="text-sm text-muted">Hiển thị 1–8 trong 24 hóa đơn</span>
+          <div class="wx-pagination">
+            <button class="wx-page-btn">‹</button>
+            <button class="wx-page-btn active">1</button>
+            <button class="wx-page-btn">2</button>
+            <button class="wx-page-btn">3</button>
+            <button class="wx-page-btn">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

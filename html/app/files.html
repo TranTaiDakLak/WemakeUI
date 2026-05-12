@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tệp tin — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .folder-card { display:flex;align-items:center;gap:12px;padding:16px;border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-lg);background:var(--wx-surface-base);cursor:pointer;transition:all .15s; }
+  .folder-card:hover { border-color:var(--wx-brand-300);box-shadow:var(--wx-shadow-sm); }
+  .folder-icon { font-size:30px; }
+  .vt-btn { padding:6px 10px;border:1px solid var(--wx-border-default);background:var(--wx-surface-base);border-radius:var(--wx-radius-md);cursor:pointer;font-size:15px; }
+  .vt-btn.active { background:var(--wx-brand-primary);color:#fff;border-color:var(--wx-brand-primary); }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item active"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Tệp tin</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <nav class="wx-breadcrumb mb-4">
+        <a href="#">Trang chủ</a><span class="wx-breadcrumb-sep">/</span>
+        <a href="#">Tài liệu</a><span class="wx-breadcrumb-sep">/</span>
+        <span class="wx-breadcrumb-current">Dự án 2024</span>
+      </nav>
+
+      <div class="flex items-center justify-between mb-4">
+        <button class="wx-btn wx-btn-primary">⬆ Tải lên</button>
+        <div class="flex items-center gap-2">
+          <select class="wx-select" style="width:160px;">
+            <option>Sắp xếp: Tên A→Z</option>
+            <option>Sắp xếp: Mới nhất</option>
+            <option>Sắp xếp: Kích thước</option>
+          </select>
+          <div class="flex gap-1">
+            <button class="vt-btn active" title="Lưới">⊞</button>
+            <button class="vt-btn" title="Danh sách">☰</button>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size:var(--wx-fs-md);font-weight:700;color:var(--wx-text-muted);text-transform:uppercase;letter-spacing:.04em;margin:0 0 10px;">Thư mục</h3>
+      <div class="wx-grid wx-grid-4 mb-5">
+        <div class="folder-card"><span class="folder-icon">📁</span><div><div class="font-semibold">Tài liệu</div><div class="text-xs text-muted">24 tệp</div></div></div>
+        <div class="folder-card"><span class="folder-icon">📁</span><div><div class="font-semibold">Hình ảnh</div><div class="text-xs text-muted">132 tệp</div></div></div>
+        <div class="folder-card"><span class="folder-icon">📁</span><div><div class="font-semibold">Video</div><div class="text-xs text-muted">8 tệp</div></div></div>
+        <div class="folder-card"><span class="folder-icon">📁</span><div><div class="font-semibold">Lưu trữ</div><div class="text-xs text-muted">17 tệp</div></div></div>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header"><span class="wx-card-title">Tệp tin</span></div>
+        <div class="wx-card-body" style="padding:0;">
+          <table class="wx-table">
+            <thead><tr><th>Tên</th><th>Kích thước</th><th>Sửa đổi</th><th>Người sửa</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>📄 Đề xuất dự án 2024.pdf</td><td>2.4 MB</td><td>10/05/2026</td><td>Lê Thị Hương</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td>📊 Ngân sách & chi phí.xlsx</td><td>980 KB</td><td>08/05/2026</td><td>Trần Văn Bình</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td>🖼️ Mockup giao diện trang chủ.png</td><td>3.1 MB</td><td>06/05/2026</td><td>Ngô Minh Anh</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td>📄 Hợp đồng đối tác.pdf</td><td>1.2 MB</td><td>04/05/2026</td><td>Nguyễn Văn A</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td>🎬 Video demo sản phẩm.mp4</td><td>148 MB</td><td>02/05/2026</td><td>Phạm Quốc Thắng</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td>📊 Báo cáo tiến độ Q2.xlsx</td><td>540 KB</td><td>28/04/2026</td><td>Lê Thị Hương</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td>🖼️ Logo bộ nhận diện.png</td><td>620 KB</td><td>20/04/2026</td><td>Ngô Minh Anh</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td>📄 Kế hoạch triển khai chi tiết.pdf</td><td>1.8 MB</td><td>15/04/2026</td><td>Nguyễn Văn A</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="wx-card">
+        <div class="wx-card-body">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-semibold">Dung lượng đã dùng</span>
+            <span class="text-sm text-muted">12.4 GB / 50 GB</span>
+          </div>
+          <div class="wx-progress"><div class="wx-progress-bar" style="width:25%;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

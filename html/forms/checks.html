@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkbox &amp; Radio — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .opt-row { display:flex; align-items:center; gap:10px; padding:6px 0; }
+  .desc-opt { display:flex; gap:10px; padding:10px 0; align-items:flex-start; }
+  .sel-card { border:1px solid var(--wx-border-default); border-radius:var(--wx-radius-lg); padding:14px; cursor:pointer; transition:.15s; }
+  .sel-card.checked { border-color:var(--wx-brand-primary); background:var(--wx-selected-bg); box-shadow:var(--wx-shadow-sm); }
+  .switch-row { display:flex; align-items:center; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--wx-border-subtle,var(--wx-border-default)); }
+  .switch-row:last-child { border-bottom:none; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item active"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Checkbox &amp; Radio</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Checkbox &amp; Radio</h1>
+        <p class="text-muted" style="margin:0">Hộp kiểm, nút chọn, công tắc và các biến thể thẻ chọn dùng cho cấu hình và lựa chọn gói.</p>
+      </div>
+
+      <div class="wx-grid-2">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Checkbox</h3></div>
+          <div class="wx-card-body">
+            <div class="opt-row"><input type="checkbox" class="wx-checkbox" id="c1" checked><label for="c1" class="text-sm">Nhận email khuyến mãi</label></div>
+            <div class="opt-row"><input type="checkbox" class="wx-checkbox" id="c2"><label for="c2" class="text-sm">Đồng ý điều khoản sử dụng</label></div>
+            <div class="opt-row"><input type="checkbox" class="wx-checkbox" id="c3" disabled><label for="c3" class="text-sm text-muted">Tuỳ chọn bị vô hiệu hoá</label></div>
+            <hr class="wx-divider">
+            <p class="text-sm font-semibold mb-2">Chọn danh mục (nhóm):</p>
+            <div class="opt-row"><input type="checkbox" class="wx-checkbox" id="cg0"><label for="cg0" class="text-sm font-semibold">Tất cả (một phần đã chọn)</label></div>
+            <div style="padding-left:24px">
+              <div class="opt-row"><input type="checkbox" class="wx-checkbox" id="cg1" checked><label for="cg1" class="text-sm">Thời trang</label></div>
+              <div class="opt-row"><input type="checkbox" class="wx-checkbox" id="cg2"><label for="cg2" class="text-sm">Điện tử</label></div>
+              <div class="opt-row"><input type="checkbox" class="wx-checkbox" id="cg3" checked><label for="cg3" class="text-sm">Gia dụng</label></div>
+              <div class="opt-row"><input type="checkbox" class="wx-checkbox" id="cg4"><label for="cg4" class="text-sm">Mỹ phẩm</label></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Radio</h3></div>
+          <div class="wx-card-body">
+            <p class="text-sm font-semibold mb-2">Phương thức giao hàng (dọc):</p>
+            <div class="opt-row"><input type="radio" name="ship" id="s1" checked style="accent-color:var(--wx-brand-primary)"><label for="s1" class="text-sm">Giao tiêu chuẩn (3-5 ngày)</label></div>
+            <div class="opt-row"><input type="radio" name="ship" id="s2" style="accent-color:var(--wx-brand-primary)"><label for="s2" class="text-sm">Giao nhanh (1-2 ngày)</label></div>
+            <div class="opt-row"><input type="radio" name="ship" id="s3" style="accent-color:var(--wx-brand-primary)"><label for="s3" class="text-sm">Nhận tại cửa hàng</label></div>
+            <hr class="wx-divider">
+            <p class="text-sm font-semibold mb-2">Giới tính (ngang):</p>
+            <div class="flex gap-4">
+              <div class="opt-row"><input type="radio" name="gen" id="g1" checked style="accent-color:var(--wx-brand-primary)"><label for="g1" class="text-sm">Nam</label></div>
+              <div class="opt-row"><input type="radio" name="gen" id="g2" style="accent-color:var(--wx-brand-primary)"><label for="g2" class="text-sm">Nữ</label></div>
+              <div class="opt-row"><input type="radio" name="gen" id="g3" style="accent-color:var(--wx-brand-primary)"><label for="g3" class="text-sm">Khác</label></div>
+            </div>
+            <hr class="wx-divider">
+            <p class="text-sm font-semibold mb-2">Mức độ thông báo (có mô tả):</p>
+            <div class="desc-opt"><input type="radio" name="noti" id="n1" checked style="accent-color:var(--wx-brand-primary);margin-top:2px"><label for="n1"><div class="text-sm font-semibold">Tất cả</div><div class="text-xs text-muted">Nhận mọi thông báo qua email và đẩy.</div></label></div>
+            <div class="desc-opt"><input type="radio" name="noti" id="n2" style="accent-color:var(--wx-brand-primary);margin-top:2px"><label for="n2"><div class="text-sm font-semibold">Quan trọng</div><div class="text-xs text-muted">Chỉ thông báo liên quan đến tài khoản và đơn hàng.</div></label></div>
+            <div class="desc-opt"><input type="radio" name="noti" id="n3" style="accent-color:var(--wx-brand-primary);margin-top:2px"><label for="n3"><div class="text-sm font-semibold">Không nhận</div><div class="text-xs text-muted">Tắt toàn bộ thông báo.</div></label></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header"><h3 class="wx-card-title">Công tắc &amp; danh sách cài đặt</h3></div>
+        <div class="wx-card-body">
+          <div class="flex gap-5 mb-4" style="flex-wrap:wrap">
+            <label class="flex items-center gap-2"><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label><span class="text-sm">Bật</span></label>
+            <label class="flex items-center gap-2"><label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label><span class="text-sm">Tắt</span></label>
+            <label class="flex items-center gap-2"><label class="wx-toggle"><input type="checkbox" checked disabled><span class="wx-toggle-track"></span></label><span class="text-sm text-muted">Bật (khoá)</span></label>
+          </div>
+          <hr class="wx-divider">
+          <div class="switch-row"><div><div class="text-sm font-semibold">Xác thực hai lớp (2FA)</div><div class="text-xs text-muted">Tăng cường bảo mật khi đăng nhập.</div></div><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></div>
+          <div class="switch-row"><div><div class="text-sm font-semibold">Thông báo qua email</div><div class="text-xs text-muted">Gửi tóm tắt hoạt động hàng tuần.</div></div><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></div>
+          <div class="switch-row"><div><div class="text-sm font-semibold">Chế độ tối tự động</div><div class="text-xs text-muted">Tự đổi giao diện theo hệ thống.</div></div><label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label></div>
+          <div class="switch-row"><div><div class="text-sm font-semibold">Cho phép định vị</div><div class="text-xs text-muted">Sử dụng vị trí để gợi ý cửa hàng gần.</div></div><label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label></div>
+        </div>
+      </div>
+
+      <div class="wx-grid-2">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Thẻ chọn (checkbox card)</h3></div>
+          <div class="wx-card-body">
+            <div class="wx-grid-2">
+              <label class="sel-card checked"><div class="flex items-center gap-2"><input type="checkbox" class="wx-checkbox" checked><span class="font-semibold text-sm">📧 Email Marketing</span></div><div class="text-xs text-muted mt-1">Gửi chiến dịch email tự động.</div></label>
+              <label class="sel-card"><div class="flex items-center gap-2"><input type="checkbox" class="wx-checkbox"><span class="font-semibold text-sm">💬 Tin nhắn SMS</span></div><div class="text-xs text-muted mt-1">Nhắn tin khuyến mãi qua số điện thoại.</div></label>
+              <label class="sel-card checked"><div class="flex items-center gap-2"><input type="checkbox" class="wx-checkbox" checked><span class="font-semibold text-sm">🔔 Thông báo đẩy</span></div><div class="text-xs text-muted mt-1">Đẩy thông báo lên thiết bị di động.</div></label>
+              <label class="sel-card"><div class="flex items-center gap-2"><input type="checkbox" class="wx-checkbox"><span class="font-semibold text-sm">📱 Zalo OA</span></div><div class="text-xs text-muted mt-1">Tích hợp gửi tin qua Zalo Official.</div></label>
+            </div>
+          </div>
+        </div>
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Chọn gói (radio card)</h3></div>
+          <div class="wx-card-body">
+            <label class="sel-card mb-2 flex items-start gap-3" style="display:flex"><input type="radio" name="plan" style="accent-color:var(--wx-brand-primary);margin-top:3px"><div class="flex-1"><div class="flex justify-between"><span class="font-semibold text-sm">Cơ bản</span><span class="font-bold">₫99K<span class="text-xs text-muted">/tháng</span></span></div><div class="text-xs text-muted">3 thành viên · 5GB lưu trữ</div></div></label>
+            <label class="sel-card checked mb-2 flex items-start gap-3" style="display:flex"><input type="radio" name="plan" checked style="accent-color:var(--wx-brand-primary);margin-top:3px"><div class="flex-1"><div class="flex justify-between"><span class="font-semibold text-sm">Chuyên nghiệp <span class="wx-badge wx-badge-primary">Phổ biến</span></span><span class="font-bold">₫299K<span class="text-xs text-muted">/tháng</span></span></div><div class="text-xs text-muted">15 thành viên · 100GB lưu trữ · Hỗ trợ ưu tiên</div></div></label>
+            <label class="sel-card flex items-start gap-3" style="display:flex"><input type="radio" name="plan" style="accent-color:var(--wx-brand-primary);margin-top:3px"><div class="flex-1"><div class="flex justify-between"><span class="font-semibold text-sm">Doanh nghiệp</span><span class="font-bold">₫899K<span class="text-xs text-muted">/tháng</span></span></div><div class="text-xs text-muted">Không giới hạn · SLA 99.9% · Quản lý riêng</div></div></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

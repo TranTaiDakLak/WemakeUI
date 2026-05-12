@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lịch — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .cal-layout { display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:20px;align-items:start; }
+  .cal-grid { display:grid;grid-template-columns:repeat(7,1fr);border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-lg);overflow:hidden; }
+  .cal-hd { background:var(--wx-surface-sunken);text-align:center;padding:8px;font-size:var(--wx-fs-xs);font-weight:700;color:var(--wx-text-muted);text-transform:uppercase; }
+  .cal-cell { min-height:96px;border-top:1px solid var(--wx-border-subtle);border-right:1px solid var(--wx-border-subtle);padding:6px;background:var(--wx-surface-base); }
+  .cal-cell:nth-child(7n){border-right:none;}
+  .cal-cell.muted { background:var(--wx-surface-sunken);color:var(--wx-text-disabled); }
+  .cal-cell.today .cal-num { background:var(--wx-brand-primary);color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center; }
+  .cal-num { font-size:var(--wx-fs-sm);font-weight:600; }
+  .ev-chip { display:block;font-size:11px;padding:2px 6px;border-radius:4px;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff; }
+  .vt-btn { padding:5px 12px;border:1px solid var(--wx-border-default);background:var(--wx-surface-base);font-size:var(--wx-fs-sm);cursor:pointer; }
+  .vt-btn.active { background:var(--wx-brand-primary);color:#fff;border-color:var(--wx-brand-primary); }
+  .vt-group { display:inline-flex;border-radius:var(--wx-radius-md);overflow:hidden; }
+  .vt-group .vt-btn:not(:last-child){border-right:none;}
+  .up-ev { display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--wx-border-subtle);font-size:var(--wx-fs-sm); }
+  .up-ev:last-child{border-bottom:none;}
+  .up-dot { width:10px;height:10px;border-radius:50%;margin-top:5px;flex-shrink:0; }
+  @media (max-width:1000px){ .cal-layout{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item active"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Lịch</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <div class="flex items-center gap-2">
+          <button class="wx-btn wx-btn-ghost wx-btn-sm">‹</button>
+          <span class="font-bold" style="font-size:var(--wx-fs-lg);">Tháng 5, 2026</span>
+          <button class="wx-btn wx-btn-ghost wx-btn-sm">›</button>
+          <button class="wx-btn wx-btn-secondary wx-btn-sm">Hôm nay</button>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="vt-group">
+            <button class="vt-btn active">Tháng</button>
+            <button class="vt-btn">Tuần</button>
+            <button class="vt-btn">Ngày</button>
+          </div>
+          <button class="wx-btn wx-btn-primary">+ Tạo sự kiện</button>
+        </div>
+      </div>
+
+      <div class="cal-layout">
+        <div class="cal-grid">
+          <div class="cal-hd">CN</div><div class="cal-hd">T2</div><div class="cal-hd">T3</div><div class="cal-hd">T4</div><div class="cal-hd">T5</div><div class="cal-hd">T6</div><div class="cal-hd">T7</div>
+          <!-- week 1: Apr 27 - May 3 -->
+          <div class="cal-cell muted"><span class="cal-num">27</span></div>
+          <div class="cal-cell muted"><span class="cal-num">28</span></div>
+          <div class="cal-cell muted"><span class="cal-num">29</span></div>
+          <div class="cal-cell muted"><span class="cal-num">30</span></div>
+          <div class="cal-cell"><span class="cal-num">1</span><span class="ev-chip" style="background:#ef4444;">Nghỉ lễ 1/5</span></div>
+          <div class="cal-cell"><span class="cal-num">2</span></div>
+          <div class="cal-cell"><span class="cal-num">3</span></div>
+          <!-- week 2: May 4-10 -->
+          <div class="cal-cell"><span class="cal-num">4</span><span class="ev-chip" style="background:#6366f1;">Họp tuần · 9:00</span></div>
+          <div class="cal-cell"><span class="cal-num">5</span></div>
+          <div class="cal-cell"><span class="cal-num">6</span><span class="ev-chip" style="background:#10b981;">Review thiết kế</span><span class="ev-chip" style="background:#f59e0b;">Demo nội bộ · 15h</span></div>
+          <div class="cal-cell"><span class="cal-num">7</span></div>
+          <div class="cal-cell"><span class="cal-num">8</span><span class="ev-chip" style="background:#06b6d4;">1-1 với Hương</span></div>
+          <div class="cal-cell"><span class="cal-num">9</span></div>
+          <div class="cal-cell"><span class="cal-num">10</span></div>
+          <!-- week 3: May 11-17 -->
+          <div class="cal-cell"><span class="cal-num">11</span><span class="ev-chip" style="background:#6366f1;">Họp tuần · 9:00</span></div>
+          <div class="cal-cell today"><span class="cal-num">12</span><span class="ev-chip" style="background:#8b5cf6;">Standup · 8:30</span><span class="ev-chip" style="background:#ef4444;">Hạn nộp báo cáo</span><span class="ev-chip" style="background:#10b981;">Phỏng vấn · 14h</span></div>
+          <div class="cal-cell"><span class="cal-num">13</span><span class="ev-chip" style="background:#f59e0b;">Bàn giao dự án A</span></div>
+          <div class="cal-cell"><span class="cal-num">14</span></div>
+          <div class="cal-cell"><span class="cal-num">15</span><span class="ev-chip" style="background:#06b6d4;">Workshop UX</span></div>
+          <div class="cal-cell"><span class="cal-num">16</span></div>
+          <div class="cal-cell"><span class="cal-num">17</span></div>
+          <!-- week 4: May 18-24 -->
+          <div class="cal-cell"><span class="cal-num">18</span><span class="ev-chip" style="background:#6366f1;">Họp tuần · 9:00</span></div>
+          <div class="cal-cell"><span class="cal-num">19</span></div>
+          <div class="cal-cell"><span class="cal-num">20</span><span class="ev-chip" style="background:#10b981;">Sprint planning</span></div>
+          <div class="cal-cell"><span class="cal-num">21</span></div>
+          <div class="cal-cell"><span class="cal-num">22</span><span class="ev-chip" style="background:#ef4444;">Deadline Q2</span></div>
+          <div class="cal-cell"><span class="cal-num">23</span></div>
+          <div class="cal-cell"><span class="cal-num">24</span></div>
+          <!-- week 5: May 25-31 -->
+          <div class="cal-cell"><span class="cal-num">25</span><span class="ev-chip" style="background:#6366f1;">Họp tuần · 9:00</span></div>
+          <div class="cal-cell"><span class="cal-num">26</span></div>
+          <div class="cal-cell"><span class="cal-num">27</span><span class="ev-chip" style="background:#f59e0b;">Đào tạo nội bộ</span></div>
+          <div class="cal-cell"><span class="cal-num">28</span></div>
+          <div class="cal-cell"><span class="cal-num">29</span><span class="ev-chip" style="background:#8b5cf6;">Retro tháng 5</span></div>
+          <div class="cal-cell"><span class="cal-num">30</span></div>
+          <div class="cal-cell"><span class="cal-num">31</span></div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header"><span class="wx-card-title">Sự kiện sắp tới</span></div>
+          <div class="wx-card-body">
+            <div class="up-ev"><span class="up-dot" style="background:#8b5cf6;"></span><div><div class="font-semibold">Standup hàng ngày</div><div class="text-xs text-muted">Hôm nay · 08:30 · Phòng họp A</div></div></div>
+            <div class="up-ev"><span class="up-dot" style="background:#10b981;"></span><div><div class="font-semibold">Phỏng vấn ứng viên Frontend</div><div class="text-xs text-muted">Hôm nay · 14:00 · Google Meet</div></div></div>
+            <div class="up-ev"><span class="up-dot" style="background:#f59e0b;"></span><div><div class="font-semibold">Bàn giao dự án A</div><div class="text-xs text-muted">Ngày mai · 10:00 · Văn phòng KH</div></div></div>
+            <div class="up-ev"><span class="up-dot" style="background:#06b6d4;"></span><div><div class="font-semibold">Workshop UX</div><div class="text-xs text-muted">15/05 · 09:00 · Phòng đào tạo</div></div></div>
+            <div class="up-ev"><span class="up-dot" style="background:#6366f1;"></span><div><div class="font-semibold">Họp tuần phòng Sản phẩm</div><div class="text-xs text-muted">18/05 · 09:00 · Phòng họp A</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

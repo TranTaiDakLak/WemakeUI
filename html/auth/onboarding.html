@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onboarding — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f0f9ff 0%, #ede9fe 60%, #ecfeff 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .onboard-card {
+      background: var(--wx-surface-base);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(37,99,235,0.12), 0 4px 20px rgba(0,0,0,0.06);
+      padding: 52px 48px;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    /* Progress bar */
+    .onboard-progress-wrap {
+      margin-bottom: 40px;
+    }
+    .onboard-progress-steps {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .onboard-step-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      position: relative;
+    }
+    .onboard-step-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: calc(50% + 20px);
+      top: 16px;
+      right: calc(-50% + 20px);
+      height: 2px;
+      background: var(--wx-border-default);
+      transition: background var(--wx-duration-normal);
+    }
+    .onboard-step-item.done::after,
+    .onboard-step-item.active::after {
+      background: var(--wx-brand-primary);
+    }
+    .onboard-step-circle {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700;
+      background: var(--wx-border-default);
+      color: var(--wx-text-muted);
+      transition: all var(--wx-duration-normal);
+      z-index: 1;
+    }
+    .onboard-step-item.active .onboard-step-circle {
+      background: var(--wx-brand-primary);
+      color: #fff;
+      box-shadow: var(--wx-shadow-brand);
+    }
+    .onboard-step-item.done .onboard-step-circle {
+      background: var(--wx-success-solid);
+      color: #fff;
+    }
+    .onboard-step-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--wx-text-muted);
+      text-align: center;
+      white-space: nowrap;
+    }
+    .onboard-step-item.active .onboard-step-label { color: var(--wx-brand-primary); font-weight: 600; }
+    .onboard-step-item.done .onboard-step-label { color: var(--wx-success-text); }
+
+    /* Step content */
+    .onboard-step-content { display: none; }
+    .onboard-step-content.active { display: block; }
+
+    .onboard-step-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--wx-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .onboard-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--wx-text-primary);
+      margin: 0 0 8px;
+    }
+    .onboard-sub {
+      font-size: 14px;
+      color: var(--wx-text-secondary);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .auth-field {
+      margin-bottom: 18px;
+    }
+    .auth-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wx-text-primary);
+      margin-bottom: 6px;
+    }
+    .auth-input {
+      width: 100%;
+      height: 44px;
+      border: 1.5px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      padding: 0 14px;
+      font-size: 14px;
+      font-family: var(--wx-font-primary);
+      color: var(--wx-text-primary);
+      background: var(--wx-surface-sunken);
+      transition: all var(--wx-duration-fast);
+      box-sizing: border-box;
+    }
+    .auth-input:focus {
+      outline: none;
+      border-color: var(--wx-brand-primary);
+      box-shadow: var(--wx-shadow-focus);
+      background: var(--wx-surface-base);
+    }
+
+    /* Role cards */
+    .role-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .role-card {
+      border: 2px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      padding: 16px;
+      cursor: pointer;
+      transition: all var(--wx-duration-fast);
+      background: var(--wx-surface-base);
+    }
+    .role-card:hover {
+      border-color: var(--wx-brand-300);
+      background: var(--wx-brand-50);
+    }
+    .role-card.selected {
+      border-color: var(--wx-brand-primary);
+      background: var(--wx-brand-50);
+      box-shadow: var(--wx-shadow-focus);
+    }
+    .role-card-icon { font-size: 28px; margin-bottom: 8px; }
+    .role-card-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--wx-text-primary);
+      margin-bottom: 2px;
+    }
+    .role-card-desc {
+      font-size: 11px;
+      color: var(--wx-text-muted);
+    }
+    .role-card.selected .role-card-name { color: var(--wx-brand-primary); }
+
+    /* Success step */
+    .success-box {
+      text-align: center;
+      padding: 16px 0;
+    }
+    .success-big-icon {
+      font-size: 80px;
+      display: block;
+      margin-bottom: 16px;
+      animation: pop 0.5s var(--wx-easing-bounce);
+    }
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .success-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--wx-text-primary);
+      margin-bottom: 10px;
+    }
+    .success-desc {
+      font-size: 14px;
+      color: var(--wx-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    /* Bottom buttons */
+    .onboard-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .onboard-btns.single { grid-template-columns: 1fr; }
+
+    .auth-btn-primary {
+      width: 100%;
+      height: 46px;
+      background: var(--wx-gradient-button);
+      color: #fff;
+      border: none;
+      border-radius: var(--wx-radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--wx-duration-fast), transform var(--wx-duration-fast);
+      box-shadow: var(--wx-shadow-brand);
+    }
+    .auth-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .auth-btn-secondary {
+      width: 100%;
+      height: 46px;
+      background: var(--wx-surface-sunken);
+      color: var(--wx-text-secondary);
+      border: 1.5px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--wx-duration-fast);
+    }
+    .auth-btn-secondary:hover { background: var(--wx-hover-bg); border-color: var(--wx-brand-300); }
+  </style>
+</head>
+<body>
+
+<div class="onboard-card">
+  <!-- Progress steps -->
+  <div class="onboard-progress-wrap">
+    <div class="onboard-progress-steps">
+      <div class="onboard-step-item active" id="step-item-1">
+        <div class="onboard-step-circle">1</div>
+        <div class="onboard-step-label">Tài khoản</div>
+      </div>
+      <div class="onboard-step-item" id="step-item-2">
+        <div class="onboard-step-circle">2</div>
+        <div class="onboard-step-label">Vai trò</div>
+      </div>
+      <div class="onboard-step-item" id="step-item-3">
+        <div class="onboard-step-circle">3</div>
+        <div class="onboard-step-label">Hoàn tất</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="onboard-step-content active" data-step="1">
+    <div class="onboard-step-badge">Bước 1 / 3</div>
+    <h2 class="onboard-title">Chào mừng! Hãy thiết lập 👋</h2>
+    <p class="onboard-sub">Cho chúng tôi biết về bạn để cá nhân hóa trải nghiệm.</p>
+
+    <div class="auth-field">
+      <label>Họ và tên đầy đủ</label>
+      <input type="text" class="auth-input" placeholder="Nguyễn Văn A" value="Nguyễn Văn A">
+    </div>
+    <div class="auth-field">
+      <label>Tên công ty / Tổ chức</label>
+      <input type="text" class="auth-input" placeholder="Công ty TNHH ABC">
+    </div>
+    <div class="auth-field">
+      <label>Quy mô tổ chức</label>
+      <select class="auth-input">
+        <option value="">Chọn quy mô</option>
+        <option>1 - 10 người</option>
+        <option selected>11 - 50 người</option>
+        <option>51 - 200 người</option>
+        <option>200+ người</option>
+      </select>
+    </div>
+
+    <div class="onboard-btns single">
+      <button class="auth-btn-primary" data-next-step="2">Tiếp theo →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="onboard-step-content" data-step="2">
+    <div class="onboard-step-badge">Bước 2 / 3</div>
+    <h2 class="onboard-title">Vai trò của bạn là gì?</h2>
+    <p class="onboard-sub">Chọn vai trò phù hợp để chúng tôi gợi ý tính năng hữu ích.</p>
+
+    <div class="role-cards">
+      <div class="role-card selected" onclick="selectRole(this)">
+        <div class="role-card-icon">💻</div>
+        <div class="role-card-name">Lập trình viên</div>
+        <div class="role-card-desc">Dev, Engineer</div>
+      </div>
+      <div class="role-card" onclick="selectRole(this)">
+        <div class="role-card-icon">🎨</div>
+        <div class="role-card-name">Nhà thiết kế</div>
+        <div class="role-card-desc">UI/UX, Graphic</div>
+      </div>
+      <div class="role-card" onclick="selectRole(this)">
+        <div class="role-card-icon">📊</div>
+        <div class="role-card-name">Quản lý sản phẩm</div>
+        <div class="role-card-desc">PM, PO</div>
+      </div>
+      <div class="role-card" onclick="selectRole(this)">
+        <div class="role-card-icon">🚀</div>
+        <div class="role-card-name">CEO / Founder</div>
+        <div class="role-card-desc">Lãnh đạo</div>
+      </div>
+      <div class="role-card" onclick="selectRole(this)">
+        <div class="role-card-icon">📈</div>
+        <div class="role-card-name">Marketing</div>
+        <div class="role-card-desc">Growth, Brand</div>
+      </div>
+      <div class="role-card" onclick="selectRole(this)">
+        <div class="role-card-icon">🔧</div>
+        <div class="role-card-name">Khác</div>
+        <div class="role-card-desc">Vai trò khác</div>
+      </div>
+    </div>
+
+    <div class="onboard-btns">
+      <button class="auth-btn-secondary" data-prev-step="1">← Quay lại</button>
+      <button class="auth-btn-primary" data-next-step="3">Hoàn tất →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="onboard-step-content" data-step="3">
+    <div class="success-box">
+      <span class="success-big-icon">🎉</span>
+      <div class="success-title">Hoàn tất! Chào mừng!</div>
+      <p class="success-desc">
+        Tài khoản của bạn đã được thiết lập thành công.<br>
+        Hãy bắt đầu khám phá WemakeUI ngay bây giờ! 🚀
+      </p>
+
+      <div style="display:flex; gap:12px; flex-direction: column;">
+        <a href="../dashboard/overview.html" class="auth-btn-primary" style="display:flex;align-items:center;justify-content:center;text-decoration:none;height:46px;border-radius:12px;font-size:15px;font-weight:600;">
+          🏠 Đến Dashboard
+        </a>
+        <a href="workspace.html" style="display:flex;align-items:center;justify-content:center;height:44px;border:1.5px solid var(--wx-border-default);border-radius:12px;font-size:14px;font-weight:600;color:var(--wx-text-secondary);text-decoration:none;">
+          🏢 Chọn Workspace
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  let currentStep = 1;
+
+  function updateProgress(step) {
+    for (let i = 1; i <= 3; i++) {
+      const item = document.getElementById('step-item-' + i);
+      const circle = item.querySelector('.onboard-step-circle');
+      item.className = 'onboard-step-item';
+      if (i < step) {
+        item.classList.add('done');
+        circle.textContent = '✓';
+      } else if (i === step) {
+        item.classList.add('active');
+        circle.textContent = i;
+      } else {
+        circle.textContent = i;
+      }
+    }
+  }
+
+  function showStep(step) {
+    document.querySelectorAll('.onboard-step-content').forEach(el => el.classList.remove('active'));
+    document.querySelector('[data-step="' + step + '"]').classList.add('active');
+    updateProgress(step);
+    currentStep = step;
+  }
+
+  document.querySelectorAll('[data-next-step]').forEach(btn => {
+    btn.addEventListener('click', () => showStep(parseInt(btn.getAttribute('data-next-step'))));
+  });
+  document.querySelectorAll('[data-prev-step]').forEach(btn => {
+    btn.addEventListener('click', () => showStep(parseInt(btn.getAttribute('data-prev-step'))));
+  });
+
+  function selectRole(card) {
+    document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+  }
+</script>
+</body>
+</html>

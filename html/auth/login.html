@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body { margin: 0; background: var(--wx-surface-sunken); }
+
+    .wx-auth-layout {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      min-height: 100vh;
+    }
+
+    /* LEFT PANEL */
+    .auth-panel-left {
+      background: linear-gradient(145deg, #1e40af 0%, #0891b2 50%, #1d4ed8 100%);
+      display: flex;
+      flex-direction: column;
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-panel-left::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .auth-panel-left::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -60px;
+      width: 240px; height: 240px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+    .auth-left-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 60px;
+      position: relative;
+      z-index: 1;
+    }
+    .auth-left-logo-mark {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .auth-left-logo-text {
+      font-weight: 700; font-size: 20px; color: #fff;
+    }
+    .auth-left-tagline {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .auth-left-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+    .auth-testimonial {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+    .auth-testimonial-text {
+      font-size: 15px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .auth-testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .auth-testimonial-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px; color: #fff;
+    }
+    .auth-testimonial-name {
+      font-size: 13px; font-weight: 600; color: #fff;
+    }
+    .auth-testimonial-role {
+      font-size: 11px; color: rgba(255,255,255,0.6);
+    }
+    .auth-features {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .auth-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      padding: 6px 0;
+    }
+    .auth-features li span:first-child {
+      font-size: 16px;
+    }
+
+    /* RIGHT PANEL */
+    .auth-panel-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      background: var(--wx-surface-base);
+    }
+    .auth-form-box {
+      width: 100%;
+      max-width: 400px;
+    }
+    .auth-form-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--wx-text-primary);
+      margin: 0 0 8px;
+    }
+    .auth-form-sub {
+      font-size: 14px;
+      color: var(--wx-text-secondary);
+      margin-bottom: 32px;
+    }
+    .auth-field {
+      margin-bottom: 20px;
+    }
+    .auth-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wx-text-primary);
+      margin-bottom: 6px;
+    }
+    .auth-input {
+      width: 100%;
+      height: 42px;
+      border: 1px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-md);
+      padding: 0 14px;
+      font-size: 14px;
+      font-family: var(--wx-font-primary);
+      color: var(--wx-text-primary);
+      background: var(--wx-surface-base);
+      transition: border-color var(--wx-duration-fast), box-shadow var(--wx-duration-fast);
+      box-sizing: border-box;
+    }
+    .auth-input:focus {
+      outline: none;
+      border-color: var(--wx-brand-primary);
+      box-shadow: var(--wx-shadow-focus);
+    }
+    .auth-input-wrap {
+      position: relative;
+    }
+    .auth-input-wrap .auth-input {
+      padding-right: 42px;
+    }
+    .auth-input-toggle {
+      position: absolute;
+      right: 12px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; padding: 0;
+      color: var(--wx-text-muted);
+      font-size: 16px;
+    }
+    .auth-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .auth-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+      cursor: pointer;
+    }
+    .auth-checkbox input { cursor: pointer; }
+    .auth-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--wx-brand-primary);
+    }
+    .auth-btn-primary {
+      width: 100%;
+      height: 44px;
+      background: var(--wx-gradient-button);
+      color: #fff;
+      border: none;
+      border-radius: var(--wx-radius-md);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--wx-duration-fast), transform var(--wx-duration-fast);
+      margin-bottom: 20px;
+    }
+    .auth-btn-primary:hover { opacity: 0.92; transform: translateY(-1px); }
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .auth-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--wx-border-default);
+    }
+    .auth-divider-text {
+      font-size: 12px;
+      color: var(--wx-text-muted);
+      white-space: nowrap;
+    }
+    .auth-social-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .auth-social-btn {
+      height: 42px;
+      border: 1px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-md);
+      background: var(--wx-surface-base);
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wx-text-primary);
+      cursor: pointer;
+      transition: background var(--wx-duration-fast), border-color var(--wx-duration-fast);
+    }
+    .auth-social-btn:hover { background: var(--wx-hover-bg); border-color: var(--wx-brand-200); }
+    .auth-social-icon { font-size: 18px; }
+    .auth-footer-text {
+      text-align: center;
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+    }
+    .auth-footer-text a { font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .wx-auth-layout { grid-template-columns: 1fr; }
+      .auth-panel-left { display: none; }
+      .auth-panel-right { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wx-auth-layout">
+  <!-- LEFT PANEL -->
+  <aside class="auth-panel-left">
+    <div class="auth-left-logo">
+      <div class="auth-left-logo-mark">W</div>
+      <span class="auth-left-logo-text">WemakeUI</span>
+    </div>
+
+    <div class="auth-left-tagline">Chào mừng<br>trở lại! 👋</div>
+    <p class="auth-left-sub">Đăng nhập để truy cập workspace và tiếp tục công việc của bạn.</p>
+
+    <div class="auth-testimonial">
+      <p class="auth-testimonial-text">"WemakeUI giúp chúng tôi xây dựng giao diện đẹp và nhất quán trong thời gian kỷ lục. Thật sự ấn tượng!"</p>
+      <div class="auth-testimonial-author">
+        <div class="auth-testimonial-avatar">TN</div>
+        <div>
+          <div class="auth-testimonial-name">Trần Ngọc</div>
+          <div class="auth-testimonial-role">Product Designer tại TechViet</div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="auth-features">
+      <li><span>✓</span><span>Bảo mật 2 lớp (2FA)</span></li>
+      <li><span>✓</span><span>Đồng bộ đa thiết bị</span></li>
+      <li><span>✓</span><span>Hỗ trợ 24/7</span></li>
+      <li><span>✓</span><span>Dữ liệu được mã hóa</span></li>
+    </ul>
+  </aside>
+
+  <!-- RIGHT PANEL -->
+  <main class="auth-panel-right">
+    <div class="auth-form-box">
+      <h1 class="auth-form-title">Đăng nhập</h1>
+      <p class="auth-form-sub">Nhập thông tin tài khoản của bạn để tiếp tục.</p>
+
+      <form>
+        <div class="auth-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="auth-input" placeholder="you@example.com" value="admin@wemakeui.vn">
+        </div>
+
+        <div class="auth-field">
+          <label for="password">Mật khẩu</label>
+          <div class="auth-input-wrap">
+            <input type="password" id="password" class="auth-input" placeholder="••••••••" value="password123">
+            <button type="button" class="auth-input-toggle" onclick="togglePass('password', this)">👁</button>
+          </div>
+        </div>
+
+        <div class="auth-row">
+          <label class="auth-checkbox">
+            <input type="checkbox" checked> Ghi nhớ đăng nhập
+          </label>
+          <a href="forgot.html" class="auth-link">Quên mật khẩu?</a>
+        </div>
+
+        <button type="submit" class="auth-btn-primary">Đăng nhập</button>
+      </form>
+
+      <div class="auth-divider">
+        <div class="auth-divider-line"></div>
+        <span class="auth-divider-text">hoặc tiếp tục với</span>
+        <div class="auth-divider-line"></div>
+      </div>
+
+      <div class="auth-social-btns">
+        <button class="auth-social-btn">
+          <span class="auth-social-icon">🇬</span> Google
+        </button>
+        <button class="auth-social-btn">
+          <span class="auth-social-icon">🪟</span> Microsoft
+        </button>
+      </div>
+
+      <p class="auth-footer-text">
+        Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
+      </p>
+    </div>
+  </main>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  function togglePass(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      btn.textContent = '👁';
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Danh bạ — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .alpha { display:flex;flex-wrap:wrap;gap:2px; }
+  .alpha-l { width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:var(--wx-radius-sm);font-size:var(--wx-fs-xs);font-weight:600;cursor:pointer;color:var(--wx-text-muted); }
+  .alpha-l:hover,.alpha-l.active { background:var(--wx-brand-primary);color:#fff; }
+  .ct-card { padding:18px;border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-lg);background:var(--wx-surface-base);transition:all .15s; }
+  .ct-card:hover { box-shadow:var(--wx-shadow-sm);border-color:var(--wx-brand-300); }
+  .ct-action { display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--wx-border-subtle); }
+  .ct-action button { flex:1;padding:6px;border:1px solid var(--wx-border-default);background:var(--wx-surface-base);border-radius:var(--wx-radius-md);cursor:pointer;font-size:14px; }
+  .ct-action button:hover{background:var(--wx-hover-bg);}
+  .vt-btn { padding:6px 10px;border:1px solid var(--wx-border-default);background:var(--wx-surface-base);border-radius:var(--wx-radius-md);cursor:pointer;font-size:15px; }
+  .vt-btn.active{background:var(--wx-brand-primary);color:#fff;border-color:var(--wx-brand-primary);}
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item active"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Danh bạ</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <div style="position:relative;width:280px;">
+          <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);">🔍</span>
+          <input class="wx-input" style="padding-left:34px;" placeholder="Tìm liên hệ...">
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex gap-1"><button class="vt-btn active" title="Lưới">⊞</button><button class="vt-btn" title="Danh sách">☰</button></div>
+          <button class="wx-btn wx-btn-secondary wx-btn-sm">⬆ Nhập</button>
+          <button class="wx-btn wx-btn-secondary wx-btn-sm">⬇ Xuất</button>
+          <button class="wx-btn wx-btn-primary">+ Thêm liên hệ</button>
+        </div>
+      </div>
+
+      <div class="alpha mb-4">
+        <span class="alpha-l active">Tất cả</span>
+        <span class="alpha-l">A</span><span class="alpha-l">B</span><span class="alpha-l">C</span><span class="alpha-l">D</span><span class="alpha-l">Đ</span><span class="alpha-l">E</span><span class="alpha-l">G</span><span class="alpha-l">H</span><span class="alpha-l">I</span><span class="alpha-l">K</span><span class="alpha-l">L</span><span class="alpha-l">M</span><span class="alpha-l">N</span><span class="alpha-l">O</span><span class="alpha-l">P</span><span class="alpha-l">Q</span><span class="alpha-l">R</span><span class="alpha-l">S</span><span class="alpha-l">T</span><span class="alpha-l">U</span><span class="alpha-l">V</span><span class="alpha-l">X</span><span class="alpha-l">Y</span>
+      </div>
+
+      <div class="wx-grid wx-grid-3">
+        <div class="ct-card">
+          <div class="flex items-center gap-3"><span class="wx-avatar wx-avatar-lg">BL</span><div><div class="font-semibold">Bùi Thị Lan</div><div class="text-xs text-muted">Giám đốc Marketing @ Sao Việt JSC</div></div></div>
+          <div class="text-sm text-muted mt-3"><div class="mb-1">✉️ lan.bui@saoviet.vn</div><div>📞 0903 112 233</div></div>
+          <div class="ct-action"><button title="Gửi email">✉️</button><button title="Gọi điện">📞</button><button title="Chỉnh sửa">✎</button></div>
+        </div>
+        <div class="ct-card">
+          <div class="flex items-center gap-3"><span class="wx-avatar wx-avatar-lg">CT</span><div><div class="font-semibold">Cao Văn Tài</div><div class="text-xs text-muted">Trưởng phòng Kinh doanh @ Minh Long Co.</div></div></div>
+          <div class="text-sm text-muted mt-3"><div class="mb-1">✉️ tai.cao@minhlong.com.vn</div><div>📞 0918 445 667</div></div>
+          <div class="ct-action"><button title="Gửi email">✉️</button><button title="Gọi điện">📞</button><button title="Chỉnh sửa">✎</button></div>
+        </div>
+        <div class="ct-card">
+          <div class="flex items-center gap-3"><span class="wx-avatar wx-avatar-lg">DN</span><div><div class="font-semibold">Dương Thị Ngọc</div><div class="text-xs text-muted">Kế toán trưởng @ An Khang Pharma</div></div></div>
+          <div class="text-sm text-muted mt-3"><div class="mb-1">✉️ ngoc.duong@ankhang.vn</div><div>📞 0987 223 114</div></div>
+          <div class="ct-action"><button title="Gửi email">✉️</button><button title="Gọi điện">📞</button><button title="Chỉnh sửa">✎</button></div>
+        </div>
+        <div class="ct-card">
+          <div class="flex items-center gap-3"><span class="wx-avatar wx-avatar-lg">ĐH</span><div><div class="font-semibold">Đặng Quốc Hùng</div><div class="text-xs text-muted">CEO @ Đông Á Logistics</div></div></div>
+          <div class="text-sm text-muted mt-3"><div class="mb-1">✉️ hung.dang@dongalog.vn</div><div>📞 0909 778 990</div></div>
+          <div class="ct-action"><button title="Gửi email">✉️</button><button title="Gọi điện">📞</button><button title="Chỉnh sửa">✎</button></div>
+        </div>
+        <div class="ct-card">
+          <div class="flex items-center gap-3"><span class="wx-avatar wx-avatar-lg">HM</span><div><div class="font-semibold">Hồ Thị Mai</div><div class="text-xs text-muted">Quản lý dự án @ Biển Xanh Resort</div></div></div>
+          <div class="text-sm text-muted mt-3"><div class="mb-1">✉️ mai.ho@bienxanh.vn</div><div>📞 0911 334 556</div></div>
+          <div class="ct-action"><button title="Gửi email">✉️</button><button title="Gọi điện">📞</button><button title="Chỉnh sửa">✎</button></div>
+        </div>
+        <div class="ct-card">
+          <div class="flex items-center gap-3"><span class="wx-avatar wx-avatar-lg">LK</span><div><div class="font-semibold">Lý Văn Khoa</div><div class="text-xs text-muted">Giám đốc kỹ thuật @ FPT Software</div></div></div>
+          <div class="text-sm text-muted mt-3"><div class="mb-1">✉️ khoa.ly@fpt.com.vn</div><div>📞 0936 221 887</div></div>
+          <div class="ct-action"><button title="Gửi email">✉️</button><button title="Gọi điện">📞</button><button title="Chỉnh sửa">✎</button></div>
+        </div>
+        <div class="ct-card">
+          <div class="flex items-center gap-3"><span class="wx-avatar wx-avatar-lg">PT</span><div><div class="font-semibold">Phạm Thanh Tú</div><div class="text-xs text-muted">Trưởng phòng Nhân sự @ VNG Corporation</div></div></div>
+          <div class="text-sm text-muted mt-3"><div class="mb-1">✉️ tu.pham@vng.com.vn</div><div>📞 0908 556 778</div></div>
+          <div class="ct-action"><button title="Gửi email">✉️</button><button title="Gọi điện">📞</button><button title="Chỉnh sửa">✎</button></div>
+        </div>
+        <div class="ct-card">
+          <div class="flex items-center gap-3"><span class="wx-avatar wx-avatar-lg">TH</span><div><div class="font-semibold">Trịnh Thu Hằng</div><div class="text-xs text-muted">Giám đốc điều hành @ Hương Sen Group</div></div></div>
+          <div class="text-sm text-muted mt-3"><div class="mb-1">✉️ hang.trinh@huongsen.vn</div><div>📞 0912 667 889</div></div>
+          <div class="ct-action"><button title="Gửi email">✉️</button><button title="Gọi điện">📞</button><button title="Chỉnh sửa">✎</button></div>
+        </div>
+        <div class="ct-card">
+          <div class="flex items-center gap-3"><span class="wx-avatar wx-avatar-lg">VN</span><div><div class="font-semibold">Vương Hồng Nhung</div><div class="text-xs text-muted">Chuyên viên đối ngoại @ Tiki Trading</div></div></div>
+          <div class="text-sm text-muted mt-3"><div class="mb-1">✉️ nhung.vuong@tiki.vn</div><div>📞 0977 889 001</div></div>
+          <div class="ct-action"><button title="Gửi email">✉️</button><button title="Gọi điện">📞</button><button title="Chỉnh sửa">✎</button></div>
+        </div>
+      </div>
+
+      <div class="wx-pagination" style="justify-content:center;margin-top:24px;">
+        <button class="wx-page-btn">‹</button>
+        <button class="wx-page-btn active">1</button>
+        <button class="wx-page-btn">2</button>
+        <button class="wx-page-btn">3</button>
+        <button class="wx-page-btn">›</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

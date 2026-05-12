@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thành viên — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">SaaS Admin</div>
+      <a href="dashboard.html" class="wx-nav-item"><span class="wx-nav-icon">📊</span><span>Bảng điều khiển</span></a>
+      <a href="members.html" class="wx-nav-item active"><span class="wx-nav-icon">👥</span><span>Thành viên</span></a>
+      <a href="products.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="transactions.html" class="wx-nav-item"><span class="wx-nav-icon">💳</span><span>Giao dịch</span></a>
+      <a href="versions.html" class="wx-nav-item"><span class="wx-nav-icon">🔖</span><span>Phiên bản</span></a>
+      <a href="statistics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Thống kê</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Thành viên</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Thành viên</h1>
+        <p class="text-muted" style="margin:0">Quản lý người dùng, gói dịch vụ và trạng thái tài khoản.</p>
+      </div>
+
+      <div class="wx-grid-4 mb-4">
+        <div class="wx-stat-card"><div class="wx-stat-label">Tổng thành viên</div><div class="wx-stat-value">4,821</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Trả phí</div><div class="wx-stat-value">1,284</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Dùng thử</div><div class="wx-stat-value">342</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Bị khoá</div><div class="wx-stat-value">18</div></div>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header">
+          <div class="flex items-center gap-2" style="flex-wrap:wrap;width:100%">
+            <div class="ig flex-1" style="display:flex;align-items:stretch;border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-md);overflow:hidden;max-width:320px">
+              <span style="display:flex;align-items:center;padding:0 12px;background:var(--wx-surface-sunken);color:var(--wx-text-muted)">🔍</span>
+              <input type="text" class="wx-input" placeholder="Tìm theo tên, email..." style="border:none;border-radius:0">
+            </div>
+            <select class="wx-select" style="max-width:160px"><option>Tất cả gói</option><option>Cơ bản</option><option>Pro</option><option>Doanh nghiệp</option></select>
+            <select class="wx-select" style="max-width:160px"><option>Tất cả trạng thái</option><option>Hoạt động</option><option>Dùng thử</option><option>Bị khoá</option></select>
+            <button class="wx-btn wx-btn-primary" style="margin-left:auto">➕ Mời thành viên</button>
+          </div>
+        </div>
+        <div class="wx-card-body" style="padding:0">
+          <table class="wx-table">
+            <thead><tr><th>Thành viên</th><th>Email</th><th>Gói</th><th>Trạng thái</th><th>Tham gia</th><th>Đăng nhập cuối</th><th>Thao tác</th></tr></thead>
+            <tbody>
+              <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">NA</div> Nguyễn Văn An</div></td><td>an.nguyen@gmail.com</td><td><span class="wx-badge wx-badge-primary">Pro</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td>12/03/2024</td><td>Hôm nay, 09:14</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">TB</div> Trần Thị Bích</div></td><td>bich.tt@outlook.com</td><td><span class="wx-badge wx-badge-neutral">Cơ bản</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td>05/06/2024</td><td>Hôm qua, 16:42</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">LC</div> Lê Hoàng Cường</div></td><td>cuong.lh@company.vn</td><td><span class="wx-badge wx-badge-warning">Doanh nghiệp</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td>18/01/2025</td><td>3 ngày trước</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">PD</div> Phạm Thuỳ Dung</div></td><td>dung.pham@gmail.com</td><td><span class="wx-badge wx-badge-info">Dùng thử</span></td><td><span class="wx-badge wx-badge-info">Dùng thử</span></td><td>02/05/2026</td><td>Hôm nay, 08:01</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">HE</div> Hoàng Văn Em</div></td><td>em.hv@yahoo.com</td><td><span class="wx-badge wx-badge-neutral">Cơ bản</span></td><td><span class="wx-badge wx-badge-warning">Tạm khoá</span></td><td>22/08/2024</td><td>2 tuần trước</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">VG</div> Vũ Thị Giang</div></td><td>giang.vu@gmail.com</td><td><span class="wx-badge wx-badge-primary">Pro</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td>11/11/2024</td><td>Hôm nay, 07:30</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">ĐH</div> Đỗ Văn Hùng</div></td><td>hung.do@company.vn</td><td><span class="wx-badge wx-badge-warning">Doanh nghiệp</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td>30/09/2023</td><td>Hôm qua, 11:20</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">BI</div> Bùi Thị Inh</div></td><td>inh.bui@gmail.com</td><td><span class="wx-badge wx-badge-neutral">Cơ bản</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td>14/02/2025</td><td>5 ngày trước</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">NK</div> Ngô Văn Khôi</div></td><td>khoi.ngo@outlook.com</td><td><span class="wx-badge wx-badge-info">Dùng thử</span></td><td><span class="wx-badge wx-badge-info">Dùng thử</span></td><td>08/05/2026</td><td>Hôm nay, 10:55</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">DL</div> Dương Thị Lan</div></td><td>lan.duong@gmail.com</td><td><span class="wx-badge wx-badge-primary">Pro</span></td><td><span class="wx-badge wx-badge-danger">Đã khoá</span></td><td>19/07/2024</td><td>1 tháng trước</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="wx-card-footer flex justify-between items-center">
+          <span class="text-sm text-muted">Hiển thị 1–10 trong 4,821 thành viên</span>
+          <div class="wx-pagination">
+            <button class="wx-page-btn">‹</button>
+            <button class="wx-page-btn active">1</button>
+            <button class="wx-page-btn">2</button>
+            <button class="wx-page-btn">3</button>
+            <span class="text-muted">…</span>
+            <button class="wx-page-btn">483</button>
+            <button class="wx-page-btn">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

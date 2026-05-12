@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xác minh OTP — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fdf4ff 0%, #eff6ff 50%, #f0fdf4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .otp-card {
+      background: var(--wx-surface-base);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(37,99,235,0.1), 0 4px 16px rgba(0,0,0,0.06);
+      padding: 52px 44px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .otp-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .otp-logo-mark {
+      width: 40px; height: 40px;
+      background: var(--wx-gradient-button);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #fff;
+    }
+    .otp-logo-text {
+      font-weight: 800; font-size: 20px;
+      background: var(--wx-gradient-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .otp-icon {
+      font-size: 56px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .otp-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--wx-text-primary);
+      margin: 0 0 10px;
+    }
+    .otp-desc {
+      font-size: 14px;
+      color: var(--wx-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .otp-phone {
+      font-weight: 700;
+      color: var(--wx-brand-primary);
+    }
+
+    /* OTP Inputs */
+    .otp-inputs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 32px 0;
+    }
+    .otp-digit {
+      width: 52px; height: 60px;
+      border: 2px solid var(--wx-border-default);
+      border-radius: 12px;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--wx-text-primary);
+      background: var(--wx-surface-sunken);
+      transition: all var(--wx-duration-fast);
+      font-family: var(--wx-font-mono);
+      outline: none;
+    }
+    .otp-digit:focus {
+      border-color: var(--wx-brand-primary);
+      box-shadow: var(--wx-shadow-focus);
+      background: var(--wx-surface-base);
+    }
+    .otp-digit.filled {
+      border-color: var(--wx-brand-400);
+      background: var(--wx-brand-50);
+      color: var(--wx-brand-primary);
+    }
+
+    .otp-timer {
+      font-size: 13px;
+      color: var(--wx-text-muted);
+      margin-bottom: 24px;
+    }
+    .otp-timer span {
+      font-weight: 700;
+      color: var(--wx-text-primary);
+    }
+    #timerVal { color: var(--wx-brand-primary); }
+
+    .auth-btn-primary {
+      width: 100%;
+      height: 46px;
+      background: var(--wx-gradient-button);
+      color: #fff;
+      border: none;
+      border-radius: var(--wx-radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--wx-duration-fast), transform var(--wx-duration-fast);
+      margin-bottom: 20px;
+      box-shadow: var(--wx-shadow-brand);
+    }
+    .auth-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .auth-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .otp-resend {
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+      margin-bottom: 8px;
+    }
+    .otp-resend-link {
+      font-weight: 600;
+      color: var(--wx-brand-primary);
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 13px;
+      padding: 0;
+    }
+    .otp-resend-link:disabled { color: var(--wx-text-muted); cursor: not-allowed; }
+
+    .otp-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+      text-decoration: none;
+      margin-top: 16px;
+    }
+    .otp-back:hover { color: var(--wx-brand-primary); text-decoration: none; }
+
+    .otp-attempts {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+    .otp-attempt-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--wx-success-solid);
+    }
+    .otp-attempt-dot.used { background: var(--wx-border-default); }
+  </style>
+</head>
+<body>
+
+<div class="otp-card">
+  <div class="otp-logo">
+    <div class="otp-logo-mark">W</div>
+    <span class="otp-logo-text">WemakeUI</span>
+  </div>
+
+  <span class="otp-icon">🔐</span>
+
+  <h1 class="otp-title">Xác minh OTP</h1>
+  <p class="otp-desc">
+    Chúng tôi đã gửi mã OTP gồm 6 chữ số đến<br>
+    <span class="otp-phone">+84 909 *** 123</span>
+  </p>
+
+  <div class="otp-inputs">
+    <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]">
+    <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]">
+    <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]">
+    <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]">
+    <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]">
+    <input type="text" class="otp-digit" maxlength="1" inputmode="numeric" pattern="[0-9]">
+  </div>
+
+  <div class="otp-timer">
+    Mã hết hạn sau <span id="timerVal">04:59</span>
+  </div>
+
+  <div class="otp-attempts">
+    <span style="font-size:12px; color: var(--wx-text-muted); margin-right:6px;">Lần thử:</span>
+    <div class="otp-attempt-dot"></div>
+    <div class="otp-attempt-dot"></div>
+    <div class="otp-attempt-dot"></div>
+  </div>
+
+  <button type="button" class="auth-btn-primary" id="verifyBtn" onclick="verifyOTP()">
+    Xác minh mã OTP
+  </button>
+
+  <p class="otp-resend">
+    Chưa nhận được mã?
+    <button class="otp-resend-link" id="resendBtn" onclick="resendOTP()" disabled>
+      Gửi lại mã
+    </button>
+  </p>
+
+  <a href="login.html" class="otp-back">← Quay lại đăng nhập</a>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  // OTP input auto-focus
+  const digits = document.querySelectorAll('.otp-digit');
+  digits.forEach((input, i) => {
+    input.addEventListener('input', () => {
+      input.value = input.value.replace(/\D/g, '');
+      if (input.value && input.classList) {
+        input.classList.add('filled');
+        if (i < digits.length - 1) digits[i + 1].focus();
+      } else {
+        input.classList.remove('filled');
+      }
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !input.value && i > 0) {
+        digits[i - 1].focus();
+        digits[i - 1].classList.remove('filled');
+      }
+    });
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,'').slice(0, 6);
+      paste.split('').forEach((ch, j) => {
+        if (digits[j]) {
+          digits[j].value = ch;
+          digits[j].classList.add('filled');
+        }
+      });
+    });
+  });
+
+  // Timer countdown
+  let seconds = 299;
+  const timerEl = document.getElementById('timerVal');
+  const resendBtn = document.getElementById('resendBtn');
+  const timer = setInterval(() => {
+    seconds--;
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    timerEl.textContent = m + ':' + s;
+    if (seconds <= 0) {
+      clearInterval(timer);
+      timerEl.textContent = '00:00';
+      timerEl.style.color = 'var(--wx-danger-solid)';
+      resendBtn.disabled = false;
+    }
+  }, 1000);
+
+  function resendOTP() {
+    resendBtn.disabled = true;
+    resendBtn.textContent = 'Đã gửi!';
+    seconds = 299;
+    timerEl.style.color = 'var(--wx-brand-primary)';
+    digits.forEach(d => { d.value = ''; d.classList.remove('filled'); });
+    digits[0].focus();
+    const t2 = setInterval(() => {
+      seconds--;
+      const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+      const s = (seconds % 60).toString().padStart(2, '0');
+      timerEl.textContent = m + ':' + s;
+      if (seconds <= 0) { clearInterval(t2); resendBtn.disabled = false; resendBtn.textContent = 'Gửi lại mã'; }
+    }, 1000);
+  }
+
+  function verifyOTP() {
+    const code = Array.from(digits).map(d => d.value).join('');
+    if (code.length < 6) { alert('Vui lòng nhập đầy đủ 6 chữ số OTP!'); return; }
+    alert('Xác minh thành công! Chào mừng bạn trở lại.');
+    window.location.href = '../dashboard/overview.html';
+  }
+</script>
+</body>
+</html>

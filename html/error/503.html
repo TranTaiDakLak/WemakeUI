@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>503 — Bảo trì hệ thống | WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+  <div class="wx-error-page">
+    <div class="wx-error-blob" style="top:-60px;left:-60px;width:360px;height:360px;background:var(--wx-info,#3b82f6);opacity:0.12;"></div>
+    <div class="wx-error-blob" style="bottom:-80px;right:-40px;width:400px;height:400px;background:var(--wx-primary);opacity:0.1;"></div>
+
+    <div class="wx-error-box">
+      <div style="font-size:3.5rem;margin-bottom:0.5rem;">🔧</div>
+      <div class="wx-error-code">503</div>
+      <h1 class="wx-error-title">Hệ thống đang bảo trì</h1>
+      <p class="wx-error-desc">
+        Chúng tôi đang nâng cấp hệ thống để phục vụ bạn tốt hơn.<br>
+        Vui lòng quay lại sau <strong>30 phút</strong>.
+      </p>
+
+      <!-- Estimated time -->
+      <div style="margin:1.5rem 0;padding:1rem 1.5rem;background:var(--wx-surface-2,rgba(59,130,246,0.08));border:1px solid var(--wx-border);border-radius:10px;">
+        <p style="margin:0;font-size:0.85rem;color:var(--wx-text-muted);">⏰ Dự kiến hoàn thành</p>
+        <p style="margin:0.3rem 0 0;font-size:1.4rem;font-weight:700;color:var(--wx-text);">14:30 hôm nay</p>
+        <p style="margin:0.2rem 0 0;font-size:0.8rem;color:var(--wx-text-muted);">Thứ Ba, 12 tháng 5 năm 2026</p>
+      </div>
+
+      <!-- Progress bar -->
+      <div style="margin-bottom:1.5rem;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:var(--wx-text-muted);margin-bottom:0.4rem;">
+          <span>Tiến trình bảo trì</span><span>78%</span>
+        </div>
+        <div style="height:8px;background:var(--wx-surface-2,#e5e7eb);border-radius:9999px;overflow:hidden;">
+          <div style="height:100%;width:78%;background:linear-gradient(90deg,var(--wx-primary),var(--wx-accent,#8b5cf6));border-radius:9999px;transition:width 0.5s;"></div>
+        </div>
+      </div>
+
+      <div class="wx-error-actions">
+        <a href="https://status.wemake.vn" class="wx-btn wx-btn-primary" target="_blank">📡 Kiểm tra trạng thái</a>
+        <a href="../index.html" class="wx-btn wx-btn-secondary">🏠 Về trang chủ</a>
+      </div>
+
+      <p style="margin-top:1.5rem;font-size:0.75rem;color:var(--wx-text-muted);opacity:0.6;">
+        Error ID: <code>ERR-503-m3k8p2</code>
+      </p>
+    </div>
+  </div>
+
+  <script src="../js/wemake.js"></script>
+</body>
+</html>

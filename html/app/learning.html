@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Học tập — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .lh-hero { background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;border-radius:var(--wx-radius-xl);padding:28px; }
+  .lh-hero .wx-progress { background:rgba(255,255,255,.25); }
+  .lh-hero .wx-progress-bar { background:#fff; }
+  .lh-thumb { height:130px;border-radius:var(--wx-radius-lg);margin-bottom:12px; }
+  .lh-chip { display:inline-flex;padding:6px 14px;border-radius:var(--wx-radius-full);border:1px solid var(--wx-border-default);background:var(--wx-surface-base);font-size:var(--wx-fs-sm);font-weight:500;cursor:pointer;color:var(--wx-text-secondary);transition:all .15s; }
+  .lh-chip:hover,.lh-chip.active { background:var(--wx-brand-primary);color:#fff;border-color:var(--wx-brand-primary); }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item active"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Học tập</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="lh-hero mb-5">
+        <div class="text-sm" style="opacity:.85;">Tiếp tục học tập</div>
+        <h2 style="margin:4px 0 14px;font-size:var(--wx-fs-xl);font-weight:700;">Bạn đã hoàn thành 68% lộ trình Vue 3</h2>
+        <div class="wx-progress mb-3" style="max-width:480px;"><div class="wx-progress-bar" style="width:68%;"></div></div>
+        <button class="wx-btn" style="background:#fff;color:var(--wx-brand-primary);font-weight:700;">▶ Tiếp tục bài học</button>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mb-5">
+        <button class="lh-chip active">Tất cả</button>
+        <button class="lh-chip">Lập trình</button>
+        <button class="lh-chip">Thiết kế</button>
+        <button class="lh-chip">Quản lý</button>
+        <button class="lh-chip">Kỹ năng mềm</button>
+        <button class="lh-chip">Ngoại ngữ</button>
+      </div>
+
+      <h3 style="font-size:var(--wx-fs-lg);font-weight:700;margin:0 0 14px;">Khóa học của tôi</h3>
+      <div class="wx-grid wx-grid-3 mb-5">
+        <div class="wx-card"><div class="wx-card-body">
+          <div class="lh-thumb" style="background:linear-gradient(135deg,#42b883,#35495e);"></div>
+          <div class="font-semibold">Vue 3 từ cơ bản đến nâng cao</div>
+          <div class="text-xs text-muted mb-2">Giảng viên: Lê Thị Hương</div>
+          <div class="wx-progress mb-1"><div class="wx-progress-bar" style="width:68%;"></div></div>
+          <div class="text-xs text-muted">Hoàn thành 68%</div>
+        </div></div>
+        <div class="wx-card"><div class="wx-card-body">
+          <div class="lh-thumb" style="background:linear-gradient(135deg,#3178c6,#1d4ed8);"></div>
+          <div class="font-semibold">TypeScript chuyên sâu cho dev Vue</div>
+          <div class="text-xs text-muted mb-2">Giảng viên: Phạm Quốc Thắng</div>
+          <div class="wx-progress mb-1"><div class="wx-progress-bar" style="width:34%;"></div></div>
+          <div class="text-xs text-muted">Hoàn thành 34%</div>
+        </div></div>
+        <div class="wx-card"><div class="wx-card-body">
+          <div class="lh-thumb" style="background:linear-gradient(135deg,#f59e0b,#d97706);"></div>
+          <div class="font-semibold">Thiết kế hệ thống cho kỹ sư</div>
+          <div class="text-xs text-muted mb-2">Giảng viên: Nguyễn Văn A</div>
+          <div class="wx-progress mb-1"><div class="wx-progress-bar" style="width:12%;"></div></div>
+          <div class="text-xs text-muted">Hoàn thành 12%</div>
+        </div></div>
+      </div>
+
+      <h3 style="font-size:var(--wx-fs-lg);font-weight:700;margin:0 0 14px;">Khóa học nổi bật</h3>
+      <div class="wx-grid wx-grid-3">
+        <div class="wx-card"><div class="wx-card-body">
+          <div class="lh-thumb" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);"></div>
+          <div class="font-semibold">Pinia & quản lý state hiện đại</div>
+          <div class="flex items-center gap-2 my-2"><span class="wx-avatar wx-avatar-sm">LH</span><span class="text-xs text-muted">Lê Thị Hương</span><span class="text-xs" style="color:#f59e0b;margin-left:auto;">★ 4.9</span></div>
+          <div class="flex items-center justify-between"><span class="font-bold">₫299K</span><button class="wx-btn wx-btn-primary wx-btn-sm">Đăng ký</button></div>
+        </div></div>
+        <div class="wx-card"><div class="wx-card-body">
+          <div class="lh-thumb" style="background:linear-gradient(135deg,#06b6d4,#0e7490);"></div>
+          <div class="font-semibold">Vite 6: Build tool tốc độ cao</div>
+          <div class="flex items-center gap-2 my-2"><span class="wx-avatar wx-avatar-sm">PT</span><span class="text-xs text-muted">Phạm Quốc Thắng</span><span class="text-xs" style="color:#f59e0b;margin-left:auto;">★ 4.7</span></div>
+          <div class="flex items-center justify-between"><span class="font-bold" style="color:var(--wx-success-text);">Miễn phí</span><button class="wx-btn wx-btn-primary wx-btn-sm">Đăng ký</button></div>
+        </div></div>
+        <div class="wx-card"><div class="wx-card-body">
+          <div class="lh-thumb" style="background:linear-gradient(135deg,#ec4899,#be185d);"></div>
+          <div class="font-semibold">Thiết kế UI/UX với Figma</div>
+          <div class="flex items-center gap-2 my-2"><span class="wx-avatar wx-avatar-sm">NM</span><span class="text-xs text-muted">Ngô Minh Anh</span><span class="text-xs" style="color:#f59e0b;margin-left:auto;">★ 4.8</span></div>
+          <div class="flex items-center justify-between"><span class="font-bold">₫399K</span><button class="wx-btn wx-btn-primary wx-btn-sm">Đăng ký</button></div>
+        </div></div>
+        <div class="wx-card"><div class="wx-card-body">
+          <div class="lh-thumb" style="background:linear-gradient(135deg,#10b981,#047857);"></div>
+          <div class="font-semibold">Testing trong Vue với Vitest</div>
+          <div class="flex items-center gap-2 my-2"><span class="wx-avatar wx-avatar-sm">TB</span><span class="text-xs text-muted">Trần Văn Bình</span><span class="text-xs" style="color:#f59e0b;margin-left:auto;">★ 4.6</span></div>
+          <div class="flex items-center justify-between"><span class="font-bold">₫249K</span><button class="wx-btn wx-btn-primary wx-btn-sm">Đăng ký</button></div>
+        </div></div>
+        <div class="wx-card"><div class="wx-card-body">
+          <div class="lh-thumb" style="background:linear-gradient(135deg,#f97316,#c2410c);"></div>
+          <div class="font-semibold">Quản lý dự án Agile/Scrum</div>
+          <div class="flex items-center gap-2 my-2"><span class="wx-avatar wx-avatar-sm">NA</span><span class="text-xs text-muted">Nguyễn Văn A</span><span class="text-xs" style="color:#f59e0b;margin-left:auto;">★ 4.5</span></div>
+          <div class="flex items-center justify-between"><span class="font-bold" style="color:var(--wx-success-text);">Miễn phí</span><button class="wx-btn wx-btn-primary wx-btn-sm">Đăng ký</button></div>
+        </div></div>
+        <div class="wx-card"><div class="wx-card-body">
+          <div class="lh-thumb" style="background:linear-gradient(135deg,#3b82f6,#1e40af);"></div>
+          <div class="font-semibold">Capacitor: Đưa app Vue lên mobile</div>
+          <div class="flex items-center gap-2 my-2"><span class="wx-avatar wx-avatar-sm">PT</span><span class="text-xs text-muted">Phạm Quốc Thắng</span><span class="text-xs" style="color:#f59e0b;margin-left:auto;">★ 4.8</span></div>
+          <div class="flex items-center justify-between"><span class="font-bold">₫349K</span><button class="wx-btn wx-btn-primary wx-btn-sm">Đăng ký</button></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

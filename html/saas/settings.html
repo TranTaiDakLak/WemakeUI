@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cài đặt SaaS — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .set-row { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--wx-border-subtle,var(--wx-border-default)); }
+  .set-row:last-child { border-bottom:none; }
+  .prov-card { border:1px solid var(--wx-border-default); border-radius:var(--wx-radius-lg); padding:16px; display:flex; align-items:center; gap:12px; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">SaaS Admin</div>
+      <a href="dashboard.html" class="wx-nav-item"><span class="wx-nav-icon">📊</span><span>Bảng điều khiển</span></a>
+      <a href="members.html" class="wx-nav-item"><span class="wx-nav-icon">👥</span><span>Thành viên</span></a>
+      <a href="products.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="transactions.html" class="wx-nav-item"><span class="wx-nav-icon">💳</span><span>Giao dịch</span></a>
+      <a href="versions.html" class="wx-nav-item"><span class="wx-nav-icon">🔖</span><span>Phiên bản</span></a>
+      <a href="statistics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Thống kê</span></a>
+      <a href="settings.html" class="wx-nav-item active"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Cài đặt SaaS</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Cài đặt SaaS</h1>
+        <p class="text-muted" style="margin:0">Cấu hình chung, thanh toán, API, webhook và quản lý nhóm.</p>
+      </div>
+
+      <div class="wx-tabs mb-4">
+        <button class="wx-tab active" data-tab="chung">Chung</button>
+        <button class="wx-tab" data-tab="thanhtoan">Thanh toán</button>
+        <button class="wx-tab" data-tab="api">API</button>
+        <button class="wx-tab" data-tab="webhooks">Webhooks</button>
+        <button class="wx-tab" data-tab="nhom">Nhóm</button>
+      </div>
+
+      <!-- CHUNG -->
+      <div data-tab-panel="chung">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Cấu hình chung</h3></div>
+          <div class="wx-card-body">
+            <div class="wx-grid-2">
+              <div class="wx-form-group">
+                <label class="wx-form-label">Tên ứng dụng</label>
+                <input type="text" class="wx-input" value="Wemake SaaS Platform">
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Logo</label>
+                <div style="border:2px dashed var(--wx-border-default);border-radius:var(--wx-radius-md);padding:14px;text-align:center;background:var(--wx-surface-sunken);color:var(--wx-text-muted);font-size:var(--wx-fs-sm)">📤 Tải logo (PNG/SVG, tối đa 1MB)</div>
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Ngôn ngữ mặc định</label>
+                <select class="wx-select"><option selected>Tiếng Việt</option><option>English</option><option>日本語</option></select>
+              </div>
+              <div class="wx-form-group">
+                <label class="wx-form-label">Múi giờ</label>
+                <select class="wx-select"><option selected>(GMT+7) Hà Nội, TP. Hồ Chí Minh</option><option>(GMT+8) Singapore</option><option>(GMT+9) Tokyo</option></select>
+              </div>
+            </div>
+            <hr class="wx-divider">
+            <div class="set-row"><div><div class="text-sm font-semibold">Chế độ bảo trì</div><div class="text-xs text-muted">Tạm khoá truy cập của người dùng, chỉ quản trị viên vào được.</div></div><label class="wx-toggle"><input type="checkbox"><span class="wx-toggle-track"></span></label></div>
+            <div class="set-row"><div><div class="text-sm font-semibold">Cho phép đăng ký công khai</div><div class="text-xs text-muted">Người dùng mới có thể tự tạo tài khoản.</div></div><label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label></div>
+          </div>
+          <div class="wx-card-footer flex justify-end gap-2"><button class="wx-btn wx-btn-ghost">Huỷ</button><button class="wx-btn wx-btn-primary">Lưu cấu hình</button></div>
+        </div>
+      </div>
+
+      <!-- THANH TOAN -->
+      <div data-tab-panel="thanhtoan" class="hidden">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Cổng thanh toán</h3></div>
+          <div class="wx-card-body">
+            <div class="wx-grid-3">
+              <div class="prov-card"><div style="font-size:24px">💳</div><div class="flex-1"><div class="font-semibold">Stripe</div><div class="text-xs" style="color:var(--wx-success-text,#15803d)">● Đã kết nối</div></div><button class="wx-btn wx-btn-ghost wx-btn-sm">Ngắt</button></div>
+              <div class="prov-card"><div style="font-size:24px">📱</div><div class="flex-1"><div class="font-semibold">MoMo</div><div class="text-xs" style="color:var(--wx-success-text,#15803d)">● Đã kết nối</div></div><button class="wx-btn wx-btn-ghost wx-btn-sm">Ngắt</button></div>
+              <div class="prov-card"><div style="font-size:24px">🏦</div><div class="flex-1"><div class="font-semibold">VNPay</div><div class="text-xs text-muted">Chưa kết nối</div></div><button class="wx-btn wx-btn-primary wx-btn-sm">Kết nối</button></div>
+            </div>
+            <hr class="wx-divider">
+            <h4 class="font-semibold mb-2">Cài đặt hoá đơn</h4>
+            <div class="wx-grid-2">
+              <div class="wx-form-group"><label class="wx-form-label">Tiền tố mã hoá đơn</label><input type="text" class="wx-input" value="INV-2026-"></div>
+              <div class="wx-form-group"><label class="wx-form-label">Đơn vị tiền tệ</label><select class="wx-select"><option selected>VND (₫)</option><option>USD ($)</option></select></div>
+            </div>
+            <h4 class="font-semibold mb-2 mt-3">Cấu hình thuế</h4>
+            <div class="wx-grid-2">
+              <div class="wx-form-group"><label class="wx-form-label">Thuế VAT (%)</label><input type="number" class="wx-input" value="10"></div>
+              <div class="wx-form-group"><label class="wx-form-label">Mã số thuế công ty</label><input type="text" class="wx-input" value="0312345678"></div>
+            </div>
+          </div>
+          <div class="wx-card-footer flex justify-end gap-2"><button class="wx-btn wx-btn-ghost">Huỷ</button><button class="wx-btn wx-btn-primary">Lưu</button></div>
+        </div>
+      </div>
+
+      <!-- API -->
+      <div data-tab-panel="api" class="hidden">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Cấu hình API</h3></div>
+          <div class="wx-card-body">
+            <div class="wx-form-group"><label class="wx-form-label">API base URL</label><input type="text" class="wx-input font-mono" value="https://api.wemake.vn/v2" readonly></div>
+            <div class="wx-grid-2">
+              <div class="wx-form-group"><label class="wx-form-label">Giới hạn yêu cầu / phút</label><input type="number" class="wx-input" value="600"></div>
+              <div class="wx-form-group"><label class="wx-form-label">Giới hạn yêu cầu / ngày</label><input type="number" class="wx-input" value="50000"></div>
+            </div>
+            <hr class="wx-divider">
+            <div class="flex justify-between items-center mb-2"><h4 class="font-semibold">Khoá API</h4><button class="wx-btn wx-btn-primary wx-btn-sm">➕ Tạo khoá mới</button></div>
+            <table class="wx-table">
+              <thead><tr><th>Tên</th><th>Khoá</th><th>Tạo lúc</th><th>Lần dùng cuối</th><th>Thao tác</th></tr></thead>
+              <tbody>
+                <tr><td>Production</td><td class="font-mono">wm_live_••••••••a91f</td><td>12/01/2026</td><td>Hôm nay</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Thu hồi</button></td></tr>
+                <tr><td>Staging</td><td class="font-mono">wm_test_••••••••3b72</td><td>03/03/2026</td><td>2 ngày trước</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Thu hồi</button></td></tr>
+                <tr><td>Mobile App</td><td class="font-mono">wm_live_••••••••c4d8</td><td>20/04/2026</td><td>Hôm qua</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Thu hồi</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEBHOOKS -->
+      <div data-tab-panel="webhooks" class="hidden">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header flex justify-between items-center"><h3 class="wx-card-title">Webhook endpoints</h3><button class="wx-btn wx-btn-primary wx-btn-sm">➕ Thêm webhook</button></div>
+          <div class="wx-card-body" style="padding:0">
+            <table class="wx-table">
+              <thead><tr><th>URL</th><th>Sự kiện</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
+              <tbody>
+                <tr><td class="font-mono text-sm">https://app.khachhang.vn/hooks/payment</td><td>payment.succeeded, payment.failed</td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button> <button class="wx-btn wx-btn-ghost wx-btn-sm">Xoá</button></td></tr>
+                <tr><td class="font-mono text-sm">https://crm.doitac.vn/api/webhook</td><td>member.created, member.updated</td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button> <button class="wx-btn wx-btn-ghost wx-btn-sm">Xoá</button></td></tr>
+                <tr><td class="font-mono text-sm">https://analytics.wemake.vn/ingest</td><td>* (tất cả sự kiện)</td><td><span class="wx-badge wx-badge-warning">Tạm dừng</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button> <button class="wx-btn wx-btn-ghost wx-btn-sm">Xoá</button></td></tr>
+                <tr><td class="font-mono text-sm">https://slack-bridge.wemake.vn/notify</td><td>version.released</td><td><span class="wx-badge wx-badge-danger">Lỗi (5xx)</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button> <button class="wx-btn wx-btn-ghost wx-btn-sm">Xoá</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- NHOM -->
+      <div data-tab-panel="nhom" class="hidden">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header flex justify-between items-center"><h3 class="wx-card-title">Thành viên nhóm quản trị</h3><button class="wx-btn wx-btn-primary wx-btn-sm">➕ Mời thành viên</button></div>
+          <div class="wx-card-body" style="padding:0">
+            <table class="wx-table">
+              <thead><tr><th>Người dùng</th><th>Email</th><th>Vai trò</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
+              <tbody>
+                <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">NA</div> Nguyễn Văn A</div></td><td>a.nguyen@wemake.vn</td><td><span class="wx-badge wx-badge-danger">Owner</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm" disabled>—</button></td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">TB</div> Trần Thị B</div></td><td>b.tran@wemake.vn</td><td><span class="wx-badge wx-badge-primary">Admin</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button></td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">LC</div> Lê Văn C</div></td><td>c.le@wemake.vn</td><td><span class="wx-badge wx-badge-neutral">Editor</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button></td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">PD</div> Phạm Thị D</div></td><td>d.pham@wemake.vn</td><td><span class="wx-badge wx-badge-neutral">Viewer</span></td><td><span class="wx-badge wx-badge-warning">Chờ xác nhận</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Gửi lại</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

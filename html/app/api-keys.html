@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Keys — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .key-prefix { font-family:var(--wx-font-mono);font-size:var(--wx-fs-sm);background:var(--wx-surface-sunken);padding:2px 8px;border-radius:var(--wx-radius-sm); }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item active"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">API Keys</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="wx-grid wx-grid-3 mb-4">
+        <div class="wx-stat-card"><div class="wx-stat-label">Tổng số khóa</div><div class="wx-stat-value">4</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Đang hoạt động</div><div class="wx-stat-value">2</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Lần dùng cuối</div><div class="wx-stat-value">2 giờ trước</div></div>
+      </div>
+
+      <div class="wx-alert wx-alert-info mb-4">🔐 Khóa API chỉ hiển thị đầy đủ một lần khi tạo. Hãy lưu trữ an toàn và không chia sẻ công khai.</div>
+
+      <div class="wx-card">
+        <div class="wx-card-header">
+          <span class="wx-card-title">Danh sách khóa API</span>
+          <button class="wx-btn wx-btn-primary" data-open-modal="newKey">+ Tạo khóa mới</button>
+        </div>
+        <div class="wx-card-body" style="padding:0;">
+          <table class="wx-table">
+            <thead><tr><th>Tên</th><th>Tiền tố</th><th>Phạm vi</th><th>Ngày tạo</th><th>Lần dùng cuối</th><th>Trạng thái</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Khóa sản xuất chính</strong></td>
+                <td><span class="key-prefix">sk_live_abc7x2•••</span></td>
+                <td><span class="wx-badge wx-badge-info">read</span> <span class="wx-badge wx-badge-info">write</span></td>
+                <td>12/01/2026</td><td>2 giờ trước</td>
+                <td><span class="wx-badge wx-badge-success">Hoạt động</span></td>
+                <td><button class="wx-btn wx-btn-ghost wx-btn-sm" title="Sao chép">📋</button> <button class="wx-btn wx-btn-ghost wx-btn-sm" data-confirm="Bạn chắc chắn muốn thu hồi khóa này?" title="Thu hồi">🗑</button></td>
+              </tr>
+              <tr>
+                <td><strong>Khóa tích hợp Webhook</strong></td>
+                <td><span class="key-prefix">sk_live_q9m4k1•••</span></td>
+                <td><span class="wx-badge wx-badge-info">read</span></td>
+                <td>05/03/2026</td><td>1 ngày trước</td>
+                <td><span class="wx-badge wx-badge-success">Hoạt động</span></td>
+                <td><button class="wx-btn wx-btn-ghost wx-btn-sm" title="Sao chép">📋</button> <button class="wx-btn wx-btn-ghost wx-btn-sm" data-confirm="Bạn chắc chắn muốn thu hồi khóa này?" title="Thu hồi">🗑</button></td>
+              </tr>
+              <tr>
+                <td><strong>Khóa thử nghiệm dev</strong></td>
+                <td><span class="key-prefix">sk_test_z3p8w0•••</span></td>
+                <td><span class="wx-badge wx-badge-info">read</span> <span class="wx-badge wx-badge-info">write</span> <span class="wx-badge wx-badge-info">delete</span></td>
+                <td>20/02/2026</td><td>3 tuần trước</td>
+                <td><span class="wx-badge wx-badge-neutral">Vô hiệu</span></td>
+                <td><button class="wx-btn wx-btn-ghost wx-btn-sm" title="Sao chép">📋</button> <button class="wx-btn wx-btn-ghost wx-btn-sm" data-confirm="Bạn chắc chắn muốn thu hồi khóa này?" title="Thu hồi">🗑</button></td>
+              </tr>
+              <tr>
+                <td><strong>Khóa di động (cũ)</strong></td>
+                <td><span class="key-prefix">sk_live_h1n6t5•••</span></td>
+                <td><span class="wx-badge wx-badge-info">read</span></td>
+                <td>08/11/2025</td><td>2 tháng trước</td>
+                <td><span class="wx-badge wx-badge-neutral">Vô hiệu</span></td>
+                <td><button class="wx-btn wx-btn-ghost wx-btn-sm" title="Sao chép">📋</button> <button class="wx-btn wx-btn-ghost wx-btn-sm" data-confirm="Bạn chắc chắn muốn thu hồi khóa này?" title="Thu hồi">🗑</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="wx-overlay hidden" id="newKey">
+        <div class="wx-modal">
+          <div class="wx-modal-header">
+            <span class="wx-modal-title">Tạo khóa API mới</span>
+            <button class="wx-modal-close" data-close-modal>✕</button>
+          </div>
+          <div class="wx-modal-body">
+            <div class="wx-form-group">
+              <label class="wx-form-label">Tên khóa</label>
+              <input class="wx-input" placeholder="VD: Khóa tích hợp CRM">
+              <div class="wx-form-hint">Đặt tên gợi nhớ để dễ quản lý sau này.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Phạm vi truy cập</label>
+              <label class="flex items-center gap-2 mb-2"><input type="checkbox" class="wx-checkbox" checked> <span>read — Đọc dữ liệu</span></label>
+              <label class="flex items-center gap-2 mb-2"><input type="checkbox" class="wx-checkbox"> <span>write — Ghi / cập nhật dữ liệu</span></label>
+              <label class="flex items-center gap-2"><input type="checkbox" class="wx-checkbox"> <span>delete — Xóa dữ liệu</span></label>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Hết hạn</label>
+              <select class="wx-select">
+                <option>Không hết hạn</option>
+                <option>30 ngày</option>
+                <option>90 ngày</option>
+                <option>1 năm</option>
+              </select>
+            </div>
+          </div>
+          <div class="wx-modal-footer">
+            <button class="wx-btn wx-btn-secondary" data-close-modal>Hủy</button>
+            <button class="wx-btn wx-btn-primary">Tạo khóa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

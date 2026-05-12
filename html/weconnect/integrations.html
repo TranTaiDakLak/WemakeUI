@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tích hợp — WeConnect</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">WC</div>
+      <span class="wx-sidebar-brand-text">WeConnect</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">WeConnect</div>
+      <a href="index.html" class="wx-nav-item"><span class="wx-nav-icon">🎛️</span><span>Bảng quản trị</span></a>
+      <a href="accounts.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Tài khoản</span></a>
+      <a href="sessions.html" class="wx-nav-item"><span class="wx-nav-icon">🔌</span><span>Phiên kết nối</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📇</span><span>Danh bạ</span></a>
+      <a href="campaigns.html" class="wx-nav-item"><span class="wx-nav-icon">📣</span><span>Chiến dịch</span></a>
+      <a href="plugins.html" class="wx-nav-item"><span class="wx-nav-icon">🧩</span><span>Plugin</span></a>
+      <a href="console.html" class="wx-nav-item"><span class="wx-nav-icon">⌨️</span><span>Console</span></a>
+      <a href="scheduler.html" class="wx-nav-item"><span class="wx-nav-icon">⏰</span><span>Lịch trình</span></a>
+      <a href="integrations.html" class="wx-nav-item active"><span class="wx-nav-icon">🔗</span><span>Tích hợp</span></a>
+      <a href="automation.html" class="wx-nav-item"><span class="wx-nav-icon">⚡</span><span>Tự động hóa</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">AD</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Admin</div><div class="text-xs text-muted">Quản trị viên</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Tích hợp</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Tích hợp</h1>
+          <p class="text-muted" style="margin:0">Kết nối WeConnect với các dịch vụ bên thứ ba</p>
+        </div>
+      </div>
+
+      <div class="wx-card mb-5">
+        <div class="wx-card-header"><div class="wx-card-title">Đã kết nối</div><span class="wx-badge wx-badge-success ml-auto">6 dịch vụ</span></div>
+        <div class="wx-card-body">
+          <div class="wx-grid wx-grid-3">
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#4a154b;color:#fff">S</div><div class="flex-1"><div class="font-semibold">Slack</div><span class="wx-badge wx-badge-success text-xs">Đã kết nối</span></div></div>
+              <div class="text-xs text-muted mb-3">Đồng bộ cuối: 5 phút trước · kênh #weconnect-alerts</div>
+              <div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button></div>
+            </div></div>
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#0f9d58;color:#fff">📊</div><div class="flex-1"><div class="font-semibold">Google Sheets</div><span class="wx-badge wx-badge-success text-xs">Đã kết nối</span></div></div>
+              <div class="text-xs text-muted mb-3">Đồng bộ cuối: 1 giờ trước · 3 bảng tính</div>
+              <div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button></div>
+            </div></div>
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#ff4a00;color:#fff">⚡</div><div class="flex-1"><div class="font-semibold">Zapier</div><span class="wx-badge wx-badge-success text-xs">Đã kết nối</span></div></div>
+              <div class="text-xs text-muted mb-3">Đồng bộ cuối: 12 phút trước · 8 Zap đang chạy</div>
+              <div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button></div>
+            </div></div>
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#ff7a59;color:#fff">H</div><div class="flex-1"><div class="font-semibold">HubSpot</div><span class="wx-badge wx-badge-success text-xs">Đã kết nối</span></div></div>
+              <div class="text-xs text-muted mb-3">Đồng bộ cuối: 30 phút trước · 12,847 liên hệ</div>
+              <div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button></div>
+            </div></div>
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#ffe01b;color:#000">🐵</div><div class="flex-1"><div class="font-semibold">Mailchimp</div><span class="wx-badge wx-badge-success text-xs">Đã kết nối</span></div></div>
+              <div class="text-xs text-muted mb-3">Đồng bộ cuối: 2 giờ trước · 5 audience</div>
+              <div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button></div>
+            </div></div>
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#334155;color:#fff">🪝</div><div class="flex-1"><div class="font-semibold">Webhook</div><span class="wx-badge wx-badge-success text-xs">Đã kết nối</span></div></div>
+              <div class="text-xs text-muted mb-3">Đồng bộ cuối: vừa xong · 4 endpoint</div>
+              <div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-5">
+        <div class="wx-card-header"><div class="wx-card-title">Có sẵn</div></div>
+        <div class="wx-card-body">
+          <div class="wx-grid wx-grid-3">
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#00a1e0;color:#fff">☁️</div><div class="flex-1"><div class="font-semibold">Salesforce</div><div class="text-xs text-muted">CRM</div></div></div>
+              <p class="text-sm text-muted mb-3">Đồng bộ leads, opportunities và hội thoại hai chiều.</p>
+              <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Kết nối</button>
+            </div></div>
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#000;color:#fff">N</div><div class="flex-1"><div class="font-semibold">Notion</div><div class="text-xs text-muted">Tài liệu</div></div></div>
+              <p class="text-sm text-muted mb-3">Ghi log hội thoại và báo cáo vào database Notion.</p>
+              <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Kết nối</button>
+            </div></div>
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#ffbf00;color:#000">📋</div><div class="flex-1"><div class="font-semibold">Airtable</div><div class="text-xs text-muted">Cơ sở dữ liệu</div></div></div>
+              <p class="text-sm text-muted mb-3">Quản lý liên hệ và chiến dịch trực quan trên Airtable.</p>
+              <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Kết nối</button>
+            </div></div>
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#5865f2;color:#fff">D</div><div class="flex-1"><div class="font-semibold">Discord</div><div class="text-xs text-muted">Thông báo</div></div></div>
+              <p class="text-sm text-muted mb-3">Gửi cảnh báo và thống kê tới kênh Discord.</p>
+              <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Kết nối</button>
+            </div></div>
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#0088cc;color:#fff">✈️</div><div class="flex-1"><div class="font-semibold">Telegram Bot</div><div class="text-xs text-muted">Thông báo</div></div></div>
+              <p class="text-sm text-muted mb-3">Nhận cảnh báo phiên lỗi và báo cáo qua bot Telegram.</p>
+              <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Kết nối</button>
+            </div></div>
+            <div class="wx-card" style="margin:0"><div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#10b981;color:#fff">{}</div><div class="flex-1"><div class="font-semibold">REST API</div><div class="text-xs text-muted">Lập trình</div></div></div>
+              <p class="text-sm text-muted mb-3">Truy cập dữ liệu WeConnect qua API và API key riêng.</p>
+              <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Kết nối</button>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-card">
+        <div class="wx-card-header"><div class="wx-card-title">Webhooks</div><button class="wx-btn wx-btn-primary wx-btn-sm ml-auto">+ Thêm webhook</button></div>
+        <div class="wx-card-body" style="padding:0">
+          <table class="wx-table">
+            <thead><tr><th>URL</th><th>Sự kiện</th><th>Trạng thái</th><th>Lần gọi cuối</th><th style="width:90px">Thao tác</th></tr></thead>
+            <tbody>
+              <tr><td class="font-mono text-xs">https://api.wemake.vn/hooks/messages</td><td><span class="wx-badge wx-badge-info">message.sent</span> <span class="wx-badge wx-badge-info">message.reply</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td class="text-sm text-muted">vừa xong · 200</td><td><button class="wx-btn wx-btn-icon wx-btn-sm">✏️</button> <button class="wx-btn wx-btn-icon wx-btn-sm">🗑</button></td></tr>
+              <tr><td class="font-mono text-xs">https://crm.wemake.vn/sync/contacts</td><td><span class="wx-badge wx-badge-info">contact.created</span> <span class="wx-badge wx-badge-info">contact.updated</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td class="text-sm text-muted">3 phút trước · 200</td><td><button class="wx-btn wx-btn-icon wx-btn-sm">✏️</button> <button class="wx-btn wx-btn-icon wx-btn-sm">🗑</button></td></tr>
+              <tr><td class="font-mono text-xs">https://hooks.zapier.com/.../weconnect</td><td><span class="wx-badge wx-badge-info">campaign.completed</span></td><td><span class="wx-badge wx-badge-warning">Lỗi tạm thời</span></td><td class="text-sm text-muted">22 phút trước · 503</td><td><button class="wx-btn wx-btn-icon wx-btn-sm">✏️</button> <button class="wx-btn wx-btn-icon wx-btn-sm">🗑</button></td></tr>
+              <tr><td class="font-mono text-xs">https://alerts.wemake.vn/session</td><td><span class="wx-badge wx-badge-info">session.error</span> <span class="wx-badge wx-badge-info">session.reconnect</span></td><td><span class="wx-badge wx-badge-neutral">Tạm dừng</span></td><td class="text-sm text-muted">2 ngày trước · 200</td><td><button class="wx-btn wx-btn-icon wx-btn-sm">✏️</button> <button class="wx-btn wx-btn-icon wx-btn-sm">🗑</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

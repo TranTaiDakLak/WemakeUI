@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phiên kết nối — WeConnect</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">WC</div>
+      <span class="wx-sidebar-brand-text">WeConnect</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">WeConnect</div>
+      <a href="index.html" class="wx-nav-item"><span class="wx-nav-icon">🎛️</span><span>Bảng quản trị</span></a>
+      <a href="accounts.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Tài khoản</span></a>
+      <a href="sessions.html" class="wx-nav-item active"><span class="wx-nav-icon">🔌</span><span>Phiên kết nối</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📇</span><span>Danh bạ</span></a>
+      <a href="campaigns.html" class="wx-nav-item"><span class="wx-nav-icon">📣</span><span>Chiến dịch</span></a>
+      <a href="plugins.html" class="wx-nav-item"><span class="wx-nav-icon">🧩</span><span>Plugin</span></a>
+      <a href="console.html" class="wx-nav-item"><span class="wx-nav-icon">⌨️</span><span>Console</span></a>
+      <a href="scheduler.html" class="wx-nav-item"><span class="wx-nav-icon">⏰</span><span>Lịch trình</span></a>
+      <a href="integrations.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>Tích hợp</span></a>
+      <a href="automation.html" class="wx-nav-item"><span class="wx-nav-icon">⚡</span><span>Tự động hóa</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">AD</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Admin</div><div class="text-xs text-muted">Quản trị viên</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Phiên kết nối</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Phiên kết nối</h1>
+          <p class="text-muted" style="margin:0">Theo dõi và quản lý các phiên kết nối tới nền tảng</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="wx-btn wx-btn-secondary">Khởi động lại tất cả</button>
+          <button class="wx-btn wx-btn-primary">+ Tạo phiên mới</button>
+        </div>
+      </div>
+
+      <div class="wx-grid wx-grid-4 mb-5">
+        <div class="wx-stat-card"><div class="wx-stat-icon">🟢</div><div class="wx-stat-label">Phiên hoạt động</div><div class="wx-stat-value">8</div><div class="wx-stat-change positive">+2</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">🟡</div><div class="wx-stat-label">Đang chờ</div><div class="wx-stat-value">3</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">🔴</div><div class="wx-stat-label">Bị ngắt</div><div class="wx-stat-value">2</div><div class="wx-stat-change negative">+1</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">📊</div><div class="wx-stat-label">Tổng băng thông</div><div class="wx-stat-value">1.2 GB</div></div>
+      </div>
+
+      <div class="wx-grid wx-grid-2">
+        <div class="wx-card">
+          <div class="wx-card-header">
+            <div class="flex items-center gap-3">
+              <span style="width:10px;height:10px;border-radius:50%;background:#16a34a;display:inline-block"></span>
+              <div><div class="wx-card-title font-mono">#SES-0012</div><div class="text-xs text-muted">WebSocket</div></div>
+            </div>
+            <span class="wx-badge wx-badge-success ml-auto">Đang chạy</span>
+          </div>
+          <div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><div class="wx-avatar wx-avatar-sm" style="background:#1877f2;color:#fff">📘</div><div><div class="font-semibold">@wemakeui_vn</div><div class="text-xs text-muted">Facebook · Uptime 4g 12p · 1,200 tin/giờ</div></div></div>
+            <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-family:var(--wx-font-mono);font-size:11px;line-height:1.6;margin-bottom:12px">
+              <div>[14:02:11] WS open · keepalive ok</div>
+              <div style="color:#86efac">[14:02:43] sent 200 msgs · q=12</div>
+              <div style="color:#93c5fd">[14:03:01] heartbeat 23ms</div>
+            </div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-secondary wx-btn-sm">Khởi động lại</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem log</button></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header">
+            <div class="flex items-center gap-3">
+              <span style="width:10px;height:10px;border-radius:50%;background:#16a34a;display:inline-block"></span>
+              <div><div class="wx-card-title font-mono">#SES-0011</div><div class="text-xs text-muted">WebSocket</div></div>
+            </div>
+            <span class="wx-badge wx-badge-success ml-auto">Đang chạy</span>
+          </div>
+          <div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><div class="wx-avatar wx-avatar-sm" style="background:#e1306c;color:#fff">📷</div><div><div class="font-semibold">@wemake.studio</div><div class="text-xs text-muted">Instagram · Uptime 2g 38p · 840 tin/giờ</div></div></div>
+            <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-family:var(--wx-font-mono);font-size:11px;line-height:1.6;margin-bottom:12px">
+              <div>[14:01:55] WS open · region sg1</div>
+              <div style="color:#86efac">[14:02:30] sent 140 msgs</div>
+              <div style="color:#93c5fd">[14:03:09] rate-limit window reset</div>
+            </div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-secondary wx-btn-sm">Khởi động lại</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem log</button></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header">
+            <div class="flex items-center gap-3">
+              <span style="width:10px;height:10px;border-radius:50%;background:#f59e0b;display:inline-block"></span>
+              <div><div class="wx-card-title font-mono">#SES-0010</div><div class="text-xs text-muted">Polling</div></div>
+            </div>
+            <span class="wx-badge wx-badge-warning ml-auto">Đang chờ</span>
+          </div>
+          <div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><div class="wx-avatar wx-avatar-sm" style="background:#0068ff;color:#fff">💬</div><div><div class="font-semibold">Wemake CSKH</div><div class="text-xs text-muted">Zalo · Uptime 0g 12p · 320 tin/giờ</div></div></div>
+            <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-family:var(--wx-font-mono);font-size:11px;line-height:1.6;margin-bottom:12px">
+              <div style="color:#fde047">[14:00:02] polling interval 5s</div>
+              <div style="color:#fde047">[14:00:48] waiting for token refresh...</div>
+              <div>[14:01:30] retry 2/5</div>
+            </div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-secondary wx-btn-sm">Khởi động lại</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem log</button></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header">
+            <div class="flex items-center gap-3">
+              <span style="width:10px;height:10px;border-radius:50%;background:#dc2626;display:inline-block"></span>
+              <div><div class="wx-card-title font-mono">#SES-0009</div><div class="text-xs text-muted">WebSocket</div></div>
+            </div>
+            <span class="wx-badge wx-badge-danger ml-auto">Bị ngắt</span>
+          </div>
+          <div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><div class="wx-avatar wx-avatar-sm" style="background:#000;color:#fff">🎵</div><div><div class="font-semibold">@wemake.tiktok</div><div class="text-xs text-muted">TikTok · Ngắt 32p trước · 0 tin/giờ</div></div></div>
+            <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-family:var(--wx-font-mono);font-size:11px;line-height:1.6;margin-bottom:12px">
+              <div style="color:#fca5a5">[13:31:08] ERROR auth challenge failed</div>
+              <div style="color:#fca5a5">[13:31:09] WS closed code 1006</div>
+              <div>[13:31:10] backoff 60s · giving up</div>
+            </div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-primary wx-btn-sm">Khởi động lại</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem log</button></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header">
+            <div class="flex items-center gap-3">
+              <span style="width:10px;height:10px;border-radius:50%;background:#16a34a;display:inline-block"></span>
+              <div><div class="wx-card-title font-mono">#SES-0008</div><div class="text-xs text-muted">WebSocket</div></div>
+            </div>
+            <span class="wx-badge wx-badge-success ml-auto">Đang chạy</span>
+          </div>
+          <div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><div class="wx-avatar wx-avatar-sm" style="background:#0a66c2;color:#fff">💼</div><div><div class="font-semibold">@wemake-jsc</div><div class="text-xs text-muted">LinkedIn · Uptime 6g 04p · 210 tin/giờ</div></div></div>
+            <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-family:var(--wx-font-mono);font-size:11px;line-height:1.6;margin-bottom:12px">
+              <div>[08:00:01] WS open · li-edge-3</div>
+              <div style="color:#86efac">[14:02:00] sent 36 msgs · q=0</div>
+              <div style="color:#93c5fd">[14:03:11] heartbeat 41ms</div>
+            </div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-secondary wx-btn-sm">Khởi động lại</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem log</button></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header">
+            <div class="flex items-center gap-3">
+              <span style="width:10px;height:10px;border-radius:50%;background:#f59e0b;display:inline-block"></span>
+              <div><div class="wx-card-title font-mono">#SES-0007</div><div class="text-xs text-muted">Polling</div></div>
+            </div>
+            <span class="wx-badge wx-badge-warning ml-auto">Đang chờ</span>
+          </div>
+          <div class="wx-card-body">
+            <div class="flex items-center gap-3 mb-3"><div class="wx-avatar wx-avatar-sm" style="background:#0088cc;color:#fff">✈️</div><div><div class="font-semibold">@wemake_bot</div><div class="text-xs text-muted">Telegram · Uptime 0g 03p · 0 tin/giờ</div></div></div>
+            <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-family:var(--wx-font-mono);font-size:11px;line-height:1.6;margin-bottom:12px">
+              <div style="color:#fde047">[14:02:45] getUpdates long-poll</div>
+              <div>[14:02:50] no new updates</div>
+              <div style="color:#fde047">[14:02:55] reconnecting...</div>
+            </div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-secondary wx-btn-sm">Khởi động lại</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem log</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

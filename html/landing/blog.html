@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<nav class="wx-landing-nav">
+  <a href="../index.html" class="wx-landing-logo">WemakeUI</a>
+  <div class="wx-landing-nav-links">
+    <a href="../landing/features.html">Tính năng</a>
+    <a href="../landing/index.html">SaaS</a>
+    <a href="../landing/about.html">Giới thiệu</a>
+    <a href="../landing/blog.html">Blog</a>
+    <a href="../landing/contact.html">Liên hệ</a>
+    <a href="../app/pricing.html">Bảng giá</a>
+  </div>
+  <a href="../auth/login.html" class="wx-btn wx-btn-secondary wx-btn-sm" style="margin-left:16px">Đăng nhập</a>
+  <a href="../auth/register.html" class="wx-btn wx-btn-primary wx-btn-sm">Dùng thử</a>
+</nav>
+
+<section class="wx-landing-hero">
+  <span class="wx-badge wx-badge-primary">Cập nhật mới</span>
+  <h1>Blog & <span class="gradient">Tin tức</span></h1>
+  <p>Hướng dẫn, bài viết kỹ thuật, ghi chú phát hành và câu chuyện từ đội ngũ WemakeUI.</p>
+</section>
+
+<section class="wx-landing-section">
+  <div class="flex gap-4 mb-5" style="flex-wrap:wrap;justify-content:center">
+    <span class="wx-badge wx-badge-primary">Tất cả</span>
+    <span class="wx-badge">Hướng dẫn</span>
+    <span class="wx-badge">Thiết kế</span>
+    <span class="wx-badge">Kỹ thuật</span>
+    <span class="wx-badge">Phát hành</span>
+    <span class="wx-badge">Cộng đồng</span>
+  </div>
+
+  <a href="../landing/blog-post.html" class="wx-card" style="display:block;text-decoration:none;color:inherit;margin-bottom:40px">
+    <div style="height:280px;background:linear-gradient(135deg,#6366f1,#ec4899);border-radius:8px 8px 0 0"></div>
+    <div class="wx-card-body" style="padding:24px">
+      <span class="wx-badge wx-badge-primary">Hướng dẫn</span>
+      <h2 style="font-size:26px;font-weight:800;margin:12px 0">Xây dựng Design System với Vue 3</h2>
+      <p class="text-muted">Từ design tokens đến component thư viện: cách chúng tôi tổ chức WemakeUI để giao diện luôn nhất quán trên Web, Mobile và Desktop — và bạn cũng có thể làm tương tự.</p>
+      <div class="flex gap-4 mt-4" style="align-items:center">
+        <div class="wx-avatar">PA</div>
+        <div><div class="font-bold">Phạm Mai Anh</div><div class="text-muted" style="font-size:13px">07/05/2026 · 12 phút đọc</div></div>
+      </div>
+    </div>
+  </a>
+
+  <div class="wx-grid-3">
+    <a href="../landing/blog-post.html" class="wx-card" style="text-decoration:none;color:inherit">
+      <div style="height:160px;background:linear-gradient(135deg,#22c55e,#06b6d4);border-radius:8px 8px 0 0"></div>
+      <div class="wx-card-body"><span class="wx-badge">Kỹ thuật</span><h3 style="font-size:18px;font-weight:700;margin:8px 0">Tree-shaking thực sự hoạt động thế nào</h3><p class="text-muted" style="font-size:14px">Mổ xẻ cách Vite loại bỏ code không dùng và mẹo giữ bundle nhỏ.</p><div class="flex gap-4 mt-4" style="align-items:center"><div class="wx-avatar" style="width:28px;height:28px;font-size:12px">TD</div><div class="text-muted" style="font-size:13px">Trần Đức Duy · 02/05/2026 · 8 phút</div></div></div>
+    </a>
+    <a href="../landing/blog-post.html" class="wx-card" style="text-decoration:none;color:inherit">
+      <div style="height:160px;background:linear-gradient(135deg,#f59e0b,#ef4444);border-radius:8px 8px 0 0"></div>
+      <div class="wx-card-body"><span class="wx-badge">Phát hành</span><h3 style="font-size:18px;font-weight:700;margin:8px 0">WemakeUI v0.8 có gì mới</h3><p class="text-muted" style="font-size:14px">Nâng cấp Vite 6, TypeScript 5, thêm 15 components và chế độ tối mới.</p><div class="flex gap-4 mt-4" style="align-items:center"><div class="wx-avatar" style="width:28px;height:28px;font-size:12px">ĐM</div><div class="text-muted" style="font-size:13px">Đặng Quang Minh · 28/04/2026 · 6 phút</div></div></div>
+    </a>
+    <a href="../landing/blog-post.html" class="wx-card" style="text-decoration:none;color:inherit">
+      <div style="height:160px;background:linear-gradient(135deg,#8b5cf6,#3b82f6);border-radius:8px 8px 0 0"></div>
+      <div class="wx-card-body"><span class="wx-badge">Thiết kế</span><h3 style="font-size:18px;font-weight:700;margin:8px 0">Hệ thống màu sắc có thể chỉnh chủ đề</h3><p class="text-muted" style="font-size:14px">Cách dựng bảng màu mở rộng dựa trên biến CSS mà vẫn dễ bảo trì.</p><div class="flex gap-4 mt-4" style="align-items:center"><div class="wx-avatar" style="width:28px;height:28px;font-size:12px">PA</div><div class="text-muted" style="font-size:13px">Phạm Mai Anh · 20/04/2026 · 9 phút</div></div></div>
+    </a>
+    <a href="../landing/blog-post.html" class="wx-card" style="text-decoration:none;color:inherit">
+      <div style="height:160px;background:linear-gradient(135deg,#06b6d4,#6366f1);border-radius:8px 8px 0 0"></div>
+      <div class="wx-card-body"><span class="wx-badge">Hướng dẫn</span><h3 style="font-size:18px;font-weight:700;margin:8px 0">Đóng gói ứng dụng với Tauri</h3><p class="text-muted" style="font-size:14px">Từ web app sang desktop trong 10 phút với WemakeUI và Tauri.</p><div class="flex gap-4 mt-4" style="align-items:center"><div class="wx-avatar" style="width:28px;height:28px;font-size:12px">LH</div><div class="text-muted" style="font-size:13px">Lê Hoàng Hải · 15/04/2026 · 11 phút</div></div></div>
+    </a>
+    <a href="../landing/blog-post.html" class="wx-card" style="text-decoration:none;color:inherit">
+      <div style="height:160px;background:linear-gradient(135deg,#ec4899,#f59e0b);border-radius:8px 8px 0 0"></div>
+      <div class="wx-card-body"><span class="wx-badge">Cộng đồng</span><h3 style="font-size:18px;font-weight:700;margin:8px 0">5 dự án mã nguồn mở dùng WemakeUI</h3><p class="text-muted" style="font-size:14px">Điểm qua những sản phẩm cộng đồng đã xây dựng trong quý vừa rồi.</p><div class="flex gap-4 mt-4" style="align-items:center"><div class="wx-avatar" style="width:28px;height:28px;font-size:12px">VH</div><div class="text-muted" style="font-size:13px">Vũ Thu Hà · 10/04/2026 · 7 phút</div></div></div>
+    </a>
+    <a href="../landing/blog-post.html" class="wx-card" style="text-decoration:none;color:inherit">
+      <div style="height:160px;background:linear-gradient(135deg,#10b981,#84cc16);border-radius:8px 8px 0 0"></div>
+      <div class="wx-card-body"><span class="wx-badge">Kỹ thuật</span><h3 style="font-size:18px;font-weight:700;margin:8px 0">Kiểm thử component Vue 3 hiệu quả</h3><p class="text-muted" style="font-size:14px">Chiến lược test cho thư viện component: từ unit đến visual regression.</p><div class="flex gap-4 mt-4" style="align-items:center"><div class="wx-avatar" style="width:28px;height:28px;font-size:12px">TD</div><div class="text-muted" style="font-size:13px">Trần Đức Duy · 05/04/2026 · 10 phút</div></div></div>
+    </a>
+    <a href="../landing/blog-post.html" class="wx-card" style="text-decoration:none;color:inherit">
+      <div style="height:160px;background:linear-gradient(135deg,#3b82f6,#a855f7);border-radius:8px 8px 0 0"></div>
+      <div class="wx-card-body"><span class="wx-badge">Thiết kế</span><h3 style="font-size:18px;font-weight:700;margin:8px 0">Khoảng cách & nhịp điệu trong UI</h3><p class="text-muted" style="font-size:14px">Thang đo spacing 4px và lý do nó làm giao diện trông chuyên nghiệp hơn.</p><div class="flex gap-4 mt-4" style="align-items:center"><div class="wx-avatar" style="width:28px;height:28px;font-size:12px">PA</div><div class="text-muted" style="font-size:13px">Phạm Mai Anh · 28/03/2026 · 8 phút</div></div></div>
+    </a>
+    <a href="../landing/blog-post.html" class="wx-card" style="text-decoration:none;color:inherit">
+      <div style="height:160px;background:linear-gradient(135deg,#f43f5e,#fb923c);border-radius:8px 8px 0 0"></div>
+      <div class="wx-card-body"><span class="wx-badge">Hướng dẫn</span><h3 style="font-size:18px;font-weight:700;margin:8px 0">Tích hợp WemakeUI vào dự án có sẵn</h3><p class="text-muted" style="font-size:14px">Hướng dẫn từng bước thêm thư viện vào codebase Vue 3 hiện hữu.</p><div class="flex gap-4 mt-4" style="align-items:center"><div class="wx-avatar" style="width:28px;height:28px;font-size:12px">ĐM</div><div class="text-muted" style="font-size:13px">Đặng Quang Minh · 18/03/2026 · 9 phút</div></div></div>
+    </a>
+    <a href="../landing/blog-post.html" class="wx-card" style="text-decoration:none;color:inherit">
+      <div style="height:160px;background:linear-gradient(135deg,#14b8a6,#0ea5e9);border-radius:8px 8px 0 0"></div>
+      <div class="wx-card-body"><span class="wx-badge">Cộng đồng</span><h3 style="font-size:18px;font-weight:700;margin:8px 0">Phỏng vấn: đội Base.vn dùng WemakeUI</h3><p class="text-muted" style="font-size:14px">Câu chuyện thực tế về cách họ rút ngắn thời gian phát triển 40%.</p><div class="flex gap-4 mt-4" style="align-items:center"><div class="wx-avatar" style="width:28px;height:28px;font-size:12px">VH</div><div class="text-muted" style="font-size:13px">Vũ Thu Hà · 08/03/2026 · 12 phút</div></div></div>
+    </a>
+  </div>
+
+  <div class="flex gap-4 justify-center mt-4" style="margin-top:32px">
+    <button class="wx-btn wx-btn-secondary wx-btn-sm">‹ Trước</button>
+    <button class="wx-btn wx-btn-primary wx-btn-sm">1</button>
+    <button class="wx-btn wx-btn-secondary wx-btn-sm">2</button>
+    <button class="wx-btn wx-btn-secondary wx-btn-sm">3</button>
+    <button class="wx-btn wx-btn-secondary wx-btn-sm">Sau ›</button>
+  </div>
+</section>
+
+<footer class="wx-landing-footer">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="wx-landing-logo" style="margin-bottom:16px">WemakeUI</div>
+    <p>Bộ UI kit Vue 3 + Design System đa nền tảng. © 2026 WemakeUI Corp. Bảo lưu mọi quyền.</p>
+    <div class="flex gap-4 justify-center mt-4" style="flex-wrap:wrap">
+      <a href="../landing/about.html" style="color:rgba(255,255,255,0.7)">Giới thiệu</a>
+      <a href="../landing/careers.html" style="color:rgba(255,255,255,0.7)">Tuyển dụng</a>
+      <a href="../landing/policy.html" style="color:rgba(255,255,255,0.7)">Chính sách</a>
+      <a href="../landing/changelog.html" style="color:rgba(255,255,255,0.7)">Changelog</a>
+      <a href="../landing/api.html" style="color:rgba(255,255,255,0.7)">API</a>
+      <a href="../landing/contact.html" style="color:rgba(255,255,255,0.7)">Liên hệ</a>
+    </div>
+  </div>
+</footer>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

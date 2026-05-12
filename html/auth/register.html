@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f0f9ff 0%, #ede9fe 50%, #ecfeff 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .register-card {
+      background: var(--wx-surface-base);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(37,99,235,0.12), 0 4px 20px rgba(0,0,0,0.06);
+      padding: 48px 44px;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .register-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      text-decoration: none;
+    }
+    .register-logo-mark {
+      width: 40px; height: 40px;
+      background: var(--wx-gradient-button);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #fff;
+    }
+    .register-logo-text {
+      font-weight: 800; font-size: 20px;
+      background: var(--wx-gradient-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* PROGRESS INDICATOR */
+    .wizard-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .wizard-step {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--wx-border-default);
+      transition: all var(--wx-duration-normal);
+    }
+    .wizard-step.active {
+      width: 28px;
+      border-radius: 5px;
+      background: var(--wx-brand-primary);
+    }
+    .wizard-step.done {
+      background: var(--wx-success-solid);
+    }
+    .wizard-progress-line {
+      width: 32px; height: 2px;
+      background: var(--wx-border-default);
+      border-radius: 1px;
+      transition: background var(--wx-duration-normal);
+    }
+    .wizard-progress-line.done { background: var(--wx-success-solid); }
+
+    .register-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--wx-text-primary);
+      margin: 0 0 6px;
+      text-align: center;
+    }
+    .register-sub {
+      font-size: 14px;
+      color: var(--wx-text-secondary);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .register-step-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--wx-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    /* STEPS */
+    .wizard-step-content { display: none; }
+    .wizard-step-content.active { display: block; }
+
+    .auth-field {
+      margin-bottom: 18px;
+    }
+    .auth-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wx-text-primary);
+      margin-bottom: 6px;
+    }
+    .auth-input {
+      width: 100%;
+      height: 42px;
+      border: 1.5px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      padding: 0 14px;
+      font-size: 14px;
+      font-family: var(--wx-font-primary);
+      color: var(--wx-text-primary);
+      background: var(--wx-surface-sunken);
+      transition: all var(--wx-duration-fast);
+      box-sizing: border-box;
+    }
+    .auth-input:focus {
+      outline: none;
+      border-color: var(--wx-brand-primary);
+      box-shadow: var(--wx-shadow-focus);
+      background: var(--wx-surface-base);
+    }
+    .auth-input-wrap { position: relative; }
+    .auth-input-wrap .auth-input { padding-right: 44px; }
+    .auth-input-toggle {
+      position: absolute;
+      right: 12px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; color: var(--wx-text-muted); font-size: 16px;
+    }
+
+    /* Password strength */
+    .pw-strength {
+      margin-top: 8px;
+    }
+    .pw-strength-bar {
+      height: 4px;
+      background: var(--wx-border-default);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .pw-strength-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width var(--wx-duration-normal), background var(--wx-duration-normal);
+      width: 0%;
+      background: var(--wx-danger-solid);
+    }
+    .pw-strength-text {
+      font-size: 11px;
+      color: var(--wx-text-muted);
+    }
+
+    /* Step 2 grid */
+    .auth-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Step 3 success */
+    .success-box {
+      text-align: center;
+      padding: 16px 0 8px;
+    }
+    .success-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .success-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--wx-text-primary);
+      margin-bottom: 12px;
+    }
+    .success-desc {
+      font-size: 14px;
+      color: var(--wx-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .success-email {
+      font-weight: 700;
+      color: var(--wx-brand-primary);
+    }
+
+    /* Buttons */
+    .auth-btn-primary {
+      width: 100%;
+      height: 44px;
+      background: var(--wx-gradient-button);
+      color: #fff;
+      border: none;
+      border-radius: var(--wx-radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--wx-duration-fast), transform var(--wx-duration-fast);
+      margin-top: 8px;
+    }
+    .auth-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .auth-btn-secondary {
+      width: 100%;
+      height: 44px;
+      background: var(--wx-surface-sunken);
+      color: var(--wx-text-secondary);
+      border: 1.5px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--wx-duration-fast);
+      margin-top: 8px;
+    }
+    .auth-btn-secondary:hover { background: var(--wx-hover-bg); border-color: var(--wx-brand-300); }
+
+    .wizard-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .wizard-btns.single { grid-template-columns: 1fr; }
+
+    .register-footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+      margin-top: 24px;
+    }
+    .register-footer a { font-weight: 600; color: var(--wx-brand-primary); }
+  </style>
+</head>
+<body>
+
+<div class="register-card">
+  <a href="../index.html" class="register-logo">
+    <div class="register-logo-mark">W</div>
+    <span class="register-logo-text">WemakeUI</span>
+  </a>
+
+  <!-- Progress -->
+  <div class="wizard-progress" id="wizardProgress">
+    <div class="wizard-step active" id="dot-1"></div>
+    <div class="wizard-progress-line" id="line-1"></div>
+    <div class="wizard-step" id="dot-2"></div>
+    <div class="wizard-progress-line" id="line-2"></div>
+    <div class="wizard-step" id="dot-3"></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="wizard-step-content active" data-step="1">
+    <p class="register-step-label">Bước 1 / 3 — Tài khoản</p>
+    <h2 class="register-title">Tạo tài khoản mới</h2>
+    <p class="register-sub">Bắt đầu miễn phí, không cần thẻ tín dụng.</p>
+
+    <div class="auth-field">
+      <label for="email1">Email</label>
+      <input type="email" id="email1" class="auth-input" placeholder="you@company.com">
+    </div>
+
+    <div class="auth-field">
+      <label for="pw1">Mật khẩu</label>
+      <div class="auth-input-wrap">
+        <input type="password" id="pw1" class="auth-input" placeholder="Tối thiểu 8 ký tự" oninput="checkStrength(this)">
+        <button type="button" class="auth-input-toggle" onclick="togglePass('pw1',this)">👁</button>
+      </div>
+      <div class="pw-strength">
+        <div class="pw-strength-bar"><div class="pw-strength-fill" id="strengthFill"></div></div>
+        <span class="pw-strength-text" id="strengthText">Nhập mật khẩu</span>
+      </div>
+    </div>
+
+    <div class="auth-field">
+      <label for="pw-confirm">Xác nhận mật khẩu</label>
+      <div class="auth-input-wrap">
+        <input type="password" id="pw-confirm" class="auth-input" placeholder="Nhập lại mật khẩu">
+        <button type="button" class="auth-input-toggle" onclick="togglePass('pw-confirm',this)">👁</button>
+      </div>
+    </div>
+
+    <div class="wizard-btns single">
+      <button type="button" class="auth-btn-primary" data-next-step="2">Tiếp theo →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="wizard-step-content" data-step="2">
+    <p class="register-step-label">Bước 2 / 3 — Thông tin cá nhân</p>
+    <h2 class="register-title">Thông tin của bạn</h2>
+    <p class="register-sub">Giúp chúng tôi cá nhân hóa trải nghiệm cho bạn.</p>
+
+    <div class="auth-grid-2">
+      <div class="auth-field">
+        <label>Họ</label>
+        <input type="text" class="auth-input" placeholder="Nguyễn">
+      </div>
+      <div class="auth-field">
+        <label>Tên</label>
+        <input type="text" class="auth-input" placeholder="Văn A">
+      </div>
+    </div>
+
+    <div class="auth-field">
+      <label>Số điện thoại</label>
+      <input type="tel" class="auth-input" placeholder="+84 xxx xxx xxx">
+    </div>
+
+    <div class="auth-field">
+      <label>Quốc gia</label>
+      <select class="auth-input">
+        <option value="">Chọn quốc gia</option>
+        <option value="vn" selected>🇻🇳 Việt Nam</option>
+        <option value="us">🇺🇸 Hoa Kỳ</option>
+        <option value="jp">🇯🇵 Nhật Bản</option>
+        <option value="sg">🇸🇬 Singapore</option>
+        <option value="kr">🇰🇷 Hàn Quốc</option>
+      </select>
+    </div>
+
+    <div class="auth-field">
+      <label>Vai trò</label>
+      <select class="auth-input">
+        <option value="">Chọn vai trò</option>
+        <option value="dev">Lập trình viên</option>
+        <option value="design">Nhà thiết kế</option>
+        <option value="pm">Quản lý sản phẩm</option>
+        <option value="ceo">CEO / Founder</option>
+        <option value="other">Khác</option>
+      </select>
+    </div>
+
+    <div class="wizard-btns">
+      <button type="button" class="auth-btn-secondary" data-prev-step="1">← Quay lại</button>
+      <button type="button" class="auth-btn-primary" data-next-step="3">Hoàn tất →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="wizard-step-content" data-step="3">
+    <div class="success-box">
+      <span class="success-icon">📧</span>
+      <div class="success-title">Xác minh email của bạn!</div>
+      <p class="success-desc">
+        Chúng tôi đã gửi link xác minh đến<br>
+        <span class="success-email">you@company.com</span>
+      </p>
+      <p class="success-desc">Vui lòng kiểm tra hộp thư đến và nhấp vào link để kích hoạt tài khoản.</p>
+
+      <div class="wizard-btns single" style="margin-top: 24px;">
+        <a href="login.html" class="auth-btn-primary" style="display:flex;align-items:center;justify-content:center;text-decoration:none;">
+          Đến trang đăng nhập
+        </a>
+      </div>
+
+      <p style="margin-top: 16px; font-size: 13px; color: var(--wx-text-muted);">
+        Chưa nhận được email? <a href="email-verify.html" style="color: var(--wx-brand-primary); font-weight: 600;">Gửi lại</a>
+      </p>
+    </div>
+  </div>
+
+  <p class="register-footer" id="loginLink">
+    Đã có tài khoản? <a href="login.html">Đăng nhập</a>
+  </p>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  let currentStep = 1;
+  const totalSteps = 3;
+
+  function updateProgress(step) {
+    for (let i = 1; i <= totalSteps; i++) {
+      const dot = document.getElementById('dot-' + i);
+      dot.className = 'wizard-step';
+      if (i < step) dot.classList.add('done');
+      else if (i === step) dot.classList.add('active');
+    }
+    for (let i = 1; i < totalSteps; i++) {
+      const line = document.getElementById('line-' + i);
+      line.className = 'wizard-progress-line';
+      if (i < step) line.classList.add('done');
+    }
+  }
+
+  function showStep(step) {
+    document.querySelectorAll('.wizard-step-content').forEach(el => el.classList.remove('active'));
+    document.querySelector('[data-step="' + step + '"]').classList.add('active');
+    updateProgress(step);
+    currentStep = step;
+    if (step === 3) {
+      document.getElementById('loginLink').style.display = 'none';
+    } else {
+      document.getElementById('loginLink').style.display = 'block';
+    }
+  }
+
+  document.querySelectorAll('[data-next-step]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = parseInt(btn.getAttribute('data-next-step'));
+      showStep(next);
+    });
+  });
+  document.querySelectorAll('[data-prev-step]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const prev = parseInt(btn.getAttribute('data-prev-step'));
+      showStep(prev);
+    });
+  });
+
+  function togglePass(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁'; }
+  }
+
+  function checkStrength(input) {
+    const val = input.value;
+    const fill = document.getElementById('strengthFill');
+    const text = document.getElementById('strengthText');
+    let score = 0;
+    if (val.length >= 8) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
+
+    const levels = [
+      { pct: '0%', color: '#dc2626', label: 'Nhập mật khẩu' },
+      { pct: '25%', color: '#dc2626', label: 'Rất yếu' },
+      { pct: '50%', color: '#d97706', label: 'Trung bình' },
+      { pct: '75%', color: '#16a34a', label: 'Mạnh' },
+      { pct: '100%', color: '#15803d', label: 'Rất mạnh!' },
+    ];
+    const lvl = val.length === 0 ? levels[0] : levels[score];
+    fill.style.width = lvl.pct;
+    fill.style.background = lvl.color;
+    text.textContent = lvl.label;
+    text.style.color = lvl.color;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Console — WeConnect</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">WC</div>
+      <span class="wx-sidebar-brand-text">WeConnect</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">WeConnect</div>
+      <a href="index.html" class="wx-nav-item"><span class="wx-nav-icon">🎛️</span><span>Bảng quản trị</span></a>
+      <a href="accounts.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Tài khoản</span></a>
+      <a href="sessions.html" class="wx-nav-item"><span class="wx-nav-icon">🔌</span><span>Phiên kết nối</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📇</span><span>Danh bạ</span></a>
+      <a href="campaigns.html" class="wx-nav-item"><span class="wx-nav-icon">📣</span><span>Chiến dịch</span></a>
+      <a href="plugins.html" class="wx-nav-item"><span class="wx-nav-icon">🧩</span><span>Plugin</span></a>
+      <a href="console.html" class="wx-nav-item active"><span class="wx-nav-icon">⌨️</span><span>Console</span></a>
+      <a href="scheduler.html" class="wx-nav-item"><span class="wx-nav-icon">⏰</span><span>Lịch trình</span></a>
+      <a href="integrations.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>Tích hợp</span></a>
+      <a href="automation.html" class="wx-nav-item"><span class="wx-nav-icon">⚡</span><span>Tự động hóa</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">AD</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Admin</div><div class="text-xs text-muted">Quản trị viên</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Console</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Console</h1>
+          <p class="text-muted" style="margin:0">Giao diện dòng lệnh để quản trị WeConnect</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="wx-btn wx-btn-secondary">Xóa màn hình</button>
+          <button class="wx-btn wx-btn-secondary">Tải log</button>
+        </div>
+      </div>
+
+      <div style="background:#0f172a;color:#e2e8f0;font-family:var(--wx-font-mono);border-radius:10px;overflow:hidden;margin-bottom:20px;border:1px solid #1e293b">
+        <div style="background:#1e293b;padding:8px 14px;display:flex;align-items:center;gap:8px;font-size:12px">
+          <span style="width:11px;height:11px;border-radius:50%;background:#ef4444;display:inline-block"></span>
+          <span style="width:11px;height:11px;border-radius:50%;background:#f59e0b;display:inline-block"></span>
+          <span style="width:11px;height:11px;border-radius:50%;background:#22c55e;display:inline-block"></span>
+          <span style="margin-left:8px;color:#94a3b8">WeConnect Console v0.8 — admin@weconnect</span>
+        </div>
+        <div style="padding:14px 16px;font-size:12.5px;line-height:1.7;max-height:420px;overflow-y:auto">
+          <div style="color:#64748b">WeConnect Console v0.8.3 · Kết nối tới cluster prod-sg1</div>
+          <div style="color:#64748b">Gõ `help` để xem danh sách lệnh.</div>
+          <div>&nbsp;</div>
+          <div><span style="color:#64748b">[14:01:02]</span> <span style="color:#38bdf8">INFO</span> &nbsp;Khởi động worker pool: 8 worker</div>
+          <div><span style="color:#64748b">[14:01:03]</span> <span style="color:#38bdf8">INFO</span> &nbsp;Scheduler loaded 14 jobs</div>
+          <div><span style="color:#22c55e">&gt; account list --status=running</span></div>
+          <div style="color:#cbd5e1">[ "@wemakeui_vn", "@wemake.studio", "@wemake-jsc", "Wemake CSKH", "@wemakeui", "@wemake.design" ]  → 18 active</div>
+          <div><span style="color:#64748b">[14:02:11]</span> <span style="color:#38bdf8">INFO</span> &nbsp;Session #SES-0012 sent 200 messages (queue=12)</div>
+          <div><span style="color:#64748b">[14:02:43]</span> <span style="color:#facc15">WARN</span> &nbsp;Worker #7 high latency: 1842ms</div>
+          <div><span style="color:#22c55e">&gt; session restart SES-0009</span></div>
+          <div style="color:#cbd5e1">{ "session": "SES-0009", "action": "restart", "status": "queued" }</div>
+          <div><span style="color:#64748b">[14:03:01]</span> <span style="color:#f87171">ERROR</span> Session SES-0009 auth challenge failed (code 1006)</div>
+          <div><span style="color:#64748b">[14:03:02]</span> <span style="color:#38bdf8">INFO</span> &nbsp;Retry SES-0009 with fresh token in 60s</div>
+          <div><span style="color:#22c55e">&gt; campaign status</span></div>
+          <div style="color:#cbd5e1">6 running · 3 scheduled · avg reply 18.4%</div>
+          <div><span style="color:#64748b">[14:03:33]</span> <span style="color:#38bdf8">INFO</span> &nbsp;Plugin Auto-Reply Bot handled 340 messages</div>
+          <div><span style="color:#22c55e">&gt; cache clear --scope=contacts</span></div>
+          <div style="color:#cbd5e1">OK · invalidated 12,847 keys in 84ms</div>
+          <div><span style="color:#64748b">[14:04:10]</span> <span style="color:#38bdf8">INFO</span> &nbsp;Hệ thống ổn định · uptime 99.8%</div>
+        </div>
+        <div style="background:#0b1220;padding:10px 16px;display:flex;align-items:center;gap:8px;border-top:1px solid #1e293b">
+          <span style="color:#22c55e;font-family:var(--wx-font-mono);font-size:13px">&gt;</span>
+          <input type="text" placeholder="Nhập lệnh và nhấn Enter..." style="flex:1;background:transparent;border:none;outline:none;color:#e2e8f0;font-family:var(--wx-font-mono);font-size:13px">
+        </div>
+      </div>
+
+      <div class="wx-grid wx-grid-2">
+        <div class="wx-card">
+          <div class="wx-card-header"><div class="wx-card-title">Lệnh nhanh</div></div>
+          <div class="wx-card-body">
+            <div class="wx-grid wx-grid-3 gap-3">
+              <button class="wx-btn wx-btn-secondary font-mono text-sm">account list</button>
+              <button class="wx-btn wx-btn-secondary font-mono text-sm">session restart</button>
+              <button class="wx-btn wx-btn-secondary font-mono text-sm">campaign status</button>
+              <button class="wx-btn wx-btn-secondary font-mono text-sm">cache clear</button>
+              <button class="wx-btn wx-btn-secondary font-mono text-sm">logs tail</button>
+              <button class="wx-btn wx-btn-secondary font-mono text-sm">help</button>
+            </div>
+          </div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-card-header"><div class="wx-card-title">Tài liệu lệnh</div></div>
+          <div class="wx-card-body" style="padding:0">
+            <table class="wx-table">
+              <thead><tr><th>Lệnh</th><th>Mô tả</th><th>Ví dụ</th></tr></thead>
+              <tbody>
+                <tr><td class="font-mono text-sm">account</td><td class="text-sm">Quản lý tài khoản</td><td class="font-mono text-xs text-muted">account list --status=running</td></tr>
+                <tr><td class="font-mono text-sm">session</td><td class="text-sm">Điều khiển phiên kết nối</td><td class="font-mono text-xs text-muted">session restart SES-0012</td></tr>
+                <tr><td class="font-mono text-sm">campaign</td><td class="text-sm">Trạng thái & điều khiển chiến dịch</td><td class="font-mono text-xs text-muted">campaign pause "Khuyến mãi"</td></tr>
+                <tr><td class="font-mono text-sm">contact</td><td class="text-sm">Tra cứu danh bạ</td><td class="font-mono text-xs text-muted">contact find --tag=VIP</td></tr>
+                <tr><td class="font-mono text-sm">cache</td><td class="text-sm">Quản lý bộ nhớ đệm</td><td class="font-mono text-xs text-muted">cache clear --scope=contacts</td></tr>
+                <tr><td class="font-mono text-sm">logs</td><td class="text-sm">Xem log hệ thống</td><td class="font-mono text-xs text-muted">logs tail --level=error</td></tr>
+                <tr><td class="font-mono text-sm">plugin</td><td class="text-sm">Bật/tắt plugin</td><td class="font-mono text-xs text-muted">plugin enable auto-reply</td></tr>
+                <tr><td class="font-mono text-sm">help</td><td class="text-sm">Hiển thị trợ giúp</td><td class="font-mono text-xs text-muted">help session</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

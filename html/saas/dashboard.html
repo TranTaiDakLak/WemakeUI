@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bảng điều khiển SaaS — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">SaaS Admin</div>
+      <a href="dashboard.html" class="wx-nav-item active"><span class="wx-nav-icon">📊</span><span>Bảng điều khiển</span></a>
+      <a href="members.html" class="wx-nav-item"><span class="wx-nav-icon">👥</span><span>Thành viên</span></a>
+      <a href="products.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="transactions.html" class="wx-nav-item"><span class="wx-nav-icon">💳</span><span>Giao dịch</span></a>
+      <a href="versions.html" class="wx-nav-item"><span class="wx-nav-icon">🔖</span><span>Phiên bản</span></a>
+      <a href="statistics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Thống kê</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Bảng điều khiển SaaS</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Bảng điều khiển SaaS</h1>
+        <p class="text-muted" style="margin:0">Tổng quan doanh thu định kỳ, người dùng, tỷ lệ chuyển đổi và phân bổ gói dịch vụ.</p>
+      </div>
+
+      <div class="wx-grid-4 mb-4">
+        <div class="wx-stat-card"><div class="wx-stat-icon">💰</div><div class="wx-stat-label">MRR (doanh thu định kỳ)</div><div class="wx-stat-value">₫1.2 tỷ</div><div class="wx-stat-change" style="color:var(--wx-success-text,#15803d)">▲ +8% so với tháng trước</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">👥</div><div class="wx-stat-label">Người dùng hoạt động</div><div class="wx-stat-value">4,821</div><div class="wx-stat-change" style="color:var(--wx-success-text,#15803d)">▲ +12% so với tháng trước</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">🎯</div><div class="wx-stat-label">Tỷ lệ chuyển đổi</div><div class="wx-stat-value">3.4%</div><div class="wx-stat-change" style="color:var(--wx-success-text,#15803d)">▲ +0.3 điểm</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">📉</div><div class="wx-stat-label">Tỷ lệ rời bỏ (churn)</div><div class="wx-stat-value">2.1%</div><div class="wx-stat-change" style="color:var(--wx-danger-text,#b91c1c)">▼ -0.4 điểm tốt hơn</div></div>
+      </div>
+
+      <div class="wx-grid-3 mb-4" style="grid-template-columns:2fr 1fr">
+        <div class="wx-card">
+          <div class="wx-card-header"><h3 class="wx-card-title">Doanh thu 12 tháng</h3></div>
+          <div class="wx-card-body">
+            <svg viewBox="0 0 600 200" style="width:100%;height:200px">
+              <polyline fill="none" stroke="var(--wx-brand-primary)" stroke-width="3" points="0,160 50,150 100,140 150,120 200,130 250,100 300,90 350,95 400,70 450,60 500,40 550,30 600,20"/>
+              <polyline fill="var(--wx-brand-100,#dbeafe)" opacity="0.4" stroke="none" points="0,200 0,160 50,150 100,140 150,120 200,130 250,100 300,90 350,95 400,70 450,60 500,40 550,30 600,20 600,200"/>
+            </svg>
+            <div class="flex justify-between text-xs text-muted mt-2"><span>T6</span><span>T7</span><span>T8</span><span>T9</span><span>T10</span><span>T11</span><span>T12</span><span>T1</span><span>T2</span><span>T3</span><span>T4</span><span>T5</span></div>
+          </div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-card-header"><h3 class="wx-card-title">Phân bổ gói</h3></div>
+          <div class="wx-card-body">
+            <div style="display:flex;justify-content:center;margin-bottom:12px">
+              <svg viewBox="0 0 120 120" width="140" height="140">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="var(--wx-surface-sunken)" stroke-width="18"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="var(--wx-brand-primary)" stroke-width="18" stroke-dasharray="157 314" transform="rotate(-90 60 60)"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#22c55e" stroke-width="18" stroke-dasharray="94 314" stroke-dashoffset="-157" transform="rotate(-90 60 60)"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#f59e0b" stroke-width="18" stroke-dasharray="63 314" stroke-dashoffset="-251" transform="rotate(-90 60 60)"/>
+              </svg>
+            </div>
+            <div class="flex items-center gap-2 text-sm mb-1"><span style="width:10px;height:10px;border-radius:2px;background:var(--wx-brand-primary)"></span> Pro — 50%</div>
+            <div class="flex items-center gap-2 text-sm mb-1"><span style="width:10px;height:10px;border-radius:2px;background:#22c55e"></span> Cơ bản — 30%</div>
+            <div class="flex items-center gap-2 text-sm"><span style="width:10px;height:10px;border-radius:2px;background:#f59e0b"></span> Doanh nghiệp — 20%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-grid-3" style="grid-template-columns:2fr 1fr">
+        <div class="wx-card">
+          <div class="wx-card-header"><h3 class="wx-card-title">Đăng ký mới gần đây</h3></div>
+          <div class="wx-card-body" style="padding:0">
+            <table class="wx-table">
+              <thead><tr><th>Người dùng</th><th>Email</th><th>Gói</th><th>Ngày</th></tr></thead>
+              <tbody>
+                <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">NA</div> Nguyễn Văn An</div></td><td>an.nguyen@gmail.com</td><td><span class="wx-badge wx-badge-primary">Pro</span></td><td>12/05/2026</td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">TB</div> Trần Thị Bích</div></td><td>bich.tt@outlook.com</td><td><span class="wx-badge wx-badge-neutral">Cơ bản</span></td><td>12/05/2026</td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">LC</div> Lê Hoàng Cường</div></td><td>cuong.lh@company.vn</td><td><span class="wx-badge wx-badge-warning">Doanh nghiệp</span></td><td>11/05/2026</td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">PD</div> Phạm Thuỳ Dung</div></td><td>dung.pham@gmail.com</td><td><span class="wx-badge wx-badge-primary">Pro</span></td><td>11/05/2026</td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="wx-avatar wx-avatar-sm">HE</div> Hoàng Văn Em</div></td><td>em.hv@yahoo.com</td><td><span class="wx-badge wx-badge-neutral">Cơ bản</span></td><td>10/05/2026</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-card-header"><h3 class="wx-card-title">Thao tác nhanh</h3></div>
+          <div class="wx-card-body flex" style="flex-direction:column;gap:8px">
+            <button class="wx-btn wx-btn-primary wx-btn-full">➕ Mời thành viên mới</button>
+            <button class="wx-btn wx-btn-secondary wx-btn-full">📦 Thêm sản phẩm</button>
+            <button class="wx-btn wx-btn-secondary wx-btn-full">🔖 Phát hành phiên bản</button>
+            <button class="wx-btn wx-btn-secondary wx-btn-full">📊 Xuất báo cáo doanh thu</button>
+            <button class="wx-btn wx-btn-ghost wx-btn-full">⚙️ Cấu hình thanh toán</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

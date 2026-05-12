@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xác minh Email — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f0f9ff 0%, #ecfeff 50%, #eff6ff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .verify-card {
+      background: var(--wx-surface-base);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(37,99,235,0.1), 0 4px 16px rgba(0,0,0,0.06);
+      padding: 52px 44px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .verify-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .verify-logo-mark {
+      width: 40px; height: 40px;
+      background: var(--wx-gradient-button);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #fff;
+    }
+    .verify-logo-text {
+      font-weight: 800; font-size: 20px;
+      background: var(--wx-gradient-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .verify-envelope {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+    .verify-envelope-icon {
+      font-size: 72px;
+      display: block;
+      animation: float 3s ease-in-out infinite;
+    }
+    .verify-envelope-badge {
+      position: absolute;
+      top: 4px; right: -4px;
+      width: 24px; height: 24px;
+      background: var(--wx-success-solid);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: #fff;
+      border: 2px solid #fff;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .verify-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--wx-text-primary);
+      margin: 0 0 12px;
+    }
+    .verify-desc {
+      font-size: 14px;
+      color: var(--wx-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .verify-email {
+      font-weight: 700;
+      color: var(--wx-brand-primary);
+    }
+
+    .verify-steps {
+      background: var(--wx-surface-sunken);
+      border-radius: var(--wx-radius-lg);
+      padding: 20px;
+      margin: 24px 0;
+      text-align: left;
+    }
+    .verify-step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 6px 0;
+    }
+    .verify-step-num {
+      width: 22px; height: 22px;
+      background: var(--wx-brand-primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .verify-step-text {
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+      line-height: 1.5;
+    }
+
+    .auth-btn-primary {
+      width: 100%;
+      height: 46px;
+      background: var(--wx-gradient-button);
+      color: #fff;
+      border: none;
+      border-radius: var(--wx-radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--wx-duration-fast), transform var(--wx-duration-fast);
+      margin-bottom: 12px;
+      box-shadow: var(--wx-shadow-brand);
+    }
+    .auth-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .auth-btn-outline {
+      width: 100%;
+      height: 44px;
+      background: transparent;
+      color: var(--wx-brand-primary);
+      border: 1.5px solid var(--wx-brand-200);
+      border-radius: var(--wx-radius-lg);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--wx-duration-fast);
+      margin-bottom: 20px;
+    }
+    .auth-btn-outline:hover { background: var(--wx-brand-50); border-color: var(--wx-brand-400); }
+
+    .verify-spam-note {
+      font-size: 12px;
+      color: var(--wx-text-muted);
+      line-height: 1.5;
+      padding: 10px 14px;
+      background: var(--wx-warning-bg);
+      border: 1px solid var(--wx-warning-border);
+      border-radius: var(--wx-radius-md);
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .verify-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .verify-link {
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+      text-decoration: none;
+    }
+    .verify-link:hover { color: var(--wx-brand-primary); text-decoration: none; }
+    .verify-link span { color: var(--wx-brand-primary); font-weight: 500; }
+  </style>
+</head>
+<body>
+
+<div class="verify-card">
+  <div class="verify-logo">
+    <div class="verify-logo-mark">W</div>
+    <span class="verify-logo-text">WemakeUI</span>
+  </div>
+
+  <div class="verify-envelope">
+    <span class="verify-envelope-icon">📧</span>
+    <div class="verify-envelope-badge">✓</div>
+  </div>
+
+  <h1 class="verify-title">Kiểm tra email của bạn</h1>
+  <p class="verify-desc">
+    Chúng tôi đã gửi link xác minh đến<br>
+    <span class="verify-email">nguyen.van.a@gmail.com</span>
+  </p>
+
+  <div class="verify-steps">
+    <div class="verify-step-item">
+      <div class="verify-step-num">1</div>
+      <div class="verify-step-text">Mở hộp thư của bạn và tìm email từ <strong>noreply@wemakeui.vn</strong></div>
+    </div>
+    <div class="verify-step-item">
+      <div class="verify-step-num">2</div>
+      <div class="verify-step-text">Nhấp vào nút <strong>"Xác minh tài khoản"</strong> trong email</div>
+    </div>
+    <div class="verify-step-item">
+      <div class="verify-step-num">3</div>
+      <div class="verify-step-text">Bắt đầu sử dụng WemakeUI sau khi xác minh thành công</div>
+    </div>
+  </div>
+
+  <div class="verify-spam-note">
+    💡 Không thấy email? Hãy kiểm tra thư mục <strong>Spam/Junk</strong> hoặc đợi vài phút.
+  </div>
+
+  <button type="button" class="auth-btn-primary" onclick="resend(this)">
+    Gửi lại email xác minh
+  </button>
+
+  <div class="verify-links">
+    <a href="#" class="verify-link" onclick="changeEmail()">
+      <span>Đổi địa chỉ email</span> khác
+    </a>
+    <a href="login.html" class="verify-link">
+      ← Quay lại <span>đăng nhập</span>
+    </a>
+  </div>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  function resend(btn) {
+    btn.textContent = 'Đang gửi...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = '✅ Đã gửi lại!';
+      setTimeout(() => {
+        btn.textContent = 'Gửi lại email xác minh';
+        btn.disabled = false;
+      }, 3000);
+    }, 1000);
+  }
+  function changeEmail() {
+    const email = prompt('Nhập địa chỉ email mới:', 'nguyen.van.a@gmail.com');
+    if (email) {
+      document.querySelector('.verify-email').textContent = email;
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Validation — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .wx-input.valid { border-color:var(--wx-success-solid); }
+  .wx-input.valid:focus { box-shadow:0 0 0 3px var(--wx-success-bg); }
+  .wx-form-ok { color:var(--wx-success-text,#15803d); font-size:var(--wx-fs-xs); margin-top:4px; display:flex; align-items:center; gap:4px; }
+  .wx-form-error { display:flex; align-items:center; gap:4px; }
+  .field-icon { position:absolute; right:12px; top:34px; font-size:14px; }
+  .fwrap { position:relative; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item active"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Validation</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Validation</h1>
+        <p class="text-muted" style="margin:0">Trạng thái kiểm tra dữ liệu: hợp lệ, lỗi định dạng, bắt buộc, độ dài tối thiểu và xác nhận mật khẩu.</p>
+      </div>
+
+      <div class="wx-grid-2">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Biểu mẫu có lỗi</h3></div>
+          <div class="wx-card-body">
+            <div class="wx-alert wx-alert-danger mb-4">⚠️ Vui lòng sửa 3 lỗi bên dưới trước khi tiếp tục.</div>
+            <div class="wx-form-group fwrap">
+              <label class="wx-form-label">Họ và tên <span class="required">*</span></label>
+              <input type="text" class="wx-input valid" value="Trần Thị Bích">
+              <span class="field-icon">✅</span>
+              <div class="wx-form-ok">✓ Hợp lệ</div>
+            </div>
+            <div class="wx-form-group fwrap">
+              <label class="wx-form-label">Email <span class="required">*</span></label>
+              <input type="text" class="wx-input error" value="bich.tran@@wemake">
+              <span class="field-icon">❌</span>
+              <div class="wx-form-error">✗ Email không đúng định dạng. Ví dụ: ban@congty.vn</div>
+            </div>
+            <div class="wx-form-group fwrap">
+              <label class="wx-form-label">Số điện thoại <span class="required">*</span></label>
+              <input type="text" class="wx-input error" value="">
+              <span class="field-icon">❌</span>
+              <div class="wx-form-error">✗ Trường này là bắt buộc.</div>
+            </div>
+            <div class="wx-form-group fwrap">
+              <label class="wx-form-label">Mật khẩu <span class="required">*</span></label>
+              <input type="password" class="wx-input error" value="123">
+              <span class="field-icon">❌</span>
+              <div class="wx-form-error">✗ Mật khẩu phải có ít nhất 8 ký tự.</div>
+            </div>
+            <div class="wx-form-group fwrap">
+              <label class="wx-form-label">Xác nhận mật khẩu <span class="required">*</span></label>
+              <input type="password" class="wx-input valid" value="••••••••">
+              <span class="field-icon">✅</span>
+              <div class="wx-form-ok">✓ Khớp với mật khẩu</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="wx-checkbox"> Tôi đồng ý với <a href="#" style="color:var(--wx-text-link)">điều khoản sử dụng</a> <span class="required">*</span></label>
+              <div class="wx-form-error">✗ Bạn cần đồng ý điều khoản để tiếp tục.</div>
+            </div>
+          </div>
+          <div class="wx-card-footer flex justify-end gap-2">
+            <button class="wx-btn wx-btn-ghost">Huỷ</button>
+            <button class="wx-btn wx-btn-primary">Đăng ký</button>
+          </div>
+        </div>
+
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Biểu mẫu hợp lệ</h3></div>
+          <div class="wx-card-body">
+            <div class="wx-alert wx-alert-success mb-4">✓ Tất cả các trường đã hợp lệ. Bạn có thể gửi biểu mẫu.</div>
+            <div class="wx-form-group fwrap">
+              <label class="wx-form-label">Tên cửa hàng <span class="required">*</span></label>
+              <input type="text" class="wx-input valid" value="Cửa hàng Wemake">
+              <span class="field-icon">✅</span>
+              <div class="wx-form-ok">✓ Hợp lệ</div>
+            </div>
+            <div class="wx-form-group fwrap">
+              <label class="wx-form-label">Email liên hệ <span class="required">*</span></label>
+              <input type="email" class="wx-input valid" value="lienhe@wemake.vn">
+              <span class="field-icon">✅</span>
+              <div class="wx-form-ok">✓ Email hợp lệ</div>
+            </div>
+            <div class="wx-form-group fwrap">
+              <label class="wx-form-label">Mã số thuế <span class="required">*</span></label>
+              <input type="text" class="wx-input valid" value="0312345678">
+              <span class="field-icon">✅</span>
+              <div class="wx-form-ok">✓ Mã số thuế đúng 10 chữ số</div>
+            </div>
+            <div class="wx-form-group fwrap">
+              <label class="wx-form-label">Website</label>
+              <input type="url" class="wx-input valid" value="https://wemake.vn">
+              <span class="field-icon">✅</span>
+              <div class="wx-form-ok">✓ URL hợp lệ</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Mô tả ngắn</label>
+              <textarea class="wx-textarea valid" rows="3">Cửa hàng thời trang nam, giao toàn quốc, đổi trả trong 7 ngày.</textarea>
+              <div class="wx-form-ok">✓ 92 / 200 ký tự</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="wx-checkbox" checked> Tôi xác nhận thông tin trên là chính xác. <span class="required">*</span></label>
+              <div class="wx-form-ok">✓ Đã xác nhận</div>
+            </div>
+          </div>
+          <div class="wx-card-footer flex justify-end gap-2">
+            <button class="wx-btn wx-btn-ghost">Đặt lại</button>
+            <button class="wx-btn wx-btn-primary">Gửi đăng ký</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

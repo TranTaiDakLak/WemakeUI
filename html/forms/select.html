@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select &amp; Combobox — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .combo-box { border:1px solid var(--wx-border-default); border-radius:var(--wx-radius-md); margin-top:6px; overflow:hidden; box-shadow:var(--wx-shadow-md); }
+  .combo-item { padding:8px 12px; cursor:pointer; font-size:var(--wx-fs-sm); display:flex; align-items:center; gap:8px; }
+  .combo-item:hover { background:var(--wx-hover-bg); }
+  .combo-item.active { background:var(--wx-selected-bg); font-weight:600; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; padding:6px; border:1px solid var(--wx-border-default); border-radius:var(--wx-radius-md); min-height:42px; align-items:center; }
+  .chip { display:inline-flex; align-items:center; gap:4px; background:var(--wx-brand-100,#dbeafe); color:var(--wx-brand-700,#1d4ed8); border-radius:var(--wx-radius-full); padding:2px 8px; font-size:var(--wx-fs-xs); }
+  .chip button { border:none; background:none; cursor:pointer; color:inherit; font-size:13px; line-height:1; }
+  .chips input { border:none; outline:none; flex:1; min-width:120px; font-size:var(--wx-fs-sm); background:transparent; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item active"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Select &amp; Combobox</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Select &amp; Combobox</h1>
+        <p class="text-muted" style="margin:0">Các kiểu chọn dữ liệu: select gốc, multi-select, nhóm tuỳ chọn, combobox, nhập nhãn và select có tìm kiếm.</p>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header"><h3 class="wx-card-title">Select gốc &amp; nâng cao</h3></div>
+        <div class="wx-card-body">
+          <div class="wx-grid-2">
+            <div class="wx-form-group">
+              <label class="wx-form-label">Trạng thái đơn hàng</label>
+              <select class="wx-select">
+                <option>Chờ xác nhận</option>
+                <option selected>Đang giao</option>
+                <option>Hoàn thành</option>
+                <option>Đã huỷ</option>
+              </select>
+              <div class="wx-form-hint">Select gốc của trình duyệt.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Tỉnh / thành phố (có nhóm)</label>
+              <select class="wx-select">
+                <optgroup label="Miền Bắc">
+                  <option>Hà Nội</option>
+                  <option>Hải Phòng</option>
+                  <option>Quảng Ninh</option>
+                </optgroup>
+                <optgroup label="Miền Trung">
+                  <option selected>Đà Nẵng</option>
+                  <option>Huế</option>
+                  <option>Nha Trang</option>
+                </optgroup>
+                <optgroup label="Miền Nam">
+                  <option>TP. Hồ Chí Minh</option>
+                  <option>Cần Thơ</option>
+                  <option>Bình Dương</option>
+                </optgroup>
+              </select>
+              <div class="wx-form-hint">Sử dụng &lt;optgroup&gt; để phân nhóm.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Kỹ năng (multi-select)</label>
+              <select class="wx-select" multiple size="5">
+                <option selected>Thiết kế UI</option>
+                <option selected>Lập trình Vue</option>
+                <option>Quản lý dự án</option>
+                <option selected>Viết tài liệu</option>
+                <option>Kiểm thử QA</option>
+                <option>Tối ưu hiệu năng</option>
+              </select>
+              <div class="wx-form-hint">Giữ Ctrl/Cmd để chọn nhiều mục.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Quốc gia (có cờ)</label>
+              <select class="wx-select">
+                <option>🇻🇳 Việt Nam</option>
+                <option>🇸🇬 Singapore</option>
+                <option>🇹🇭 Thái Lan</option>
+                <option>🇯🇵 Nhật Bản</option>
+                <option>🇰🇷 Hàn Quốc</option>
+                <option>🇺🇸 Hoa Kỳ</option>
+                <option>🇦🇺 Úc</option>
+              </select>
+              <div class="wx-form-hint">Dùng emoji cờ cho trực quan.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-grid-2">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Combobox (input + danh sách)</h3></div>
+          <div class="wx-card-body">
+            <div class="wx-form-group">
+              <label class="wx-form-label">Chọn sản phẩm</label>
+              <input type="text" class="wx-input" value="Áo" placeholder="Gõ để lọc...">
+              <div class="combo-box">
+                <div class="combo-item active">👕 Áo thun nam basic</div>
+                <div class="combo-item">👔 Áo sơ mi công sở</div>
+                <div class="combo-item">🧥 Áo khoác gió</div>
+                <div class="combo-item">🥼 Áo len cổ tròn</div>
+              </div>
+              <div class="wx-form-hint">Danh sách lọc theo từ khoá.</div>
+            </div>
+          </div>
+        </div>
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><h3 class="wx-card-title">Select có tìm kiếm</h3></div>
+          <div class="wx-card-body">
+            <div class="wx-form-group">
+              <label class="wx-form-label">Khách hàng</label>
+              <div class="ig" style="display:flex;align-items:stretch;border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-md);overflow:hidden">
+                <span style="display:flex;align-items:center;padding:0 12px;background:var(--wx-surface-sunken);color:var(--wx-text-muted)">🔍</span>
+                <input type="text" class="wx-input" placeholder="Tìm khách hàng..." style="border:none;border-radius:0" value="Nguyễn">
+                <span style="display:flex;align-items:center;padding:0 12px;color:var(--wx-text-muted)">▾</span>
+              </div>
+              <div class="combo-box">
+                <div class="combo-item active"><div class="wx-avatar wx-avatar-sm">NA</div> Nguyễn Văn An — 0912 345 678</div>
+                <div class="combo-item"><div class="wx-avatar wx-avatar-sm">NB</div> Nguyễn Thị Bình — 0987 654 321</div>
+                <div class="combo-item"><div class="wx-avatar wx-avatar-sm">NC</div> Nguyễn Hữu Chính — 0901 222 333</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header"><h3 class="wx-card-title">Nhập nhiều giá trị (tags)</h3></div>
+        <div class="wx-card-body">
+          <div class="wx-form-group">
+            <label class="wx-form-label">Thẻ bài viết</label>
+            <div class="chips">
+              <span class="chip">Khuyến mãi <button>×</button></span>
+              <span class="chip">Thời trang nam <button>×</button></span>
+              <span class="chip">Mùa hè 2026 <button>×</button></span>
+              <span class="chip">Bán chạy <button>×</button></span>
+              <input type="text" placeholder="Thêm thẻ rồi nhấn Enter...">
+            </div>
+            <div class="wx-form-hint">Nhấn Enter để thêm, nhấn × để xoá thẻ.</div>
+          </div>
+          <div class="wx-form-group">
+            <label class="wx-form-label">Người nhận email</label>
+            <div class="chips">
+              <span class="chip">an.nguyen@wemake.vn <button>×</button></span>
+              <span class="chip">binh.tran@wemake.vn <button>×</button></span>
+              <input type="email" placeholder="Nhập email...">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

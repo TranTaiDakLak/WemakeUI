@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chiến dịch — WeConnect</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">WC</div>
+      <span class="wx-sidebar-brand-text">WeConnect</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">WeConnect</div>
+      <a href="index.html" class="wx-nav-item"><span class="wx-nav-icon">🎛️</span><span>Bảng quản trị</span></a>
+      <a href="accounts.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Tài khoản</span></a>
+      <a href="sessions.html" class="wx-nav-item"><span class="wx-nav-icon">🔌</span><span>Phiên kết nối</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📇</span><span>Danh bạ</span></a>
+      <a href="campaigns.html" class="wx-nav-item active"><span class="wx-nav-icon">📣</span><span>Chiến dịch</span></a>
+      <a href="plugins.html" class="wx-nav-item"><span class="wx-nav-icon">🧩</span><span>Plugin</span></a>
+      <a href="console.html" class="wx-nav-item"><span class="wx-nav-icon">⌨️</span><span>Console</span></a>
+      <a href="scheduler.html" class="wx-nav-item"><span class="wx-nav-icon">⏰</span><span>Lịch trình</span></a>
+      <a href="integrations.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>Tích hợp</span></a>
+      <a href="automation.html" class="wx-nav-item"><span class="wx-nav-icon">⚡</span><span>Tự động hóa</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">AD</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Admin</div><div class="text-xs text-muted">Quản trị viên</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Chiến dịch</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Chiến dịch</h1>
+          <p class="text-muted" style="margin:0">Quản lý các chiến dịch gửi tin nhắn hàng loạt</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="wx-btn wx-btn-secondary">Mẫu chiến dịch</button>
+          <button class="wx-btn wx-btn-primary">+ Tạo chiến dịch</button>
+        </div>
+      </div>
+
+      <div class="wx-grid wx-grid-4 mb-5">
+        <div class="wx-stat-card"><div class="wx-stat-icon">▶️</div><div class="wx-stat-label">Chiến dịch đang chạy</div><div class="wx-stat-value">6</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">⏰</div><div class="wx-stat-label">Đã lên lịch</div><div class="wx-stat-value">3</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">✅</div><div class="wx-stat-label">Hoàn thành</div><div class="wx-stat-value">42</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-icon">💬</div><div class="wx-stat-label">Tỷ lệ phản hồi TB</div><div class="wx-stat-value">18.4%</div><div class="wx-stat-change positive">+1.2%</div></div>
+      </div>
+
+      <div class="wx-grid wx-grid-2">
+        <div class="wx-card">
+          <div class="wx-card-header"><div class="wx-card-title">Khuyến mãi tháng 5</div><span class="wx-badge wx-badge-success ml-auto">Đang chạy</span></div>
+          <div class="wx-card-body">
+            <div class="flex items-center justify-between mb-3"><span class="text-xl">📘 📷</span><span class="text-sm text-muted">2,400 liên hệ</span></div>
+            <div class="mb-3"><div class="flex justify-between text-sm mb-3"><span>1,840 / 2,400 đã gửi</span><span class="font-semibold">77%</span></div><div class="wx-progress"><div class="wx-progress-bar" style="width:77%"></div></div></div>
+            <div class="wx-grid wx-grid-4 mb-3" style="text-align:center">
+              <div><div class="font-bold">1,840</div><div class="text-xs text-muted">Đã gửi</div></div>
+              <div><div class="font-bold">1,420</div><div class="text-xs text-muted">Đã đọc</div></div>
+              <div><div class="font-bold">312</div><div class="text-xs text-muted">Đã phản hồi</div></div>
+              <div><div class="font-bold text-muted">7</div><div class="text-xs text-muted">Lỗi</div></div>
+            </div>
+            <div class="text-xs text-muted mb-3">Bắt đầu: 10/05 · Kết thúc: 15/05</div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-secondary wx-btn-sm">⏸ Tạm dừng</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Chỉnh sửa</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem báo cáo</button></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header"><div class="wx-card-title">Chăm sóc khách VIP</div><span class="wx-badge wx-badge-success ml-auto">Đang chạy</span></div>
+          <div class="wx-card-body">
+            <div class="flex items-center justify-between mb-3"><span class="text-xl">💬 ✈️</span><span class="text-sm text-muted">1,200 liên hệ</span></div>
+            <div class="mb-3"><div class="flex justify-between text-sm mb-3"><span>540 / 1,200 đã gửi</span><span class="font-semibold">45%</span></div><div class="wx-progress"><div class="wx-progress-bar" style="width:45%"></div></div></div>
+            <div class="wx-grid wx-grid-4 mb-3" style="text-align:center">
+              <div><div class="font-bold">540</div><div class="text-xs text-muted">Đã gửi</div></div>
+              <div><div class="font-bold">498</div><div class="text-xs text-muted">Đã đọc</div></div>
+              <div><div class="font-bold">156</div><div class="text-xs text-muted">Đã phản hồi</div></div>
+              <div><div class="font-bold text-muted">2</div><div class="text-xs text-muted">Lỗi</div></div>
+            </div>
+            <div class="text-xs text-muted mb-3">Bắt đầu: 08/05 · Kết thúc: 20/05</div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-secondary wx-btn-sm">⏸ Tạm dừng</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Chỉnh sửa</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem báo cáo</button></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header"><div class="wx-card-title">Mời tham gia sự kiện Webinar</div><span class="wx-badge wx-badge-success ml-auto">Đang chạy</span></div>
+          <div class="wx-card-body">
+            <div class="flex items-center justify-between mb-3"><span class="text-xl">💼</span><span class="text-sm text-muted">2,400 liên hệ</span></div>
+            <div class="mb-3"><div class="flex justify-between text-sm mb-3"><span>2,208 / 2,400 đã gửi</span><span class="font-semibold">92%</span></div><div class="wx-progress"><div class="wx-progress-bar wx-progress-warning" style="width:92%"></div></div></div>
+            <div class="wx-grid wx-grid-4 mb-3" style="text-align:center">
+              <div><div class="font-bold">2,208</div><div class="text-xs text-muted">Đã gửi</div></div>
+              <div><div class="font-bold">1,640</div><div class="text-xs text-muted">Đã đọc</div></div>
+              <div><div class="font-bold">428</div><div class="text-xs text-muted">Đã phản hồi</div></div>
+              <div><div class="font-bold text-muted">18</div><div class="text-xs text-muted">Lỗi</div></div>
+            </div>
+            <div class="text-xs text-muted mb-3">Bắt đầu: 09/05 · Kết thúc: 12/05</div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-secondary wx-btn-sm">⏸ Tạm dừng</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Chỉnh sửa</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem báo cáo</button></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header"><div class="wx-card-title">Khảo sát mức độ hài lòng</div><span class="wx-badge wx-badge-warning ml-auto">Tạm dừng</span></div>
+          <div class="wx-card-body">
+            <div class="flex items-center justify-between mb-3"><span class="text-xl">📘</span><span class="text-sm text-muted">1,000 liên hệ</span></div>
+            <div class="mb-3"><div class="flex justify-between text-sm mb-3"><span>300 / 1,000 đã gửi</span><span class="font-semibold">30%</span></div><div class="wx-progress"><div class="wx-progress-bar" style="width:30%"></div></div></div>
+            <div class="wx-grid wx-grid-4 mb-3" style="text-align:center">
+              <div><div class="font-bold">300</div><div class="text-xs text-muted">Đã gửi</div></div>
+              <div><div class="font-bold">221</div><div class="text-xs text-muted">Đã đọc</div></div>
+              <div><div class="font-bold">64</div><div class="text-xs text-muted">Đã phản hồi</div></div>
+              <div><div class="font-bold text-muted">1</div><div class="text-xs text-muted">Lỗi</div></div>
+            </div>
+            <div class="text-xs text-muted mb-3">Bắt đầu: 05/05 · Kết thúc: 25/05</div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-primary wx-btn-sm">▶ Tiếp tục</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Chỉnh sửa</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem báo cáo</button></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header"><div class="wx-card-title">Thông báo bản cập nhật v2.0</div><span class="wx-badge wx-badge-info ml-auto">Đã lên lịch</span></div>
+          <div class="wx-card-body">
+            <div class="flex items-center justify-between mb-3"><span class="text-xl">𝕏 ▶️</span><span class="text-sm text-muted">3,000 liên hệ</span></div>
+            <div class="mb-3"><div class="flex justify-between text-sm mb-3"><span>0 / 3,000 đã gửi</span><span class="font-semibold">0%</span></div><div class="wx-progress"><div class="wx-progress-bar" style="width:0%"></div></div></div>
+            <div class="wx-grid wx-grid-4 mb-3" style="text-align:center">
+              <div><div class="font-bold">0</div><div class="text-xs text-muted">Đã gửi</div></div>
+              <div><div class="font-bold">0</div><div class="text-xs text-muted">Đã đọc</div></div>
+              <div><div class="font-bold">0</div><div class="text-xs text-muted">Đã phản hồi</div></div>
+              <div><div class="font-bold text-muted">0</div><div class="text-xs text-muted">Lỗi</div></div>
+            </div>
+            <div class="text-xs text-muted mb-3">Bắt đầu: 18/05 · Kết thúc: 22/05</div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-secondary wx-btn-sm">Chỉnh sửa lịch</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Chỉnh sửa</button><button class="wx-btn wx-btn-danger wx-btn-sm">Hủy</button></div>
+          </div>
+        </div>
+
+        <div class="wx-card">
+          <div class="wx-card-header"><div class="wx-card-title">Chúc mừng năm mới khách hàng</div><span class="wx-badge wx-badge-neutral ml-auto">Hoàn thành</span></div>
+          <div class="wx-card-body">
+            <div class="flex items-center justify-between mb-3"><span class="text-xl">📘 💬 📷</span><span class="text-sm text-muted">5,200 liên hệ</span></div>
+            <div class="mb-3"><div class="flex justify-between text-sm mb-3"><span>5,200 / 5,200 đã gửi</span><span class="font-semibold">100%</span></div><div class="wx-progress"><div class="wx-progress-bar wx-progress-success" style="width:100%"></div></div></div>
+            <div class="wx-grid wx-grid-4 mb-3" style="text-align:center">
+              <div><div class="font-bold">5,200</div><div class="text-xs text-muted">Đã gửi</div></div>
+              <div><div class="font-bold">4,810</div><div class="text-xs text-muted">Đã đọc</div></div>
+              <div><div class="font-bold">1,124</div><div class="text-xs text-muted">Đã phản hồi</div></div>
+              <div><div class="font-bold text-muted">41</div><div class="text-xs text-muted">Lỗi</div></div>
+            </div>
+            <div class="text-xs text-muted mb-3">Bắt đầu: 01/02 · Kết thúc: 03/02</div>
+            <div class="flex gap-2"><button class="wx-btn wx-btn-secondary wx-btn-sm">Nhân bản</button><button class="wx-btn wx-btn-ghost wx-btn-sm">Xem báo cáo</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

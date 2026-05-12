@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thống kê — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .heat-grid { display:grid; grid-template-columns:repeat(24,1fr); gap:3px; }
+  .heat-cell { aspect-ratio:1; border-radius:2px; }
+  .bar-list-row { display:flex; align-items:center; gap:8px; padding:6px 0; font-size:var(--wx-fs-sm); }
+  .bar-track { flex:1; background:var(--wx-surface-sunken); border-radius:var(--wx-radius-full); height:8px; overflow:hidden; }
+  .bar-fill { height:100%; background:var(--wx-brand-primary); border-radius:var(--wx-radius-full); }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">SaaS Admin</div>
+      <a href="dashboard.html" class="wx-nav-item"><span class="wx-nav-icon">📊</span><span>Bảng điều khiển</span></a>
+      <a href="members.html" class="wx-nav-item"><span class="wx-nav-icon">👥</span><span>Thành viên</span></a>
+      <a href="products.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="transactions.html" class="wx-nav-item"><span class="wx-nav-icon">💳</span><span>Giao dịch</span></a>
+      <a href="versions.html" class="wx-nav-item"><span class="wx-nav-icon">🔖</span><span>Phiên bản</span></a>
+      <a href="statistics.html" class="wx-nav-item active"><span class="wx-nav-icon">📈</span><span>Thống kê</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Thống kê</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex justify-between items-center" style="display:flex">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Thống kê</h1>
+          <p class="text-muted" style="margin:0">Phân tích doanh thu, người dùng, phân bổ gói và hoạt động theo thời gian.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="date" class="wx-input" value="2026-04-12" style="max-width:150px">
+          <span class="text-muted">→</span>
+          <input type="date" class="wx-input" value="2026-05-12" style="max-width:150px">
+        </div>
+      </div>
+
+      <div class="wx-grid-2 mb-4">
+        <div class="wx-card">
+          <div class="wx-card-header"><h3 class="wx-card-title">Doanh thu theo tháng</h3></div>
+          <div class="wx-card-body">
+            <svg viewBox="0 0 360 160" style="width:100%;height:160px">
+              <rect x="10" y="100" width="30" height="50" fill="var(--wx-brand-300,#93c5fd)" rx="3"/>
+              <rect x="55" y="80" width="30" height="70" fill="var(--wx-brand-300,#93c5fd)" rx="3"/>
+              <rect x="100" y="60" width="30" height="90" fill="var(--wx-brand-400,#60a5fa)" rx="3"/>
+              <rect x="145" y="70" width="30" height="80" fill="var(--wx-brand-400,#60a5fa)" rx="3"/>
+              <rect x="190" y="40" width="30" height="110" fill="var(--wx-brand-primary)" rx="3"/>
+              <rect x="235" y="30" width="30" height="120" fill="var(--wx-brand-primary)" rx="3"/>
+              <rect x="280" y="20" width="30" height="130" fill="var(--wx-brand-primary)" rx="3"/>
+              <rect x="325" y="15" width="30" height="135" fill="var(--wx-brand-600,#1d4ed8)" rx="3"/>
+            </svg>
+            <div class="flex justify-between text-xs text-muted mt-1"><span>T10</span><span>T11</span><span>T12</span><span>T1</span><span>T2</span><span>T3</span><span>T4</span><span>T5</span></div>
+          </div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-card-header"><h3 class="wx-card-title">Người dùng mới</h3></div>
+          <div class="wx-card-body">
+            <svg viewBox="0 0 360 160" style="width:100%;height:160px">
+              <polyline fill="none" stroke="#22c55e" stroke-width="3" points="10,130 55,120 100,100 145,110 190,80 235,70 280,50 325,40"/>
+              <polyline fill="#dcfce7" opacity="0.5" stroke="none" points="10,160 10,130 55,120 100,100 145,110 190,80 235,70 280,50 325,40 325,160"/>
+              <circle cx="325" cy="40" r="4" fill="#22c55e"/>
+            </svg>
+            <div class="flex justify-between text-xs text-muted mt-1"><span>T10</span><span>T11</span><span>T12</span><span>T1</span><span>T2</span><span>T3</span><span>T4</span><span>T5</span></div>
+          </div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-card-header"><h3 class="wx-card-title">Phân bổ gói dịch vụ</h3></div>
+          <div class="wx-card-body flex items-center gap-5">
+            <svg viewBox="0 0 120 120" width="130" height="130">
+              <circle cx="60" cy="60" r="48" fill="none" stroke="var(--wx-surface-sunken)" stroke-width="20"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="var(--wx-brand-primary)" stroke-width="20" stroke-dasharray="150 301" transform="rotate(-90 60 60)"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="#22c55e" stroke-width="20" stroke-dasharray="90 301" stroke-dashoffset="-150" transform="rotate(-90 60 60)"/>
+              <circle cx="60" cy="60" r="48" fill="none" stroke="#f59e0b" stroke-width="20" stroke-dasharray="61 301" stroke-dashoffset="-240" transform="rotate(-90 60 60)"/>
+            </svg>
+            <div>
+              <div class="flex items-center gap-2 text-sm mb-1"><span style="width:10px;height:10px;border-radius:2px;background:var(--wx-brand-primary)"></span> Pro — 1,284 (50%)</div>
+              <div class="flex items-center gap-2 text-sm mb-1"><span style="width:10px;height:10px;border-radius:2px;background:#22c55e"></span> Cơ bản — 770 (30%)</div>
+              <div class="flex items-center gap-2 text-sm"><span style="width:10px;height:10px;border-radius:2px;background:#f59e0b"></span> Doanh nghiệp — 512 (20%)</div>
+            </div>
+          </div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-card-header"><h3 class="wx-card-title">Tỷ lệ giữ chân (retention)</h3></div>
+          <div class="wx-card-body">
+            <svg viewBox="0 0 360 160" style="width:100%;height:160px">
+              <polyline fill="none" stroke="var(--wx-brand-primary)" stroke-width="3" points="10,30 55,40 100,50 145,55 190,62 235,68 280,72 325,75"/>
+              <line x1="10" y1="100" x2="325" y2="100" stroke="var(--wx-border-default)" stroke-dasharray="4 4"/>
+            </svg>
+            <div class="flex justify-between text-xs text-muted mt-1"><span>Tuần 1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-grid-2 mb-4">
+        <div class="wx-card">
+          <div class="wx-card-header"><h3 class="wx-card-title">Top quốc gia</h3></div>
+          <div class="wx-card-body">
+            <div class="bar-list-row"><span style="width:90px">🇻🇳 Việt Nam</span><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div><span class="text-muted" style="width:40px;text-align:right">62%</span></div>
+            <div class="bar-list-row"><span style="width:90px">🇸🇬 Singapore</span><div class="bar-track"><div class="bar-fill" style="width:14%"></div></div><span class="text-muted" style="width:40px;text-align:right">14%</span></div>
+            <div class="bar-list-row"><span style="width:90px">🇹🇭 Thái Lan</span><div class="bar-track"><div class="bar-fill" style="width:9%"></div></div><span class="text-muted" style="width:40px;text-align:right">9%</span></div>
+            <div class="bar-list-row"><span style="width:90px">🇵🇭 Philippines</span><div class="bar-track"><div class="bar-fill" style="width:7%"></div></div><span class="text-muted" style="width:40px;text-align:right">7%</span></div>
+            <div class="bar-list-row"><span style="width:90px">🇮🇩 Indonesia</span><div class="bar-track"><div class="bar-fill" style="width:5%"></div></div><span class="text-muted" style="width:40px;text-align:right">5%</span></div>
+            <div class="bar-list-row"><span style="width:90px">🌐 Khác</span><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><span class="text-muted" style="width:40px;text-align:right">3%</span></div>
+          </div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-card-header"><h3 class="wx-card-title">Hoạt động theo giờ (7 ngày × 24 giờ)</h3></div>
+          <div class="wx-card-body">
+            <div class="heat-grid" id="heat"></div>
+            <div class="flex items-center gap-2 mt-3 text-xs text-muted">
+              Ít
+              <span class="heat-cell" style="width:12px;background:var(--wx-surface-sunken)"></span>
+              <span class="heat-cell" style="width:12px;background:var(--wx-brand-200,#bfdbfe)"></span>
+              <span class="heat-cell" style="width:12px;background:var(--wx-brand-400,#60a5fa)"></span>
+              <span class="heat-cell" style="width:12px;background:var(--wx-brand-primary)"></span>
+              <span class="heat-cell" style="width:12px;background:var(--wx-brand-700,#1d4ed8)"></span>
+              Nhiều
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+<script>
+(function(){
+  var colors = ['var(--wx-surface-sunken)','var(--wx-brand-200,#bfdbfe)','var(--wx-brand-400,#60a5fa)','var(--wx-brand-primary)','var(--wx-brand-700,#1d4ed8)'];
+  var grid = document.getElementById('heat');
+  if(!grid) return;
+  var seed = 7;
+  function rnd(){ seed = (seed*9301+49297)%233280; return seed/233280; }
+  for(var d=0; d<7; d++){
+    for(var h=0; h<24; h++){
+      var c = document.createElement('div');
+      c.className = 'heat-cell';
+      var lvl = (h>=8 && h<=20) ? Math.floor(rnd()*4)+1 : Math.floor(rnd()*2);
+      c.style.background = colors[Math.min(lvl,4)];
+      c.title = 'Ngày '+(d+1)+', '+h+'h';
+      grid.appendChild(c);
+    }
+  }
+})();
+</script>
+</body>
+</html>

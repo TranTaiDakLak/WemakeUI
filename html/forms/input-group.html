@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nhóm input — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .ig { display:flex; align-items:stretch; border:1px solid var(--wx-border-default); border-radius:var(--wx-radius-md); overflow:hidden; }
+  .ig .wx-input, .ig .wx-select { border:none; border-radius:0; }
+  .ig .wx-input:focus, .ig .wx-select:focus { box-shadow:none; }
+  .ig-addon { display:flex; align-items:center; padding:0 12px; background:var(--wx-surface-sunken); color:var(--wx-text-muted); white-space:nowrap; font-size:var(--wx-fs-sm); }
+  .ig-btn { border:none; padding:0 14px; background:var(--wx-brand-primary); color:#fff; font-weight:600; cursor:pointer; white-space:nowrap; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item active"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Nhóm input</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Nhóm input</h1>
+        <p class="text-muted" style="margin:0">Kết hợp input với biểu tượng, văn bản phụ, nút và select để tạo các nhóm nhập liệu thông dụng.</p>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header"><h3 class="wx-card-title">Các kiểu nhóm input</h3></div>
+        <div class="wx-card-body">
+          <div class="wx-grid-2">
+            <div class="wx-form-group">
+              <label class="wx-form-label">Tìm kiếm (icon đầu)</label>
+              <div class="ig">
+                <span class="ig-addon">🔍</span>
+                <input type="text" class="wx-input" placeholder="Tìm khách hàng, đơn hàng...">
+              </div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Tên miền website (văn bản đầu)</label>
+              <div class="ig">
+                <span class="ig-addon">https://</span>
+                <input type="text" class="wx-input" value="cuahang-wemake" placeholder="ten-mien">
+                <span class="ig-addon">.vn</span>
+              </div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Liên kết chia sẻ (nút cuối)</label>
+              <div class="ig">
+                <input type="text" class="wx-input" value="https://wemake.vn/p/wm-00184" readonly>
+                <button class="ig-btn">📋 Sao chép</button>
+              </div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Đơn giá (tiền tố + hậu tố)</label>
+              <div class="ig">
+                <span class="ig-addon">₫</span>
+                <input type="text" class="wx-input" value="1.250.000" style="text-align:right">
+                <span class="ig-addon">.00</span>
+              </div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Số điện thoại (select + input)</label>
+              <div class="ig">
+                <select class="wx-select" style="max-width:120px">
+                  <option>🇻🇳 +84</option>
+                  <option>🇺🇸 +1</option>
+                  <option>🇸🇬 +65</option>
+                  <option>🇯🇵 +81</option>
+                </select>
+                <input type="tel" class="wx-input" value="912 345 678" placeholder="912 345 678">
+              </div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Cân nặng (input + đơn vị select)</label>
+              <div class="ig">
+                <input type="number" class="wx-input" value="68">
+                <select class="wx-select" style="max-width:100px">
+                  <option>kg</option>
+                  <option>g</option>
+                  <option>tấn</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <hr class="wx-divider">
+          <div class="wx-form-group">
+            <label class="wx-form-label">Thanh tìm kiếm có nút</label>
+            <div class="flex gap-2">
+              <div class="ig flex-1">
+                <span class="ig-addon">🔍</span>
+                <input type="text" class="wx-input" placeholder="Nhập từ khoá để tìm kiếm...">
+              </div>
+              <button class="wx-btn wx-btn-primary">Tìm kiếm</button>
+              <button class="wx-btn wx-btn-secondary">Bộ lọc</button>
+            </div>
+          </div>
+          <div class="wx-form-group">
+            <label class="wx-form-label">Mã giảm giá (input + nút áp dụng)</label>
+            <div class="ig" style="max-width:360px">
+              <span class="ig-addon">🎟️</span>
+              <input type="text" class="wx-input" placeholder="Nhập mã khuyến mãi" value="WEMAKE2026">
+              <button class="ig-btn">Áp dụng</button>
+            </div>
+            <div class="wx-form-hint">Giảm 10% cho đơn từ 500.000₫.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

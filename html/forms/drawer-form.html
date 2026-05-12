@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drawer form — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .add-row { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item active"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Drawer form</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Drawer form</h1>
+        <p class="text-muted" style="margin:0">Bảng đơn hàng kèm panel trượt bên phải để tạo bản ghi mới (đang hiển thị để minh hoạ).</p>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header flex justify-between items-center">
+          <h3 class="wx-card-title">Đơn hàng gần đây</h3>
+          <button class="wx-btn wx-btn-primary">➕ Thêm bản ghi</button>
+        </div>
+        <div class="wx-card-body" style="padding:0">
+          <table class="wx-table">
+            <thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Tổng tiền</th><th>Trạng thái</th><th>Ngày</th></tr></thead>
+            <tbody>
+              <tr><td>#DH-10248</td><td>Nguyễn Văn An</td><td>₫1.250.000</td><td><span class="wx-badge wx-badge-success">Hoàn thành</span></td><td>08/05/2026</td></tr>
+              <tr><td>#DH-10249</td><td>Trần Thị Bích</td><td>₫890.000</td><td><span class="wx-badge wx-badge-warning">Đang giao</span></td><td>09/05/2026</td></tr>
+              <tr><td>#DH-10250</td><td>Lê Hoàng Cường</td><td>₫2.430.000</td><td><span class="wx-badge wx-badge-info">Đang xử lý</span></td><td>10/05/2026</td></tr>
+              <tr><td>#DH-10251</td><td>Phạm Thuỳ Dung</td><td>₫349.000</td><td><span class="wx-badge wx-badge-neutral">Chờ xác nhận</span></td><td>11/05/2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Backdrop -->
+<div style="position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:999"></div>
+
+<!-- Drawer -->
+<aside style="position:fixed;top:0;right:0;bottom:0;width:420px;background:var(--wx-surface-base,#fff);box-shadow:-8px 0 30px rgba(0,0,0,.1);z-index:1000;display:flex;flex-direction:column">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--wx-border-default)">
+    <h3 style="margin:0;font-size:18px;font-weight:700">Tạo đơn hàng mới</h3>
+    <button class="wx-modal-close">✕</button>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:20px">
+    <div class="wx-form-group">
+      <label class="wx-form-label">Khách hàng <span class="required">*</span></label>
+      <select class="wx-select">
+        <option>Nguyễn Văn An — 0912 345 678</option>
+        <option>Trần Thị Bích — 0987 654 321</option>
+        <option>Lê Hoàng Cường — 0901 222 333</option>
+      </select>
+    </div>
+    <div class="wx-form-group">
+      <label class="wx-form-label">Sản phẩm</label>
+      <div class="add-row">
+        <select class="wx-select flex-1"><option>Áo thun nam basic</option><option>Quần jeans slim-fit</option></select>
+        <input type="number" class="wx-input" value="2" style="width:70px">
+        <button class="wx-btn wx-btn-ghost wx-btn-sm">🗑️</button>
+      </div>
+      <div class="add-row">
+        <select class="wx-select flex-1"><option>Tai nghe Bluetooth X3</option><option>Bình giữ nhiệt 500ml</option></select>
+        <input type="number" class="wx-input" value="1" style="width:70px">
+        <button class="wx-btn wx-btn-ghost wx-btn-sm">🗑️</button>
+      </div>
+      <button class="wx-btn wx-btn-secondary wx-btn-sm">➕ Thêm sản phẩm</button>
+    </div>
+    <div class="wx-form-group">
+      <label class="wx-form-label">Địa chỉ giao hàng <span class="required">*</span></label>
+      <textarea class="wx-textarea" rows="3">123 Lê Lợi, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</textarea>
+    </div>
+    <div class="wx-form-group">
+      <label class="wx-form-label">Ghi chú</label>
+      <textarea class="wx-textarea" rows="2" placeholder="Giao trong giờ hành chính..."></textarea>
+    </div>
+    <div class="wx-form-group">
+      <label class="wx-form-label">Phương thức thanh toán</label>
+      <div class="flex items-center gap-2" style="padding:4px 0"><input type="radio" name="pay" checked style="accent-color:var(--wx-brand-primary)"><span class="text-sm">Tiền mặt khi nhận hàng (COD)</span></div>
+      <div class="flex items-center gap-2" style="padding:4px 0"><input type="radio" name="pay" style="accent-color:var(--wx-brand-primary)"><span class="text-sm">Chuyển khoản ngân hàng</span></div>
+      <div class="flex items-center gap-2" style="padding:4px 0"><input type="radio" name="pay" style="accent-color:var(--wx-brand-primary)"><span class="text-sm">Ví MoMo / VNPay</span></div>
+    </div>
+    <hr class="wx-divider">
+    <div class="flex justify-between text-sm"><span class="text-muted">Tạm tính</span><span>₫1.288.000</span></div>
+    <div class="flex justify-between text-sm mt-1"><span class="text-muted">Phí vận chuyển</span><span>₫30.000</span></div>
+    <div class="flex justify-between mt-2"><span class="font-semibold">Tổng cộng</span><span class="font-bold" style="color:var(--wx-brand-primary)">₫1.318.000</span></div>
+  </div>
+  <div style="padding:14px 20px;border-top:1px solid var(--wx-border-default);display:flex;justify-content:flex-end;gap:8px">
+    <button class="wx-btn wx-btn-ghost">Huỷ</button>
+    <button class="wx-btn wx-btn-primary">Lưu đơn hàng</button>
+  </div>
+</aside>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

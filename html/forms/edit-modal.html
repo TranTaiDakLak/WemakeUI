@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modal chỉnh sửa — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item active"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Modal chỉnh sửa</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Modal chỉnh sửa</h1>
+        <p class="text-muted" style="margin:0">Bảng người dùng kèm hộp thoại chỉnh sửa đã điền sẵn dữ liệu (đang hiển thị để minh hoạ).</p>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header flex justify-between items-center">
+          <h3 class="wx-card-title">Người dùng</h3>
+          <button class="wx-btn wx-btn-primary" data-open-modal="editModal">➕ Thêm người dùng</button>
+        </div>
+        <div class="wx-card-body" style="padding:0">
+          <table class="wx-table">
+            <thead><tr><th>Họ tên</th><th>Email</th><th>Vai trò</th><th>Trạng thái</th><th>Phòng ban</th><th>Thao tác</th></tr></thead>
+            <tbody>
+              <tr><td>Trần Thị B</td><td>b.tran@wemake.vn</td><td><span class="wx-badge wx-badge-primary">Quản lý</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td>Kinh doanh</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm" data-open-modal="editModal">Sửa</button></td></tr>
+              <tr><td>Nguyễn Văn C</td><td>c.nguyen@wemake.vn</td><td><span class="wx-badge wx-badge-neutral">Nhân viên</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td>Kỹ thuật</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm" data-open-modal="editModal">Sửa</button></td></tr>
+              <tr><td>Lê Thị D</td><td>d.le@wemake.vn</td><td><span class="wx-badge wx-badge-neutral">Nhân viên</span></td><td><span class="wx-badge wx-badge-warning">Tạm khoá</span></td><td>Marketing</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm" data-open-modal="editModal">Sửa</button></td></tr>
+              <tr><td>Phạm Văn E</td><td>e.pham@wemake.vn</td><td><span class="wx-badge wx-badge-danger">Quản trị</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td>Vận hành</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm" data-open-modal="editModal">Sửa</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wx-overlay" id="editModal">
+  <div class="wx-modal" style="max-width:540px">
+    <div class="wx-modal-header">
+      <h3 class="wx-modal-title">Chỉnh sửa thông tin người dùng</h3>
+      <button class="wx-modal-close" data-close-modal>✕</button>
+    </div>
+    <div class="wx-modal-body">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="wx-avatar wx-avatar-lg">TB</div>
+        <div><div class="font-semibold">Trần Thị B</div><div class="text-xs text-muted">Tham gia 12/03/2024</div></div>
+      </div>
+      <div class="wx-grid-2">
+        <div class="wx-form-group">
+          <label class="wx-form-label">Họ và tên <span class="required">*</span></label>
+          <input type="text" class="wx-input" value="Trần Thị B">
+        </div>
+        <div class="wx-form-group">
+          <label class="wx-form-label">Email <span class="required">*</span></label>
+          <input type="email" class="wx-input" value="b.tran@wemake.vn">
+        </div>
+        <div class="wx-form-group">
+          <label class="wx-form-label">Vai trò</label>
+          <select class="wx-select">
+            <option>Nhân viên</option>
+            <option selected>Quản lý</option>
+            <option>Quản trị</option>
+          </select>
+        </div>
+        <div class="wx-form-group">
+          <label class="wx-form-label">Phòng ban</label>
+          <select class="wx-select">
+            <option selected>Kinh doanh</option>
+            <option>Kỹ thuật</option>
+            <option>Marketing</option>
+            <option>Vận hành</option>
+          </select>
+        </div>
+      </div>
+      <div class="wx-form-group flex items-center justify-between" style="display:flex">
+        <div><div class="text-sm font-semibold">Trạng thái tài khoản</div><div class="text-xs text-muted">Bật để cho phép đăng nhập.</div></div>
+        <label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label>
+      </div>
+      <hr class="wx-divider">
+      <div class="wx-alert wx-alert-danger">⚠️ Xoá người dùng sẽ thu hồi toàn bộ quyền truy cập và không thể hoàn tác.</div>
+      <button class="wx-btn wx-btn-danger" data-confirm="Bạn có chắc muốn xoá người dùng Trần Thị B?">🗑️ Xoá người dùng</button>
+    </div>
+    <div class="wx-modal-footer flex justify-end gap-2">
+      <button class="wx-btn wx-btn-ghost" data-close-modal>Huỷ</button>
+      <button class="wx-btn wx-btn-primary">Lưu thay đổi</button>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

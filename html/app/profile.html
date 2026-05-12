@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hồ sơ — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    .profile-card { text-align: center; padding: 32px 24px; }
+    .profile-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 12px; }
+    .profile-tag { background: var(--wx-brand-50); color: var(--wx-brand-700); border: 1px solid var(--wx-brand-200); border-radius: var(--wx-radius-full); padding: 2px 12px; font-size: var(--wx-fs-xs); font-weight: 600; }
+    .social-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: var(--wx-radius-md); border: 1px solid var(--wx-border-default); background: var(--wx-surface-base); color: var(--wx-text-secondary); font-size: var(--wx-fs-sm); font-weight: 500; cursor: pointer; text-decoration: none; }
+    .social-btn:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); text-decoration: none; }
+    .activity-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--wx-border-subtle); }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-time { font-size: var(--wx-fs-xs); color: var(--wx-text-muted); white-space: nowrap; margin-top: 2px; }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  </style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item active"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:var(--wx-fs-sm);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Nguyễn Văn Thành</div>
+          <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Hồ sơ cá nhân</span>
+      <div class="wx-topbar-actions">
+        <a href="profile-edit.html" class="wx-btn wx-btn-secondary wx-btn-sm" style="color:#fff;border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);">✏️ Chỉnh sửa</a>
+        <button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button>
+      </div>
+    </div>
+    <div class="wx-content">
+      <div style="display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start;">
+
+        <!-- Left: Profile Card -->
+        <div>
+          <div class="wx-card" style="margin-bottom:16px;">
+            <div class="profile-card">
+              <div class="wx-avatar wx-avatar-2xl" style="margin:0 auto 16px;font-size:28px;">NT</div>
+              <h2 style="margin:0 0 4px;font-size:var(--wx-fs-2xl);">Nguyễn Văn Thành</h2>
+              <p style="color:var(--wx-brand-primary);font-weight:600;margin:0 0 4px;font-size:var(--wx-fs-md);">Senior Developer</p>
+              <p style="color:var(--wx-text-muted);font-size:var(--wx-fs-sm);margin:0 0 12px;">🏢 WemakeUI Corp</p>
+              <p style="color:var(--wx-text-secondary);font-size:var(--wx-fs-sm);line-height:1.6;margin:0 0 16px;">
+                Lập trình viên với hơn 8 năm kinh nghiệm phát triển ứng dụng web và mobile. Đam mê với Vue.js, TypeScript và thiết kế UI/UX hiện đại.
+              </p>
+              <div style="display:flex;gap:8px;justify-content:center;margin-bottom:16px;">
+                <a href="#" class="social-btn">GitHub</a>
+                <a href="#" class="social-btn">LinkedIn</a>
+                <a href="#" class="social-btn">Twitter</a>
+              </div>
+              <div class="profile-tags">
+                <span class="profile-tag">Vue 3</span>
+                <span class="profile-tag">TypeScript</span>
+                <span class="profile-tag">Node.js</span>
+                <span class="profile-tag">PostgreSQL</span>
+                <span class="profile-tag">Docker</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="wx-card">
+            <div class="wx-card-header">
+              <span style="font-size:16px;">📍</span>
+              <span class="wx-card-title" style="font-size:var(--wx-fs-md);">Thông tin liên hệ</span>
+            </div>
+            <div class="wx-card-body" style="padding:16px;">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;align-items:center;gap:8px;font-size:var(--wx-fs-sm);">
+                  <span>✉️</span><span style="color:var(--wx-text-secondary);">thanh.nguyen@wemakeui.com</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:var(--wx-fs-sm);">
+                  <span>📞</span><span style="color:var(--wx-text-secondary);">+84 912 345 678</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:var(--wx-fs-sm);">
+                  <span>🌏</span><span style="color:var(--wx-text-secondary);">Hà Nội, Việt Nam</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:var(--wx-fs-sm);">
+                  <span>🕐</span><span style="color:var(--wx-text-secondary);">GMT+7 (Indochina Time)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div>
+          <!-- Stat cards -->
+          <div class="stat-grid" style="margin-bottom:24px;">
+            <div class="wx-stat-card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <span class="wx-stat-label">Dự án</span>
+                <div class="wx-stat-icon" style="background:var(--wx-brand-50);">🚀</div>
+              </div>
+              <div class="wx-stat-value" style="font-size:var(--wx-fs-5xl);">42</div>
+              <div class="wx-stat-change positive">+5 tháng này</div>
+            </div>
+            <div class="wx-stat-card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <span class="wx-stat-label">Đóng góp</span>
+                <div class="wx-stat-icon" style="background:#f0fdf4;">💡</div>
+              </div>
+              <div class="wx-stat-value" style="font-size:var(--wx-fs-5xl);">1,284</div>
+              <div class="wx-stat-change positive">+127 tháng này</div>
+            </div>
+            <div class="wx-stat-card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <span class="wx-stat-label">Đánh giá</span>
+                <div class="wx-stat-icon" style="background:#fffbeb;">⭐</div>
+              </div>
+              <div class="wx-stat-value" style="font-size:var(--wx-fs-5xl);">4.9</div>
+              <div class="wx-stat-change positive">★★★★★</div>
+            </div>
+            <div class="wx-stat-card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <span class="wx-stat-label">Streak</span>
+                <div class="wx-stat-icon" style="background:#fff7ed;">🔥</div>
+              </div>
+              <div class="wx-stat-value" style="font-size:var(--wx-fs-5xl);">28</div>
+              <div class="wx-stat-change positive">ngày liên tiếp</div>
+            </div>
+          </div>
+
+          <!-- Activity Log -->
+          <div class="wx-card">
+            <div class="wx-card-header">
+              <span style="font-size:16px;">📊</span>
+              <span class="wx-card-title">Hoạt động gần đây</span>
+            </div>
+            <div class="wx-card-body">
+              <div class="activity-item">
+                <div class="wx-avatar wx-avatar-sm" style="background:var(--wx-brand-100);color:var(--wx-brand-700);">NT</div>
+                <div style="flex:1;">
+                  <div style="font-size:var(--wx-fs-sm);font-weight:600;">Hoàn thành task <span style="color:var(--wx-brand-primary);">#UI-2847</span></div>
+                  <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Thiết kế lại trang Dashboard với layout mới</div>
+                </div>
+                <div class="activity-time">5 phút trước</div>
+              </div>
+              <div class="activity-item">
+                <div class="wx-avatar wx-avatar-sm" style="background:#f0fdf4;color:#15803d;">NT</div>
+                <div style="flex:1;">
+                  <div style="font-size:var(--wx-fs-sm);font-weight:600;">Đẩy code lên <span style="color:var(--wx-brand-primary);">feat/sidebar-collapse</span></div>
+                  <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">15 file thay đổi, +342 -89 dòng</div>
+                </div>
+                <div class="activity-time">2 giờ trước</div>
+              </div>
+              <div class="activity-item">
+                <div class="wx-avatar wx-avatar-sm" style="background:#fffbeb;color:#b45309;">NT</div>
+                <div style="flex:1;">
+                  <div style="font-size:var(--wx-fs-sm);font-weight:600;">Review PR <span style="color:var(--wx-brand-primary);">#234</span> của Trần Minh</div>
+                  <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Thêm comment và yêu cầu chỉnh sửa nhỏ</div>
+                </div>
+                <div class="activity-time">4 giờ trước</div>
+              </div>
+              <div class="activity-item">
+                <div class="wx-avatar wx-avatar-sm" style="background:#fef2f2;color:#b91c1c;">NT</div>
+                <div style="flex:1;">
+                  <div style="font-size:var(--wx-fs-sm);font-weight:600;">Tạo tài liệu API mới</div>
+                  <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Cập nhật hướng dẫn tích hợp webhook</div>
+                </div>
+                <div class="activity-time">Hôm qua</div>
+              </div>
+              <div class="activity-item">
+                <div class="wx-avatar wx-avatar-sm">NT</div>
+                <div style="flex:1;">
+                  <div style="font-size:var(--wx-fs-sm);font-weight:600;">Tham gia cuộc họp <span style="color:var(--wx-brand-primary);">Sprint Planning</span></div>
+                  <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Sprint 42 — 14 task mới được phân công</div>
+                </div>
+                <div class="activity-time">2 ngày trước</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tải tệp lên — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .dropzone { border:2px dashed var(--wx-border-default); border-radius:var(--wx-radius-lg); padding:40px 20px; text-align:center; background:var(--wx-surface-sunken); cursor:pointer; transition:.15s; }
+  .dropzone:hover { border-color:var(--wx-brand-primary); background:var(--wx-selected-bg); }
+  .file-row { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--wx-border-subtle,var(--wx-border-default)); }
+  .file-row:last-child { border-bottom:none; }
+  .file-icon { width:40px; height:40px; border-radius:var(--wx-radius-md); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; background:var(--wx-brand-100,#dbeafe); }
+  .thumb-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:10px; }
+  .thumb { aspect-ratio:1; border-radius:var(--wx-radius-md); position:relative; overflow:hidden; }
+  .thumb-x { position:absolute; top:4px; right:4px; background:rgba(0,0,0,.5); color:#fff; border:none; border-radius:50%; width:20px; height:20px; cursor:pointer; font-size:11px; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item active"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Tải tệp lên</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Tải tệp lên</h1>
+        <p class="text-muted" style="margin:0">Khu vực kéo thả, danh sách tệp đang tải với thanh tiến độ, và xem trước ảnh.</p>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header"><h3 class="wx-card-title">Khu vực tải lên</h3></div>
+        <div class="wx-card-body">
+          <div class="dropzone">
+            <div style="font-size:36px">📤</div>
+            <div class="font-semibold mt-2">Kéo thả tệp vào đây hoặc bấm để chọn</div>
+            <div class="text-sm text-muted mt-1">Hỗ trợ kéo thả nhiều tệp cùng lúc</div>
+            <button class="wx-btn wx-btn-primary mt-3">Chọn tệp từ máy</button>
+          </div>
+          <div class="wx-form-hint mt-3">📌 Dung lượng tối đa 10MB mỗi tệp. Định dạng cho phép: .jpg, .png, .pdf, .docx</div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header flex justify-between items-center"><h3 class="wx-card-title">Tệp đang tải (4)</h3><button class="wx-btn wx-btn-ghost wx-btn-sm">Xoá tất cả</button></div>
+        <div class="wx-card-body">
+          <div class="file-row">
+            <div class="file-icon">🖼️</div>
+            <div class="flex-1">
+              <div class="flex justify-between"><span class="text-sm font-semibold">san-pham-ao-thun.jpg</span><span class="text-xs text-muted">2.4 MB</span></div>
+              <div class="wx-progress mt-1" style="height:6px"><div class="wx-progress-bar wx-progress-success" style="width:100%"></div></div>
+              <div class="text-xs mt-1" style="color:var(--wx-success-text,#15803d)">✓ Hoàn tất</div>
+            </div>
+            <button class="wx-btn wx-btn-ghost wx-btn-sm">🗑️</button>
+          </div>
+          <div class="file-row">
+            <div class="file-icon">📄</div>
+            <div class="flex-1">
+              <div class="flex justify-between"><span class="text-sm font-semibold">hop-dong-cung-cap.pdf</span><span class="text-xs text-muted">1.1 MB</span></div>
+              <div class="wx-progress mt-1" style="height:6px"><div class="wx-progress-bar wx-progress-success" style="width:100%"></div></div>
+              <div class="text-xs mt-1" style="color:var(--wx-success-text,#15803d)">✓ Hoàn tất</div>
+            </div>
+            <button class="wx-btn wx-btn-ghost wx-btn-sm">🗑️</button>
+          </div>
+          <div class="file-row">
+            <div class="file-icon">🖼️</div>
+            <div class="flex-1">
+              <div class="flex justify-between"><span class="text-sm font-semibold">bo-suu-tap-he-2026.png</span><span class="text-xs text-muted">5.8 MB · đang tải...</span></div>
+              <div class="wx-progress mt-1" style="height:6px"><div class="wx-progress-bar" style="width:67%"></div></div>
+              <div class="text-xs text-muted mt-1">67% — còn lại ~8 giây</div>
+            </div>
+            <button class="wx-btn wx-btn-ghost wx-btn-sm">✕</button>
+          </div>
+          <div class="file-row">
+            <div class="file-icon" style="background:var(--wx-danger-bg)">⚠️</div>
+            <div class="flex-1">
+              <div class="flex justify-between"><span class="text-sm font-semibold">video-quang-cao.mp4</span><span class="text-xs text-muted">28 MB</span></div>
+              <div class="wx-progress mt-1" style="height:6px"><div class="wx-progress-bar wx-progress-danger" style="width:35%"></div></div>
+              <div class="text-xs mt-1" style="color:var(--wx-danger-text,#b91c1c)">✗ Tải thất bại — vượt quá dung lượng cho phép (10MB)</div>
+            </div>
+            <button class="wx-btn wx-btn-secondary wx-btn-sm">↻ Thử lại</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header"><h3 class="wx-card-title">Xem trước ảnh đã tải</h3></div>
+        <div class="wx-card-body">
+          <div class="thumb-grid">
+            <div class="thumb" style="background:linear-gradient(135deg,#60a5fa,#2563eb)"><button class="thumb-x">✕</button></div>
+            <div class="thumb" style="background:linear-gradient(135deg,#f472b6,#db2777)"><button class="thumb-x">✕</button></div>
+            <div class="thumb" style="background:linear-gradient(135deg,#34d399,#059669)"><button class="thumb-x">✕</button></div>
+            <div class="thumb" style="background:linear-gradient(135deg,#fbbf24,#d97706)"><button class="thumb-x">✕</button></div>
+            <div class="thumb" style="background:linear-gradient(135deg,#a78bfa,#7c3aed)"><button class="thumb-x">✕</button></div>
+            <div class="thumb" style="background:var(--wx-surface-sunken);display:flex;align-items:center;justify-content:center;border:2px dashed var(--wx-border-default);color:var(--wx-text-muted);font-size:24px">＋</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

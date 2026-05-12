@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tổ chức — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .org-stat { text-align:center; }
+  .org-stat-val { font-size:var(--wx-fs-xl);font-weight:700; }
+  .org-stat-lbl { font-size:var(--wx-fs-sm);color:var(--wx-text-muted); }
+  .dept-card { padding:18px;border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-lg);background:var(--wx-surface-base); }
+  .info-row { display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--wx-border-subtle);font-size:var(--wx-fs-sm); }
+  .info-row:last-child{border-bottom:none;}
+  .danger-zone { border:1px solid var(--wx-danger-border);background:var(--wx-danger-bg);border-radius:var(--wx-radius-lg);padding:18px; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item active"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Tổ chức</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="wx-card mb-4">
+        <div class="wx-card-body">
+          <div class="flex items-center gap-4">
+            <div class="wx-avatar wx-avatar-xl">WC</div>
+            <div class="flex-1">
+              <h2 style="margin:0;font-size:var(--wx-fs-xl);font-weight:700;">WemakeUI Corporation</h2>
+              <div class="text-sm text-muted">wemakeui.vn</div>
+            </div>
+            <div class="flex gap-5">
+              <div class="org-stat"><div class="org-stat-val">28</div><div class="org-stat-lbl">thành viên</div></div>
+              <div class="org-stat"><div class="org-stat-val">5</div><div class="org-stat-lbl">phòng ban</div></div>
+              <div class="org-stat"><div class="org-stat-val">12</div><div class="org-stat-lbl">dự án</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-tabs mb-4">
+        <div class="wx-tab active" data-tab="overview">Tổng quan</div>
+        <div class="wx-tab" data-tab="members">Thành viên</div>
+        <div class="wx-tab" data-tab="depts">Phòng ban</div>
+        <div class="wx-tab" data-tab="settings">Cài đặt</div>
+      </div>
+
+      <!-- Tổng quan -->
+      <div data-tab-panel="overview">
+        <div class="wx-grid wx-grid-2">
+          <div class="wx-card">
+            <div class="wx-card-header"><span class="wx-card-title">Thông tin tổ chức</span></div>
+            <div class="wx-card-body">
+              <div class="info-row"><span class="text-muted">Tên tổ chức</span><span class="font-semibold">WemakeUI Corporation</span></div>
+              <div class="info-row"><span class="text-muted">Tên miền</span><span class="font-semibold">wemakeui.vn</span></div>
+              <div class="info-row"><span class="text-muted">Ngành nghề</span><span class="font-semibold">Công nghệ phần mềm</span></div>
+              <div class="info-row"><span class="text-muted">Quy mô</span><span class="font-semibold">11–50 nhân viên</span></div>
+              <div class="info-row"><span class="text-muted">Địa chỉ</span><span class="font-semibold">Tầng 12, Toà nhà Sông Đà, Hà Nội</span></div>
+              <div class="info-row"><span class="text-muted">Gói dịch vụ</span><span><span class="wx-badge wx-badge-primary">Business</span></span></div>
+              <div class="info-row"><span class="text-muted">Ngày tạo</span><span class="font-semibold">14/03/2024</span></div>
+            </div>
+          </div>
+          <div class="wx-card">
+            <div class="wx-card-header"><span class="wx-card-title">Hoạt động gần đây</span></div>
+            <div class="wx-card-body">
+              <div class="wx-activity-item"><span class="wx-avatar wx-avatar-sm">LH</span><div><div><strong>Lê Thị Hương</strong> đã mời <strong>Đỗ Thanh Tùng</strong> vào phòng Sản phẩm</div><div class="wx-activity-time">2 giờ trước</div></div></div>
+              <div class="wx-activity-item"><span class="wx-avatar wx-avatar-sm">NA</span><div><div><strong>Nguyễn Văn A</strong> đã tạo dự án mới "Tái thiết kế trang chủ"</div><div class="wx-activity-time">5 giờ trước</div></div></div>
+              <div class="wx-activity-item"><span class="wx-avatar wx-avatar-sm">PT</span><div><div><strong>Phạm Quốc Thắng</strong> đã cập nhật cài đặt bảo mật tổ chức</div><div class="wx-activity-time">Hôm qua</div></div></div>
+              <div class="wx-activity-item"><span class="wx-avatar wx-avatar-sm">TB</span><div><div><strong>Trần Văn Bình</strong> đã tạo phòng ban "Hỗ trợ khách hàng"</div><div class="wx-activity-time">2 ngày trước</div></div></div>
+              <div class="wx-activity-item"><span class="wx-avatar wx-avatar-sm">NM</span><div><div><strong>Ngô Minh Anh</strong> rời phòng Marketing</div><div class="wx-activity-time">3 ngày trước</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thành viên -->
+      <div data-tab-panel="members" class="hidden">
+        <div class="wx-card">
+          <div class="wx-card-header">
+            <span class="wx-card-title">Thành viên (28)</span>
+            <button class="wx-btn wx-btn-primary">+ Mời thành viên</button>
+          </div>
+          <div class="wx-card-body" style="padding:0;">
+            <table class="wx-table">
+              <thead><tr><th>Thành viên</th><th>Email</th><th>Vai trò</th><th>Phòng ban</th><th>Trạng thái</th><th></th></tr></thead>
+              <tbody>
+                <tr><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">NA</span> Nguyễn Văn A</span></td><td>a.nguyen@wemakeui.vn</td><td><select class="wx-select wx-btn-sm"><option>Admin</option><option>Editor</option><option>Viewer</option></select></td><td>Ban giám đốc</td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+                <tr><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">LH</span> Lê Thị Hương</span></td><td>huong.le@wemakeui.vn</td><td><select class="wx-select wx-btn-sm"><option>Editor</option><option>Admin</option><option>Viewer</option></select></td><td>Sản phẩm</td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+                <tr><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">PT</span> Phạm Quốc Thắng</span></td><td>thang.pham@wemakeui.vn</td><td><select class="wx-select wx-btn-sm"><option>Editor</option><option>Admin</option><option>Viewer</option></select></td><td>Kỹ thuật</td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+                <tr><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">TB</span> Trần Văn Bình</span></td><td>binh.tran@wemakeui.vn</td><td><select class="wx-select wx-btn-sm"><option>Editor</option><option>Admin</option><option>Viewer</option></select></td><td>Tài chính</td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+                <tr><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">NM</span> Ngô Minh Anh</span></td><td>anh.ngo@wemakeui.vn</td><td><select class="wx-select wx-btn-sm"><option>Editor</option><option>Admin</option><option>Viewer</option></select></td><td>Sản phẩm</td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+                <tr><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">VH</span> Vũ Thị Hà</span></td><td>ha.vu@wemakeui.vn</td><td><select class="wx-select wx-btn-sm"><option>Viewer</option><option>Editor</option><option>Admin</option></select></td><td>Marketing</td><td><span class="wx-badge wx-badge-warning">Chờ duyệt</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+                <tr><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">DT</span> Đỗ Thanh Tùng</span></td><td>tung.do@wemakeui.vn</td><td><select class="wx-select wx-btn-sm"><option>Editor</option><option>Admin</option><option>Viewer</option></select></td><td>Sản phẩm</td><td><span class="wx-badge wx-badge-warning">Đã mời</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+                <tr><td><span class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">HK</span> Hoàng Khánh</span></td><td>khanh.hoang@wemakeui.vn</td><td><select class="wx-select wx-btn-sm"><option>Viewer</option><option>Editor</option><option>Admin</option></select></td><td>Hỗ trợ KH</td><td><span class="wx-badge wx-badge-neutral">Tạm khóa</span></td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">⋯</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phòng ban -->
+      <div data-tab-panel="depts" class="hidden">
+        <div class="wx-grid wx-grid-3">
+          <div class="dept-card"><div class="font-bold mb-1">Ban giám đốc</div><div class="text-sm text-muted mb-3">3 thành viên</div><div class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">NA</span><span class="text-sm">Trưởng phòng: Nguyễn Văn A</span></div></div>
+          <div class="dept-card"><div class="font-bold mb-1">Sản phẩm</div><div class="text-sm text-muted mb-3">9 thành viên</div><div class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">LH</span><span class="text-sm">Trưởng phòng: Lê Thị Hương</span></div></div>
+          <div class="dept-card"><div class="font-bold mb-1">Kỹ thuật</div><div class="text-sm text-muted mb-3">8 thành viên</div><div class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">PT</span><span class="text-sm">Trưởng phòng: Phạm Quốc Thắng</span></div></div>
+          <div class="dept-card"><div class="font-bold mb-1">Tài chính</div><div class="text-sm text-muted mb-3">4 thành viên</div><div class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">TB</span><span class="text-sm">Trưởng phòng: Trần Văn Bình</span></div></div>
+          <div class="dept-card"><div class="font-bold mb-1">Marketing</div><div class="text-sm text-muted mb-3">4 thành viên</div><div class="flex items-center gap-2"><span class="wx-avatar wx-avatar-sm">VH</span><span class="text-sm">Trưởng phòng: Vũ Thị Hà</span></div></div>
+        </div>
+      </div>
+
+      <!-- Cài đặt -->
+      <div data-tab-panel="settings" class="hidden">
+        <div class="wx-card mb-4">
+          <div class="wx-card-header"><span class="wx-card-title">Thông tin tổ chức</span></div>
+          <div class="wx-card-body">
+            <div class="wx-form-group"><label class="wx-form-label">Tên tổ chức</label><input class="wx-input" value="WemakeUI Corporation"></div>
+            <div class="wx-form-group"><label class="wx-form-label">Tên miền</label><input class="wx-input" value="wemakeui.vn"></div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Logo tổ chức</label>
+              <div class="flex items-center gap-3">
+                <div class="wx-avatar wx-avatar-lg">WC</div>
+                <button class="wx-btn wx-btn-secondary">Tải logo mới</button>
+                <span class="wx-form-hint">PNG hoặc SVG, tối đa 2MB</span>
+              </div>
+            </div>
+            <button class="wx-btn wx-btn-primary mt-2">Lưu thay đổi</button>
+          </div>
+        </div>
+        <div class="danger-zone">
+          <div class="font-bold mb-1" style="color:var(--wx-danger-text);">Vùng nguy hiểm</div>
+          <p class="text-sm text-muted mb-3">Các hành động dưới đây không thể hoàn tác. Hãy chắc chắn trước khi thực hiện.</p>
+          <button class="wx-btn wx-btn-danger" data-confirm="Bạn chắc chắn muốn xóa tổ chức? Hành động này không thể hoàn tác.">Xóa tổ chức</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

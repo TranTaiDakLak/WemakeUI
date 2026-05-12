@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập v3 — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(99,102,241,0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(6,182,212,0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(30,64,175,0.3) 0%, transparent 70%),
+        linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0c4a6e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* Decorative orbs */
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .bg-orb-1 {
+      width: 400px; height: 400px;
+      background: #6366f1;
+      top: -100px; left: -100px;
+    }
+    .bg-orb-2 {
+      width: 300px; height: 300px;
+      background: #06b6d4;
+      bottom: -80px; right: -60px;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 48px 44px;
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .glass-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .glass-logo-mark {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.8), rgba(6,182,212,0.8));
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 24px; color: #fff;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 20px rgba(99,102,241,0.4);
+    }
+    .glass-logo-text {
+      font-weight: 800; font-size: 20px; color: #fff;
+    }
+
+    .glass-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 6px;
+      text-align: center;
+    }
+    .glass-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .glass-field {
+      margin-bottom: 18px;
+    }
+    .glass-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 6px;
+    }
+    .glass-input {
+      width: 100%;
+      height: 44px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--wx-radius-lg);
+      padding: 0 14px;
+      font-size: 14px;
+      font-family: var(--wx-font-primary);
+      color: #fff;
+      transition: all var(--wx-duration-fast);
+      box-sizing: border-box;
+    }
+    .glass-input::placeholder { color: rgba(255,255,255,0.35); }
+    .glass-input:focus {
+      outline: none;
+      border-color: rgba(99,102,241,0.6);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+    }
+    .glass-input-wrap { position: relative; }
+    .glass-input-wrap .glass-input { padding-right: 44px; }
+    .glass-input-toggle {
+      position: absolute;
+      right: 12px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; color: rgba(255,255,255,0.4); font-size: 16px;
+    }
+
+    .glass-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .glass-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      cursor: pointer;
+    }
+    .glass-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: #818cf8;
+      text-decoration: none;
+    }
+    .glass-link:hover { color: #a5b4fc; }
+
+    .glass-btn {
+      width: 100%;
+      height: 46px;
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      color: #fff;
+      border: none;
+      border-radius: var(--wx-radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--wx-duration-fast);
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(99,102,241,0.4);
+    }
+    .glass-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(99,102,241,0.5);
+    }
+
+    .glass-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .glass-divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.12); }
+    .glass-divider-text { font-size: 12px; color: rgba(255,255,255,0.35); white-space: nowrap; }
+
+    .glass-social-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .glass-social-btn {
+      height: 42px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--wx-radius-lg);
+      background: rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      cursor: pointer;
+      transition: all var(--wx-duration-fast);
+    }
+    .glass-social-btn:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .glass-footer {
+      text-align: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+    }
+    .glass-footer a { color: #818cf8; font-weight: 500; text-decoration: none; }
+    .glass-footer a:hover { color: #a5b4fc; }
+
+    .page-nav-links {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .page-nav-links a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      padding: 4px 12px;
+      border-radius: var(--wx-radius-full);
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(8px);
+    }
+    .page-nav-links a:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+    .page-nav-links a.active {
+      background: linear-gradient(135deg, rgba(99,102,241,0.6), rgba(6,182,212,0.6));
+      color: #fff;
+      border-color: transparent;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<div class="glass-card">
+  <div class="glass-logo">
+    <div class="glass-logo-mark">W</div>
+    <span class="glass-logo-text">WemakeUI</span>
+  </div>
+
+  <h1 class="glass-title">Chào mừng trở lại</h1>
+  <p class="glass-sub">Đăng nhập để tiếp tục sử dụng dịch vụ</p>
+
+  <form>
+    <div class="glass-field">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="glass-input" placeholder="you@example.com">
+    </div>
+
+    <div class="glass-field">
+      <label for="password">Mật khẩu</label>
+      <div class="glass-input-wrap">
+        <input type="password" id="password" class="glass-input" placeholder="••••••••">
+        <button type="button" class="glass-input-toggle" onclick="togglePass('password', this)">👁</button>
+      </div>
+    </div>
+
+    <div class="glass-row">
+      <label class="glass-checkbox">
+        <input type="checkbox"> Ghi nhớ đăng nhập
+      </label>
+      <a href="forgot.html" class="glass-link">Quên mật khẩu?</a>
+    </div>
+
+    <button type="submit" class="glass-btn">Đăng nhập</button>
+  </form>
+
+  <div class="glass-divider">
+    <div class="glass-divider-line"></div>
+    <span class="glass-divider-text">hoặc tiếp tục với</span>
+    <div class="glass-divider-line"></div>
+  </div>
+
+  <div class="glass-social-btns">
+    <button class="glass-social-btn">🇬 Google</button>
+    <button class="glass-social-btn">🪟 Microsoft</button>
+  </div>
+
+  <p class="glass-footer">
+    Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
+  </p>
+</div>
+
+<div class="page-nav-links">
+  <a href="login.html">v1 Split</a>
+  <a href="login-v2.html">v2 Card</a>
+  <a href="login-v3.html" class="active">v3 Glass</a>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  function togglePass(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁'; }
+  }
+</script>
+</body>
+</html>

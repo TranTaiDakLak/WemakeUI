@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiki — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .wiki-layout { display:grid;grid-template-columns:230px 1fr;gap:24px;align-items:start; }
+  .wiki-cat { font-size:var(--wx-fs-xs);font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--wx-text-muted);margin:16px 0 6px; }
+  .wiki-link { display:block;padding:6px 10px;border-radius:var(--wx-radius-sm);font-size:var(--wx-fs-sm);color:var(--wx-text-secondary);text-decoration:none;transition:all .12s; }
+  .wiki-link:hover { background:var(--wx-hover-bg);color:var(--wx-text-primary); }
+  .wiki-link.active { background:var(--wx-selected-bg);color:var(--wx-brand-primary);font-weight:600; }
+  .wiki-art { padding:16px 18px;border:1px solid var(--wx-border-subtle);border-radius:var(--wx-radius-lg);background:var(--wx-surface-base);margin-bottom:12px;cursor:pointer;transition:border-color .15s; }
+  .wiki-art:hover { border-color:var(--wx-brand-300); }
+  .wiki-excerpt { display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--wx-text-muted);font-size:var(--wx-fs-sm);margin:6px 0 10px;line-height:1.6; }
+  @media (max-width:900px){ .wiki-layout{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item active"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Wiki — Cơ sở tri thức</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="wiki-layout">
+        <!-- Category tree -->
+        <div class="wx-card" style="position:sticky;top:16px;">
+          <div class="wx-card-body" style="padding:14px;">
+            <div class="wiki-cat">Bắt đầu</div>
+            <a class="wiki-link active" href="#">Giới thiệu WemakeUI</a>
+            <a class="wiki-link" href="#">Cài đặt nhanh</a>
+            <a class="wiki-link" href="#">Khái niệm cơ bản</a>
+            <div class="wiki-cat">Hướng dẫn</div>
+            <a class="wiki-link" href="#">Tạo dự án đầu tiên</a>
+            <a class="wiki-link" href="#">Quản lý thành viên</a>
+            <a class="wiki-link" href="#">Phân quyền & vai trò</a>
+            <a class="wiki-link" href="#">Tùy biến giao diện</a>
+            <div class="wiki-cat">API</div>
+            <a class="wiki-link" href="#">Xác thực API</a>
+            <a class="wiki-link" href="#">Endpoint tham chiếu</a>
+            <a class="wiki-link" href="#">Webhooks</a>
+            <a class="wiki-link" href="#">Giới hạn tốc độ</a>
+            <div class="wiki-cat">Tích hợp</div>
+            <a class="wiki-link" href="#">Tích hợp Slack</a>
+            <a class="wiki-link" href="#">Tích hợp Google Workspace</a>
+            <a class="wiki-link" href="#">Zapier & tự động hóa</a>
+            <div class="wiki-cat">FAQ</div>
+            <a class="wiki-link" href="#">Câu hỏi về tài khoản</a>
+            <a class="wiki-link" href="#">Câu hỏi về thanh toán</a>
+            <a class="wiki-link" href="#">Câu hỏi về bảo mật</a>
+          </div>
+        </div>
+
+        <!-- Articles -->
+        <div>
+          <div style="position:relative;margin-bottom:18px;">
+            <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);">🔍</span>
+            <input class="wx-input" style="padding-left:38px;" placeholder="Tìm trong cơ sở tri thức...">
+          </div>
+
+          <h3 style="font-size:var(--wx-fs-lg);font-weight:700;margin:0 0 12px;">Giới thiệu WemakeUI</h3>
+
+          <div class="wiki-art">
+            <div class="font-semibold">Bắt đầu với WemakeUI trong 5 phút</div>
+            <div class="wiki-excerpt">Hướng dẫn từng bước để tạo tài khoản, thiết lập tổ chức và mời các thành viên đầu tiên vào không gian làm việc của bạn một cách nhanh chóng.</div>
+            <div class="flex items-center gap-3 text-xs text-muted"><span>👁 1.2k lượt xem</span><span>·</span><span>cập nhật 3 ngày trước</span><span>·</span><span class="flex items-center gap-1"><span class="wx-avatar wx-avatar-sm">LH</span> Lê Thị Hương</span></div>
+          </div>
+          <div class="wiki-art">
+            <div class="font-semibold">Hiểu về cấu trúc tổ chức và phòng ban</div>
+            <div class="wiki-excerpt">Tổ chức trong WemakeUI được chia thành các phòng ban và nhóm. Bài viết này giải thích cách thiết lập cấu trúc phù hợp với doanh nghiệp của bạn.</div>
+            <div class="flex items-center gap-3 text-xs text-muted"><span>👁 864 lượt xem</span><span>·</span><span>cập nhật 1 tuần trước</span><span>·</span><span class="flex items-center gap-1"><span class="wx-avatar wx-avatar-sm">PT</span> Phạm Quốc Thắng</span></div>
+          </div>
+          <div class="wiki-art">
+            <div class="font-semibold">Phân quyền & vai trò: hướng dẫn chi tiết</div>
+            <div class="wiki-excerpt">WemakeUI hỗ trợ các vai trò Admin, Editor và Viewer. Tìm hiểu khi nào nên dùng vai trò nào và cách tạo vai trò tùy chỉnh cho nhu cầu riêng.</div>
+            <div class="flex items-center gap-3 text-xs text-muted"><span>👁 1.9k lượt xem</span><span>·</span><span>cập nhật 2 ngày trước</span><span>·</span><span class="flex items-center gap-1"><span class="wx-avatar wx-avatar-sm">NA</span> Nguyễn Văn A</span></div>
+          </div>
+          <div class="wiki-art">
+            <div class="font-semibold">Tùy biến giao diện với CSS variables</div>
+            <div class="wiki-excerpt">Toàn bộ giao diện WemakeUI được điều khiển qua design tokens. Bài viết hướng dẫn cách thay đổi màu sắc, khoảng cách, bo góc theo thương hiệu của bạn.</div>
+            <div class="flex items-center gap-3 text-xs text-muted"><span>👁 612 lượt xem</span><span>·</span><span>cập nhật 5 ngày trước</span><span>·</span><span class="flex items-center gap-1"><span class="wx-avatar wx-avatar-sm">NM</span> Ngô Minh Anh</span></div>
+          </div>
+          <div class="wiki-art">
+            <div class="font-semibold">Tích hợp WemakeUI với Slack</div>
+            <div class="wiki-excerpt">Kết nối không gian làm việc với Slack để nhận thông báo theo thời gian thực. Hướng dẫn cài đặt app, cấu hình kênh và quản lý quyền.</div>
+            <div class="flex items-center gap-3 text-xs text-muted"><span>👁 478 lượt xem</span><span>·</span><span>cập nhật 1 tuần trước</span><span>·</span><span class="flex items-center gap-1"><span class="wx-avatar wx-avatar-sm">TB</span> Trần Văn Bình</span></div>
+          </div>
+          <div class="wiki-art">
+            <div class="font-semibold">Sao lưu & khôi phục dữ liệu</div>
+            <div class="wiki-excerpt">Hệ thống tự động sao lưu mỗi ngày và giữ trong 30 ngày. Tìm hiểu cách yêu cầu khôi phục, xuất dữ liệu thủ công và chính sách lưu trữ.</div>
+            <div class="flex items-center gap-3 text-xs text-muted"><span>👁 333 lượt xem</span><span>·</span><span>cập nhật 4 ngày trước</span><span>·</span><span class="flex items-center gap-1"><span class="wx-avatar wx-avatar-sm">LH</span> Lê Thị Hương</span></div>
+          </div>
+
+          <div class="wx-card mt-4">
+            <div class="wx-card-header"><span class="wx-card-title">🔥 Bài viết phổ biến</span></div>
+            <div class="wx-card-body">
+              <div class="mb-2"><a href="#" style="color:var(--wx-text-link);text-decoration:none;">1. Phân quyền & vai trò: hướng dẫn chi tiết</a></div>
+              <div class="mb-2"><a href="#" style="color:var(--wx-text-link);text-decoration:none;">2. Bắt đầu với WemakeUI trong 5 phút</a></div>
+              <div class="mb-2"><a href="#" style="color:var(--wx-text-link);text-decoration:none;">3. Hiểu về cấu trúc tổ chức và phòng ban</a></div>
+              <div><a href="#" style="color:var(--wx-text-link);text-decoration:none;">4. Xác thực API & quản lý khóa</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

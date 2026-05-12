@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRM | WemakeUI Dashboard</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body class="wx-app">
+<div class="wx-shell">
+
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar>☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tổng quan</div>
+      <a href="overview.html" class="wx-nav-item"><span class="wx-nav-icon">📊</span><span>Tổng quan</span></a>
+      <a href="analytics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Phân tích</span></a>
+      <a href="ecommerce.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Thương mại</span></a>
+      <a href="crm.html" class="wx-nav-item active"><span class="wx-nav-icon">👥</span><span>CRM</span></a>
+      <a href="project.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Dự án</span></a>
+      <div class="wx-nav-section-label">Tài chính &amp; Vận hành</div>
+      <a href="finance.html" class="wx-nav-item"><span class="wx-nav-icon">💰</span><span>Tài chính</span></a>
+      <a href="saas.html" class="wx-nav-item"><span class="wx-nav-icon">☁️</span><span>SaaS</span></a>
+      <a href="logistics.html" class="wx-nav-item"><span class="wx-nav-icon">🚚</span><span>Vận chuyển</span></a>
+      <a href="helpdesk.html" class="wx-nav-item"><span class="wx-nav-icon">🎧</span><span>Hỗ trợ</span></a>
+      <a href="iot.html" class="wx-nav-item"><span class="wx-nav-icon">📡</span><span>IoT</span></a>
+      <div class="wx-nav-section-label">Đặc biệt</div>
+      <a href="weconnect-v1.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>WeDashboard v1</span></a>
+      <a href="weconnect-v2.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>WeDashboard v2</span></a>
+    </nav>
+  </aside>
+
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Quản lý khách hàng (CRM)</span>
+      <div class="wx-topbar-actions">
+        <button class="wx-topbar-btn" data-dark-toggle>🌙</button>
+      </div>
+    </div>
+
+    <div class="wx-content">
+
+      <!-- Stats -->
+      <div class="wx-grid-4" style="margin-bottom:1.5rem;">
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Tổng liên hệ</div>
+          <div class="wx-stat-value">5,284</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +142 tháng này</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Tổng giá trị deals</div>
+          <div class="wx-stat-value">₫12.3 tỷ</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +21.4% so với tháng trước</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Tỷ lệ thắng</div>
+          <div class="wx-stat-value">64%</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +3% so với tháng trước</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Pipeline</div>
+          <div class="wx-stat-value">₫3.8 tỷ</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ 28 deals đang mở</div>
+        </div>
+      </div>
+
+      <!-- Kanban pipeline -->
+      <div class="wx-card" style="margin-bottom:1.5rem;">
+        <div class="wx-card-header"><span style="font-weight:600;">Sales Pipeline</span></div>
+        <div class="wx-card-body" style="padding:1rem;">
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.75rem;overflow-x:auto;">
+
+            <!-- Stage: Tiềm năng -->
+            <div style="min-width:150px;">
+              <div style="font-size:0.78rem;font-weight:700;color:var(--wx-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:2px solid var(--wx-info,#3b82f6);">
+                Tiềm năng <span style="font-weight:400;opacity:0.7;">(8)</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <div style="background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">Công ty ABC</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫250M · Nguyễn T.</p>
+                </div>
+                <div style="background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">StartUp XYZ</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫180M · Lê H.</p>
+                </div>
+                <div style="background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">TechViet Corp</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫420M · Trần V.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage: Liên hệ -->
+            <div style="min-width:150px;">
+              <div style="font-size:0.78rem;font-weight:700;color:var(--wx-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:2px solid var(--wx-accent,#8b5cf6);">
+                Liên hệ <span style="font-weight:400;opacity:0.7;">(6)</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <div style="background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">Mega Solutions</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫680M · Phạm L.</p>
+                </div>
+                <div style="background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">DigiTech VN</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫320M · Võ M.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage: Đề xuất -->
+            <div style="min-width:150px;">
+              <div style="font-size:0.78rem;font-weight:700;color:var(--wx-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:2px solid var(--wx-warning,#f59e0b);">
+                Đề xuất <span style="font-weight:400;opacity:0.7;">(5)</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <div style="background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">Global Trade Co.</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫1.2 tỷ · Hoàng M.</p>
+                </div>
+                <div style="background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">VinGroup Sub</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫850M · Đặng T.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage: Đàm phán -->
+            <div style="min-width:150px;">
+              <div style="font-size:0.78rem;font-weight:700;color:var(--wx-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:2px solid var(--wx-primary,#6366f1);">
+                Đàm phán <span style="font-weight:400;opacity:0.7;">(4)</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <div style="background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">FPT Software</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫2.4 tỷ · Ngô H.</p>
+                </div>
+                <div style="background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">MISA Corp</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫960M · Bùi P.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage: Chốt -->
+            <div style="min-width:150px;">
+              <div style="font-size:0.78rem;font-weight:700;color:var(--wx-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.6rem;padding-bottom:0.4rem;border-bottom:2px solid var(--wx-success,#22c55e);">
+                Chốt <span style="font-weight:400;opacity:0.7;">(5)</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">Tiki Platform</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫1.8 tỷ ✅</p>
+                </div>
+                <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:0.6rem;">
+                  <p style="margin:0;font-size:0.82rem;font-weight:600;">Shopee VN</p>
+                  <p style="margin:0.2rem 0 0;font-size:0.75rem;color:var(--wx-text-muted);">₫3.2 tỷ ✅</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Contacts table -->
+      <div class="wx-card">
+        <div class="wx-card-header" style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-weight:600;">Liên hệ gần đây</span>
+          <button class="wx-btn wx-btn-primary" style="font-size:0.8rem;padding:0.3rem 0.8rem;">+ Thêm liên hệ</button>
+        </div>
+        <div class="wx-card-body" style="padding:0;">
+          <table class="wx-table" style="width:100%;">
+            <thead>
+              <tr>
+                <th>Tên</th>
+                <th>Công ty</th>
+                <th>Email</th>
+                <th>Điện thoại</th>
+                <th>Giai đoạn</th>
+                <th>Phụ trách</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Nguyễn Minh Tuấn</strong></td>
+                <td>FPT Software</td>
+                <td>tuan.nm@fpt.com</td>
+                <td>0912 345 678</td>
+                <td><span class="wx-badge wx-badge-warning">Đàm phán</span></td>
+                <td>Ngô Hải</td>
+              </tr>
+              <tr>
+                <td><strong>Lê Thị Bích Vân</strong></td>
+                <td>Tiki Corp</td>
+                <td>bv.le@tiki.vn</td>
+                <td>0987 654 321</td>
+                <td><span class="wx-badge wx-badge-success">Đã chốt</span></td>
+                <td>Nguyễn T.</td>
+              </tr>
+              <tr>
+                <td><strong>Trần Quang Khải</strong></td>
+                <td>StartUp XYZ</td>
+                <td>khai@startupxyz.vn</td>
+                <td>0901 234 567</td>
+                <td><span class="wx-badge wx-badge-primary">Tiềm năng</span></td>
+                <td>Lê H.</td>
+              </tr>
+              <tr>
+                <td><strong>Phạm Thanh Hà</strong></td>
+                <td>VinGroup</td>
+                <td>ha.pt@vingroup.net</td>
+                <td>0978 901 234</td>
+                <td><span class="wx-badge wx-badge-warning">Đề xuất</span></td>
+                <td>Đặng T.</td>
+              </tr>
+              <tr>
+                <td><strong>Võ Thị Thanh Mai</strong></td>
+                <td>DigiTech VN</td>
+                <td>mai.vt@digitech.vn</td>
+                <td>0865 432 109</td>
+                <td><span class="wx-badge wx-badge-primary">Liên hệ</span></td>
+                <td>Võ M.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../js/wemake.js"></script>
+</body>
+</html>

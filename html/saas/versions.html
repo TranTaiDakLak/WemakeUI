@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quản lý phiên bản — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .ver-badge { font-family:var(--wx-font-mono); font-weight:700; background:var(--wx-brand-primary); color:#fff; padding:3px 10px; border-radius:var(--wx-radius-full); font-size:var(--wx-fs-sm); }
+  .changelog li { font-size:var(--wx-fs-sm); padding:3px 0; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">SaaS Admin</div>
+      <a href="dashboard.html" class="wx-nav-item"><span class="wx-nav-icon">📊</span><span>Bảng điều khiển</span></a>
+      <a href="members.html" class="wx-nav-item"><span class="wx-nav-icon">👥</span><span>Thành viên</span></a>
+      <a href="products.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="transactions.html" class="wx-nav-item"><span class="wx-nav-icon">💳</span><span>Giao dịch</span></a>
+      <a href="versions.html" class="wx-nav-item active"><span class="wx-nav-icon">🔖</span><span>Phiên bản</span></a>
+      <a href="statistics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Thống kê</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Quản lý phiên bản</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex justify-between items-center" style="display:flex">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Quản lý phiên bản</h1>
+          <p class="text-muted" style="margin:0">Lịch sử phát hành, changelog và lượt tải xuống của ứng dụng.</p>
+        </div>
+        <button class="wx-btn wx-btn-primary">🔖 Phát hành phiên bản mới</button>
+      </div>
+
+      <div class="wx-card mb-4" style="border:2px solid var(--wx-brand-primary)">
+        <div class="wx-card-header flex items-center gap-3">
+          <span class="wx-badge wx-badge-primary">Phiên bản hiện tại</span>
+          <span class="ver-badge">v2.4.0</span>
+          <span class="text-sm text-muted">Phát hành 02/05/2026</span>
+          <span class="wx-badge wx-badge-success" style="margin-left:auto">Đã phát hành</span>
+        </div>
+        <div class="wx-card-body">
+          <ul class="changelog" style="list-style:none;padding:0;margin:0">
+            <li>✨ Thêm bảng điều khiển doanh thu định kỳ (MRR) theo thời gian thực</li>
+            <li>✨ Hỗ trợ thanh toán qua VNPay và MoMo</li>
+            <li>🐛 Sửa lỗi xuất CSV bị thiếu cột phương thức thanh toán</li>
+            <li>🐛 Cải thiện hiệu năng tải danh sách thành viên trên 5,000 bản ghi</li>
+          </ul>
+          <div class="flex items-center gap-4 mt-3">
+            <span class="text-sm text-muted">⬇ 12,480 lượt tải</span>
+            <a href="#" style="color:var(--wx-text-link);font-size:var(--wx-fs-sm)">Xem chi tiết →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-3">
+        <div class="wx-card-header flex items-center gap-3">
+          <span class="ver-badge">v2.5.0-beta</span>
+          <span class="text-sm text-muted">Dự kiến 25/05/2026</span>
+          <span class="wx-badge wx-badge-info" style="margin-left:auto">Beta</span>
+        </div>
+        <div class="wx-card-body">
+          <ul class="changelog" style="list-style:none;padding:0;margin:0">
+            <li>✨ Trợ lý AI gợi ý chiến dịch email</li>
+            <li>✨ Bộ lọc nâng cao cho báo cáo thống kê</li>
+            <li>🐛 Sửa lỗi giao diện chế độ tối ở trang giao dịch</li>
+          </ul>
+          <div class="flex items-center gap-4 mt-3"><span class="text-sm text-muted">⬇ 312 lượt tải (beta)</span><a href="#" style="color:var(--wx-text-link);font-size:var(--wx-fs-sm)">Xem chi tiết →</a></div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-3">
+        <div class="wx-card-header flex items-center gap-3">
+          <span class="ver-badge">v3.0.0</span>
+          <span class="text-sm text-muted">Dự kiến Q3/2026</span>
+          <span class="wx-badge wx-badge-warning" style="margin-left:auto">Sắp tới</span>
+        </div>
+        <div class="wx-card-body">
+          <ul class="changelog" style="list-style:none;padding:0;margin:0">
+            <li>✨ Tái thiết kế toàn bộ giao diện quản trị</li>
+            <li>✨ API v3 với webhook 2 chiều</li>
+            <li>✨ Hỗ trợ đa workspace</li>
+          </ul>
+          <div class="flex items-center gap-4 mt-3"><span class="text-sm text-muted">Đang lên kế hoạch</span><a href="#" style="color:var(--wx-text-link);font-size:var(--wx-fs-sm)">Xem lộ trình →</a></div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-3">
+        <div class="wx-card-header flex items-center gap-3">
+          <span class="ver-badge">v2.3.1</span>
+          <span class="text-sm text-muted">Phát hành 18/03/2026</span>
+          <span class="wx-badge wx-badge-success" style="margin-left:auto">Đã phát hành</span>
+        </div>
+        <div class="wx-card-body">
+          <ul class="changelog" style="list-style:none;padding:0;margin:0">
+            <li>🐛 Sửa lỗi không gửi được email khi máy chủ SMTP timeout</li>
+            <li>🐛 Sửa lỗi hiển thị sai múi giờ trong báo cáo</li>
+          </ul>
+          <div class="flex items-center gap-4 mt-3"><span class="text-sm text-muted">⬇ 9,841 lượt tải</span><a href="#" style="color:var(--wx-text-link);font-size:var(--wx-fs-sm)">Xem chi tiết →</a></div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-3">
+        <div class="wx-card-header flex items-center gap-3">
+          <span class="ver-badge">v2.3.0</span>
+          <span class="text-sm text-muted">Phát hành 02/02/2026</span>
+          <span class="wx-badge wx-badge-success" style="margin-left:auto">Đã phát hành</span>
+        </div>
+        <div class="wx-card-body">
+          <ul class="changelog" style="list-style:none;padding:0;margin:0">
+            <li>✨ Thêm trang quản lý webhook</li>
+            <li>✨ Hỗ trợ phân quyền theo nhóm</li>
+            <li>🐛 Sửa nhiều lỗi nhỏ giao diện</li>
+          </ul>
+          <div class="flex items-center gap-4 mt-3"><span class="text-sm text-muted">⬇ 8,503 lượt tải</span><a href="#" style="color:var(--wx-text-link);font-size:var(--wx-fs-sm)">Xem chi tiết →</a></div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-3">
+        <div class="wx-card-header flex items-center gap-3">
+          <span class="ver-badge">v2.2.0</span>
+          <span class="text-sm text-muted">Phát hành 10/12/2025</span>
+          <span class="wx-badge wx-badge-neutral" style="margin-left:auto">Cũ</span>
+        </div>
+        <div class="wx-card-body">
+          <ul class="changelog" style="list-style:none;padding:0;margin:0">
+            <li>✨ Ra mắt bảng thống kê nâng cao</li>
+            <li>🐛 Khắc phục lỗi đăng nhập SSO với Google</li>
+          </ul>
+          <div class="flex items-center gap-4 mt-3"><span class="text-sm text-muted">⬇ 7,210 lượt tải</span><a href="#" style="color:var(--wx-text-link);font-size:var(--wx-fs-sm)">Xem chi tiết →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

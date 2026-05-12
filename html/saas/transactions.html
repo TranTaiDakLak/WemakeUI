@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giao dịch — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">SaaS Admin</div>
+      <a href="dashboard.html" class="wx-nav-item"><span class="wx-nav-icon">📊</span><span>Bảng điều khiển</span></a>
+      <a href="members.html" class="wx-nav-item"><span class="wx-nav-icon">👥</span><span>Thành viên</span></a>
+      <a href="products.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="transactions.html" class="wx-nav-item active"><span class="wx-nav-icon">💳</span><span>Giao dịch</span></a>
+      <a href="versions.html" class="wx-nav-item"><span class="wx-nav-icon">🔖</span><span>Phiên bản</span></a>
+      <a href="statistics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Thống kê</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Giao dịch</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Giao dịch</h1>
+        <p class="text-muted" style="margin:0">Lịch sử thanh toán, hoàn tiền và giao dịch thất bại trên nền tảng.</p>
+      </div>
+
+      <div class="wx-grid-4 mb-4">
+        <div class="wx-stat-card"><div class="wx-stat-label">Doanh thu tháng</div><div class="wx-stat-value">₫284M</div><div class="wx-stat-change" style="color:var(--wx-success-text,#15803d)">▲ +6.2%</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Số giao dịch</div><div class="wx-stat-value">1,847</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Hoàn tiền</div><div class="wx-stat-value">₫4.2M</div></div>
+        <div class="wx-stat-card"><div class="wx-stat-label">Thất bại</div><div class="wx-stat-value">23</div></div>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header">
+          <div class="flex items-center gap-2" style="width:100%;flex-wrap:wrap">
+            <input type="date" class="wx-input" value="2026-05-01" style="max-width:160px">
+            <span class="text-muted">→</span>
+            <input type="date" class="wx-input" value="2026-05-12" style="max-width:160px">
+            <select class="wx-select" style="max-width:170px"><option>Tất cả trạng thái</option><option>Thành công</option><option>Đang xử lý</option><option>Thất bại</option><option>Hoàn tiền</option></select>
+            <button class="wx-btn wx-btn-secondary" style="margin-left:auto">⬇ Xuất CSV</button>
+          </div>
+        </div>
+        <div class="wx-card-body" style="padding:0">
+          <table class="wx-table">
+            <thead><tr><th>Mã GD</th><th>Khách hàng</th><th>Sản phẩm</th><th>Số tiền</th><th>Phương thức</th><th>Trạng thái</th><th>Thời gian</th></tr></thead>
+            <tbody>
+              <tr><td class="font-mono">TXN-90412</td><td>Nguyễn Văn An</td><td>WeAnalytics Pro</td><td>₫299.000</td><td>💳 Visa •••• 4242</td><td><span class="wx-badge wx-badge-success">Thành công</span></td><td>12/05 09:14</td></tr>
+              <tr><td class="font-mono">TXN-90411</td><td>Trần Thị Bích</td><td>WeChat Suite</td><td>₫149.000</td><td>📱 MoMo</td><td><span class="wx-badge wx-badge-success">Thành công</span></td><td>12/05 08:42</td></tr>
+              <tr><td class="font-mono">TXN-90410</td><td>Lê Hoàng Cường</td><td>WeShop Commerce</td><td>₫499.000</td><td>🏦 VNPay</td><td><span class="wx-badge wx-badge-warning">Đang xử lý</span></td><td>12/05 08:10</td></tr>
+              <tr><td class="font-mono">TXN-90409</td><td>Phạm Thuỳ Dung</td><td>WeCloud Storage</td><td>₫59.000</td><td>💳 Mastercard •••• 8821</td><td><span class="wx-badge wx-badge-success">Thành công</span></td><td>11/05 22:33</td></tr>
+              <tr><td class="font-mono">TXN-90408</td><td>Hoàng Văn Em</td><td>WeAuth Security</td><td>₫89.000</td><td>📱 MoMo</td><td><span class="wx-badge wx-badge-danger">Thất bại</span></td><td>11/05 19:01</td></tr>
+              <tr><td class="font-mono">TXN-90407</td><td>Vũ Thị Giang</td><td>WeAnalytics Pro</td><td>₫299.000</td><td>🏦 VNPay</td><td><span class="wx-badge wx-badge-success">Thành công</span></td><td>11/05 16:45</td></tr>
+              <tr><td class="font-mono">TXN-90406</td><td>Đỗ Văn Hùng</td><td>WeShop Commerce</td><td>₫499.000</td><td>💳 Visa •••• 1199</td><td><span class="wx-badge wx-badge-neutral">Hoàn tiền</span></td><td>11/05 14:20</td></tr>
+              <tr><td class="font-mono">TXN-90405</td><td>Bùi Thị Inh</td><td>WeMail Campaign</td><td>₫129.000</td><td>📱 MoMo</td><td><span class="wx-badge wx-badge-success">Thành công</span></td><td>11/05 11:08</td></tr>
+              <tr><td class="font-mono">TXN-90404</td><td>Ngô Văn Khôi</td><td>WeChat Suite</td><td>₫149.000</td><td>🏦 VNPay</td><td><span class="wx-badge wx-badge-success">Thành công</span></td><td>10/05 21:55</td></tr>
+              <tr><td class="font-mono">TXN-90403</td><td>Dương Thị Lan</td><td>WeAnalytics Pro</td><td>₫299.000</td><td>💳 Visa •••• 4242</td><td><span class="wx-badge wx-badge-warning">Đang xử lý</span></td><td>10/05 18:30</td></tr>
+              <tr><td class="font-mono">TXN-90402</td><td>Trịnh Văn Minh</td><td>WeCloud Storage</td><td>₫59.000</td><td>📱 MoMo</td><td><span class="wx-badge wx-badge-success">Thành công</span></td><td>10/05 15:12</td></tr>
+              <tr><td class="font-mono">TXN-90401</td><td>Lý Thị Nga</td><td>WeAuth Security</td><td>₫89.000</td><td>🏦 VNPay</td><td><span class="wx-badge wx-badge-danger">Thất bại</span></td><td>10/05 09:40</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="wx-card-footer flex justify-between items-center">
+          <span class="text-sm text-muted">Hiển thị 1–12 trong 1,847 giao dịch</span>
+          <div class="wx-pagination">
+            <button class="wx-page-btn">‹</button>
+            <button class="wx-page-btn active">1</button>
+            <button class="wx-page-btn">2</button>
+            <button class="wx-page-btn">3</button>
+            <span class="text-muted">…</span>
+            <button class="wx-page-btn">154</button>
+            <button class="wx-page-btn">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

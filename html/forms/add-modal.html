@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modal thêm mới — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item active"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Modal thêm mới</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Modal thêm mới</h1>
+        <p class="text-muted" style="margin:0">Bảng danh sách sản phẩm kèm hộp thoại thêm mới (đang hiển thị để minh hoạ).</p>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header flex justify-between items-center">
+          <h3 class="wx-card-title">Sản phẩm</h3>
+          <button class="wx-btn wx-btn-primary" data-open-modal="addModal">➕ Thêm sản phẩm</button>
+        </div>
+        <div class="wx-card-body" style="padding:0">
+          <table class="wx-table">
+            <thead><tr><th>Tên sản phẩm</th><th>Danh mục</th><th>Giá</th><th>Tồn kho</th><th>Thao tác</th></tr></thead>
+            <tbody>
+              <tr><td>Áo thun nam basic</td><td><span class="wx-badge wx-badge-neutral">Thời trang</span></td><td>₫199.000</td><td>248</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button> <button class="wx-btn wx-btn-ghost wx-btn-sm">Xoá</button></td></tr>
+              <tr><td>Quần jeans slim-fit</td><td><span class="wx-badge wx-badge-neutral">Thời trang</span></td><td>₫450.000</td><td>132</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button> <button class="wx-btn wx-btn-ghost wx-btn-sm">Xoá</button></td></tr>
+              <tr><td>Tai nghe Bluetooth X3</td><td><span class="wx-badge wx-badge-info">Điện tử</span></td><td>₫890.000</td><td>56</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button> <button class="wx-btn wx-btn-ghost wx-btn-sm">Xoá</button></td></tr>
+              <tr><td>Bình giữ nhiệt 500ml</td><td><span class="wx-badge wx-badge-success">Gia dụng</span></td><td>₫159.000</td><td>410</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button> <button class="wx-btn wx-btn-ghost wx-btn-sm">Xoá</button></td></tr>
+              <tr><td>Son lì màu đỏ hồng</td><td><span class="wx-badge wx-badge-warning">Mỹ phẩm</span></td><td>₫249.000</td><td>87</td><td><button class="wx-btn wx-btn-ghost wx-btn-sm">Sửa</button> <button class="wx-btn wx-btn-ghost wx-btn-sm">Xoá</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wx-overlay" id="addModal">
+  <div class="wx-modal" style="max-width:560px">
+    <div class="wx-modal-header">
+      <h3 class="wx-modal-title">Thêm sản phẩm mới</h3>
+      <button class="wx-modal-close" data-close-modal>✕</button>
+    </div>
+    <div class="wx-modal-body">
+      <div class="wx-form-group">
+        <label class="wx-form-label">Tên sản phẩm <span class="required">*</span></label>
+        <input type="text" class="wx-input" placeholder="VD: Áo khoác gió nam">
+      </div>
+      <div class="wx-grid-2">
+        <div class="wx-form-group">
+          <label class="wx-form-label">Danh mục</label>
+          <select class="wx-select"><option>Thời trang</option><option>Điện tử</option><option>Gia dụng</option><option>Mỹ phẩm</option></select>
+        </div>
+        <div class="wx-form-group">
+          <label class="wx-form-label">Giá <span class="required">*</span></label>
+          <div class="flex items-center" style="border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-md);overflow:hidden">
+            <span style="padding:0 10px;background:var(--wx-surface-sunken);color:var(--wx-text-muted);align-self:stretch;display:flex;align-items:center">₫</span>
+            <input type="text" class="wx-input" placeholder="0" style="border:none;border-radius:0">
+          </div>
+        </div>
+      </div>
+      <div class="wx-form-group">
+        <label class="wx-form-label">Số lượng tồn kho</label>
+        <input type="number" class="wx-input" placeholder="0" value="0">
+      </div>
+      <div class="wx-form-group">
+        <label class="wx-form-label">Mô tả</label>
+        <textarea class="wx-textarea" rows="3" placeholder="Mô tả ngắn về sản phẩm..."></textarea>
+      </div>
+      <div class="wx-form-group">
+        <label class="wx-form-label">Ảnh sản phẩm</label>
+        <div style="border:2px dashed var(--wx-border-default);border-radius:var(--wx-radius-md);padding:20px;text-align:center;background:var(--wx-surface-sunken);color:var(--wx-text-muted);font-size:var(--wx-fs-sm)">📤 Kéo thả ảnh hoặc bấm để chọn</div>
+      </div>
+    </div>
+    <div class="wx-modal-footer flex justify-end gap-2">
+      <button class="wx-btn wx-btn-ghost" data-close-modal>Huỷ</button>
+      <button class="wx-btn wx-btn-primary">Thêm sản phẩm</button>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

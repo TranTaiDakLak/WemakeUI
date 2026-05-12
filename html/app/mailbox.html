@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hộp thư — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    .mail-layout { display:grid; grid-template-columns:180px 1fr; height:100%; gap:0; }
+    .mail-sidebar { border-right:1px solid var(--wx-border-default); background:var(--wx-surface-base); padding:12px 0; }
+    .mail-folder { display:flex; align-items:center; gap:8px; padding:8px 16px; font-size:var(--wx-fs-sm); color:var(--wx-text-secondary); cursor:pointer; border-radius:0; transition:background 0.15s; }
+    .mail-folder:hover { background:var(--wx-hover-bg); }
+    .mail-folder.active { background:var(--wx-selected-bg); color:var(--wx-brand-primary); font-weight:600; }
+    .mail-folder .count { margin-left:auto; font-size:11px; font-weight:700; background:var(--wx-danger-solid); color:#fff; padding:1px 6px; border-radius:9999px; }
+    .mail-list { overflow-y:auto; }
+    .mail-item { display:flex; align-items:flex-start; gap:12px; padding:12px 16px; border-bottom:1px solid var(--wx-border-subtle); cursor:pointer; transition:background 0.15s; position:relative; }
+    .mail-item:hover { background:var(--wx-hover-bg); }
+    .mail-item.selected { background:var(--wx-selected-bg); }
+    .mail-item.unread .mail-subject { font-weight:700; color:var(--wx-text-primary); }
+    .mail-subject { font-size:var(--wx-fs-sm); color:var(--wx-text-secondary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .mail-preview { font-size:var(--wx-fs-xs); color:var(--wx-text-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:2px; }
+    .mail-time { font-size:var(--wx-fs-xs); color:var(--wx-text-muted); white-space:nowrap; }
+    .unread-dot { width:8px; height:8px; border-radius:50%; background:var(--wx-brand-primary); flex-shrink:0; margin-top:6px; }
+    .mail-sender { font-size:var(--wx-fs-xs); color:var(--wx-text-muted); }
+    .mail-right { display:grid; grid-template-rows:auto 1fr; height:100%; overflow:hidden; }
+    .mail-preview-panel { padding:24px; overflow-y:auto; }
+  </style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item active"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:var(--wx-fs-sm);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Nguyễn Văn Thành</div>
+          <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Hộp thư</span>
+      <div class="wx-topbar-actions">
+        <button class="wx-btn wx-btn-sm" style="background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3);color:#fff;">✏️ Soạn thư</button>
+        <button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button>
+      </div>
+    </div>
+    <div class="wx-content" style="padding:0;display:flex;overflow:hidden;">
+      <!-- Folder sidebar -->
+      <div class="mail-sidebar" style="min-width:180px;">
+        <div style="padding:0 12px 12px;"><button class="wx-btn wx-btn-primary wx-btn-sm wx-btn-full">✏️ Soạn thư mới</button></div>
+        <div class="mail-folder active">📥 Hộp đến <span class="count">12</span></div>
+        <div class="mail-folder">📤 Đã gửi</div>
+        <div class="mail-folder">📝 Nháp <span class="count">3</span></div>
+        <div class="mail-folder">⭐ Quan trọng</div>
+        <div class="mail-folder">🗑️ Thùng rác</div>
+        <div style="padding:12px 16px 4px;font-size:var(--wx-fs-xs);font-weight:600;color:var(--wx-text-muted);text-transform:uppercase;letter-spacing:0.06em;">Nhãn</div>
+        <div class="mail-folder">🔵 Công việc</div>
+        <div class="mail-folder">🟢 Cá nhân</div>
+        <div class="mail-folder">🟡 Quan trọng</div>
+      </div>
+
+      <!-- Mail list + preview -->
+      <div style="flex:1;display:grid;grid-template-columns:340px 1fr;overflow:hidden;">
+        <!-- Mail list -->
+        <div class="mail-list" style="border-right:1px solid var(--wx-border-default);background:var(--wx-surface-base);overflow-y:auto;">
+          <div style="padding:8px 16px;border-bottom:1px solid var(--wx-border-subtle);display:flex;align-items:center;gap:8px;">
+            <input class="wx-input" style="height:32px;font-size:var(--wx-fs-sm);" placeholder="Tìm trong hộp thư...">
+          </div>
+          <!-- unread items -->
+          <div class="mail-item unread selected">
+            <div class="wx-avatar wx-avatar-sm" style="background:#eff6ff;color:#2563eb;">TM</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:var(--wx-fs-sm);font-weight:700;">Trần Minh</span><span class="mail-time">10:32</span></div>
+              <div class="mail-subject">Re: Review thiết kế Sprint 42</div>
+              <div class="mail-preview">Mình đã xem qua thiết kế rồi, có một vài điểm cần điều chỉnh...</div>
+            </div>
+            <div class="unread-dot"></div>
+          </div>
+          <div class="mail-item unread">
+            <div class="wx-avatar wx-avatar-sm" style="background:#f0fdf4;color:#15803d;">PH</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:var(--wx-fs-sm);font-weight:700;">Phạm Hương</span><span class="mail-time">09:15</span></div>
+              <div class="mail-subject">Báo cáo doanh thu tháng 4/2026</div>
+              <div class="mail-preview">Kính gửi anh Thành, em gửi anh báo cáo doanh thu tháng 4...</div>
+            </div>
+            <div class="unread-dot"></div>
+          </div>
+          <div class="mail-item">
+            <div class="wx-avatar wx-avatar-sm">LH</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:var(--wx-fs-sm);font-weight:600;">Lê Hoàng</span><span class="mail-time">Hôm qua</span></div>
+              <div class="mail-subject">Lịch họp tuần tới</div>
+              <div class="mail-preview">Mình muốn dời buổi họp Planning từ thứ 2 sang thứ 3...</div>
+            </div>
+          </div>
+          <div class="mail-item unread">
+            <div class="wx-avatar wx-avatar-sm" style="background:#fffbeb;color:#b45309;">NA</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:var(--wx-fs-sm);font-weight:700;">Nguyễn An</span><span class="mail-time">Hôm qua</span></div>
+              <div class="mail-subject">Yêu cầu phê duyệt ngân sách Q2</div>
+              <div class="mail-preview">Anh ơi, em cần anh phê duyệt ngân sách cho quý 2...</div>
+            </div>
+            <div class="unread-dot"></div>
+          </div>
+          <div class="mail-item">
+            <div class="wx-avatar wx-avatar-sm" style="background:#fef2f2;color:#b91c1c;">VT</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:var(--wx-fs-sm);font-weight:600;">Vũ Tuấn</span><span class="mail-time">12/05</span></div>
+              <div class="mail-subject">Cập nhật tiến độ dự án WeConnect</div>
+              <div class="mail-preview">Tuần này team đã hoàn thành 8/12 task trong sprint...</div>
+            </div>
+          </div>
+          <div class="mail-item">
+            <div class="wx-avatar wx-avatar-sm" style="background:#eff6ff;color:#1d4ed8;">WU</div>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:var(--wx-fs-sm);font-weight:600;">WemakeUI System</span><span class="mail-time">11/05</span></div>
+              <div class="mail-subject">Hóa đơn #INV-2026-0051 đã được tạo</div>
+              <div class="mail-preview">Hóa đơn tháng 5/2026 của bạn đã sẵn sàng...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mail preview -->
+        <div class="mail-preview-panel">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;">
+            <div>
+              <h2 style="font-size:var(--wx-fs-2xl);font-weight:700;margin:0 0 8px;">Re: Review thiết kế Sprint 42</h2>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div class="wx-avatar wx-avatar-sm" style="background:#eff6ff;color:#2563eb;">TM</div>
+                <div>
+                  <span style="font-size:var(--wx-fs-sm);font-weight:600;">Trần Minh</span>
+                  <span style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);margin-left:6px;">&lt;minh.tran@wemakeui.com&gt;</span>
+                </div>
+                <span style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);margin-left:auto;">12/05/2026, 10:32</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button class="wx-btn wx-btn-ghost wx-btn-sm">↩️ Trả lời</button>
+              <button class="wx-btn wx-btn-ghost wx-btn-sm">↪️ Chuyển tiếp</button>
+              <button class="wx-btn wx-btn-ghost wx-btn-sm">🗑️</button>
+            </div>
+          </div>
+          <div style="border-top:1px solid var(--wx-border-subtle);padding-top:20px;line-height:1.8;color:var(--wx-text-secondary);font-size:var(--wx-fs-sm);">
+            <p>Chào anh Thành,</p>
+            <p>Mình đã xem qua toàn bộ thiết kế của Sprint 42 rồi. Nhìn chung rất tốt, nhưng có một vài điểm cần điều chỉnh:</p>
+            <ol style="padding-left:20px;">
+              <li style="margin-bottom:8px;">Màu sắc của nút CTA trên trang Pricing cần tương phản cao hơn để dễ nhìn trên nền tối.</li>
+              <li style="margin-bottom:8px;">Icon trong sidebar bị lệch 2px so với text — cần căn chỉnh lại vertical alignment.</li>
+              <li style="margin-bottom:8px;">Trang Profile Edit: section "Vùng nguy hiểm" nên có thêm dialog xác nhận trước khi xóa.</li>
+            </ol>
+            <p>Anh xem qua và phản hồi giúp mình nhé. Deadline là cuối tuần này.</p>
+            <p style="margin-top:20px;">Trân trọng,<br><strong>Trần Minh</strong><br>UI/UX Designer — WemakeUI Corp</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

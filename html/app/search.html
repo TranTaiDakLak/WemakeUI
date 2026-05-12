@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tìm kiếm — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .sr-chip { display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:var(--wx-radius-full);border:1px solid var(--wx-border-default);background:var(--wx-surface-base);font-size:var(--wx-fs-sm);font-weight:500;cursor:pointer;color:var(--wx-text-secondary);transition:all .15s; }
+  .sr-chip:hover,.sr-chip.active { background:var(--wx-brand-primary);color:#fff;border-color:var(--wx-brand-primary); }
+  .sr-section-title { font-size:var(--wx-fs-md);font-weight:700;color:var(--wx-text-muted);text-transform:uppercase;letter-spacing:.04em;margin:24px 0 10px; }
+  .sr-item { display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px solid var(--wx-border-subtle);border-radius:var(--wx-radius-md);background:var(--wx-surface-base);margin-bottom:8px;cursor:pointer;transition:border-color .15s; }
+  .sr-item:hover { border-color:var(--wx-brand-300); }
+  .sr-file-icon { font-size:22px;width:36px;text-align:center; }
+  mark { background:var(--wx-warning-bg);color:var(--wx-warning-text);padding:0 2px;border-radius:3px; }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item active"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Tìm kiếm</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div style="max-width:860px;margin:0 auto;">
+        <div style="position:relative;margin-bottom:18px;">
+          <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;">🔍</span>
+          <input class="wx-input" style="height:48px;padding-left:42px;font-size:var(--wx-fs-lg);" value="thiết kế hệ thống">
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+          <button class="sr-chip active">Tất cả <strong>(47)</strong></button>
+          <button class="sr-chip">Người dùng (8)</button>
+          <button class="sr-chip">Tệp tin (12)</button>
+          <button class="sr-chip">Trang (15)</button>
+          <button class="sr-chip">Hành động (12)</button>
+        </div>
+        <p class="text-sm text-muted mb-4">Khoảng 47 kết quả (0.18 giây) cho "<strong>thiết kế hệ thống</strong>"</p>
+
+        <div class="sr-section-title">Người dùng</div>
+        <div class="sr-item">
+          <div class="wx-avatar">LH</div>
+          <div class="flex-1">
+            <div class="font-semibold">Lê Thị Hương</div>
+            <div class="text-sm text-muted">Trưởng nhóm Thiết kế hệ thống · Phòng Sản phẩm</div>
+          </div>
+          <span class="wx-badge wx-badge-success">Đang hoạt động</span>
+        </div>
+        <div class="sr-item">
+          <div class="wx-avatar">PT</div>
+          <div class="flex-1">
+            <div class="font-semibold">Phạm Quốc Thắng</div>
+            <div class="text-sm text-muted">Kiến trúc sư hệ thống · Phòng Kỹ thuật</div>
+          </div>
+          <span class="wx-badge wx-badge-neutral">Vắng mặt</span>
+        </div>
+        <div class="sr-item">
+          <div class="wx-avatar">NM</div>
+          <div class="flex-1">
+            <div class="font-semibold">Ngô Minh Anh</div>
+            <div class="text-sm text-muted">Chuyên viên Thiết kế UX · Phòng Sản phẩm</div>
+          </div>
+          <span class="wx-badge wx-badge-success">Đang hoạt động</span>
+        </div>
+
+        <div class="sr-section-title">Tệp tin</div>
+        <div class="sr-item">
+          <div class="sr-file-icon">📄</div>
+          <div class="flex-1">
+            <div class="font-semibold">Tài liệu thiết kế hệ thống v2.pdf</div>
+            <div class="text-xs text-muted">Tài liệu / Dự án 2024 / Kiến trúc</div>
+          </div>
+          <span class="text-sm text-muted">3.8 MB</span>
+        </div>
+        <div class="sr-item">
+          <div class="sr-file-icon">📊</div>
+          <div class="flex-1">
+            <div class="font-semibold">Bảng phân rã module hệ thống.xlsx</div>
+            <div class="text-xs text-muted">Tài liệu / Dự án 2024 / Phân tích</div>
+          </div>
+          <span class="text-sm text-muted">1.2 MB</span>
+        </div>
+        <div class="sr-item">
+          <div class="sr-file-icon">🖼️</div>
+          <div class="flex-1">
+            <div class="font-semibold">Sơ đồ kiến trúc - thiết kế hệ thống.png</div>
+            <div class="text-xs text-muted">Hình ảnh / Sơ đồ</div>
+          </div>
+          <span class="text-sm text-muted">820 KB</span>
+        </div>
+        <div class="sr-item">
+          <div class="sr-file-icon">📄</div>
+          <div class="flex-1">
+            <div class="font-semibold">Biên bản họp review thiết kế.docx</div>
+            <div class="text-xs text-muted">Tài liệu / Họp / 2026</div>
+          </div>
+          <span class="text-sm text-muted">340 KB</span>
+        </div>
+
+        <div class="sr-section-title">Trang</div>
+        <div class="sr-item">
+          <div class="flex-1">
+            <div class="font-semibold" style="color:var(--wx-text-link);">Hướng dẫn thiết kế hệ thống microservices</div>
+            <div class="text-xs text-muted">Wiki / Kiến trúc / Best practices</div>
+            <div class="text-sm text-muted mt-1">Tài liệu này mô tả cách <mark>thiết kế hệ thống</mark> phân tán theo nguyên tắc tách biệt trách nhiệm và khả năng mở rộng theo chiều ngang...</div>
+          </div>
+        </div>
+        <div class="sr-item">
+          <div class="flex-1">
+            <div class="font-semibold" style="color:var(--wx-text-link);">Quy trình review thiết kế hệ thống nội bộ</div>
+            <div class="text-xs text-muted">Wiki / Quy trình / Engineering</div>
+            <div class="text-sm text-muted mt-1">Mọi đề xuất <mark>thiết kế hệ thống</mark> mới phải được trình bày trước hội đồng kiến trúc và được phê duyệt trước khi triển khai...</div>
+          </div>
+        </div>
+        <div class="sr-item">
+          <div class="flex-1">
+            <div class="font-semibold" style="color:var(--wx-text-link);">Mẫu tài liệu thiết kế hệ thống (Design Doc)</div>
+            <div class="text-xs text-muted">Wiki / Templates</div>
+            <div class="text-sm text-muted mt-1">Sử dụng mẫu này khi bắt đầu một <mark>thiết kế hệ thống</mark> mới: bối cảnh, mục tiêu, giải pháp, đánh đổi và kế hoạch triển khai...</div>
+          </div>
+        </div>
+        <div class="sr-item">
+          <div class="flex-1">
+            <div class="font-semibold" style="color:var(--wx-text-link);">Khóa học: Thiết kế hệ thống cho kỹ sư</div>
+            <div class="text-xs text-muted">Học tập / Khóa học / Kỹ thuật</div>
+            <div class="text-sm text-muted mt-1">Khóa học 8 tuần về <mark>thiết kế hệ thống</mark> quy mô lớn, bao gồm caching, sharding, hàng đợi và cân bằng tải...</div>
+          </div>
+        </div>
+        <div class="sr-item">
+          <div class="flex-1">
+            <div class="font-semibold" style="color:var(--wx-text-link);">FAQ: Câu hỏi thường gặp về thiết kế hệ thống</div>
+            <div class="text-xs text-muted">FAQ / Kỹ thuật</div>
+            <div class="text-sm text-muted mt-1">Tổng hợp các câu hỏi phổ biến khi <mark>thiết kế hệ thống</mark>: chọn cơ sở dữ liệu, đảm bảo tính nhất quán, xử lý lỗi...</div>
+          </div>
+        </div>
+
+        <div class="wx-pagination" style="justify-content:center;margin-top:24px;">
+          <button class="wx-page-btn">‹</button>
+          <button class="wx-page-btn active">1</button>
+          <button class="wx-page-btn">2</button>
+          <button class="wx-page-btn">3</button>
+          <button class="wx-page-btn">4</button>
+          <button class="wx-page-btn">5</button>
+          <button class="wx-page-btn">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi tiết sản phẩm — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .prod-layout { display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start; }
+  .prod-img { height:400px;border-radius:var(--wx-radius-xl);background:linear-gradient(135deg,#6366f1,#8b5cf6); }
+  .prod-thumb { height:78px;border-radius:var(--wx-radius-md);background:linear-gradient(135deg,#a5b4fc,#c4b5fd);cursor:pointer;border:2px solid transparent; }
+  .prod-thumb.active { border-color:var(--wx-brand-primary); }
+  .swatch { width:30px;height:30px;border-radius:var(--wx-radius-full);cursor:pointer;border:2px solid var(--wx-border-default); }
+  .swatch.active { box-shadow:0 0 0 2px var(--wx-brand-primary); }
+  .stepper { display:inline-flex;align-items:center;border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-md);overflow:hidden; }
+  .stepper button { border:none;background:var(--wx-surface-base);width:34px;height:34px;font-size:16px;cursor:pointer; }
+  .stepper span { width:44px;text-align:center;font-weight:600; }
+  .spec-table td { padding:6px 0;font-size:var(--wx-fs-sm);border-bottom:1px solid var(--wx-border-subtle); }
+  .spec-table tr:last-child td{border-bottom:none;}
+  .rel-img { height:140px;border-radius:var(--wx-radius-md);background:linear-gradient(135deg,#94a3b8,#cbd5e1);margin-bottom:10px; }
+  @media (max-width:900px){ .prod-layout{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item active"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Chi tiết sản phẩm</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <nav class="wx-breadcrumb mb-4">
+        <a href="#">Trang chủ</a><span class="wx-breadcrumb-sep">/</span>
+        <a href="#">Phụ kiện</a><span class="wx-breadcrumb-sep">/</span>
+        <a href="#">Bàn phím</a><span class="wx-breadcrumb-sep">/</span>
+        <span class="wx-breadcrumb-current">Bàn phím cơ WemakeUI Pro</span>
+      </nav>
+
+      <div class="prod-layout mb-5">
+        <div>
+          <div class="prod-img mb-3"></div>
+          <div class="wx-grid wx-grid-4">
+            <div class="prod-thumb active"></div>
+            <div class="prod-thumb"></div>
+            <div class="prod-thumb"></div>
+            <div class="prod-thumb"></div>
+          </div>
+        </div>
+        <div>
+          <h1 style="margin:0 0 6px;font-size:var(--wx-fs-xl);font-weight:700;">Bàn phím cơ WemakeUI Pro</h1>
+          <div class="flex items-center gap-2 mb-3">
+            <span style="color:#f59e0b;">★★★★★</span>
+            <span class="text-sm text-muted">4.8 · 234 đánh giá</span>
+          </div>
+          <div class="flex items-center gap-3 mb-3">
+            <span style="font-size:26px;font-weight:700;color:var(--wx-brand-primary);">₫1.290.000</span>
+            <span class="text-muted" style="text-decoration:line-through;">₫1.590.000</span>
+            <span class="wx-badge wx-badge-danger">-19%</span>
+          </div>
+          <p class="text-sm text-muted mb-4">Bàn phím cơ cao cấp với switch hot-swap, layout 75%, đèn nền RGB và khung nhôm CNC nguyên khối. Kết nối Bluetooth 5.1, USB-C và 2.4GHz.</p>
+
+          <div class="mb-4">
+            <div class="wx-form-label mb-2">Màu sắc</div>
+            <div class="flex gap-2">
+              <div class="swatch active" style="background:#1e293b;" title="Đen"></div>
+              <div class="swatch" style="background:#e2e8f0;" title="Trắng"></div>
+              <div class="swatch" style="background:#475569;" title="Xám"></div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <div class="wx-form-label mb-2">Số lượng</div>
+            <div class="stepper"><button>−</button><span>1</span><button>+</button></div>
+          </div>
+
+          <div class="flex gap-3 mb-4">
+            <button class="wx-btn wx-btn-primary wx-btn-lg">🛒 Thêm vào giỏ</button>
+            <button class="wx-btn wx-btn-secondary wx-btn-lg">♡ Yêu thích</button>
+          </div>
+
+          <table class="spec-table" style="width:100%;">
+            <tr><td class="text-muted">Mã sản phẩm</td><td style="text-align:right;font-weight:600;">WMK-KB-PRO75</td></tr>
+            <tr><td class="text-muted">Tình trạng</td><td style="text-align:right;"><span class="wx-badge wx-badge-success">Còn hàng</span></td></tr>
+            <tr><td class="text-muted">Bảo hành</td><td style="text-align:right;font-weight:600;">24 tháng</td></tr>
+            <tr><td class="text-muted">Vận chuyển</td><td style="text-align:right;font-weight:600;">Miễn phí toàn quốc</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="wx-card mb-5">
+        <div class="wx-tabs">
+          <div class="wx-tab active" data-tab="desc">Mô tả</div>
+          <div class="wx-tab" data-tab="specs">Thông số kỹ thuật</div>
+          <div class="wx-tab" data-tab="reviews">Đánh giá (234)</div>
+        </div>
+        <div class="wx-card-body">
+          <div data-tab-panel="desc">
+            <p>Bàn phím cơ WemakeUI Pro là sự lựa chọn hoàn hảo cho lập trình viên và người làm việc văn phòng đòi hỏi trải nghiệm gõ phím tốt nhất. Khung nhôm CNC nguyên khối mang lại cảm giác chắc chắn, không ọp ẹp.</p>
+            <p>Switch hot-swap cho phép bạn thay thế switch mà không cần hàn, dễ dàng tùy biến theo sở thích. Đèn nền RGB với 16 hiệu ứng, điều chỉnh qua phần mềm hoặc phím tắt.</p>
+            <p>Pin 4000mAh cho thời lượng sử dụng lên đến 3 tuần (tắt đèn nền). Kết nối linh hoạt: Bluetooth 5.1 (3 thiết bị), USB-C có dây và đầu thu 2.4GHz độ trễ thấp.</p>
+          </div>
+          <div data-tab-panel="specs" class="hidden">
+            <table class="wx-table">
+              <tr><td class="text-muted" style="width:200px;">Layout</td><td>75% (84 phím)</td></tr>
+              <tr><td class="text-muted">Switch</td><td>Hot-swap, hỗ trợ 3-pin & 5-pin</td></tr>
+              <tr><td class="text-muted">Keycap</td><td>PBT Double-shot, profile Cherry</td></tr>
+              <tr><td class="text-muted">Khung</td><td>Nhôm CNC 6063</td></tr>
+              <tr><td class="text-muted">Kết nối</td><td>Bluetooth 5.1 / USB-C / 2.4GHz</td></tr>
+              <tr><td class="text-muted">Pin</td><td>4000mAh Li-ion</td></tr>
+              <tr><td class="text-muted">Đèn nền</td><td>RGB per-key, 16 hiệu ứng</td></tr>
+              <tr><td class="text-muted">Trọng lượng</td><td>1.05 kg</td></tr>
+              <tr><td class="text-muted">Kích thước</td><td>327 × 145 × 38 mm</td></tr>
+            </table>
+          </div>
+          <div data-tab-panel="reviews" class="hidden">
+            <div class="wx-grid wx-grid-2">
+              <div class="wx-card"><div class="wx-card-body"><div class="flex items-center gap-2 mb-1"><span class="wx-avatar wx-avatar-sm">TM</span><strong>Trần Minh</strong><span style="color:#f59e0b;margin-left:auto;">★★★★★</span></div><div class="text-xs text-muted mb-2">08/05/2026</div><p class="text-sm">Gõ êm, build chắc chắn. Hot-swap rất tiện, mình đổi sang switch tactile chỉ trong 5 phút. Đáng tiền!</p></div></div>
+              <div class="wx-card"><div class="wx-card-body"><div class="flex items-center gap-2 mb-1"><span class="wx-avatar wx-avatar-sm">NL</span><strong>Nguyễn Lan</strong><span style="color:#f59e0b;margin-left:auto;">★★★★☆</span></div><div class="text-xs text-muted mb-2">02/05/2026</div><p class="text-sm">Pin trâu, kết nối ổn định. Chỉ tiếc là không có chân kê độ cao thứ 3, hơi thấp với mình.</p></div></div>
+              <div class="wx-card"><div class="wx-card-body"><div class="flex items-center gap-2 mb-1"><span class="wx-avatar wx-avatar-sm">PD</span><strong>Phạm Đức</strong><span style="color:#f59e0b;margin-left:auto;">★★★★★</span></div><div class="text-xs text-muted mb-2">25/04/2026</div><p class="text-sm">Dùng cho công việc lập trình cả ngày, rất thoải mái. Đèn RGB đẹp, tùy chỉnh dễ qua phần mềm.</p></div></div>
+              <div class="wx-card"><div class="wx-card-body"><div class="flex items-center gap-2 mb-1"><span class="wx-avatar wx-avatar-sm">VA</span><strong>Vũ Anh</strong><span style="color:#f59e0b;margin-left:auto;">★★★★★</span></div><div class="text-xs text-muted mb-2">19/04/2026</div><p class="text-sm">Giao hàng nhanh, đóng gói cẩn thận. Bàn phím xịn hơn kỳ vọng ở tầm giá này.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size:var(--wx-fs-lg);font-weight:700;margin:0 0 14px;">Sản phẩm liên quan</h3>
+      <div class="wx-grid wx-grid-4">
+        <div class="wx-card"><div class="wx-card-body"><div class="rel-img"></div><div class="font-semibold">Chuột không dây WemakeUI M1</div><div class="text-sm text-muted mb-2">₫690.000</div><button class="wx-btn wx-btn-secondary wx-btn-sm">Xem chi tiết</button></div></div>
+        <div class="wx-card"><div class="wx-card-body"><div class="rel-img"></div><div class="font-semibold">Kê tay gỗ óc chó</div><div class="text-sm text-muted mb-2">₫350.000</div><button class="wx-btn wx-btn-secondary wx-btn-sm">Xem chi tiết</button></div></div>
+        <div class="wx-card"><div class="wx-card-body"><div class="rel-img"></div><div class="font-semibold">Bộ keycap PBT 130 phím</div><div class="text-sm text-muted mb-2">₫790.000</div><button class="wx-btn wx-btn-secondary wx-btn-sm">Xem chi tiết</button></div></div>
+        <div class="wx-card"><div class="wx-card-body"><div class="rel-img"></div><div class="font-semibold">Túi đựng bàn phím chống sốc</div><div class="text-sm text-muted mb-2">₫250.000</div><button class="wx-btn wx-btn-secondary wx-btn-sm">Xem chi tiết</button></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

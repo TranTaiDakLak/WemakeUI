@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đang xây dựng | WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+  <div class="wx-error-page">
+    <div class="wx-error-blob" style="top:-60px;left:-60px;width:300px;height:300px;background:var(--wx-warning,#f59e0b);opacity:0.15;"></div>
+    <div class="wx-error-blob" style="bottom:-60px;right:-60px;width:360px;height:360px;background:var(--wx-warning,#f59e0b);opacity:0.1;"></div>
+
+    <div class="wx-error-box">
+      <!-- Construction emoji -->
+      <div style="font-size:5rem;line-height:1;margin-bottom:1rem;filter:drop-shadow(0 4px 12px rgba(245,158,11,0.3));">🚧</div>
+
+      <h1 class="wx-error-title">Đang phát triển</h1>
+      <p class="wx-error-desc">
+        Tính năng này đang được xây dựng.<br>
+        Cảm ơn sự kiên nhẫn của bạn!
+      </p>
+
+      <!-- Progress bar -->
+      <div style="margin:1.5rem 0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;color:var(--wx-text-muted);margin-bottom:0.5rem;">
+          <span>Tiến trình phát triển</span>
+          <span style="font-weight:700;color:var(--wx-warning,#f59e0b);">65%</span>
+        </div>
+        <div style="height:10px;background:var(--wx-surface-2,#e5e7eb);border-radius:9999px;overflow:hidden;position:relative;">
+          <div style="
+            height:100%;width:65%;
+            background:linear-gradient(90deg,#f59e0b,#fbbf24);
+            border-radius:9999px;
+            position:relative;
+            overflow:hidden;
+          ">
+            <div style="
+              position:absolute;inset:0;
+              background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.35) 50%,transparent 100%);
+              animation:shimmer 1.8s infinite;
+            "></div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--wx-text-muted);margin-top:0.4rem;opacity:0.7;">
+          <span>Bắt đầu: 01/05/2026</span>
+          <span>Dự kiến: 30/05/2026</span>
+        </div>
+      </div>
+
+      <!-- Checklist -->
+      <div style="text-align:left;margin-bottom:1.5rem;background:var(--wx-surface-2,rgba(0,0,0,0.04));border-radius:10px;padding:1rem 1.2rem;">
+        <p style="font-size:0.82rem;font-weight:600;color:var(--wx-text-muted);margin:0 0 0.6rem;">Trạng thái các hạng mục:</p>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0.35rem;font-size:0.85rem;">
+          <li>✅ Thiết kế UI/UX</li>
+          <li>✅ Cấu trúc dữ liệu</li>
+          <li>✅ API backend</li>
+          <li>🔄 Giao diện frontend (đang làm)</li>
+          <li>⬜ Kiểm thử & QA</li>
+          <li>⬜ Triển khai production</li>
+        </ul>
+      </div>
+
+      <div class="wx-error-actions" style="justify-content:center;">
+        <a href="javascript:history.back()" class="wx-btn wx-btn-secondary">← Quay lại</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+  </style>
+
+  <script src="../js/wemake.js"></script>
+</body>
+</html>

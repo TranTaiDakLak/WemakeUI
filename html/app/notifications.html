@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông báo — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    .notif-item { display:flex; align-items:flex-start; gap:14px; padding:16px; border-bottom:1px solid var(--wx-border-subtle); transition:background 0.15s; cursor:pointer; position:relative; }
+    .notif-item:hover { background:var(--wx-hover-bg); }
+    .notif-item.unread { background:var(--wx-info-bg); }
+    .notif-item.unread:hover { background:#dbeafe; }
+    .notif-icon { width:40px; height:40px; border-radius:var(--wx-radius-full); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+    .notif-title { font-size:var(--wx-fs-sm); font-weight:600; color:var(--wx-text-primary); margin-bottom:2px; }
+    .notif-desc { font-size:var(--wx-fs-sm); color:var(--wx-text-secondary); line-height:1.5; }
+    .notif-time { font-size:var(--wx-fs-xs); color:var(--wx-text-muted); margin-top:4px; }
+    .unread-dot { width:8px; height:8px; border-radius:50%; background:var(--wx-brand-primary); position:absolute; right:16px; top:50%; transform:translateY(-50%); }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+  </style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item active"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:var(--wx-fs-sm);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Nguyễn Văn Thành</div>
+          <div style="font-size:var(--wx-fs-xs);color:var(--wx-text-muted);">Administrator</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Thông báo</span>
+      <div class="wx-topbar-actions">
+        <button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button>
+      </div>
+    </div>
+    <div class="wx-content">
+      <div style="max-width:760px;margin:0 auto;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div class="wx-tabs">
+            <button class="wx-tab active" onclick="switchNotifTab('all',this)">Tất cả <span class="wx-badge wx-badge-danger" style="margin-left:4px;">12</span></button>
+            <button class="wx-tab" onclick="switchNotifTab('unread',this)">Chưa đọc <span class="wx-badge wx-badge-danger" style="margin-left:4px;">4</span></button>
+            <button class="wx-tab" onclick="switchNotifTab('read',this)">Đã đọc</button>
+            <button class="wx-tab" onclick="switchNotifTab('mention',this)">Đề cập</button>
+          </div>
+          <button class="wx-btn wx-btn-ghost wx-btn-sm">✅ Đánh dấu tất cả đã đọc</button>
+        </div>
+
+        <div id="tab-all" class="tab-content active">
+          <div class="wx-card">
+            <div class="notif-item unread">
+              <div class="notif-icon" style="background:#eff6ff;">🔔</div>
+              <div style="flex:1;">
+                <div class="notif-title">Trần Minh đã nhắc đến bạn</div>
+                <div class="notif-desc">trong bình luận PR #234: "@Thành anh xem giúp mình phần này với nhé"</div>
+                <div class="notif-time">5 phút trước</div>
+              </div>
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon" style="background:#f0fdf4;">✅</div>
+              <div style="flex:1;">
+                <div class="notif-title">Task #UI-2847 đã hoàn thành</div>
+                <div class="notif-desc">Phạm Hương đã đánh dấu hoàn thành task "Thiết kế trang Dashboard mới"</div>
+                <div class="notif-time">32 phút trước</div>
+              </div>
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon" style="background:#fffbeb;">📊</div>
+              <div style="flex:1;">
+                <div class="notif-title">Báo cáo tuần mới có sẵn</div>
+                <div class="notif-desc">Báo cáo hiệu suất tuần 19 (06/05 - 12/05/2026) đã được tạo tự động</div>
+                <div class="notif-time">2 giờ trước</div>
+              </div>
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon" style="background:#fef2f2;">⚠️</div>
+              <div style="flex:1;">
+                <div class="notif-title">Hóa đơn sắp đến hạn</div>
+                <div class="notif-desc">Hóa đơn #INV-2026-0048 từ Công ty ABC sẽ đến hạn trong 3 ngày (₫12,500,000)</div>
+                <div class="notif-time">4 giờ trước</div>
+              </div>
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon" style="background:#f5f3ff;">🚀</div>
+              <div style="flex:1;">
+                <div class="notif-title">Sprint 42 đã bắt đầu</div>
+                <div class="notif-desc">Sprint mới đã bắt đầu với 14 task. Ngày kết thúc: 26/05/2026</div>
+                <div class="notif-time">Hôm qua, 08:00</div>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon" style="background:#f0fdf4;">💬</div>
+              <div style="flex:1;">
+                <div class="notif-title">Lê Hoàng đã bình luận</div>
+                <div class="notif-desc">trong tài liệu "API Documentation v3": "Cần cập nhật thêm ví dụ cho endpoint /users"</div>
+                <div class="notif-time">Hôm qua, 15:42</div>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon" style="background:#eff6ff;">👤</div>
+              <div style="flex:1;">
+                <div class="notif-title">Thành viên mới tham gia</div>
+                <div class="notif-desc">Nguyễn Thị Lan đã tham gia tổ chức WemakeUI Corp với vai trò Developer</div>
+                <div class="notif-time">2 ngày trước</div>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-icon" style="background:#fff7ed;">🔑</div>
+              <div style="flex:1;">
+                <div class="notif-title">API Key sắp hết hạn</div>
+                <div class="notif-desc">API Key "Production Backend" sẽ hết hạn vào 01/06/2026. Hãy gia hạn sớm.</div>
+                <div class="notif-time">3 ngày trước</div>
+              </div>
+            </div>
+          </div>
+          <!-- Pagination placeholder -->
+          <div style="display:flex;justify-content:center;margin-top:20px;">
+            <div class="wx-pagination">
+              <button class="wx-page-btn">«</button>
+              <button class="wx-page-btn active">1</button>
+              <button class="wx-page-btn">2</button>
+              <button class="wx-page-btn">3</button>
+              <button class="wx-page-btn">»</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-unread" class="tab-content">
+          <div class="wx-card">
+            <div class="notif-item unread">
+              <div class="notif-icon" style="background:#eff6ff;">🔔</div>
+              <div style="flex:1;"><div class="notif-title">Trần Minh đã nhắc đến bạn</div><div class="notif-desc">trong bình luận PR #234: "@Thành anh xem giúp mình phần này với nhé"</div><div class="notif-time">5 phút trước</div></div>
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon" style="background:#f0fdf4;">✅</div>
+              <div style="flex:1;"><div class="notif-title">Task #UI-2847 đã hoàn thành</div><div class="notif-desc">Phạm Hương đã đánh dấu hoàn thành task</div><div class="notif-time">32 phút trước</div></div>
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon" style="background:#fffbeb;">📊</div>
+              <div style="flex:1;"><div class="notif-title">Báo cáo tuần mới có sẵn</div><div class="notif-desc">Báo cáo hiệu suất tuần 19 đã được tạo</div><div class="notif-time">2 giờ trước</div></div>
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notif-item unread">
+              <div class="notif-icon" style="background:#fef2f2;">⚠️</div>
+              <div style="flex:1;"><div class="notif-title">Hóa đơn sắp đến hạn</div><div class="notif-desc">Hóa đơn #INV-2026-0048 sẽ đến hạn trong 3 ngày</div><div class="notif-time">4 giờ trước</div></div>
+              <div class="unread-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div id="tab-read" class="tab-content"><div class="wx-card"><div style="padding:40px;text-align:center;color:var(--wx-text-muted);">Không có thông báo đã đọc mới</div></div></div>
+        <div id="tab-mention" class="tab-content">
+          <div class="wx-card">
+            <div class="notif-item unread">
+              <div class="notif-icon" style="background:#eff6ff;">🔔</div>
+              <div style="flex:1;"><div class="notif-title">Trần Minh đã nhắc đến bạn</div><div class="notif-desc">trong bình luận PR #234: "@Thành anh xem giúp mình phần này với nhé"</div><div class="notif-time">5 phút trước</div></div>
+              <div class="unread-dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+<script>
+function switchNotifTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.wx-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>

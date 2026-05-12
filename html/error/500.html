@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>500 — Lỗi máy chủ | WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+  <div class="wx-error-page">
+    <div class="wx-error-blob" style="top:-60px;right:-60px;width:280px;height:280px;background:var(--wx-danger,#ef4444);opacity:0.15;"></div>
+    <div class="wx-error-blob" style="bottom:-80px;left:-40px;width:360px;height:360px;background:var(--wx-warning,#f59e0b);opacity:0.1;"></div>
+
+    <div class="wx-error-box">
+      <div class="wx-error-code">500</div>
+      <h1 class="wx-error-title">Đã xảy ra lỗi máy chủ</h1>
+      <p class="wx-error-desc">
+        Máy chủ gặp sự cố không mong muốn.<br>
+        Vui lòng thử lại sau hoặc liên hệ với bộ phận hỗ trợ.
+      </p>
+
+      <div class="wx-error-actions">
+        <button class="wx-btn wx-btn-primary" onclick="location.reload()">🔄 Thử lại</button>
+        <a href="mailto:support@wemake.vn?subject=Báo cáo lỗi 500" class="wx-btn wx-btn-secondary">📨 Báo cáo lỗi</a>
+      </div>
+
+      <div style="margin-top:2rem;padding:1rem;background:var(--wx-surface-2,rgba(0,0,0,0.05));border-radius:8px;text-align:left;">
+        <p style="font-size:0.78rem;color:var(--wx-text-muted);margin:0 0 0.4rem;">Chi tiết lỗi:</p>
+        <code style="font-size:0.78rem;color:var(--wx-danger,#ef4444);display:block;word-break:break-all;">
+          Internal Server Error — Unexpected condition encountered
+        </code>
+        <p style="margin-top:0.6rem;font-size:0.75rem;color:var(--wx-text-muted);opacity:0.7;margin-bottom:0;">
+          Thời gian: <span id="err-time"></span><br>
+          Error ID: <code>ERR-500-x9f2b8</code>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/wemake.js"></script>
+  <script>
+    document.getElementById('err-time').textContent = new Date().toLocaleString('vi-VN');
+  </script>
+</body>
+</html>

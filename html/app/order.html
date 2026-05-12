@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi tiết đơn hàng — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+<style>
+  .ord-layout { display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px;align-items:start; }
+  .timeline { display:flex;justify-content:space-between;position:relative;margin:8px 4px 4px; }
+  .timeline::before { content:"";position:absolute;top:14px;left:5%;right:5%;height:2px;background:var(--wx-border-default);z-index:0; }
+  .ts { display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1;flex:1; }
+  .ts-dot { width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;background:var(--wx-surface-base);border:2px solid var(--wx-border-default);color:var(--wx-text-muted); }
+  .ts.done .ts-dot { background:var(--wx-success-solid);border-color:var(--wx-success-solid);color:#fff; }
+  .ts.cur .ts-dot { background:var(--wx-warning-solid);border-color:var(--wx-warning-solid);color:#fff; }
+  .ts-lbl { font-size:var(--wx-fs-xs);text-align:center;color:var(--wx-text-muted); }
+  .ts.done .ts-lbl,.ts.cur .ts-lbl { color:var(--wx-text-primary);font-weight:600; }
+  .sum-row { display:flex;justify-content:space-between;padding:8px 0;font-size:var(--wx-fs-sm); }
+  .ord-thumb { width:48px;height:48px;border-radius:var(--wx-radius-md);background:linear-gradient(135deg,#818cf8,#c4b5fd); }
+  @media (max-width:900px){ .ord-layout{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tài khoản</div>
+      <a href="profile.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Hồ sơ</span></a>
+      <a href="notifications.html" class="wx-nav-item"><span class="wx-nav-icon">🔔</span><span>Thông báo</span><span class="wx-nav-badge">4</span></a>
+      <a href="settings.html" class="wx-nav-item"><span class="wx-nav-icon">⚙️</span><span>Cài đặt</span></a>
+      <a href="organization.html" class="wx-nav-item"><span class="wx-nav-icon">🏢</span><span>Tổ chức</span></a>
+      <div class="wx-nav-section-label">Giao tiếp</div>
+      <a href="mailbox.html" class="wx-nav-item"><span class="wx-nav-icon">✉️</span><span>Hộp thư</span></a>
+      <a href="chat.html" class="wx-nav-item"><span class="wx-nav-icon">💬</span><span>Chat</span></a>
+      <div class="wx-nav-section-label">Công việc</div>
+      <a href="invoices.html" class="wx-nav-item"><span class="wx-nav-icon">📄</span><span>Hóa đơn</span></a>
+      <a href="calendar.html" class="wx-nav-item"><span class="wx-nav-icon">📅</span><span>Lịch</span></a>
+      <a href="files.html" class="wx-nav-item"><span class="wx-nav-icon">📁</span><span>Tệp tin</span></a>
+      <div class="wx-nav-section-label">Khám phá</div>
+      <a href="search.html" class="wx-nav-item"><span class="wx-nav-icon">🔍</span><span>Tìm kiếm</span></a>
+      <a href="product.html" class="wx-nav-item"><span class="wx-nav-icon">📦</span><span>Sản phẩm</span></a>
+      <a href="order.html" class="wx-nav-item active"><span class="wx-nav-icon">🛒</span><span>Đơn hàng</span></a>
+      <a href="pricing.html" class="wx-nav-item"><span class="wx-nav-icon">💎</span><span>Bảng giá</span></a>
+      <a href="faq.html" class="wx-nav-item"><span class="wx-nav-icon">❓</span><span>FAQ</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Liên hệ</span></a>
+      <div class="wx-nav-section-label">Tài nguyên</div>
+      <a href="wiki.html" class="wx-nav-item"><span class="wx-nav-icon">📚</span><span>Wiki</span></a>
+      <a href="learning.html" class="wx-nav-item"><span class="wx-nav-icon">🎓</span><span>Học tập</span></a>
+      <a href="map.html" class="wx-nav-item"><span class="wx-nav-icon">🗺️</span><span>Bản đồ</span></a>
+      <a href="api-keys.html" class="wx-nav-item"><span class="wx-nav-icon">🔑</span><span>API Keys</span></a>
+      <a href="audit-log.html" class="wx-nav-item"><span class="wx-nav-icon">📝</span><span>Nhật ký</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Chi tiết đơn hàng</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <div class="flex items-center gap-3">
+          <h1 style="margin:0;font-size:var(--wx-fs-xl);font-weight:700;">Đơn hàng #ORD-2024-1847</h1>
+          <span class="wx-badge wx-badge-warning">Đang giao hàng</span>
+          <span class="text-sm text-muted">Đặt ngày 12/05/2026</span>
+        </div>
+        <button class="wx-btn wx-btn-secondary">🖨 In hóa đơn</button>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-body">
+          <div class="timeline">
+            <div class="ts done"><div class="ts-dot">✓</div><div class="ts-lbl">Đặt hàng<br>12/05 09:20</div></div>
+            <div class="ts done"><div class="ts-dot">✓</div><div class="ts-lbl">Xác nhận<br>12/05 10:05</div></div>
+            <div class="ts done"><div class="ts-dot">✓</div><div class="ts-lbl">Đóng gói<br>12/05 14:30</div></div>
+            <div class="ts cur"><div class="ts-dot">🚚</div><div class="ts-lbl">Đang giao<br>13/05 08:00</div></div>
+            <div class="ts"><div class="ts-dot">📦</div><div class="ts-lbl">Đã nhận<br>—</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ord-layout">
+        <div>
+          <div class="wx-card">
+            <div class="wx-card-header"><span class="wx-card-title">Sản phẩm</span></div>
+            <div class="wx-card-body" style="padding:0;">
+              <table class="wx-table">
+                <thead><tr><th colspan="2">Sản phẩm</th><th style="text-align:center;">SL</th><th style="text-align:right;">Đơn giá</th><th style="text-align:right;">Thành tiền</th></tr></thead>
+                <tbody>
+                  <tr><td style="width:60px;"><div class="ord-thumb"></div></td><td>Bàn phím cơ WemakeUI Pro<br><span class="text-xs text-muted">Màu: Đen</span></td><td style="text-align:center;">1</td><td style="text-align:right;">₫1.290.000</td><td style="text-align:right;">₫1.290.000</td></tr>
+                  <tr><td><div class="ord-thumb"></div></td><td>Chuột không dây WemakeUI M1<br><span class="text-xs text-muted">Màu: Xám</span></td><td style="text-align:center;">1</td><td style="text-align:right;">₫690.000</td><td style="text-align:right;">₫690.000</td></tr>
+                  <tr><td><div class="ord-thumb"></div></td><td>Kê tay gỗ óc chó<br><span class="text-xs text-muted">Size: M</span></td><td style="text-align:center;">2</td><td style="text-align:right;">₫350.000</td><td style="text-align:right;">₫600.000</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="wx-card-body">
+              <div class="sum-row"><span class="text-muted">Tạm tính</span><span>₫2.580.000</span></div>
+              <div class="sum-row"><span class="text-muted">Phí vận chuyển</span><span>₫30.000</span></div>
+              <div class="sum-row"><span class="text-muted">Giảm giá (mã WELCOME)</span><span style="color:var(--wx-success-text);">−₫100.000</span></div>
+              <div class="sum-row" style="border-top:1px solid var(--wx-border-default);margin-top:4px;padding-top:12px;font-size:var(--wx-fs-md);"><strong>Tổng cộng</strong><strong style="color:var(--wx-brand-primary);font-size:var(--wx-fs-lg);">₫2.510.000</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="wx-card mb-4">
+            <div class="wx-card-header"><span class="wx-card-title">Thông tin khách hàng</span></div>
+            <div class="wx-card-body">
+              <div class="flex items-center gap-3 mb-3"><span class="wx-avatar">PH</span><div><div class="font-semibold">Phan Thị Hoài</div><div class="text-xs text-muted">Khách hàng thân thiết</div></div></div>
+              <div class="text-sm"><div class="mb-1">✉️ hoai.phan@gmail.com</div><div>📞 0912 345 678</div></div>
+            </div>
+          </div>
+          <div class="wx-card mb-4">
+            <div class="wx-card-header"><span class="wx-card-title">Địa chỉ giao hàng</span></div>
+            <div class="wx-card-body text-sm">
+              <div class="font-semibold mb-1">Phan Thị Hoài</div>
+              <div>Số 27, ngõ 12 đường Láng Hạ</div>
+              <div>Phường Thành Công, Quận Ba Đình</div>
+              <div>Hà Nội, Việt Nam</div>
+            </div>
+          </div>
+          <div class="wx-card">
+            <div class="wx-card-header"><span class="wx-card-title">Phương thức thanh toán</span></div>
+            <div class="wx-card-body">
+              <div class="flex items-center gap-2"><span style="font-size:22px;">💵</span><div><div class="font-semibold">Thanh toán khi nhận hàng (COD)</div><div class="text-xs text-muted">Thu hộ: ₫2.510.000</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

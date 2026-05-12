@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đặt lại mật khẩu — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #eff6ff 0%, #ecfeff 50%, #f0fdf4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .reset-card {
+      background: var(--wx-surface-base);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(37,99,235,0.1), 0 4px 16px rgba(0,0,0,0.06);
+      padding: 52px 44px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .reset-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .reset-logo-mark {
+      width: 40px; height: 40px;
+      background: var(--wx-gradient-button);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: #fff;
+    }
+    .reset-logo-text {
+      font-weight: 800; font-size: 20px;
+      background: var(--wx-gradient-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .reset-icon-wrap {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+
+    .reset-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--wx-text-primary);
+      margin: 0 0 8px;
+      text-align: center;
+    }
+    .reset-sub {
+      font-size: 14px;
+      color: var(--wx-text-secondary);
+      text-align: center;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .auth-field {
+      margin-bottom: 20px;
+    }
+    .auth-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wx-text-primary);
+      margin-bottom: 6px;
+    }
+    .auth-input-wrap { position: relative; }
+    .auth-input {
+      width: 100%;
+      height: 44px;
+      border: 1.5px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      padding: 0 44px 0 14px;
+      font-size: 14px;
+      font-family: var(--wx-font-primary);
+      color: var(--wx-text-primary);
+      background: var(--wx-surface-sunken);
+      transition: all var(--wx-duration-fast);
+      box-sizing: border-box;
+    }
+    .auth-input:focus {
+      outline: none;
+      border-color: var(--wx-brand-primary);
+      box-shadow: var(--wx-shadow-focus);
+      background: var(--wx-surface-base);
+    }
+    .auth-input-toggle {
+      position: absolute;
+      right: 12px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; color: var(--wx-text-muted); font-size: 16px;
+    }
+
+    /* Password strength */
+    .pw-strength { margin-top: 8px; }
+    .pw-strength-bar {
+      height: 5px;
+      background: var(--wx-border-default);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+    .pw-strength-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width var(--wx-duration-normal), background var(--wx-duration-normal);
+      width: 0%;
+    }
+    .pw-strength-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--wx-text-muted);
+    }
+    .pw-strength-text { font-size: 11px; }
+
+    .pw-requirements {
+      margin-top: 10px;
+      padding: 12px;
+      background: var(--wx-surface-sunken);
+      border-radius: var(--wx-radius-md);
+      border: 1px solid var(--wx-border-default);
+    }
+    .pw-req-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--wx-text-muted);
+      padding: 2px 0;
+      transition: color var(--wx-duration-fast);
+    }
+    .pw-req-item.met { color: var(--wx-success-text); }
+    .pw-req-item.met .pw-req-icon::before { content: '✓'; }
+    .pw-req-icon::before { content: '○'; }
+
+    .auth-btn-primary {
+      width: 100%;
+      height: 46px;
+      background: var(--wx-gradient-button);
+      color: #fff;
+      border: none;
+      border-radius: var(--wx-radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--wx-duration-fast), transform var(--wx-duration-fast);
+      margin-top: 8px;
+      margin-bottom: 16px;
+      box-shadow: var(--wx-shadow-brand);
+    }
+    .auth-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .reset-back {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+      text-decoration: none;
+    }
+    .reset-back:hover { color: var(--wx-brand-primary); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<div class="reset-card">
+  <div class="reset-logo">
+    <div class="reset-logo-mark">W</div>
+    <span class="reset-logo-text">WemakeUI</span>
+  </div>
+
+  <div class="reset-icon-wrap">🔄</div>
+
+  <h1 class="reset-title">Đặt lại mật khẩu</h1>
+  <p class="reset-sub">Tạo mật khẩu mới an toàn cho tài khoản của bạn.</p>
+
+  <form onsubmit="handleReset(event)">
+    <div class="auth-field">
+      <label for="newpw">Mật khẩu mới</label>
+      <div class="auth-input-wrap">
+        <input type="password" id="newpw" class="auth-input" placeholder="Tối thiểu 8 ký tự" oninput="checkStrength(this)">
+        <button type="button" class="auth-input-toggle" onclick="togglePass('newpw',this)">👁</button>
+      </div>
+      <div class="pw-strength">
+        <div class="pw-strength-bar">
+          <div class="pw-strength-fill" id="strengthFill"></div>
+        </div>
+        <span class="pw-strength-text" id="strengthText" style="color: var(--wx-text-muted);">Nhập mật khẩu</span>
+      </div>
+      <div class="pw-requirements">
+        <div class="pw-req-item" id="req-len"><span class="pw-req-icon"></span> Ít nhất 8 ký tự</div>
+        <div class="pw-req-item" id="req-upper"><span class="pw-req-icon"></span> Có chữ hoa (A-Z)</div>
+        <div class="pw-req-item" id="req-num"><span class="pw-req-icon"></span> Có số (0-9)</div>
+        <div class="pw-req-item" id="req-special"><span class="pw-req-icon"></span> Có ký tự đặc biệt (!@#$)</div>
+      </div>
+    </div>
+
+    <div class="auth-field">
+      <label for="confirmpw">Xác nhận mật khẩu mới</label>
+      <div class="auth-input-wrap">
+        <input type="password" id="confirmpw" class="auth-input" placeholder="Nhập lại mật khẩu mới">
+        <button type="button" class="auth-input-toggle" onclick="togglePass('confirmpw',this)">👁</button>
+      </div>
+    </div>
+
+    <button type="submit" class="auth-btn-primary">Đặt lại mật khẩu</button>
+  </form>
+
+  <a href="login.html" class="reset-back">← Quay lại đăng nhập</a>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  function togglePass(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁'; }
+  }
+
+  function checkStrength(input) {
+    const val = input.value;
+    const fill = document.getElementById('strengthFill');
+    const text = document.getElementById('strengthText');
+    const reqLen = document.getElementById('req-len');
+    const reqUpper = document.getElementById('req-upper');
+    const reqNum = document.getElementById('req-num');
+    const reqSpecial = document.getElementById('req-special');
+
+    const hasLen = val.length >= 8;
+    const hasUpper = /[A-Z]/.test(val);
+    const hasNum = /[0-9]/.test(val);
+    const hasSpecial = /[^A-Za-z0-9]/.test(val);
+
+    reqLen.className = 'pw-req-item' + (hasLen ? ' met' : '');
+    reqUpper.className = 'pw-req-item' + (hasUpper ? ' met' : '');
+    reqNum.className = 'pw-req-item' + (hasNum ? ' met' : '');
+    reqSpecial.className = 'pw-req-item' + (hasSpecial ? ' met' : '');
+
+    let score = [hasLen, hasUpper, hasNum, hasSpecial].filter(Boolean).length;
+    const levels = [
+      { pct: '0%', color: '#dc2626', label: 'Nhập mật khẩu' },
+      { pct: '25%', color: '#dc2626', label: 'Rất yếu' },
+      { pct: '50%', color: '#d97706', label: 'Trung bình' },
+      { pct: '75%', color: '#16a34a', label: 'Mạnh' },
+      { pct: '100%', color: '#15803d', label: 'Rất mạnh!' },
+    ];
+    const lvl = val.length === 0 ? levels[0] : levels[score];
+    fill.style.width = lvl.pct;
+    fill.style.background = lvl.color;
+    text.textContent = lvl.label;
+    text.style.color = lvl.color;
+  }
+
+  function handleReset(e) {
+    e.preventDefault();
+    const pw = document.getElementById('newpw').value;
+    const confirm = document.getElementById('confirmpw').value;
+    if (pw !== confirm) {
+      alert('Mật khẩu xác nhận không khớp!');
+      return;
+    }
+    alert('Mật khẩu đã được đặt lại thành công! Chuyển đến đăng nhập...');
+    setTimeout(() => { window.location.href = 'login.html'; }, 500);
+  }
+</script>
+</body>
+</html>

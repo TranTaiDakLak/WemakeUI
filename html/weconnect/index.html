@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bảng quản trị — WeConnect</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">WC</div>
+      <span class="wx-sidebar-brand-text">WeConnect</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">WeConnect</div>
+      <a href="index.html" class="wx-nav-item active"><span class="wx-nav-icon">🎛️</span><span>Bảng quản trị</span></a>
+      <a href="accounts.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Tài khoản</span></a>
+      <a href="sessions.html" class="wx-nav-item"><span class="wx-nav-icon">🔌</span><span>Phiên kết nối</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📇</span><span>Danh bạ</span></a>
+      <a href="campaigns.html" class="wx-nav-item"><span class="wx-nav-icon">📣</span><span>Chiến dịch</span></a>
+      <a href="plugins.html" class="wx-nav-item"><span class="wx-nav-icon">🧩</span><span>Plugin</span></a>
+      <a href="console.html" class="wx-nav-item"><span class="wx-nav-icon">⌨️</span><span>Console</span></a>
+      <a href="scheduler.html" class="wx-nav-item"><span class="wx-nav-icon">⏰</span><span>Lịch trình</span></a>
+      <a href="integrations.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>Tích hợp</span></a>
+      <a href="automation.html" class="wx-nav-item"><span class="wx-nav-icon">⚡</span><span>Tự động hóa</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">AD</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Admin</div><div class="text-xs text-muted">Quản trị viên</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Bảng quản trị</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Bảng quản trị</h1>
+          <p class="text-muted" style="margin:0">Tổng quan hoạt động tài khoản, phiên kết nối và chiến dịch</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="wx-btn wx-btn-secondary">Xuất báo cáo</button>
+          <button class="wx-btn wx-btn-primary">+ Tài khoản mới</button>
+        </div>
+      </div>
+
+      <div class="wx-grid wx-grid-4 mb-5">
+        <div class="wx-stat-card">
+          <div class="wx-stat-icon">📘</div>
+          <div class="wx-stat-label">Tài khoản kết nối</div>
+          <div class="wx-stat-value">24</div>
+          <div class="wx-stat-change positive">+3 trong tuần</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-icon">🔌</div>
+          <div class="wx-stat-label">Phiên hoạt động</div>
+          <div class="wx-stat-value">8</div>
+          <div class="wx-stat-change positive">+2</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-icon">📣</div>
+          <div class="wx-stat-label">Tin nhắn đã gửi</div>
+          <div class="wx-stat-value">284,921</div>
+          <div class="wx-stat-change positive">+12%</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-icon">✅</div>
+          <div class="wx-stat-label">Tỷ lệ thành công</div>
+          <div class="wx-stat-value">96.4%</div>
+          <div class="wx-stat-change positive">+0.8%</div>
+        </div>
+      </div>
+
+      <div class="wx-card mb-5">
+        <div class="wx-card-header">
+          <div>
+            <div class="wx-card-title">Tài khoản</div>
+            <div class="wx-card-subtitle">Trạng thái các tài khoản đang được quản lý</div>
+          </div>
+          <a href="accounts.html" class="wx-btn wx-btn-ghost wx-btn-sm ml-auto">Xem tất cả →</a>
+        </div>
+        <div class="wx-card-body">
+          <div class="wx-grid wx-grid-4">
+            <div class="wx-card" style="margin:0">
+              <div class="wx-card-body">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="wx-avatar" style="background:#1877f2;color:#fff">📘</div>
+                  <div class="flex-1 truncate">
+                    <div class="font-semibold truncate">@wemakeui_vn</div>
+                    <div class="text-xs text-muted">Facebook Page</div>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between mb-3"><span class="wx-badge wx-badge-success">Đang chạy</span><span class="text-xs text-muted">3 phiên</span></div>
+                <div class="text-xs text-muted">Hoạt động cuối: 2 phút trước</div>
+              </div>
+            </div>
+            <div class="wx-card" style="margin:0">
+              <div class="wx-card-body">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="wx-avatar" style="background:#e1306c;color:#fff">📷</div>
+                  <div class="flex-1 truncate">
+                    <div class="font-semibold truncate">@wemake.studio</div>
+                    <div class="text-xs text-muted">Instagram</div>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between mb-3"><span class="wx-badge wx-badge-success">Đang chạy</span><span class="text-xs text-muted">2 phiên</span></div>
+                <div class="text-xs text-muted">Hoạt động cuối: 8 phút trước</div>
+              </div>
+            </div>
+            <div class="wx-card" style="margin:0">
+              <div class="wx-card-body">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="wx-avatar" style="background:#0088cc;color:#fff">✈️</div>
+                  <div class="flex-1 truncate">
+                    <div class="font-semibold truncate">@wemake_bot</div>
+                    <div class="text-xs text-muted">Telegram</div>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between mb-3"><span class="wx-badge wx-badge-warning">Tạm dừng</span><span class="text-xs text-muted">0 phiên</span></div>
+                <div class="text-xs text-muted">Hoạt động cuối: 1 giờ trước</div>
+              </div>
+            </div>
+            <div class="wx-card" style="margin:0">
+              <div class="wx-card-body">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="wx-avatar" style="background:#000;color:#fff">🎵</div>
+                  <div class="flex-1 truncate">
+                    <div class="font-semibold truncate">@wemake.tiktok</div>
+                    <div class="text-xs text-muted">TikTok</div>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between mb-3"><span class="wx-badge wx-badge-danger">Lỗi</span><span class="text-xs text-muted">1 phiên</span></div>
+                <div class="text-xs text-muted">Hoạt động cuối: 32 phút trước</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-grid wx-grid-2 mb-5">
+        <div class="wx-card">
+          <div class="wx-card-header">
+            <div class="wx-card-title">Hoạt động gần đây</div>
+          </div>
+          <div class="wx-card-body">
+            <div class="wx-activity-item">
+              <div class="wx-avatar wx-avatar-sm" style="background:#1877f2;color:#fff">📘</div>
+              <div class="flex-1"><div class="text-sm">Tài khoản <strong>@wemakeui_vn</strong> đã gửi <strong>1,200 tin nhắn</strong></div><div class="wx-activity-time">2 phút trước</div></div>
+            </div>
+            <div class="wx-activity-item">
+              <div class="wx-avatar wx-avatar-sm" style="background:#16a34a;color:#fff">🔌</div>
+              <div class="flex-1"><div class="text-sm">Phiên <strong>#SES-0004</strong> đã kết nối lại thành công</div><div class="wx-activity-time">9 phút trước</div></div>
+            </div>
+            <div class="wx-activity-item">
+              <div class="wx-avatar wx-avatar-sm" style="background:#f59e0b;color:#fff">📣</div>
+              <div class="flex-1"><div class="text-sm">Chiến dịch <strong>"Khuyến mãi tháng 5"</strong> đạt 77% tiến độ</div><div class="wx-activity-time">15 phút trước</div></div>
+            </div>
+            <div class="wx-activity-item">
+              <div class="wx-avatar wx-avatar-sm" style="background:#dc2626;color:#fff">⚠️</div>
+              <div class="flex-1"><div class="text-sm">Tài khoản <strong>@wemake.tiktok</strong> gặp lỗi xác thực phiên</div><div class="wx-activity-time">32 phút trước</div></div>
+            </div>
+            <div class="wx-activity-item">
+              <div class="wx-avatar wx-avatar-sm" style="background:#0088cc;color:#fff">✈️</div>
+              <div class="flex-1"><div class="text-sm">Plugin <strong>Auto-Reply Bot</strong> đã trả lời 340 tin nhắn</div><div class="wx-activity-time">48 phút trước</div></div>
+            </div>
+            <div class="wx-activity-item">
+              <div class="wx-avatar wx-avatar-sm" style="background:#6366f1;color:#fff">📇</div>
+              <div class="flex-1"><div class="text-sm">Nhập <strong>1,204 liên hệ</strong> mới vào danh bạ</div><div class="wx-activity-time">1 giờ trước</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="wx-card">
+          <div class="wx-card-header">
+            <div class="wx-card-title">Trạng thái hệ thống</div>
+            <span class="wx-badge wx-badge-success ml-auto">Hoạt động bình thường</span>
+          </div>
+          <div class="wx-card-body">
+            <div class="flex items-center justify-between mb-3"><span class="text-sm">API Gateway</span><span class="wx-badge wx-badge-success">✓ Online</span></div>
+            <div class="wx-divider"></div>
+            <div class="flex items-center justify-between mb-3 mt-3"><span class="text-sm">Message Queue</span><span class="wx-badge wx-badge-success">✓ Online</span></div>
+            <div class="wx-divider"></div>
+            <div class="flex items-center justify-between mb-3 mt-3"><span class="text-sm">Scheduler</span><span class="wx-badge wx-badge-success">✓ Online</span></div>
+            <div class="wx-divider"></div>
+            <div class="flex items-center justify-between mb-3 mt-3"><span class="text-sm">Worker Pool</span><span class="wx-badge wx-badge-warning">⚠ 7/8 active</span></div>
+            <div class="wx-divider"></div>
+            <div class="mt-4">
+              <div class="flex items-center justify-between mb-3"><span class="text-sm text-muted">Uptime (30 ngày)</span><span class="font-bold">99.8%</span></div>
+              <div class="wx-progress"><div class="wx-progress-bar wx-progress-success" style="width:99.8%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wx-card">
+        <div class="wx-card-header">
+          <div class="wx-card-title">Chiến dịch đang chạy</div>
+          <a href="campaigns.html" class="wx-btn wx-btn-ghost wx-btn-sm ml-auto">Quản lý chiến dịch →</a>
+        </div>
+        <div class="wx-card-body">
+          <table class="wx-table">
+            <thead><tr><th>Tên chiến dịch</th><th>Nền tảng</th><th>Tiến độ</th><th>Trạng thái</th></tr></thead>
+            <tbody>
+              <tr><td class="font-semibold">Khuyến mãi tháng 5</td><td>📘 📷</td><td><div class="wx-progress" style="width:160px"><div class="wx-progress-bar" style="width:77%"></div></div><span class="text-xs text-muted">1,840 / 2,400</span></td><td><span class="wx-badge wx-badge-success">Đang chạy</span></td></tr>
+              <tr><td class="font-semibold">Chăm sóc khách VIP</td><td>💬 ✈️</td><td><div class="wx-progress" style="width:160px"><div class="wx-progress-bar" style="width:45%"></div></div><span class="text-xs text-muted">540 / 1,200</span></td><td><span class="wx-badge wx-badge-success">Đang chạy</span></td></tr>
+              <tr><td class="font-semibold">Mời tham gia sự kiện</td><td>💼</td><td><div class="wx-progress" style="width:160px"><div class="wx-progress-bar wx-progress-warning" style="width:92%"></div></div><span class="text-xs text-muted">2,208 / 2,400</span></td><td><span class="wx-badge wx-badge-success">Đang chạy</span></td></tr>
+              <tr><td class="font-semibold">Khảo sát hài lòng</td><td>📘</td><td><div class="wx-progress" style="width:160px"><div class="wx-progress-bar" style="width:30%"></div></div><span class="text-xs text-muted">300 / 1,000</span></td><td><span class="wx-badge wx-badge-warning">Tạm dừng</span></td></tr>
+              <tr><td class="font-semibold">Thông báo cập nhật ứng dụng</td><td>𝕏 ▶️</td><td><div class="wx-progress" style="width:160px"><div class="wx-progress-bar" style="width:62%"></div></div><span class="text-xs text-muted">1,860 / 3,000</span></td><td><span class="wx-badge wx-badge-success">Đang chạy</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

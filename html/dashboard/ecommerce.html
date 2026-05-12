@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thương mại điện tử | WemakeUI Dashboard</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body class="wx-app">
+<div class="wx-shell">
+
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar>☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tổng quan</div>
+      <a href="overview.html" class="wx-nav-item"><span class="wx-nav-icon">📊</span><span>Tổng quan</span></a>
+      <a href="analytics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Phân tích</span></a>
+      <a href="ecommerce.html" class="wx-nav-item active"><span class="wx-nav-icon">🛒</span><span>Thương mại</span></a>
+      <a href="crm.html" class="wx-nav-item"><span class="wx-nav-icon">👥</span><span>CRM</span></a>
+      <a href="project.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Dự án</span></a>
+      <div class="wx-nav-section-label">Tài chính &amp; Vận hành</div>
+      <a href="finance.html" class="wx-nav-item"><span class="wx-nav-icon">💰</span><span>Tài chính</span></a>
+      <a href="saas.html" class="wx-nav-item"><span class="wx-nav-icon">☁️</span><span>SaaS</span></a>
+      <a href="logistics.html" class="wx-nav-item"><span class="wx-nav-icon">🚚</span><span>Vận chuyển</span></a>
+      <a href="helpdesk.html" class="wx-nav-item"><span class="wx-nav-icon">🎧</span><span>Hỗ trợ</span></a>
+      <a href="iot.html" class="wx-nav-item"><span class="wx-nav-icon">📡</span><span>IoT</span></a>
+      <div class="wx-nav-section-label">Đặc biệt</div>
+      <a href="weconnect-v1.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>WeDashboard v1</span></a>
+      <a href="weconnect-v2.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>WeDashboard v2</span></a>
+    </nav>
+  </aside>
+
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Thương mại điện tử</span>
+      <div class="wx-topbar-actions">
+        <button class="wx-topbar-btn" data-dark-toggle>🌙</button>
+      </div>
+    </div>
+
+    <div class="wx-content">
+
+      <!-- Stats -->
+      <div class="wx-grid-4" style="margin-bottom:1.5rem;">
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Tổng GMV</div>
+          <div class="wx-stat-value">₫8.7 tỷ</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +18.2% tháng này</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Đơn hàng</div>
+          <div class="wx-stat-value">3,421</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +9.4% tháng này</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Khách hàng</div>
+          <div class="wx-stat-value">12,847</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +5.6% tháng này</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Giá trị TB/đơn</div>
+          <div class="wx-stat-value">₫2.5M</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +3.1% tháng này</div>
+        </div>
+      </div>
+
+      <!-- Recent orders table -->
+      <div class="wx-card" style="margin-bottom:1.5rem;">
+        <div class="wx-card-header" style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-weight:600;">Đơn hàng gần đây</span>
+          <button class="wx-btn wx-btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.8rem;">Xem tất cả →</button>
+        </div>
+        <div class="wx-card-body" style="padding:0;">
+          <table class="wx-table" style="width:100%;">
+            <thead>
+              <tr>
+                <th>Mã đơn</th>
+                <th>Khách hàng</th>
+                <th>Sản phẩm</th>
+                <th>Số tiền</th>
+                <th>Trạng thái</th>
+                <th>Ngày</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#DH-20248</strong></td>
+                <td>Nguyễn Thành</td>
+                <td>MacBook Pro M3</td>
+                <td>₫52,000,000</td>
+                <td><span class="wx-badge wx-badge-success">Hoàn thành</span></td>
+                <td>12/05/2026</td>
+              </tr>
+              <tr>
+                <td><strong>#DH-20247</strong></td>
+                <td>Lê Thị Hương</td>
+                <td>iPhone 16 Pro</td>
+                <td>₫28,500,000</td>
+                <td><span class="wx-badge wx-badge-warning">Đang giao</span></td>
+                <td>12/05/2026</td>
+              </tr>
+              <tr>
+                <td><strong>#DH-20246</strong></td>
+                <td>Trần Văn Việt</td>
+                <td>Tai nghe Sony WH-1000XM5</td>
+                <td>₫8,200,000</td>
+                <td><span class="wx-badge wx-badge-success">Hoàn thành</span></td>
+                <td>11/05/2026</td>
+              </tr>
+              <tr>
+                <td><strong>#DH-20245</strong></td>
+                <td>Phạm Thị Lan</td>
+                <td>iPad Air M2 + Apple Pencil</td>
+                <td>₫18,900,000</td>
+                <td><span class="wx-badge wx-badge-danger">Đã hủy</span></td>
+                <td>11/05/2026</td>
+              </tr>
+              <tr>
+                <td><strong>#DH-20244</strong></td>
+                <td>Hoàng Minh Tuấn</td>
+                <td>Samsung QLED TV 55"</td>
+                <td>₫24,700,000</td>
+                <td><span class="wx-badge wx-badge-warning">Chờ xác nhận</span></td>
+                <td>10/05/2026</td>
+              </tr>
+              <tr>
+                <td><strong>#DH-20243</strong></td>
+                <td>Võ Thị Mai</td>
+                <td>Máy lọc không khí Dyson</td>
+                <td>₫12,300,000</td>
+                <td><span class="wx-badge wx-badge-success">Hoàn thành</span></td>
+                <td>10/05/2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Top products -->
+      <div class="wx-card">
+        <div class="wx-card-header"><span style="font-weight:600;">Sản phẩm bán chạy</span></div>
+        <div class="wx-card-body" style="padding:0;">
+          <ul style="margin:0;padding:0;list-style:none;">
+            <li style="display:flex;align-items:center;gap:0.9rem;padding:0.8rem 1.2rem;border-bottom:1px solid var(--wx-border);">
+              <div style="width:44px;height:44px;background:var(--wx-surface-2,#e5e7eb);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">💻</div>
+              <div style="flex:1;">
+                <p style="margin:0;font-size:0.9rem;font-weight:600;">MacBook Pro M3 14"</p>
+                <p style="margin:0.1rem 0 0;font-size:0.78rem;color:var(--wx-text-muted);">214 lượt bán</p>
+              </div>
+              <div style="text-align:right;">
+                <p style="margin:0;font-size:0.9rem;font-weight:700;">₫11.1 tỷ</p>
+                <span class="wx-badge wx-badge-success" style="font-size:0.72rem;">+24%</span>
+              </div>
+            </li>
+            <li style="display:flex;align-items:center;gap:0.9rem;padding:0.8rem 1.2rem;border-bottom:1px solid var(--wx-border);">
+              <div style="width:44px;height:44px;background:var(--wx-surface-2,#e5e7eb);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">📱</div>
+              <div style="flex:1;">
+                <p style="margin:0;font-size:0.9rem;font-weight:600;">iPhone 16 Pro 256GB</p>
+                <p style="margin:0.1rem 0 0;font-size:0.78rem;color:var(--wx-text-muted);">189 lượt bán</p>
+              </div>
+              <div style="text-align:right;">
+                <p style="margin:0;font-size:0.9rem;font-weight:700;">₫5.4 tỷ</p>
+                <span class="wx-badge wx-badge-success" style="font-size:0.72rem;">+18%</span>
+              </div>
+            </li>
+            <li style="display:flex;align-items:center;gap:0.9rem;padding:0.8rem 1.2rem;border-bottom:1px solid var(--wx-border);">
+              <div style="width:44px;height:44px;background:var(--wx-surface-2,#e5e7eb);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">🎧</div>
+              <div style="flex:1;">
+                <p style="margin:0;font-size:0.9rem;font-weight:600;">Sony WH-1000XM5</p>
+                <p style="margin:0.1rem 0 0;font-size:0.78rem;color:var(--wx-text-muted);">156 lượt bán</p>
+              </div>
+              <div style="text-align:right;">
+                <p style="margin:0;font-size:0.9rem;font-weight:700;">₫1.3 tỷ</p>
+                <span class="wx-badge wx-badge-warning" style="font-size:0.72rem;">+5%</span>
+              </div>
+            </li>
+            <li style="display:flex;align-items:center;gap:0.9rem;padding:0.8rem 1.2rem;border-bottom:1px solid var(--wx-border);">
+              <div style="width:44px;height:44px;background:var(--wx-surface-2,#e5e7eb);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">🖥️</div>
+              <div style="flex:1;">
+                <p style="margin:0;font-size:0.9rem;font-weight:600;">Dell UltraSharp 27" 4K</p>
+                <p style="margin:0.1rem 0 0;font-size:0.78rem;color:var(--wx-text-muted);">98 lượt bán</p>
+              </div>
+              <div style="text-align:right;">
+                <p style="margin:0;font-size:0.9rem;font-weight:700;">₫1.4 tỷ</p>
+                <span class="wx-badge wx-badge-success" style="font-size:0.72rem;">+12%</span>
+              </div>
+            </li>
+            <li style="display:flex;align-items:center;gap:0.9rem;padding:0.8rem 1.2rem;">
+              <div style="width:44px;height:44px;background:var(--wx-surface-2,#e5e7eb);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">⌨️</div>
+              <div style="flex:1;">
+                <p style="margin:0;font-size:0.9rem;font-weight:600;">Keychron Q5 Pro</p>
+                <p style="margin:0.1rem 0 0;font-size:0.78rem;color:var(--wx-text-muted);">84 lượt bán</p>
+              </div>
+              <div style="text-align:right;">
+                <p style="margin:0;font-size:0.9rem;font-weight:700;">₫420M</p>
+                <span class="wx-badge wx-badge-danger" style="font-size:0.72rem;">-3%</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../js/wemake.js"></script>
+</body>
+</html>

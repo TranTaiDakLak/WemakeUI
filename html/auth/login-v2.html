@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập v2 — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #e0e7ff 0%, #cffafe 50%, #ede9fe 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .auth-card {
+      background: var(--wx-surface-base);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(37, 99, 235, 0.15), 0 4px 20px rgba(0,0,0,0.08);
+      padding: 48px 44px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .auth-card-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .auth-card-logo-mark {
+      width: 52px; height: 52px;
+      background: var(--wx-gradient-button);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 24px; color: #fff;
+      margin-bottom: 12px;
+      box-shadow: var(--wx-shadow-brand);
+    }
+    .auth-card-logo-text {
+      font-weight: 800;
+      font-size: 20px;
+      background: var(--wx-gradient-text);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .auth-card h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--wx-text-primary);
+      margin: 0 0 8px;
+      text-align: center;
+    }
+    .auth-card-sub {
+      font-size: 14px;
+      color: var(--wx-text-secondary);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .auth-field {
+      margin-bottom: 18px;
+    }
+    .auth-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wx-text-primary);
+      margin-bottom: 6px;
+    }
+    .auth-input {
+      width: 100%;
+      height: 44px;
+      border: 1.5px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      padding: 0 14px;
+      font-size: 14px;
+      font-family: var(--wx-font-primary);
+      color: var(--wx-text-primary);
+      background: var(--wx-surface-sunken);
+      transition: all var(--wx-duration-fast);
+      box-sizing: border-box;
+    }
+    .auth-input:focus {
+      outline: none;
+      border-color: var(--wx-brand-primary);
+      box-shadow: var(--wx-shadow-focus);
+      background: var(--wx-surface-base);
+    }
+    .auth-input-wrap {
+      position: relative;
+    }
+    .auth-input-wrap .auth-input { padding-right: 44px; }
+    .auth-input-toggle {
+      position: absolute;
+      right: 12px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; padding: 0;
+      color: var(--wx-text-muted);
+      font-size: 16px;
+    }
+
+    .auth-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .auth-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+      cursor: pointer;
+    }
+    .auth-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--wx-brand-primary);
+    }
+
+    .auth-btn-primary {
+      width: 100%;
+      height: 46px;
+      background: var(--wx-gradient-button);
+      color: #fff;
+      border: none;
+      border-radius: var(--wx-radius-lg);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--wx-duration-fast), transform var(--wx-duration-fast), box-shadow var(--wx-duration-fast);
+      margin-bottom: 20px;
+      box-shadow: var(--wx-shadow-brand);
+    }
+    .auth-btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 25px rgba(59,130,246,0.45);
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .auth-divider-line { flex: 1; height: 1px; background: var(--wx-border-default); }
+    .auth-divider-text { font-size: 12px; color: var(--wx-text-muted); white-space: nowrap; }
+
+    .auth-social-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .auth-social-btn {
+      height: 44px;
+      border: 1.5px solid var(--wx-border-default);
+      border-radius: var(--wx-radius-lg);
+      background: var(--wx-surface-base);
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wx-text-primary);
+      cursor: pointer;
+      transition: all var(--wx-duration-fast);
+    }
+    .auth-social-btn:hover {
+      background: var(--wx-hover-bg);
+      border-color: var(--wx-brand-300);
+      transform: translateY(-1px);
+    }
+
+    .auth-footer-text {
+      text-align: center;
+      font-size: 13px;
+      color: var(--wx-text-secondary);
+    }
+    .auth-footer-text a { font-weight: 600; color: var(--wx-brand-primary); }
+
+    .page-nav-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .page-nav-links a {
+      font-size: 12px;
+      color: var(--wx-text-muted);
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: var(--wx-radius-full);
+      border: 1px solid var(--wx-border-default);
+      background: rgba(255,255,255,0.7);
+    }
+    .page-nav-links a:hover { color: var(--wx-brand-primary); border-color: var(--wx-brand-300); }
+    .page-nav-links a.active { background: var(--wx-brand-primary); color: #fff; border-color: var(--wx-brand-primary); }
+  </style>
+</head>
+<body>
+
+<div class="auth-card">
+  <div class="auth-card-logo">
+    <div class="auth-card-logo-mark">W</div>
+    <span class="auth-card-logo-text">WemakeUI</span>
+  </div>
+
+  <h1>Đăng nhập vào WemakeUI</h1>
+  <p class="auth-card-sub">Xin chào! Nhập thông tin bên dưới để đăng nhập.</p>
+
+  <form>
+    <div class="auth-field">
+      <label for="email">Địa chỉ Email</label>
+      <input type="email" id="email" class="auth-input" placeholder="you@example.com">
+    </div>
+
+    <div class="auth-field">
+      <label for="password">Mật khẩu</label>
+      <div class="auth-input-wrap">
+        <input type="password" id="password" class="auth-input" placeholder="Nhập mật khẩu">
+        <button type="button" class="auth-input-toggle" onclick="togglePass('password', this)">👁</button>
+      </div>
+    </div>
+
+    <div class="auth-row">
+      <label class="auth-checkbox">
+        <input type="checkbox"> Ghi nhớ đăng nhập
+      </label>
+      <a href="forgot.html" class="auth-link">Quên mật khẩu?</a>
+    </div>
+
+    <button type="submit" class="auth-btn-primary">Đăng nhập</button>
+  </form>
+
+  <div class="auth-divider">
+    <div class="auth-divider-line"></div>
+    <span class="auth-divider-text">hoặc tiếp tục với</span>
+    <div class="auth-divider-line"></div>
+  </div>
+
+  <div class="auth-social-btns">
+    <button class="auth-social-btn">
+      🇬 Google
+    </button>
+    <button class="auth-social-btn">
+      🪟 Microsoft
+    </button>
+  </div>
+
+  <p class="auth-footer-text">
+    Chưa có tài khoản? <a href="register.html">Đăng ký miễn phí</a>
+  </p>
+</div>
+
+<div class="page-nav-links">
+  <a href="login.html">v1 Split</a>
+  <a href="login-v2.html" class="active">v2 Card</a>
+  <a href="login-v3.html">v3 Glass</a>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  function togglePass(id, btn) {
+    const input = document.getElementById(id);
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁'; }
+  }
+</script>
+</body>
+</html>

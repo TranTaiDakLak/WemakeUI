@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Điều khiển cơ bản — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Biểu mẫu</div>
+      <a href="control.html" class="wx-nav-item active"><span class="wx-nav-icon">📝</span><span>Điều khiển cơ bản</span></a>
+      <a href="input-group.html" class="wx-nav-item"><span class="wx-nav-icon">🔤</span><span>Nhóm input</span></a>
+      <a href="select.html" class="wx-nav-item"><span class="wx-nav-icon">▾</span><span>Select &amp; Combobox</span></a>
+      <a href="checks.html" class="wx-nav-item"><span class="wx-nav-icon">☑️</span><span>Checkbox &amp; Radio</span></a>
+      <a href="floating-labels.html" class="wx-nav-item"><span class="wx-nav-icon">🏷️</span><span>Floating labels</span></a>
+      <a href="validation.html" class="wx-nav-item"><span class="wx-nav-icon">✅</span><span>Validation</span></a>
+      <a href="wizard.html" class="wx-nav-item"><span class="wx-nav-icon">🪄</span><span>Wizard nhiều bước</span></a>
+      <a href="file-upload.html" class="wx-nav-item"><span class="wx-nav-icon">📤</span><span>Tải tệp lên</span></a>
+      <div class="wx-nav-section-label">Mẫu popup</div>
+      <a href="add-modal.html" class="wx-nav-item"><span class="wx-nav-icon">➕</span><span>Modal thêm mới</span></a>
+      <a href="edit-modal.html" class="wx-nav-item"><span class="wx-nav-icon">✏️</span><span>Modal chỉnh sửa</span></a>
+      <a href="drawer-form.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Drawer form</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">NT</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Nguyễn Văn A</div><div class="text-xs text-muted">Administrator</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Điều khiển cơ bản</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4">
+        <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Điều khiển cơ bản</h1>
+        <p class="text-muted" style="margin:0">Tập hợp tất cả các điều khiển nhập liệu cơ bản: văn bản, số, ngày giờ, màu sắc, thanh trượt và vùng văn bản.</p>
+      </div>
+
+      <div class="wx-card mb-4">
+        <div class="wx-card-header"><h3 class="wx-card-title">Trường nhập liệu</h3></div>
+        <div class="wx-card-body">
+          <div class="wx-grid-2">
+            <div class="wx-form-group">
+              <label class="wx-form-label">Họ và tên <span class="required">*</span></label>
+              <input type="text" class="wx-input" placeholder="Nguyễn Văn A" value="Trần Thị Bích">
+              <div class="wx-form-hint">Nhập đầy đủ họ tên theo CMND/CCCD.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Email <span class="required">*</span></label>
+              <input type="email" class="wx-input" placeholder="ban@congty.vn" value="bich.tran@wemake.vn">
+              <div class="wx-form-hint">Dùng để đăng nhập và nhận thông báo.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Mật khẩu <span class="required">*</span></label>
+              <div class="flex gap-2">
+                <input type="password" id="ctlPw" class="wx-input flex-1" placeholder="••••••••" value="MatKhau@2026">
+                <button type="button" class="wx-btn wx-btn-secondary" data-pw-toggle="#ctlPw">👁</button>
+              </div>
+              <div class="wx-form-hint">Tối thiểu 8 ký tự, gồm chữ hoa, số và ký tự đặc biệt.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Số lượng</label>
+              <input type="number" class="wx-input" value="12" min="0" max="999">
+              <div class="wx-form-hint">Giá trị từ 0 đến 999.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Ngày sinh</label>
+              <input type="date" class="wx-input" value="1994-08-15">
+              <div class="wx-form-hint">Định dạng dd/mm/yyyy.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Giờ hẹn</label>
+              <input type="time" class="wx-input" value="09:30">
+              <div class="wx-form-hint">Giờ làm việc 08:00 – 17:30.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Màu nhận diện</label>
+              <input type="color" class="wx-input" value="#2563eb" style="height:40px;padding:4px">
+              <div class="wx-form-hint">Màu hiển thị trên hồ sơ và nhãn.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Mức độ ưu tiên</label>
+              <input type="range" min="0" max="100" value="65" class="w-full" style="width:100%">
+              <div class="wx-form-hint">Hiện tại: 65%.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Đơn giá</label>
+              <div class="flex items-center" style="border:1px solid var(--wx-border-default);border-radius:var(--wx-radius-md);overflow:hidden">
+                <span style="padding:0 10px;background:var(--wx-surface-sunken);color:var(--wx-text-muted);align-self:stretch;display:flex;align-items:center">₫</span>
+                <input type="text" class="wx-input" value="350.000" style="border:none;border-radius:0">
+                <span style="padding:0 10px;background:var(--wx-surface-sunken);color:var(--wx-text-muted);align-self:stretch;display:flex;align-items:center">/ sản phẩm</span>
+              </div>
+              <div class="wx-form-hint">Input có tiền tố và hậu tố.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Mã nội bộ (chỉ đọc)</label>
+              <input type="text" class="wx-input" value="WM-2026-00184" readonly>
+              <div class="wx-form-hint">Trường chỉ đọc, không thể chỉnh sửa.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Trường vô hiệu hoá</label>
+              <input type="text" class="wx-input" value="Không khả dụng" disabled>
+              <div class="wx-form-hint">Trường bị disabled.</div>
+            </div>
+            <div class="wx-form-group">
+              <label class="wx-form-label">Trạng thái</label>
+              <div class="flex items-center gap-3">
+                <label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label>
+                <span class="text-sm">Đang hoạt động</span>
+              </div>
+              <div class="wx-form-hint">Bật/tắt nhanh trạng thái bản ghi.</div>
+            </div>
+          </div>
+          <hr class="wx-divider">
+          <div class="wx-form-group">
+            <label class="wx-form-label">Mô tả</label>
+            <textarea class="wx-textarea" rows="4" placeholder="Nhập mô tả chi tiết...">Khách hàng thân thiết, ưu tiên xử lý đơn hàng nhanh. Liên hệ qua hotline 1900 1234.</textarea>
+            <div class="wx-form-hint">Tối đa 500 ký tự.</div>
+          </div>
+        </div>
+        <div class="wx-card-footer flex justify-end gap-2">
+          <button class="wx-btn wx-btn-ghost">Đặt lại</button>
+          <button class="wx-btn wx-btn-primary">Lưu thay đổi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

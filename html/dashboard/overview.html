@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tổng quan | WemakeUI Dashboard</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body class="wx-app">
+<div class="wx-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar>☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tổng quan</div>
+      <a href="overview.html" class="wx-nav-item active"><span class="wx-nav-icon">📊</span><span>Tổng quan</span></a>
+      <a href="analytics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Phân tích</span></a>
+      <a href="ecommerce.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Thương mại</span></a>
+      <a href="crm.html" class="wx-nav-item"><span class="wx-nav-icon">👥</span><span>CRM</span></a>
+      <a href="project.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Dự án</span></a>
+      <div class="wx-nav-section-label">Tài chính &amp; Vận hành</div>
+      <a href="finance.html" class="wx-nav-item"><span class="wx-nav-icon">💰</span><span>Tài chính</span></a>
+      <a href="saas.html" class="wx-nav-item"><span class="wx-nav-icon">☁️</span><span>SaaS</span></a>
+      <a href="logistics.html" class="wx-nav-item"><span class="wx-nav-icon">🚚</span><span>Vận chuyển</span></a>
+      <a href="helpdesk.html" class="wx-nav-item"><span class="wx-nav-icon">🎧</span><span>Hỗ trợ</span></a>
+      <a href="iot.html" class="wx-nav-item"><span class="wx-nav-icon">📡</span><span>IoT</span></a>
+      <div class="wx-nav-section-label">Đặc biệt</div>
+      <a href="weconnect-v1.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>WeDashboard v1</span></a>
+      <a href="weconnect-v2.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>WeDashboard v2</span></a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Tổng quan</span>
+      <div class="wx-topbar-actions">
+        <button class="wx-topbar-btn" data-dark-toggle>🌙</button>
+      </div>
+    </div>
+
+    <div class="wx-content">
+
+      <!-- Stat Cards -->
+      <div class="wx-grid-4" style="margin-bottom:1.5rem;">
+
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Doanh thu</div>
+          <div class="wx-stat-value">₫2.4 tỷ</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +12.5% so với tháng trước</div>
+          <div class="wx-sparkline" style="display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:0.6rem;">
+            <div style="flex:1;background:var(--wx-primary);opacity:0.5;height:40%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-primary);opacity:0.6;height:60%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-primary);opacity:0.7;height:50%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-primary);opacity:0.8;height:80%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-primary);height:100%;border-radius:2px;"></div>
+          </div>
+        </div>
+
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Đơn hàng</div>
+          <div class="wx-stat-value">1,284</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +8.2% so với tháng trước</div>
+          <div class="wx-sparkline" style="display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:0.6rem;">
+            <div style="flex:1;background:var(--wx-success,#22c55e);opacity:0.5;height:55%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-success,#22c55e);opacity:0.6;height:45%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-success,#22c55e);opacity:0.7;height:70%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-success,#22c55e);opacity:0.85;height:60%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-success,#22c55e);height:100%;border-radius:2px;"></div>
+          </div>
+        </div>
+
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Khách hàng mới</div>
+          <div class="wx-stat-value">328</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +23.1% so với tháng trước</div>
+          <div class="wx-sparkline" style="display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:0.6rem;">
+            <div style="flex:1;background:var(--wx-accent,#8b5cf6);opacity:0.5;height:30%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-accent,#8b5cf6);opacity:0.6;height:50%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-accent,#8b5cf6);opacity:0.7;height:65%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-accent,#8b5cf6);opacity:0.85;height:85%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-accent,#8b5cf6);height:100%;border-radius:2px;"></div>
+          </div>
+        </div>
+
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">CSAT</div>
+          <div class="wx-stat-value">94.2%</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +1.8% so với tháng trước</div>
+          <div class="wx-sparkline" style="display:flex;align-items:flex-end;gap:3px;height:32px;margin-top:0.6rem;">
+            <div style="flex:1;background:var(--wx-info,#3b82f6);opacity:0.5;height:75%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-info,#3b82f6);opacity:0.6;height:80%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-info,#3b82f6);opacity:0.7;height:70%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-info,#3b82f6);opacity:0.85;height:85%;border-radius:2px;"></div>
+            <div style="flex:1;background:var(--wx-info,#3b82f6);height:100%;border-radius:2px;"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Charts row -->
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.25rem;margin-bottom:1.5rem;">
+
+        <!-- Line chart card -->
+        <div class="wx-card">
+          <div class="wx-card-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+            <span style="font-weight:600;">Doanh thu theo thời gian</span>
+            <div style="display:flex;gap:0.4rem;">
+              <button class="wx-btn wx-btn-sm wx-btn-secondary" onclick="setFilter(this,'7d')" style="padding:0.25rem 0.7rem;font-size:0.78rem;">7 ngày</button>
+              <button class="wx-btn wx-btn-sm wx-btn-primary" onclick="setFilter(this,'30d')" style="padding:0.25rem 0.7rem;font-size:0.78rem;">30 ngày</button>
+              <button class="wx-btn wx-btn-sm wx-btn-secondary" onclick="exportCSV()" style="padding:0.25rem 0.7rem;font-size:0.78rem;">⬇ CSV</button>
+            </div>
+          </div>
+          <div class="wx-card-body">
+            <svg viewBox="0 0 500 120" style="width:100%;height:120px;" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--wx-primary,#6366f1)" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="var(--wx-primary,#6366f1)" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,90 C40,80 80,60 120,55 C160,50 200,70 240,45 C280,20 320,40 360,25 C400,10 450,20 500,15"
+                    fill="url(#lineGrad)" stroke="none"/>
+              <path d="M0,90 C40,80 80,60 120,55 C160,50 200,70 240,45 C280,20 320,40 360,25 C400,10 450,20 500,15"
+                    fill="none" stroke="var(--wx-primary,#6366f1)" stroke-width="2.5" stroke-linejoin="round"/>
+              <!-- X labels -->
+              <text x="0" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">01/05</text>
+              <text x="115" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">08/05</text>
+              <text x="235" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">15/05</text>
+              <text x="355" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">22/05</text>
+              <text x="470" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">30/05</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Donut chart card -->
+        <div class="wx-card">
+          <div class="wx-card-header"><span style="font-weight:600;">Phân bổ gói</span></div>
+          <div class="wx-card-body" style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+            <svg viewBox="0 0 100 100" style="width:120px;height:120px;">
+              <!-- Donut: Pro 45%, Free 30%, Team 25% -->
+              <!-- Total circumference of r=40: 2π×40 ≈ 251.2 -->
+              <circle cx="50" cy="50" r="40" fill="none" stroke="var(--wx-primary,#6366f1)" stroke-width="18"
+                      stroke-dasharray="113.04 138.16" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+              <circle cx="50" cy="50" r="40" fill="none" stroke="var(--wx-success,#22c55e)" stroke-width="18"
+                      stroke-dasharray="75.36 175.84" stroke-dashoffset="-113.04" transform="rotate(-90 50 50)"/>
+              <circle cx="50" cy="50" r="40" fill="none" stroke="var(--wx-warning,#f59e0b)" stroke-width="18"
+                      stroke-dasharray="62.8 188.4" stroke-dashoffset="-188.4" transform="rotate(-90 50 50)"/>
+              <circle cx="50" cy="50" r="28" fill="var(--wx-surface)"/>
+              <text x="50" y="54" text-anchor="middle" font-size="10" font-weight="700" fill="var(--wx-text)">100%</text>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:0.4rem;width:100%;">
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.83rem;">
+                <span><span style="display:inline-block;width:10px;height:10px;background:var(--wx-primary,#6366f1);border-radius:2px;margin-right:6px;"></span>Pro</span>
+                <strong>45%</strong>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.83rem;">
+                <span><span style="display:inline-block;width:10px;height:10px;background:var(--wx-success,#22c55e);border-radius:2px;margin-right:6px;"></span>Free</span>
+                <strong>30%</strong>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.83rem;">
+                <span><span style="display:inline-block;width:10px;height:10px;background:var(--wx-warning,#f59e0b);border-radius:2px;margin-right:6px;"></span>Team</span>
+                <strong>25%</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Activity feed -->
+      <div class="wx-card">
+        <div class="wx-card-header"><span style="font-weight:600;">Hoạt động gần đây</span></div>
+        <div class="wx-card-body" style="padding:0;">
+          <ul style="margin:0;padding:0;list-style:none;">
+            <li style="display:flex;align-items:flex-start;gap:0.8rem;padding:0.85rem 1.2rem;border-bottom:1px solid var(--wx-border);">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--wx-primary);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;flex-shrink:0;">NT</div>
+              <div style="flex:1;">
+                <p style="margin:0;font-size:0.88rem;"><strong>Nguyễn Thành</strong> đã tạo đơn hàng <strong>#DH-20248</strong> — ₫4,500,000</p>
+                <p style="margin:0.2rem 0 0;font-size:0.78rem;color:var(--wx-text-muted);">2 phút trước</p>
+              </div>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:0.8rem;padding:0.85rem 1.2rem;border-bottom:1px solid var(--wx-border);">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--wx-success,#22c55e);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;flex-shrink:0;">LH</div>
+              <div style="flex:1;">
+                <p style="margin:0;font-size:0.88rem;"><strong>Lê Hương</strong> đã nâng cấp lên gói <span class="wx-badge wx-badge-success">Pro</span></p>
+                <p style="margin:0.2rem 0 0;font-size:0.78rem;color:var(--wx-text-muted);">15 phút trước</p>
+              </div>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:0.8rem;padding:0.85rem 1.2rem;border-bottom:1px solid var(--wx-border);">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--wx-warning,#f59e0b);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;flex-shrink:0;">TV</div>
+              <div style="flex:1;">
+                <p style="margin:0;font-size:0.88rem;"><strong>Trần Việt</strong> đã gửi ticket hỗ trợ <strong>#TK-1029</strong></p>
+                <p style="margin:0.2rem 0 0;font-size:0.78rem;color:var(--wx-text-muted);">42 phút trước</p>
+              </div>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:0.8rem;padding:0.85rem 1.2rem;border-bottom:1px solid var(--wx-border);">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--wx-info,#3b82f6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;flex-shrink:0;">PL</div>
+              <div style="flex:1;">
+                <p style="margin:0;font-size:0.88rem;"><strong>Phạm Lan</strong> đã xuất báo cáo doanh thu tháng 5</p>
+                <p style="margin:0.2rem 0 0;font-size:0.78rem;color:var(--wx-text-muted);">1 giờ trước</p>
+              </div>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:0.8rem;padding:0.85rem 1.2rem;">
+              <div style="width:36px;height:36px;border-radius:50%;background:var(--wx-accent,#8b5cf6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;flex-shrink:0;">HM</div>
+              <div style="flex:1;">
+                <p style="margin:0;font-size:0.88rem;"><strong>Hoàng Minh</strong> đã thêm 3 sản phẩm mới vào danh mục <em>Điện tử</em></p>
+                <p style="margin:0.2rem 0 0;font-size:0.78rem;color:var(--wx-text-muted);">2 giờ trước</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /wx-content -->
+  </div><!-- /wx-main -->
+</div><!-- /wx-shell -->
+
+<script src="../js/wemake.js"></script>
+<script>
+  function setFilter(btn, range) {
+    document.querySelectorAll('.wx-card-header .wx-btn').forEach(b => {
+      b.classList.remove('wx-btn-primary');
+      b.classList.add('wx-btn-secondary');
+    });
+    btn.classList.remove('wx-btn-secondary');
+    btn.classList.add('wx-btn-primary');
+  }
+  function exportCSV() { alert('Đang xuất dữ liệu CSV...'); }
+</script>
+</body>
+</html>

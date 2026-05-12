@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Documentation — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<nav class="wx-landing-nav">
+  <a href="../index.html" class="wx-landing-logo">WemakeUI</a>
+  <div class="wx-landing-nav-links">
+    <a href="../landing/features.html">Tính năng</a>
+    <a href="../landing/index.html">SaaS</a>
+    <a href="../landing/about.html">Giới thiệu</a>
+    <a href="../landing/blog.html">Blog</a>
+    <a href="../landing/contact.html">Liên hệ</a>
+    <a href="../app/pricing.html">Bảng giá</a>
+  </div>
+  <a href="../auth/login.html" class="wx-btn wx-btn-secondary wx-btn-sm" style="margin-left:16px">Đăng nhập</a>
+  <a href="../auth/register.html" class="wx-btn wx-btn-primary wx-btn-sm">Dùng thử</a>
+</nav>
+
+<section class="wx-landing-hero">
+  <span class="wx-badge wx-badge-primary">REST API v1</span>
+  <h1>Tài liệu <span class="gradient">API</span></h1>
+  <p>Tích hợp WemakeUI Cloud vào hệ thống của bạn. Tất cả endpoint trả về JSON, xác thực qua Bearer token.</p>
+</section>
+
+<section class="wx-landing-section">
+  <div style="display:grid;grid-template-columns:240px 1fr;gap:32px;align-items:flex-start">
+    <aside class="wx-card" style="position:sticky;top:80px">
+      <div class="wx-card-body">
+        <div class="font-bold text-muted" style="font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Authentication</div>
+        <ul style="list-style:none;padding:0;margin:0 0 16px;line-height:2"><li><a href="#auth-token" style="color:inherit;text-decoration:none">POST /auth/token</a></li><li><a href="#auth-revoke" style="color:inherit;text-decoration:none">POST /auth/revoke</a></li></ul>
+        <div class="font-bold text-muted" style="font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Users</div>
+        <ul style="list-style:none;padding:0;margin:0 0 16px;line-height:2"><li><a href="#users-list" style="color:inherit;text-decoration:none">GET /users</a></li><li><a href="#users-get" style="color:inherit;text-decoration:none">GET /users/:id</a></li></ul>
+        <div class="font-bold text-muted" style="font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Projects</div>
+        <ul style="list-style:none;padding:0;margin:0 0 16px;line-height:2"><li><a href="#projects-create" style="color:inherit;text-decoration:none">POST /projects</a></li></ul>
+        <div class="font-bold text-muted" style="font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Webhooks</div>
+        <ul style="list-style:none;padding:0;margin:0;line-height:2"><li><a href="#webhooks-create" style="color:inherit;text-decoration:none">POST /webhooks</a></li></ul>
+      </div>
+    </aside>
+
+    <div class="flex flex-col gap-4">
+      <div class="wx-card" id="auth-token">
+        <div class="wx-card-body">
+          <div class="flex gap-4 mb-5" style="align-items:center"><span class="wx-badge wx-badge-primary">POST</span><code style="font-size:15px">/v1/auth/token</code></div>
+          <p class="text-muted">Lấy access token từ API key và secret. Token có hiệu lực 1 giờ.</p>
+          <strong>Tham số (body)</strong>
+          <table class="wx-table" style="margin:8px 0 16px"><thead><tr><th>Tên</th><th>Kiểu</th><th>Bắt buộc</th><th>Mô tả</th></tr></thead><tbody>
+            <tr><td><code>client_id</code></td><td>string</td><td>Có</td><td>API key của ứng dụng</td></tr>
+            <tr><td><code>client_secret</code></td><td>string</td><td>Có</td><td>Secret tương ứng</td></tr>
+            <tr><td><code>scope</code></td><td>string</td><td>Không</td><td>Phạm vi quyền, mặc định <code>read</code></td></tr>
+          </tbody></table>
+          <strong>Phản hồi</strong>
+          <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:8px;overflow:auto;font-size:13px"><code>{
+  "access_token": "wmk_live_a1b2c3d4e5f6g7h8",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "scope": "read"
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="wx-card" id="users-list">
+        <div class="wx-card-body">
+          <div class="flex gap-4 mb-5" style="align-items:center"><span class="wx-badge">GET</span><code style="font-size:15px">/v1/users</code></div>
+          <p class="text-muted">Liệt kê người dùng trong workspace, hỗ trợ phân trang.</p>
+          <strong>Tham số (query)</strong>
+          <table class="wx-table" style="margin:8px 0 16px"><thead><tr><th>Tên</th><th>Kiểu</th><th>Mặc định</th><th>Mô tả</th></tr></thead><tbody>
+            <tr><td><code>page</code></td><td>integer</td><td>1</td><td>Số trang</td></tr>
+            <tr><td><code>per_page</code></td><td>integer</td><td>25</td><td>Số bản ghi/trang (tối đa 100)</td></tr>
+            <tr><td><code>role</code></td><td>string</td><td>—</td><td>Lọc theo vai trò: <code>admin</code>, <code>member</code></td></tr>
+          </tbody></table>
+          <strong>Phản hồi</strong>
+          <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:8px;overflow:auto;font-size:13px"><code>{
+  "data": [
+    { "id": "usr_01", "name": "Nguyễn Văn A", "email": "a@congty.vn", "role": "admin" },
+    { "id": "usr_02", "name": "Trần Thị B", "email": "b@congty.vn", "role": "member" }
+  ],
+  "page": 1,
+  "per_page": 25,
+  "total": 42
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="wx-card" id="projects-create">
+        <div class="wx-card-body">
+          <div class="flex gap-4 mb-5" style="align-items:center"><span class="wx-badge wx-badge-primary">POST</span><code style="font-size:15px">/v1/projects</code></div>
+          <p class="text-muted">Tạo một project mới trong workspace hiện tại.</p>
+          <strong>Tham số (body)</strong>
+          <table class="wx-table" style="margin:8px 0 16px"><thead><tr><th>Tên</th><th>Kiểu</th><th>Bắt buộc</th><th>Mô tả</th></tr></thead><tbody>
+            <tr><td><code>name</code></td><td>string</td><td>Có</td><td>Tên project</td></tr>
+            <tr><td><code>description</code></td><td>string</td><td>Không</td><td>Mô tả ngắn</td></tr>
+            <tr><td><code>visibility</code></td><td>string</td><td>Không</td><td><code>private</code> (mặc định) hoặc <code>internal</code></td></tr>
+          </tbody></table>
+          <strong>Yêu cầu</strong>
+          <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:8px;overflow:auto;font-size:13px"><code>POST /v1/projects
+Authorization: Bearer wmk_live_...
+Content-Type: application/json
+
+{ "name": "Dự án WebApp 2026", "visibility": "internal" }</code></pre>
+          <strong>Phản hồi</strong>
+          <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:8px;overflow:auto;font-size:13px"><code>{
+  "id": "prj_8f3a",
+  "name": "Dự án WebApp 2026",
+  "visibility": "internal",
+  "created_at": "2026-05-12T09:30:00+07:00"
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="wx-card" id="webhooks-create">
+        <div class="wx-card-body">
+          <div class="flex gap-4 mb-5" style="align-items:center"><span class="wx-badge wx-badge-primary">POST</span><code style="font-size:15px">/v1/webhooks</code></div>
+          <p class="text-muted">Đăng ký webhook để nhận thông báo sự kiện qua HTTP POST.</p>
+          <strong>Tham số (body)</strong>
+          <table class="wx-table" style="margin:8px 0 16px"><thead><tr><th>Tên</th><th>Kiểu</th><th>Bắt buộc</th><th>Mô tả</th></tr></thead><tbody>
+            <tr><td><code>url</code></td><td>string</td><td>Có</td><td>Endpoint nhận sự kiện (HTTPS)</td></tr>
+            <tr><td><code>events</code></td><td>array</td><td>Có</td><td>Danh sách sự kiện, ví dụ <code>["project.created","user.invited"]</code></td></tr>
+            <tr><td><code>secret</code></td><td>string</td><td>Không</td><td>Dùng để ký HMAC payload</td></tr>
+          </tbody></table>
+          <strong>Phản hồi</strong>
+          <pre style="background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:8px;overflow:auto;font-size:13px"><code>{
+  "id": "whk_2c91",
+  "url": "https://app.congty.vn/hooks/wemakeui",
+  "events": ["project.created", "user.invited"],
+  "status": "active"
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wx-landing-footer">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="wx-landing-logo" style="margin-bottom:16px">WemakeUI</div>
+    <p>Bộ UI kit Vue 3 + Design System đa nền tảng. © 2026 WemakeUI Corp. Bảo lưu mọi quyền.</p>
+    <div class="flex gap-4 justify-center mt-4" style="flex-wrap:wrap">
+      <a href="../landing/about.html" style="color:rgba(255,255,255,0.7)">Giới thiệu</a>
+      <a href="../landing/careers.html" style="color:rgba(255,255,255,0.7)">Tuyển dụng</a>
+      <a href="../landing/policy.html" style="color:rgba(255,255,255,0.7)">Chính sách</a>
+      <a href="../landing/changelog.html" style="color:rgba(255,255,255,0.7)">Changelog</a>
+      <a href="../landing/api.html" style="color:rgba(255,255,255,0.7)">API</a>
+      <a href="../landing/contact.html" style="color:rgba(255,255,255,0.7)">Liên hệ</a>
+    </div>
+  </div>
+</footer>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

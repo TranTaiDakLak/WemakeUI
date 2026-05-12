@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changelog — WemakeUI</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<nav class="wx-landing-nav">
+  <a href="../index.html" class="wx-landing-logo">WemakeUI</a>
+  <div class="wx-landing-nav-links">
+    <a href="../landing/features.html">Tính năng</a>
+    <a href="../landing/index.html">SaaS</a>
+    <a href="../landing/about.html">Giới thiệu</a>
+    <a href="../landing/blog.html">Blog</a>
+    <a href="../landing/contact.html">Liên hệ</a>
+    <a href="../app/pricing.html">Bảng giá</a>
+  </div>
+  <a href="../auth/login.html" class="wx-btn wx-btn-secondary wx-btn-sm" style="margin-left:16px">Đăng nhập</a>
+  <a href="../auth/register.html" class="wx-btn wx-btn-primary wx-btn-sm">Dùng thử</a>
+</nav>
+
+<section class="wx-landing-hero">
+  <span class="wx-badge wx-badge-primary">Cập nhật</span>
+  <h1>Lịch sử <span class="gradient">thay đổi</span></h1>
+  <p>Mọi tính năng mới, sửa lỗi và thay đổi đột phá của WemakeUI — minh bạch theo từng phiên bản.</p>
+</section>
+
+<div style="max-width:760px;margin:0 auto;padding:24px;display:flex;flex-direction:column;gap:24px">
+
+  <div class="wx-card">
+    <div class="wx-card-body">
+      <div class="flex gap-4 mb-5" style="align-items:center"><span class="wx-badge wx-badge-primary">v0.8.0</span><span class="text-muted">07/05/2026</span></div>
+      <div style="margin-bottom:12px"><strong>✨ Mới</strong>
+        <ul style="padding-left:24px;margin-top:6px">
+          <li>Nâng cấp toàn bộ stack lên Vite 6 + TypeScript 5.9</li>
+          <li>Thêm 15 components: <code>DataTable</code> nâng cao, <code>DateRangePicker</code>, <code>KanbanBoard</code>, <code>Stepper</code>...</li>
+          <li>Chế độ tối mới dựa hoàn toàn trên biến CSS, không nhấp nháy</li>
+          <li>Sinh tự động <code>index.d.ts</code> qua vite-plugin-dts</li>
+        </ul>
+      </div>
+      <div style="margin-bottom:12px"><strong>🐛 Sửa lỗi</strong>
+        <ul style="padding-left:24px;margin-top:6px">
+          <li>Sửa lỗi <code>Modal</code> không khóa cuộn trang trên iOS</li>
+          <li>Khắc phục rò rỉ bộ nhớ trong composable <code>useBreakpoint</code></li>
+        </ul>
+      </div>
+      <div><strong>💥 Breaking</strong>
+        <ul style="padding-left:24px;margin-top:6px">
+          <li>Đổi tên prop <code>color</code> → <code>variant</code> trên <code>Button</code>, <code>Badge</code>, <code>Alert</code></li>
+          <li>Yêu cầu peer dependency <code>vue ^3.2.0</code> trở lên</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wx-card">
+    <div class="wx-card-body">
+      <div class="flex gap-4 mb-5" style="align-items:center"><span class="wx-badge">v0.7.0</span><span class="text-muted">12/02/2026</span></div>
+      <div style="margin-bottom:12px"><strong>✨ Mới</strong>
+        <ul style="padding-left:24px;margin-top:6px">
+          <li>Thêm bộ component biểu đồ nhẹ (<code>LineChart</code>, <code>BarChart</code>, <code>Sparkline</code>)</li>
+          <li>Hỗ trợ chính thức Capacitor 6</li>
+          <li>40 trang demo mới cho dashboard và ứng dụng</li>
+        </ul>
+      </div>
+      <div><strong>🐛 Sửa lỗi</strong>
+        <ul style="padding-left:24px;margin-top:6px">
+          <li>Sửa lỗi tab focus bị nhảy trong <code>Tabs</code></li>
+          <li>Cải thiện độ tương phản màu trên nền tối</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wx-card">
+    <div class="wx-card-body">
+      <div class="flex gap-4 mb-5" style="align-items:center"><span class="wx-badge">v0.6.0</span><span class="text-muted">04/11/2025</span></div>
+      <div style="margin-bottom:12px"><strong>✨ Mới</strong>
+        <ul style="padding-left:24px;margin-top:6px">
+          <li>Mở rộng đa nền tảng: hỗ trợ Tauri và Electron</li>
+          <li>Thêm composable <code>useNativeBridge</code> với fallback no-op cho web</li>
+          <li>Hệ token đạt 120+ biến</li>
+        </ul>
+      </div>
+      <div><strong>💥 Breaking</strong>
+        <ul style="padding-left:24px;margin-top:6px">
+          <li>Di chuyển <code>ui.css</code> sang import qua <code>@wemake/ui/style.css</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wx-card">
+    <div class="wx-card-body">
+      <div class="flex gap-4 mb-5" style="align-items:center"><span class="wx-badge">v0.5.0</span><span class="text-muted">19/07/2025</span></div>
+      <div style="margin-bottom:12px"><strong>✨ Mới</strong>
+        <ul style="padding-left:24px;margin-top:6px">
+          <li>Thêm component biểu mẫu: <code>Select</code>, <code>Checkbox</code>, <code>Radio</code>, <code>Switch</code>, <code>FileUpload</code></li>
+          <li>Hỗ trợ i18n cho mọi label mặc định (tiếng Việt + tiếng Anh)</li>
+        </ul>
+      </div>
+      <div><strong>🐛 Sửa lỗi</strong>
+        <ul style="padding-left:24px;margin-top:6px">
+          <li>Sửa lỗi <code>Tooltip</code> bị tràn viewport ở mép màn hình</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="wx-card">
+    <div class="wx-card-body">
+      <div class="flex gap-4 mb-5" style="align-items:center"><span class="wx-badge">v0.3.0</span><span class="text-muted">02/04/2025</span></div>
+      <div><strong>✨ Mới</strong>
+        <ul style="padding-left:24px;margin-top:6px">
+          <li>Bản công khai đầu tiên trên npm với 40 components</li>
+          <li>Bộ design tokens nền tảng và chế độ tối cơ bản</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="wx-landing-footer">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="wx-landing-logo" style="margin-bottom:16px">WemakeUI</div>
+    <p>Bộ UI kit Vue 3 + Design System đa nền tảng. © 2026 WemakeUI Corp. Bảo lưu mọi quyền.</p>
+    <div class="flex gap-4 justify-center mt-4" style="flex-wrap:wrap">
+      <a href="../landing/about.html" style="color:rgba(255,255,255,0.7)">Giới thiệu</a>
+      <a href="../landing/careers.html" style="color:rgba(255,255,255,0.7)">Tuyển dụng</a>
+      <a href="../landing/policy.html" style="color:rgba(255,255,255,0.7)">Chính sách</a>
+      <a href="../landing/changelog.html" style="color:rgba(255,255,255,0.7)">Changelog</a>
+      <a href="../landing/api.html" style="color:rgba(255,255,255,0.7)">API</a>
+      <a href="../landing/contact.html" style="color:rgba(255,255,255,0.7)">Liên hệ</a>
+    </div>
+  </div>
+</footer>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

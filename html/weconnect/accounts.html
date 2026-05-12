@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tài khoản — WeConnect</title>
+<link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body>
+<div class="wx-shell">
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">WC</div>
+      <span class="wx-sidebar-brand-text">WeConnect</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">WeConnect</div>
+      <a href="index.html" class="wx-nav-item"><span class="wx-nav-icon">🎛️</span><span>Bảng quản trị</span></a>
+      <a href="accounts.html" class="wx-nav-item active"><span class="wx-nav-icon">👤</span><span>Tài khoản</span></a>
+      <a href="sessions.html" class="wx-nav-item"><span class="wx-nav-icon">🔌</span><span>Phiên kết nối</span></a>
+      <a href="contacts.html" class="wx-nav-item"><span class="wx-nav-icon">📇</span><span>Danh bạ</span></a>
+      <a href="campaigns.html" class="wx-nav-item"><span class="wx-nav-icon">📣</span><span>Chiến dịch</span></a>
+      <a href="plugins.html" class="wx-nav-item"><span class="wx-nav-icon">🧩</span><span>Plugin</span></a>
+      <a href="console.html" class="wx-nav-item"><span class="wx-nav-icon">⌨️</span><span>Console</span></a>
+      <a href="scheduler.html" class="wx-nav-item"><span class="wx-nav-icon">⏰</span><span>Lịch trình</span></a>
+      <a href="integrations.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>Tích hợp</span></a>
+      <a href="automation.html" class="wx-nav-item"><span class="wx-nav-icon">⚡</span><span>Tự động hóa</span></a>
+    </nav>
+    <div class="wx-sidebar-footer">
+      <div class="flex items-center gap-3">
+        <div class="wx-avatar wx-avatar-sm">AD</div>
+        <div class="flex-1 truncate"><div class="text-sm font-semibold truncate">Admin</div><div class="text-xs text-muted">Quản trị viên</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Tài khoản</span>
+      <div class="wx-topbar-actions"><button class="wx-topbar-btn" data-dark-toggle title="Chế độ tối">🌙</button></div>
+    </div>
+    <div class="wx-content">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Tài khoản</h1>
+          <p class="text-muted" style="margin:0">Quản lý các tài khoản mạng xã hội đang kết nối</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="wx-btn wx-btn-secondary">Đồng bộ tất cả</button>
+          <button class="wx-btn wx-btn-primary" data-open-modal="addAccount">+ Thêm tài khoản</button>
+        </div>
+      </div>
+
+      <div class="flex gap-4 mb-4">
+        <div class="wx-badge wx-badge-neutral">Tổng: <strong style="margin-left:4px">24</strong></div>
+        <div class="wx-badge wx-badge-success">Đang hoạt động: <strong style="margin-left:4px">18</strong></div>
+        <div class="wx-badge wx-badge-danger">Có lỗi: <strong style="margin-left:4px">2</strong></div>
+      </div>
+
+      <div class="wx-card">
+        <div class="wx-card-body">
+          <div class="flex gap-3 mb-4">
+            <input class="wx-input" placeholder="🔍 Tìm tài khoản theo @handle hoặc tên..." style="max-width:340px">
+            <select class="wx-select" style="max-width:180px">
+              <option>Tất cả nền tảng</option>
+              <option>Facebook</option><option>Instagram</option><option>TikTok</option><option>Zalo</option><option>Telegram</option><option>X (Twitter)</option><option>LinkedIn</option><option>YouTube</option>
+            </select>
+            <select class="wx-select" style="max-width:180px">
+              <option>Tất cả trạng thái</option>
+              <option>Đang chạy</option><option>Tạm dừng</option><option>Lỗi</option><option>Chưa xác thực</option>
+            </select>
+          </div>
+          <table class="wx-table">
+            <thead><tr>
+              <th style="width:36px"><input type="checkbox"></th>
+              <th>Tài khoản</th><th>Nền tảng</th><th>Trạng thái</th><th>Phiên</th><th>Followers</th><th>Đăng nhập cuối</th><th style="width:130px">Thao tác</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><div class="flex items-center gap-3"><div class="wx-avatar wx-avatar-sm" style="background:#1877f2;color:#fff">📘</div><div><div class="font-semibold">@wemakeui_vn</div><div class="text-xs text-muted">WemakeUI Việt Nam</div></div></div></td>
+                <td>📘 Facebook</td><td><span class="wx-badge wx-badge-success">Đang chạy</span></td><td>3</td><td>48,210</td><td class="text-sm text-muted">2 phút trước</td>
+                <td><button class="wx-btn wx-btn-icon wx-btn-sm" title="Cấu hình">⚙️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Tạm dừng">⏸</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Xóa">🗑</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><div class="flex items-center gap-3"><div class="wx-avatar wx-avatar-sm" style="background:#e1306c;color:#fff">📷</div><div><div class="font-semibold">@wemake.studio</div><div class="text-xs text-muted">Wemake Studio</div></div></div></td>
+                <td>📷 Instagram</td><td><span class="wx-badge wx-badge-success">Đang chạy</span></td><td>2</td><td>92,840</td><td class="text-sm text-muted">8 phút trước</td>
+                <td><button class="wx-btn wx-btn-icon wx-btn-sm" title="Cấu hình">⚙️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Tạm dừng">⏸</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Xóa">🗑</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><div class="flex items-center gap-3"><div class="wx-avatar wx-avatar-sm" style="background:#000;color:#fff">🎵</div><div><div class="font-semibold">@wemake.tiktok</div><div class="text-xs text-muted">Wemake Official</div></div></div></td>
+                <td>🎵 TikTok</td><td><span class="wx-badge wx-badge-danger">Lỗi</span></td><td>1</td><td>156,300</td><td class="text-sm text-muted">32 phút trước</td>
+                <td><button class="wx-btn wx-btn-icon wx-btn-sm" title="Cấu hình">⚙️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Chạy lại">▶️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Xóa">🗑</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><div class="flex items-center gap-3"><div class="wx-avatar wx-avatar-sm" style="background:#0088cc;color:#fff">✈️</div><div><div class="font-semibold">@wemake_bot</div><div class="text-xs text-muted">Wemake Telegram Bot</div></div></div></td>
+                <td>✈️ Telegram</td><td><span class="wx-badge wx-badge-warning">Tạm dừng</span></td><td>0</td><td>4,120</td><td class="text-sm text-muted">1 giờ trước</td>
+                <td><button class="wx-btn wx-btn-icon wx-btn-sm" title="Cấu hình">⚙️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Chạy lại">▶️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Xóa">🗑</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><div class="flex items-center gap-3"><div class="wx-avatar wx-avatar-sm" style="background:#0a66c2;color:#fff">💼</div><div><div class="font-semibold">@wemake-jsc</div><div class="text-xs text-muted">Wemake JSC</div></div></div></td>
+                <td>💼 LinkedIn</td><td><span class="wx-badge wx-badge-success">Đang chạy</span></td><td>1</td><td>12,940</td><td class="text-sm text-muted">14 phút trước</td>
+                <td><button class="wx-btn wx-btn-icon wx-btn-sm" title="Cấu hình">⚙️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Tạm dừng">⏸</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Xóa">🗑</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><div class="flex items-center gap-3"><div class="wx-avatar wx-avatar-sm" style="background:#0068ff;color:#fff">💬</div><div><div class="font-semibold">Wemake CSKH</div><div class="text-xs text-muted">Zalo OA</div></div></div></td>
+                <td>💬 Zalo</td><td><span class="wx-badge wx-badge-success">Đang chạy</span></td><td>2</td><td>21,580</td><td class="text-sm text-muted">5 phút trước</td>
+                <td><button class="wx-btn wx-btn-icon wx-btn-sm" title="Cấu hình">⚙️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Tạm dừng">⏸</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Xóa">🗑</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><div class="flex items-center gap-3"><div class="wx-avatar wx-avatar-sm" style="background:#000;color:#fff">𝕏</div><div><div class="font-semibold">@wemakeui</div><div class="text-xs text-muted">WemakeUI</div></div></div></td>
+                <td>𝕏 X (Twitter)</td><td><span class="wx-badge wx-badge-success">Đang chạy</span></td><td>1</td><td>8,760</td><td class="text-sm text-muted">22 phút trước</td>
+                <td><button class="wx-btn wx-btn-icon wx-btn-sm" title="Cấu hình">⚙️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Tạm dừng">⏸</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Xóa">🗑</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><div class="flex items-center gap-3"><div class="wx-avatar wx-avatar-sm" style="background:#ff0000;color:#fff">▶️</div><div><div class="font-semibold">Wemake Channel</div><div class="text-xs text-muted">YouTube</div></div></div></td>
+                <td>▶️ YouTube</td><td><span class="wx-badge wx-badge-neutral">Chưa xác thực</span></td><td>0</td><td>34,210</td><td class="text-sm text-muted">3 ngày trước</td>
+                <td><button class="wx-btn wx-btn-icon wx-btn-sm" title="Cấu hình">⚙️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Chạy lại">▶️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Xóa">🗑</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><div class="flex items-center gap-3"><div class="wx-avatar wx-avatar-sm" style="background:#1877f2;color:#fff">📘</div><div><div class="font-semibold">@wemake.hcm</div><div class="text-xs text-muted">Wemake Hồ Chí Minh</div></div></div></td>
+                <td>📘 Facebook</td><td><span class="wx-badge wx-badge-danger">Lỗi</span></td><td>0</td><td>6,540</td><td class="text-sm text-muted">2 giờ trước</td>
+                <td><button class="wx-btn wx-btn-icon wx-btn-sm" title="Cấu hình">⚙️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Chạy lại">▶️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Xóa">🗑</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><div class="flex items-center gap-3"><div class="wx-avatar wx-avatar-sm" style="background:#e1306c;color:#fff">📷</div><div><div class="font-semibold">@wemake.design</div><div class="text-xs text-muted">Wemake Design</div></div></div></td>
+                <td>📷 Instagram</td><td><span class="wx-badge wx-badge-success">Đang chạy</span></td><td>2</td><td>27,910</td><td class="text-sm text-muted">11 phút trước</td>
+                <td><button class="wx-btn wx-btn-icon wx-btn-sm" title="Cấu hình">⚙️</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Tạm dừng">⏸</button> <button class="wx-btn wx-btn-icon wx-btn-sm" title="Xóa">🗑</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="flex items-center justify-between mt-4">
+            <span class="text-sm text-muted">Hiển thị 1–10 trong 24 tài khoản</span>
+            <div class="wx-pagination">
+              <button class="wx-page-btn" disabled>‹</button>
+              <button class="wx-page-btn active">1</button>
+              <button class="wx-page-btn">2</button>
+              <button class="wx-page-btn">3</button>
+              <button class="wx-page-btn">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wx-overlay hidden" id="addAccount">
+  <div class="wx-modal">
+    <div class="wx-card-header">
+      <div class="wx-card-title">Thêm tài khoản</div>
+      <button class="wx-btn wx-btn-icon wx-btn-sm ml-auto" data-close-modal>✕</button>
+    </div>
+    <div class="wx-card-body">
+      <div class="wx-form-group">
+        <label class="wx-form-label">Nền tảng</label>
+        <select class="wx-select w-full">
+          <option>Facebook</option><option>Instagram</option><option>TikTok</option><option>Zalo</option><option>Telegram</option><option>X (Twitter)</option><option>LinkedIn</option><option>YouTube</option>
+        </select>
+      </div>
+      <div class="wx-form-group">
+        <label class="wx-form-label">Tên đăng nhập</label>
+        <input class="wx-input w-full" placeholder="email hoặc số điện thoại">
+      </div>
+      <div class="wx-form-group">
+        <label class="wx-form-label">Mật khẩu</label>
+        <input class="wx-input w-full" type="password" placeholder="••••••••">
+      </div>
+      <div class="wx-form-group">
+        <label class="wx-form-label">Proxy (tùy chọn)</label>
+        <input class="wx-input w-full" placeholder="http://user:pass@host:port">
+        <div class="wx-form-hint">Để trống nếu không dùng proxy riêng</div>
+      </div>
+      <div class="wx-form-group">
+        <label class="flex items-center gap-3">
+          <label class="wx-toggle"><input type="checkbox" checked><span class="wx-toggle-track"></span></label>
+          <span class="text-sm">Bật xác thực 2 lớp (2FA)</span>
+        </label>
+      </div>
+    </div>
+    <div class="wx-card-footer flex justify-between gap-2">
+      <button class="wx-btn wx-btn-secondary" data-close-modal>Hủy</button>
+      <button class="wx-btn wx-btn-primary">Thêm tài khoản</button>
+    </div>
+  </div>
+</div>
+<script src="../js/wemake.js"></script>
+</body>
+</html>

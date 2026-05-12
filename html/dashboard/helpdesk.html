@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trung tâm hỗ trợ | WemakeUI Dashboard</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+</head>
+<body class="wx-app">
+<div class="wx-shell">
+
+  <aside class="wx-sidebar" id="sidebar">
+    <div class="wx-sidebar-brand">
+      <div class="wx-sidebar-logo">W</div>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
+      <button class="wx-sidebar-toggle" data-toggle-sidebar>☰</button>
+    </div>
+    <nav class="wx-sidebar-nav">
+      <div class="wx-nav-section-label">Tổng quan</div>
+      <a href="overview.html" class="wx-nav-item"><span class="wx-nav-icon">📊</span><span>Tổng quan</span></a>
+      <a href="analytics.html" class="wx-nav-item"><span class="wx-nav-icon">📈</span><span>Phân tích</span></a>
+      <a href="ecommerce.html" class="wx-nav-item"><span class="wx-nav-icon">🛒</span><span>Thương mại</span></a>
+      <a href="crm.html" class="wx-nav-item"><span class="wx-nav-icon">👥</span><span>CRM</span></a>
+      <a href="project.html" class="wx-nav-item"><span class="wx-nav-icon">📋</span><span>Dự án</span></a>
+      <div class="wx-nav-section-label">Tài chính &amp; Vận hành</div>
+      <a href="finance.html" class="wx-nav-item"><span class="wx-nav-icon">💰</span><span>Tài chính</span></a>
+      <a href="saas.html" class="wx-nav-item"><span class="wx-nav-icon">☁️</span><span>SaaS</span></a>
+      <a href="logistics.html" class="wx-nav-item"><span class="wx-nav-icon">🚚</span><span>Vận chuyển</span></a>
+      <a href="helpdesk.html" class="wx-nav-item active"><span class="wx-nav-icon">🎧</span><span>Hỗ trợ</span></a>
+      <a href="iot.html" class="wx-nav-item"><span class="wx-nav-icon">📡</span><span>IoT</span></a>
+      <div class="wx-nav-section-label">Đặc biệt</div>
+      <a href="weconnect-v1.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>WeDashboard v1</span></a>
+      <a href="weconnect-v2.html" class="wx-nav-item"><span class="wx-nav-icon">🔗</span><span>WeDashboard v2</span></a>
+    </nav>
+  </aside>
+
+  <div class="wx-main">
+    <div class="wx-topbar">
+      <span class="wx-topbar-title">Trung tâm hỗ trợ</span>
+      <div class="wx-topbar-actions">
+        <button class="wx-topbar-btn" data-dark-toggle>🌙</button>
+      </div>
+    </div>
+
+    <div class="wx-content">
+
+      <!-- Stats -->
+      <div class="wx-grid-4" style="margin-bottom:1.5rem;">
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Tickets đang mở</div>
+          <div class="wx-stat-value">48</div>
+          <div class="wx-stat-change wx-stat-change--down">▼ -12 so với hôm qua</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Đã giải quyết hôm nay</div>
+          <div class="wx-stat-value">23</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +5 so với hôm qua</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">Thời gian phản hồi TB</div>
+          <div class="wx-stat-value">1h 24m</div>
+          <div class="wx-stat-change wx-stat-change--down">▼ -18m (cải thiện)</div>
+        </div>
+        <div class="wx-stat-card">
+          <div class="wx-stat-label">CSAT</div>
+          <div class="wx-stat-value">96%</div>
+          <div class="wx-stat-change wx-stat-change--up">▲ +1.2% tháng này</div>
+        </div>
+      </div>
+
+      <!-- Charts row -->
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.25rem;margin-bottom:1.5rem;">
+
+        <!-- Response time chart -->
+        <div class="wx-card">
+          <div class="wx-card-header"><span style="font-weight:600;">Thời gian phản hồi theo ngày</span></div>
+          <div class="wx-card-body">
+            <svg viewBox="0 0 500 120" style="width:100%;height:120px;" preserveAspectRatio="none">
+              <!-- Target line at 2h (y=60) -->
+              <line x1="0" y1="60" x2="500" y2="60" stroke="var(--wx-danger,#ef4444)" stroke-width="1" stroke-dasharray="6,4" opacity="0.5"/>
+              <text x="420" y="56" font-size="9" fill="var(--wx-danger,#ef4444)" opacity="0.8">Mục tiêu 2h</text>
+              <!-- Actual response time line -->
+              <path d="M0,90 C50,85 100,70 150,65 C200,60 250,75 300,55 C350,35 400,45 500,42"
+                    fill="none" stroke="var(--wx-primary,#6366f1)" stroke-width="2.5"/>
+              <!-- Dots -->
+              <circle cx="0" cy="90" r="3" fill="var(--wx-primary,#6366f1)"/>
+              <circle cx="150" cy="65" r="3" fill="var(--wx-primary,#6366f1)"/>
+              <circle cx="300" cy="55" r="3" fill="var(--wx-primary,#6366f1)"/>
+              <circle cx="500" cy="42" r="3" fill="var(--wx-primary,#6366f1)"/>
+              <!-- X labels -->
+              <text x="0" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">T2</text>
+              <text x="95" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">T3</text>
+              <text x="195" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">T4</text>
+              <text x="295" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">T5</text>
+              <text x="395" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">T6</text>
+              <text x="472" y="118" font-size="9" fill="var(--wx-text-muted,#6b7280)">T7</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Category breakdown -->
+        <div class="wx-card">
+          <div class="wx-card-header"><span style="font-weight:600;">Phân loại ticket</span></div>
+          <div class="wx-card-body">
+            <div style="display:flex;flex-direction:column;gap:0.65rem;">
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.85rem;">
+                <span>🐛 Báo lỗi</span>
+                <span style="display:flex;align-items:center;gap:0.5rem;">
+                  <div style="width:80px;height:6px;background:var(--wx-surface-2,#e5e7eb);border-radius:9999px;overflow:hidden;">
+                    <div style="width:38%;height:100%;background:var(--wx-danger,#ef4444);border-radius:9999px;"></div>
+                  </div>
+                  <strong>18</strong>
+                </span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.85rem;">
+                <span>💡 Hỏi tính năng</span>
+                <span style="display:flex;align-items:center;gap:0.5rem;">
+                  <div style="width:80px;height:6px;background:var(--wx-surface-2,#e5e7eb);border-radius:9999px;overflow:hidden;">
+                    <div style="width:27%;height:100%;background:var(--wx-info,#3b82f6);border-radius:9999px;"></div>
+                  </div>
+                  <strong>13</strong>
+                </span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.85rem;">
+                <span>💳 Thanh toán</span>
+                <span style="display:flex;align-items:center;gap:0.5rem;">
+                  <div style="width:80px;height:6px;background:var(--wx-surface-2,#e5e7eb);border-radius:9999px;overflow:hidden;">
+                    <div style="width:21%;height:100%;background:var(--wx-warning,#f59e0b);border-radius:9999px;"></div>
+                  </div>
+                  <strong>10</strong>
+                </span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.85rem;">
+                <span>🔐 Tài khoản</span>
+                <span style="display:flex;align-items:center;gap:0.5rem;">
+                  <div style="width:80px;height:6px;background:var(--wx-surface-2,#e5e7eb);border-radius:9999px;overflow:hidden;">
+                    <div style="width:15%;height:100%;background:var(--wx-accent,#8b5cf6);border-radius:9999px;"></div>
+                  </div>
+                  <strong>7</strong>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tickets table -->
+      <div class="wx-card">
+        <div class="wx-card-header" style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-weight:600;">Danh sách ticket</span>
+          <div style="display:flex;gap:0.5rem;">
+            <button class="wx-btn wx-btn-secondary" style="font-size:0.8rem;padding:0.3rem 0.8rem;">Lọc</button>
+            <button class="wx-btn wx-btn-primary" style="font-size:0.8rem;padding:0.3rem 0.8rem;">+ Tạo ticket</button>
+          </div>
+        </div>
+        <div class="wx-card-body" style="padding:0;">
+          <table class="wx-table" style="width:100%;">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Tiêu đề</th>
+                <th>Khách hàng</th>
+                <th>Ưu tiên</th>
+                <th>Trạng thái</th>
+                <th>Phụ trách</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#TK-1029</strong></td>
+                <td>Không thể đăng nhập sau khi đổi mật khẩu</td>
+                <td>Trần Văn Việt</td>
+                <td><span class="wx-badge wx-badge-danger">Khẩn cấp</span></td>
+                <td><span class="wx-badge wx-badge-warning">Đang xử lý</span></td>
+                <td>Nguyễn T.</td>
+              </tr>
+              <tr>
+                <td><strong>#TK-1028</strong></td>
+                <td>Lỗi xuất báo cáo Excel bị sai định dạng</td>
+                <td>Phạm Thị Lan</td>
+                <td><span class="wx-badge wx-badge-warning">Cao</span></td>
+                <td><span class="wx-badge wx-badge-warning">Đang xử lý</span></td>
+                <td>Lê H.</td>
+              </tr>
+              <tr>
+                <td><strong>#TK-1027</strong></td>
+                <td>Hỏi cách tích hợp API webhook</td>
+                <td>Hoàng Minh Tuấn</td>
+                <td><span class="wx-badge wx-badge-primary">Thường</span></td>
+                <td><span class="wx-badge wx-badge-success">Đã giải quyết</span></td>
+                <td>Trần V.</td>
+              </tr>
+              <tr>
+                <td><strong>#TK-1026</strong></td>
+                <td>Thanh toán thẻ Visa bị từ chối</td>
+                <td>Võ Thị Mai</td>
+                <td><span class="wx-badge wx-badge-danger">Khẩn cấp</span></td>
+                <td><span class="wx-badge wx-badge-success">Đã giải quyết</span></td>
+                <td>Phạm L.</td>
+              </tr>
+              <tr>
+                <td><strong>#TK-1025</strong></td>
+                <td>Yêu cầu tính năng đa ngôn ngữ</td>
+                <td>Lê Quang Khải</td>
+                <td><span class="wx-badge wx-badge-success">Thấp</span></td>
+                <td><span class="wx-badge wx-badge-primary">Mới</span></td>
+                <td>Chưa phân công</td>
+              </tr>
+              <tr>
+                <td><strong>#TK-1024</strong></td>
+                <td>Dashboard tải chậm trên mobile</td>
+                <td>Nguyễn Minh Tuấn</td>
+                <td><span class="wx-badge wx-badge-warning">Cao</span></td>
+                <td><span class="wx-badge wx-badge-primary">Mới</span></td>
+                <td>Hoàng M.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="../js/wemake.js"></script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Màn hình khóa — WemakeUI</title>
+  <link rel="stylesheet" href="../css/wemake.css">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 30% 30%, rgba(37,99,235,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 70%, rgba(6,182,212,0.15) 0%, transparent 60%),
+        linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* Background pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    .lock-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 52px 44px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+
+    .lock-time {
+      font-size: 48px;
+      font-weight: 200;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+      font-family: var(--wx-font-mono);
+    }
+    .lock-date {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 36px;
+    }
+
+    .lock-avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .lock-avatar {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+      font-weight: 700;
+      color: #fff;
+      border: 3px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.3);
+      margin: 0 auto;
+    }
+    .lock-avatar-badge {
+      position: absolute;
+      bottom: 4px; right: 4px;
+      width: 20px; height: 20px;
+      background: var(--wx-success-solid);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+    }
+
+    .lock-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .lock-role {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .lock-role-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--wx-success-solid);
+    }
+
+    .lock-field {
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .lock-input {
+      width: 100%;
+      height: 48px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 0 44px 0 16px;
+      font-size: 15px;
+      font-family: var(--wx-font-primary);
+      color: #fff;
+      text-align: center;
+      letter-spacing: 2px;
+      transition: all var(--wx-duration-fast);
+      box-sizing: border-box;
+    }
+    .lock-input::placeholder { color: rgba(255,255,255,0.3); letter-spacing: 0; }
+    .lock-input:focus {
+      outline: none;
+      border-color: rgba(59,130,246,0.5);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+    .lock-input-toggle {
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; color: rgba(255,255,255,0.4); font-size: 16px;
+    }
+
+    .lock-btn {
+      width: 100%;
+      height: 48px;
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--wx-duration-fast);
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(59,130,246,0.4);
+    }
+    .lock-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .lock-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 4px 0 16px;
+    }
+
+    .lock-logout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color var(--wx-duration-fast);
+    }
+    .lock-logout:hover { color: rgba(239,68,68,0.8); text-decoration: none; }
+
+    .lock-pin-hint {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="lock-card">
+  <!-- Clock -->
+  <div class="lock-time" id="lockTime">00:00</div>
+  <div class="lock-date" id="lockDate">Thứ Ba, 12 tháng 5 năm 2026</div>
+
+  <!-- User -->
+  <div class="lock-avatar-wrap">
+    <div class="lock-avatar">NA</div>
+    <div class="lock-avatar-badge">✓</div>
+  </div>
+
+  <div class="lock-name">Nguyễn Văn A</div>
+  <div class="lock-role">
+    <span class="lock-role-dot"></span>
+    Administrator
+  </div>
+
+  <!-- Password field -->
+  <div class="lock-field">
+    <input type="password" class="lock-input" id="lockPw" placeholder="Nhập mật khẩu để mở khóa">
+    <button type="button" class="lock-input-toggle" onclick="toggleLock()">👁</button>
+  </div>
+  <p class="lock-pin-hint">Hoặc nhập mã PIN 6 chữ số của bạn</p>
+
+  <button type="button" class="lock-btn" style="margin-top: 16px;" onclick="unlock()">🔓 Mở khóa</button>
+
+  <div class="lock-divider"></div>
+
+  <a href="login.html" class="lock-logout">
+    🚪 Đăng xuất tài khoản khác
+  </a>
+</div>
+
+<script src="../js/wemake.js"></script>
+<script>
+  // Live clock
+  function updateClock() {
+    const now = new Date();
+    const h = now.getHours().toString().padStart(2,'0');
+    const m = now.getMinutes().toString().padStart(2,'0');
+    document.getElementById('lockTime').textContent = h + ':' + m;
+
+    const days = ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+    const months = ['tháng 1','tháng 2','tháng 3','tháng 4','tháng 5','tháng 6','tháng 7','tháng 8','tháng 9','tháng 10','tháng 11','tháng 12'];
+    document.getElementById('lockDate').textContent = days[now.getDay()] + ', ' + now.getDate() + ' ' + months[now.getMonth()] + ' năm ' + now.getFullYear();
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  function toggleLock() {
+    const input = document.getElementById('lockPw');
+    const btn = document.querySelector('.lock-input-toggle');
+    if (input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+    else { input.type = 'password'; btn.textContent = '👁'; }
+  }
+
+  function unlock() {
+    const pw = document.getElementById('lockPw').value;
+    if (!pw) { document.getElementById('lockPw').focus(); return; }
+    // Simulate unlock
+    window.location.href = '../dashboard/overview.html';
+  }
+
+  // Allow Enter key
+  document.getElementById('lockPw').addEventListener('keydown', e => {
+    if (e.key === 'Enter') unlock();
+  });
+</script>
+</body>
+</html>

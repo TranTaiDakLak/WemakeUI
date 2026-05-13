@@ -72,10 +72,11 @@ function open() {
   nextTick(scrollFocused)
 }
 
-function close() {
+function close(restoreFocus = true) {
+  if (!isOpen.value) return
   isOpen.value = false
   focusedIdx.value = -1
-  triggerRef.value?.focus()
+  if (restoreFocus) triggerRef.value?.focus()
 }
 
 function toggle() { isOpen.value ? close() : open() }
@@ -123,9 +124,10 @@ function onKeydown(e: KeyboardEvent) {
 
 /* ── close on outside click / scroll ── */
 function onOutside(e: MouseEvent) {
+  if (!isOpen.value) return
   if (!wrapperRef.value?.contains(e.target as Node) &&
       !menuRef.value?.contains(e.target as Node)) {
-    close()
+    close(false)  // close without stealing focus back — user clicked elsewhere
   }
 }
 function onScroll() { if (isOpen.value) computePos() }

@@ -53,3 +53,7 @@ export { cn } from './ui-system/utils'
 
 // ── Types ──────────────────────────────────────────────────────
 export * from './types'
+
+// ── Archetypes ─────────────────────────────────────────────────
+export { default as CrudPage } from './archetypes/crud/CrudPage.vue'
+export type { CrudPageConfig, CrudColumnDef, FormFieldConfig, FilterConfig, DetailSectionConfig, BulkActionConfig, RowId } from './schemas/crud.schema'

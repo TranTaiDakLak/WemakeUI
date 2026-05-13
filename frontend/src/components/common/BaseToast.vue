@@ -48,14 +48,12 @@ const iconMap: Record<string, string> = {
   width: 100%;
 }
 
-/* ── Toast card — WX style: white bg + colored left border + icon badge ── */
+/* ── Toast card — tinted bg theo type + colored left border + icon badge ── */
 .wx-toast {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
-  background: #fff;
-  border: 1px solid #e5e7eb;
   border-radius: 12px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   pointer-events: auto;
@@ -63,11 +61,27 @@ const iconMap: Record<string, string> = {
   font-family: var(--wx-font-primary, 'Inter', sans-serif);
 }
 
-/* Colored left accent borders */
-.wx-toast--success { border-left: 3px solid #22c55e; }
-.wx-toast--error   { border-left: 3px solid #ef4444; }
-.wx-toast--warning { border-left: 3px solid #f59e0b; }
-.wx-toast--info    { border-left: 3px solid #3b82f6; }
+/* Tinted bg + border theo type */
+.wx-toast--success {
+  background: rgba(34, 197, 94, 0.30);
+  border: 1px solid rgba(34, 197, 94, 0.60);
+  border-left: 3px solid #22c55e;
+}
+.wx-toast--error {
+  background: rgba(239, 68, 68, 0.30);
+  border: 1px solid rgba(239, 68, 68, 0.60);
+  border-left: 3px solid #ef4444;
+}
+.wx-toast--warning {
+  background: rgba(245, 158, 11, 0.30);
+  border: 1px solid rgba(245, 158, 11, 0.60);
+  border-left: 3px solid #f59e0b;
+}
+.wx-toast--info {
+  background: rgba(59, 130, 246, 0.30);
+  border: 1px solid rgba(59, 130, 246, 0.60);
+  border-left: 3px solid #3b82f6;
+}
 
 /* ── Icon badge ── */
 .wx-toast__icon-badge {
@@ -118,14 +132,14 @@ const iconMap: Record<string, string> = {
   color: rgba(0, 0, 0, 0.6);
 }
 
-/* ── Dark mode ── */
-.wx-dark .wx-toast {
-  background: var(--wx-surface-elevated);
-  border-color: var(--wx-border-default);
-}
+/* ── Dark mode — tinted mạnh hơn một chút để hiện rõ trên nền tối ── */
+.wx-dark .wx-toast--success { background: rgba(34, 197, 94, 0.35);  border-color: rgba(34, 197, 94, 0.65); }
+.wx-dark .wx-toast--error   { background: rgba(239, 68, 68, 0.35);  border-color: rgba(239, 68, 68, 0.65); }
+.wx-dark .wx-toast--warning { background: rgba(245, 158, 11, 0.35); border-color: rgba(245, 158, 11, 0.65); }
+.wx-dark .wx-toast--info    { background: rgba(59, 130, 246, 0.35); border-color: rgba(59, 130, 246, 0.65); }
 .wx-dark .wx-toast__message { color: var(--wx-text-primary); }
 .wx-dark .wx-toast__close { color: var(--wx-text-muted); }
-.wx-dark .wx-toast__close:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); }
+.wx-dark .wx-toast__close:hover { background: rgba(0,0,0,0.15); color: var(--wx-text-primary); }
 
 /* ── Transition — slide in from right ── */
 .wx-toast-enter-active { transition: all 0.3s ease-out; }

@@ -86,11 +86,13 @@ async function handleAdd() {
   const err = cfg.validate?.(addForm.form)
   if (err) { showToast('error', err); return }
   addLoading.value = true
-  await new Promise(r => setTimeout(r, 900))
   const item = cfg.build(addForm.form) as { id: RowId }
-  addItem(item as any)
-  await props.config.handlers?.onAdd?.(item as any)
-  addLoading.value = false
+  try {
+    await props.config.handlers?.onAdd?.(item as any)
+    addItem(item as any)
+  } finally {
+    addLoading.value = false
+  }
   addOpen.value = false
   showToast('success', `Đã thêm ${props.config.label.singular}`)
   highlight(item.id)
@@ -108,38 +110,50 @@ async function handleEdit() {
   const err = cfg.validate?.(editForm.form)
   if (err) { showToast('error', err); return }
   editLoading.value = true
-  await new Promise(r => setTimeout(r, 900))
   const updated = cfg.apply(editTarget.value as any, editForm.form)
-  updateItem((editTarget.value as any).id, updated as any)
-  await props.config.handlers?.onEdit?.(updated as any)
-  editLoading.value = false
-  editOpen.value = false
-  showToast('success', `Đã cập nhật ${props.config.label.singular}`)
+  try {
+    await props.config.handlers?.onEdit?.(updated as any)
+    updateItem((editTarget.value as any).id, updated as any)
+    editOpen.value = false
+    showToast('success', `Đã cập nhật ${props.config.label.singular}`)
+  } catch {
+    showToast('error', `Không thể cập nhật ${props.config.label.singular}`)
+  } finally {
+    editLoading.value = false
+  }
 }
 
 // ── Delete ────────────────────────────────────────────────────────────────────
 async function handleDelete() {
   if (!deleteTarget.value) return
   deleteLoading.value = true
-  await new Promise(r => setTimeout(r, 800))
   const id = (deleteTarget.value as any).id as RowId
-  await props.config.handlers?.onDelete?.(id)
-  removeItem(id)
-  deleteLoading.value = false
-  deleteOpen.value = false
-  showToast('success', `Đã xoá ${props.config.label.singular}`)
+  try {
+    await props.config.handlers?.onDelete?.(id)
+    removeItem(id)
+    deleteOpen.value = false
+    showToast('success', `Đã xoá ${props.config.label.singular}`)
+  } catch {
+    showToast('error', `Không thể xoá ${props.config.label.singular}`)
+  } finally {
+    deleteLoading.value = false
+  }
 }
 
 // ── Bulk delete ───────────────────────────────────────────────────────────────
 async function handleBulkDelete() {
   bulkLoading.value = true
-  await new Promise(r => setTimeout(r, 1000))
   const ids = [...selected.value]
-  await props.config.handlers?.onBulkDelete?.(ids)
-  removeItems(ids)
-  bulkLoading.value = false
-  bulkDeleteOpen.value = false
-  showToast('success', `Đã xoá ${ids.length} ${props.config.label.plural}`)
+  try {
+    await props.config.handlers?.onBulkDelete?.(ids)
+    removeItems(ids)
+    bulkDeleteOpen.value = false
+    showToast('success', `Đã xoá ${ids.length} ${props.config.label.plural}`)
+  } catch {
+    showToast('error', 'Không thể xoá')
+  } finally {
+    bulkLoading.value = false
+  }
 }
 
 // ── Bulk custom actions ───────────────────────────────────────────────────────

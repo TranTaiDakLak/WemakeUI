@@ -8,7 +8,7 @@ import AppTopbar from '../../components/layout/AppTopbar.vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import {
   BaseTabs, BaseAccordion, BaseBreadcrumb, BasePagination,
-  CommandPalette, BaseButton,
+  CommandPalette, BaseButton, AnchorBar,
   type PaletteItem,
 } from '../../components/common'
 import { useToast } from '../../composables/useToast'
@@ -54,6 +54,16 @@ function onLoadMore() {
     showToast('success', `đã tải trang ${page3.value}`)
   }, 800)
 }
+
+/* ── anchor bar ── */
+const anchorActive = ref('gioi-thieu')
+const anchorSections = [
+  { id: 'gioi-thieu',  label: 'Giới thiệu' },
+  { id: 'tinh-nang',   label: 'Tính năng' },
+  { id: 'gia-ca',      label: 'Giá cả' },
+  { id: 'faq',         label: 'FAQ' },
+  { id: 'lien-he',     label: 'Liên hệ' },
+]
 
 /* ── command palette ── */
 const paletteShow = ref(false)
@@ -151,7 +161,26 @@ const paletteItems: PaletteItem[] = [
         />
       </section>
 
-      <!-- ── 5. Command palette ─── -->
+      <!-- ── 5. AnchorBar ─── -->
+      <section class="card">
+        <h2 class="h">5. anchor bar — sticky in-page nav + scroll-spy</h2>
+        <p class="muted">Click để scroll đến section. ScrollSpy tự highlight khi cuộn.</p>
+
+        <h3 class="sub">sticky (mặc định)</h3>
+        <AnchorBar v-model="anchorActive" :sections="anchorSections" />
+
+        <h3 class="sub">inline (không sticky)</h3>
+        <AnchorBar v-model="anchorActive" :sections="anchorSections" inline />
+
+        <h3 class="sub">scroll-spy tắt</h3>
+        <AnchorBar v-model="anchorActive" :sections="anchorSections" :scroll-spy="false" inline />
+
+        <p class="muted" style="margin-top: var(--wx-space-3);">
+          active: <code>{{ anchorActive }}</code>
+        </p>
+      </section>
+
+      <!-- ── 6. Command palette ─── -->
       <section class="card">
         <h2 class="h">5. command palette — cmd+k / ctrl+k</h2>
         <p class="muted">bấm phím tắt (toàn cục) hoặc nút bên dưới. ↑↓ điều hướng, enter chọn, esc đóng.</p>

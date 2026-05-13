@@ -20,17 +20,17 @@
   border-radius: inherit;
 }
 
-/* ── Loading Spinner (CSS-only) ───────────────────────── */
-.wx-spinner {
+/* ── Loading Spinner (CSS-only fallback, no Vue component) ── */
+.wx-css-spinner {
   width: 24px;
   height: 24px;
   border: 3px solid var(--wx-border-subtle);
   border-top-color: var(--wx-brand-primary);
   border-radius: 50%;
-  animation: wx-spin var(--wx-duration-decorative) linear infinite;
+  animation: wx-spin 0.7s linear infinite;
 }
 
-.wx-spinner-lg {
+.wx-css-spinner-lg {
   width: 40px;
   height: 40px;
   border-width: 4px;
@@ -38,6 +38,61 @@
 
 @keyframes wx-spin {
   to { transform: rotate(360deg); }
+}
+
+/* ── Component spinner keyframes + animation (global: tránh scoped-hash mismatch) ── */
+@keyframes wx-spinner-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes wx-retry-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes wx-job-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes wx-job-indet {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
+}
+@keyframes wx-live-pulse {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  70%  { transform: scale(2.4); opacity: 0;   }
+  100% { transform: scale(2.4); opacity: 0;   }
+}
+@keyframes wx-live-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+@keyframes wx-cd-shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-3px); }
+  75%      { transform: translateX(3px); }
+}
+
+/* animation properties — phải ở global vì plugin-vue hash cả keyframe name lẫn animation value */
+.wx-spinner__ring                                           { animation: wx-spinner-rotate 0.8s linear infinite; }
+.wx-retry__spinner                                          { animation: wx-retry-spin 0.8s linear infinite; }
+.wx-job__icon-glyph--spin                                   { animation: wx-job-spin 1s linear infinite; }
+.wx-job__progress[data-indeterminate='true'] .wx-job__progress-bar { animation: wx-job-indet 1.4s var(--wx-ease-standard) infinite; }
+.wx-live[data-status='live'] .wx-live__dot::after           { animation: wx-live-pulse 1.6s var(--wx-ease-standard) infinite; }
+.wx-live[data-status='polling'] .wx-live__dot::after        { animation: wx-live-pulse 2.4s var(--wx-ease-standard) infinite; }
+.wx-live[data-status='connecting'] .wx-live__dot            { animation: wx-live-blink 1s linear infinite; }
+.wx-countdown[data-state='danger'] .wx-countdown__ring      { animation: wx-cd-shake 0.4s ease 0s 1; }
+
+/* prefers-reduced-motion: loading spinner là indicator CHỨC NĂNG → vẫn phải quay.
+   layout.css đặt `* { animation-iteration-count: 1 !important }` — class selector
+   ở đây specificity cao hơn `*` nên thắng dù cả hai cùng !important. */
+@media (prefers-reduced-motion: reduce) {
+  .wx-css-spinner          { animation-duration: 1s !important;   animation-iteration-count: infinite !important; }
+  .wx-spinner__ring        { animation-duration: 1.2s !important; animation-iteration-count: infinite !important; }
+  .wx-retry__spinner       { animation-duration: 1.2s !important; animation-iteration-count: infinite !important; }
+  .wx-job__icon-glyph--spin { animation-duration: 1.5s !important; animation-iteration-count: infinite !important; }
+  .wx-job__progress[data-indeterminate='true'] .wx-job__progress-bar { animation-duration: 2.4s !important; animation-iteration-count: infinite !important; }
+  /* pulse / blink / shake — decorative, để chúng dừng theo reduced-motion */
+  .wx-live__dot::after,
+  .wx-live[data-status='connecting'] .wx-live__dot       { animation: none !important; }
+  .wx-countdown[data-state='danger'] .wx-countdown__ring { animation: none !important; }
 }
 
 /* ── Progress Bar ─────────────────────────────────────── */

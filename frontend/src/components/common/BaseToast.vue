@@ -51,7 +51,7 @@ const iconMap: Record<string, string> = {
 /* ── Toast card — WX style: white bg + colored left border + icon badge ── */
 .wx-toast {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   padding: 12px 16px;
   background: #fff;

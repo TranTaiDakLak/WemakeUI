@@ -400,6 +400,8 @@ const planRadioOptions = [
   background: var(--wx-bg-sunken);
   color: var(--wx-content-primary);
   font-family: var(--wx-font-primary);
+  position: relative;
+  isolation: isolate;
 }
 .main {
   max-width: 960px;
@@ -408,6 +410,8 @@ const planRadioOptions = [
   display: flex;
   flex-direction: column;
   gap: var(--wx-space-5);
+  position: relative;
+  z-index: 1;
 }
 
 .card {
@@ -416,7 +420,9 @@ const planRadioOptions = [
   border-radius: var(--wx-radius-lg);
   padding: var(--wx-space-5);
   box-shadow: var(--wx-shadow-md);
-  scroll-margin-top: 72px;
+  scroll-margin-top: 112px;
+  position: relative;
+  z-index: 2;
 }
 
 .h {

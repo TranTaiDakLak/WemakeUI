@@ -67,7 +67,6 @@ withDefaults(defineProps<{
           mask: radial-gradient(circle, transparent 60%, #000 62%);
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
-  /* animation rotate: 1 element duy nhất, 0.8s/vòng. */
   animation: wx-spinner-rotate 0.8s linear infinite;
   transform-origin: 50% 50%;
   /* ép tăng tốc GPU cho mượt */
@@ -75,7 +74,7 @@ withDefaults(defineProps<{
 }
 
 @keyframes wx-spinner-rotate {
-  from { transform: rotate(0deg);   }
+  from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
 
@@ -94,4 +93,5 @@ withDefaults(defineProps<{
 @media (prefers-reduced-motion: reduce) {
   .wx-spinner__ring { animation-duration: 1.6s; }
 }
+
 </style>

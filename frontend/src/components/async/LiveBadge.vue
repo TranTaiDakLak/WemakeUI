@@ -132,9 +132,10 @@ const relative = computed(() => {
 
 @keyframes wx-live-pulse {
   0%   { transform: scale(1);   opacity: 0.7; }
-  70%  { transform: scale(2.4); opacity: 0;   }
-  100% { transform: scale(2.4); opacity: 0;   }
+  70%  { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
 }
+
 @keyframes wx-live-blink {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0.3; }
@@ -144,4 +145,5 @@ const relative = computed(() => {
   .wx-live__dot::after,
   .wx-live[data-status='connecting'] .wx-live__dot { animation: none; }
 }
+
 </style>

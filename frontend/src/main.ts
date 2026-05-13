@@ -3,8 +3,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-// WX UI System foundations (tokens, dark mode, layout, surfaces, typography, etc.)
-import './ui-system/foundations'
+// Import CSS entry directly so foundation styles are never tree-shaken out of app builds.
+import './ui-system/foundations/index.css'
 
 // App-specific styles (backward-compat aliases, utility classes, animations)
 import './style.css'

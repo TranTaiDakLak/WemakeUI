@@ -156,6 +156,17 @@
   --wx-easing-bounce: cubic-bezier(0.16, 1, 0.3, 1);
   --wx-easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
+  /* short-form aliases — --wx-d-* / --wx-ease-* dùng trong components */
+  --wx-d-micro: 80ms;
+  --wx-d-fast: var(--wx-duration-fast);
+  --wx-d-normal: var(--wx-duration-normal);
+  --wx-d-slow: var(--wx-duration-slow);
+  --wx-d-decorative: var(--wx-duration-decorative);
+  --wx-ease-standard: var(--wx-easing-default);
+  --wx-ease-out: var(--wx-easing-out);
+  --wx-ease-bounce: var(--wx-easing-bounce);
+  --wx-ease-spring: var(--wx-easing-spring);
+
   /* ── Z-Index ────────────────────────────────────────── */
   --wx-z-behind: -1;
   --wx-z-base: 0;

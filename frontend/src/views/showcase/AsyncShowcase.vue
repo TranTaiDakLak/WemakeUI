@@ -9,6 +9,7 @@ import { onBeforeUnmount, onMounted, ref, computed } from 'vue'
 import AppTopbar from '../../components/layout/AppTopbar.vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { EmptyState, ErrorState } from '../../components/feedback'
+import { AnchorBar } from '../../components/common'
 import {
   JobCard,
   JobTimeline,
@@ -16,6 +17,7 @@ import {
   ConflictBanner,
   RetryButton,
   StepProgress,
+  CountdownTimer,
   type Job,
   type JobStatus,
 } from '../../components/async'
@@ -160,24 +162,23 @@ const verticalSteps = [
 
 /* ─── anchor nav ────────────────────────────────────────── */
 const sections = [
-  { id: 'empty', label: 'EmptyState' },
-  { id: 'error', label: 'ErrorState' },
-  { id: 'jobcard', label: 'JobCard' },
-  { id: 'timeline', label: 'JobTimeline' },
-  { id: 'live', label: 'LiveBadge' },
-  { id: 'conflict', label: 'ConflictBanner' },
-  { id: 'retry', label: 'RetryButton' },
-  { id: 'step', label: 'StepProgress' },
-] as const
-const activeId = ref<string>('empty')
-function jumpTo(id: string, e: MouseEvent) {
-  e.preventDefault()
-  const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  activeId.value = id
-}
+  { id: 'empty',     label: 'EmptyState' },
+  { id: 'error',     label: 'ErrorState' },
+  { id: 'jobcard',   label: 'JobCard' },
+  { id: 'timeline',  label: 'JobTimeline' },
+  { id: 'live',      label: 'LiveBadge' },
+  { id: 'conflict',  label: 'ConflictBanner' },
+  { id: 'retry',     label: 'RetryButton' },
+  { id: 'step',      label: 'StepProgress' },
+  { id: 'countdown', label: 'CountdownTimer' },
+]
+const activeId = ref('empty')
 
 const totalJobs = computed(() => jobs.value.length)
+
+/* ─── CountdownTimer demo ───────────────────────────────── */
+const cdKey = ref(0)
+function resetAllTimers() { cdKey.value++ }
 </script>
 
 <template>
@@ -190,16 +191,7 @@ const totalJobs = computed(() => jobs.value.length)
       />
 
       <!-- anchor nav -->
-      <nav class="anchors" aria-label="section nav">
-        <a
-          v-for="s in sections"
-          :key="s.id"
-          :href="'#' + s.id"
-          class="anchor"
-          :data-active="activeId === s.id ? 'true' : 'false'"
-          @click="jumpTo(s.id, $event)"
-        >{{ s.label }}</a>
-      </nav>
+      <AnchorBar v-model="activeId" :sections="sections" />
 
       <!-- EmptyState -->
       <section id="empty" class="section">
@@ -349,6 +341,23 @@ const totalJobs = computed(() => jobs.value.length)
           <StepProgress :steps="verticalSteps" orientation="vertical" :current="1" />
         </div>
       </section>
+      <!-- CountdownTimer -->
+      <section id="countdown" class="section">
+        <h3 class="section__title">CountdownTimer — OTP / session / cooldown</h3>
+        <div class="card">
+          <div class="row" style="flex-wrap:wrap; gap: 24px; align-items:center;">
+            <CountdownTimer :key="`otp-${cdKey}`" :seconds="30"  label="mã OTP hết hạn sau"   size="md" />
+            <CountdownTimer :key="`ses-${cdKey}`" :seconds="120" label="phiên đăng nhập"       size="md" :warn-at="40" :danger-at="15" />
+            <CountdownTimer :key="`cd-${cdKey}`"  :seconds="10"  label="gửi lại sau"           size="sm" />
+            <CountdownTimer :key="`lg-${cdKey}`"  :seconds="300" label="job chạy lại lúc"      size="lg" :warn-at="20" />
+            <CountdownTimer :key="`exp-${cdKey}`" :seconds="5"   label="đã hết hạn"            size="md" :auto-start="false" @expire="() => {}" />
+          </div>
+          <p class="hint" style="margin-top:12px;">
+            Vòng tròn chuyển vàng khi gần hết, đỏ + rung khi sắp hết. Expose: <code>start / stop / reset(n)</code>.
+          </p>
+          <button class="reset-btn" style="margin-top:8px" @click="resetAllTimers">↻ đặt lại tất cả</button>
+        </div>
+      </section>
     </main>
   </div>
 </template>
@@ -367,35 +376,6 @@ const totalJobs = computed(() => jobs.value.length)
   display: flex;
   flex-direction: column;
   gap: var(--wx-space-6);
-}
-
-.anchors {
-  position: sticky;
-  top: var(--wx-space-3);
-  z-index: var(--wx-z-sticky);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--wx-space-1);
-  padding: var(--wx-space-2);
-  background: var(--wx-surface-base);
-  border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-md);
-  box-shadow: var(--wx-shadow-md);
-}
-.anchor {
-  font-family: var(--wx-font-mono);
-  font-size: var(--wx-fs-12);
-  color: var(--wx-text-secondary);
-  padding: 4px 10px;
-  border-radius: var(--wx-radius-sm);
-  text-decoration: none;
-  transition: background var(--wx-d-micro) var(--wx-ease-standard);
-}
-.anchor:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); }
-.anchor[data-active='true'] {
-  background: var(--wx-selected-bg);
-  color: var(--wx-selected-text);
-  font-weight: var(--wx-fw-semibold);
 }
 
 .section {

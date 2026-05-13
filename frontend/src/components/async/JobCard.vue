@@ -189,7 +189,10 @@ const progressPct = computed(() => {
 .wx-job__icon[data-intent='muted']   { background: var(--wx-disabled-bg); color: var(--wx-disabled-text); }
 
 .wx-job__icon-glyph { display: inline-block; }
-.wx-job__icon-glyph--spin { animation: wx-job-spin 1s linear infinite; }
+.wx-job__icon-glyph--spin {
+  display: inline-block;
+  animation: wx-job-spin 1s linear infinite;
+}
 
 .wx-job__title-wrap { flex: 1; min-width: 0; }
 .wx-job__title {
@@ -292,6 +295,7 @@ const progressPct = computed(() => {
 @keyframes wx-job-spin {
   to { transform: rotate(360deg); }
 }
+
 @keyframes wx-job-indet {
   0%   { transform: translateX(-100%); }
   100% { transform: translateX(250%); }

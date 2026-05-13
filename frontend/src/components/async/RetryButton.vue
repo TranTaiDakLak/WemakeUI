@@ -186,7 +186,9 @@ function close() { open.value = false }
 @keyframes wx-retry-spin {
   to { transform: rotate(360deg); }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .wx-retry__spinner { animation-duration: 1.6s; }
 }
+
 </style>

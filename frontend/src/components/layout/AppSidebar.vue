@@ -13,6 +13,7 @@
  *   sections render qua prop `items` hoặc qua slot mặc định (hoàn toàn tự render).
  */
 import { computed, ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { useRouter } from 'vue-router'
 import type { SidebarItem, SidebarSection } from './sidebar-types'
 
 const props = withDefaults(defineProps<{
@@ -53,6 +54,8 @@ const emit = defineEmits<{
   'select': [item: SidebarItem]
   'update:collapsed': [value: boolean]
 }>()
+
+const router = useRouter()
 
 const internalCollapsed = ref(props.collapsed)
 const collapsed = computed<boolean>({
@@ -124,6 +127,23 @@ function toggleGroup(item: SidebarItem) {
 
 function onSelect(item: SidebarItem) {
   if (item.disabled) return
+  emit('select', item)
+}
+
+function onNavigate(item: SidebarItem, e: MouseEvent) {
+  if (item.disabled) {
+    e.preventDefault()
+    return
+  }
+
+  if (item.href?.startsWith('#/')) {
+    e.preventDefault()
+    const target = item.href.slice(1)
+    if (router.currentRoute.value.fullPath !== target) {
+      void router.push(target)
+    }
+  }
+
   emit('select', item)
 }
 
@@ -238,7 +258,7 @@ watch(() => props.activeId, () => {
                     'wx-sidebar__link--disabled': item.disabled,
                   }"
                   :title="collapsed ? item.label : undefined"
-                  @click="onSelect(item)"
+                  @click="onNavigate(item, $event)"
                 >
                   <span
                     v-if="item.icon"
@@ -302,7 +322,7 @@ watch(() => props.activeId, () => {
                           'wx-sidebar__link--disabled': child.disabled,
                         }"
                         :title="child.label"
-                        @click="onSelect(child)"
+                        @click="onNavigate(child, $event)"
                       >
                         <span class="wx-sidebar__child-bullet" aria-hidden="true" />
                         <span class="wx-sidebar__label">{{ child.label }}</span>

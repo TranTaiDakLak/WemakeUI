@@ -56,3 +56,6 @@ export { default as BaseWizard }     from './BaseWizard.vue'
 
 /* ── phase 12 additions (custom select menu) ───────────── */
 export { default as BaseSelectMenu } from './BaseSelectMenu.vue'
+
+/* ── navigation utilities ───────────────────────────────── */
+export { default as AnchorBar } from './AnchorBar.vue'

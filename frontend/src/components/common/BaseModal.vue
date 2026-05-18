@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<{
   closeLabel?: string
   loading?: boolean
   intent?: ModalIntent
+  closable?: boolean
 }>(), {
   size: 'md',
   showSave: false,
@@ -20,6 +21,7 @@ const props = withDefaults(defineProps<{
   closeLabel: 'Đóng',
   loading: false,
   intent: 'default',
+  closable: true,
 })
 
 const intentDialogStyle = computed(() => {
@@ -141,9 +143,15 @@ function trapFocusHandle(e: KeyboardEvent) {
         <div class="modal-header" :style="intentHeaderStyle">
           <span class="modal-title">{{ props.title }}</span>
           <slot name="header-extra" />
-          <button class="modal-close" @click="emit('close')">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+          <button
+            v-if="props.closable"
+            class="modal-close-btn"
+            type="button"
+            aria-label="Đóng"
+            @click="emit('close')"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
           </button>
         </div>
@@ -219,28 +227,30 @@ function trapFocusHandle(e: KeyboardEvent) {
   font-weight: 700;
   color: var(--wx-text-primary);
   letter-spacing: 0.2px;
+  flex: 1;
 }
 
-.modal-close {
+.modal-close-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
   border: none;
-  border-radius: var(--wx-radius-md);
+  border-radius: var(--wx-radius-md, 6px);
   background: transparent;
-  color: var(--wx-text-muted);
+  color: var(--wx-content-muted);
   cursor: pointer;
-  transition: all var(--wx-d-fast, 150ms) var(--wx-ease-standard);
+  flex-shrink: 0;
+  transition: background var(--wx-d-fast, 150ms), color var(--wx-d-fast, 150ms);
 }
-.modal-close:hover {
-  background: var(--wx-surface-hover);
+.modal-close-btn:hover {
+  background: var(--wx-surface-sunken);
   color: var(--wx-text-primary);
-  transform: scale(1.1);
 }
-.modal-close:active {
-  transform: scale(0.9);
+.modal-close-btn:active {
+  transform: scale(0.92);
 }
 
 /* ── Body ── */

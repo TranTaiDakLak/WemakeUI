@@ -20,6 +20,7 @@ withDefaults(defineProps<{
   cancelLabel?: string
   danger?: boolean
   submitDisabled?: boolean
+  closable?: boolean
 }>(), {
   size: 'md',
   loading: false,
@@ -27,6 +28,7 @@ withDefaults(defineProps<{
   cancelLabel: 'Huỷ',
   danger: false,
   submitDisabled: false,
+  closable: true,
 })
 
 const emit = defineEmits<{
@@ -45,6 +47,7 @@ function close() {
     :title="title"
     :size="size"
     :loading="loading"
+    :closable="closable"
     @close="close"
   >
     <slot />

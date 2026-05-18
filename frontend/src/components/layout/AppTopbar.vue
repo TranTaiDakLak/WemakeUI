@@ -49,6 +49,7 @@ const { isDark, toggleTheme } = useTheme()
   justify-content: space-between;
   padding: 0 var(--space-md);
   background: var(--wx-gradient-header);
+  color: #fff;       /* default cho mọi icon/text trong topbar */
   flex-shrink: 0;
   z-index: var(--wx-z-dropdown);
   transition: background var(--wx-duration-normal) var(--wx-easing-default);
@@ -80,14 +81,14 @@ const { isDark, toggleTheme } = useTheme()
   border: none;
   border-radius: var(--wx-radius-full);
   background: transparent;
-  color: rgba(255, 255, 255, 0.85);
+  color: #fff;
   cursor: pointer;
   transition: all var(--wx-duration-fast) var(--wx-easing-default);
 }
 
 .topbar-icon-btn:hover {
-  background: var(--wx-glass-light-bg);
-  color: var(--wx-text-inverse);
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
   transform: scale(1.05);
 }
 

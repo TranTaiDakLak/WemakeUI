@@ -61,27 +61,19 @@ const iconMap: Record<string, string> = {
   font-family: var(--wx-font-primary, 'Inter', sans-serif);
 }
 
-/* Tinted bg + border theo type */
-.wx-toast--success {
-  background: rgba(34, 197, 94, 0.30);
-  border: 1px solid rgba(34, 197, 94, 0.60);
-  border-left: 3px solid #22c55e;
-}
-.wx-toast--error {
-  background: rgba(239, 68, 68, 0.30);
-  border: 1px solid rgba(239, 68, 68, 0.60);
-  border-left: 3px solid #ef4444;
-}
-.wx-toast--warning {
-  background: rgba(245, 158, 11, 0.30);
-  border: 1px solid rgba(245, 158, 11, 0.60);
-  border-left: 3px solid #f59e0b;
-}
+/* Light mode: white card + colored left border + colored icon badge.
+   Đồng bộ với card/modal trắng, tăng readability. */
+.wx-toast--success,
+.wx-toast--error,
+.wx-toast--warning,
 .wx-toast--info {
-  background: rgba(59, 130, 246, 0.30);
-  border: 1px solid rgba(59, 130, 246, 0.60);
-  border-left: 3px solid #3b82f6;
+  background: var(--wx-surface-base);
+  border: 1px solid var(--wx-border-default);
 }
+.wx-toast--success { border-left: 3px solid var(--wx-success-solid); }
+.wx-toast--error   { border-left: 3px solid var(--wx-danger-solid); }
+.wx-toast--warning { border-left: 3px solid var(--wx-warning-solid); }
+.wx-toast--info    { border-left: 3px solid var(--wx-info-solid); }
 
 /* ── Icon badge ── */
 .wx-toast__icon-badge {
@@ -96,10 +88,10 @@ const iconMap: Record<string, string> = {
   font-size: 12px;
   font-weight: 700;
 }
-.wx-toast__icon-badge--success { background: #22c55e; }
-.wx-toast__icon-badge--error   { background: #ef4444; }
-.wx-toast__icon-badge--warning { background: #f59e0b; }
-.wx-toast__icon-badge--info    { background: #3b82f6; }
+.wx-toast__icon-badge--success { background: var(--wx-success-solid); }
+.wx-toast__icon-badge--error   { background: var(--wx-danger-solid); }
+.wx-toast__icon-badge--warning { background: var(--wx-warning-solid); }
+.wx-toast__icon-badge--info    { background: var(--wx-info-solid); }
 
 /* ── Content ── */
 .wx-toast__content {
@@ -109,7 +101,7 @@ const iconMap: Record<string, string> = {
 
 .wx-toast__message {
   font-size: 13px;
-  color: #1f2937;
+  color: var(--wx-text-primary);
   line-height: 1.5;
   margin: 0;
 }
@@ -132,14 +124,16 @@ const iconMap: Record<string, string> = {
   color: rgba(0, 0, 0, 0.6);
 }
 
-/* ── Dark mode — tinted mạnh hơn một chút để hiện rõ trên nền tối ── */
-.wx-dark .wx-toast--success { background: rgba(34, 197, 94, 0.35);  border-color: rgba(34, 197, 94, 0.65); }
-.wx-dark .wx-toast--error   { background: rgba(239, 68, 68, 0.35);  border-color: rgba(239, 68, 68, 0.65); }
-.wx-dark .wx-toast--warning { background: rgba(245, 158, 11, 0.35); border-color: rgba(245, 158, 11, 0.65); }
-.wx-dark .wx-toast--info    { background: rgba(59, 130, 246, 0.35); border-color: rgba(59, 130, 246, 0.65); }
-.wx-dark .wx-toast__message { color: var(--wx-text-primary); }
+/* ── Dark mode — surface-elevated thay vì white, giữ colored left border ── */
+.wx-dark .wx-toast--success,
+.wx-dark .wx-toast--error,
+.wx-dark .wx-toast--warning,
+.wx-dark .wx-toast--info {
+  background: var(--wx-surface-elevated);
+  border-color: var(--wx-border-default);
+}
 .wx-dark .wx-toast__close { color: var(--wx-text-muted); }
-.wx-dark .wx-toast__close:hover { background: rgba(0,0,0,0.15); color: var(--wx-text-primary); }
+.wx-dark .wx-toast__close:hover { background: rgba(255,255,255,0.08); color: var(--wx-text-primary); }
 
 /* ── Transition — slide in from right ── */
 .wx-toast-enter-active { transition: all 0.3s ease-out; }

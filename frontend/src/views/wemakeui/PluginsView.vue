@@ -216,7 +216,7 @@ async function handleBulkDelete() {
 </script>
 
 <template>
-  <AppPageLayout section="weconnect"
+  <AppPageLayout section="wemakeui"
     current="plugins"
     page-title="Plugin manager"
     page-description="Quản lý và cài đặt plugin mở rộng tính năng"

@@ -4,7 +4,6 @@
  * full-width topbar + centered main, max-width container.
  */
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
 import { AppShell, PageHeader } from '../../../components/layout'
 import {
   BaseButton, BaseCard, BasePanel, BaseInput, BaseSelectMenu, BaseToggle,
@@ -176,7 +175,6 @@ function submit() {
     <template #footer>
       <div class="foot">
         <span>© 2026 WemakeUI · sentence case · vietnamese</span>
-        <RouterLink to="/" class="text-link">← quay về sitemap</RouterLink>
       </div>
     </template>
   </AppShell>

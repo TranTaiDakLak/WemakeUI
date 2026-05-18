@@ -24,7 +24,7 @@ const { revealed, observe } = useScrollReveal()
 onMounted(() => { if (sectionRef.value) observe(sectionRef.value) })
 
 const DEFAULT_ITEMS: FAQItem[] = [
-  { id: '1', category: 'Sản phẩm', question: 'WeConnect hỗ trợ những kênh nhắn tin nào?', answer: 'WeConnect hỗ trợ WhatsApp, WhatsApp Business API, Zalo OA, Zalo ZNS, Telegram, và SMS. Chúng tôi đang phát triển thêm Facebook Messenger và Viber.' },
+  { id: '1', category: 'Sản phẩm', question: 'WemakeUI hỗ trợ những kênh nhắn tin nào?', answer: 'WemakeUI hỗ trợ WhatsApp, WhatsApp Business API, Zalo OA, Zalo ZNS, Telegram, và SMS. Chúng tôi đang phát triển thêm Facebook Messenger và Viber.' },
   { id: '2', category: 'Sản phẩm', question: 'Có thể quản lý bao nhiêu tài khoản cùng lúc?', answer: 'Tuỳ gói: Starter 50 tài khoản, Business 500 tài khoản, Enterprise không giới hạn. Mỗi tài khoản có thể chạy nhiều phiên song song.' },
   { id: '3', category: 'Kỹ thuật', question: 'API có tài liệu đầy đủ không?', answer: 'Có. Chúng tôi cung cấp REST API đầy đủ tài liệu tại api.wemake.vn, SDK cho Node.js, Python và PHP, cùng Webhook cho event-driven integration.' },
   { id: '4', category: 'Bảo mật', question: 'Dữ liệu có được mã hóa không?', answer: 'Tất cả dữ liệu được mã hóa AES-256 lúc lưu trữ và TLS 1.3 khi truyền tải. Chúng tôi tuân thủ PDPA và đang trong quá trình đạt ISO 27001.' },

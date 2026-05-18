@@ -91,7 +91,7 @@ function onBarClick(item: { label: string; value: number }) {
 }
 
 function navToPlatform() {
-  router.push({ path: '/weconnect/campaigns', query: { platform: selectedPlatform.value ?? '' } })
+  router.push({ path: '/wemakeui/campaigns', query: { platform: selectedPlatform.value ?? '' } })
   platformDrawer.value = false
 }
 
@@ -189,7 +189,7 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value) })
       >
         <div class="a-card__head">
           <h3 class="a-card__title">Hoạt động hệ thống</h3>
-          <BaseButton size="sm" variant="ghost" @click="router.push('/weconnect/console')">Xem tất cả</BaseButton>
+          <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">Xem tất cả</BaseButton>
         </div>
         <div class="timeline-wrap">
           <Timeline :items="TIMELINE" :group-by-day="false" />

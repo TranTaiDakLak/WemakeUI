@@ -234,8 +234,8 @@ function viewDemo(card: FlatCard, e: Event) {
                 <rect x="32" y="30" width="38" height="7" rx="3" fill="rgba(255,255,255,.3)"/>
                 <rect x="54" y="42" width="38" height="7" rx="3" fill="rgba(255,255,255,.2)"/>
               </template>
-              <template v-else-if="card.page.category === 'WeConnect'">
-                <!-- WeConnect: sidebar nav + menustrip + datagrid rows + statusbar -->
+              <template v-else-if="card.page.category === 'WemakeUI'">
+                <!-- WemakeUI: sidebar nav + menustrip + datagrid rows + statusbar -->
                 <rect x="0" y="0" width="20" height="60" fill="rgba(255,255,255,.15)"/>
                 <rect x="3" y="4" width="14" height="3" rx="1" fill="rgba(255,255,255,.5)"/>
                 <rect x="3" y="9" width="14" height="2" rx="1" fill="rgba(255,255,255,.25)"/>

@@ -19,7 +19,7 @@ const MEMBER_TABS = [
 ]
 
 const PRODUCTS_POOL = [
-  { name: 'WeConnect Pro',        plan: 'Subscription', price: '499.000đ/tháng', since: '01/01/2024', status: 'active' },
+  { name: 'WemakeUI Pro',        plan: 'Subscription', price: '499.000đ/tháng', since: '01/01/2024', status: 'active' },
   { name: 'AutoMessage Plus',     plan: 'One-time',     price: '1.490.000đ',     since: '15/02/2024', status: 'active' },
   { name: 'ChatBot Builder',      plan: 'Subscription', price: '299.000đ/tháng', since: '08/03/2024', status: 'active' },
   { name: 'CRM Enterprise',       plan: 'Subscription', price: '799.000đ/tháng', since: '22/04/2024', status: 'expired' },
@@ -29,7 +29,7 @@ const PRODUCTS_POOL = [
   { name: 'SMS Gateway',          plan: 'Subscription', price: '399.000đ/tháng', since: '20/08/2024', status: 'pending' },
   { name: 'Push Kit',             plan: 'One-time',     price: '790.000đ',       since: '01/09/2024', status: 'active' },
   { name: 'Social Media Manager', plan: 'Subscription', price: '599.000đ/tháng', since: '12/10/2024', status: 'active' },
-  { name: 'WeConnect Pro',        plan: 'Renewal',      price: '499.000đ/tháng', since: '01/11/2024', status: 'active' },
+  { name: 'WemakeUI Pro',        plan: 'Renewal',      price: '499.000đ/tháng', since: '01/11/2024', status: 'active' },
 ]
 
 function getMemberProducts(m: Member) {

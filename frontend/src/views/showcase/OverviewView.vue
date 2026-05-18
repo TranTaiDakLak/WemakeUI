@@ -45,13 +45,13 @@ function phasesForGroup(nums: number[]) {
 </script>
 
 <template>
-  <div class="sitemap">
+  <div class="overview-page">
 
     <!-- ── Hero ───────────────────────────────────────────────── -->
     <header class="hero">
       <div class="hero-inner">
         <div class="hero-text">
-          <h1 class="hero-title">WemakeUI <span class="hero-accent">Sitemap</span></h1>
+          <h1 class="hero-title">WemakeUI <span class="hero-accent">Tổng quan</span></h1>
           <p class="hero-sub">Demo lab — duyệt toàn bộ components và page templates. Click bất kỳ route nào để xem ngay.</p>
         </div>
         <div class="stats-row">
@@ -127,7 +127,7 @@ function phasesForGroup(nums: number[]) {
 
 <style scoped>
 /* ── Layout ──────────────────────────────────────────────────── */
-.sitemap {
+.overview-page {
   min-height: 100vh;
   font-family: var(--wx-font-primary);
   color: var(--wx-text-primary);

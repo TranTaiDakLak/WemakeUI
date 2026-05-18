@@ -2,11 +2,11 @@
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseAvatar, BaseBadge, BaseTag } from '@/components/common'
 import CrudPage from '@/archetypes/crud/CrudPage.vue'
-import { contactsConfig, CONTACT_STATUS_BADGE, CONTACT_STATUS_LABEL } from '@/configs/weconnect/contacts.config'
+import { contactsConfig, CONTACT_STATUS_BADGE, CONTACT_STATUS_LABEL } from '@/configs/wemakeui/contacts.config'
 </script>
 
 <template>
-  <AppPageLayout section="weconnect"
+  <AppPageLayout section="wemakeui"
     current="contacts"
     page-title="Danh bạ liên hệ"
     page-description="Quản lý danh bạ và phân nhóm khách hàng"

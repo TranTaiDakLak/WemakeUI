@@ -33,7 +33,7 @@ async function unlock() {
 </script>
 
 <template>
-  <AuthLayout aside-tone="dark" :show-home="true">
+  <AuthLayout aside-tone="dark">
     <template #aside>
       <div class="lock-aside">
         <div class="clock">{{ timeStr }}</div>

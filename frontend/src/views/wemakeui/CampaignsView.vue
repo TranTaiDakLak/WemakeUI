@@ -340,7 +340,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
 </script>
 
 <template>
-  <AppPageLayout section="weconnect"
+  <AppPageLayout section="wemakeui"
     current="campaigns"
     page-title="Chiến dịch tin nhắn"
     page-description="Tạo và theo dõi chiến dịch gửi tin hàng loạt"

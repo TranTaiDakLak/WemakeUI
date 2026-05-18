@@ -3,8 +3,6 @@
  * ErrorLayout — centered illustration + heading + cta.
  * Phase 6 — error & utility pages shared layout.
  */
-import { RouterLink } from 'vue-router'
-
 withDefaults(defineProps<{
   /** mã lỗi to (404, 500…) — hoặc emoji */
   code?: string
@@ -24,8 +22,6 @@ withDefaults(defineProps<{
 
 <template>
   <div class="err-shell" :data-variant="variant">
-    <RouterLink to="/" class="err-home">← sitemap</RouterLink>
-
     <div class="err-blob err-blob--1" aria-hidden="true" />
     <div class="err-blob err-blob--2" aria-hidden="true" />
 
@@ -69,25 +65,6 @@ withDefaults(defineProps<{
 }
 .err-shell[data-variant="gradient"] { background: var(--wx-gradient-bg); }
 .err-shell[data-variant="dark"]     { background: #0f172a; color: white; }
-
-.err-home {
-  position: absolute;
-  top: var(--wx-space-4);
-  left: var(--wx-space-5);
-  font-size: var(--wx-fs-13);
-  color: var(--wx-content-link);
-  text-decoration: none;
-  background: var(--wx-surface-base);
-  padding: 4px 10px;
-  border-radius: var(--wx-radius-md);
-  border: 1px solid var(--wx-border-subtle);
-  z-index: 2;
-}
-.err-shell[data-variant="dark"] .err-home {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border-color: rgba(255, 255, 255, 0.2);
-}
 
 /* decorative blobs */
 .err-blob {

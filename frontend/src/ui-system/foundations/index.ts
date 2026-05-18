@@ -18,6 +18,7 @@
 
 import './tokens.css'
 import './dark-mode.css'
+import './flat-mode.css'
 import './layout.css'
 import './surfaces.css'
 import './typography.css'

@@ -19,13 +19,13 @@ export const useNotificationsStore = defineStore('notifications', () => {
       id: 1, title: 'Chiến dịch hoàn thành',
       body: 'Campaign "ZaloBlast_May" đã gửi xong 12,000 tin.',
       severity: 'success', time: '11:30', read: false,
-      action: { label: 'Xem báo cáo', to: '/weconnect/campaigns' },
+      action: { label: 'Xem báo cáo', to: '/wemakeui/campaigns' },
     },
     {
       id: 2, title: 'Cảnh báo session',
       body: '3 phiên kết nối mất và chưa reconnect sau 10 phút.',
       severity: 'warning', time: '11:15', read: false,
-      action: { label: 'Xem phiên', to: '/weconnect/sessions' },
+      action: { label: 'Xem phiên', to: '/wemakeui/sessions' },
     },
     {
       id: 3, title: 'Lỗi webhook',

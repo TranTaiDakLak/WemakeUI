@@ -31,14 +31,17 @@
   --wx-brand-800: #1e40af;
   --wx-brand-900: #1e3a8a;
 
-  /* ── Gradients ──────────────────────────────────────── */
+  /* ── Gradients ──────────────────────────────────────────
+     Reference --wx-brand-* tokens so consumer override cascades.
+     Override --wx-brand-primary / --wx-brand-accent to re-skin.
+     ──────────────────────────────────────────────────────── */
   --wx-gradient-bg: linear-gradient(to right, #7ecff1, #9cc9f5, #95def5);
-  --wx-gradient-header: linear-gradient(to right, #06b6d4, #3b82f6, #2563eb);
+  --wx-gradient-header: linear-gradient(to right, var(--wx-brand-accent), var(--wx-brand-500), var(--wx-brand-primary));
   --wx-gradient-cta: linear-gradient(to right, #00d2ff, #3a7bd5, #0052D4);
-  --wx-gradient-button: linear-gradient(to right, #06b6d4, #2563eb);
-  --wx-gradient-accent: linear-gradient(to right, #44c3f9, #007bff);
-  --wx-gradient-text: linear-gradient(to right, #06b6d4, #2563eb);
-  --wx-gradient-divider: linear-gradient(to right, transparent, #e5e7eb, transparent);
+  --wx-gradient-button: linear-gradient(to right, var(--wx-brand-accent), var(--wx-brand-primary));
+  --wx-gradient-accent: linear-gradient(to right, var(--wx-brand-accent), var(--wx-brand-focus));
+  --wx-gradient-text: linear-gradient(to right, var(--wx-brand-accent), var(--wx-brand-primary));
+  --wx-gradient-divider: linear-gradient(to right, transparent, var(--wx-border-default), transparent);
   --wx-gradient-success: linear-gradient(to right, #10b981, #059669);
   --wx-gradient-danger: linear-gradient(to right, #f43f5e, #dc2626);
   --wx-gradient-warning: linear-gradient(to right, #fb923c, #f59e0b);
@@ -110,13 +113,16 @@
   --wx-status-info-text: var(--wx-info-text);
   --wx-status-info-border: var(--wx-info-solid);
 
-  /* ── Interactive States ─────────────────────────────── */
-  --wx-selected-bg: #ecf3fd;
-  --wx-selected-text: #007bff;
-  --wx-hover-bg: #f6faff;
-  --wx-hover-text: #6e98f1;
-  --wx-active-bg: #dbeafe;
-  --wx-active-text: #1d4ed8;
+  /* ── Interactive States ──────────────────────────────────
+     Reference --wx-brand-* nên cascade khi consumer override brand.
+     (disabled giữ neutral — không nên nhuộm theo brand.)
+     ──────────────────────────────────────────────────────── */
+  --wx-selected-bg: var(--wx-brand-50);
+  --wx-selected-text: var(--wx-brand-focus);
+  --wx-hover-bg: var(--wx-brand-50);
+  --wx-hover-text: var(--wx-brand-400);
+  --wx-active-bg: var(--wx-brand-100);
+  --wx-active-text: var(--wx-brand-700);
   --wx-disabled-bg: #f3f4f6;
   --wx-disabled-text: #9ca3af;
 

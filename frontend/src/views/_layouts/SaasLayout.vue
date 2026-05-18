@@ -152,7 +152,7 @@ const activeId = computed(() => props.current)
   width: 32px; height: 32px;
   border: none;
   background: transparent;
-  color: rgba(255,255,255,0.85);
+  color: #fff;
   border-radius: var(--wx-radius-full);
   cursor: pointer;
   display: inline-flex;
@@ -160,7 +160,7 @@ const activeId = computed(() => props.current)
   justify-content: center;
 }
 .topbar-icon :deep(svg) { width: 16px; height: 16px; }
-.topbar-icon:hover { background: rgba(255,255,255,0.12); color: white; }
+.topbar-icon:hover { background: rgba(255,255,255,0.18); color: #fff; }
 
 /* Hamburger — ẩn trên desktop, hiện trên mobile */
 .topbar-hamburger {

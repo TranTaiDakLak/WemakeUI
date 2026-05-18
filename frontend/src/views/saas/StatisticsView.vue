@@ -21,8 +21,8 @@ const periodOptions  = [
 ]
 const productOptions = [
   { value: 'all',          label: 'Tất cả sản phẩm' },
-  { value: 'pro',          label: 'WeConnect Pro' },
-  { value: 'basic',        label: 'WeConnect Basic' },
+  { value: 'pro',          label: 'WemakeUI Pro' },
+  { value: 'basic',        label: 'WemakeUI Basic' },
   { value: 'addon',        label: 'Add-on' },
 ]
 const statusOptions  = [
@@ -66,8 +66,8 @@ const revenueSeries = computed<LineSeries[]>(() => [
 
 /* ── Product distribution donut ── */
 const productPie = computed<DonutSlice[]>(() => [
-  { label: 'WeConnect Pro',   value: 58, color: '#2563eb' },
-  { label: 'WeConnect Basic', value: 24, color: '#10b981' },
+  { label: 'WemakeUI Pro',   value: 58, color: '#2563eb' },
+  { label: 'WemakeUI Basic', value: 24, color: '#10b981' },
   { label: 'Add-on API',      value: 12, color: '#f59e0b' },
   { label: 'Trial',           value: 6,  color: '#8b5cf6' },
 ])

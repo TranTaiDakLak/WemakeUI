@@ -281,7 +281,7 @@ function quickConnect(a: Account, e: MouseEvent) {
 </script>
 
 <template>
-  <AppPageLayout section="weconnect"
+  <AppPageLayout section="wemakeui"
     current="accounts"
     page-title="Tài khoản kết nối"
     page-description="Quản lý các tài khoản WhatsApp, Telegram và Zalo đang kết nối"

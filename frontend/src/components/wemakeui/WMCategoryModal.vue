@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { BaseButton, BaseInput, BaseModal } from '../common'
-import { useCategoriesStore } from '../../stores/weconnect/categories'
+import { useCategoriesStore } from '../../stores/wemakeui/categories'
 
 const show = defineModel<boolean>({ required: true })
 const categoriesStore = useCategoriesStore()

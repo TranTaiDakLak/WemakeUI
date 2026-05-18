@@ -13,7 +13,7 @@ const CASES = [
     industry: 'Thương mại điện tử',
     company: 'Shopee Vietnam',
     challenge: 'Quản lý 50,000+ chat/ngày từ sellers trên nhiều kênh riêng biệt.',
-    solution: 'Triển khai WeConnect để hợp nhất kênh, tự động phân loại và gán ticket theo loại vấn đề.',
+    solution: 'Triển khai WemakeUI để hợp nhất kênh, tự động phân loại và gán ticket theo loại vấn đề.',
     metrics: [
       { value: '78%', label: 'Giảm thời gian xử lý' },
       { value: '3.2×', label: 'Tăng năng suất team' },

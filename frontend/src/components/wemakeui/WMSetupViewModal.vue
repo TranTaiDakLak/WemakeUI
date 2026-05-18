@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { BaseButton, BaseCheckbox, GroupBox, BaseModal } from '../common'
-import { useSettingsStore } from '../../stores/weconnect/settings'
+import { useSettingsStore } from '../../stores/wemakeui/settings'
 import type { ColumnConfig } from '../../types'
 
 const show = defineModel<boolean>({ required: true })

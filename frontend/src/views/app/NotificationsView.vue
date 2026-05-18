@@ -15,7 +15,7 @@ const NOTIFS = ref([
   { id: 2, type: 'review',  actor: 'Trần Văn C', text: 'đã duyệt PR #298 của bạn', time: '1 giờ trước', read: false, avatar: 'TC' },
   { id: 3, type: 'deploy',  actor: 'Hệ thống', text: 'Deploy staging thành công — commit a3b4c5d', time: '2 giờ trước', read: false, avatar: 'SY' },
   { id: 4, type: 'comment', actor: 'Nguyễn Thị D', text: 'đã bình luận vào task #142', time: '3 giờ trước', read: false, avatar: 'ND' },
-  { id: 5, type: 'invite',  actor: 'Phạm Văn E', text: 'đã mời bạn vào dự án "WeConnect v3"', time: 'Hôm qua', read: true, avatar: 'PE' },
+  { id: 5, type: 'invite',  actor: 'Phạm Văn E', text: 'đã mời bạn vào dự án "WemakeUI v3"', time: 'Hôm qua', read: true, avatar: 'PE' },
   { id: 6, type: 'merge',   actor: 'GitHub Actions', text: 'PR #295 đã được merge vào main', time: 'Hôm qua', read: true, avatar: 'GA' },
   { id: 7, type: 'mention', actor: 'Hoàng Thị F', text: 'đã nhắc đến bạn trong issue #312', time: '2 ngày trước', read: true, avatar: 'HF' },
 ])

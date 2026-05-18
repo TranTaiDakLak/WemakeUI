@@ -69,10 +69,10 @@ const ENV_COLOR: Record<string, string> = {
 
       <!-- quick action buttons -->
       <div v-if="showActions" class="d-hero__actions">
-        <BaseButton size="sm" variant="ghost" @click="router.push('/weconnect/scheduler')">
+        <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/scheduler')">
           ⏳ Scheduler
         </BaseButton>
-        <BaseButton size="sm" variant="ghost" @click="router.push('/weconnect/console')">
+        <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">
           🖥 Console
         </BaseButton>
         <BaseButton size="sm" variant="ghost" @click="emit('openCampaignModal')">

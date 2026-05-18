@@ -73,7 +73,7 @@ onUnmounted(() => clearInterval(interval))
 </script>
 
 <template>
-  <AppPageLayout section="weconnect" current="console" page-title="Console" page-description="Xem log thời gian thực từ tất cả session">
+  <AppPageLayout section="wemakeui" current="console" page-title="Console" page-description="Xem log thời gian thực từ tất cả session">
     <template #actions>
       <BaseButton size="sm" :variant="paused ? 'primary' : 'ghost'" @click="paused = !paused">
         {{ paused ? '▶ Tiếp tục' : '⏸ Tạm dừng' }}

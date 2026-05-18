@@ -54,7 +54,7 @@ const FEATURES = [
       '10 dashboard — overview, analytics, CRM, IoT…',
       '20 app page — mailbox, chat, invoice, calendar…',
       '10 landing page — SaaS, API, blog, careers…',
-      '10 WeConnect page — admin, campaign, canvas…',
+      '10 WemakeUI page — admin, campaign, canvas…',
     ],
   },
 ]

@@ -64,7 +64,7 @@ const MEMBERS = [
   { name: 'Ngô Thu Khanh',   email: 'user010@work.vn' },
 ]
 const PRODUCTS = [
-  'WeConnect Pro', 'AutoMessage Plus', 'ChatBot Builder',
+  'WemakeUI Pro', 'AutoMessage Plus', 'ChatBot Builder',
   'CRM Enterprise', 'Analytics Suite', 'API Access Pro',
   'Email Automation', 'SMS Gateway', 'Push Kit', 'Social Media Manager',
 ]

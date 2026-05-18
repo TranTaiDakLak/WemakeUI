@@ -8,8 +8,8 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        name: 'Sitemap',
-        component: () => import('../views/showcase/SitemapView.vue'),
+        name: 'Home',
+        component: () => import('../views/showcase/OverviewView.vue'),
       },
       /* ── phase 0 ────────────────────────────────────── */
       {
@@ -194,7 +194,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/dashboard/logistics',  name: 'DashLogistics',  component: () => import('../views/dashboard/LogisticsView.vue') },
   { path: '/dashboard/helpdesk',   name: 'DashHelpdesk',   component: () => import('../views/dashboard/HelpdeskView.vue') },
   { path: '/dashboard/iot',        name: 'DashIot',        component: () => import('../views/dashboard/IotView.vue') },
-  { path: '/dashboard/weconnect-v1', name: 'DashWeDashboardV1', component: () => import('../views/dashboard/WeDashboardV1View.vue') },
+  { path: '/dashboard/wemakeui-v1', name: 'DashWeDashboardV1', component: () => import('../views/dashboard/WeDashboardV1View.vue') },
 
   /* ── phase 7 — app pages (20) ───────────────────────────────── */
   { path: '/app/profile',       name: 'AppProfile',       component: () => import('../views/app/ProfileView.vue') },
@@ -264,17 +264,17 @@ const routes: RouteRecordRaw[] = [
   { path: '/partners',        name: 'MarketingPartners',      component: () => import('../views/marketing/PartnersView.vue') },
   { path: '/contact',         name: 'MarketingContact',       component: () => import('../views/marketing/ContactView.vue') },
 
-  /* ── phase 7 — weconnect pages (10) ────────────────────────── */
-  { path: '/weconnect',               name: 'WCAdmin',        component: () => import('../views/weconnect/AdminView.vue') },
-  { path: '/weconnect/accounts',      name: 'WCAccounts',     component: () => import('../views/weconnect/AccountsView.vue') },
-  { path: '/weconnect/sessions',      name: 'WCSessions',     component: () => import('../views/weconnect/SessionsView.vue') },
-  { path: '/weconnect/contacts',      name: 'WCContacts',     component: () => import('../views/weconnect/ContactsView.vue') },
-  { path: '/weconnect/campaigns',     name: 'WCCampaigns',    component: () => import('../views/weconnect/CampaignsView.vue') },
-  { path: '/weconnect/plugins',       name: 'WCPlugins',      component: () => import('../views/weconnect/PluginsView.vue') },
-  { path: '/weconnect/console',       name: 'WCConsole',      component: () => import('../views/weconnect/ConsoleView.vue') },
-  { path: '/weconnect/scheduler',     name: 'WCScheduler',    component: () => import('../views/weconnect/SchedulerView.vue') },
-  { path: '/weconnect/integrations',  name: 'WCIntegrations', component: () => import('../views/weconnect/IntegrationsView.vue') },
-  { path: '/weconnect/automation',    name: 'WCAutomation',   component: () => import('../views/weconnect/AutomationCanvasView.vue') },
+  /* ── phase 7 — wemakeui pages (10) ────────────────────────── */
+  { path: '/wemakeui',               name: 'WCAdmin',        component: () => import('../views/wemakeui/AdminView.vue') },
+  { path: '/wemakeui/accounts',      name: 'WCAccounts',     component: () => import('../views/wemakeui/AccountsView.vue') },
+  { path: '/wemakeui/sessions',      name: 'WCSessions',     component: () => import('../views/wemakeui/SessionsView.vue') },
+  { path: '/wemakeui/contacts',      name: 'WCContacts',     component: () => import('../views/wemakeui/ContactsView.vue') },
+  { path: '/wemakeui/campaigns',     name: 'WCCampaigns',    component: () => import('../views/wemakeui/CampaignsView.vue') },
+  { path: '/wemakeui/plugins',       name: 'WCPlugins',      component: () => import('../views/wemakeui/PluginsView.vue') },
+  { path: '/wemakeui/console',       name: 'WCConsole',      component: () => import('../views/wemakeui/ConsoleView.vue') },
+  { path: '/wemakeui/scheduler',     name: 'WCScheduler',    component: () => import('../views/wemakeui/SchedulerView.vue') },
+  { path: '/wemakeui/integrations',  name: 'WCIntegrations', component: () => import('../views/wemakeui/IntegrationsView.vue') },
+  { path: '/wemakeui/automation',    name: 'WCAutomation',   component: () => import('../views/wemakeui/AutomationCanvasView.vue') },
 ]
 
 const router = createRouter({
@@ -283,7 +283,7 @@ const router = createRouter({
 })
 
 /* ── Auth guard for private sections ── */
-const PRIVATE_PREFIXES = ['/saas', '/weconnect', '/dashboard']
+const PRIVATE_PREFIXES = ['/saas', '/wemakeui', '/dashboard']
 
 router.beforeEach((to) => {
   const auth = useAuthStore()

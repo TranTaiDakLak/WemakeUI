@@ -26,7 +26,7 @@ Every phase must:
 - [x] CrudPageConfig<T> schema
 - [x] CrudPage archetype (table + search + filter + pagination + add/edit + detail drawer + delete + bulk)
 - [x] SaaS module: Members, Products, Transactions, Versions
-- [x] WeConnect: Contacts via CrudPage
+- [x] WemakeUI: Contacts via CrudPage
 - [x] StatusChip, TagList, UserDropdown common components
 - [x] FormModal, FormDrawer, ConfirmDialog archetypes
 
@@ -59,7 +59,7 @@ Every phase must:
 **Status:** 0% complete (infrastructure exists but unconnected)
 
 ### Deliverables
-1. **Route Guards** — `router.beforeEach` for `/saas/*`, `/weconnect/*`, `/dashboard/*`
+1. **Route Guards** — `router.beforeEach` for `/saas/*`, `/wemakeui/*`, `/dashboard/*`
 2. **useApi()** — composable with mock adapter + real adapter toggle via `VITE_API_MODE`
 3. **NotificationCenter** — component + wire `useNotificationsStore` to SaasLayout bell
 4. **Store Migration** — move SaaS page data from component-local to Pinia stores
@@ -99,7 +99,7 @@ Every phase must:
 1. **WemakeUI Platform Homepage** (`/wemakeui` or `/`)
    - Hero: Platform value proposition + live component preview
    - Architecture: Visual diagram of platform layers
-   - Use cases: WeConnect demo, SaaS demo, Dashboard demo
+   - Use cases: WemakeUI demo, SaaS demo, Dashboard demo
    - Ecosystem: Token system, archetypes, composables showcase
    - CTA: Get started, Documentation
 2. **Motion System Application**

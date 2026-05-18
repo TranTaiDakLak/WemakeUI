@@ -103,37 +103,41 @@ const hasUnread = computed(() => store.unreadCount > 0)
 <style scoped>
 .nc-root { position: relative; }
 
-/* trigger */
+/* trigger — bell trên topbar gradient luôn trắng */
 .nc-trigger {
   position: relative;
   width: 36px; height: 36px;
-  border-radius: var(--wx-radius-md);
+  border-radius: var(--wx-radius-full);
   border: 1px solid transparent;
-  background: none;
+  background: transparent;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  color: var(--wx-text-secondary);
+  color: #fff;
   transition: all var(--wx-d-fast);
 }
 .nc-trigger:hover, .nc-trigger--active {
-  background: var(--wx-surface-elevated);
-  border-color: var(--wx-border-subtle);
-  color: var(--wx-text-primary);
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
 }
 .nc-bell { width: 18px; height: 18px; }
 .nc-badge {
   position: absolute;
-  top: -2px; right: -2px;
-  min-width: 16px; height: 16px;
-  padding: 0 3px;
+  top: -4px; right: -4px;
+  min-width: 20px; height: 20px;
+  padding: 0 6px;
   border-radius: var(--wx-radius-full);
-  background: var(--wx-danger);
+  background: #ef4444;       /* red-500 — luôn đỏ tươi */
   color: #fff;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   display: flex; align-items: center; justify-content: center;
-  border: 2px solid var(--wx-surface);
+  border: 2px solid #fff;    /* trắng — viền nổi trên topbar gradient */
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.45);
+  z-index: 1;
 }
+/* Dark mode: viền dùng topbar bg để blend, vẫn đỏ tươi */
+.wx-dark .nc-badge { border-color: var(--wx-surface-base); }
 
 /* overlay */
 .nc-overlay {
@@ -148,10 +152,11 @@ const hasUnread = computed(() => store.unreadCount > 0)
   right: 0;
   width: 380px;
   max-height: 520px;
-  background: var(--wx-surface);
-  border: 1px solid var(--wx-border-subtle);
+  background: var(--wx-surface-base);
+  color: var(--wx-text-primary);
+  border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-xl);
-  box-shadow: var(--wx-shadow-lg, 0 20px 48px rgba(0,0,0,0.15));
+  box-shadow: var(--wx-shadow-lg);
   z-index: 201;
   display: flex;
   flex-direction: column;
@@ -167,17 +172,17 @@ const hasUnread = computed(() => store.unreadCount > 0)
   gap: var(--wx-space-2);
   flex-shrink: 0;
 }
-.nc-panel__title { font-size: var(--wx-text-base); font-weight: 600; color: var(--wx-text-primary); }
+.nc-panel__title { font-size: var(--wx-fs-16); font-weight: var(--wx-fw-semibold); color: var(--wx-text-primary); }
 .nc-panel__actions { display: flex; align-items: center; gap: var(--wx-space-2); }
 .nc-mark-all {
-  font-size: var(--wx-text-xs);
-  color: var(--wx-primary);
+  font-size: var(--wx-fs-12);
+  color: var(--wx-brand-primary);
   background: none; border: none; cursor: pointer;
   white-space: nowrap;
 }
 .nc-close {
   background: none; border: none; cursor: pointer;
-  color: var(--wx-text-tertiary);
+  color: var(--wx-text-muted);
   width: 24px; height: 24px;
   border-radius: var(--wx-radius-sm);
   display: flex; align-items: center; justify-content: center;
@@ -190,8 +195,8 @@ const hasUnread = computed(() => store.unreadCount > 0)
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: var(--wx-space-2);
   padding: var(--wx-space-10) var(--wx-space-4);
-  color: var(--wx-text-tertiary);
-  font-size: var(--wx-text-sm);
+  color: var(--wx-text-muted);
+  font-size: var(--wx-fs-14);
 }
 .nc-empty__icon { font-size: 32px; }
 
@@ -207,35 +212,35 @@ const hasUnread = computed(() => store.unreadCount > 0)
 }
 .nc-item:last-child { border-bottom: none; }
 .nc-item:hover { background: var(--wx-surface-elevated); }
-.nc-item--unread { background: color-mix(in srgb, var(--wx-primary) 4%, transparent); }
+.nc-item--unread { background: color-mix(in srgb, var(--wx-brand-primary) 4%, transparent); }
 .nc-item--unread::before {
   content: '';
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 3px;
-  background: var(--wx-primary);
+  background: var(--wx-brand-primary);
   border-radius: 0 2px 2px 0;
 }
-.nc-item--error.nc-item--unread::before { background: var(--wx-danger); }
-.nc-item--warning.nc-item--unread::before { background: var(--wx-warning); }
-.nc-item--success.nc-item--unread::before { background: var(--wx-success); }
+.nc-item--error.nc-item--unread::before { background: var(--wx-danger-solid); }
+.nc-item--warning.nc-item--unread::before { background: var(--wx-warning-solid); }
+.nc-item--success.nc-item--unread::before { background: var(--wx-success-solid); }
 
 .nc-item__icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
 .nc-item__content { flex: 1; min-width: 0; }
 .nc-item__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--wx-space-2); margin-bottom: 2px; }
-.nc-item__title { font-size: var(--wx-text-sm); font-weight: 600; color: var(--wx-text-primary); margin: 0; }
-.nc-item__time { font-size: 11px; color: var(--wx-text-tertiary); white-space: nowrap; flex-shrink: 0; }
-.nc-item__body { font-size: var(--wx-text-xs); color: var(--wx-text-secondary); margin: 0 0 var(--wx-space-1-5); line-height: 1.5; }
+.nc-item__title { font-size: var(--wx-fs-14); font-weight: var(--wx-fw-semibold); color: var(--wx-text-primary); margin: 0; }
+.nc-item__time { font-size: var(--wx-fs-12); color: var(--wx-text-muted); white-space: nowrap; flex-shrink: 0; }
+.nc-item__body { font-size: var(--wx-fs-13); color: var(--wx-text-secondary); margin: 0 0 6px; line-height: 1.5; }
 .nc-item__action {
-  font-size: var(--wx-text-xs);
-  font-weight: 500;
-  color: var(--wx-primary);
+  font-size: var(--wx-fs-12);
+  font-weight: var(--wx-fw-medium);
+  color: var(--wx-brand-primary);
   background: none; border: none; cursor: pointer; padding: 0;
 }
 .nc-item__action:hover { text-decoration: underline; }
 .nc-item__dismiss {
   background: none; border: none; cursor: pointer;
-  color: var(--wx-text-tertiary);
+  color: var(--wx-text-muted);
   font-size: 12px;
   width: 20px; height: 20px;
   border-radius: var(--wx-radius-sm);

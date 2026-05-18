@@ -12,8 +12,8 @@ onMounted(() => { if (gridRef.value) observe(gridRef.value) })
 
 const PRODUCTS = [
   {
-    slug: 'weconnect',
-    name: 'WeConnect',
+    slug: 'wemakeui',
+    name: 'WemakeUI',
     icon: '🔗',
     version: 'v3.2.1',
     tags: ['WhatsApp', 'Zalo', 'Telegram', 'SMS'],

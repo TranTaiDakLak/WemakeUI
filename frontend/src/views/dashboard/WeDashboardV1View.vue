@@ -40,34 +40,34 @@ const KPIS = [
     iconEmoji: '📱', iconBg: 'green' as const,
     sparkline: gen(20, 1, 60, 25), sparklineColor: '#22c55e',
     detail: '47 đang checkpoint',
-    action: () => router.push('/weconnect/accounts'),
+    action: () => router.push('/wemakeui/accounts'),
   },
   {
     label: 'Phiên hôm nay', metric: 4821, delta: 8,
     iconEmoji: '🔗', iconBg: 'blue' as const,
     sparkline: gen(20, 2, 55, 20), sparklineColor: '#2563eb',
     alert: '3 lỗi kết nối', alertLevel: 'warning' as const,
-    action: () => router.push({ path: '/weconnect/sessions', query: { status: 'online' } }),
+    action: () => router.push({ path: '/wemakeui/sessions', query: { status: 'online' } }),
   },
   {
     label: 'Chiến dịch', metric: 24, delta: 2,
     iconEmoji: '📣', iconBg: 'purple' as const,
     sparkline: gen(20, 3, 45, 15), sparklineColor: '#8b5cf6',
     detail: '5 sắp hoàn thành',
-    action: () => router.push({ path: '/weconnect/campaigns', query: { status: 'running' } }),
+    action: () => router.push({ path: '/wemakeui/campaigns', query: { status: 'running' } }),
   },
   {
     label: 'Tỷ lệ giao thành công', metric: '98.4', metricSuffix: '%', delta: -0.2,
     iconEmoji: '✅', iconBg: 'amber' as const,
     sparkline: gen(20, 4, 90, 8), sparklineColor: '#f59e0b',
     alert: 'Kiểm tra ngay', alertLevel: 'danger' as const,
-    action: () => router.push('/weconnect/sessions'),
+    action: () => router.push('/wemakeui/sessions'),
   },
   {
     label: 'Tin nhắn hôm nay', metric: 142390, delta: 18,
     iconEmoji: '💬', iconBg: 'cyan' as const,
     sparkline: gen(20, 5, 70, 30), sparklineColor: '#06b6d4',
-    action: () => router.push('/weconnect/campaigns'),
+    action: () => router.push('/wemakeui/campaigns'),
   },
   {
     label: 'Lỗi hệ thống', metric: 8, delta: 3,
@@ -81,7 +81,7 @@ const KPIS = [
     iconEmoji: '⏳', iconBg: 'amber' as const,
     sparkline: gen(20, 7, 40, 18), sparklineColor: '#f59e0b',
     detail: '3 đang chạy',
-    action: () => router.push('/weconnect/scheduler'),
+    action: () => router.push('/wemakeui/scheduler'),
   },
   {
     label: 'Uptime tháng này', metric: '99.8', metricSuffix: '%', delta: 0,
@@ -194,7 +194,7 @@ const platformCampaigns = computed(() =>
 )
 
 function navigateToPlatformCampaigns() {
-  router.push({ path: '/weconnect/campaigns', query: { platform: selectedPlatform.value ?? '' } })
+  router.push({ path: '/wemakeui/campaigns', query: { platform: selectedPlatform.value ?? '' } })
   platformDrawer.value = false
 }
 
@@ -358,7 +358,7 @@ const ENV_STATUS = [
 <template>
   <AppPageLayout section="dashboards"
     current="wedashboard-v1"
-    page-title="WeConnect Dashboard"
+    page-title="WemakeUI Dashboard"
     page-description="Tổng quan trạng thái và hoạt động hệ thống WhatsApp automation"
   >
     <!-- ── Toast ─────────────────────────────────────────────── -->
@@ -385,10 +385,10 @@ const ENV_STATUS = [
       </div>
 
       <div class="dash-actions">
-        <BaseButton size="sm" variant="ghost" @click="router.push('/weconnect/scheduler')">
+        <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/scheduler')">
           ⏳ Scheduler
         </BaseButton>
-        <BaseButton size="sm" variant="ghost" @click="router.push('/weconnect/console')">
+        <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">
           🖥 Console
         </BaseButton>
         <BaseButton size="sm" variant="ghost" @click="campaignModal = true">
@@ -490,7 +490,7 @@ const ENV_STATUS = [
       <BaseCard shadow="sm">
         <div class="section-header">
           <h3 class="section-title">Hoạt động hệ thống</h3>
-          <BaseButton size="sm" variant="ghost" @click="router.push('/weconnect/console')">
+          <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">
             Xem tất cả
           </BaseButton>
         </div>

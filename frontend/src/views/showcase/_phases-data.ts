@@ -1,6 +1,6 @@
 /**
- * Shared sidebar/sitemap data — single source of truth cho cả DemoLayout
- * (sidebar cố định) và SitemapView (overview cards).
+ * Shared sidebar/overview data — single source of truth cho cả DemoLayout
+ * (sidebar cố định) và overview page (overview cards).
  */
 
 export type PhaseStatus = 'done' | 'pending'
@@ -224,19 +224,19 @@ export const phases: readonly ShowcasePhase[] = [
   },
   {
     n: 7.3,
-    title: 'WeConnect Pages (10)',
+    title: 'WemakeUI Pages (10)',
     status: 'done',
     routes: [
-      { path: '/weconnect',              label: 'Admin — KPI + Realtime Feed',              desc: '4 KPI + Sparkline + activity feed realtime' },
-      { path: '/weconnect/accounts',     label: 'Accounts — Connect / QR Actions',          desc: 'accounts table + connect/disconnect/QR actions' },
-      { path: '/weconnect/sessions',     label: 'Sessions — Auto-update Interval',          desc: 'session cards + setInterval auto-update messages' },
-      { path: '/weconnect/contacts',     label: 'Contacts — Search + Tag Filter',           desc: 'contacts table + search + tag filter' },
-      { path: '/weconnect/campaigns',    label: 'Campaigns — Progress Bar + Stats',         desc: 'campaign cards + progress bar + stats' },
-      { path: '/weconnect/plugins',      label: 'Plugins — Enable / Disable Toggle',        desc: 'plugin cards + BaseToggle enable/disable' },
-      { path: '/weconnect/console',      label: 'Console — Log Stream + Level Filter',      desc: 'streaming log viewer + level/session filter + dark terminal' },
-      { path: '/weconnect/scheduler',    label: 'Scheduler — Cron Job Manager',             desc: 'cron job list + create/run/delete + enabled toggle' },
-      { path: '/weconnect/integrations', label: 'Integrations — Cards + Webhook Table',     desc: 'integration cards + webhook table + add webhook form' },
-      { path: '/weconnect/automation',   label: 'Automation Canvas — SVG Drag-Drop Nodes',  desc: 'SVG canvas drag-drop nodes + curved edges + run animation' },
+      { path: '/wemakeui',              label: 'Admin — KPI + Realtime Feed',              desc: '4 KPI + Sparkline + activity feed realtime' },
+      { path: '/wemakeui/accounts',     label: 'Accounts — Connect / QR Actions',          desc: 'accounts table + connect/disconnect/QR actions' },
+      { path: '/wemakeui/sessions',     label: 'Sessions — Auto-update Interval',          desc: 'session cards + setInterval auto-update messages' },
+      { path: '/wemakeui/contacts',     label: 'Contacts — Search + Tag Filter',           desc: 'contacts table + search + tag filter' },
+      { path: '/wemakeui/campaigns',    label: 'Campaigns — Progress Bar + Stats',         desc: 'campaign cards + progress bar + stats' },
+      { path: '/wemakeui/plugins',      label: 'Plugins — Enable / Disable Toggle',        desc: 'plugin cards + BaseToggle enable/disable' },
+      { path: '/wemakeui/console',      label: 'Console — Log Stream + Level Filter',      desc: 'streaming log viewer + level/session filter + dark terminal' },
+      { path: '/wemakeui/scheduler',    label: 'Scheduler — Cron Job Manager',             desc: 'cron job list + create/run/delete + enabled toggle' },
+      { path: '/wemakeui/integrations', label: 'Integrations — Cards + Webhook Table',     desc: 'integration cards + webhook table + add webhook form' },
+      { path: '/wemakeui/automation',   label: 'Automation Canvas — SVG Drag-Drop Nodes',  desc: 'SVG canvas drag-drop nodes + curved edges + run animation' },
     ],
   },
   {
@@ -277,7 +277,7 @@ export const phases: readonly ShowcasePhase[] = [
         path: '/showcase/templates',
         navLabel: 'Template Gallery',
         label: 'Template Gallery — 120 trang sẵn dùng cho dev nội bộ',
-        desc: 'browse 120 templates theo category (Auth / Error / Dashboard / App / Landing / WeConnect), tìm kiếm, xem preview, copy path',
+        desc: 'browse 120 templates theo category (Auth / Error / Dashboard / App / Landing / WemakeUI), tìm kiếm, xem preview, copy path',
       },
     ],
   },

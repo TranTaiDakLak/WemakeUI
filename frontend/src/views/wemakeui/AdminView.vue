@@ -2,24 +2,24 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { BaseDataGrid, ContextMenu, StatusBar } from '../../components/common'
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
-import { useAccountsStore } from '../../stores/weconnect/accounts'
-import { useSettingsStore } from '../../stores/weconnect/settings'
-import { useCategoriesStore } from '../../stores/weconnect/categories'
+import { useAccountsStore } from '../../stores/wemakeui/accounts'
+import { useSettingsStore } from '../../stores/wemakeui/settings'
+import { useCategoriesStore } from '../../stores/wemakeui/categories'
 import type { ContextMenuItem, GridStats } from '../../types'
 import type { AccountRow } from '../../types/account'
 
-import WCMenuStrip from '../../components/weconnect/WCMenuStrip.vue'
-import WCActionBar from '../../components/weconnect/WCActionBar.vue'
-import WCSetupToolModal from '../../components/weconnect/WCSetupToolModal.vue'
-import WCSetupInteractModal from '../../components/weconnect/WCSetupInteractModal.vue'
-import WCSetupViewModal from '../../components/weconnect/WCSetupViewModal.vue'
-import WCAddAccountModal from '../../components/weconnect/WCAddAccountModal.vue'
-import WCAddAccountReviewModal from '../../components/weconnect/WCAddAccountReviewModal.vue'
-import WCUpdateFieldModal from '../../components/weconnect/WCUpdateFieldModal.vue'
-import WCTrashModal from '../../components/weconnect/WCTrashModal.vue'
-import WCContactModal from '../../components/weconnect/WCContactModal.vue'
-import WCUtilsModal from '../../components/weconnect/WCUtilsModal.vue'
-import WCCategoryModal from '../../components/weconnect/WCCategoryModal.vue'
+import WCMenuStrip from '../../components/wemakeui/WCMenuStrip.vue'
+import WCActionBar from '../../components/wemakeui/WCActionBar.vue'
+import WMSetupToolModal from '../../components/wemakeui/WMSetupToolModal.vue'
+import WMSetupInteractModal from '../../components/wemakeui/WMSetupInteractModal.vue'
+import WMSetupViewModal from '../../components/wemakeui/WMSetupViewModal.vue'
+import WCAddAccountModal from '../../components/wemakeui/WCAddAccountModal.vue'
+import WCAddAccountReviewModal from '../../components/wemakeui/WCAddAccountReviewModal.vue'
+import WCUpdateFieldModal from '../../components/wemakeui/WCUpdateFieldModal.vue'
+import WCTrashModal from '../../components/wemakeui/WCTrashModal.vue'
+import WCContactModal from '../../components/wemakeui/WCContactModal.vue'
+import WCUtilsModal from '../../components/wemakeui/WCUtilsModal.vue'
+import WMCategoryModal from '../../components/wemakeui/WMCategoryModal.vue'
 
 // ── Stores ──────────────────────────────────────────
 const accountsStore = useAccountsStore()
@@ -309,7 +309,7 @@ onBeforeUnmount(() => document.removeEventListener('mouseup', onMouseup))
 </script>
 
 <template>
-  <AppPageLayout section="weconnect" current="accounts" page-title="Tài khoản Facebook" page-description="Quản lý toàn bộ tài khoản, chiến dịch và công cụ tự động hóa">
+  <AppPageLayout section="wemakeui" current="accounts" page-title="Tài khoản Facebook" page-description="Quản lý toàn bộ tài khoản, chiến dịch và công cụ tự động hóa">
     <div class="wc-accounts-page">
 
       <!-- MENU STRIP -->
@@ -351,7 +351,7 @@ onBeforeUnmount(() => document.removeEventListener('mouseup', onMouseup))
         status-text="Hoạt động"
         user-name="Hoàng Phong"
         expiry-date="31/12/2026"
-        version="WeConnect v1.0.0"
+        version="WemakeUI v1.0.0"
       >
         <template #left>
           <span class="sb-seg">Live: {{ accountsStore.stats.live }}</span>
@@ -372,7 +372,7 @@ onBeforeUnmount(() => document.removeEventListener('mouseup', onMouseup))
           <span class="sb-div">|</span>
           <span class="sb-seg">Hạn: 31/12/2026</span>
           <span class="sb-div">|</span>
-          <span class="sb-seg">WeConnect v1.0.0</span>
+          <span class="sb-seg">WemakeUI v1.0.0</span>
           <span class="sb-div">|</span>
           <button class="sb-more">Xem thêm..</button>
         </template>
@@ -390,13 +390,13 @@ onBeforeUnmount(() => document.removeEventListener('mouseup', onMouseup))
     />
 
     <!-- MODALS -->
-    <WCSetupToolModal :model-value="activeModal === 'settings'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
-    <WCSetupInteractModal :model-value="activeModal === 'interaction'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
-    <WCSetupViewModal :model-value="activeModal === 'display'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
+    <WMSetupToolModal :model-value="activeModal === 'settings'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
+    <WMSetupInteractModal :model-value="activeModal === 'interaction'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
+    <WMSetupViewModal :model-value="activeModal === 'display'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
     <WCTrashModal :model-value="activeModal === 'trash'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
     <WCContactModal :model-value="activeModal === 'contact'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
     <WCUtilsModal :model-value="activeModal === 'utils'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
-    <WCCategoryModal :model-value="activeModal === 'category'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
+    <WMCategoryModal :model-value="activeModal === 'category'" @update:model-value="(v: boolean) => !v && (activeModal = null)" />
     <WCAddAccountModal
       :model-value="activeModal === 'add'"
       :categories="categoriesStore.categories"
@@ -420,7 +420,7 @@ onBeforeUnmount(() => document.removeEventListener('mouseup', onMouseup))
 </template>
 
 <style scoped>
-/* Override WeConnectLayout content wrapper để DataGrid fill hết height */
+/* Override WemakeUILayout content wrapper để DataGrid fill hết height */
 :deep(.wc-content) {
   padding: 0 !important;
   gap: 0 !important;

@@ -196,7 +196,7 @@ const { target } = useScrollReveal({ threshold: 0.15 })
 </template>
 ```
 
-**Available layouts:** AppLayout, AuthLayout, DashboardLayout, ErrorLayout, LandingLayout, SaasLayout, WeConnectLayout.
+**Available layouts:** AppLayout, AuthLayout, DashboardLayout, ErrorLayout, LandingLayout, SaasLayout, WemakeUILayout.
 
 ---
 
@@ -210,7 +210,7 @@ configs/
   saas/
     members.config.ts    ← Member entity + MOCK data + CrudPageConfig
     products.config.ts
-  weconnect/
+  wemakeui/
     contacts.config.ts
 
 ❌ FORBIDDEN:
@@ -280,7 +280,7 @@ Pattern appears 3+    → architectural failure, must refactor
 
 ## R12 — Route Guard Rule
 
-**RULE:** Mọi route trong `/saas/*`, `/weconnect/*`, `/dashboard/*` phải có auth guard.
+**RULE:** Mọi route trong `/saas/*`, `/wemakeui/*`, `/dashboard/*` phải có auth guard.
 
 ```typescript
 // ✅ CORRECT

@@ -8,10 +8,40 @@ import { ref } from 'vue'
 import { BaseSelectMenu } from '../../components/common'
 import AppTopbar from '../../components/layout/AppTopbar.vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
-import { useTheme, type Theme } from '../../ui-system/composables/useTheme'
+import { useTheme, type Theme, type Variant } from '../../ui-system/composables/useTheme'
 
-const { theme, setTheme } = useTheme()
+const {
+  theme, setTheme,
+  variant, setVariant,
+  brandColor, setBrandColor,
+  accentColor, setAccentColor,
+  resetColors,
+} = useTheme()
 function pickTheme(t: Theme) { setTheme(t) }
+function pickVariant(v: Variant) { setVariant(v) }
+
+const brandInput = ref('#8b5cf6')
+const accentInput = ref('#ec4899')
+const brandPresets = ['#2563eb', '#8b5cf6', '#ec4899', '#10b981', '#f59e0b', '#ef4444', '#0ea5e9', '#14b8a6'] as const
+
+const scaleStops = ['50','100','200','300','400','500','600','700','800','900'] as const
+
+const feedbackTokens = [
+  { name: 'success', solid: 'success-solid', bg: 'success-bg', text: 'success-text', border: 'success-border' },
+  { name: 'danger',  solid: 'danger-solid',  bg: 'danger-bg',  text: 'danger-text',  border: 'danger-border' },
+  { name: 'warning', solid: 'warning-solid', bg: 'warning-bg', text: 'warning-text', border: 'warning-border' },
+  { name: 'info',    solid: 'info-solid',    bg: 'info-bg',    text: 'info-text',    border: 'info-border' },
+  { name: 'neutral', solid: 'neutral-solid', bg: 'neutral-bg', text: 'neutral-text', border: 'neutral-border' },
+] as const
+
+function setFeedbackSolid(name: string, hex: string) {
+  document.documentElement.style.setProperty(`--wx-${name}-solid`, hex)
+}
+function resetFeedback() {
+  for (const f of feedbackTokens) {
+    document.documentElement.style.removeProperty(`--wx-${f.solid}`)
+  }
+}
 
 interface RadiusItem { name: string; value: string; hint?: string }
 const radiusList: RadiusItem[] = [
@@ -85,23 +115,155 @@ function bumpMotion() {
         description="bộ tokens nền tảng: color, gradient, radius, spacing, typography, motion. duyệt xong → sang phase 1 (base primitives)."
       />
 
-      <!-- ── 1. Brand color ─────────────────────────── -->
+      <!-- ── 1. Brand color (solid) ─────────────────── -->
       <section class="section">
-        <h2 class="h">1. brand color</h2>
+        <h2 class="h">1. brand color — solid scale</h2>
+        <p class="muted">
+          3 alias chính + dải 10 stops (50→900). Khi đổi brand bên dưới, toàn bộ dải này
+          được generate lại bằng HSL — đây là "màu đơn" cascade qua mọi component.
+        </p>
         <div class="row">
           <div class="swatch" :style="{ background: 'var(--wx-brand-primary)' }">
             <span class="swatch-name">brand-primary</span>
-            <span class="swatch-val">#2563eb</span>
+            <span class="swatch-val">600</span>
           </div>
           <div class="swatch" :style="{ background: 'var(--wx-brand-accent)' }">
             <span class="swatch-name">brand-accent</span>
-            <span class="swatch-val">#06b6d4</span>
+            <span class="swatch-val">cyan</span>
           </div>
           <div class="swatch" :style="{ background: 'var(--wx-brand-focus)' }">
             <span class="swatch-name">brand-focus</span>
-            <span class="swatch-val">#007bff</span>
+            <span class="swatch-val">500</span>
           </div>
         </div>
+        <div class="scale-strip">
+          <div
+            v-for="s in scaleStops"
+            :key="s"
+            class="scale-cell"
+            :style="{ background: `var(--wx-brand-${s})` }"
+          >
+            <span class="scale-stop">{{ s }}</span>
+          </div>
+        </div>
+        <div class="scale-strip scale-strip--accent">
+          <div
+            v-for="s in scaleStops"
+            :key="`a-${s}`"
+            class="scale-cell"
+            :style="{ background: `var(--wx-accent-${s}, var(--wx-brand-${s}))` }"
+          >
+            <span class="scale-stop">{{ s }}</span>
+          </div>
+        </div>
+        <span class="muted scale-caption">
+          ↑ brand scale (top) — accent scale (bottom, chỉ active sau khi <code>setAccentColor()</code>)
+        </span>
+      </section>
+
+      <!-- ── 1b. Theme playground ────────────────────── -->
+      <section class="section">
+        <h2 class="h">1b. theme playground — đổi brand / accent / variant runtime</h2>
+        <p class="muted">
+          custom brand color → toàn bộ gradient, button, shadow tự đổi theo.
+          <code>variant=flat</code> tắt gradient → solid color. lưu localStorage, reload vẫn giữ.
+        </p>
+
+        <div class="playground">
+          <div class="pg-row">
+            <label class="pg-field">
+              <span>brand color</span>
+              <div class="pg-input-group">
+                <input type="color" v-model="brandInput" class="pg-color" />
+                <input type="text" v-model="brandInput" class="pg-text" />
+                <button class="pg-btn" @click="setBrandColor(brandInput)">áp dụng</button>
+              </div>
+            </label>
+            <div class="pg-presets">
+              <button
+                v-for="hex in brandPresets"
+                :key="hex"
+                class="pg-preset"
+                :style="{ background: hex }"
+                :title="hex"
+                @click="setBrandColor(hex); brandInput = hex"
+              />
+            </div>
+          </div>
+
+          <div class="pg-row">
+            <label class="pg-field">
+              <span>accent color</span>
+              <div class="pg-input-group">
+                <input type="color" v-model="accentInput" class="pg-color" />
+                <input type="text" v-model="accentInput" class="pg-text" />
+                <button class="pg-btn" @click="setAccentColor(accentInput)">áp dụng</button>
+              </div>
+            </label>
+            <button class="pg-btn pg-btn--ghost" @click="resetColors()">reset về default</button>
+          </div>
+
+          <div class="pg-row">
+            <span class="pg-label">variant</span>
+            <div class="pg-variant-switch" role="group" aria-label="chọn variant">
+              <button
+                v-for="v in (['default','flat'] as Variant[])"
+                :key="v"
+                :data-active="variant === v"
+                class="pg-variant-btn"
+                @click="pickVariant(v)"
+              >{{ v }}</button>
+            </div>
+            <span class="pg-state">
+              variant: <code>{{ variant }}</code> ·
+              brand: <code>{{ brandColor ?? 'default' }}</code> ·
+              accent: <code>{{ accentColor ?? 'default' }}</code>
+            </span>
+          </div>
+
+          <div class="pg-preview">
+            <button class="pg-demo-cta">button gradient</button>
+            <button class="pg-demo-solid">button solid</button>
+            <span class="pg-demo-text">text gradient</span>
+            <div class="pg-demo-badge">badge</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 1c. Feedback solid colors ──────────────── -->
+      <section class="section">
+        <h2 class="h">1c. feedback colors — solid, bg, text, border</h2>
+        <p class="muted">
+          5 semantic màu đơn (success / danger / warning / info / neutral) — mỗi cái có
+          4 biến thể. Click color picker bên cạnh để override <code>--wx-{name}-solid</code> runtime.
+        </p>
+        <div class="feedback-grid">
+          <div v-for="f in feedbackTokens" :key="f.name" class="feedback-card">
+            <div class="feedback-head">
+              <span class="feedback-name">{{ f.name }}</span>
+              <input
+                type="color"
+                class="pg-color"
+                :value="undefined"
+                @input="setFeedbackSolid(f.solid, ($event.target as HTMLInputElement).value)"
+              />
+            </div>
+            <div class="feedback-swatches">
+              <div class="fb-cell" :style="{ background: `var(--wx-${f.solid})` }">solid</div>
+              <div
+                class="fb-cell fb-cell--soft"
+                :style="{
+                  background: `var(--wx-${f.bg})`,
+                  color: `var(--wx-${f.text})`,
+                  borderColor: `var(--wx-${f.border})`,
+                }"
+              >bg + text + border</div>
+            </div>
+          </div>
+        </div>
+        <button class="pg-btn pg-btn--ghost" @click="resetFeedback()" style="margin-top: var(--wx-space-3)">
+          reset feedback colors
+        </button>
       </section>
 
       <!-- ── 2. Gradient ────────────────────────────── -->
@@ -549,6 +711,255 @@ code {
   color: var(--wx-content-primary);
   font-size: var(--wx-fs-14);
   min-width: 220px;
+}
+
+/* ── 1. scale strip ─── */
+.scale-strip {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  margin-top: var(--wx-space-3);
+  border-radius: var(--wx-radius-md);
+  overflow: hidden;
+  border: 1px solid var(--wx-border-default);
+}
+.scale-strip--accent { margin-top: var(--wx-space-2); }
+.scale-cell {
+  height: 56px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: var(--wx-space-1);
+}
+.scale-stop {
+  font-family: var(--wx-font-mono);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  font-weight: var(--wx-fw-semibold);
+}
+.scale-caption {
+  display: block;
+  margin-top: var(--wx-space-2);
+  font-size: var(--wx-fs-12);
+}
+
+/* ── 1c. feedback grid ─── */
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--wx-space-3);
+}
+.feedback-card {
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-md);
+  padding: var(--wx-space-3);
+  background: var(--wx-bg-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--wx-space-2);
+}
+.feedback-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.feedback-name {
+  font-weight: var(--wx-fw-semibold);
+  font-size: var(--wx-fs-14);
+  text-transform: lowercase;
+}
+.feedback-swatches {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: var(--wx-space-2);
+}
+.fb-cell {
+  height: 56px;
+  border-radius: var(--wx-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--wx-fs-12);
+  font-weight: var(--wx-fw-medium);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.fb-cell--soft {
+  border-width: 1px;
+  border-style: solid;
+  text-shadow: none;
+}
+
+/* ── 1b. theme playground ─── */
+.playground {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wx-space-4);
+  padding: var(--wx-space-5);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-lg);
+  background: var(--wx-bg-base);
+}
+.pg-row {
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-4);
+  flex-wrap: wrap;
+}
+.pg-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wx-space-2);
+  font-size: var(--wx-fs-13);
+  color: var(--wx-content-secondary);
+}
+.pg-input-group {
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-2);
+}
+.pg-color {
+  width: 40px;
+  height: 36px;
+  padding: 2px;
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-md);
+  background: var(--wx-bg-base);
+  cursor: pointer;
+}
+.pg-text {
+  height: 36px;
+  padding: 0 var(--wx-space-3);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-md);
+  background: var(--wx-bg-base);
+  color: var(--wx-content-primary);
+  font-family: var(--wx-font-mono);
+  font-size: var(--wx-fs-13);
+  width: 110px;
+}
+.pg-btn {
+  height: 36px;
+  padding: 0 var(--wx-space-4);
+  border: none;
+  border-radius: var(--wx-radius-md);
+  background: var(--wx-gradient-button);
+  color: #fff;
+  font-weight: var(--wx-fw-semibold);
+  font-size: var(--wx-fs-13);
+  cursor: pointer;
+  box-shadow: var(--wx-shadow-brand);
+  transition: transform var(--wx-d-fast) var(--wx-ease-standard);
+}
+.pg-btn:hover { transform: translateY(-1px); }
+.pg-btn--ghost {
+  background: transparent;
+  color: var(--wx-content-secondary);
+  border: 1px solid var(--wx-border-default);
+  box-shadow: none;
+}
+.pg-presets {
+  display: flex;
+  gap: var(--wx-space-2);
+  align-self: flex-end;
+}
+.pg-preset {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-full);
+  cursor: pointer;
+  padding: 0;
+  transition: transform var(--wx-d-fast) var(--wx-ease-standard);
+}
+.pg-preset:hover { transform: scale(1.15); }
+.pg-label {
+  font-size: var(--wx-fs-13);
+  color: var(--wx-content-secondary);
+  font-weight: var(--wx-fw-medium);
+}
+.pg-state {
+  font-size: var(--wx-fs-12);
+  color: var(--wx-content-muted);
+  margin-left: auto;
+}
+.pg-variant-switch {
+  display: inline-flex;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-full);
+  background: var(--wx-bg-sunken);
+}
+.pg-variant-btn {
+  padding: 6px 16px;
+  border: none;
+  background: transparent;
+  color: var(--wx-content-secondary);
+  border-radius: var(--wx-radius-full);
+  font-size: var(--wx-fs-13);
+  font-weight: var(--wx-fw-medium);
+  cursor: pointer;
+  text-transform: lowercase;
+  transition: all var(--wx-d-fast) var(--wx-ease-standard);
+}
+.pg-variant-btn:hover { color: var(--wx-content-primary); }
+.pg-variant-btn[data-active="true"] {
+  background: var(--wx-brand-primary);
+  color: #fff;
+  box-shadow: var(--wx-shadow-sm);
+}
+.pg-state code {
+  font-family: var(--wx-font-mono);
+  background: var(--wx-bg-sunken);
+  padding: 2px 6px;
+  border-radius: var(--wx-radius-sm);
+  color: var(--wx-content-primary);
+}
+.pg-preview {
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-4);
+  padding: var(--wx-space-4);
+  border-top: 1px dashed var(--wx-border-default);
+  flex-wrap: wrap;
+}
+.pg-demo-cta {
+  height: 40px;
+  padding: 0 var(--wx-space-5);
+  border: none;
+  border-radius: var(--wx-radius-md);
+  background: var(--wx-gradient-button);
+  color: #fff;
+  font-weight: var(--wx-fw-semibold);
+  cursor: pointer;
+  box-shadow: var(--wx-shadow-brand);
+}
+.pg-demo-solid {
+  height: 40px;
+  padding: 0 var(--wx-space-5);
+  border: none;
+  border-radius: var(--wx-radius-md);
+  background: var(--wx-brand-primary);
+  color: #fff;
+  font-weight: var(--wx-fw-semibold);
+  cursor: pointer;
+}
+.pg-demo-text {
+  font-size: var(--wx-fs-20);
+  font-weight: var(--wx-fw-bold);
+  background: var(--wx-gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.pg-demo-badge {
+  padding: 4px 12px;
+  border-radius: var(--wx-radius-full);
+  background: var(--wx-brand-100);
+  color: var(--wx-brand-700);
+  font-size: var(--wx-fs-12);
+  font-weight: var(--wx-fw-semibold);
 }
 
 /* ── 8. rule list ─── */

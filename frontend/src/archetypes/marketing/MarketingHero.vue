@@ -82,7 +82,7 @@ withDefaults(defineProps<{
             <span class="hero__card-dot" style="background:#22c55e" />
             <span class="hero__card-dot" style="background:#f59e0b" />
             <span class="hero__card-dot" style="background:#ef4444" />
-            <span class="hero__card-title">WeConnect Dashboard</span>
+            <span class="hero__card-title">WemakeUI Dashboard</span>
           </div>
           <div class="hero__metrics">
             <div class="hero__metric">

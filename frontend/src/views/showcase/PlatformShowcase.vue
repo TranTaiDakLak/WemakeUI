@@ -135,7 +135,7 @@ const draftName = ref('Hùng Trần')
             force
             controls-style="mac"
             controls-placement="left"
-            title="WeConnect — admin"
+            title="WemakeUI — admin"
           />
           <div class="frame__body">
             <p>nội dung app — vùng trắng phía dưới titlebar.</p>

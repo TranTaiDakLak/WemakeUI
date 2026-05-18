@@ -8,10 +8,10 @@ const route = useRoute()
 const slug = computed(() => route.params.slug as string)
 
 const PRODUCT_DATA: Record<string, { name: string; icon: string; version: string; color: string; tagline: string; overview: string; features: string[] }> = {
-  weconnect: {
-    name: 'WeConnect', icon: '🔗', version: '3.2.1', color: '#2563eb',
+  wemakeui: {
+    name: 'WemakeUI', icon: '🔗', version: '3.2.1', color: '#2563eb',
     tagline: 'Quản lý đa kênh nhắn tin thông minh',
-    overview: 'WeConnect là giải pháp quản lý tập trung mọi kênh nhắn tin — WhatsApp, Zalo, Telegram, SMS — trên một dashboard duy nhất. Với AI automation, bạn có thể tự động hóa phản hồi, phân loại hội thoại và tối ưu chiến dịch.',
+    overview: 'WemakeUI là giải pháp quản lý tập trung mọi kênh nhắn tin — WhatsApp, Zalo, Telegram, SMS — trên một dashboard duy nhất. Với AI automation, bạn có thể tự động hóa phản hồi, phân loại hội thoại và tối ưu chiến dịch.',
     features: ['Session management đa thiết bị', 'AI chatbot với GPT-4 integration', 'Bulk messaging 500K+/giờ', 'Proxy & fingerprint management', 'Webhook & Open API', 'Team collaboration & RBAC'],
   },
   wedashboard: {

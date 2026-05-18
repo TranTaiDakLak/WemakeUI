@@ -94,13 +94,13 @@ stores/
 ├── auth.ts              ← Auth user (mock login/logout)
 ├── dashboard.ts         ← KPIs, system alerts, errors, jobs, tickets
 ├── notifications.ts     ← In-app notification center
-└── weconnect/
+└── wemakeui/
     ├── accounts.ts      ← Facebook account management (rich state, 12+ actions)
     ├── categories.ts    ← Account categories
-    └── settings.ts      ← WeConnect config (columns, general, IP, interaction)
+    └── settings.ts      ← WemakeUI config (columns, general, IP, interaction)
 ```
 
-**Status:** WeConnect stores are production-grade and well-structured. Saas module has NO stores — all state is component-local. Dashboard store exists but SaaS dashboard doesn't use it.
+**Status:** WemakeUI stores are production-grade and well-structured. Saas module has NO stores — all state is component-local. Dashboard store exists but SaaS dashboard doesn't use it.
 
 ### 3.5 Archetype Layer
 ```
@@ -116,7 +116,7 @@ archetypes/
 schemas/crud.schema.ts   ← CrudPageConfig<T> — unified CRUD config type
 ```
 
-**Status:** CrudPage archetype is genuinely reusable and well-used (5 configs in saas/, 1 in weconnect/). DashboardKPICard is good but isolated. Marketing archetype is empty. Need: FormSection archetype, StatWidget archetype, ChartCard archetype.
+**Status:** CrudPage archetype is genuinely reusable and well-used (5 configs in saas/, 1 in wemakeui/). DashboardKPICard is good but isolated. Marketing archetype is empty. Need: FormSection archetype, StatWidget archetype, ChartCard archetype.
 
 ### 3.6 Config Layer
 ```
@@ -126,7 +126,7 @@ configs/
 │   ├── products.config.ts
 │   ├── transactions.config.ts
 │   └── versions.config.ts
-└── weconnect/
+└── wemakeui/
     └── contacts.config.ts
 ```
 
@@ -135,7 +135,7 @@ configs/
 ### 3.7 View Layer
 ```
 views/
-├── _layouts/   7 layout shells (App, Auth, Dashboard, Error, Landing, Saas, WeConnect)
+├── _layouts/   7 layout shells (App, Auth, Dashboard, Error, Landing, Saas, WemakeUI)
 ├── app/        21 app pages (profile, mailbox, chat, wiki, etc.)
 ├── auth/       11 auth pages
 ├── dashboard/  11 dashboard variants
@@ -144,7 +144,7 @@ views/
 ├── landing/    10 landing pages
 ├── saas/       7 SaaS internal pages ← NEW, complete
 ├── showcase/   17 showcase demos
-└── weconnect/  10 WeConnect pages
+└── wemakeui/  10 WemakeUI pages
 ```
 
 **Total:** 123 Vue views
@@ -188,15 +188,15 @@ These decisions are FINAL. Do not revisit without explicit governance review.
 | Debt | Severity | Impact |
 |---|---|---|
 | SaaS pages (members/products/etc) use config-local mock data — no shared Pinia store | MEDIUM | Acceptable for now, needs useApi() migration when real backend ready |
-| `useDashboardStore` (WeConnect ops) exists but only used in WeDashboard views, not SaaS dashboard | LOW | SaaS dashboard correctly uses useSaasStore |
-| ~~No route guards~~ **DONE** — router.beforeEach guards /saas, /weconnect, /dashboard | ✅ RESOLVED | — |
+| `useDashboardStore` (WemakeUI ops) exists but only used in WeDashboard views, not SaaS dashboard | LOW | SaaS dashboard correctly uses useSaasStore |
+| ~~No route guards~~ **DONE** — router.beforeEach guards /saas, /wemakeui, /dashboard | ✅ RESOLVED | — |
 | ~~NotificationCenter missing~~ **DONE** — component built + wired in SaasLayout | ✅ RESOLVED | — |
 | No API layer — mocks scattered in configs | MEDIUM | Hard to switch to real API |
 | No testing infrastructure | MEDIUM | No coverage |
 | `useScrollReveal`/`useStagger` not applied to any real view | MEDIUM | Motion system wasted |
 | Marketing archetype/ is empty | MEDIUM | Homepage will be built without pattern |
 | `useLiveQuery`/`useOptimistic` not wired to any view | LOW-MED | Advanced infra unused |
-| WeConnect stores detailed but WeConnect UI uses local state in some views | LOW | Inconsistent |
+| WemakeUI stores detailed but WemakeUI UI uses local state in some views | LOW | Inconsistent |
 | i18n composable exists but strings are hardcoded Vietnamese | LOW | Won't matter until multi-lang |
 
 ---

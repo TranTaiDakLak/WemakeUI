@@ -47,7 +47,7 @@ import { RouterLink } from 'vue-router'
         <div class="home-footer__links">
           <div class="home-footer__col">
             <h4 class="home-footer__col-title">Sản phẩm</h4>
-            <RouterLink to="/products" class="home-footer__link">WeConnect</RouterLink>
+            <RouterLink to="/products" class="home-footer__link">WemakeUI</RouterLink>
             <RouterLink to="/products" class="home-footer__link">WeDashboard</RouterLink>
             <RouterLink to="/products" class="home-footer__link">WeAnalytics</RouterLink>
           </div>

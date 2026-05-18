@@ -5,6 +5,8 @@ defineProps<{
   size?: 'sm' | 'md'
   dot?: boolean
   pulsing?: boolean
+  /** Solid fill (notification count style) — bg đậm + text trắng + viền trắng */
+  solid?: boolean
 }>()
 </script>
 
@@ -18,6 +20,7 @@ defineProps<{
         'base-badge--dot-only': dot && !text && !$slots.default,
         'base-badge--with-dot': dot && (text || $slots.default),
         'base-badge--pulsing': pulsing,
+        'base-badge--solid': solid,
       }
     ]"
   >
@@ -78,6 +81,26 @@ defineProps<{
 .base-badge--dot-only.base-badge--warning { background: #d97706; }
 .base-badge--dot-only.base-badge--danger  { background: #dc2626; }
 .base-badge--dot-only.base-badge--info    { background: var(--wx-brand-primary); }
+
+/* Solid (notification count style) — luôn bg đậm + chữ trắng + viền trắng */
+.base-badge--solid {
+  color: #fff;
+  border: 2px solid #fff;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+.base-badge--solid.base-badge--danger  { background: #ef4444; box-shadow: 0 2px 6px rgba(239, 68, 68, 0.45); }
+.base-badge--solid.base-badge--success { background: #22c55e; box-shadow: 0 2px 6px rgba(34, 197, 94, 0.45); }
+.base-badge--solid.base-badge--warning { background: #f59e0b; box-shadow: 0 2px 6px rgba(245, 158, 11, 0.45); }
+.base-badge--solid.base-badge--info    { background: #3b82f6; box-shadow: 0 2px 6px rgba(59, 130, 246, 0.45); }
+.base-badge--solid.base-badge--primary { background: var(--wx-brand-primary); }
+.base-badge--solid.base-badge--neutral { background: var(--wx-text-secondary); }
+.wx-dark .base-badge--solid { border-color: var(--wx-surface-base); }
 
 /* Pulsing (for dot-only indicators) */
 .base-badge--pulsing { animation: badge-pulse 2s infinite; }

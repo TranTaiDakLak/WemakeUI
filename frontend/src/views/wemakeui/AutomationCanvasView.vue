@@ -101,7 +101,7 @@ function addNode() {
 </script>
 
 <template>
-  <AppPageLayout section="weconnect" current="automation" page-title="Automation Canvas" page-description="Thiết kế luồng tự động hoá bằng kéo thả node">
+  <AppPageLayout section="wemakeui" current="automation" page-title="Automation Canvas" page-description="Thiết kế luồng tự động hoá bằng kéo thả node">
     <template #actions>
       <BaseButton size="sm" variant="ghost" @click="runFlow">{{ running ? '⏳ Đang chạy...' : '▶ Chạy luồng' }}</BaseButton>
       <BaseButton size="sm" variant="primary">Lưu luồng</BaseButton>

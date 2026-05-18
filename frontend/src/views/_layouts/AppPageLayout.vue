@@ -6,7 +6,7 @@ import type { SidebarSection } from '../../components/layout'
 import { BaseBadge, BaseAvatar, BaseTag } from '../../components/common'
 
 const props = withDefaults(defineProps<{
-  section: 'app' | 'dashboards' | 'weconnect'
+  section: 'app' | 'dashboards' | 'wemakeui'
   current: string
   pageTitle: string
   pageDescription?: string
@@ -105,20 +105,20 @@ const SECTIONS: Record<string, SidebarSection[]> = {
       { id: 'iot',      label: 'IoT realtime', icon: I.iot,  href: '#/dashboard/iot' },
     ]},
   ],
-  weconnect: [
-    { label: 'WeConnect', items: [
-      { id: 'admin',        label: 'Tổng quan',     icon: I.home,     href: '#/weconnect' },
-      { id: 'accounts',     label: 'Tài khoản',     icon: I.users,    href: '#/weconnect/accounts' },
-      { id: 'campaigns',    label: 'Chiến dịch',    icon: I.campaign, href: '#/weconnect/campaigns', badge: 2 },
-      { id: 'contacts',     label: 'Danh bạ',       icon: I.contacts, href: '#/weconnect/contacts' },
-      { id: 'sessions',     label: 'Phiên kết nối', icon: I.session,  href: '#/weconnect/sessions', badge: 8 },
+  wemakeui: [
+    { label: 'WemakeUI', items: [
+      { id: 'admin',        label: 'Tổng quan',     icon: I.home,     href: '#/wemakeui' },
+      { id: 'accounts',     label: 'Tài khoản',     icon: I.users,    href: '#/wemakeui/accounts' },
+      { id: 'campaigns',    label: 'Chiến dịch',    icon: I.campaign, href: '#/wemakeui/campaigns', badge: 2 },
+      { id: 'contacts',     label: 'Danh bạ',       icon: I.contacts, href: '#/wemakeui/contacts' },
+      { id: 'sessions',     label: 'Phiên kết nối', icon: I.session,  href: '#/wemakeui/sessions', badge: 8 },
     ]},
     { label: 'Hệ thống', items: [
-      { id: 'plugins',      label: 'Plugin',            icon: I.plugin,  href: '#/weconnect/plugins' },
-      { id: 'console',      label: 'Console / Log',     icon: I.console, href: '#/weconnect/console' },
-      { id: 'scheduler',    label: 'Lịch tác vụ',      icon: I.clock,   href: '#/weconnect/scheduler' },
-      { id: 'integrations', label: 'Tích hợp',          icon: I.link,    href: '#/weconnect/integrations' },
-      { id: 'automation',   label: 'Automation canvas', icon: I.canvas,  href: '#/weconnect/automation' },
+      { id: 'plugins',      label: 'Plugin',            icon: I.plugin,  href: '#/wemakeui/plugins' },
+      { id: 'console',      label: 'Console / Log',     icon: I.console, href: '#/wemakeui/console' },
+      { id: 'scheduler',    label: 'Lịch tác vụ',      icon: I.clock,   href: '#/wemakeui/scheduler' },
+      { id: 'integrations', label: 'Tích hợp',          icon: I.link,    href: '#/wemakeui/integrations' },
+      { id: 'automation',   label: 'Automation canvas', icon: I.canvas,  href: '#/wemakeui/automation' },
     ]},
   ],
 }
@@ -127,7 +127,7 @@ const SECTIONS: Record<string, SidebarSection[]> = {
 const CFG = {
   app:        { brand: 'WemakeUI',  subtitlePrefix: 'app',       breadcrumb: 'app',        tagVariant: 'primary' as const, defaultId: 'profile'  },
   dashboards: { brand: 'WemakeUI',  subtitlePrefix: 'dashboard', breadcrumb: 'dashboards', tagVariant: 'primary' as const, defaultId: 'overview' },
-  weconnect:  { brand: 'WeConnect', subtitlePrefix: '',           breadcrumb: 'weconnect',  tagVariant: 'info'    as const, defaultId: 'admin'    },
+  wemakeui:  { brand: 'WemakeUI', subtitlePrefix: '',           breadcrumb: 'wemakeui',  tagVariant: 'info'    as const, defaultId: 'admin'    },
 }
 
 const cfg = computed(() => CFG[props.section])
@@ -138,7 +138,7 @@ const topbarSubtitle = computed(() =>
 
 const activeId = computed(() => {
   const last = route.path.split('/').filter(Boolean).pop() || ''
-  if (!last || last === 'weconnect') return cfg.value.defaultId
+  if (!last || last === 'wemakeui') return cfg.value.defaultId
   return last
 })
 </script>
@@ -153,7 +153,7 @@ const activeId = computed(() => {
           </button>
           <button class="topbar-icon" aria-label="Thông báo">
             <span v-html="I.bell" />
-            <BaseBadge text="3" variant="danger" size="sm" class="topbar-icon__badge" />
+            <BaseBadge text="3" variant="danger" size="sm" solid class="topbar-icon__badge" />
           </button>
           <BaseAvatar name="Admin" size="sm" />
         </template>
@@ -172,7 +172,7 @@ const activeId = computed(() => {
 
     <PageHeader :title="pageTitle" :description="pageDescription" padded>
       <template #breadcrumb>
-        <RouterLink to="/" class="bc-link">sitemap</RouterLink>
+        <RouterLink to="/" class="bc-link">trang chủ</RouterLink>
         <span class="bc-sep">/</span>
         <span>{{ cfg.breadcrumb }}</span>
         <span class="bc-sep">/</span>
@@ -195,14 +195,14 @@ const activeId = computed(() => {
   position: relative;
   width: 32px; height: 32px;
   border: none; background: transparent;
-  color: rgba(255,255,255,0.85);
+  color: #fff;
   border-radius: var(--wx-radius-full);
   cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center;
 }
 .topbar-icon :deep(svg) { width: 16px; height: 16px; }
-.topbar-icon:hover { background: rgba(255,255,255,0.12); color: white; }
-.topbar-icon__badge { position: absolute; top: -2px; right: -2px; }
+.topbar-icon:hover { background: rgba(255,255,255,0.18); color: #fff; }
+.topbar-icon__badge { position: absolute; top: -4px; right: -4px; pointer-events: none; }
 .bc-link { font-size: var(--wx-fs-12); color: var(--wx-content-link); text-decoration: none; }
 .bc-link:hover { text-decoration: underline; }
 .bc-sep { color: var(--wx-content-muted); }

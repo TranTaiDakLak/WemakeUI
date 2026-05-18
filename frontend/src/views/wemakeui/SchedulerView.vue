@@ -274,7 +274,7 @@ function toggleEnabled(j: CronJob) {
 </script>
 
 <template>
-  <AppPageLayout section="weconnect"
+  <AppPageLayout section="wemakeui"
     current="scheduler"
     page-title="Bộ lập lịch"
     page-description="Quản lý tác vụ định kỳ và cron jobs"

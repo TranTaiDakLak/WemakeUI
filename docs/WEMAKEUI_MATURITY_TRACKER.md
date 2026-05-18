@@ -116,7 +116,7 @@
 | Optimistic updates | ❌ Not built | 0% |
 | useCrudState wired to CrudPage | ❌ Not wired | 0% |
 
-**Configs using CrudPage:** 5 (members, products, transactions, versions, weconnect/contacts)
+**Configs using CrudPage:** 5 (members, products, transactions, versions, wemakeui/contacts)
 
 **Technical Debt:** Column sort is missing — most data tables need it. Export button exists in some views but does nothing. `useCrudState` composable exists but isn't used by CrudPage.
 
@@ -133,7 +133,7 @@
 | DashboardKPICard archetype | ✅ Built | 85% |
 | Sparkline in KPI cards | ✅ Built | 80% |
 | useSaasStore → SaaS DashboardView | ✅ Done — KPIs, pendingTxs, alert, counts | 85% |
-| useDashboardStore (WeConnect ops) | ✅ Built | 70% |
+| useDashboardStore (WemakeUI ops) | ✅ Built | 70% |
 | useDashboardStore wired to WeDashboard views | ⚠️ WeDashboardV1/V2 use it | 60% |
 | Alert banner dismissible | ✅ Done in SaaS Dashboard | 85% |
 | Quick action buttons → routes | ✅ Done | 85% |
@@ -208,7 +208,7 @@
 | useAuthStore (Pinia) | ✅ Built | 90% |
 | Mock login/logout | ✅ Wired to LoginView | 90% |
 | isLoggedIn computed | ✅ Built | 90% |
-| Route guards | ✅ Done — router.beforeEach /saas /weconnect /dashboard | 90% |
+| Route guards | ✅ Done — router.beforeEach /saas /wemakeui /dashboard | 90% |
 | Login redirect (query param support) | ✅ Done | 85% |
 | Logout → /auth/login | ✅ Done (UserDropdown) | 90% |
 | Token storage (localStorage) | ❌ Not built | 0% |
@@ -259,9 +259,9 @@
 | mark-read on click | ✅ Working | 85% |
 | Action link navigates + marks read | ✅ Working | 85% |
 
-**Technical Debt:** Notification center not available in WeConnect layout or DashboardLayout (only in SaasLayout). No persistence — cleared on refresh.
+**Technical Debt:** Notification center not available in WemakeUI layout or DashboardLayout (only in SaasLayout). No persistence — cleared on refresh.
 
-**Next Milestone:** Add NotificationCenter to WeConnectLayout topbar.
+**Next Milestone:** Add NotificationCenter to WemakeUILayout topbar.
 
 ---
 

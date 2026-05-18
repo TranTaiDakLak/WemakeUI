@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tích hợp — WeConnect</title>
+<title>Tích hợp — WemakeUI</title>
 <link rel="stylesheet" href="../css/wemake.css">
 </head>
 <body>
@@ -11,11 +11,11 @@
   <aside class="wx-sidebar" id="sidebar">
     <div class="wx-sidebar-brand">
       <div class="wx-sidebar-logo">WC</div>
-      <span class="wx-sidebar-brand-text">WeConnect</span>
+      <span class="wx-sidebar-brand-text">WemakeUI</span>
       <button class="wx-sidebar-toggle" data-toggle-sidebar title="Thu gọn">☰</button>
     </div>
     <nav class="wx-sidebar-nav">
-      <div class="wx-nav-section-label">WeConnect</div>
+      <div class="wx-nav-section-label">WemakeUI</div>
       <a href="index.html" class="wx-nav-item"><span class="wx-nav-icon">🎛️</span><span>Bảng quản trị</span></a>
       <a href="accounts.html" class="wx-nav-item"><span class="wx-nav-icon">👤</span><span>Tài khoản</span></a>
       <a href="sessions.html" class="wx-nav-item"><span class="wx-nav-icon">🔌</span><span>Phiên kết nối</span></a>
@@ -43,7 +43,7 @@
       <div class="mb-4 flex items-center justify-between">
         <div>
           <h1 style="font-size:24px;font-weight:700;margin:0 0 4px">Tích hợp</h1>
-          <p class="text-muted" style="margin:0">Kết nối WeConnect với các dịch vụ bên thứ ba</p>
+          <p class="text-muted" style="margin:0">Kết nối WemakeUI với các dịch vụ bên thứ ba</p>
         </div>
       </div>
 
@@ -53,7 +53,7 @@
           <div class="wx-grid wx-grid-3">
             <div class="wx-card" style="margin:0"><div class="wx-card-body">
               <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#4a154b;color:#fff">S</div><div class="flex-1"><div class="font-semibold">Slack</div><span class="wx-badge wx-badge-success text-xs">Đã kết nối</span></div></div>
-              <div class="text-xs text-muted mb-3">Đồng bộ cuối: 5 phút trước · kênh #weconnect-alerts</div>
+              <div class="text-xs text-muted mb-3">Đồng bộ cuối: 5 phút trước · kênh #wemakeui-alerts</div>
               <div class="flex gap-2"><button class="wx-btn wx-btn-ghost wx-btn-sm">Cấu hình</button><button class="wx-btn wx-btn-danger wx-btn-sm">Ngắt kết nối</button></div>
             </div></div>
             <div class="wx-card" style="margin:0"><div class="wx-card-body">
@@ -116,7 +116,7 @@
             </div></div>
             <div class="wx-card" style="margin:0"><div class="wx-card-body">
               <div class="flex items-center gap-3 mb-3"><div class="wx-avatar" style="background:#10b981;color:#fff">{}</div><div class="flex-1"><div class="font-semibold">REST API</div><div class="text-xs text-muted">Lập trình</div></div></div>
-              <p class="text-sm text-muted mb-3">Truy cập dữ liệu WeConnect qua API và API key riêng.</p>
+              <p class="text-sm text-muted mb-3">Truy cập dữ liệu WemakeUI qua API và API key riêng.</p>
               <button class="wx-btn wx-btn-primary wx-btn-sm w-full">Kết nối</button>
             </div></div>
           </div>
@@ -131,7 +131,7 @@
             <tbody>
               <tr><td class="font-mono text-xs">https://api.wemake.vn/hooks/messages</td><td><span class="wx-badge wx-badge-info">message.sent</span> <span class="wx-badge wx-badge-info">message.reply</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td class="text-sm text-muted">vừa xong · 200</td><td><button class="wx-btn wx-btn-icon wx-btn-sm">✏️</button> <button class="wx-btn wx-btn-icon wx-btn-sm">🗑</button></td></tr>
               <tr><td class="font-mono text-xs">https://crm.wemake.vn/sync/contacts</td><td><span class="wx-badge wx-badge-info">contact.created</span> <span class="wx-badge wx-badge-info">contact.updated</span></td><td><span class="wx-badge wx-badge-success">Hoạt động</span></td><td class="text-sm text-muted">3 phút trước · 200</td><td><button class="wx-btn wx-btn-icon wx-btn-sm">✏️</button> <button class="wx-btn wx-btn-icon wx-btn-sm">🗑</button></td></tr>
-              <tr><td class="font-mono text-xs">https://hooks.zapier.com/.../weconnect</td><td><span class="wx-badge wx-badge-info">campaign.completed</span></td><td><span class="wx-badge wx-badge-warning">Lỗi tạm thời</span></td><td class="text-sm text-muted">22 phút trước · 503</td><td><button class="wx-btn wx-btn-icon wx-btn-sm">✏️</button> <button class="wx-btn wx-btn-icon wx-btn-sm">🗑</button></td></tr>
+              <tr><td class="font-mono text-xs">https://hooks.zapier.com/.../wemakeui</td><td><span class="wx-badge wx-badge-info">campaign.completed</span></td><td><span class="wx-badge wx-badge-warning">Lỗi tạm thời</span></td><td class="text-sm text-muted">22 phút trước · 503</td><td><button class="wx-btn wx-btn-icon wx-btn-sm">✏️</button> <button class="wx-btn wx-btn-icon wx-btn-sm">🗑</button></td></tr>
               <tr><td class="font-mono text-xs">https://alerts.wemake.vn/session</td><td><span class="wx-badge wx-badge-info">session.error</span> <span class="wx-badge wx-badge-info">session.reconnect</span></td><td><span class="wx-badge wx-badge-neutral">Tạm dừng</span></td><td class="text-sm text-muted">2 ngày trước · 200</td><td><button class="wx-btn wx-btn-icon wx-btn-sm">✏️</button> <button class="wx-btn wx-btn-icon wx-btn-sm">🗑</button></td></tr>
             </tbody>
           </table>

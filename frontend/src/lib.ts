@@ -46,10 +46,11 @@ export * from './ui-system/tokens'
 
 // ── Theme Composable ───────────────────────────────────────────
 export { useTheme } from './ui-system/composables/useTheme'
-export type { Theme } from './ui-system/composables/useTheme'
+export type { Theme, ColorScheme, Variant } from './ui-system/composables/useTheme'
 
 // ── Utilities ──────────────────────────────────────────────────
-export { cn } from './ui-system/utils'
+export { cn, generateScale, applyScale } from './ui-system/utils'
+export type { ColorScale } from './ui-system/utils'
 
 // ── Types ──────────────────────────────────────────────────────
 export * from './types'

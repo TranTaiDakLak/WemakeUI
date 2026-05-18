@@ -2,8 +2,8 @@ export type LayoutMode   = 'light' | 'dark' | 'both'
 export type LayoutStatus = 'ready' | 'draft'
 
 export type LayoutCategory =
-  | 'WeConnect'      // Facebook automation platform — full tool set
-  | 'WeDashboard'    // WeConnect KPI dashboard
+  | 'WemakeUI'      // Facebook automation platform — full tool set
+  | 'WeDashboard'    // WemakeUI KPI dashboard
   | 'ChartDashboard' // Analytics & chart-heavy dashboards
   | 'Dashboard'      // Full comprehensive dashboard layouts
   | 'PageTemplates'  // Auth, App, Landing, Error standalone pages
@@ -29,15 +29,15 @@ export interface LayoutPage {
   title: string
   description: string
   category: LayoutCategory
-  /** Sub-group trong category (WeConnect: 'WeConnect'|'Hệ thống', PageTemplates: 'Auth'|'App'|'Communication'|'Billing'|'Landing'|'Error') */
+  /** Sub-group trong category (WemakeUI: 'WemakeUI'|'Hệ thống', PageTemplates: 'Auth'|'App'|'Communication'|'Billing'|'Landing'|'Error') */
   group?: string
   variants: LayoutVariant[]
   tags?: string[]
 }
 
 export const CATEGORY_META: Record<LayoutCategory, { color: string; label: string; desc: string }> = {
-  WeConnect:     { color: '#8b5cf6', label: 'WeConnect',       desc: 'Nền tảng automation — tài khoản, chiến dịch, datagrid, context menu, statusbar' },
-  WeDashboard:   { color: '#2563eb', label: 'KPI Dashboard',   desc: 'KPI cards, sparkline, activity feed — dashboard tổng quan hệ thống WeConnect' },
+  WemakeUI:     { color: '#8b5cf6', label: 'WemakeUI',       desc: 'Nền tảng automation — tài khoản, chiến dịch, datagrid, context menu, statusbar' },
+  WeDashboard:   { color: '#2563eb', label: 'KPI Dashboard',   desc: 'KPI cards, sparkline, activity feed — dashboard tổng quan hệ thống WemakeUI' },
   ChartDashboard:{ color: '#0ea5e9', label: 'Phân tích',       desc: 'Analytics, Finance, Ecommerce, CRM, Project — dashboard nặng biểu đồ' },
   Dashboard:     { color: '#f59e0b', label: 'Tổng hợp',        desc: 'Dashboard đa năng với KPI, area chart, activity feed, top list' },
   PageTemplates: { color: '#6366f1', label: 'Trang đơn',       desc: 'Auth · App · Billing · Landing · Error — các trang độc lập tiêu chuẩn' },
@@ -47,30 +47,30 @@ export const CATEGORY_META: Record<LayoutCategory, { color: string; label: strin
 export const layoutPages: LayoutPage[] = [
 
   /* ════════════════════════════════════════════════
-     WECONNECT — Facebook automation platform
+     WEMAKEUI — Facebook automation platform
      Sidebar gốc:
-       Group "WeConnect": Tổng quan / Tài khoản / Chiến dịch / Danh bạ / Phiên kết nối
+       Group "WemakeUI": Tổng quan / Tài khoản / Chiến dịch / Danh bạ / Phiên kết nối
        Group "Hệ thống":  Plugin / Console / Lịch tác vụ / Tích hợp / Automation canvas
   ════════════════════════════════════════════════ */
   {
     id: 'wc-admin',
     title: 'Tổng quan',
     description: 'Dashboard messaging: tài khoản hoạt động, phiên kết nối, chiến dịch đang chạy, tỷ lệ giao thành công + activity feed.',
-    category: 'WeConnect',
-    group: 'WeConnect',
+    category: 'WemakeUI',
+    group: 'WemakeUI',
     tags: ['dashboard', 'kpi', 'messaging', 'admin'],
     variants: [
       {
         id: 'wc-admin-v1',
         label: 'KPI cards + Sparkline + Activity feed',
         description: '4 KPI (accounts / sessions / campaigns / delivery rate) với sparkline chart, recent activity timeline.',
-        route: '/dashboard/weconnect-v1',
+        route: '/dashboard/wemakeui-v1',
         status: 'ready',
         mode: 'both',
         components: ['BaseCard', 'Sparkline'],
         patterns: ['KpiGrid', 'SparklineCard', 'ActivityFeed'],
         file: 'src/views/dashboard/WeDashboardV1View.vue',
-        prompt: 'WeConnect dashboard: 4 KPI cards (Tài khoản hoạt động / Phiên kết nối hôm nay / Chiến dịch đang chạy / Tỷ lệ giao thành công), mỗi card có sparkline 24h, bên dưới là activity feed với màu theo type (campaign/account/plugin/error/session).',
+        prompt: 'WemakeUI dashboard: 4 KPI cards (Tài khoản hoạt động / Phiên kết nối hôm nay / Chiến dịch đang chạy / Tỷ lệ giao thành công), mỗi card có sparkline 24h, bên dưới là activity feed với màu theo type (campaign/account/plugin/error/session).',
       },
     ],
   },
@@ -79,20 +79,20 @@ export const layoutPages: LayoutPage[] = [
     id: 'wc-accounts',
     title: 'Tài khoản',
     description: 'Quản lý tài khoản Facebook: kết nối, trạng thái, tìm kiếm, bulk action, context menu 14 nhóm.',
-    category: 'WeConnect',
-    group: 'WeConnect',
+    category: 'WemakeUI',
+    group: 'WemakeUI',
     tags: ['accounts', 'facebook', 'datagrid', 'context-menu'],
     variants: [
       {
         id: 'wc-accounts-table',
         label: 'DataGrid + MenuStrip + ActionBar + StatusBar',
         description: 'Bảng tài khoản virtual scroll, badge trạng thái, context menu 14 nhóm, 10 modal.',
-        route: '/weconnect',
+        route: '/wemakeui',
         status: 'ready',
         mode: 'both',
         components: ['BaseButton', 'BaseBadge', 'BaseDataGrid', 'BaseInput'],
         patterns: ['AccountTable', 'StatusBadge', 'ContextMenu', 'SearchBar', 'StatusBar'],
-        file: 'src/views/weconnect/AdminView.vue',
+        file: 'src/views/wemakeui/AdminView.vue',
         prompt: 'Accounts table: MenuStrip 6 mục, ActionBar run/stop + search + category, DataGrid virtual scroll với context menu 14 nhóm, StatusBar tổng kết.',
       },
     ],
@@ -102,19 +102,19 @@ export const layoutPages: LayoutPage[] = [
     id: 'wc-campaigns',
     title: 'Chiến dịch',
     description: 'Campaign gửi tin nhắn: inline progress, filter platform/status, bulk pause/activate/delete.',
-    category: 'WeConnect',
-    group: 'WeConnect',
+    category: 'WemakeUI',
+    group: 'WemakeUI',
     tags: ['campaign', 'bulk', 'progress', 'zalo', 'facebook', 'sms'],
     variants: [
       {
         id: 'wc-campaigns-table',
         label: 'Table + Progress + 3 bulk actions',
-        route: '/weconnect/campaigns',
+        route: '/wemakeui/campaigns',
         status: 'ready',
         mode: 'both',
         components: ['BaseButton', 'BaseSelectMenu', 'BaseBadge', 'BaseProgress', 'FormModal', 'ConfirmDialog', 'BulkActionBar'],
         patterns: ['TableFilter', 'InlineProgress', 'BulkPause', 'BulkActivate', 'BulkDelete'],
-        file: 'src/views/weconnect/CampaignsView.vue',
+        file: 'src/views/wemakeui/CampaignsView.vue',
         prompt: 'Campaigns: search + platform select (Zalo/Facebook/SMS/Email) + status select, table có inline progress bar 6px cho running/completed/paused, checkbox multi-select, bulk action bar với pause/activate/delete.',
       },
     ],
@@ -124,19 +124,19 @@ export const layoutPages: LayoutPage[] = [
     id: 'wc-contacts',
     title: 'Danh bạ',
     description: 'Quản lý liên hệ: CRUD đầy đủ với Add/Edit modal, Detail drawer, Bulk delete, multi-select.',
-    category: 'WeConnect',
-    group: 'WeConnect',
+    category: 'WemakeUI',
+    group: 'WemakeUI',
     tags: ['contacts', 'crud', 'drawer', 'bulk', 'table'],
     variants: [
       {
         id: 'wc-contacts-crud',
         label: 'Full CRUD — Table + Detail drawer',
-        route: '/weconnect/contacts',
+        route: '/wemakeui/contacts',
         status: 'ready',
         mode: 'both',
         components: ['BaseButton', 'BaseInput', 'BaseSelectMenu', 'BaseBadge', 'FormModal', 'FormDrawer', 'ConfirmDialog', 'BulkActionBar'],
         patterns: ['FullCRUD', 'MultiSelect', 'RowActionsOnHover', 'DetailDrawer', 'BulkDelete'],
-        file: 'src/views/weconnect/ContactsView.vue',
+        file: 'src/views/wemakeui/ContactsView.vue',
         prompt: 'Contacts CRUD: search + filter, checkbox multi-select, row actions (edit/delete) chỉ hiện khi hover, Add modal, Edit modal, Detail drawer có "Chỉnh sửa" button, Delete confirm dialog, Bulk action bar.',
       },
     ],
@@ -146,20 +146,20 @@ export const layoutPages: LayoutPage[] = [
     id: 'wc-sessions',
     title: 'Phiên kết nối',
     description: 'Giám sát session đang hoạt động realtime: uptime, tin nhắn đã gửi, thiết bị, trạng thái.',
-    category: 'WeConnect',
-    group: 'WeConnect',
+    category: 'WemakeUI',
+    group: 'WemakeUI',
     tags: ['sessions', 'realtime', 'monitor'],
     variants: [
       {
         id: 'wc-sessions-cards',
         label: 'Session cards + realtime counter',
         description: 'Card grid mỗi session, tự cập nhật số tin nhắn mỗi 3s, badge màu theo trạng thái.',
-        route: '/weconnect/sessions',
+        route: '/wemakeui/sessions',
         status: 'ready',
         mode: 'both',
         components: ['BaseCard', 'BaseBadge', 'BaseButton'],
         patterns: ['SessionCard', 'StatusBadge', 'LiveCounter', 'DisconnectAction'],
-        file: 'src/views/weconnect/SessionsView.vue',
+        file: 'src/views/wemakeui/SessionsView.vue',
         prompt: 'Sessions: card grid, mỗi card có session ID (mono font) + account + device + uptime + message count (realtime +random mỗi 3s) + badge active/idle/error, footer: Logs + Disconnect/Reconnect buttons.',
       },
     ],
@@ -169,19 +169,19 @@ export const layoutPages: LayoutPage[] = [
     id: 'wc-plugins',
     title: 'Plugin',
     description: 'Marketplace plugin: cài đặt, cập nhật, toggle bật/tắt.',
-    category: 'WeConnect',
+    category: 'WemakeUI',
     group: 'Hệ thống',
     tags: ['plugins', 'extensions', 'marketplace'],
     variants: [
       {
         id: 'wc-plugins-list',
         label: 'Plugin list + install/toggle',
-        route: '/weconnect/plugins',
+        route: '/wemakeui/plugins',
         status: 'ready',
         mode: 'both',
         components: ['BaseCard', 'BaseBadge', 'BaseButton', 'BaseToggle'],
         patterns: ['PluginCard', 'VersionBadge', 'InstallAction'],
-        file: 'src/views/weconnect/PluginsView.vue',
+        file: 'src/views/wemakeui/PluginsView.vue',
       },
     ],
   },
@@ -190,19 +190,19 @@ export const layoutPages: LayoutPage[] = [
     id: 'wc-console',
     title: 'Console / Log',
     description: 'System log realtime: filter theo level (info/warn/error), auto-scroll, copy log.',
-    category: 'WeConnect',
+    category: 'WemakeUI',
     group: 'Hệ thống',
     tags: ['console', 'log', 'debug', 'realtime'],
     variants: [
       {
         id: 'wc-console-log',
         label: 'Log viewer + level filter',
-        route: '/weconnect/console',
+        route: '/wemakeui/console',
         status: 'ready',
         mode: 'both',
         components: ['BaseButton', 'BaseSelectMenu', 'BaseBadge'],
         patterns: ['LogViewer', 'LevelFilter', 'AutoScroll'],
-        file: 'src/views/weconnect/ConsoleView.vue',
+        file: 'src/views/wemakeui/ConsoleView.vue',
       },
     ],
   },
@@ -211,19 +211,19 @@ export const layoutPages: LayoutPage[] = [
     id: 'wc-scheduler',
     title: 'Lịch tác vụ',
     description: 'Cron jobs: tạo task định kỳ, xem lịch chạy tiếp theo, enable/disable.',
-    category: 'WeConnect',
+    category: 'WemakeUI',
     group: 'Hệ thống',
     tags: ['scheduler', 'cron', 'task', 'automation'],
     variants: [
       {
         id: 'wc-scheduler-list',
         label: 'Task list + cron expression',
-        route: '/weconnect/scheduler',
+        route: '/wemakeui/scheduler',
         status: 'ready',
         mode: 'both',
         components: ['BaseCard', 'BaseBadge', 'BaseButton', 'BaseToggle'],
         patterns: ['TaskList', 'CronExpression', 'NextRunBadge'],
-        file: 'src/views/weconnect/SchedulerView.vue',
+        file: 'src/views/wemakeui/SchedulerView.vue',
       },
     ],
   },
@@ -232,19 +232,19 @@ export const layoutPages: LayoutPage[] = [
     id: 'wc-integrations',
     title: 'Tích hợp',
     description: 'Kết nối app bên ngoài: Zapier, CRM, webhook, API config.',
-    category: 'WeConnect',
+    category: 'WemakeUI',
     group: 'Hệ thống',
     tags: ['integrations', 'webhook', 'api', 'zapier'],
     variants: [
       {
         id: 'wc-integrations-grid',
         label: 'Integration app grid + config drawer',
-        route: '/weconnect/integrations',
+        route: '/wemakeui/integrations',
         status: 'ready',
         mode: 'both',
         components: ['BaseCard', 'BaseBadge', 'BaseButton', 'BaseToggle'],
         patterns: ['IntegrationCard', 'ConfigDrawer', 'ConnectedBadge'],
-        file: 'src/views/weconnect/IntegrationsView.vue',
+        file: 'src/views/wemakeui/IntegrationsView.vue',
       },
     ],
   },
@@ -253,19 +253,19 @@ export const layoutPages: LayoutPage[] = [
     id: 'wc-automation',
     title: 'Automation Canvas',
     description: 'Visual flow builder: drag-drop node, trigger → condition → action, kết nối bằng đường.',
-    category: 'WeConnect',
+    category: 'WemakeUI',
     group: 'Hệ thống',
     tags: ['automation', 'flow', 'canvas', 'nocode', 'drag-drop'],
     variants: [
       {
         id: 'wc-automation-canvas',
         label: 'Flow canvas — Node editor',
-        route: '/weconnect/automation',
+        route: '/wemakeui/automation',
         status: 'ready',
         mode: 'both',
         components: ['BaseButton', 'BaseBadge', 'BaseCard', 'BaseSelectMenu'],
         patterns: ['FlowNode', 'NodeConnector', 'TriggerNode', 'ActionNode', 'ConditionNode'],
-        file: 'src/views/weconnect/AutomationCanvasView.vue',
+        file: 'src/views/wemakeui/AutomationCanvasView.vue',
         prompt: 'Automation canvas: toolbar trên (zoom/undo/save), canvas infinite scroll, node types: Trigger (xanh) / Condition (vàng) / Action (tím), kéo thả từ panel bên trái, kết nối bằng bezier curve.',
       },
     ],
@@ -275,23 +275,23 @@ export const layoutPages: LayoutPage[] = [
      WEDASHBOARD — WeDashboard branded KPI templates
   ════════════════════════════════════════════════ */
   {
-    id: 'dash-weconnect',
-    title: 'WeConnect Dashboard',
+    id: 'dash-wemakeui',
+    title: 'WemakeUI Dashboard',
     description: 'Dashboard overview cho hệ thống Facebook automation: KPI cards với sparkline, quick stats, activity feed.',
     category: 'WeDashboard',
     tags: ['dashboard', 'kpi', 'sparkline', 'messaging', 'facebook'],
     variants: [
       {
-        id: 'dash-weconnect-v1',
+        id: 'dash-wemakeui-v1',
         label: 'KPI 4-col + Quick stats + Activity feed',
         description: '4 KPI cards (tài khoản / phiên / chiến dịch / tỷ lệ giao), sparkline 24h, recent activity feed, quick stats panel.',
-        route: '/dashboard/weconnect-v1',
+        route: '/dashboard/wemakeui-v1',
         status: 'ready',
         mode: 'both',
         components: ['BaseCard', 'Sparkline'],
         patterns: ['KpiGrid', 'SparklineCard', 'ActivityFeed', 'QuickStats'],
         file: 'src/views/dashboard/WeDashboardV1View.vue',
-        prompt: 'WeConnect dashboard v1: 4 KPI cards với sparkline 24h (Tài khoản hoạt động / Phiên kết nối hôm nay / Chiến dịch đang chạy / Tỷ lệ giao thành công), bên dưới 2 cột: trái là activity feed với màu dot theo type, phải là quick stats (Tổng TK / Chiến dịch hoàn thành / Tin nhắn đã gửi / Uptime).',
+        prompt: 'WemakeUI dashboard v1: 4 KPI cards với sparkline 24h (Tài khoản hoạt động / Phiên kết nối hôm nay / Chiến dịch đang chạy / Tỷ lệ giao thành công), bên dưới 2 cột: trái là activity feed với màu dot theo type, phải là quick stats (Tổng TK / Chiến dịch hoàn thành / Tin nhắn đã gửi / Uptime).',
       },
     ],
   },

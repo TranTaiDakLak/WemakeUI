@@ -33,7 +33,7 @@ interface Webhook {
 
 const WEBHOOKS = ref<Webhook[]>([
   { id: 1, url: 'https://api.yourapp.com/wh/messages', events: ['message.received', 'message.sent'], active: true, deliveries: 4821, failures: 12 },
-  { id: 2, url: 'https://n8n.internal/wh/weconnect', events: ['session.disconnected', 'campaign.completed'], active: true, deliveries: 231, failures: 0 },
+  { id: 2, url: 'https://n8n.internal/wh/wemakeui', events: ['session.disconnected', 'campaign.completed'], active: true, deliveries: 231, failures: 0 },
 ])
 
 const showAddWebhook = ref(false)
@@ -56,7 +56,7 @@ const TYPE_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'neutral'> =
 </script>
 
 <template>
-  <AppPageLayout section="weconnect" current="integrations" page-title="Tích hợp" page-description="Kết nối với các dịch vụ bên ngoài và quản lý webhook">
+  <AppPageLayout section="wemakeui" current="integrations" page-title="Tích hợp" page-description="Kết nối với các dịch vụ bên ngoài và quản lý webhook">
     <template #actions>
       <BaseButton size="sm" variant="primary">+ Thêm tích hợp</BaseButton>
     </template>

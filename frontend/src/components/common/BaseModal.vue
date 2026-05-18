@@ -289,9 +289,9 @@ function trapFocusHandle(e: KeyboardEvent) {
 }
 
 .modal-btn--save {
-  background: linear-gradient(to right, #06b6d4, #3b82f6);
+  background: var(--wx-gradient-button);
   color: #fff;
-  box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.25);
+  box-shadow: var(--wx-shadow-brand);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 .modal-btn--save:hover:not(:disabled) {
@@ -305,7 +305,7 @@ function trapFocusHandle(e: KeyboardEvent) {
 }
 
 .modal-btn--close {
-  background: linear-gradient(to right, #f43f5e, #dc2626);
+  background: var(--wx-gradient-danger);
   color: #fff;
   box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.25);
   border-top: 1px solid rgba(255, 255, 255, 0.2);

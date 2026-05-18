@@ -424,7 +424,7 @@ landing SaaS · landing developer/API · feature page · about · blog list · b
 ### 4.9 error & utility (7)
 404 · 500 · 403 · 503 maintenance · offline · under construction · welcome / coming soon.
 
-### 4.10 ứng dụng đặc thù WeConnect (10)
+### 4.10 ứng dụng đặc thù WemakeUI (10)
 admin overview · accounts · campaign · contacts · sessions · plugin manager · console / log viewer · scheduler · integrations · automation canvas (node-based).
 
 ### 4.11 mobile shell (7)
@@ -1000,16 +1000,16 @@ routing & sitemap:
 - ✅ chunks page nặng nhất: `OverviewView`, `AnalyticsView`, `LogisticsView` đều < 8KB / gzip < 3KB mỗi chunk (tree-shaken tốt)
 - ✅ shared layout chunks: `AuthLayout` 4.09KB css, `DashboardLayout` 0.78KB css (tái dùng tốt)
 
-### phase 7 — page templates: app + landing + WeConnect
+### phase 7 — page templates: app + landing + WemakeUI
 **mục tiêu**: 50 trang còn lại.
 
 deliverable:
 - app (20): profile, settings, mailbox, chat, invoice, calendar, pricing, FAQ, notifications, search, product, order, file manager, wiki, learning, map, API key, audit log, organization, profile-edit.
 - landing (10): SaaS, dev API, feature, about, blog list/post, careers, changelog, contact, policy.
-- WeConnect (10): admin, accounts, campaign, contacts, sessions, plugins, console, scheduler, integrations, automation canvas.
+- WemakeUI (10): admin, accounts, campaign, contacts, sessions, plugins, console, scheduler, integrations, automation canvas.
 - mobile shell (7) + desktop wrapper (6).
 
-**demo route**: `/app/*` + `/landing/*` + `/weconnect/*` + `/mobile/*` + `/desktop/*`. sitemap cập nhật.
+**demo route**: `/app/*` + `/landing/*` + `/wemakeui/*` + `/mobile/*` + `/desktop/*`. sitemap cập nhật.
 
 **done khi**: build PASS, catalog 120 page render đúng theme, dark mode parity, mobile breakpoint ≤414px OK.
 

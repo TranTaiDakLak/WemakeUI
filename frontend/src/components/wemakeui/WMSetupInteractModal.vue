@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { BaseButton, BaseInput, BaseSelectMenu, BaseCheckbox, BaseTextarea, GroupBox, BaseTabs, BaseModal } from '../common'
-import { useSettingsStore } from '../../stores/weconnect/settings'
+import { useSettingsStore } from '../../stores/wemakeui/settings'
 import {
   CHECK_INFO_ITEMS, CHECK_ADS_ITEMS,
   BM_OPERATIONS, TUT_TYPES, PAYMENT_TIME_OPTIONS,

@@ -5,7 +5,7 @@
 > **Targets:** Web · Mobile (Capacitor / Ionic / PWA) · Desktop (Wails / Tauri / Electron)
 > **Last updated:** 2026-05-07
 
-WemakeUI là bộ UI kit Vue 3 + Design System tách ra từ WeConnect desktop. Mục tiêu: dùng được trên mọi nền tảng — Web app, Mobile shell, Desktop wrapper — mà không phụ thuộc backend cụ thể.
+WemakeUI là bộ UI kit Vue 3 + Design System tách ra từ WemakeUI desktop. Mục tiêu: dùng được trên mọi nền tảng — Web app, Mobile shell, Desktop wrapper — mà không phụ thuộc backend cụ thể.
 
 ## Stack versions
 

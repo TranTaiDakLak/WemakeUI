@@ -34,7 +34,7 @@ export function formatPrice(v: number): string {
 
 /* ── Mock data ── */
 const NAMES = [
-  'WeConnect Pro', 'AutoMessage Plus', 'ChatBot Builder', 'CRM Enterprise', 'Analytics Suite',
+  'WemakeUI Pro', 'AutoMessage Plus', 'ChatBot Builder', 'CRM Enterprise', 'Analytics Suite',
   'Report Generator', 'API Access Pro', 'WhatsApp Integration', 'Multi-Channel Hub', 'Customer Journey',
   'Lead Scoring Tool', 'Email Automation', 'SMS Gateway', 'Push Notification Kit', 'Social Media Manager',
 ]
@@ -66,7 +66,7 @@ const MOCK: Product[] = Array.from({ length: 55 }, (_, i) => genProduct(i))
 
 /* ── Form fields ── */
 const FORM_FIELDS: FormFieldConfig[] = [
-  { key: 'name',  label: 'Tên sản phẩm', type: 'text',  required: true, placeholder: 'WeConnect Pro' },
+  { key: 'name',  label: 'Tên sản phẩm', type: 'text',  required: true, placeholder: 'WemakeUI Pro' },
   { key: 'price', label: 'Giá (VND)',     type: 'text',  required: true, placeholder: '499000', half: true },
   {
     key: 'type', label: 'Loại', type: 'select', half: true,

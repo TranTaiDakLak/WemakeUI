@@ -8,8 +8,6 @@
  *  - aside:   override left panel content (mặc định: brand + tagline + testimonial)
  *  - footer:  footer dưới form (privacy / terms / version)
  */
-import { RouterLink } from 'vue-router'
-
 withDefaults(defineProps<{
   /** ẩn aside (cho login-v2 alt layout) */
   noAside?: boolean
@@ -17,20 +15,15 @@ withDefaults(defineProps<{
   asideTone?: 'gradient' | 'brand' | 'dark'
   /** căn form left/center/right */
   align?: 'center' | 'top'
-  /** hiện link "← quay về sitemap" */
-  showHome?: boolean
 }>(), {
   noAside: false,
   asideTone: 'gradient',
   align: 'center',
-  showHome: true,
 })
 </script>
 
 <template>
   <div class="auth-shell" :data-no-aside="noAside">
-    <RouterLink v-if="showHome" to="/" class="auth-home">← sitemap</RouterLink>
-
     <aside v-if="!noAside" class="auth-aside" :data-tone="asideTone">
       <div class="auth-aside__content">
         <slot name="aside">
@@ -114,21 +107,6 @@ withDefaults(defineProps<{
   opacity: 0.10;
   bottom: -200px; left: 80px;
 }
-
-.auth-home {
-  position: absolute;
-  top: var(--wx-space-4);
-  left: var(--wx-space-5);
-  font-size: var(--wx-fs-13);
-  color: var(--wx-content-link);
-  text-decoration: none;
-  z-index: 10;
-  background: var(--wx-surface-base);
-  padding: 4px 10px;
-  border-radius: var(--wx-radius-md);
-  border: 1px solid var(--wx-border-subtle);
-}
-.auth-home:hover { background: var(--wx-surface-sunken); }
 
 /* ── Aside (left branding panel) ── */
 .auth-aside {

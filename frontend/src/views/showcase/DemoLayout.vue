@@ -49,7 +49,7 @@ const SECTIONS: SidebarSection[] = [
   /* ── Top ── */
   {
     items: [
-      { id: '/', label: 'Sitemap', icon: ICON_HOME, href: '#/' },
+      { id: '/', label: 'Tổng quan', icon: ICON_HOME, href: '#/' },
     ],
   },
   /* ── Demo Apps — entry points, mỗi app có sidebar riêng ── */
@@ -60,7 +60,7 @@ const SECTIONS: SidebarSection[] = [
       { id: '/saas/dashboard',     label: 'SaaS Dashboard', icon: ICON_DASH, href: '#/saas/dashboard' },
       { id: '/dashboard/overview', label: 'Dashboards',     icon: ICON_DASH, href: '#/dashboard/overview' },
       { id: '/app/profile',        label: 'App Pages',      icon: ICON_APP,  href: '#/app/profile' },
-      { id: '/weconnect',          label: 'WeConnect',      icon: ICON_WC,   href: '#/weconnect' },
+      { id: '/wemakeui',          label: 'WemakeUI',      icon: ICON_WC,   href: '#/wemakeui' },
     ],
   },
   /* ── Component library ── */

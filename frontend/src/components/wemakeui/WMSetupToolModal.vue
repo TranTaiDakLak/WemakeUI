@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { BaseButton, BaseInput, BaseSelectMenu, BaseCheckbox, BaseRadio, BaseTextarea, GroupBox, BaseModal } from '../common'
-import { useSettingsStore } from '../../stores/weconnect/settings'
+import { useSettingsStore } from '../../stores/wemakeui/settings'
 import { IP_PROVIDERS, CAPTCHA_PROVIDERS } from '../../types/settings'
 import type { IpProvider } from '../../types/settings'
 

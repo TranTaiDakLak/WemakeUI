@@ -8,7 +8,7 @@ const { showToast } = useToast()
 
 /* ── Section: Chung ── */
 const general = reactive({
-  appName:       'WeConnect SaaS',
+  appName:       'WemakeUI SaaS',
   supportEmail:  'support@wemakeui.vn',
   timezone:      'asia-hcmc',
   language:      'vi',
@@ -37,7 +37,7 @@ async function saveGeneral() {
 }
 
 function resetGeneral() {
-  general.appName      = 'WeConnect SaaS'
+  general.appName      = 'WemakeUI SaaS'
   general.supportEmail = 'support@wemakeui.vn'
   general.timezone     = 'asia-hcmc'
   general.language     = 'vi'

@@ -22,7 +22,7 @@ import { BaseButton } from '../../components/common'
     <ul class="suggest">
       <li><strong>Có thể bạn đang tìm:</strong></li>
       <li><RouterLink to="/dashboard/overview">Dashboard tổng quan</RouterLink></li>
-      <li><RouterLink to="/showcase/sitemap">Sitemap đầy đủ</RouterLink></li>
+      <li><RouterLink to="/">Trang chủ</RouterLink></li>
       <li><RouterLink to="/auth/login">Đăng nhập</RouterLink></li>
     </ul>
   </ErrorLayout>

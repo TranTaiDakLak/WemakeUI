@@ -244,7 +244,7 @@ const stats = computed(() => ({
 </script>
 
 <template>
-  <AppPageLayout section="weconnect"
+  <AppPageLayout section="wemakeui"
     current="sessions"
     page-title="Phiên kết nối"
     page-description="Giám sát và quản lý session WhatsApp đang hoạt động"

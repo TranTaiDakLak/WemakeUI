@@ -107,10 +107,9 @@ const activeId = computed(() => props.current)
     <div class="saas-content">
       <slot />
     </div>
-  </AppShell>
 
-  <!-- Mobile nav overlay -->
-  <Teleport to="body">
+    <!-- Mobile nav overlay (Teleport — render ngoài DOM nhưng giữ trong root để Transition không warn) -->
+    <Teleport to="body">
     <transition name="mob-backdrop">
       <div v-if="mobileNavOpen" class="mob-backdrop" @click="closeMobileNav" />
     </transition>
@@ -143,7 +142,8 @@ const activeId = computed(() => props.current)
         </div>
       </nav>
     </transition>
-  </Teleport>
+    </Teleport>
+  </AppShell>
 </template>
 
 <style scoped>

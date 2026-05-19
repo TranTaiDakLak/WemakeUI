@@ -42,74 +42,77 @@ const ENV_COLOR: Record<string, string> = {
 </script>
 
 <template>
-  <div class="d-hero">
-    <div class="d-hero__left">
-      <p class="d-hero__greeting">{{ greeting }}, {{ userName }} 👋</p>
-      <h2 class="d-hero__title">Tổng quan hệ thống</h2>
-      <p class="d-hero__date">{{ today }}</p>
-    </div>
-
-    <div class="d-hero__right">
-      <!-- env status pills -->
-      <div class="d-hero__env">
-        <span class="d-hero__live">
-          <span class="wx-live-ping" style="color: #22c55e; margin-right: 6px" />
-          Realtime
-        </span>
-        <span
-          v-for="svc in dashboard.envServices"
-          :key="svc.label"
-          class="d-hero__env-pill"
-          :class="`d-hero__env-pill--${svc.status}`"
-        >
-          <span class="d-hero__env-dot" :style="{ background: ENV_COLOR[svc.status] }" />
-          {{ svc.label }}
-        </span>
+  <div style="display: contents">
+    <div class="d-hero">
+      <div class="d-hero__left">
+        <p class="d-hero__greeting">{{ greeting }}, {{ userName }} 👋</p>
+        <h2 class="d-hero__title">Tổng quan hệ thống</h2>
+        <p class="d-hero__date">{{ today }}</p>
       </div>
 
-      <!-- quick action buttons -->
-      <div v-if="showActions" class="d-hero__actions">
-        <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/scheduler')">
-          ⏳ Scheduler
-        </BaseButton>
-        <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">
-          🖥 Console
-        </BaseButton>
-        <BaseButton size="sm" variant="ghost" @click="emit('openCampaignModal')">
-          📣 Tạo chiến dịch
-        </BaseButton>
-        <BaseButton size="sm" variant="primary" @click="emit('openAccountModal')">
-          + Thêm tài khoản
-        </BaseButton>
-      </div>
-    </div>
-  </div>
+      <div class="d-hero__right">
+        <!-- env status pills -->
+        <div class="d-hero__env">
+          <span class="d-hero__live">
+            <span class="wx-live-ping" style="color: #22c55e; margin-right: 6px" />
+            Realtime
+          </span>
+          <span
+            v-for="svc in dashboard.envServices"
+            :key="svc.label"
+            class="d-hero__env-pill"
+            :class="`d-hero__env-pill--${svc.status}`"
+          >
+            <span class="d-hero__env-dot" :style="{ background: ENV_COLOR[svc.status] }" />
+            {{ svc.label }}
+          </span>
+        </div>
 
-  <!-- alert banner -->
-  <Transition name="wx-slide-down">
-    <div v-if="dashboard.activeAlerts.length" class="d-hero__alerts">
-      <div class="alert-items">
-        <div
-          v-for="a in dashboard.activeAlerts"
-          :key="a.id"
-          class="alert-item"
-          :class="`alert-item--${a.level}`"
-        >
-          <span class="alert-icon">{{ a.level === 'danger' ? '🔴' : '⚠️' }}</span>
-          {{ a.text }}
-          <BaseButton v-if="a.level === 'danger'" variant="ghost" size="sm" style="color: inherit; padding: 0 4px" @click="emit('openErrors')">
-            Xem ngay →
+        <!-- quick action buttons -->
+        <div v-if="showActions" class="d-hero__actions">
+          <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/scheduler')">
+            ⏳ Scheduler
+          </BaseButton>
+          <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">
+            🖥 Console
+          </BaseButton>
+          <BaseButton size="sm" variant="ghost" @click="emit('openCampaignModal')">
+            📣 Tạo chiến dịch
+          </BaseButton>
+          <BaseButton size="sm" variant="primary" @click="emit('openAccountModal')">
+            + Thêm tài khoản
           </BaseButton>
         </div>
       </div>
-      <BaseButton
-        variant="ghost"
-        size="sm"
-        aria-label="Đóng thông báo"
-        @click="dashboard.activeAlerts.forEach(a => dashboard.dismissAlert(a.id))"
-      >✕</BaseButton>
     </div>
-  </Transition>
+
+    <!-- alert banner -->
+    <Transition name="wx-slide-down">
+      <div v-if="dashboard.activeAlerts.length" class="d-hero__alerts">
+        <div class="alert-items">
+          <div
+            v-for="a in dashboard.activeAlerts"
+            :key="a.id"
+            class="alert-item"
+            :class="`alert-item--${a.level}`"
+          >
+            <span class="alert-icon">{{ a.level === 'danger' ? '🔴' : '⚠️' }}</span>
+            {{ a.text }}
+            <BaseButton v-if="a.level === 'danger'" variant="ghost" size="sm" style="color: inherit; padding: 0 4px" @click="emit('openErrors')">
+              Xem ngay →
+            </BaseButton>
+          </div>
+        </div>
+        <BaseButton
+          variant="ghost"
+          size="sm"
+          aria-label="Đóng thông báo"
+          @click="dashboard.activeAlerts.forEach(a => dashboard.dismissAlert(a.id))"
+        >✕</BaseButton>
+      </div>
+    </Transition>
+
+  </div>
 </template>
 
 <style scoped>

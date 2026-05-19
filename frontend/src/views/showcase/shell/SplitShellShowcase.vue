@@ -264,8 +264,7 @@ function toggleStar(id: string) {
         <p class="muted">Master-detail layout với resize handle. Kéo thanh giữa để chỉnh tỉ lệ.</p>
       </div>
     </template>
-  </AppShell>
-
+  
   <BottomSheet
     v-model="showSheetOnMobile"
     title="Tuỳ chọn thêm"
@@ -286,6 +285,7 @@ function toggleStar(id: string) {
       <BaseButton @click="showSheetOnMobile = false">Áp dụng</BaseButton>
     </template>
   </BottomSheet>
+</AppShell>
 </template>
 
 <style scoped>

@@ -46,161 +46,164 @@ const tabItems = computed(() => [
 </script>
 
 <template>
-  <BaseCard
-    ref="sectionRef"
-    shadow="sm"
-    class="act-card wx-reveal"
-    :class="{ 'is-revealed': revealed }"
-    style="margin-bottom: var(--wx-space-6)"
-  >
-    <!-- section header + tabs -->
-    <div class="act-head">
-      <h3 class="act-title">Cần xử lý ngay</h3>
-      <div class="act-tab-area">
-        <BaseTabs v-model="activeTab" :tabs="tabItems" />
-        <BaseButton variant="ghost" size="sm" @click="errorsDrawer = true">
-          🚨 {{ dashboard.sysErrors.length }} lỗi hệ thống
-        </BaseButton>
-      </div>
-    </div>
-
-    <!-- ── Tab: Failed jobs ────────────────────────────────── -->
-    <div v-if="activeTab === 'jobs'" class="act-table-wrap">
-      <div v-if="!dashboard.failedJobs.length" class="act-empty">
-        <span class="act-empty__icon">✅</span>
-        <span>Không có job thất bại — hệ thống ổn định</span>
-      </div>
-      <table v-else class="act-table">
-        <thead>
-          <tr><th>Job</th><th>Lỗi</th><th>Thời gian</th><th>Retry</th><th></th></tr>
-        </thead>
-        <tbody>
-          <tr v-for="job in dashboard.failedJobs" :key="job.id">
-            <td><code class="job-name">{{ job.name }}</code></td>
-            <td class="err-msg">{{ job.error }}</td>
-            <td class="cell-muted">{{ job.time }}</td>
-            <td><span class="retry-badge">{{ job.retries }}×</span></td>
-            <td class="cell-action">
-              <BaseButton
-                size="sm" variant="ghost"
-                :loading="job.retrying"
-                :disabled="job.retrying"
-                @click="dashboard.retryJob(job.id, showToast)"
-              >↻ Retry</BaseButton>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ── Tab: Expiring accounts ──────────────────────────── -->
-    <div v-else-if="activeTab === 'expiring'" class="act-table-wrap">
-      <div v-if="activeAccountFilter" class="filter-notice">
-        <span>Đang lọc theo: <strong>{{ activeAccountFilter }}</strong></span>
-        <BaseButton variant="ghost" size="sm" @click="activeAccountFilter = null">✕ Bỏ lọc</BaseButton>
-      </div>
-      <div v-if="!filteredAccounts.length" class="act-empty">
-        <span class="act-empty__icon">✅</span>
-        <span>Không có tài khoản cần gia hạn</span>
-      </div>
-      <table v-else class="act-table">
-        <thead>
-          <tr><th>Tài khoản</th><th>Nền tảng</th><th>Hết hạn trong</th><th>Trạng thái</th><th></th></tr>
-        </thead>
-        <tbody>
-          <tr v-for="acc in filteredAccounts" :key="acc.id">
-            <td>
-              <div class="acc-cell">
-                <span class="acc-name">{{ acc.name }}</span>
-                <span class="acc-phone">{{ acc.phone }}</span>
-              </div>
-            </td>
-            <td class="cell-muted">{{ acc.platform }}</td>
-            <td class="cell-warn">{{ acc.expiresIn }}</td>
-            <td>
-              <BaseBadge
-                :text="acc.status === 'checkpoint' ? 'Checkpoint' : 'Sắp hết hạn'"
-                :variant="acc.status === 'checkpoint' ? 'warning' : 'neutral'"
-                dot
-              />
-            </td>
-            <td class="cell-action">
-              <BaseButton
-                size="sm" variant="ghost"
-                :loading="acc.actioning"
-                :disabled="acc.actioning"
-                @click="dashboard.renewAccount(acc.id, showToast)"
-              >Gia hạn</BaseButton>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ── Tab: Pending tickets ────────────────────────────── -->
-    <div v-else class="act-table-wrap">
-      <div v-if="!dashboard.pendingTickets.length" class="act-empty">
-        <span class="act-empty__icon">✅</span>
-        <span>Không có ticket nào đang chờ xử lý</span>
-      </div>
-      <table v-else class="act-table">
-        <thead>
-          <tr><th>ID</th><th>Vấn đề</th><th>Độ ưu tiên</th><th>Thời gian</th><th></th></tr>
-        </thead>
-        <tbody>
-          <tr v-for="ticket in dashboard.pendingTickets" :key="ticket.id">
-            <td class="cell-muted">#{{ ticket.id }}</td>
-            <td class="ticket-title">{{ ticket.title }}</td>
-            <td>
-              <BaseBadge :text="PRIORITY_LABEL[ticket.priority]" :variant="PRIORITY_BADGE[ticket.priority]" />
-            </td>
-            <td class="cell-muted">{{ ticket.created }}</td>
-            <td class="cell-action">
-              <BaseButton
-                size="sm" variant="ghost"
-                :loading="ticket.assigning"
-                :disabled="ticket.assigning"
-                @click="dashboard.assignTicket(ticket.id, showToast)"
-              >Nhận xử lý</BaseButton>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </BaseCard>
-
-  <!-- System errors drawer -->
-  <BaseDrawer :show="errorsDrawer" title="Lỗi hệ thống" size="md" @update:show="v => { errorsDrawer = v }">
-    <div class="drawer-pad">
-      <p class="drawer-desc">{{ dashboard.sysErrors.length }} lỗi đang hoạt động. Click "Xử lý" để resolve.</p>
-      <div v-if="!dashboard.sysErrors.length" class="act-empty">
-        <span class="act-empty__icon">✅</span>
-        <span>Tất cả lỗi đã được xử lý</span>
-      </div>
-      <div v-else class="err-list">
-        <div
-          v-for="err in dashboard.sysErrors"
-          :key="err.id"
-          class="err-row"
-          :class="`err-row--${err.level}`"
-        >
-          <div class="err-row__info">
-            <span class="err-icon">{{ err.level === 'critical' ? '🔴' : '⚠️' }}</span>
-            <div>
-              <p class="err-msg-text">{{ err.msg }}</p>
-              <span class="err-time">{{ err.time }} hôm nay</span>
-            </div>
-          </div>
-          <BaseButton
-            size="sm" variant="ghost"
-            :loading="err.resolving"
-            :disabled="err.resolving"
-            @click="dashboard.resolveError(err.id, showToast)"
-          >Xử lý</BaseButton>
+  <div style="display: contents">
+    <BaseCard
+      ref="sectionRef"
+      shadow="sm"
+      class="act-card wx-reveal"
+      :class="{ 'is-revealed': revealed }"
+      style="margin-bottom: var(--wx-space-6)"
+    >
+      <!-- section header + tabs -->
+      <div class="act-head">
+        <h3 class="act-title">Cần xử lý ngay</h3>
+        <div class="act-tab-area">
+          <BaseTabs v-model="activeTab" :tabs="tabItems" />
+          <BaseButton variant="ghost" size="sm" @click="errorsDrawer = true">
+            🚨 {{ dashboard.sysErrors.length }} lỗi hệ thống
+          </BaseButton>
         </div>
       </div>
-    </div>
-  </BaseDrawer>
+
+      <!-- ── Tab: Failed jobs ────────────────────────────────── -->
+      <div v-if="activeTab === 'jobs'" class="act-table-wrap">
+        <div v-if="!dashboard.failedJobs.length" class="act-empty">
+          <span class="act-empty__icon">✅</span>
+          <span>Không có job thất bại — hệ thống ổn định</span>
+        </div>
+        <table v-else class="act-table">
+          <thead>
+            <tr><th>Job</th><th>Lỗi</th><th>Thời gian</th><th>Retry</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr v-for="job in dashboard.failedJobs" :key="job.id">
+              <td><code class="job-name">{{ job.name }}</code></td>
+              <td class="err-msg">{{ job.error }}</td>
+              <td class="cell-muted">{{ job.time }}</td>
+              <td><span class="retry-badge">{{ job.retries }}×</span></td>
+              <td class="cell-action">
+                <BaseButton
+                  size="sm" variant="ghost"
+                  :loading="job.retrying"
+                  :disabled="job.retrying"
+                  @click="dashboard.retryJob(job.id, showToast)"
+                >↻ Retry</BaseButton>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ── Tab: Expiring accounts ──────────────────────────── -->
+      <div v-else-if="activeTab === 'expiring'" class="act-table-wrap">
+        <div v-if="activeAccountFilter" class="filter-notice">
+          <span>Đang lọc theo: <strong>{{ activeAccountFilter }}</strong></span>
+          <BaseButton variant="ghost" size="sm" @click="activeAccountFilter = null">✕ Bỏ lọc</BaseButton>
+        </div>
+        <div v-if="!filteredAccounts.length" class="act-empty">
+          <span class="act-empty__icon">✅</span>
+          <span>Không có tài khoản cần gia hạn</span>
+        </div>
+        <table v-else class="act-table">
+          <thead>
+            <tr><th>Tài khoản</th><th>Nền tảng</th><th>Hết hạn trong</th><th>Trạng thái</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr v-for="acc in filteredAccounts" :key="acc.id">
+              <td>
+                <div class="acc-cell">
+                  <span class="acc-name">{{ acc.name }}</span>
+                  <span class="acc-phone">{{ acc.phone }}</span>
+                </div>
+              </td>
+              <td class="cell-muted">{{ acc.platform }}</td>
+              <td class="cell-warn">{{ acc.expiresIn }}</td>
+              <td>
+                <BaseBadge
+                  :text="acc.status === 'checkpoint' ? 'Checkpoint' : 'Sắp hết hạn'"
+                  :variant="acc.status === 'checkpoint' ? 'warning' : 'neutral'"
+                  dot
+                />
+              </td>
+              <td class="cell-action">
+                <BaseButton
+                  size="sm" variant="ghost"
+                  :loading="acc.actioning"
+                  :disabled="acc.actioning"
+                  @click="dashboard.renewAccount(acc.id, showToast)"
+                >Gia hạn</BaseButton>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ── Tab: Pending tickets ────────────────────────────── -->
+      <div v-else class="act-table-wrap">
+        <div v-if="!dashboard.pendingTickets.length" class="act-empty">
+          <span class="act-empty__icon">✅</span>
+          <span>Không có ticket nào đang chờ xử lý</span>
+        </div>
+        <table v-else class="act-table">
+          <thead>
+            <tr><th>ID</th><th>Vấn đề</th><th>Độ ưu tiên</th><th>Thời gian</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr v-for="ticket in dashboard.pendingTickets" :key="ticket.id">
+              <td class="cell-muted">#{{ ticket.id }}</td>
+              <td class="ticket-title">{{ ticket.title }}</td>
+              <td>
+                <BaseBadge :text="PRIORITY_LABEL[ticket.priority]" :variant="PRIORITY_BADGE[ticket.priority]" />
+              </td>
+              <td class="cell-muted">{{ ticket.created }}</td>
+              <td class="cell-action">
+                <BaseButton
+                  size="sm" variant="ghost"
+                  :loading="ticket.assigning"
+                  :disabled="ticket.assigning"
+                  @click="dashboard.assignTicket(ticket.id, showToast)"
+                >Nhận xử lý</BaseButton>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </BaseCard>
+
+    <!-- System errors drawer -->
+    <BaseDrawer :show="errorsDrawer" title="Lỗi hệ thống" size="md" @update:show="v => { errorsDrawer = v }">
+      <div class="drawer-pad">
+        <p class="drawer-desc">{{ dashboard.sysErrors.length }} lỗi đang hoạt động. Click "Xử lý" để resolve.</p>
+        <div v-if="!dashboard.sysErrors.length" class="act-empty">
+          <span class="act-empty__icon">✅</span>
+          <span>Tất cả lỗi đã được xử lý</span>
+        </div>
+        <div v-else class="err-list">
+          <div
+            v-for="err in dashboard.sysErrors"
+            :key="err.id"
+            class="err-row"
+            :class="`err-row--${err.level}`"
+          >
+            <div class="err-row__info">
+              <span class="err-icon">{{ err.level === 'critical' ? '🔴' : '⚠️' }}</span>
+              <div>
+                <p class="err-msg-text">{{ err.msg }}</p>
+                <span class="err-time">{{ err.time }} hôm nay</span>
+              </div>
+            </div>
+            <BaseButton
+              size="sm" variant="ghost"
+              :loading="err.resolving"
+              :disabled="err.resolving"
+              @click="dashboard.resolveError(err.id, showToast)"
+            >Xử lý</BaseButton>
+          </div>
+        </div>
+      </div>
+    </BaseDrawer>
+
+  </div>
 </template>
 
 <style scoped>

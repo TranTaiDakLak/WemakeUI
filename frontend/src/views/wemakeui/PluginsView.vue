@@ -317,8 +317,7 @@ async function handleBulkDelete() {
         </BaseButton>
       </div>
     </div>
-  </AppPageLayout>
-
+  
   <!-- ── Bulk Action Bar ── -->
   <BulkActionBar :count="selected.length" :show="selected.length > 0" @clear="clearSelection">
     <BaseButton size="sm" variant="primary" @click="bulkEnOpen = true">
@@ -472,6 +471,7 @@ async function handleBulkDelete() {
     :loading="bulkLoading"
     @confirm="handleBulkDelete"
   />
+</AppPageLayout>
 </template>
 
 <style scoped>

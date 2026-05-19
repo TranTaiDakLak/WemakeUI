@@ -373,8 +373,7 @@ const stats = computed(() => ({
         </BaseButton>
       </div>
     </div>
-  </AppPageLayout>
-
+  
   <!-- ── Bulk Action Bar ── -->
   <BulkActionBar :count="selected.length" :show="selected.length > 0" @clear="clearSelection">
     <BaseButton size="sm" variant="warning" @click="bulkDisconnOpen = true">
@@ -511,6 +510,7 @@ const stats = computed(() => ({
     :loading="bulkLoading"
     @confirm="handleBulkDelete"
   />
+</AppPageLayout>
 </template>
 
 <style scoped>

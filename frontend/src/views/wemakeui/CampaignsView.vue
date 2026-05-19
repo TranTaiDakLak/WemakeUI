@@ -508,8 +508,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
         </BaseButton>
       </div>
     </div>
-  </AppPageLayout>
-
+  
   <!-- ── Bulk Action Bar ── -->
   <BulkActionBar :count="selected.length" :show="selected.length > 0" @clear="clearSelection">
     <BaseButton size="sm" variant="warning" @click="bulkPauseOpen = true">
@@ -737,6 +736,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
     :loading="bulkLoading"
     @confirm="handleBulkPause"
   />
+</AppPageLayout>
 </template>
 
 <style scoped>

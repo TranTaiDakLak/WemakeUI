@@ -473,8 +473,7 @@ async function handleBulkStage(stage: ContactStage) {
       </div>
       </Transition>
     </div>
-  </AppPageLayout>
-
+  
   <!-- ── Bulk Action Bar ── -->
   <BulkActionBar :count="selected.length" :show="selected.length > 0" @clear="clearSelection">
     <BaseButton size="sm" variant="primary" @click="handleBulkStage('qualified')">
@@ -705,6 +704,7 @@ async function handleBulkStage(stage: ContactStage) {
     :loading="bulkLoading"
     @confirm="handleBulkDelete"
   />
+</AppPageLayout>
 </template>
 
 <style scoped>

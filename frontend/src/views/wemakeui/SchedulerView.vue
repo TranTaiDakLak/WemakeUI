@@ -365,8 +365,7 @@ function toggleEnabled(j: CronJob) {
         <BaseButton variant="ghost" size="sm" @click="search = ''; statusFilter = 'all'">Xoá bộ lọc</BaseButton>
       </div>
     </div>
-  </AppPageLayout>
-
+  
   <!-- ── Bulk Action Bar ── -->
   <BulkActionBar :count="selected.length" :show="selected.length > 0" @clear="clearSelection">
     <BaseButton size="sm" variant="primary" @click="bulkEnOpen = true">
@@ -548,6 +547,7 @@ function toggleEnabled(j: CronJob) {
     :loading="bulkLoading"
     @confirm="handleBulkDisable"
   />
+</AppPageLayout>
 </template>
 
 <style scoped>

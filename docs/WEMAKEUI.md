@@ -3,8 +3,8 @@
 > bộ UI kit Vue 3 cross-platform (web · mobile · desktop wrapper). tài liệu này là nguồn duy nhất (single source of truth) — gộp từ TEMPLATES.md + DESIGN-SYSTEM.md trước đây.
 >
 > ngôn ngữ: tiếng Việt sentence case (không UPPERCASE trừ acronym: API/UI/CTA/KPI/SLA/RBAC/SaaS/CRM/IoT).
-> font: **Inter**. brand: **xanh dương `#2563eb`**. gradient: 11 token `--wx-gradient-*` đã có sẵn.
-> cập nhật: 2026-05-05.
+> font: **Inter**. brand default: **xanh dương `#2563eb`** (đã tham số hoá — consumer override bằng `setBrandColor()`, xem §1.8). gradient: 10 token `--wx-gradient-*`, đa số tham chiếu `--wx-brand-*` để cascade tự động.
+> cập nhật: 2026-05-19.
 
 ---
 
@@ -76,20 +76,21 @@ raw tokens (đã có trong `tokens.css`) — **không** dùng trực tiếp ở 
 --wx-bg-overlay → --wx-surface-overlay
 ```
 
-gradient — giữ nguyên 11 token đã có:
-- `--wx-gradient-bg` — page background, hero light.
-- `--wx-gradient-header` — sidebar header, top banner.
-- `--wx-gradient-cta` — primary CTA cao cấp (hero, pricing).
-- `--wx-gradient-button` — primary button mặc định.
-- `--wx-gradient-accent` — divider sáng, badge nổi.
-- `--wx-gradient-text` — text gradient cho heading hero.
-- `--wx-gradient-divider` — divider mềm.
-- `--wx-gradient-success/danger/warning` — KPI card status.
+gradient — 10 token, các gradient brand-tied giờ tham chiếu `--wx-brand-*` để cascade khi consumer override brand:
+- `--wx-gradient-bg` — page background, hero light *(palette riêng, không cascade)*.
+- `--wx-gradient-header` — sidebar header, top banner *(brand-tied)*.
+- `--wx-gradient-cta` — primary CTA cao cấp (hero, pricing) *(palette riêng)*.
+- `--wx-gradient-button` — primary button mặc định *(brand-tied)*.
+- `--wx-gradient-accent` — divider sáng, badge nổi *(brand-tied)*.
+- `--wx-gradient-text` — text gradient cho heading hero *(brand-tied)*.
+- `--wx-gradient-divider` — divider mềm *(brand-tied)*.
+- `--wx-gradient-success/danger/warning` — KPI card status *(semantic — đổi qua `--wx-{name}-solid`)*.
 
 quy tắc gradient:
 - chỉ 1 element gradient lớn / màn hình. tránh "rainbow soup".
 - gradient text bắt buộc fallback `color` để screen reader & contrast OK.
-- dark mode: gradient giảm saturation 10–15%, giữ hue.
+- dark mode: gradient giữ nguyên token (đa số tham chiếu brand vars → tự dim theo brand-* dark scale).
+- consumer có thể tắt gradient toàn cục bằng `setVariant('flat')` — xem §1.8.
 
 ### 1.3 radius — bo góc bắt buộc
 
@@ -166,8 +167,73 @@ mọi padding / gap / margin **phải** là bội số của 4. density mode (`-
 ### 1.7 dark mode
 
 - 3 mode: `system` (mặc định) / `light` / `dark`. composable `useTheme()` đã có — bổ sung lựa chọn `system`.
-- toggle qua `data-theme` trên `<html>`.
+- toggle qua `data-wx-theme` trên `<html>` hoặc class `.wx-dark`.
 - mọi token có 2 set; gradient giữ hue, hạ saturation 10–15% trong dark.
+
+### 1.8 theming API — consumer customization
+
+WemakeUI cho phép consumer **truyền màu brand riêng** thay vì bị khoá vào palette mặc định. Hệ thống gồm 3 trục độc lập, combine tự do:
+
+| Trục | Giá trị | Tác dụng |
+|------|---------|----------|
+| `colorScheme` | `'light' \| 'dark' \| 'system'` | Light/dark mode |
+| `variant` | `'default' \| 'flat'` | Bật/tắt gradient toàn UI |
+| `brandColor` / `accentColor` | bất kỳ hex (`#8b5cf6`, …) | Re-skin brand color, scale 50→900 tự generate |
+
+**Composable API** — `useTheme()`:
+
+```ts
+import { useTheme } from '@wemake/ui'
+
+const {
+  colorScheme, setColorScheme, toggleColorScheme,
+  variant, setVariant,
+  brandColor, setBrandColor,
+  accentColor, setAccentColor,
+  resetColors,
+  isDark,
+} = useTheme()
+
+setBrandColor('#8b5cf6')   // tím → toàn bộ button/gradient/hover/focus cascade
+setAccentColor('#ec4899')  // hồng → accent gradient
+setVariant('flat')         // bỏ gradient → solid color
+setColorScheme('dark')     // dark mode
+resetColors()              // xoá custom → quay về default
+```
+
+Tất cả state persist vào `localStorage` (`wx-theme`, `wx-variant`, `wx-brand-color`, `wx-accent-color`). SSR-safe (check `window`).
+
+**Declarative API** (không cần JS, set trên `<html>`):
+
+```html
+<html data-wx-theme="dark" data-wx-variant="flat">
+<!-- hoặc class form -->
+<html class="wx-dark wx-variant-flat">
+```
+
+**Color scale generator** — `generateScale(hex)`:
+
+```ts
+import { generateScale, applyScale } from '@wemake/ui'
+
+const scale = generateScale('#8b5cf6')
+// → { '50': '#...', '100': '#...', ..., '900': '#...' }
+// HSL-based, mirror Tailwind v3 lightness curve
+
+applyScale(scale, 'brand')  // set CSS vars --wx-brand-50..900
+```
+
+**Cascade matrix** — khi đổi brand color, các phần tử sau tự đổi theo (tham chiếu `--wx-brand-*` qua gradient/interactive tokens):
+
+- ✅ Button gradient (`--wx-gradient-button`), header gradient, text gradient, accent gradient
+- ✅ Hover bg/text, selected bg/text, active bg/text
+- ✅ Input focus border, focus ring
+- ✅ Badge `solid` variant
+- ✅ Modal save button, chart line series
+- ⛔ Card/table surface (giữ neutral trắng/xám — không đổi theo brand)
+- ⛔ Success/danger/warning solid (semantic — đổi qua `--wx-{name}-solid` riêng nếu cần)
+
+**Flat variant** — file `flat-mode.css` override tất cả `--wx-gradient-*` thành solid color (dùng `--wx-brand-primary`). Bật bằng `setVariant('flat')` hoặc `<html data-wx-variant="flat">`.
 
 ---
 

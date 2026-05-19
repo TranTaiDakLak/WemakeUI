@@ -43,100 +43,103 @@ defineExpose({
 </script>
 
 <template>
-  <!-- modals rendered inline — parent calls expose methods to trigger -->
-  <FormModal
-    v-model="campaignModal"
-    title="Tạo chiến dịch mới"
-    :loading="campaignLoading"
-    submit-label="Tạo chiến dịch"
-    @submit="submitCampaign"
-  >
-    <div class="qa-form">
-      <FormField label="Tên chiến dịch" :required="true">
-        <BaseInput
-          v-model="campaignForm.name"
-          placeholder="VD: Khuyến mãi tháng 6..."
-          :disabled="campaignLoading"
-        />
-      </FormField>
-      <div class="qa-row-2">
-        <FormField label="Nền tảng">
-          <BaseSelectMenu
-            v-model="campaignForm.platform"
-            :options="[
-              { value: 'WhatsApp', label: 'WhatsApp' },
-              { value: 'Zalo', label: 'Zalo' },
-              { value: 'Telegram', label: 'Telegram' },
-              { value: 'SMS', label: 'SMS' },
-            ]"
+  <div style="display: contents">
+    <!-- modals rendered inline — parent calls expose methods to trigger -->
+    <FormModal
+      v-model="campaignModal"
+      title="Tạo chiến dịch mới"
+      :loading="campaignLoading"
+      submit-label="Tạo chiến dịch"
+      @submit="submitCampaign"
+    >
+      <div class="qa-form">
+        <FormField label="Tên chiến dịch" :required="true">
+          <BaseInput
+            v-model="campaignForm.name"
+            placeholder="VD: Khuyến mãi tháng 6..."
             :disabled="campaignLoading"
           />
         </FormField>
-        <FormField label="Loại chiến dịch">
-          <BaseSelectMenu
-            v-model="campaignForm.type"
-            :options="[
-              { value: 'broadcast', label: 'Broadcast' },
-              { value: 'autoresponder', label: 'Autoresponder' },
-              { value: 'sequence', label: 'Sequence' },
-            ]"
+        <div class="qa-row-2">
+          <FormField label="Nền tảng">
+            <BaseSelectMenu
+              v-model="campaignForm.platform"
+              :options="[
+                { value: 'WhatsApp', label: 'WhatsApp' },
+                { value: 'Zalo', label: 'Zalo' },
+                { value: 'Telegram', label: 'Telegram' },
+                { value: 'SMS', label: 'SMS' },
+              ]"
+              :disabled="campaignLoading"
+            />
+          </FormField>
+          <FormField label="Loại chiến dịch">
+            <BaseSelectMenu
+              v-model="campaignForm.type"
+              :options="[
+                { value: 'broadcast', label: 'Broadcast' },
+                { value: 'autoresponder', label: 'Autoresponder' },
+                { value: 'sequence', label: 'Sequence' },
+              ]"
+              :disabled="campaignLoading"
+            />
+          </FormField>
+        </div>
+        <FormField label="Nội dung tin nhắn">
+          <BaseTextarea
+            v-model="campaignForm.message"
+            placeholder="Nhập nội dung tin nhắn mẫu..."
+            :rows="4"
             :disabled="campaignLoading"
           />
         </FormField>
       </div>
-      <FormField label="Nội dung tin nhắn">
-        <BaseTextarea
-          v-model="campaignForm.message"
-          placeholder="Nhập nội dung tin nhắn mẫu..."
-          :rows="4"
-          :disabled="campaignLoading"
-        />
-      </FormField>
-    </div>
-  </FormModal>
+    </FormModal>
 
-  <FormModal
-    v-model="accountModal"
-    title="Thêm tài khoản"
-    :loading="accountLoading"
-    submit-label="Thêm tài khoản"
-    @submit="submitAccount"
-  >
-    <div class="qa-form">
-      <div class="qa-row-2">
-        <FormField label="Số điện thoại" :required="true">
-          <BaseInput v-model="accountForm.phone" placeholder="+84912345678" :disabled="accountLoading" />
-        </FormField>
-        <FormField label="Tên hiển thị">
-          <BaseInput v-model="accountForm.name" placeholder="Tên tài khoản..." :disabled="accountLoading" />
-        </FormField>
-      </div>
-      <div class="qa-row-2">
-        <FormField label="Nền tảng">
-          <BaseSelectMenu
-            v-model="accountForm.platform"
-            :options="[
-              { value: 'WhatsApp', label: 'WhatsApp' },
-              { value: 'Zalo', label: 'Zalo' },
-              { value: 'Telegram', label: 'Telegram' },
-            ]"
+    <FormModal
+      v-model="accountModal"
+      title="Thêm tài khoản"
+      :loading="accountLoading"
+      submit-label="Thêm tài khoản"
+      @submit="submitAccount"
+    >
+      <div class="qa-form">
+        <div class="qa-row-2">
+          <FormField label="Số điện thoại" :required="true">
+            <BaseInput v-model="accountForm.phone" placeholder="+84912345678" :disabled="accountLoading" />
+          </FormField>
+          <FormField label="Tên hiển thị">
+            <BaseInput v-model="accountForm.name" placeholder="Tên tài khoản..." :disabled="accountLoading" />
+          </FormField>
+        </div>
+        <div class="qa-row-2">
+          <FormField label="Nền tảng">
+            <BaseSelectMenu
+              v-model="accountForm.platform"
+              :options="[
+                { value: 'WhatsApp', label: 'WhatsApp' },
+                { value: 'Zalo', label: 'Zalo' },
+                { value: 'Telegram', label: 'Telegram' },
+              ]"
+              :disabled="accountLoading"
+            />
+          </FormField>
+          <FormField label="Nhóm">
+            <BaseInput v-model="accountForm.group" placeholder="VD: Sales, Support..." :disabled="accountLoading" />
+          </FormField>
+        </div>
+        <FormField label="Ghi chú">
+          <BaseTextarea
+            v-model="accountForm.note"
+            placeholder="Ghi chú về tài khoản này..."
+            :rows="3"
             :disabled="accountLoading"
           />
         </FormField>
-        <FormField label="Nhóm">
-          <BaseInput v-model="accountForm.group" placeholder="VD: Sales, Support..." :disabled="accountLoading" />
-        </FormField>
       </div>
-      <FormField label="Ghi chú">
-        <BaseTextarea
-          v-model="accountForm.note"
-          placeholder="Ghi chú về tài khoản này..."
-          :rows="3"
-          :disabled="accountLoading"
-        />
-      </FormField>
-    </div>
-  </FormModal>
+    </FormModal>
+
+  </div>
 </template>
 
 <style scoped>

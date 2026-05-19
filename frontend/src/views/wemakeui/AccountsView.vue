@@ -438,8 +438,7 @@ function quickConnect(a: Account, e: MouseEvent) {
       </div>
       </Transition>
     </div>
-  </AppPageLayout>
-
+  
   <!-- ── Bulk Action Bar ── -->
   <BulkActionBar :count="selected.length" :show="selected.length > 0" @clear="clearSelection">
     <BaseButton size="sm" variant="warning" @click="bulkDisconOpen = true">
@@ -653,6 +652,7 @@ function quickConnect(a: Account, e: MouseEvent) {
     :loading="bulkLoading"
     @confirm="handleBulkDisconnect"
   />
+</AppPageLayout>
 </template>
 
 <style scoped>

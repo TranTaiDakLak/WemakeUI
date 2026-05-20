@@ -37,7 +37,12 @@ function subscribe() {
     variant="dark"
   >
     <template #illustration>
-      <div class="rocket">🚀</div>
+      <lord-icon
+        src="https://cdn.lordicon.com/tyvtvbcy.json"
+        trigger="loop"
+        colors="primary:#8b5cf6,secondary:#ec4899"
+        style="width: 96px; height: 96px;"
+      />
     </template>
 
     <div class="countdown">
@@ -62,8 +67,6 @@ function subscribe() {
 </template>
 
 <style scoped>
-.rocket { font-size: 96px; }
-
 .countdown {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

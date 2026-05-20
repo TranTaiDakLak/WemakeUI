@@ -121,7 +121,12 @@ function back() {
 
     <!-- step 3 -->
     <div v-else class="finish">
-      <div class="finish-emoji">🎉</div>
+      <lord-icon
+        src="https://cdn.lordicon.com/lupuorrc.json"
+        trigger="loop"
+        colors="primary:#8b5cf6,secondary:#ec4899"
+        style="width: 80px; height: 80px;"
+      />
       <h2>Sẵn sàng bắt đầu!</h2>
       <p>Tài khoản <strong>{{ account.email }}</strong> đã được tạo. Chúng tôi gửi email xác minh đến bạn.</p>
       <RouterLink to="/auth/email-verify" class="cta-link">
@@ -199,7 +204,6 @@ function back() {
   gap: var(--wx-space-3);
   padding: var(--wx-space-2) 0;
 }
-.finish-emoji { font-size: 48px; }
 .finish h2 { margin: 0; font-size: var(--wx-fs-20); font-weight: var(--wx-fw-semibold); }
 .finish p { margin: 0; color: var(--wx-content-secondary); font-size: var(--wx-fs-14); }
 .cta-link { width: 100%; text-decoration: none; }

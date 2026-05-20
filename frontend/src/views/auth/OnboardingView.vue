@@ -5,12 +5,19 @@ import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
 import { BaseButton, BaseInput, BaseTag, BaseProgress, FormField, BaseSelectMenu } from '../../components/common'
 import { useTheme } from '../../ui-system/composables/useTheme'
+import { Monitor, Sun, Moon, Check } from 'lucide-vue-next'
 
 const step = ref<0 | 1 | 2 | 3 | 4>(0)
 const ws = ref({ name: 'Công ty của tôi', subdomain: 'mycompany', size: '11-50' })
 const invites = ref<string[]>([''])
 const themeChoice = ref<'system' | 'light' | 'dark'>('system')
 const { setTheme } = useTheme()
+
+const themeOptions = [
+  { id: 'system', label: 'Theo hệ thống', icon: Monitor, desc: 'Bám theo OS' },
+  { id: 'light',  label: 'Sáng',          icon: Sun,     desc: 'Trắng + xanh' },
+  { id: 'dark',   label: 'Tối',           icon: Moon,    desc: 'Xám + xanh' },
+] as const
 
 const totalSteps = 5
 const progress = computed(() => ((step.value + 1) / totalSteps) * 100)
@@ -45,14 +52,19 @@ function back() {
 
     <!-- 0: chào -->
     <div v-if="step === 0" class="card">
-      <div class="big-emoji">👋</div>
+      <lord-icon
+        src="https://cdn.lordicon.com/tyvtvbcy.json"
+        trigger="loop"
+        colors="primary:#8b5cf6,secondary:#ec4899"
+        style="width: 80px; height: 80px;"
+      />
       <h1>Chào mừng đến với WemakeUI!</h1>
       <p>Chúng ta sẽ thiết lập workspace của bạn trong 4 bước nhanh.</p>
       <ul class="hint-list">
-        <li>✓ Tạo workspace cho team</li>
-        <li>✓ Mời thành viên</li>
-        <li>✓ Chọn giao diện</li>
-        <li>✓ Hoàn tất 🎉</li>
+        <li><Check :size="14" class="check-icon" /> Tạo workspace cho team</li>
+        <li><Check :size="14" class="check-icon" /> Mời thành viên</li>
+        <li><Check :size="14" class="check-icon" /> Chọn giao diện</li>
+        <li><Check :size="14" class="check-icon" /> Hoàn tất</li>
       </ul>
       <BaseButton block @click="next">Bắt đầu →</BaseButton>
     </div>
@@ -100,17 +112,13 @@ function back() {
       <p>Bạn có thể đổi sau ở phần Cài đặt.</p>
       <div class="theme-grid">
         <button
-          v-for="t in [
-            { id: 'system', label: 'Theo hệ thống', emoji: '🖥️', desc: 'Bám theo OS' },
-            { id: 'light',  label: 'Sáng',          emoji: '☀️', desc: 'Trắng + xanh' },
-            { id: 'dark',   label: 'Tối',           emoji: '🌙', desc: 'Xám + xanh' },
-          ]"
+          v-for="t in themeOptions"
           :key="t.id"
           class="theme-card"
           :class="{ 'theme-card--active': themeChoice === t.id }"
           @click="themeChoice = t.id as 'system' | 'light' | 'dark'"
         >
-          <span class="theme-emoji">{{ t.emoji }}</span>
+          <component :is="t.icon" :size="28" class="theme-icon" />
           <span class="theme-label">{{ t.label }}</span>
           <span class="theme-desc">{{ t.desc }}</span>
         </button>
@@ -123,7 +131,12 @@ function back() {
 
     <!-- 4: finish -->
     <div v-else class="card finish">
-      <div class="big-emoji">🎉</div>
+      <lord-icon
+        src="https://cdn.lordicon.com/lupuorrc.json"
+        trigger="loop"
+        colors="primary:#8b5cf6,secondary:#ec4899"
+        style="width: 80px; height: 80px;"
+      />
       <h1>Hoàn tất!</h1>
       <p>Workspace <strong>{{ ws.name }}</strong> đã sẵn sàng.</p>
       <BaseTag size="md" variant="success" text="đã thiết lập xong" />
@@ -151,20 +164,20 @@ function back() {
 }
 .card h1 { margin: 0; font-size: var(--wx-fs-24); font-weight: var(--wx-fw-semibold); letter-spacing: var(--wx-tracking-tight); }
 .card p { margin: 0; color: var(--wx-content-muted); font-size: var(--wx-fs-14); }
-.big-emoji { font-size: 48px; }
 
 .hint-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: var(--wx-space-3);
   display: flex;
   flex-direction: column;
   gap: var(--wx-space-1);
   font-size: var(--wx-fs-13);
   background: var(--wx-surface-sunken);
-  padding: var(--wx-space-3);
   border-radius: var(--wx-radius-md);
 }
+.hint-list li { display: flex; align-items: center; gap: var(--wx-space-2); }
+.check-icon { color: var(--wx-brand-primary); flex-shrink: 0; }
 
 .auth-row { display: flex; gap: var(--wx-space-2); justify-content: flex-end; flex-wrap: wrap; }
 .invite-row { display: flex; gap: var(--wx-space-2); align-items: center; }
@@ -206,7 +219,8 @@ function back() {
   border-color: var(--wx-brand-primary);
   background: rgba(37, 99, 235, 0.06);
 }
-.theme-emoji { font-size: 24px; }
+.theme-icon { color: var(--wx-content-secondary); }
+.theme-card--active .theme-icon { color: var(--wx-brand-primary); }
 .theme-label { font-size: var(--wx-fs-13); font-weight: var(--wx-fw-medium); }
 .theme-desc { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 

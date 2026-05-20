@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseAvatar, BaseTabs } from '../../components/common'
+import { MessageCircle, CheckCircle2, Rocket, FileText, Mail, GitMerge, Bell, type LucideIcon } from 'lucide-vue-next'
 
 const tab = ref('tat-ca')
 const tabs = [
@@ -28,8 +29,13 @@ const filtered = computed(() => {
 
 function markAllRead() { NOTIFS.value.forEach(n => n.read = true) }
 
-const TYPE_ICONS: Record<string, string> = {
-  mention: '💬', review: '✅', deploy: '🚀', comment: '📝', invite: '✉️', merge: '🔀',
+const TYPE_ICONS: Record<string, LucideIcon> = {
+  mention: MessageCircle,
+  review:  CheckCircle2,
+  deploy:  Rocket,
+  comment: FileText,
+  invite:  Mail,
+  merge:   GitMerge,
 }
 </script>
 
@@ -46,7 +52,7 @@ const TYPE_ICONS: Record<string, string> = {
         <div v-for="n in filtered" :key="n.id" class="notif-item" :class="{ unread: !n.read }">
           <div class="notif-avatar">
             <BaseAvatar :name="n.avatar" size="md" />
-            <span class="notif-type-icon">{{ TYPE_ICONS[n.type] || '🔔' }}</span>
+            <component :is="TYPE_ICONS[n.type] || Bell" :size="12" class="notif-type-icon" />
           </div>
           <div class="notif-body">
             <p class="notif-text">
@@ -61,7 +67,12 @@ const TYPE_ICONS: Record<string, string> = {
       </TransitionGroup>
 
       <div v-if="filtered.length === 0" class="empty-state">
-        <span class="empty-icon">🎉</span>
+        <lord-icon
+          src="https://cdn.lordicon.com/lupuorrc.json"
+          trigger="loop"
+          colors="primary:#8b5cf6,secondary:#ec4899"
+          style="width: 64px; height: 64px;"
+        />
         <p class="empty-text">Không có thông báo {{ tab === 'chua-doc' ? 'chưa đọc' : '' }}</p>
       </div>
     </div>
@@ -76,7 +87,7 @@ const TYPE_ICONS: Record<string, string> = {
 .notif-item:hover { background: var(--wx-hover-bg); }
 
 .notif-avatar { position: relative; }
-.notif-type-icon { position: absolute; bottom: -4px; right: -4px; font-size: 14px; background: var(--wx-bg-base); border-radius: var(--wx-radius-full); width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+.notif-type-icon { position: absolute; bottom: -4px; right: -4px; background: var(--wx-bg-base); border-radius: var(--wx-radius-full); width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; color: var(--wx-brand-primary); padding: 2px; }
 
 .notif-body { flex: 1; }
 .notif-text { margin: 0 0 var(--wx-space-1); font-size: var(--wx-fs-14); line-height: var(--wx-lh-normal); color: var(--wx-content-primary); }
@@ -86,7 +97,6 @@ const TYPE_ICONS: Record<string, string> = {
 .mark-btn { border: none; background: none; color: var(--wx-brand-500); cursor: pointer; font-size: 18px; line-height: 1; }
 
 .empty-state { display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-3); padding: var(--wx-space-9); }
-.empty-icon { font-size: 48px; }
 .empty-text { font-size: var(--wx-fs-15); color: var(--wx-content-muted); }
 
 .fade-list-enter-active, .fade-list-leave-active { transition: all var(--wx-d-fast) var(--wx-ease-standard); }

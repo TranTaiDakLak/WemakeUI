@@ -4,6 +4,8 @@ import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
 import { BaseButton, BaseInput, BaseAvatar, FormField } from '../../components/common'
+import { DotLottieVue } from '@lottiefiles/dotlottie-vue'
+import lockedJson from '@/assets/animations/locked.json'
 
 const password = ref('')
 const error = ref<string | null>(null)
@@ -38,7 +40,12 @@ async function unlock() {
       <div class="lock-aside">
         <div class="clock">{{ timeStr }}</div>
         <div class="date">{{ dateStr }}</div>
-        <div class="lock-icon" aria-hidden="true">🔒</div>
+        <DotLottieVue
+          :data="lockedJson"
+          autoplay
+          loop
+          class="lock-icon"
+        />
         <p class="lock-tip">
           Phiên của bạn đã bị khoá sau <strong>15 phút</strong> không hoạt động.
           Nhập mật khẩu để tiếp tục.
@@ -85,7 +92,7 @@ async function unlock() {
   line-height: 1;
 }
 .date { font-size: var(--wx-fs-16); color: rgba(255,255,255,0.7); }
-.lock-icon { font-size: 64px; margin-top: var(--wx-space-5); }
+.lock-icon { width: 120px; height: 120px; margin-top: var(--wx-space-5); }
 .lock-tip {
   margin: 0;
   font-size: var(--wx-fs-13);

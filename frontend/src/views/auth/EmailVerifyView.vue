@@ -33,7 +33,12 @@ function setState(s: typeof state.value) { state.value = s }
     </div>
 
     <div v-else-if="state === 'verified'" class="state state--ok">
-      <div class="big-icon">✅</div>
+      <lord-icon
+        src="https://cdn.lordicon.com/lupuorrc.json"
+        trigger="loop"
+        colors="primary:#10b981,secondary:#059669"
+        style="width: 80px; height: 80px;"
+      />
       <h2>Xác minh thành công!</h2>
       <p>Email của bạn đã được xác minh. Bạn có thể tiếp tục.</p>
       <BaseTag size="md" variant="success" text="đã xác minh" />
@@ -43,7 +48,14 @@ function setState(s: typeof state.value) { state.value = s }
     </div>
 
     <div v-else-if="state === 'expired'" class="state state--warn">
-      <div class="big-icon">⏱️</div>
+      <lord-icon
+        src="https://cdn.lordicon.com/azxkyjta.json"
+        trigger="loop"
+        state="hover-enlarge"
+        delay="2000"
+        colors="primary:#f59e0b,secondary:#92400e"
+        style="width: 80px; height: 80px;"
+      />
       <h2>Đường dẫn đã hết hạn</h2>
       <p>Đường dẫn xác minh chỉ có hiệu lực trong 30 phút. Hãy yêu cầu gửi lại.</p>
       <BaseTag size="md" variant="warning" text="hết hạn" />
@@ -51,7 +63,13 @@ function setState(s: typeof state.value) { state.value = s }
     </div>
 
     <div v-else class="state state--err">
-      <div class="big-icon">⚠️</div>
+      <lord-icon
+        src="https://cdn.lordicon.com/azxkyjta.json"
+        trigger="loop"
+        state="hover-enlarge"
+        colors="primary:#ef4444,secondary:#991b1b"
+        style="width: 80px; height: 80px;"
+      />
       <h2>Không thể xác minh</h2>
       <p>Đường dẫn không hợp lệ hoặc đã được sử dụng. Vui lòng thử lại.</p>
       <BaseTag size="md" variant="danger" text="lỗi" />
@@ -89,7 +107,6 @@ function setState(s: typeof state.value) { state.value = s }
 .state--warn    { background: var(--wx-warning-bg); }
 .state--err     { background: var(--wx-danger-bg); }
 
-.big-icon { font-size: 56px; }
 .state h2 { margin: 0; font-size: var(--wx-fs-20); font-weight: var(--wx-fw-semibold); }
 .state p { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-content-secondary); }
 .actions { display: flex; gap: var(--wx-space-2); margin-top: var(--wx-space-2); }

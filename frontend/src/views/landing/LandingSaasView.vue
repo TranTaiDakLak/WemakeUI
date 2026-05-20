@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import LandingLayout from '../_layouts/LandingLayout.vue'
 import { BaseButton, BaseBadge, BaseTag } from '../../components/common'
+import { Zap, Palette, Globe, Lock, BarChart3, Shield, type LucideIcon } from 'lucide-vue-next'
 
-const FEATURES = [
-  { icon: '⚡', title: 'Hiệu năng cao', desc: 'Bundle <200KB, virtual scroll, lazy load — tốc độ vượt trội trên mọi thiết bị.' },
-  { icon: '🎨', title: 'Design system đầy đủ', desc: 'Tokens, dark mode, radius, spacing, motion — đồng nhất từ atom đến page.' },
-  { icon: '🌐', title: 'Cross-platform', desc: 'Web, Mobile (Capacitor/PWA), Desktop (Tauri/Electron) — một codebase.' },
-  { icon: '🔒', title: 'RBAC tích hợp', desc: 'useCan, v-can, CanShow, PermissionGate — phân quyền rõ ràng.' },
-  { icon: '📊', title: '7 chart SVG', desc: 'Line, Area, Bar, Pie, Sparkline, Gauge, Heatmap — không deps ngoài.' },
-  { icon: '🛡️', title: 'TypeScript strict', desc: 'Type an toàn cho props, emits, composables và store.' },
+const FEATURES: { icon: LucideIcon; title: string; desc: string }[] = [
+  { icon: Zap,       title: 'Hiệu năng cao',        desc: 'Bundle <200KB, virtual scroll, lazy load — tốc độ vượt trội trên mọi thiết bị.' },
+  { icon: Palette,   title: 'Design system đầy đủ', desc: 'Tokens, dark mode, radius, spacing, motion — đồng nhất từ atom đến page.' },
+  { icon: Globe,     title: 'Cross-platform',        desc: 'Web, Mobile (Capacitor/PWA), Desktop (Tauri/Electron) — một codebase.' },
+  { icon: Lock,      title: 'RBAC tích hợp',         desc: 'useCan, v-can, CanShow, PermissionGate — phân quyền rõ ràng.' },
+  { icon: BarChart3, title: '7 chart SVG',            desc: 'Line, Area, Bar, Pie, Sparkline, Gauge, Heatmap — không deps ngoài.' },
+  { icon: Shield,    title: 'TypeScript strict',      desc: 'Type an toàn cho props, emits, composables và store.' },
 ]
 
 const LOGOS = ['Công ty TNHH ABC', 'Startup XYZ', 'Tập đoàn DEF', 'Corp GHI', 'Agency JKL']
@@ -51,7 +52,7 @@ const LOGOS = ['Công ty TNHH ABC', 'Startup XYZ', 'Tập đoàn DEF', 'Corp GHI
         <p class="section-desc">Từ token đến page template — không cần build từ đầu.</p>
         <div class="features-grid">
           <div v-for="f in FEATURES" :key="f.title" class="feature-card">
-            <span class="feature-icon">{{ f.icon }}</span>
+            <component :is="f.icon" class="feature-icon" :size="28" />
             <h3 class="feature-name">{{ f.title }}</h3>
             <p class="feature-desc">{{ f.desc }}</p>
           </div>

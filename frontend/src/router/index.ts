@@ -17,6 +17,11 @@ const routes: RouteRecordRaw[] = [
         name: 'ShowcaseTokens',
         component: () => import('../views/showcase/TokensShowcase.vue'),
       },
+      {
+        path: 'showcase/icons',
+        name: 'ShowcaseIcons',
+        component: () => import('../views/showcase/IconShowcase.vue'),
+      },
       /* ── phase 1 ────────────────────────────────────── */
       {
         path: 'showcase/primitives',

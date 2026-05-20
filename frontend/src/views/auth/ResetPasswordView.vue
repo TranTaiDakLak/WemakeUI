@@ -74,7 +74,12 @@ async function submit() {
     </form>
 
     <div v-else class="done">
-      <div class="done-icon">✅</div>
+      <lord-icon
+        src="https://cdn.lordicon.com/lupuorrc.json"
+        trigger="loop"
+        colors="primary:#10b981,secondary:#059669"
+        style="width: 80px; height: 80px;"
+      />
       <h2>Mật khẩu đã được cập nhật</h2>
       <p>Bây giờ bạn có thể đăng nhập với mật khẩu mới.</p>
       <RouterLink to="/auth/login" class="cta">
@@ -119,7 +124,6 @@ async function submit() {
   background: var(--wx-success-bg);
   border-radius: var(--wx-radius-xl);
 }
-.done-icon { font-size: 48px; }
 .done h2 { margin: 0; font-size: var(--wx-fs-20); font-weight: var(--wx-fw-semibold); }
 .done p { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-content-secondary); }
 .cta { width: 100%; text-decoration: none; }

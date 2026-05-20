@@ -39,7 +39,13 @@ async function submit() {
     </form>
 
     <div v-else class="sent">
-      <div class="sent-icon">📬</div>
+      <lord-icon
+        src="https://cdn.lordicon.com/vxzzdaaj.json"
+        trigger="loop"
+        delay="2000"
+        colors="primary:#3b82f6,secondary:#93c5fd"
+        style="width: 80px; height: 80px;"
+      />
       <h2>Đã gửi đường dẫn</h2>
       <p>Kiểm tra hộp thư <strong>{{ email }}</strong>. Đường dẫn có hiệu lực trong 30 phút.</p>
       <BaseTag size="md" variant="success" text="đã gửi" />
@@ -76,7 +82,6 @@ async function submit() {
   background: var(--wx-surface-sunken);
   border-radius: var(--wx-radius-xl);
 }
-.sent-icon { font-size: 48px; }
 .sent h2 { margin: 0; font-size: var(--wx-fs-20); font-weight: var(--wx-fw-semibold); }
 .sent p { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-content-secondary); }
 .sent-actions { display: flex; flex-direction: column; gap: var(--wx-space-2); width: 100%; margin-top: var(--wx-space-3); }

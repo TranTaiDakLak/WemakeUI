@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useNotificationsStore } from '@/stores/notifications'
 import type { NotifSeverity } from '@/stores/notifications'
+import { CheckCircle2, AlertTriangle, XCircle, Info, Bell, type LucideIcon } from 'lucide-vue-next'
 
 const router = useRouter()
 const store = useNotificationsStore()
@@ -11,11 +12,11 @@ const open = ref(false)
 function toggle() { open.value = !open.value }
 function close() { open.value = false }
 
-const SEVERITY_ICON: Record<NotifSeverity, string> = {
-  success: '✅',
-  warning: '⚠️',
-  error: '🔴',
-  info: 'ℹ️',
+const SEVERITY_ICON: Record<NotifSeverity, LucideIcon> = {
+  success: CheckCircle2,
+  warning: AlertTriangle,
+  error:   XCircle,
+  info:    Info,
 }
 const SEVERITY_CLASS: Record<NotifSeverity, string> = {
   success: 'notif--success',
@@ -64,7 +65,7 @@ const hasUnread = computed(() => store.unreadCount > 0)
 
         <div class="nc-list">
           <div v-if="!store.items.length" class="nc-empty">
-            <span class="nc-empty__icon">🔔</span>
+            <Bell class="nc-empty__icon" :size="40" />
             <p>Không có thông báo nào</p>
           </div>
 
@@ -75,7 +76,7 @@ const hasUnread = computed(() => store.unreadCount > 0)
             :class="[SEVERITY_CLASS[notif.severity], { 'nc-item--unread': !notif.read }]"
             @click="store.markRead(notif.id)"
           >
-            <span class="nc-item__icon">{{ SEVERITY_ICON[notif.severity] }}</span>
+            <component :is="SEVERITY_ICON[notif.severity]" class="nc-item__icon" :size="18" />
             <div class="nc-item__content">
               <div class="nc-item__head">
                 <p class="nc-item__title">{{ notif.title }}</p>
@@ -198,7 +199,7 @@ const hasUnread = computed(() => store.unreadCount > 0)
   color: var(--wx-text-muted);
   font-size: var(--wx-fs-14);
 }
-.nc-empty__icon { font-size: 32px; }
+.nc-empty__icon { color: var(--wx-text-muted); }
 
 .nc-item {
   display: flex;
@@ -225,7 +226,11 @@ const hasUnread = computed(() => store.unreadCount > 0)
 .nc-item--warning.nc-item--unread::before { background: var(--wx-warning-solid); }
 .nc-item--success.nc-item--unread::before { background: var(--wx-success-solid); }
 
-.nc-item__icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.nc-item__icon { flex-shrink: 0; margin-top: 1px; color: var(--wx-brand-primary); }
+.nc-item--success .nc-item__icon { color: var(--wx-success-solid); }
+.nc-item--warning .nc-item__icon { color: var(--wx-warning-solid); }
+.nc-item--error   .nc-item__icon { color: var(--wx-danger-solid); }
+.nc-item--info    .nc-item__icon { color: var(--wx-brand-primary); }
 .nc-item__content { flex: 1; min-width: 0; }
 .nc-item__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--wx-space-2); margin-bottom: 2px; }
 .nc-item__title { font-size: var(--wx-fs-14); font-weight: var(--wx-fw-semibold); color: var(--wx-text-primary); margin: 0; }

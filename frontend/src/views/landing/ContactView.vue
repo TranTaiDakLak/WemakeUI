@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import LandingLayout from '../_layouts/LandingLayout.vue'
 import { BaseButton, BaseInput, FormField, GroupBox } from '../../components/common'
+import { Mail, MessageSquare, Twitter, Building2, CheckCircle2, type LucideIcon } from 'lucide-vue-next'
 
 const name = ref('')
 const email = ref('')
@@ -15,11 +16,11 @@ function submit() {
   }
 }
 
-const CONTACTS = [
-  { icon: '📧', label: 'Email', value: 'hello@wemakeui.vn' },
-  { icon: '💬', label: 'Discord', value: 'discord.gg/wemakeui' },
-  { icon: '🐦', label: 'Twitter / X', value: '@wemakeui' },
-  { icon: '🏢', label: 'Địa chỉ', value: '123 Lê Lợi, Quận 1, TP.HCM' },
+const CONTACTS: { icon: LucideIcon; label: string; value: string }[] = [
+  { icon: Mail,          label: 'Email',       value: 'hello@wemakeui.vn' },
+  { icon: MessageSquare, label: 'Discord',     value: 'discord.gg/wemakeui' },
+  { icon: Twitter,       label: 'Twitter / X', value: '@wemakeui' },
+  { icon: Building2,     label: 'Địa chỉ',     value: '123 Lê Lợi, Quận 1, TP.HCM' },
 ]
 </script>
 
@@ -36,7 +37,7 @@ const CONTACTS = [
         <div>
           <Transition name="fade">
             <div v-if="sent" class="success-box">
-              <span class="success-icon">✅</span>
+              <CheckCircle2 :size="48" class="success-icon" />
               <h2 class="success-title">Đã gửi thành công!</h2>
               <p class="success-desc">Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi trong vòng 24 giờ.</p>
               <BaseButton variant="secondary" @click="sent = false; name = ''; email = ''; message = ''">Gửi tin nhắn khác</BaseButton>
@@ -66,7 +67,7 @@ const CONTACTS = [
           <h2 class="info-title">Kênh liên hệ khác</h2>
           <div class="contact-channels">
             <div v-for="c in CONTACTS" :key="c.label" class="channel-item">
-              <span class="channel-icon">{{ c.icon }}</span>
+              <component :is="c.icon" :size="20" class="channel-icon" />
               <div>
                 <span class="channel-label">{{ c.label }}</span>
                 <span class="channel-value">{{ c.value }}</span>
@@ -98,7 +99,7 @@ const CONTACTS = [
 .msg-input:focus { outline: none; border-color: var(--wx-border-focus); box-shadow: var(--wx-shadow-focus); }
 
 .success-box { display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-4); padding: var(--wx-space-9) var(--wx-space-5); text-align: center; background: var(--wx-success-bg); border: 1px solid var(--wx-success-border); border-radius: var(--wx-radius-xl); }
-.success-icon { font-size: 48px; }
+.success-icon { color: var(--wx-success-solid); }
 .success-title { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); margin: 0; }
 .success-desc { font-size: var(--wx-fs-15); color: var(--wx-content-secondary); margin: 0; }
 
@@ -106,7 +107,7 @@ const CONTACTS = [
 .info-title { font-size: var(--wx-fs-20); font-weight: var(--wx-fw-semibold); margin-bottom: var(--wx-space-4); }
 .contact-channels { display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .channel-item { display: flex; gap: var(--wx-space-3); align-items: flex-start; }
-.channel-icon { font-size: 20px; width: 28px; text-align: center; }
+.channel-icon { width: 28px; flex-shrink: 0; color: var(--wx-brand-primary); }
 .channel-label { display: block; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); color: var(--wx-content-muted); }
 .channel-value { display: block; font-size: var(--wx-fs-14); color: var(--wx-content-primary); }
 .office-hours { padding: var(--wx-space-4); background: var(--wx-bg-sunken); border-radius: var(--wx-radius-lg); }

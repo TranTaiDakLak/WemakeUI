@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import LandingLayout from '../_layouts/LandingLayout.vue'
 import { BaseAvatar, BaseAvatarGroup, BaseButton } from '../../components/common'
+import { Rocket, Accessibility, Globe2, Unlock, type LucideIcon } from 'lucide-vue-next'
 
 const TEAM = [
   { name: 'Nguyễn Văn A', role: 'Founder & CEO', bio: 'Vue & TypeScript specialist. Yêu thích design system và developer experience tốt.' },
@@ -9,11 +10,11 @@ const TEAM = [
   { name: 'Nguyễn Thị D', role: 'QA Lead', bio: 'Automation testing, accessibility audit và lighthouse CI. Giữ quality gate nghiêm ngặt.' },
 ]
 
-const VALUES = [
-  { icon: '🚀', title: 'Tốc độ là tính năng', desc: 'Mọi component đều được benchmark và optimize. Chúng tôi nghiêm túc về performance.' },
-  { icon: '♿', title: 'Accessibility mặc định', desc: 'ARIA, keyboard nav, focus trap, contrast — không phải optional, là mặc định.' },
-  { icon: '🌏', title: 'Tiếng Việt first', desc: 'Thiết kế cho i18n, mặc định tiếng Việt. UI Việt Nam xứng đáng được đầu tư đúng mức.' },
-  { icon: '🔓', title: 'Open & transparent', desc: 'Mã nguồn mở, changelog công khai, roadmap rõ ràng. Không black box.' },
+const VALUES: { icon: LucideIcon; title: string; desc: string }[] = [
+  { icon: Rocket,        title: 'Tốc độ là tính năng',   desc: 'Mọi component đều được benchmark và optimize. Chúng tôi nghiêm túc về performance.' },
+  { icon: Accessibility, title: 'Accessibility mặc định', desc: 'ARIA, keyboard nav, focus trap, contrast — không phải optional, là mặc định.' },
+  { icon: Globe2,        title: 'Tiếng Việt first',       desc: 'Thiết kế cho i18n, mặc định tiếng Việt. UI Việt Nam xứng đáng được đầu tư đúng mức.' },
+  { icon: Unlock,        title: 'Open & transparent',     desc: 'Mã nguồn mở, changelog công khai, roadmap rõ ràng. Không black box.' },
 ]
 </script>
 
@@ -52,7 +53,7 @@ const VALUES = [
         <h2 class="section-title center">Giá trị cốt lõi</h2>
         <div class="values-grid">
           <div v-for="v in VALUES" :key="v.title" class="value-card">
-            <span class="value-icon">{{ v.icon }}</span>
+            <component :is="v.icon" class="value-icon" :size="28" />
             <h3 class="value-name">{{ v.title }}</h3>
             <p class="value-desc">{{ v.desc }}</p>
           </div>

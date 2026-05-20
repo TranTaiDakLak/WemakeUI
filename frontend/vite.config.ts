@@ -9,7 +9,13 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
-      vue(),
+      vue({
+        template: {
+          compilerOptions: {
+            isCustomElement: (tag) => tag === 'lord-icon',
+          },
+        },
+      }),
       ...(isLib ? [dts({ include: ['src'], tsconfigPath: './tsconfig.json', rollupTypes: true })] : []),
     ],
     server: {

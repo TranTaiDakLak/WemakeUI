@@ -38,6 +38,12 @@ export const phases: readonly ShowcasePhase[] = [
         label: 'Color · Spacing · Typography · Motion',
         desc: 'color, gradient, radius, spacing, typography, motion, focus, sentence case',
       },
+      {
+        path: '/showcase/icons',
+        navLabel: 'Icon Sets',
+        label: 'Lucide · Phosphor · Solar · Tabler · Hugeicons',
+        desc: 'so sánh trực quan 5 bộ icon hiện đại — weight, size, theme, brand color',
+      },
     ],
   },
   {

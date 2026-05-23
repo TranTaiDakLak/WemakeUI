@@ -4,6 +4,7 @@ import { ref, watch, nextTick, onMounted } from 'vue'
 const props = defineProps<{
   modelValue: string
   tabs: Array<{ key: string; label: string; icon?: string; disabled?: boolean }>
+  variant?: 'pill' | 'underline'
 }>()
 
 defineEmits<{
@@ -30,7 +31,7 @@ onMounted(() => nextTick(updateIndicator))
 </script>
 
 <template>
-  <div class="base-tabs">
+  <div class="base-tabs" :class="`base-tabs--${variant ?? 'pill'}`">
     <div ref="tabsRef" class="base-tabs__header">
       <button
         v-for="tab in tabs"
@@ -46,7 +47,7 @@ onMounted(() => nextTick(updateIndicator))
         <span v-if="tab.icon" class="base-tabs__icon">{{ tab.icon }}</span>
         {{ tab.label }}
       </button>
-      <span class="base-tabs__indicator" :style="indicatorStyle" />
+      <span v-if="(variant ?? 'pill') === 'pill'" class="base-tabs__indicator" :style="indicatorStyle" />
     </div>
     <div class="base-tabs__content">
       <template v-for="tab in tabs" :key="tab.key">
@@ -119,5 +120,48 @@ onMounted(() => nextTick(updateIndicator))
 .base-tabs__icon {
   display: inline-flex;
   font-size: 16px;
+}
+
+/* ── Underline variant ── */
+.base-tabs--underline .base-tabs__header {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  border-bottom: 1px solid var(--wx-border-default);
+  margin-bottom: 20px;
+  gap: 0;
+}
+.base-tabs--underline .base-tabs__tab {
+  flex: none;
+  padding: 8px 16px;
+  border-radius: 0;
+  color: var(--wx-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  position: relative;
+  transition: color var(--wx-duration-fast) var(--wx-easing-default);
+}
+.base-tabs--underline .base-tabs__tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--wx-brand-primary);
+  border-radius: 2px 2px 0 0;
+  transform: scaleX(0);
+  transition: transform 0.2s var(--wx-easing-default);
+}
+.base-tabs--underline .base-tabs__tab--active {
+  color: var(--wx-brand-primary);
+  font-weight: 600;
+}
+.base-tabs--underline .base-tabs__tab--active::after {
+  transform: scaleX(1);
+}
+.base-tabs--underline .base-tabs__tab:hover:not(:disabled):not(.base-tabs__tab--active) {
+  color: var(--wx-brand-primary);
+  background: transparent;
 }
 </style>

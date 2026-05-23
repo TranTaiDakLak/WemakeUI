@@ -125,28 +125,29 @@ onMounted(() => nextTick(updateIndicator))
 /* ── Underline variant ── */
 .base-tabs--underline .base-tabs__header {
   background: transparent;
-  padding: 0;
-  border-radius: 0;
-  border-bottom: 1px solid var(--wx-border-default);
+  padding: 4px 6px;
+  border-radius: var(--wx-radius-lg, 8px);
+  border: 1px solid var(--wx-border-default);
   margin-bottom: 20px;
-  gap: 0;
+  gap: 2px;
 }
 .base-tabs--underline .base-tabs__tab {
   flex: none;
-  padding: 8px 16px;
-  border-radius: 0;
+  padding: 6px 14px;
+  border-radius: var(--wx-radius-md, 6px);
   color: var(--wx-text-secondary);
   font-size: 13px;
   font-weight: 500;
   position: relative;
-  transition: color var(--wx-duration-fast) var(--wx-easing-default);
+  transition: color var(--wx-duration-fast) var(--wx-easing-default),
+              background var(--wx-duration-fast) var(--wx-easing-default);
 }
 .base-tabs--underline .base-tabs__tab::after {
   content: '';
   position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
+  bottom: -5px;
+  left: 8px;
+  right: 8px;
   height: 2px;
   background: var(--wx-brand-primary);
   border-radius: 2px 2px 0 0;
@@ -161,7 +162,7 @@ onMounted(() => nextTick(updateIndicator))
   transform: scaleX(1);
 }
 .base-tabs--underline .base-tabs__tab:hover:not(:disabled):not(.base-tabs__tab--active) {
-  color: var(--wx-brand-primary);
-  background: transparent;
+  color: var(--wx-text-primary);
+  background: var(--wx-surface-hover);
 }
 </style>

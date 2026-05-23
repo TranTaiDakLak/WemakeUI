@@ -25,6 +25,7 @@ function updateIndicator() {
 }
 
 watch(() => props.modelValue, () => nextTick(updateIndicator))
+watch(() => props.tabs, () => nextTick(updateIndicator), { deep: true })
 onMounted(() => nextTick(updateIndicator))
 </script>
 

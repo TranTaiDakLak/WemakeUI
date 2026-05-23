@@ -2,7 +2,7 @@
 defineProps<{
   text?: string | number
   variant?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'ghost' | 'neutral'
-  size?: 'sm' | 'md'
+  size?: 'sm' | 'md' | 'lg'
   dot?: boolean
   pulsing?: boolean
   /** Solid fill (notification count style) — bg đậm + text trắng + viền trắng */
@@ -53,6 +53,7 @@ defineProps<{
 
 .base-badge--sm { font-size: 10px; padding: 1px 6px; }
 .base-badge--md { font-size: 11px; padding: 2px 8px; }
+.base-badge--lg { font-size: 12px; padding: 3px 10px; }
 
 /* Dot indicator inline (dot=true + has text) */
 .base-badge--with-dot { gap: 5px; }

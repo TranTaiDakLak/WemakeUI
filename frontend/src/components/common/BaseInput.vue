@@ -53,7 +53,7 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
         :class="{
           'base-input__field--has-toggle': type === 'password',
           'base-input__field--has-icon': success && !hasError,
-          [`base-input__field--align-${align ?? 'left'}`]: true,
+          [`base-input__field--align-${align ?? (type === 'number' ? 'center' : 'left')}`]: true,
         }"
         :type="inputType"
         :value="modelValue"

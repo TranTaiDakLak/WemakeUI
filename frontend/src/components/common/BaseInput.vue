@@ -16,6 +16,8 @@ const props = defineProps<{
   disabled?: boolean
   readonly?: boolean
   size?: 'sm' | 'md'
+  /** text alignment inside the input */
+  align?: 'left' | 'center' | 'right'
 }>()
 
 const emit = defineEmits<{
@@ -51,6 +53,7 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
         :class="{
           'base-input__field--has-toggle': type === 'password',
           'base-input__field--has-icon': success && !hasError,
+          [`base-input__field--align-${align ?? 'left'}`]: true,
         }"
         :type="inputType"
         :value="modelValue"
@@ -201,6 +204,22 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
   font-size: 12px;
 }
 .base-input--sm .base-input__label { font-size: 11px; }
+
+/* text alignment */
+.base-input__field--align-left   { text-align: left; }
+.base-input__field--align-center { text-align: center; }
+.base-input__field--align-right  { text-align: right; }
+
+/* hide number spinner arrows */
+.base-input__field[type="number"]::-webkit-inner-spin-button,
+.base-input__field[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.base-input__field[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .base-input__field {

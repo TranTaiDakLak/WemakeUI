@@ -49,8 +49,10 @@ const { search, filterValues, filtered, resetFilters } = useFilter(
 const headerCheckRef = ref<HTMLInputElement | null>(null)
 // ── Pagination ────────────────────────────────────────────────────────────────
 const currentPage = ref(1)
-const pageSize = computed(() => props.config.pageSize ?? 20)
+const pageSize = ref(props.config.pageSize ?? 20)
+watch(() => props.config.pageSize, (v) => { pageSize.value = v ?? 20 })
 watch(filtered, () => { currentPage.value = 1 })
+watch(pageSize, () => { currentPage.value = 1 })
 const paginated = computed(() => {
   const start = (currentPage.value - 1) * pageSize.value
   return filtered.value.slice(start, start + pageSize.value)
@@ -334,7 +336,19 @@ defineExpose({ openAdd: handleOpenAdd })
 
     <!-- ── Pagination ────────────────────────────────────────────────────────────── -->
     <div class="crud-pagination">
-      <span class="crud-total">{{ filtered.length }} {{ config.label.plural }}</span>
+      <div class="crud-pagination__left">
+        <span class="crud-total">
+          {{ filtered.length > pageSize
+            ? `${(currentPage - 1) * pageSize + 1}–${Math.min(currentPage * pageSize, filtered.length)} / ${filtered.length} ${config.label.plural}`
+            : `${filtered.length} ${config.label.plural}` }}
+        </span>
+        <BaseSelectMenu
+          :model-value="String(pageSize)"
+          :options="[{value:'10',label:'10/trang'},{value:'20',label:'20/trang'},{value:'50',label:'50/trang'},{value:'100',label:'100/trang'}]"
+          size="sm"
+          @update:model-value="v => pageSize = Number(v)"
+        />
+      </div>
       <BasePagination
         v-if="filtered.length > pageSize"
         v-model="currentPage"
@@ -594,8 +608,8 @@ defineExpose({ openAdd: handleOpenAdd })
   cursor: pointer;
 }
 
-.text-right  { text-align: right; }
-.text-center { text-align: center; }
+.text-right,  th.text-right  { text-align: right; }
+.text-center, th.text-center { text-align: center; }
 
 /* ── Row actions (always visible) ── */
 .row-actions {
@@ -673,13 +687,23 @@ defineExpose({ openAdd: handleOpenAdd })
   padding: var(--wx-space-3) var(--wx-space-4);
   border-top: 1px solid var(--wx-border-subtle);
   background: var(--wx-surface-elevated);
+  gap: var(--wx-space-3);
+  flex-wrap: wrap;
+}
+
+.crud-pagination__left {
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-3);
 }
 
 .crud-total {
   font-size: var(--wx-fs-12);
   color: var(--wx-text-muted);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
+
 
 /* ── Empty state ── */
 .crud-empty {

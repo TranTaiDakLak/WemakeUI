@@ -39,6 +39,12 @@ cd frontend && npm run build:lib      # build publishable library → dist-lib/
 | `ui.css` | Toàn bộ styles gộp (import qua `@wemake/ui/style.css`) |
 | `index.d.ts` | TypeScript definitions (generated bởi vite-plugin-dts) |
 
+## Skill policy
+
+- **KHÔNG dùng gstack skills** trong dự án này. Đây là mọi skill có hậu tố `(gstack)` ở cuối description — ví dụ: `/ship`, `/qa`, `/qa-only`, `/browse`, `/review` (gstack), `/health`, `/ios-*`, `/design-*`, `/plan-*`, `/codex`, `/canary`, `/careful`, `/freeze`, `/guard`, `/unfreeze`, `/checkpoint`, `/context-save`, `/context-restore`, `/cso`, `/devex-review`, `/document-*`, `/scrape`, `/skillify`, `/setup-*`, `/sync-gbrain`, `/learn`, `/make-pdf`, `/office-hours`, `/retro`, `/landing-report`, `/land-and-deploy`, `/pair-agent`, `/open-gstack-browser`, `/connect-chrome`, `/benchmark`, `/benchmark-models`, `/autoplan`, `/gstack`, `/gstack-upgrade`, `/_gstack-command`. Không proactive suggest, không auto-invoke.
+- Nếu cần workflow tương đương (review, plan, ship, qa, …), ưu tiên `/superpowers` (plugin obra/superpowers).
+- Skill built-in của Claude Code vẫn dùng bình thường: `/review`, `/security-review`, `/init`, `/verify`, `/simplify`, `/loop`, `/schedule`, `/run`, `/claude-api`, `/update-config`, `/keybindings-help`, `/fewer-permission-prompts`.
+
 ## Rules
 
 1. **No secrets** — never read, print, or log .env, credentials, tokens, API keys
@@ -48,6 +54,10 @@ cd frontend && npm run build:lib      # build publishable library → dist-lib/
 5. **TypeScript strict** — types cho tất cả props, emits, stores, composables
 6. **Tree-shakable** — named exports, không side effects ngoài CSS, peer-deps cho `vue`/`vue-router`/`pinia`
 7. **Verify before done** — chạy actual commands, paste output as evidence
+
+## Design system reference
+
+See `DESIGN.md` for: full token map, component inventory with props, composables, types, dark mode mechanism, and new-component checklist.
 
 ## Library entry
 

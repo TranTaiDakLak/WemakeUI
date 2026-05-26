@@ -118,5 +118,3 @@ out/
 # -----------------------------------------------------------------------------
 # Claude Code internal
 skills-lock.json
-README_gstack.md
-.gstack/

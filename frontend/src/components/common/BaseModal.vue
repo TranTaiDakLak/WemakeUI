@@ -208,7 +208,9 @@ function trapFocusHandle(e: KeyboardEvent) {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  will-change: transform;
+  /* Không đặt `will-change: transform` mặc định: khi modal đứng yên, lớp composited GPU
+     làm text render qua texture (mất subpixel-AA) → chữ trông mờ như bị scale.
+     Chỉ promote layer trong lúc đang animate enter/leave (xem block bên dưới). */
 }
 
 /* ── Header ── */
@@ -330,8 +332,8 @@ function trapFocusHandle(e: KeyboardEvent) {
 .modal-enter-active { transition: opacity var(--wx-d-normal, 250ms) var(--wx-ease-decelerate); }
 .modal-leave-active { transition: opacity var(--wx-d-fast, 150ms) var(--wx-ease-accelerate); }
 .modal-enter-from, .modal-leave-to { opacity: 0; }
-.modal-enter-active .modal-dialog { animation: wxModalIn var(--wx-d-normal, 250ms) var(--wx-ease-decelerate); }
-.modal-leave-active .modal-dialog { animation: wxModalOut var(--wx-d-fast, 150ms) var(--wx-ease-accelerate) forwards; }
+.modal-enter-active .modal-dialog { animation: wxModalIn var(--wx-d-normal, 250ms) var(--wx-ease-decelerate); will-change: transform, opacity; }
+.modal-leave-active .modal-dialog { animation: wxModalOut var(--wx-d-fast, 150ms) var(--wx-ease-accelerate) forwards; will-change: transform, opacity; }
 @keyframes wxModalIn {
   from { transform: translateY(-16px) scale(0.95); opacity: 0; }
   to   { transform: translateY(0) scale(1); opacity: 1; }

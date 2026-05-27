@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, useSlots } from 'vue'
+import { ref, computed, useSlots, type Slots } from 'vue'
 import { AppShell, AppSidebar, AppTopbar, PageHeader } from '../../components/layout'
 import type { SidebarSection } from '../../components/layout'
 import UserDropdown from '../../components/common/UserDropdown.vue'
@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<{
   pageDescription: '',
 })
 
-const slots = useSlots()
+const slots: Slots = useSlots()
 const collapsed = ref(false)
 const mobileNavOpen = ref(false)
 

@@ -9,6 +9,53 @@
 import { ref, computed } from 'vue'
 import { Icon } from '@iconify/vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
+import BaseButton from '../../components/common/BaseButton.vue'
+import { ACTION_ICONS, type ActionIconName } from '../../utils/actionIcons'
+
+/* ── WemakeUI built-in ACTION_ICONS — danh sách và mapping pastel class ──
+ *  Ported từ WemakeHRM. Mỗi icon = 1 SVG string dùng trực tiếp với
+ *  <BaseButton size="icon" :icon="ACTION_ICONS.xxx">. Pastel màu qua class
+ *  .act-* (xem ui-system/foundations/table-actions.css).
+ */
+const ACTION_ICON_NAMES = Object.keys(ACTION_ICONS) as ActionIconName[]
+
+type SemanticAction = {
+  icon: ActionIconName
+  cls: string
+  label: string
+  tone: string
+}
+/* Demo "kiểu dùng thực tế" — mỗi row trong table CRUD. */
+const SEMANTIC_ACTIONS: SemanticAction[] = [
+  { icon: 'edit',       cls: 'act-edit',       label: 'Sửa',          tone: 'brand'   },
+  { icon: 'view',       cls: 'act-view',       label: 'Xem',          tone: 'brand'   },
+  { icon: 'detail',     cls: 'act-detail',     label: 'Chi tiết',     tone: 'brand'   },
+  { icon: 'approve',    cls: 'act-approve',    label: 'Duyệt',        tone: 'success' },
+  { icon: 'activate',   cls: 'act-activate',   label: 'Kích hoạt',    tone: 'success' },
+  { icon: 'reject',     cls: 'act-reject',     label: 'Từ chối',      tone: 'danger'  },
+  { icon: 'delete',     cls: 'act-delete',     label: 'Xoá',          tone: 'danger'  },
+  { icon: 'remove',     cls: 'act-remove',     label: 'Loại',         tone: 'danger'  },
+  { icon: 'deactivate', cls: 'act-deactivate', label: 'Ngừng',        tone: 'danger'  },
+  { icon: 'key',        cls: 'act-key',        label: 'Reset MK',     tone: 'warning' },
+  { icon: 'star',       cls: 'act-star',       label: 'Đánh dấu',     tone: 'warning' },
+  { icon: 'gift',       cls: 'act-gift',       label: 'Thưởng',       tone: 'warning' },
+  { icon: 'cancel',     cls: 'act-cancel',     label: 'Huỷ',          tone: 'muted'   },
+  { icon: 'restore',    cls: 'act-restore',    label: 'Khôi phục',    tone: 'info'    },
+  { icon: 'refresh',    cls: 'act-refresh',    label: 'Làm mới',      tone: 'info'    },
+  { icon: 'download',   cls: 'act-download',   label: 'Tải về',       tone: 'info'    },
+  { icon: 'upload',     cls: 'act-upload',     label: 'Tải lên',      tone: 'info'    },
+  { icon: 'move',       cls: 'act-move',       label: 'Di chuyển',    tone: 'info'    },
+]
+
+const copiedIcon = ref<ActionIconName | null>(null)
+async function copyIconName(name: ActionIconName) {
+  try {
+    await navigator.clipboard.writeText(`ACTION_ICONS.${name}`)
+    copiedIcon.value = name
+    setTimeout(() => { if (copiedIcon.value === name) copiedIcon.value = null }, 1200)
+  } catch { /* clipboard blocked — silent fail OK trong demo */ }
+}
+
 
 /* ── Bộ icon được so sánh ── */
 type IconSet = {
@@ -298,6 +345,137 @@ function lordSrc(hash: string) {
       description="Lucide (đang dùng) vs Phosphor · Solar · Tabler · Hugeicons. Bấm thử weight/size/màu để xem bộ nào hợp WemakeUI nhất."
       padded
     />
+
+    <!-- ══════════════════════════════════════════════════════════════
+         Section 0 — WemakeUI ACTION_ICONS (built-in)
+         47 SVG icon đi kèm thư viện. Dùng trực tiếp với BaseButton
+         size="icon" + pastel .act-* class. Không cần Iconify CDN.
+         ══════════════════════════════════════════════════════════════ -->
+    <section class="action-icons-section">
+      <div class="ai-header">
+        <h2>WemakeUI ACTION_ICONS <span class="ai-count">{{ ACTION_ICON_NAMES.length }} icon</span></h2>
+        <p>
+          Bộ icon SVG inline đi kèm <code>@wemake/ui</code> — dùng cho table actions,
+          toolbars, dialogs. Cặp với <code>BaseButton size="icon"</code> + pastel class
+          <code>.act-*</code> để có style nhất quán toàn hệ thống.
+        </p>
+      </div>
+
+      <!-- Patterns: icon-only · icon+text · text+iconRight · raw SVG -->
+      <div class="ai-patterns">
+        <div class="ai-subtitle">4 cách dùng ACTION_ICONS</div>
+        <div class="ai-patterns-grid">
+          <!-- 1. Raw SVG (no button at all) -->
+          <div class="ai-pattern">
+            <div class="ai-pattern-demo">
+              <span class="ai-raw-row">
+                <span class="ai-raw-icon ai-raw-icon--warning" v-html="ACTION_ICONS.warning" />
+                Tài khoản sắp hết hạn
+              </span>
+              <span class="ai-raw-row">
+                <span class="ai-raw-icon ai-raw-icon--success" v-html="ACTION_ICONS.check" />
+                Đã đồng bộ thành công
+              </span>
+            </div>
+            <div class="ai-pattern-info">
+              <div class="ai-pattern-title">1 · Raw inline (không button)</div>
+              <code class="ai-pattern-code">&lt;span v-html="ACTION_ICONS.warning" /&gt;</code>
+            </div>
+          </div>
+
+          <!-- 2. Icon-only button (pastel) -->
+          <div class="ai-pattern">
+            <div class="ai-pattern-demo">
+              <BaseButton size="icon" variant="ghost" class="act-edit"    :icon="ACTION_ICONS.edit" />
+              <BaseButton size="icon" variant="ghost" class="act-approve" :icon="ACTION_ICONS.approve" />
+              <BaseButton size="icon" variant="ghost" class="act-delete"  :icon="ACTION_ICONS.delete" />
+            </div>
+            <div class="ai-pattern-info">
+              <div class="ai-pattern-title">2 · Icon-only button (table action)</div>
+              <code class="ai-pattern-code">&lt;BaseButton size="icon" class="act-edit" :icon="ACTION_ICONS.edit" /&gt;</code>
+            </div>
+          </div>
+
+          <!-- 3. Icon + text -->
+          <div class="ai-pattern">
+            <div class="ai-pattern-demo ai-pattern-demo--col">
+              <BaseButton variant="primary" :icon="ACTION_ICONS.plus">Thêm nhân viên</BaseButton>
+              <BaseButton variant="danger"  :icon="ACTION_ICONS.delete">Xoá đã chọn</BaseButton>
+              <BaseButton variant="success" :icon="ACTION_ICONS.approve">Duyệt đơn</BaseButton>
+            </div>
+            <div class="ai-pattern-info">
+              <div class="ai-pattern-title">3 · Icon + text (CTA / form)</div>
+              <code class="ai-pattern-code">&lt;BaseButton :icon="ACTION_ICONS.plus"&gt;Thêm mới&lt;/BaseButton&gt;</code>
+            </div>
+          </div>
+
+          <!-- 4. Text + iconRight -->
+          <div class="ai-pattern">
+            <div class="ai-pattern-demo ai-pattern-demo--col">
+              <BaseButton variant="secondary" :iconRight="ACTION_ICONS.chevronRight">Tiếp theo</BaseButton>
+              <BaseButton variant="ghost"     :iconRight="ACTION_ICONS.chevronDown">Mở rộng</BaseButton>
+              <BaseButton variant="link"      :iconRight="ACTION_ICONS.link">Xem tài liệu</BaseButton>
+            </div>
+            <div class="ai-pattern-info">
+              <div class="ai-pattern-title">4 · Text + iconRight (nav / link)</div>
+              <code class="ai-pattern-code">&lt;BaseButton :iconRight="ACTION_ICONS.chevronRight"&gt;Tiếp&lt;/BaseButton&gt;</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Semantic pastel buttons (real-world usage demo) -->
+      <div class="ai-semantic">
+        <div class="ai-subtitle">Pastel action variants (table row actions)</div>
+        <div class="ai-semantic-grid">
+          <div
+            v-for="a in SEMANTIC_ACTIONS"
+            :key="a.cls"
+            class="ai-semantic-cell"
+          >
+            <BaseButton
+              size="icon"
+              variant="ghost"
+              :class="a.cls"
+              :icon="ACTION_ICONS[a.icon]"
+              :title="a.label"
+            />
+            <div class="ai-semantic-label">{{ a.label }}</div>
+            <code class="ai-semantic-class">.{{ a.cls }}</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full inventory — click-to-copy import path -->
+      <div class="ai-inventory">
+        <div class="ai-subtitle">Full inventory · click để copy <code>ACTION_ICONS.&lt;name&gt;</code></div>
+        <div class="ai-inventory-grid">
+          <button
+            v-for="name in ACTION_ICON_NAMES"
+            :key="name"
+            class="ai-icon-card"
+            :class="{ copied: copiedIcon === name }"
+            type="button"
+            @click="copyIconName(name)"
+            :title="`ACTION_ICONS.${name}`"
+          >
+            <span class="ai-icon-svg" v-html="ACTION_ICONS[name]" />
+            <span class="ai-icon-name">{{ name }}</span>
+            <span v-if="copiedIcon === name" class="ai-icon-copied">Đã copy ✓</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Usage snippet -->
+      <div class="ai-usage">
+        <div class="ai-subtitle">Cách dùng từ dự án khác</div>
+<pre class="ai-code"><code>import { BaseButton, ACTION_ICONS } from '@wemake/ui'
+import '@wemake/ui/style.css'
+
+&lt;BaseButton size="icon" variant="ghost" class="act-approve"
+            :icon="ACTION_ICONS.approve" title="Duyệt" /&gt;</code></pre>
+      </div>
+    </section>
 
     <!-- Controls -->
     <section class="controls">
@@ -916,5 +1094,240 @@ function lordSrc(hash: string) {
   color: var(--wx-color-text-tertiary, #9ca3af);
   line-height: 1.4;
   max-width: 180px;
+}
+
+/* ── Section 0 · WemakeUI ACTION_ICONS ─────────────────────────── */
+.action-icons-section {
+  margin: var(--wx-space-4) 0 var(--wx-space-8);
+  padding: var(--wx-space-5);
+  background: var(--wx-surface-elevated, #fff);
+  border: 1px solid var(--wx-border-default, #e5e7eb);
+  border-radius: var(--wx-radius-lg, 12px);
+}
+.is-dark .action-icons-section {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.ai-header h2 {
+  margin: 0 0 var(--wx-space-2);
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-2);
+}
+.ai-count {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--wx-brand-primary, #2563eb);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.ai-header p {
+  margin: 0 0 var(--wx-space-4);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--wx-text-secondary, #6b7280);
+  max-width: 760px;
+}
+.ai-header code,
+.ai-subtitle code {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 0.875em;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--wx-hover-bg, rgba(0, 0, 0, 0.05));
+  border: 1px solid var(--wx-border-default, #e5e7eb);
+}
+.ai-subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--wx-text-secondary, #6b7280);
+  margin: var(--wx-space-5) 0 var(--wx-space-3);
+}
+
+/* Patterns row */
+.ai-patterns-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--wx-space-3);
+}
+.ai-pattern {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wx-space-3);
+  padding: var(--wx-space-4);
+  border: 1px solid var(--wx-border-default, #e5e7eb);
+  border-radius: var(--wx-radius-md, 8px);
+  background: var(--wx-surface-base, #fff);
+}
+.is-dark .ai-pattern {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.ai-pattern-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wx-space-2);
+  align-items: center;
+  min-height: 56px;
+}
+.ai-pattern-demo--col {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.ai-raw-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--wx-text-primary, #1f2937);
+}
+.is-dark .ai-raw-row { color: #e6e8ec; }
+.ai-raw-icon { display: inline-flex; }
+.ai-raw-icon :deep(svg) { width: 16px; height: 16px; }
+.ai-raw-icon--warning { color: var(--wx-warning-solid, #f59e0b); }
+.ai-raw-icon--success { color: var(--wx-success-solid, #22c55e); }
+.ai-pattern-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: var(--wx-space-2);
+  border-top: 1px dashed var(--wx-border-default, #e5e7eb);
+}
+.is-dark .ai-pattern-info { border-top-color: rgba(255, 255, 255, 0.1); }
+.ai-pattern-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--wx-text-primary, #1f2937);
+}
+.is-dark .ai-pattern-title { color: #e6e8ec; }
+.ai-pattern-code {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 11px;
+  color: var(--wx-text-secondary, #6b7280);
+  background: var(--wx-hover-bg, rgba(0, 0, 0, 0.04));
+  padding: 4px 6px;
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+/* Semantic row */
+.ai-semantic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--wx-space-3);
+}
+.ai-semantic-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: var(--wx-space-3);
+  border-radius: var(--wx-radius-md, 8px);
+  background: var(--wx-surface-base, transparent);
+  transition: background 120ms;
+}
+.ai-semantic-cell:hover { background: var(--wx-hover-bg, rgba(0, 0, 0, 0.03)); }
+.ai-semantic-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--wx-text-primary, #1f2937);
+}
+.is-dark .ai-semantic-label { color: #e6e8ec; }
+.ai-semantic-class {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 11px;
+  color: var(--wx-text-muted, #9ca3af);
+}
+
+/* Inventory grid */
+.ai-inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: var(--wx-space-2);
+}
+.ai-icon-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: var(--wx-space-3) var(--wx-space-2);
+  background: var(--wx-surface-base, #fff);
+  border: 1px solid var(--wx-border-default, #e5e7eb);
+  border-radius: var(--wx-radius-md, 8px);
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: transform 120ms var(--wx-ease-standard, ease),
+              box-shadow 120ms var(--wx-ease-standard, ease),
+              border-color 120ms var(--wx-ease-standard, ease);
+}
+.is-dark .ai-icon-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.ai-icon-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--wx-brand-primary, #2563eb);
+  box-shadow: 0 4px 12px -2px color-mix(in srgb, var(--wx-brand-primary) 30%, transparent);
+}
+.ai-icon-card.copied {
+  border-color: var(--wx-success-solid, #22c55e);
+  background: color-mix(in srgb, var(--wx-success-solid) 10%, var(--wx-surface-base, #fff));
+}
+.ai-icon-svg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--wx-text-primary, #1f2937);
+}
+.is-dark .ai-icon-svg { color: #e6e8ec; }
+.ai-icon-svg :deep(svg) { width: 24px; height: 24px; }
+.ai-icon-name {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 11px;
+  color: var(--wx-text-secondary, #6b7280);
+  word-break: break-all;
+  text-align: center;
+}
+.ai-icon-copied {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--wx-success-solid, #22c55e);
+  color: #fff;
+}
+
+/* Usage code block */
+.ai-code {
+  margin: 0;
+  padding: var(--wx-space-4);
+  background: var(--wx-surface-base, #f9fafb);
+  border: 1px solid var(--wx-border-default, #e5e7eb);
+  border-radius: var(--wx-radius-md, 8px);
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--wx-text-primary, #1f2937);
+  overflow-x: auto;
+  white-space: pre;
+}
+.is-dark .ai-code {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e6e8ec;
 }
 </style>

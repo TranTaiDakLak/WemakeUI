@@ -231,6 +231,12 @@ defineExpose({ openAdd: handleOpenAdd })
                 @change="toggleAll(paginated as any)"
               />
             </th>
+            <!--
+              Built-in STT (row-number) column. Default on; opt-out per table
+              with `config.showRowIndex: false`. Number resets per page (uses
+              global paginated index = (page-1)*pageSize + rowIdx + 1).
+            -->
+            <th v-if="config.showRowIndex !== false" class="col-stt text-center">STT</th>
             <th
               v-for="col in config.columns"
               :key="col.key"
@@ -262,6 +268,11 @@ defineExpose({ openAdd: handleOpenAdd })
                 :checked="selected.includes((row as any).id)"
                 @change="toggleOne((row as any).id)"
               />
+            </td>
+
+            <!-- STT (row-number) cell — matches header on/off rule -->
+            <td v-if="config.showRowIndex !== false" class="col-stt text-center">
+              {{ (currentPage - 1) * pageSize + rowIdx + 1 }}
             </td>
 
             <!-- Data cells -->
@@ -594,6 +605,15 @@ defineExpose({ openAdd: handleOpenAdd })
 .col-check {
   width: 44px;
   text-align: center;
+}
+
+/* STT (row-number) column: narrow, centred, muted so it doesn't compete
+   with real data for attention. */
+.col-stt {
+  width: 56px;
+  text-align: center;
+  color: var(--wx-content-muted, #6b7280);
+  font-variant-numeric: tabular-nums;
 }
 
 .col-actions {

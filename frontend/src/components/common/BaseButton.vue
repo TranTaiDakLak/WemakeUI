@@ -81,13 +81,18 @@ defineEmits<{
 .wx-btn--block { width: 100%; }
 
 /* ── Sizes ── */
-.wx-btn--sm   { padding: 6px 13px;  font-size: var(--wx-fs-12); gap: 5px;  min-height: 30px; }
-.wx-btn--md   { padding: 9px 18px;  font-size: var(--wx-fs-14); gap: 7px;  min-height: 36px; }
-.wx-btn--lg   { padding: 11px 22px; font-size: var(--wx-fs-15); gap: 8px;  min-height: 42px; }
-.wx-btn--xl   { padding: 14px 28px; font-size: var(--wx-fs-16); gap: 10px; min-height: 52px; border-radius: var(--wx-radius-xl); }
+/* Padding/gap snap to the 4px design-token scale (--wx-space-1..6 → 4/8/12/16/20/24).
+   Old values (13/18/22 px, gaps 5/7) drifted off-scale and showed up in the
+   2026-05-25 design audit. Heights also raised to hit WCAG/iOS-HIG touch
+   target floors (44px at --lg, 40px at --md). */
+.wx-btn--sm   { padding: 6px 12px;  font-size: var(--wx-fs-12); gap: 4px;  min-height: 32px; }
+.wx-btn--md   { padding: 8px 16px;  font-size: var(--wx-fs-14); gap: 8px;  min-height: 40px; }
+.wx-btn--lg   { padding: 12px 24px; font-size: var(--wx-fs-15); gap: 8px;  min-height: 44px; }
+.wx-btn--xl   { padding: 16px 28px; font-size: var(--wx-fs-16); gap: 12px; min-height: 52px; border-radius: var(--wx-radius-xl); }
 .wx-btn--icon {
   padding: 0;
-  width: 36px; height: 36px;
+  /* 40px square = touch-target compliant; old 36px failed audit. */
+  width: 40px; height: 40px;
   border-radius: var(--wx-radius-md);
   flex-shrink: 0;
 }

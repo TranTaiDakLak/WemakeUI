@@ -51,6 +51,8 @@ export type { Theme, ColorScheme, Variant } from './ui-system/composables/useThe
 // ── Utilities ──────────────────────────────────────────────────
 export { cn, generateScale, applyScale } from './ui-system/utils'
 export type { ColorScale } from './ui-system/utils'
+export { ACTION_ICONS } from './utils/actionIcons'
+export type { ActionIconName } from './utils/actionIcons'
 
 // ── Types ──────────────────────────────────────────────────────
 export * from './types'

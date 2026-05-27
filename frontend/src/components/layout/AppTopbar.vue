@@ -55,18 +55,38 @@ const { isDark, toggleTheme } = useTheme()
   transition: background var(--wx-duration-normal) var(--wx-easing-default);
 }
 
-.topbar-left { display: flex; align-items: baseline; gap: var(--space-sm); }
+.topbar-left {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  min-width: 0; /* allow children to ellipsis instead of forcing wrap */
+  flex: 1 1 auto;
+  overflow: hidden;
+}
 
 .topbar-title {
   font-size: 14px;
   font-weight: 700;
   color: var(--wx-text-inverse);
   letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .topbar-subtitle {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.65);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 30vw;
+}
+
+/* The user chip in the topbar already shows the same name; on narrow
+   viewports the subtitle just duplicates that info AND forces wrap. */
+@media (max-width: 640px) {
+  .topbar-subtitle { display: none; }
 }
 
 .topbar-right { display: flex; align-items: center; gap: var(--space-sm); }

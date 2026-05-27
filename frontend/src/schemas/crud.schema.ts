@@ -72,6 +72,8 @@ export interface CrudPageConfig<T extends { id: RowId } = { id: RowId }> {
 
   // ── Table ──
   columns: CrudColumnDef[]
+  /** Show a built-in STT (row-number) column. Default true. */
+  showRowIndex?: boolean
 
   // ── Search ──
   searchFields: (keyof T & string)[]

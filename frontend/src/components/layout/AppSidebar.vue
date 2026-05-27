@@ -482,7 +482,9 @@ watch(() => props.activeId, () => {
   gap: var(--wx-space-3);
   width: 100%;
   padding: 0 var(--wx-space-3);
-  height: 36px;
+  /* 44px = Apple HIG / Material touch target floor. Old 36px failed audit
+     on mobile (taps near adjacent links registered on the wrong row). */
+  min-height: 44px;
   border: none;
   border-radius: var(--wx-radius-md);
   background: transparent;

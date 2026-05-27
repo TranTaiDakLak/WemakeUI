@@ -182,6 +182,13 @@ const sizeClass = computed(() => `wx-page-header--${props.size}`)
 
 @media (max-width: 640px) {
   .wx-page-header { flex-wrap: wrap; }
-  .wx-page-header__actions { width: 100%; justify-content: flex-end; }
+  .wx-page-header__actions {
+    width: 100%;
+    justify-content: flex-end;
+    /* Pages drop 2–3 action buttons in here (e.g. AdminNhanSu). Without
+       flex-wrap they overflow the row at 375px and get clipped by the
+       viewport. Allow wrapping so each button stays fully visible. */
+    flex-wrap: wrap;
+  }
 }
 </style>

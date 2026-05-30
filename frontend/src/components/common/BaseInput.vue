@@ -57,7 +57,7 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
       <input
         v-bind="$attrs"
         :id="inputId"
-        class="form-input base-input__field"
+        class="base-input__field"
         :class="{
           'base-input__field--has-toggle': type === 'password',
           'base-input__field--has-icon': success && !hasError,

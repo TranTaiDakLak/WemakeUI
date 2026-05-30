@@ -1,8 +1,14 @@
+<script lang="ts">
+let _idCounter = 0
+</script>
+
 <script setup lang="ts">
 import { ref, watch, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import type { ModalSize } from '../../types'
 
 type ModalIntent = 'default' | 'danger' | 'warning'
+
+const titleId = `modal-title-${++_idCounter}`
 
 const props = withDefaults(defineProps<{
   show: boolean
@@ -136,12 +142,15 @@ function trapFocusHandle(e: KeyboardEvent) {
     <div v-if="props.show" class="modal-overlay" :style="{ zIndex: currentZ }" @click.self="emit('close')">
       <div
         ref="dialogRef"
+        role="dialog"
+        aria-modal="true"
+        :aria-labelledby="titleId"
         class="modal-dialog"
         :style="[{ maxWidth: sizeMap[props.size] }, intentDialogStyle]"
       >
         <!-- Header -->
         <div class="modal-header" :style="intentHeaderStyle">
-          <span class="modal-title">{{ props.title }}</span>
+          <span :id="titleId" class="modal-title">{{ props.title }}</span>
           <slot name="header-extra" />
           <button
             v-if="props.closable"

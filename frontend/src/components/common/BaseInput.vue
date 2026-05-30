@@ -1,3 +1,7 @@
+<script lang="ts">
+let _idCounter = 0
+</script>
+
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
@@ -20,6 +24,9 @@ const props = defineProps<{
   align?: 'left' | 'center' | 'right'
 }>()
 
+const inputId = `base-input-${++_idCounter}`
+const errorId = `${inputId}-error`
+
 const emit = defineEmits<{
   'update:modelValue': [value: string | number]
   'blur': [event: FocusEvent]
@@ -38,7 +45,7 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
 
 <template>
   <div class="base-input" :class="[`base-input--${size ?? 'md'}`]">
-    <label v-if="label" class="base-input__label">{{ label }}</label>
+    <label v-if="label" :for="inputId" class="base-input__label">{{ label }}</label>
     <div
       class="base-input__wrapper"
       :class="{
@@ -49,6 +56,7 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
     >
       <input
         v-bind="$attrs"
+        :id="inputId"
         class="form-input base-input__field"
         :class="{
           'base-input__field--has-toggle': type === 'password',
@@ -61,6 +69,7 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
         :disabled="disabled"
         :readonly="readonly"
         :aria-invalid="hasError ? 'true' : undefined"
+        :aria-describedby="error ? errorId : undefined"
         @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
         @blur="emit('blur', $event)"
         @focus="emit('focus', $event)"
@@ -94,7 +103,7 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
         </svg>
       </button>
     </div>
-    <span v-if="error" class="base-input__error">{{ error }}</span>
+    <span v-if="error" :id="errorId" role="alert" class="base-input__error">{{ error }}</span>
   </div>
 </template>
 

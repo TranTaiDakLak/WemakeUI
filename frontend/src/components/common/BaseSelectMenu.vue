@@ -1,7 +1,15 @@
+<script lang="ts">
+let _idCounter = 0
+</script>
+
 <script setup lang="ts">
 import { ref, computed, nextTick, onMounted, onBeforeUnmount } from 'vue'
 
 type Option = { value: string | number; label: string; group?: string }
+
+const _uid = ++_idCounter
+const labelId  = `bsm-label-${_uid}`
+const listboxId = `bsm-listbox-${_uid}`
 
 const props = withDefaults(defineProps<{
   modelValue?: string | number
@@ -199,7 +207,7 @@ onBeforeUnmount(() => {
     :class="[`bsm--${size}`, { 'bsm--open': isOpen, 'bsm--disabled': disabled }]"
   >
     <!-- Label -->
-    <label v-if="label" class="bsm__label">{{ label }}</label>
+    <label v-if="label" :id="labelId" class="bsm__label">{{ label }}</label>
 
     <!-- Trigger -->
     <button
@@ -209,6 +217,8 @@ onBeforeUnmount(() => {
       :disabled="disabled"
       aria-haspopup="listbox"
       :aria-expanded="isOpen"
+      :aria-labelledby="label ? labelId : undefined"
+      :aria-controls="listboxId"
       @click="toggle"
       @keydown="onKeydown"
     >
@@ -226,9 +236,11 @@ onBeforeUnmount(() => {
       <Transition name="bsm-drop">
         <div
           v-if="isOpen"
+          :id="listboxId"
           ref="menuRef"
           class="bsm__menu"
           role="listbox"
+          :aria-labelledby="label ? labelId : undefined"
           :style="menuStyle"
         >
           <!-- Search input (searchable mode only) — sticky at top so it

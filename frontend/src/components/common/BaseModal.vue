@@ -20,6 +20,7 @@ const props = withDefaults(defineProps<{
   loading?: boolean
   intent?: ModalIntent
   closable?: boolean
+  closeOnBackdrop?: boolean
 }>(), {
   size: 'md',
   showSave: false,
@@ -28,6 +29,7 @@ const props = withDefaults(defineProps<{
   loading: false,
   intent: 'default',
   closable: true,
+  closeOnBackdrop: true,
 })
 
 const intentDialogStyle = computed(() => {
@@ -139,7 +141,7 @@ function trapFocusHandle(e: KeyboardEvent) {
 <template>
   <Teleport to="body">
   <transition name="modal">
-    <div v-if="props.show" class="modal-overlay" :style="{ zIndex: currentZ }" @click.self="emit('close')">
+    <div v-if="props.show" class="modal-overlay" :style="{ zIndex: currentZ }" @click.self="props.closeOnBackdrop && emit('close')">
       <div
         ref="dialogRef"
         role="dialog"

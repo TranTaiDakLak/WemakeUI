@@ -22,6 +22,8 @@ defineProps<{
           :label="field.label"
           :hint="field.hint"
           :required="field.required"
+          :label-placement="field.type === 'toggle' ? 'left' : 'top'"
+          :class="{ 'cff-toggle-ff': field.type === 'toggle' }"
         >
           <BaseInput
             v-if="field.type === 'text' || field.type === 'email' || field.type === 'password'"
@@ -107,7 +109,11 @@ defineProps<{
           class="cff-row-2"
         >
           <!-- Current half field -->
-          <FormField :label="field.label" :required="field.required" :hint="field.hint">
+          <FormField
+            :label="field.label" :required="field.required" :hint="field.hint"
+            :label-placement="field.type === 'toggle' ? 'left' : 'top'"
+            :class="{ 'cff-toggle-ff': field.type === 'toggle' }"
+          >
             <BaseInput
               v-if="field.type === 'text' || field.type === 'email'"
               :modelValue="form[field.key] as string"
@@ -121,6 +127,12 @@ defineProps<{
               :options="field.options ?? []"
               @update:modelValue="form[field.key] = $event"
             />
+            <BaseToggle
+              v-else-if="field.type === 'toggle'"
+              :modelValue="form[field.key] as boolean"
+              :label="field.placeholder"
+              @update:modelValue="form[field.key] = $event"
+            />
           </FormField>
 
           <!-- Next half field (pair partner) -->
@@ -129,6 +141,8 @@ defineProps<{
               :label="fields[i + 1].label"
               :required="fields[i + 1].required"
               :hint="fields[i + 1].hint"
+              :label-placement="fields[i + 1].type === 'toggle' ? 'left' : 'top'"
+              :class="{ 'cff-toggle-ff': fields[i + 1].type === 'toggle' }"
             >
               <BaseInput
                 v-if="fields[i + 1].type === 'text' || fields[i + 1].type === 'email'"
@@ -141,6 +155,12 @@ defineProps<{
                 v-else-if="fields[i + 1].type === 'select'"
                 :modelValue="form[fields[i + 1].key] as string"
                 :options="fields[i + 1].options ?? []"
+                @update:modelValue="form[fields[i + 1].key] = $event"
+              />
+              <BaseToggle
+                v-else-if="fields[i + 1].type === 'toggle'"
+                :modelValue="form[fields[i + 1].key] as boolean"
+                :label="fields[i + 1].placeholder"
                 @update:modelValue="form[fields[i + 1].key] = $event"
               />
             </FormField>
@@ -157,6 +177,18 @@ defineProps<{
   display: flex;
   flex-direction: column;
   gap: var(--wx-space-4);
+}
+
+/* Toggle fields: label and switch on one row, label hugs its text. */
+.cff-toggle-ff {
+  align-items: center;
+}
+.cff-toggle-ff[data-layout="horizontal"] :deep(.wx-field__label-wrap) {
+  flex: 0 0 auto;
+  padding-top: 0;
+}
+.cff-toggle-ff[data-layout="horizontal"] :deep(.wx-field__control) {
+  flex: 0 0 auto;
 }
 
 .cff-row-2 {

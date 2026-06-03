@@ -21,6 +21,7 @@ withDefaults(defineProps<{
   danger?: boolean
   submitDisabled?: boolean
   closable?: boolean
+  closeOnBackdrop?: boolean
 }>(), {
   size: 'md',
   loading: false,
@@ -29,6 +30,7 @@ withDefaults(defineProps<{
   danger: false,
   submitDisabled: false,
   closable: true,
+  closeOnBackdrop: false,
 })
 
 const emit = defineEmits<{
@@ -48,6 +50,7 @@ function close() {
     :size="size"
     :loading="loading"
     :closable="closable"
+    :closeOnBackdrop="closeOnBackdrop"
     @close="close"
   >
     <slot />

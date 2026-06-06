@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useToast } from '../../composables/useToast'
+import { ref, watch } from 'vue'
 
 const { toasts, removeToast } = useToast()
 
@@ -9,11 +10,28 @@ const iconMap: Record<string, string> = {
   warning: '⚠',
   info: 'ℹ',
 }
+
+// When a toast appears, move the container to the LAST position in <body>.
+// Overlays teleported to body (modals, drawers) may be appended after the
+// toast container's initial mount, putting them later in DOM order. The
+// toast sits at --wx-z-toast (1200), above every form layer (modal 1000,
+// popover 1100), but Chrome's backdrop-filter compositing can still reorder
+// equal-context siblings. Appending last guarantees DOM order AND z-index
+// both favour the toast.
+const containerRef = ref<HTMLElement | null>(null)
+watch(
+  () => toasts.value.length,
+  (n) => {
+    if (n > 0 && containerRef.value?.parentNode === document.body) {
+      document.body.appendChild(containerRef.value)
+    }
+  }
+)
 </script>
 
 <template>
   <teleport to="body">
-    <div class="wx-toast-container">
+    <div ref="containerRef" class="wx-toast-container">
       <transition-group name="wx-toast">
         <div
           v-for="toast in toasts"
@@ -39,7 +57,7 @@ const iconMap: Record<string, string> = {
   position: fixed;
   bottom: 16px;
   right: 16px;
-  z-index: 10000;
+  z-index: var(--wx-z-toast);
   display: flex;
   flex-direction: column-reverse;
   gap: 8px;

@@ -467,7 +467,8 @@ onBeforeUnmount(() => {
 <!-- Teleported menu — global (not scoped) -->
 <style>
 .bsm__menu {
-  z-index: 9999;
+  /* popover band — floats above modals (1000), under toast (1200) */
+  z-index: var(--wx-z-popover);
   background: var(--wx-surface-base);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-xl);

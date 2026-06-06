@@ -46,7 +46,7 @@ function hide() {
 
 .base-tooltip {
   position: absolute;
-  z-index: 9000;
+  z-index: var(--wx-z-tooltip);
   padding: 5px 10px;
   font-size: 12px;
   color: #fff;

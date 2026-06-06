@@ -64,7 +64,11 @@ const sizeMap: Record<ModalSize, string> = {
 }
 
 // ── z-index stacking ──
-let zIndex = 500
+// Base = --wx-z-modal (1000). Each nested modal stacks +10 (1000, 1010, …),
+// staying under the popover band (1100: selects, lightboxes, nested popups)
+// and the toast (1200), so notifications always render in front of any modal.
+const MODAL_Z_BASE = 1000
+let zIndex = MODAL_Z_BASE
 const modalStack: number[] = []
 
 function pushZ(): number {
@@ -75,10 +79,10 @@ function pushZ(): number {
 function popZ() {
   modalStack.pop()
   if (modalStack.length) zIndex = modalStack[modalStack.length - 1]
-  else zIndex = 500
+  else zIndex = MODAL_Z_BASE
 }
 
-const currentZ = ref(500)
+const currentZ = ref(MODAL_Z_BASE)
 
 watch(() => props.show, (val) => {
   if (val) {
@@ -203,8 +207,6 @@ function trapFocusHandle(e: KeyboardEvent) {
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 
 .modal-dialog {

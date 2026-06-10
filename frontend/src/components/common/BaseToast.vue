@@ -20,7 +20,7 @@ const iconMap: Record<string, string> = {
 // both favour the toast.
 const containerRef = ref<HTMLElement | null>(null)
 watch(
-  () => toasts.value.length,
+  () => toasts.length,
   (n) => {
     if (n > 0 && containerRef.value?.parentNode === document.body) {
       document.body.appendChild(containerRef.value)

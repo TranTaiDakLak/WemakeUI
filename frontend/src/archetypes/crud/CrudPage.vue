@@ -35,8 +35,16 @@ const {
   isAllSelected, isIndeterminate,
   toggleOne, toggleAll, clearSelection,
   openAdd, openEdit, openDetail, openDelete, highlight,
-  addItem, updateItem, removeItem, removeItems,
+  addItem, updateItem, removeItem, removeItems, resetItems,
 } = useCrudState(props.config.initialData)
+
+// Re-sync rows in place when the parent swaps in a new initialData (e.g. after a
+// server reload/sort/filter that produces a fresh closure). This replaces the old
+// pattern of bumping a `:key` to force-remount the whole CrudPage — remounting
+// rebuilt every row + all modals and was a major navigation/interaction stall.
+watch(() => props.config.initialData, (fn) => {
+  if (typeof fn === 'function') resetItems(fn())
+})
 
 // ── Filter ────────────────────────────────────────────────────────────────────
 const { search, filterValues, filtered, resetFilters } = useFilter(

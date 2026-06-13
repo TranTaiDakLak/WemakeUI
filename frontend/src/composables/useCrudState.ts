@@ -39,6 +39,14 @@ export interface CrudStateReturn<T extends { id: RowId }> {
   updateItem(id: RowId, updated: T): void
   removeItem(id: RowId): void
   removeItems(ids: RowId[]): void
+
+  /**
+   * Replace the whole list in place (e.g. after a server reload/sort/filter).
+   * Lets callers refresh the table WITHOUT remounting CrudPage via a `:key` bump —
+   * remounting rebuilt every row + modal and was a major source of slowness.
+   * Drops any selected ids that are no longer present.
+   */
+  resetItems(next: T[]): void
 }
 
 export function useCrudState<T extends { id: RowId }>(
@@ -123,6 +131,14 @@ export function useCrudState<T extends { id: RowId }>(
     selected.value = selected.value.filter(id => !ids.includes(id))
   }
 
+  function resetItems(next: T[]) {
+    items.value = next
+    if (selected.value.length) {
+      const present = new Set(next.map(r => r.id))
+      selected.value = selected.value.filter(id => present.has(id))
+    }
+  }
+
   return {
     items, selected,
     addOpen, editOpen, detailOpen, deleteOpen, bulkDeleteOpen,
@@ -131,6 +147,6 @@ export function useCrudState<T extends { id: RowId }>(
     isAllSelected, isIndeterminate,
     toggleOne, toggleAll, clearSelection,
     openAdd, openEdit, openDetail, openDelete, highlight,
-    addItem, updateItem, removeItem, removeItems,
+    addItem, updateItem, removeItem, removeItems, resetItems,
   }
 }

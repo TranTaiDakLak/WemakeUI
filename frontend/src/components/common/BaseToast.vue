@@ -66,6 +66,20 @@ watch(
   width: 100%;
 }
 
+/* Mobile: neo ở TRÊN cùng (góc dưới bị thanh điều hướng trình duyệt che).
+   Căn ngang giữa với lề an toàn; toast mới xếp xuống dưới (column thường). */
+@media (max-width: 768px) {
+  .wx-toast-container {
+    bottom: auto;
+    top: calc(12px + env(safe-area-inset-top, 0px));
+    right: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
+    flex-direction: column;
+  }
+}
+
 /* ── Toast card — tinted bg theo type + colored left border + icon badge ── */
 .wx-toast {
   display: flex;
@@ -158,4 +172,10 @@ watch(
 .wx-toast-leave-active { transition: all 0.2s ease-in; }
 .wx-toast-enter-from { opacity: 0; transform: translateX(32px) scale(0.95); }
 .wx-toast-leave-to { opacity: 0; transform: translateX(32px) scale(0.95); }
+
+/* Mobile: toast neo ở trên → trượt xuống từ trên thay vì từ phải */
+@media (max-width: 768px) {
+  .wx-toast-enter-from { opacity: 0; transform: translateY(-24px) scale(0.97); }
+  .wx-toast-leave-to { opacity: 0; transform: translateY(-24px) scale(0.97); }
+}
 </style>

@@ -57,6 +57,8 @@ const emit = defineEmits<{
   'save-view': [view: Omit<SavedView, 'id'>]
   'apply-view': [view: SavedView]
   'export': [format: 'csv' | 'json', rows: Record<string, unknown>[]]
+  'row-contextmenu': [row: Record<string, unknown>, event: MouseEvent]
+  'row-click': [row: Record<string, unknown>, event: MouseEvent]
 }>()
 
 /* ── Density → row height ────────────────────────── */
@@ -380,6 +382,8 @@ function downloadFile(content: string, type: string, name: string) {
         </span>
       </div>
       <div class="dgp-toolbar__group">
+        <!-- Slot tuỳ biến: nút/filter của consumer (search, filter-chips…) -->
+        <slot name="toolbar-actions" />
         <!-- Density -->
         <div class="dgp-density">
           <button
@@ -448,7 +452,11 @@ function downloadFile(content: string, type: string, name: string) {
               @drop="onColDrop(col)"
               @dragend="onColDragEnd"
             >
-              <span class="dgp-th__label" @click="onHeaderClick(col)">{{ col.label }}</span>
+              <span class="dgp-th__label" @click="onHeaderClick(col)">
+                <slot :name="`header-${col.key}`" :col="col">
+                  <slot name="header" :col="col">{{ col.label }}</slot>
+                </slot>
+              </span>
               <span v-if="col.sortable && sortCol === col.key" class="dgp-th__sort">
                 {{ sortDir === 'asc' ? '▲' : '▼' }}
               </span>
@@ -478,6 +486,8 @@ function downloadFile(content: string, type: string, name: string) {
             class="dgp-tr"
             :class="{ 'dgp-tr--selected': localSelected.has(getRowId(row)) }"
             :style="{ height: rowHeight + 'px' }"
+            @click="emit('row-click', row, $event)"
+            @contextmenu="emit('row-contextmenu', row, $event)"
           >
             <td class="dgp-col-chk">
               <input type="checkbox" :checked="localSelected.has(getRowId(row))" @change="toggleRow(row)" />
@@ -502,7 +512,13 @@ function downloadFile(content: string, type: string, name: string) {
                   @keydown.esc="cancelEdit"
                 />
               </template>
-              <template v-else>{{ row[col.key] }}</template>
+              <template v-else>
+                <!-- Cell slot tuỳ biến: ưu tiên `cell-<key>` (per-cột), fallback `cell` (chung),
+                     cuối cùng là text mặc định → 100% backward-compatible khi không truyền slot. -->
+                <slot :name="`cell-${col.key}`" :row="row" :value="row[col.key]" :col="col" :row-index="idx">
+                  <slot name="cell" :row="row" :value="row[col.key]" :col="col" :row-index="idx">{{ row[col.key] }}</slot>
+                </slot>
+              </template>
             </td>
           </tr>
           <template v-if="useVirtualScroll">
@@ -510,6 +526,11 @@ function downloadFile(content: string, type: string, name: string) {
           </template>
         </tbody>
       </table>
+    </div>
+
+    <!-- Footer slot: stats-bar / tổng hợp của consumer (dưới grid) -->
+    <div v-if="$slots.footer" class="dgp-footer">
+      <slot name="footer" :rows="sortedRows" :selected="localSelected" />
     </div>
 
     <!-- Column menu -->
@@ -653,6 +674,18 @@ function downloadFile(content: string, type: string, name: string) {
   padding: 32px;
   text-align: center;
   color: var(--wx-text-muted);
+}
+
+.dgp-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--wx-surface-sunken);
+  border-top: 1px solid var(--wx-border-default);
+  font-size: 12px;
+  color: var(--wx-text-secondary);
+  flex-wrap: wrap;
 }
 
 .dgp-table {

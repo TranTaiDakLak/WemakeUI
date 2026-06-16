@@ -233,6 +233,13 @@ function colWidth(col: ColumnConfig): string {
   return col.width || '160px'
 }
 
+const tableWidth = computed(() => {
+  let w = 36 // dgp-col-chk
+  for (const col of visibleColumns.value)
+    w += colWidths.value[col.key] ?? parseInt(col.width ?? '') || 160
+  return w
+})
+
 function onResizeStart(col: ColumnConfig, e: MouseEvent) {
   if (!props.resizable) return
   e.preventDefault()
@@ -372,7 +379,7 @@ function downloadFile(content: string, type: string, name: string) {
 </script>
 
 <template>
-  <div class="dgp">
+  <div :class="['dgp', `dgp--d-${density}`]">
     <!-- Toolbar -->
     <div class="dgp-toolbar">
       <div class="dgp-toolbar__group">
@@ -429,7 +436,7 @@ function downloadFile(content: string, type: string, name: string) {
     <div ref="scrollEl" class="dgp-scroll" @scroll="onScroll">
       <div v-if="loading" class="dgp-loading">Đang tải...</div>
       <div v-else-if="sortedRows.length === 0" class="dgp-empty">Không có dữ liệu</div>
-      <table v-else class="dgp-table" :class="{ 'dgp-table--bordered': bordered, 'dgp-table--striped': striped }">
+      <table v-else class="dgp-table" :class="{ 'dgp-table--bordered': bordered, 'dgp-table--striped': striped }" :style="{ width: tableWidth + 'px', minWidth: '100%' }">
         <thead>
           <tr>
             <th class="dgp-col-chk">
@@ -689,7 +696,6 @@ function downloadFile(content: string, type: string, name: string) {
 }
 
 .dgp-table {
-  width: 100%;
   border-collapse: collapse;
   font-size: 12px;
   table-layout: fixed;
@@ -703,7 +709,7 @@ function downloadFile(content: string, type: string, name: string) {
 }
 
 .dgp-th {
-  padding: 8px 12px;
+  padding: 12px;
   text-align: left;
   font-size: 11px;
   font-weight: 700;
@@ -902,4 +908,9 @@ function downloadFile(content: string, type: string, name: string) {
   margin: 4px 0;
   background: var(--wx-border-subtle);
 }
+
+/* Header padding theo density — khớp AccountsView */
+.dgp--d-sm .dgp-th { padding: 7px 10px; }
+.dgp--d-md .dgp-th { padding: 12px; }
+.dgp--d-lg .dgp-th { padding: 14px 12px; }
 </style>

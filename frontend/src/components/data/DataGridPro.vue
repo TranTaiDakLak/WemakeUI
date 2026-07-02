@@ -236,7 +236,7 @@ function colWidth(col: ColumnConfig): string {
 const tableWidth = computed(() => {
   let w = 36 // dgp-col-chk
   for (const col of visibleColumns.value)
-    w += colWidths.value[col.key] ?? parseInt(col.width ?? '') || 160
+    w += colWidths.value[col.key] ?? (parseInt(col.width ?? '') || 160)
   return w
 })
 

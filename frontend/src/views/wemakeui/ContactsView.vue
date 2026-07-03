@@ -36,7 +36,7 @@ import { contactsConfig, CONTACT_STATUS_BADGE, CONTACT_STATUS_LABEL } from '@/co
           <BaseTag
             v-for="t in (row as any).tags"
             :key="t"
-            :text="t"
+            :label="t"
             size="sm"
             variant="neutral"
           />
@@ -73,7 +73,7 @@ import { contactsConfig, CONTACT_STATUS_BADGE, CONTACT_STATUS_LABEL } from '@/co
             <BaseTag
               v-for="t in (item as any).tags"
               :key="t"
-              :text="t"
+              :label="t"
               size="sm"
               variant="neutral"
             />

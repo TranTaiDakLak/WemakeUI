@@ -290,7 +290,7 @@ async function handleBulkDelete() {
                 </div>
               </td>
               <td>
-                <BaseTag :text="CAT_LABEL[p.category]" variant="neutral" size="sm" />
+                <BaseTag :label="CAT_LABEL[p.category]" variant="neutral" size="sm" />
               </td>
               <td><code class="ver-code">v{{ p.version }}</code></td>
               <td class="col-author">{{ p.author }}</td>

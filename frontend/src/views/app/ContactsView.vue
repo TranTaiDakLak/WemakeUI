@@ -356,7 +356,7 @@ async function handleBulkStage(stage: ContactStage) {
     </div>
 
     <!-- ── Table ── -->
-    <div class="table-wrap">
+    <div class="table-wrap" v-reveal>
       <!-- Loading skeleton -->
       <Transition name="skel-fade">
         <div v-if="tableLoading" class="table-skel">
@@ -659,7 +659,7 @@ async function handleBulkStage(stage: ContactStage) {
       <div class="detail-section">
         <p class="detail-section__label">Nhãn</p>
         <div class="tags-cell">
-          <BaseTag v-for="t in detailTarget.tags" :key="t" :text="t" size="sm" variant="neutral" />
+          <BaseTag v-for="t in detailTarget.tags" :key="t" :label="t" size="sm" variant="neutral" />
           <span v-if="!detailTarget.tags.length" class="detail-empty">Chưa gán nhãn</span>
         </div>
       </div>

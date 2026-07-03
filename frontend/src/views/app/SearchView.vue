@@ -37,14 +37,14 @@ const TYPE_ICONS: Record<string, string> = { trang: '📄', component: '🧩', '
       <div class="filter-row">
         <BaseTag
           v-for="f in FILTERS" :key="f"
-          :text="f" size="sm"
+          :label="f" size="sm"
           :variant="activeFilter === f ? 'primary' : 'neutral'"
           style="cursor: pointer"
           @click="activeFilter = f"
         />
       </div>
 
-      <div class="results">
+      <div class="results" v-reveal>
         <a v-for="r in filtered" :key="r.id" :href="`#${r.path}`" class="result-item">
           <span class="result-icon">{{ TYPE_ICONS[r.type] || '🔍' }}</span>
           <div class="result-info">
@@ -54,7 +54,7 @@ const TYPE_ICONS: Record<string, string> = { trang: '📄', component: '🧩', '
             </div>
             <span class="result-desc">{{ r.desc }}</span>
             <div class="result-tags">
-              <BaseTag v-for="t in r.tags" :key="t" :text="t" size="sm" variant="neutral" />
+              <BaseTag v-for="t in r.tags" :key="t" :label="t" size="sm" variant="neutral" />
             </div>
           </div>
         </a>

@@ -61,21 +61,23 @@ const aVariant = (s: string) => ({ critical: 'danger', warning: 'warning', info:
     page-description="Giám sát cảm biến phòng server — cập nhật mỗi 2.5 giây."
   >
     <template #actions>
-      <BaseTag size="md" variant="success" text="● đang theo dõi" />
+      <BaseTag size="md" variant="success" label="● đang theo dõi" />
       <BaseButton variant="ghost" size="sm">Lịch sử</BaseButton>
     </template>
 
-    <div class="sensor-grid">
+    <div class="sensor-grid" v-reveal>
       <BaseCard
-        v-for="s in sensors"
+        v-for="(s, i) in sensors"
         :key="s.id"
+        v-reveal="i * 60"
         padded
         shadow="sm"
+        hover-effect="glow"
         :selected="s.status === 'critical'"
       >
         <div class="s-head">
           <span class="s-name">{{ s.name }}</span>
-          <BaseTag :variant="sVariant(s.status)" :text="s.status" size="sm" />
+          <BaseTag :variant="sVariant(s.status)" :label="s.status" size="sm" />
         </div>
         <div class="s-value">
           {{ s.current.toFixed(1) }}<span class="s-unit">{{ s.unit }}</span>
@@ -90,11 +92,11 @@ const aVariant = (s: string) => ({ critical: 'danger', warning: 'warning', info:
       </BaseCard>
     </div>
 
-    <BasePanel title="Cảnh báo realtime" description="20 cảnh báo cuối · live feed">
+    <BasePanel v-reveal title="Cảnh báo realtime" description="20 cảnh báo cuối · live feed">
       <ul class="alerts">
         <li v-for="(a, i) in alerts" :key="i" class="alert-row">
           <span class="alert-time muted small">{{ a.time }}</span>
-          <BaseTag :variant="aVariant(a.severity)" :text="a.severity" size="sm" />
+          <BaseTag :variant="aVariant(a.severity)" :label="a.severity" size="sm" />
           <strong>{{ a.sensor }}:</strong>
           <span>{{ a.msg }}</span>
         </li>

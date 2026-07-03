@@ -75,7 +75,7 @@ async function submit() {
 
     <template #footer>
       <span>© 2026 WemakeUI · phiên bản 0.6.0</span>
-      <span><BaseTag size="sm" text="bảo mật end-to-end" variant="success" /></span>
+      <span><BaseTag size="sm" label="bảo mật end-to-end" variant="success" /></span>
     </template>
   </AuthLayout>
 </template>

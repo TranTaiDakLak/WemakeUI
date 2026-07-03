@@ -8,12 +8,14 @@ import { BaseButton, BaseTag } from '../../components/common'
 <template>
   <ErrorLayout
     code="403"
+    tone="warning"
     title="Bạn không có quyền truy cập"
     description="Trang này chỉ dành cho thành viên có vai trò admin trở lên. Hãy yêu cầu chủ workspace cấp quyền nếu cần."
     error-id="AUTH-403-1c3"
   >
     <template #actions>
       <BaseButton size="lg">Yêu cầu cấp quyền</BaseButton>
+      <BaseButton variant="ghost" size="lg" @click="$router.back()">← Quay lại</BaseButton>
       <RouterLink to="/" class="no-link">
         <BaseButton variant="ghost" size="lg">Về trang chủ</BaseButton>
       </RouterLink>
@@ -23,11 +25,11 @@ import { BaseButton, BaseTag } from '../../components/common'
       <h3>Quyền hiện tại của bạn</h3>
       <div class="row">
         <span>Vai trò</span>
-        <BaseTag text="member" variant="info" size="sm" />
+        <BaseTag label="member" variant="info" size="sm" />
       </div>
       <div class="row">
         <span>Quyền cần</span>
-        <BaseTag text="admin" variant="warning" size="sm" />
+        <BaseTag label="admin" variant="warning" size="sm" />
       </div>
       <div class="row">
         <span>Trang yêu cầu</span>

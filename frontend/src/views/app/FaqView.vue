@@ -38,10 +38,10 @@ const accordionItems = computed(() => filtered.value.map(f => ({
         <BaseInput v-model="search" placeholder="Tìm câu hỏi..." clearable style="max-width: 480px;" />
       </div>
 
-      <div class="tag-filters">
+      <div class="tag-filters" v-reveal>
         <BaseTag
           v-for="t in TAGS" :key="t"
-          :text="t" size="sm"
+          :label="t" size="sm"
           :variant="activeTag === t ? 'primary' : 'neutral'"
           style="cursor: pointer;"
           @click="activeTag = t"
@@ -53,7 +53,7 @@ const accordionItems = computed(() => filtered.value.map(f => ({
       </div>
       <BaseAccordion v-else :items="accordionItems" />
 
-      <div class="contact-cta">
+      <div class="contact-cta" v-reveal>
         <p class="cta-text">Không tìm thấy câu trả lời bạn cần?</p>
         <a href="#/landing/contact" class="cta-link">Liên hệ hỗ trợ →</a>
       </div>

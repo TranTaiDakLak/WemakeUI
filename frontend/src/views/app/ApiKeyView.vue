@@ -47,7 +47,7 @@ function revokeKey(id: number) { KEYS.value = KEYS.value.map(k => k.id === id ? 
     </Transition>
 
     <!-- key list -->
-    <div class="key-list">
+    <div class="key-list" v-reveal>
       <div v-for="k in KEYS" :key="k.id" class="key-item" :class="{ inactive: !k.active }">
         <div class="key-info">
           <div class="key-row1">
@@ -59,7 +59,7 @@ function revokeKey(id: number) { KEYS.value = KEYS.value.map(k => k.id === id ? 
             <span>Tạo: {{ k.created }}</span>
             <span>Dùng lần cuối: {{ k.lastUsed }}</span>
             <div class="scope-badges">
-              <BaseTag v-for="s in k.scopes" :key="s" :text="s" size="sm" variant="neutral" />
+              <BaseTag v-for="s in k.scopes" :key="s" :label="s" size="sm" variant="neutral" />
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ function revokeKey(id: number) { KEYS.value = KEYS.value.map(k => k.id === id ? 
       </div>
     </div>
 
-    <BaseCard class="docs-card">
+    <BaseCard v-reveal class="docs-card">
       <template #header><span class="card-label">Cách sử dụng</span></template>
       <template #body>
         <p class="docs-text">Thêm API key vào header mọi request:</p>

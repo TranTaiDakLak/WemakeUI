@@ -420,7 +420,7 @@ const ENV_STATUS = [
     </Transition>
 
     <!-- ── KPI Grid ───────────────────────────────────────────── -->
-    <div class="kpi-grid">
+    <div class="kpi-grid" v-reveal>
       <template v-if="!widgetReady">
         <DashboardKPICard
           v-for="i in 8" :key="i"
@@ -439,8 +439,8 @@ const ENV_STATUS = [
     </div>
 
     <!-- ── Analytics section ─────────────────────────────────── -->
-    <div class="analytics-grid">
-      <BaseCard shadow="sm">
+    <div class="analytics-grid" v-reveal>
+      <BaseCard shadow="sm" hover-effect="glow">
         <div class="section-header">
           <h3 class="section-title">Xu hướng 7 ngày</h3>
           <BaseBadge text="Live" variant="success" dot />
@@ -448,7 +448,7 @@ const ENV_STATUS = [
         <LineChart :series="LINE_SERIES" :height="220" :show-grid="true" :show-legend="true" :smooth="true" />
       </BaseCard>
 
-      <BaseCard shadow="sm">
+      <BaseCard shadow="sm" hover-effect="glow">
         <div class="section-header">
           <h3 class="section-title">Trạng thái tài khoản</h3>
           <BaseButton v-if="activeAccountFilter" variant="ghost" size="sm" @click="activeAccountFilter = null">
@@ -473,8 +473,8 @@ const ENV_STATUS = [
     </div>
 
     <!-- ── Bottom: Bar chart + Timeline ──────────────────────── -->
-    <div class="bottom-grid">
-      <BaseCard shadow="sm">
+    <div class="bottom-grid" v-reveal>
+      <BaseCard shadow="sm" hover-effect="glow">
         <div class="section-header">
           <h3 class="section-title">Chiến dịch theo nền tảng</h3>
           <span class="section-badge">24 đang chạy</span>
@@ -487,7 +487,7 @@ const ENV_STATUS = [
         />
       </BaseCard>
 
-      <BaseCard shadow="sm">
+      <BaseCard shadow="sm" hover-effect="glow">
         <div class="section-header">
           <h3 class="section-title">Hoạt động hệ thống</h3>
           <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">

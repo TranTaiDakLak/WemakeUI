@@ -74,7 +74,7 @@ const sections: SidebarSection[] = [
     items: [
       { id: 'notifications', label: 'Thông báo', icon: ICON.bell },
       { id: 'settings',      label: 'Cài đặt',   icon: ICON.settings, shortcut: 'g s' },
-      { id: 'help',          label: 'Trợ giúp',  icon: ICON.help, href: '#/help' },
+      { id: 'help',          label: 'Trợ giúp',  icon: ICON.help, href: '#/app/faq' },
     ],
   },
 ]
@@ -124,6 +124,7 @@ function onSelect(item: { id: string }) {
         :active-id="activeId"
         :collapsed="sidebarCollapsed"
         brand="WemakeUI"
+        logo-src="/logo.png"
         @update:collapsed="(v: boolean) => sidebarCollapsed = v"
         @select="onSelect"
       />
@@ -153,7 +154,7 @@ function onSelect(item: { id: string }) {
         </BasePanel>
         <BasePanel title="Thẻ" tone="subtle" :padded="false">
           <div class="tag-cloud">
-            <BaseTag v-for="t in ['vip', 'doanh nghiệp', 'cá nhân', 'thử nghiệm', 'huỷ']" :key="t" size="sm" :text="t" />
+            <BaseTag v-for="t in ['vip', 'doanh nghiệp', 'cá nhân', 'thử nghiệm', 'huỷ']" :key="t" size="sm" :label="t" />
           </div>
         </BasePanel>
       </div>
@@ -192,7 +193,7 @@ function onSelect(item: { id: string }) {
           <div class="kpi">
             <span class="kpi-label">{{ kpi.label }}</span>
             <span class="kpi-value">{{ kpi.value }}</span>
-            <BaseTag size="sm" :variant="(kpi.tone as 'success' | 'danger')" :text="kpi.delta" />
+            <BaseTag size="sm" :variant="(kpi.tone as 'success' | 'danger')" :label="kpi.delta" />
           </div>
         </BaseCard>
       </div>

@@ -64,7 +64,7 @@ function toggleSelect(id: number) {
     </div>
 
     <!-- grid view -->
-    <div v-if="view === 'grid'" class="file-grid">
+    <div v-if="view === 'grid'" class="file-grid" v-reveal>
       <div
         v-for="item in filtered" :key="item.id"
         class="file-card" :class="{ selected: selected.includes(item.id) }"
@@ -80,7 +80,7 @@ function toggleSelect(id: number) {
     </div>
 
     <!-- list view -->
-    <div v-else class="file-list">
+    <div v-else class="file-list" v-reveal>
       <table class="ftable">
         <thead><tr><th></th><th>Tên</th><th>Kích thước</th><th>Chỉnh sửa</th><th>Chia sẻ</th><th></th></tr></thead>
         <tbody>

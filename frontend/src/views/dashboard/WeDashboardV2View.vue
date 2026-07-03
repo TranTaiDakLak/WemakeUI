@@ -30,15 +30,15 @@ const quickActionsRef = ref<InstanceType<typeof DashboardQuickActions> | null>(n
     />
 
     <!-- KPI metrics grid (4-col, stagger reveal) -->
-    <DashboardKPIGrid />
+    <DashboardKPIGrid v-reveal />
 
     <!-- Analytics: line chart, donut, bar chart, timeline -->
-    <DashboardAnalytics
+    <DashboardAnalytics v-reveal
       @filter-accounts="(f) => activityRef?.setAccountFilter(f)"
     />
 
     <!-- Actionable tables: jobs / expiring accounts / pending tickets -->
-    <DashboardActivity ref="activityRef" />
+    <DashboardActivity v-reveal ref="activityRef" />
 
     <!-- Form modals (triggered via Hero buttons) -->
     <DashboardQuickActions ref="quickActionsRef" />

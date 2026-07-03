@@ -24,6 +24,8 @@ export interface ShowcasePhase {
   title: string
   status: PhaseStatus
   routes: readonly ShowcaseRoute[]
+  /** 'list' = danh sách gọn có thể bấm (mỗi lần bấm mở đúng 1 trang). Mặc định 'grid'. */
+  layout?: 'grid' | 'list'
 }
 
 export const phases: readonly ShowcasePhase[] = [
@@ -156,6 +158,7 @@ export const phases: readonly ShowcasePhase[] = [
     n: 6.2,
     title: 'Error Pages',
     status: 'done',
+    layout: 'list',
     routes: [
       { path: '/error/404',                label: '404 — Not Found',          desc: 'mã code gradient text, suggest links về pages khác' },
       { path: '/error/500',                label: '500 — Server Error',       desc: 'status table 3 dịch vụ + retry + liên hệ hỗ trợ' },
@@ -282,8 +285,8 @@ export const phases: readonly ShowcasePhase[] = [
       {
         path: '/showcase/templates',
         navLabel: 'Template Gallery',
-        label: 'Template Gallery — 120 trang sẵn dùng cho dev nội bộ',
-        desc: 'browse 120 templates theo category (Auth / Error / Dashboard / App / Landing / WemakeUI), tìm kiếm, xem preview, copy path',
+        label: 'Template Gallery — bộ template trang hoàn chỉnh sẵn dùng',
+        desc: 'browse template theo category (Auth / Error / Dashboard / App / Landing / WemakeUI), tìm kiếm, xem preview, copy path & prompt',
       },
     ],
   },

@@ -38,7 +38,7 @@ const SDKs = [
     <section class="section">
       <div class="section-inner">
         <h2 class="section-title">Bắt đầu trong 5 phút</h2>
-        <div class="quick-grid">
+        <div class="quick-grid" v-reveal>
           <div class="step-card">
             <span class="step-num">1</span>
             <h3 class="step-title">Tạo API key</h3>
@@ -64,7 +64,7 @@ const SDKs = [
     <section class="section section-alt">
       <div class="section-inner">
         <h2 class="section-title">Endpoints</h2>
-        <div class="endpoint-list">
+        <div class="endpoint-list" v-reveal>
           <div v-for="ep in ENDPOINTS" :key="ep.path" class="endpoint-row">
             <BaseBadge :text="ep.method" :variant="METHOD_VARIANTS[ep.method]" />
             <code class="ep-path">{{ ep.path }}</code>
@@ -78,7 +78,7 @@ const SDKs = [
     <section class="section">
       <div class="section-inner">
         <h2 class="section-title">SDK</h2>
-        <div class="sdk-grid">
+        <div class="sdk-grid" v-reveal>
           <div v-for="s in SDKs" :key="s.lang" class="sdk-card">
             <span class="sdk-icon">{{ s.icon }}</span>
             <h3 class="sdk-name">{{ s.lang }}</h3>

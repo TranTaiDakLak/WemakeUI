@@ -43,8 +43,8 @@ const faqs = [
         <BaseBadge v-if="annual" text="tiết kiệm 20%" variant="success" />
       </div>
 
-      <div class="plans-grid">
-        <BaseCard v-for="p in plans" :key="p.name" class="plan-card" :class="{ popular: p.badge }">
+      <div class="plans-grid" v-reveal>
+        <BaseCard v-for="(p, i) in plans" :key="p.name" v-reveal="i * 60" class="plan-card" :class="{ popular: p.badge }" hover-effect="glow-lift">
           <template #header>
             <div class="plan-head">
               <span class="plan-name">{{ p.name }}</span>
@@ -72,7 +72,7 @@ const faqs = [
         </BaseCard>
       </div>
 
-      <div class="faq-section">
+      <div class="faq-section" v-reveal>
         <h2 class="faq-title">Câu hỏi thường gặp</h2>
         <div class="faqs">
           <div v-for="f in faqs" :key="f.q" class="faq-item">

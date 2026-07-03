@@ -21,8 +21,20 @@ const props = withDefaults(defineProps<{
   shadow?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   /** radius */
   radius?: 'md' | 'lg' | 'xl' | '2xl'
-  /** hover lift effect (translateY -2px + shadow +1) */
+  /** hover lift effect (translateY -2px + shadow +1) — deprecated, dùng hoverEffect thay */
   hoverable?: boolean
+  /** kiểu hover effect:
+   *  - 'none'        : không hover effect
+   *  - 'glow'        : vùng xanh gradient fade vào trong từ rìa
+   *  - 'lift'        : nhấc lên + shadow sâu
+   *  - 'shimmer'     : scale nhẹ + ánh sáng brand sweep qua
+   *  - 'glow-lift'   : kết hợp glow + lift (::before + transform/shadow — không conflict)
+   *  - 'glow-shimmer': kết hợp glow + shimmer (::before + ::after — không conflict)
+   *  Lưu ý: 'lift' và 'shimmer' không combine được với nhau vì cùng dùng `transform`.
+   */
+  hoverEffect?: 'none' | 'glow' | 'lift' | 'shimmer' | 'glow-lift' | 'glow-shimmer'
+  /** màu accent riêng (CSS color) — thêm viền trái 3px + nhuộm màu cho glow/lift hover thay vì brand-primary mặc định */
+  accentColor?: string
   /** hiện viền — mặc định true */
   bordered?: boolean
   /** trạng thái selected (highlight) */
@@ -38,6 +50,7 @@ const props = withDefaults(defineProps<{
   shadow: 'md',
   radius: 'lg',
   hoverable: false,
+  hoverEffect: 'none',
   bordered: true,
   selected: false,
   loading: false,
@@ -63,9 +76,14 @@ function onClick(e: MouseEvent) {
     :data-radius="radius"
     :data-shadow="shadow"
     :data-state="loading ? 'loading' : disabled ? 'disabled' : selected ? 'selected' : 'default'"
+    :style="accentColor ? { '--wx-card-accent': accentColor } : undefined"
     :class="{
       'wx-card--padded': padded,
       'wx-card--hoverable': hoverable && !disabled,
+      'wx-card--hover-glow': (hoverEffect === 'glow' || hoverEffect === 'glow-lift' || hoverEffect === 'glow-shimmer') && !disabled,
+      'wx-card--hover-lift': (hoverEffect === 'lift' || hoverEffect === 'glow-lift') && !disabled,
+      'wx-card--hover-shimmer': (hoverEffect === 'shimmer' || hoverEffect === 'glow-shimmer') && !disabled,
+      'wx-card--accent': !!accentColor,
       'wx-card--bordered': bordered,
       'wx-card--clickable': clickable && !disabled,
     }"
@@ -132,7 +150,10 @@ function onClick(e: MouseEvent) {
 .wx-card[data-shadow="xl"]   { box-shadow: var(--wx-shadow-xl); }
 
 .wx-card--bordered {
-  border: 1px solid var(--wx-border-default);
+  border: 1px solid color-mix(in srgb, var(--wx-border-default) 60%, transparent);
+}
+.wx-card--accent {
+  border-left: 3px solid var(--wx-card-accent);
 }
 
 .wx-card--padded > .wx-card__body { padding: var(--wx-space-5); }
@@ -213,6 +234,88 @@ function onClick(e: MouseEvent) {
     var(--wx-shadow-lg);
 }
 
+/* ══════════════════════════════════════════════════════════════
+   Hover Effect: glow — vùng xanh gradient fade vào trong
+   ══════════════════════════════════════════════════════════════ */
+.wx-card--hover-glow {
+  transition:
+    box-shadow var(--wx-d-normal) var(--wx-ease-standard),
+    border-color var(--wx-d-normal) var(--wx-ease-standard);
+}
+.wx-card--hover-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 40%,
+    color-mix(in srgb, var(--wx-card-accent, var(--wx-brand-primary)) 8%, transparent) 70%,
+    color-mix(in srgb, var(--wx-card-accent, var(--wx-brand-primary)) 14%, transparent) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--wx-d-normal) var(--wx-ease-standard);
+  pointer-events: none;
+  z-index: 0;
+}
+.wx-card--hover-glow:not([data-state="disabled"]):not([data-state="loading"]):hover {
+  border-color: color-mix(in srgb, var(--wx-card-accent, var(--wx-brand-primary)) 20%, transparent);
+}
+.wx-card--hover-glow:not([data-state="disabled"]):not([data-state="loading"]):hover::before {
+  opacity: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   Hover Effect: lift — nhấc lên + shadow sâu
+   ══════════════════════════════════════════════════════════════ */
+.wx-card--hover-lift {
+  transition:
+    transform var(--wx-d-normal) var(--wx-ease-bounce),
+    box-shadow var(--wx-d-normal) var(--wx-ease-standard),
+    border-color var(--wx-d-fast) var(--wx-ease-standard);
+}
+.wx-card--hover-lift:not([data-state="disabled"]):not([data-state="loading"]):hover {
+  transform: translateY(-4px);
+  border-color: var(--wx-card-accent, var(--wx-border-subtle));
+  box-shadow:
+    0 12px 32px -8px color-mix(in srgb, var(--wx-card-accent, var(--wx-brand-primary)) 18%, transparent),
+    0 4px 12px color-mix(in srgb, var(--wx-card-accent, var(--wx-brand-primary)) 10%, transparent);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   Hover Effect: shimmer — scale + ánh sáng brand sweep chậm
+   ══════════════════════════════════════════════════════════════ */
+.wx-card--hover-shimmer {
+  transition:
+    transform var(--wx-d-normal) var(--wx-ease-standard),
+    box-shadow var(--wx-d-normal) var(--wx-ease-standard),
+    border-color var(--wx-d-normal) var(--wx-ease-standard);
+}
+.wx-card--hover-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    color-mix(in srgb, var(--wx-brand-accent) 15%, transparent) 45%,
+    color-mix(in srgb, var(--wx-brand-primary) 12%, transparent) 55%,
+    transparent 65%
+  );
+  transform: translateX(-110%);
+  pointer-events: none;
+  z-index: 1;
+}
+.wx-card--hover-shimmer:not([data-state="disabled"]):not([data-state="loading"]):hover {
+  transform: scale(1.015);
+  border-color: color-mix(in srgb, var(--wx-brand-primary) 35%, var(--wx-border-default));
+  box-shadow: var(--wx-shadow-lg);
+}
+.wx-card--hover-shimmer:not([data-state="disabled"]):not([data-state="loading"]):hover::after {
+  animation: wx-card-shimmer-sweep 0.9s var(--wx-ease-standard) forwards;
+}
+
 .wx-card--clickable {
   cursor: pointer;
 }
@@ -250,6 +353,10 @@ function onClick(e: MouseEvent) {
 }
 .wx-card__loading-bar--short { width: 60%; }
 
+@keyframes wx-card-shimmer-sweep {
+  to { transform: translateX(110%); }
+}
+
 @keyframes wx-card-shimmer {
   0%   { background-position: 100% 0; }
   100% { background-position: -100% 0; }
@@ -257,6 +364,10 @@ function onClick(e: MouseEvent) {
 
 @media (prefers-reduced-motion: reduce) {
   .wx-card { transition: none; }
+  .wx-card--hover-glow,
+  .wx-card--hover-lift,
+  .wx-card--hover-shimmer { transition: none; }
+  .wx-card--hover-shimmer:hover::after { animation: none; }
   .wx-card__loading-bar { animation: none; }
 }
 </style>

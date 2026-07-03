@@ -4,11 +4,7 @@ import { BaseButton, BaseModal, BaseBadge } from '../common'
 
 const show = defineModel<boolean>({ required: true })
 
-const trashItems = ref([
-  { id: 1, uid: '100011111111', fullName: 'Tài khoản A', deletedAt: '2026-05-01 10:00' },
-  { id: 2, uid: '100022222222', fullName: 'Tài khoản B', deletedAt: '2026-05-02 14:30' },
-  { id: 3, uid: '100033333333', fullName: 'Tài khoản C', deletedAt: '2026-05-03 09:15' },
-])
+const trashItems = ref<{ id: number; uid: string; fullName: string; deletedAt: string }[]>([])
 
 function restore(id: number) {
   trashItems.value = trashItems.value.filter(i => i.id !== id)

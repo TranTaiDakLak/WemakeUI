@@ -51,8 +51,8 @@ const VALUES: { icon: LucideIcon; title: string; desc: string }[] = [
     <section class="section section-alt">
       <div class="inner">
         <h2 class="section-title center">Giá trị cốt lõi</h2>
-        <div class="values-grid">
-          <div v-for="v in VALUES" :key="v.title" class="value-card">
+        <div class="values-grid" v-reveal>
+          <div v-for="(v, i) in VALUES" :key="v.title" v-reveal="i * 60" class="value-card">
             <component :is="v.icon" class="value-icon" :size="28" />
             <h3 class="value-name">{{ v.title }}</h3>
             <p class="value-desc">{{ v.desc }}</p>
@@ -65,8 +65,8 @@ const VALUES: { icon: LucideIcon; title: string; desc: string }[] = [
     <section class="section">
       <div class="inner">
         <h2 class="section-title center">Đội ngũ</h2>
-        <div class="team-grid">
-          <div v-for="m in TEAM" :key="m.name" class="team-card">
+        <div class="team-grid" v-reveal>
+          <div v-for="(m, i) in TEAM" :key="m.name" v-reveal="i * 60" class="team-card">
             <BaseAvatar :name="m.name" size="xl" />
             <h3 class="member-name">{{ m.name }}</h3>
             <span class="member-role">{{ m.role }}</span>

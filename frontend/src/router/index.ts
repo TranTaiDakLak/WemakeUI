@@ -1,9 +1,39 @@
 import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+import { docEntries } from '../views/docs/_registry'
+
+/* ── Docs children built from the registry (single source of truth) ── */
+const docChildren: RouteRecordRaw[] = [
+  {
+    path: '',
+    name: 'DocsHome',
+    component: () => import('../views/docs/GettingStartedView.vue'),
+  },
+  ...docEntries.map((e): RouteRecordRaw => ({
+    path: e.slug,
+    name: `Docs-${e.slug}`,
+    component: e.loader,
+  })),
+]
 
 const routes: RouteRecordRaw[] = [
+  /* ── Public landing (root) ── */
   {
     path: '/',
+    name: 'Landing',
+    component: () => import('../views/home/LandingView.vue'),
+  },
+
+  /* ── Documentation system ── */
+  {
+    path: '/docs',
+    component: () => import('../views/docs/DocsLayout.vue'),
+    children: docChildren,
+  },
+
+  /* ── Demo Lab — internal component/template browser (sidebar shell) ── */
+  {
+    path: '/lab',
     component: () => import('../views/showcase/DemoLayout.vue'),
     children: [
       {
@@ -13,143 +43,159 @@ const routes: RouteRecordRaw[] = [
       },
       /* ── phase 0 ────────────────────────────────────── */
       {
-        path: 'showcase/tokens',
+        path: '/showcase/tokens',
         name: 'ShowcaseTokens',
         component: () => import('../views/showcase/TokensShowcase.vue'),
       },
       {
-        path: 'showcase/icons',
+        path: '/showcase/reveal-test',
+        name: 'RevealTest',
+        component: () => import('../views/showcase/RevealTest.vue'),
+      },
+      {
+        path: '/showcase/icons',
         name: 'ShowcaseIcons',
         component: () => import('../views/showcase/IconShowcase.vue'),
       },
       /* ── phase 1 ────────────────────────────────────── */
       {
-        path: 'showcase/primitives',
+        path: '/showcase/primitives',
         name: 'ShowcasePrimitives',
         component: () => import('../views/showcase/PrimitivesShowcase.vue'),
       },
       {
-        path: 'showcase/cards',
+        path: '/showcase/cards',
         name: 'ShowcaseCards',
         component: () => import('../views/showcase/CardShowcase.vue'),
       },
+      {
+        path: '/showcase/card-hover-demo',
+        name: 'CardHoverDemo',
+        component: () => import('../views/showcase/CardHoverDemo.vue'),
+      },
       /* ── phase 2 ────────────────────────────────────── */
       {
-        path: 'showcase/overlay',
+        path: '/showcase/overlay',
         name: 'ShowcaseOverlay',
         component: () => import('../views/showcase/OverlayShowcase.vue'),
       },
       {
-        path: 'showcase/nav',
+        path: '/showcase/nav',
         name: 'ShowcaseNav',
         component: () => import('../views/showcase/NavShowcase.vue'),
       },
       /* ── phase 3 — form & layout shells ─────────────── */
       {
-        path: 'showcase/shell/sidebar',
+        path: '/showcase/shell/sidebar',
         name: 'ShowcaseShellSidebar',
         component: () => import('../views/showcase/shell/SidebarShellShowcase.vue'),
       },
       {
-        path: 'showcase/shell/topnav',
+        path: '/showcase/shell/topnav',
         name: 'ShowcaseShellTopNav',
         component: () => import('../views/showcase/shell/TopNavShellShowcase.vue'),
       },
       {
-        path: 'showcase/shell/split',
+        path: '/showcase/shell/split',
         name: 'ShowcaseShellSplit',
         component: () => import('../views/showcase/shell/SplitShellShowcase.vue'),
       },
       /* ── phase 4 — data display ─────────────────────── */
       {
-        path: 'showcase/data',
+        path: '/showcase/data',
         name: 'ShowcaseDataIndex',
         component: () => import('../views/showcase/data/IndexView.vue'),
       },
       {
-        path: 'showcase/data/grid',
+        path: '/showcase/data/grid',
         name: 'ShowcaseDataGrid',
         component: () => import('../views/showcase/data/GridView.vue'),
       },
       {
-        path: 'showcase/data/filter',
+        path: '/showcase/data/filter',
         name: 'ShowcaseDataFilter',
         component: () => import('../views/showcase/data/FilterView.vue'),
       },
       {
-        path: 'showcase/data/log',
+        path: '/showcase/data/log',
         name: 'ShowcaseDataLog',
         component: () => import('../views/showcase/data/LogView.vue'),
       },
       {
-        path: 'showcase/data/kanban',
+        path: '/showcase/data/kanban',
         name: 'ShowcaseDataKanban',
         component: () => import('../views/showcase/data/KanbanView.vue'),
       },
       {
-        path: 'showcase/data/calendar',
+        path: '/showcase/data/calendar',
         name: 'ShowcaseDataCalendar',
         component: () => import('../views/showcase/data/CalendarView.vue'),
       },
       {
-        path: 'showcase/data/timeline',
+        path: '/showcase/data/timeline',
         name: 'ShowcaseDataTimeline',
         component: () => import('../views/showcase/data/TimelineView.vue'),
       },
       {
-        path: 'showcase/data/gallery',
+        path: '/showcase/data/gallery',
         name: 'ShowcaseDataGallery',
         component: () => import('../views/showcase/data/GalleryView.vue'),
       },
       {
-        path: 'showcase/data/crud',
+        path: '/showcase/data/crud',
         name: 'ShowcaseDataCrud',
         component: () => import('../views/showcase/data/CrudTableView.vue'),
       },
       /* ── phase 4.5 — chart system ───────────────────── */
       {
-        path: 'showcase/charts',
+        path: '/showcase/charts',
         name: 'ShowcaseCharts',
         component: () => import('../views/showcase/charts/IndexView.vue'),
       },
       /* ── phase 5 — feedback / async / permission / platform ── */
       {
-        path: 'showcase/async',
+        path: '/showcase/async',
         name: 'ShowcaseAsync',
         component: () => import('../views/showcase/AsyncShowcase.vue'),
       },
       {
-        path: 'showcase/permission',
+        path: '/showcase/permission',
         name: 'ShowcasePermission',
         component: () => import('../views/showcase/PermissionShowcase.vue'),
       },
       {
-        path: 'showcase/platform',
+        path: '/showcase/platform',
         name: 'ShowcasePlatform',
         component: () => import('../views/showcase/PlatformShowcase.vue'),
       },
       /* ── phase 8 — DX / observability ─────────────────── */
       {
-        path: 'showcase/dev-panel',
+        path: '/showcase/dev-panel',
         name: 'ShowcaseDevPanel',
         component: () => import('../views/showcase/DevPanelShowcase.vue'),
       },
       {
-        path: 'showcase/observability',
+        path: '/showcase/observability',
         name: 'ShowcaseObservability',
         component: () => import('../views/showcase/ObservabilityShowcase.vue'),
       },
       /* ── phase 9 — form popup patterns ─────────────────── */
       {
-        path: 'showcase/patterns',
+        path: '/showcase/patterns',
         name: 'ShowcasePatterns',
         component: () => import('../views/showcase/PatternShowcase.vue'),
       },
       /* ── template gallery ───────────────────────────────── */
       {
-        path: 'showcase/templates',
+        path: '/showcase/templates',
         name: 'TemplateGallery',
         component: () => import('../views/showcase/TemplateGallery.vue'),
+      },
+      /* ── bộ giao diện hoàn chỉnh (cấp sản phẩm) ───────────── */
+      {
+        path: '/showcase/apps',
+        name: 'AppTemplates',
+        component: () => import('../views/showcase/AppTemplatesView.vue'),
       },
     ],
   },

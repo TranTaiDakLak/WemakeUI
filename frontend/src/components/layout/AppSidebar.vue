@@ -23,6 +23,8 @@ const props = withDefaults(defineProps<{
   brand?: string
   /** logo gradient — hiện ở header */
   logoGradient?: boolean
+  /** URL ảnh logo — nếu bỏ trống, dùng chữ cái đầu của `brand` làm mark mặc định */
+  logoSrc?: string
   /** width khi mở rộng (px) */
   width?: number
   /** width khi collapsed (px) */
@@ -96,7 +98,6 @@ onBeforeUnmount(() => {
 function toggleCollapse() {
   userToggled.value = true
   collapsed.value = !collapsed.value
-  emit('update:collapsed', collapsed.value)
 }
 
 function isActive(item: SidebarItem): boolean {
@@ -171,7 +172,14 @@ watch(() => props.activeId, () => {
     <header class="wx-sidebar__header" data-part="header">
       <slot name="brand">
         <div class="wx-sidebar__brand">
+          <img
+            v-if="logoSrc"
+            :src="logoSrc"
+            :alt="brand"
+            class="wx-sidebar__logo wx-sidebar__logo--img"
+          />
           <div
+            v-else
             class="wx-sidebar__logo"
             :class="{ 'wx-sidebar__logo--gradient': logoGradient }"
             aria-hidden="true"
@@ -404,8 +412,13 @@ watch(() => props.activeId, () => {
   flex-shrink: 0;
 }
 .wx-sidebar--collapsed .wx-sidebar__header {
-  padding: var(--wx-space-3);
+  padding: var(--wx-space-2);
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: var(--wx-space-1);
+  height: auto;
+  min-height: 56px;
 }
 
 .wx-sidebar__brand {
@@ -427,6 +440,7 @@ watch(() => props.activeId, () => {
   flex-shrink: 0;
 }
 .wx-sidebar__logo--gradient { background: var(--wx-gradient-button); }
+.wx-sidebar__logo--img { background: none; object-fit: contain; }
 .wx-sidebar__brand-name {
   font-size: var(--wx-fs-15);
   font-weight: var(--wx-fw-semibold);

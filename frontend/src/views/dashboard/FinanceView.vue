@@ -38,7 +38,7 @@ const tx = [
           <div class="bal-label">Tổng số dư</div>
           <div class="bal-value">6.582 triệu ₫</div>
           <div class="bal-meta">
-            <BaseTag size="sm" variant="success" text="+3.2% so với tuần trước" />
+            <BaseTag size="sm" variant="success" label="+3.2% so với tuần trước" />
             <span class="muted">cập nhật 12:34 hôm nay</span>
           </div>
           <svg class="bal-spark" viewBox="0 0 600 60" preserveAspectRatio="none">
@@ -49,25 +49,25 @@ const tx = [
       </BaseCard>
     </div>
 
-    <div class="cols-3">
+    <div class="cols-3" v-reveal>
       <BaseCard title="Doanh thu tháng" padded shadow="sm">
         <div class="kpi">820 tr</div>
-        <BaseTag size="sm" variant="success" text="+18%" />
+        <BaseTag size="sm" variant="success" label="+18%" />
         <svg class="spark-h" viewBox="0 0 100 32"><path :d="sparkPath([...seriesUp])" stroke="#10b981" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
       <BaseCard title="Chi phí tháng" padded shadow="sm">
         <div class="kpi">462 tr</div>
-        <BaseTag size="sm" variant="warning" text="+4%" />
+        <BaseTag size="sm" variant="warning" label="+4%" />
         <svg class="spark-h" viewBox="0 0 100 32"><path :d="sparkPath([...seriesVolatile])" stroke="#f59e0b" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
       <BaseCard title="Lợi nhuận ròng" padded shadow="sm">
         <div class="kpi">358 tr</div>
-        <BaseTag size="sm" variant="success" text="44% biên" />
+        <BaseTag size="sm" variant="success" label="44% biên" />
         <svg class="spark-h" viewBox="0 0 100 32"><path :d="sparkPath([...seriesUp])" stroke="#2563eb" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
     </div>
 
-    <div class="cols">
+    <div class="cols" v-reveal>
       <BasePanel title="Tài khoản ngân hàng">
         <ul class="accs">
           <li v-for="a in accounts" :key="a.name" class="acc-row">
@@ -79,7 +79,7 @@ const tx = [
               <strong>{{ a.balance }}</strong>
               <BaseTag
                 :variant="a.delta.startsWith('+') ? 'success' : a.delta.startsWith('-') ? 'danger' : 'neutral'"
-                :text="a.delta"
+                :label="a.delta"
                 size="sm"
               />
             </div>
@@ -92,7 +92,7 @@ const tx = [
           <li v-for="(t, i) in tx" :key="i" class="tx-row">
             <span class="muted small">{{ t.date }}</span>
             <span>{{ t.desc }}</span>
-            <BaseTag size="sm" :text="t.cat" />
+            <BaseTag size="sm" :label="t.cat" />
             <strong :class="{ neg: t.amount.startsWith('-'), pos: t.amount.startsWith('+') }">{{ t.amount }}</strong>
           </li>
         </ul>

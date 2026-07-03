@@ -33,14 +33,14 @@ const displaying = computed(() => tab.value === 'khoa-hoc' ? COURSES : tab.value
   <AppPageLayout section="app" current="học tập" page-title="Trung tâm học tập" page-description="Nâng cao kỹ năng với các khoá học được tuyển chọn">
     <BaseTabs v-model="tab" :tabs="tabs" />
 
-    <div class="courses-grid">
-      <BaseCard v-for="c in displaying" :key="c.id" class="course-card">
+    <div class="courses-grid" v-reveal>
+      <BaseCard v-for="(c, i) in displaying" :key="c.id" v-reveal="i * 60" class="course-card" hover-effect="lift">
         <template #header>
           <div class="course-thumb">{{ c.thumb }}</div>
         </template>
         <template #body>
           <div class="course-meta">
-            <BaseTag :text="c.category" size="sm" variant="neutral" />
+            <BaseTag :label="c.category" size="sm" variant="neutral" />
             <BaseBadge :text="c.level" :variant="LEVEL_VARIANTS[c.level]" size="sm" />
           </div>
           <h3 class="course-title">{{ c.title }}</h3>

@@ -179,7 +179,7 @@ function toggleStar(id: string) {
               <div class="mail-item__subject">{{ m.subject }}</div>
               <div class="mail-item__preview">{{ m.preview }}</div>
               <div class="mail-item__tags">
-                <BaseTag v-for="t in m.tags" :key="t" :text="t" size="sm" variant="neutral" />
+                <BaseTag v-for="t in m.tags" :key="t" :label="t" size="sm" variant="neutral" />
               </div>
             </div>
             <button
@@ -236,7 +236,7 @@ function toggleStar(id: string) {
                 <span class="muted">đã gửi đến bạn · {{ selected.time }}</span>
               </div>
               <div class="meta-tags">
-                <BaseTag v-for="t in selected.tags" :key="t" :text="t" size="sm" />
+                <BaseTag v-for="t in selected.tags" :key="t" :label="t" size="sm" />
               </div>
             </div>
             <pre class="body">{{ selected.body }}</pre>
@@ -251,7 +251,7 @@ function toggleStar(id: string) {
               <li v-for="(f, i) in ['báo-giá-v2.pdf', 'roadmap-q3.png']" :key="i" class="file-row">
                 <span class="file-icon">📎</span>
                 <span class="file-name">{{ f }}</span>
-                <BaseTag size="sm" variant="neutral" :text="i === 0 ? '420 KB' : '88 KB'" />
+                <BaseTag size="sm" variant="neutral" :label="i === 0 ? '420 KB' : '88 KB'" />
               </li>
             </ul>
           </BasePanel>

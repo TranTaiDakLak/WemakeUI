@@ -31,7 +31,7 @@ const CONTACTS: { icon: LucideIcon; label: string; value: string }[] = [
       <p class="contact-desc">Có câu hỏi hoặc cần hỗ trợ? Chúng tôi phản hồi trong vòng 24 giờ làm việc.</p>
     </section>
 
-    <section class="contact-section">
+    <section class="contact-section" v-reveal>
       <div class="contact-grid">
         <!-- form -->
         <div>

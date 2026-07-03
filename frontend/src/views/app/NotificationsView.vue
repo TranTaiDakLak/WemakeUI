@@ -47,7 +47,7 @@ const TYPE_ICONS: Record<string, LucideIcon> = {
 
     <BaseTabs v-model="tab" :tabs="tabs" />
 
-    <div class="notif-list">
+    <div class="notif-list" v-reveal>
       <TransitionGroup name="fade-list">
         <div v-for="n in filtered" :key="n.id" class="notif-item" :class="{ unread: !n.read }">
           <div class="notif-avatar">

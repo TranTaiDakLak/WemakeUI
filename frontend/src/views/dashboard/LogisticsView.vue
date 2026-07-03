@@ -52,30 +52,30 @@ const cities = [
       <BaseButton size="sm">Bản đồ đầy đủ</BaseButton>
     </template>
 
-    <div class="kpi-grid">
+    <div class="kpi-grid" v-reveal>
       <BaseCard padded shadow="sm">
         <div class="m-label">Đơn đang giao</div>
         <div class="m-value">128</div>
-        <BaseTag size="sm" variant="primary" text="42 xe đang chạy" />
+        <BaseTag size="sm" variant="primary" label="42 xe đang chạy" />
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">Đã giao hôm nay</div>
         <div class="m-value">412</div>
-        <BaseTag size="sm" variant="success" text="98% đúng giờ" />
+        <BaseTag size="sm" variant="success" label="98% đúng giờ" />
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">Trễ giờ</div>
         <div class="m-value">8</div>
-        <BaseTag size="sm" variant="warning" text="2% sla" />
+        <BaseTag size="sm" variant="warning" label="2% sla" />
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">Hủy / hoàn</div>
         <div class="m-value">14</div>
-        <BaseTag size="sm" variant="danger" text="1.4%" />
+        <BaseTag size="sm" variant="danger" label="1.4%" />
       </BaseCard>
     </div>
 
-    <div class="cols">
+    <div class="cols" v-reveal>
       <BaseCard title="Bản đồ giao hàng" subtitle="theo thành phố · 24h gần nhất" padded shadow="sm">
         <div class="map">
           <svg viewBox="0 0 60 100" class="map-svg" preserveAspectRatio="xMidYMid meet">
@@ -98,7 +98,7 @@ const cities = [
               <strong>{{ w.name }}</strong>
               <BaseTag
                 :variant="w.status === 'warning' ? 'warning' : w.status === 'low' ? 'danger' : 'success'"
-                :text="`${w.fill}%`"
+                :label="`${w.fill}%`"
                 size="sm"
               />
             </div>
@@ -109,7 +109,7 @@ const cities = [
       </BasePanel>
     </div>
 
-    <BasePanel title="Đơn hàng vận chuyển gần đây">
+    <BasePanel v-reveal title="Đơn hàng vận chuyển gần đây">
       <table class="ships">
         <thead><tr>
           <th>Mã</th><th>Từ</th><th>Đến</th><th>Trạng thái</th><th>ETA</th>
@@ -119,7 +119,7 @@ const cities = [
             <td><code class="mono">{{ s.code }}</code></td>
             <td>{{ s.from }}</td>
             <td>{{ s.to }}</td>
-            <td><BaseTag :variant="sVariant(s.status)" :text="sLabel(s.status)" size="sm" /></td>
+            <td><BaseTag :variant="sVariant(s.status)" :label="sLabel(s.status)" size="sm" /></td>
             <td><span class="muted">{{ s.eta }}</span></td>
           </tr>
         </tbody>

@@ -95,13 +95,13 @@ const avgRating = (RATINGS.reduce((s, r, i) => s + r * ratingCounts[i], 0) / tot
         </div>
 
         <div class="product-tags">
-          <BaseTag v-for="t in ['cotton','áo thun','unisex','premium']" :key="t" :text="t" size="sm" variant="neutral" />
+          <BaseTag v-for="t in ['cotton','áo thun','unisex','premium']" :key="t" :label="t" size="sm" variant="neutral" />
         </div>
       </div>
     </div>
 
     <!-- Reviews -->
-    <BaseCard class="reviews-card">
+    <BaseCard v-reveal class="reviews-card">
       <template #header>
         <span class="card-label">Đánh giá khách hàng ({{ totalReviews }})</span>
       </template>

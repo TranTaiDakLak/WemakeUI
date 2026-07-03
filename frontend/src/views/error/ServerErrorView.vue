@@ -8,12 +8,14 @@ import { BaseButton, BaseTag } from '../../components/common'
 <template>
   <ErrorLayout
     code="500"
+    tone="danger"
     title="Lỗi máy chủ"
     description="Đã có lỗi xảy ra ở phía máy chủ. Đội ngũ kỹ thuật đã được thông báo. Vui lòng thử lại sau ít phút."
     error-id="ERR-500-d39f81c"
   >
     <template #actions>
       <BaseButton size="lg" @click="$router.go(0)">Thử lại</BaseButton>
+      <BaseButton variant="ghost" size="lg" @click="$router.back()">← Quay lại</BaseButton>
       <RouterLink to="/" class="no-link">
         <BaseButton variant="ghost" size="lg">Về trang chủ</BaseButton>
       </RouterLink>
@@ -23,15 +25,15 @@ import { BaseButton, BaseTag } from '../../components/common'
     <div class="status">
       <div class="status-row">
         <span>API gateway</span>
-        <BaseTag size="sm" variant="success" text="hoạt động" />
+        <BaseTag size="sm" variant="success" label="hoạt động" />
       </div>
       <div class="status-row">
         <span>Database</span>
-        <BaseTag size="sm" variant="warning" text="chậm" />
+        <BaseTag size="sm" variant="warning" label="chậm" />
       </div>
       <div class="status-row">
         <span>Cache layer</span>
-        <BaseTag size="sm" variant="danger" text="lỗi" />
+        <BaseTag size="sm" variant="danger" label="lỗi" />
       </div>
       <p class="status-cap">
         Xem chi tiết tại <a href="#">status.wemake.app</a>

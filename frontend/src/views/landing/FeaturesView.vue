@@ -69,7 +69,7 @@ const FEATURES = [
 
     <section class="feat-section">
       <div class="feat-inner">
-        <div v-for="f in FEATURES" :key="f.category" class="feat-category">
+        <div v-for="(f, i) in FEATURES" :key="f.category" v-reveal="i * 60" class="feat-category">
           <div class="cat-header">
             <span class="cat-icon">{{ f.icon }}</span>
             <h2 class="cat-title">{{ f.category }}</h2>
@@ -83,7 +83,7 @@ const FEATURES = [
           </div>
         </div>
 
-        <div class="feat-cta">
+        <div class="feat-cta" v-reveal>
           <h2 class="cta-title">Sẵn sàng bắt đầu?</h2>
           <p class="cta-desc">Dùng thử showcase ngay — không cần cài đặt.</p>
           <div class="cta-actions">

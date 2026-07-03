@@ -8,6 +8,7 @@ import { BaseButton } from '../../components/common'
 <template>
   <ErrorLayout
     code="404"
+    tone="info"
     title="Trang không tồn tại"
     description="Đường dẫn bạn vừa truy cập không tồn tại hoặc đã được di chuyển. Kiểm tra lại URL hoặc quay về trang chủ."
     error-id="REQ-404-3aF92"

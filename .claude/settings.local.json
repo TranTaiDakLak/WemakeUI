@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:adminlte.io)"
+      "WebFetch(domain:adminlte.io)",
+      "Bash(npm run *)"
     ]
   }
 }

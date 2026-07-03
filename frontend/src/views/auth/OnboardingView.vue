@@ -139,7 +139,7 @@ function back() {
       />
       <h1>Hoàn tất!</h1>
       <p>Workspace <strong>{{ ws.name }}</strong> đã sẵn sàng.</p>
-      <BaseTag size="md" variant="success" text="đã thiết lập xong" />
+      <BaseTag size="md" variant="success" label="đã thiết lập xong" />
       <RouterLink to="/dashboard/overview" class="cta">
         <BaseButton block>Vào dashboard →</BaseButton>
       </RouterLink>

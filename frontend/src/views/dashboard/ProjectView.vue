@@ -40,7 +40,7 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
       <BaseButton size="sm">+ Task mới</BaseButton>
     </template>
 
-    <div class="summary">
+    <div class="summary" v-reveal>
       <BaseCard padded shadow="sm">
         <div class="metric">
           <span>Tiến độ sprint</span>
@@ -59,19 +59,19 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
         <div class="metric">
           <span>Velocity</span>
           <strong>32 SP</strong>
-          <BaseTag size="sm" variant="success" text="+4 vs sprint trước" />
+          <BaseTag size="sm" variant="success" label="+4 vs sprint trước" />
         </div>
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="metric">
           <span>Bug đang mở</span>
           <strong>4</strong>
-          <BaseTag size="sm" variant="warning" text="2 critical" />
+          <BaseTag size="sm" variant="warning" label="2 critical" />
         </div>
       </BaseCard>
     </div>
 
-    <div class="cols">
+    <div class="cols" v-reveal>
       <BaseCard title="Burndown chart" subtitle="Lý tưởng vs thực tế" padded shadow="sm">
         <svg class="chart" viewBox="0 0 600 220" preserveAspectRatio="none">
           <line x1="32" y1="200" x2="580" y2="200" stroke="#e5e7eb" />
@@ -106,7 +106,7 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
       </BasePanel>
     </div>
 
-    <BasePanel title="Tasks gần đây" description="Sprint hiện tại">
+    <BasePanel v-reveal title="Tasks gần đây" description="Sprint hiện tại">
       <table class="tasks">
         <thead><tr>
           <th>ID</th><th>Tiêu đề</th><th>Trạng thái</th><th>Ưu tiên</th>
@@ -116,8 +116,8 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
           <tr v-for="t in tasks" :key="t.id">
             <td><code class="mono">{{ t.id }}</code></td>
             <td>{{ t.title }}</td>
-            <td><BaseTag :variant="statusInfo(t.status).variant" :text="statusInfo(t.status).label" size="sm" /></td>
-            <td><BaseTag :variant="priorityVariant(t.priority)" :text="t.priority" size="sm" /></td>
+            <td><BaseTag :variant="statusInfo(t.status).variant" :label="statusInfo(t.status).label" size="sm" /></td>
+            <td><BaseTag :variant="priorityVariant(t.priority)" :label="t.priority" size="sm" /></td>
             <td><BaseAvatar :name="t.owner" size="xs" /></td>
             <td class="muted small">{{ t.due }}</td>
           </tr>

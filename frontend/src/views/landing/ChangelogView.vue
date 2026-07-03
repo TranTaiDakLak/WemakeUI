@@ -56,8 +56,8 @@ const ITEM_COLORS: Record<string, string> = { new: 'success', improve: 'info', f
 
     <section class="cl-section">
       <div class="cl-inner">
-        <div class="cl-feed">
-          <div v-for="release in CHANGELOG" :key="release.version" class="release-block">
+        <div class="cl-feed" v-reveal>
+          <div v-for="(release, i) in CHANGELOG" :key="release.version" v-reveal="i * 60" class="release-block">
             <div class="release-header">
               <div class="version-row">
                 <code class="version-num">{{ release.version }}</code>

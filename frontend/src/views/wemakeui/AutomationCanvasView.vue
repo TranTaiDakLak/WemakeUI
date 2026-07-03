@@ -50,41 +50,83 @@ const TYPE_CFG: Record<string, { color: string; icon: string; variant: 'info' | 
 const selectedNode = ref<string | null>(null)
 const dragging = ref<string | null>(null)
 const dragOffset = ref({ x: 0, y: 0 })
+const svgRef = ref<SVGSVGElement | null>(null)
 
-function getNodeCenter(id: string) {
+// trạng thái kéo nối (connecting): id node nguồn + vị trí chuột hiện tại trong toạ độ svg
+const connecting = ref<string | null>(null)
+const connectPos = ref({ x: 0, y: 0 })
+
+function getNodeOutput(id: string) {
   const n = NODES.value.find(n => n.id === id)
   if (!n) return { x: 0, y: 0 }
-  return { x: n.x + NODE_W / 2, y: n.y + NODE_H / 2 }
+  return { x: n.x + NODE_W, y: n.y + NODE_H / 2 }
+}
+function getNodeInput(id: string) {
+  const n = NODES.value.find(n => n.id === id)
+  if (!n) return { x: 0, y: 0 }
+  return { x: n.x, y: n.y + NODE_H / 2 }
+}
+
+function edgePath(a: { x: number; y: number }, b: { x: number; y: number }) {
+  const c = Math.max(40, Math.abs(b.x - a.x) / 2)
+  return `M${a.x},${a.y} C${a.x + c},${a.y} ${b.x - c},${b.y} ${b.x},${b.y}`
 }
 
 const svgEdges = computed(() =>
   EDGES.value.map(e => {
-    const a = getNodeCenter(e.from)
-    const b = getNodeCenter(e.to)
-    const mx = (a.x + b.x) / 2
-    const d = `M${a.x},${a.y} C${mx},${a.y} ${mx},${b.y} ${b.x},${b.y}`
-    return { ...e, d, lx: mx, ly: (a.y + b.y) / 2 }
+    const a = getNodeOutput(e.from)
+    const b = getNodeInput(e.to)
+    return { ...e, d: edgePath(a, b), lx: (a.x + b.x) / 2, ly: (a.y + b.y) / 2 }
   })
 )
+
+// đường "ma" hiển thị khi đang kéo nối, bám theo con trỏ
+const ghostEdge = computed(() => {
+  if (!connecting.value) return null
+  return edgePath(getNodeOutput(connecting.value), connectPos.value)
+})
 
 const canvasW = computed(() => Math.max(...NODES.value.map(n => n.x + NODE_W + 60), 900))
 const canvasH = computed(() => Math.max(...NODES.value.map(n => n.y + NODE_H + 80), 300))
 
 function startDrag(e: MouseEvent, id: string) {
   const node = NODES.value.find(n => n.id === id)
-  if (!node) return
+  if (!node || !svgRef.value) return
+  const r = svgRef.value.getBoundingClientRect()
   dragging.value = id; selectedNode.value = id
-  dragOffset.value = { x: e.offsetX - node.x, y: e.offsetY - node.y }
+  dragOffset.value = { x: (e.clientX - r.left) - node.x, y: (e.clientY - r.top) - node.y }
+}
+
+// bắt đầu kéo nối từ cổng output của một node
+function startConnect(id: string) {
+  connecting.value = id
+  connectPos.value = getNodeOutput(id)
+}
+
+// thả lên một node → tạo kết nối (bỏ qua self-loop và trùng lặp)
+function endConnect(id: string) {
+  const from = connecting.value
+  if (from && from !== id) {
+    const exists = EDGES.value.some(e => e.from === from && e.to === id)
+    if (!exists) EDGES.value.push({ from, to: id })
+  }
+  connecting.value = null
+}
+
+function removeEdge(edge: EdgeDef) {
+  EDGES.value = EDGES.value.filter(e => !(e.from === edge.from && e.to === edge.to))
 }
 
 function onMouseMove(e: MouseEvent) {
-  if (!dragging.value) return
+  if (!dragging.value && !connecting.value) return
   const svg = (e.currentTarget as SVGElement).getBoundingClientRect()
+  const mx = e.clientX - svg.left, my = e.clientY - svg.top
+  if (connecting.value) { connectPos.value = { x: mx, y: my }; return }
   const node = NODES.value.find(n => n.id === dragging.value)
-  if (node) { node.x = e.clientX - svg.left - dragOffset.value.x; node.y = e.clientY - svg.top - dragOffset.value.y }
+  if (node) { node.x = mx - dragOffset.value.x; node.y = my - dragOffset.value.y }
 }
 
-function stopDrag() { dragging.value = null }
+function stopDrag() { dragging.value = null; connecting.value = null }
 
 const running = ref(false)
 function runFlow() { running.value = true; setTimeout(() => { running.value = false }, 2000) }
@@ -145,9 +187,10 @@ function addNode() {
 
       <div class="canvas-area">
         <svg
+          ref="svgRef"
           :width="canvasW" :height="canvasH"
           class="canvas-svg"
-          :class="{ running }"
+          :class="{ running, connecting: !!connecting }"
           @mousemove="onMouseMove"
           @mouseup="stopDrag"
           @mouseleave="stopDrag"
@@ -156,35 +199,55 @@ function addNode() {
             <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
               <path d="M0,0 L0,6 L8,3 z" fill="var(--wx-border-default)" />
             </marker>
+            <marker id="arrow-active" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--wx-brand-600)" />
+            </marker>
           </defs>
 
           <g class="edges">
-            <path v-for="(e, i) in svgEdges" :key="i"
-              :d="e.d" fill="none" stroke="var(--wx-border-default)" stroke-width="2"
-              marker-end="url(#arrow)" :class="{ pulse: running }" />
+            <g v-for="(e, i) in svgEdges" :key="i" class="edge"
+              @click="removeEdge(e)">
+              <title>Bấm để xoá kết nối</title>
+              <path :d="e.d" fill="none" stroke="transparent" stroke-width="14" class="edge-hit" />
+              <path :d="e.d" fill="none" stroke="var(--wx-border-default)" stroke-width="2"
+                marker-end="url(#arrow)" :class="{ pulse: running }" class="edge-line" />
+            </g>
             <template v-for="(e, i) in svgEdges" :key="'lbl'+i">
               <text v-if="e.label" :x="e.lx" :y="e.ly - 6"
-                text-anchor="middle" font-size="11" fill="var(--wx-content-muted)">{{ e.label }}</text>
+                text-anchor="middle" font-size="11" fill="var(--wx-content-muted)"
+                style="pointer-events:none">{{ e.label }}</text>
             </template>
           </g>
+
+          <path v-if="ghostEdge" :d="ghostEdge" fill="none" stroke="var(--wx-brand-600)"
+            stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow-active)"
+            style="pointer-events:none" />
 
           <g v-for="node in NODES" :key="node.id"
             :transform="`translate(${node.x},${node.y})`"
             class="node-group"
             :class="{ selected: selectedNode === node.id }"
-            @mousedown="startDrag($event, node.id)"
+            @mouseup="endConnect(node.id)"
             @click="selectedNode = node.id"
           >
             <rect :width="NODE_W" :height="NODE_H" rx="10"
               fill="var(--wx-bg-base)" stroke="var(--wx-border-default)"
               :stroke-width="selectedNode === node.id ? 2 : 1"
-              :stroke-dasharray="node.type === 'condition' ? '6 3' : undefined" />
+              :stroke-dasharray="node.type === 'condition' ? '6 3' : undefined"
+              class="node-body" @mousedown="startDrag($event, node.id)" />
             <rect :width="4" :height="NODE_H" rx="2"
-              :fill="TYPE_CFG[node.type].color" />
-            <text x="20" y="24" font-size="12" font-weight="600" fill="var(--wx-content-primary)">
+              :fill="TYPE_CFG[node.type].color" style="pointer-events:none" />
+            <text x="20" y="24" font-size="12" font-weight="600" fill="var(--wx-content-primary)"
+              style="pointer-events:none">
               {{ TYPE_CFG[node.type].icon }} {{ node.label }}
             </text>
-            <text x="20" y="44" font-size="11" fill="var(--wx-content-muted)">{{ node.sub }}</text>
+            <text x="20" y="44" font-size="11" fill="var(--wx-content-muted)"
+              style="pointer-events:none">{{ node.sub }}</text>
+
+            <!-- cổng vào (input) bên trái + cổng ra (output) bên phải -->
+            <circle :cx="0" :cy="NODE_H / 2" r="5" class="port port-in" />
+            <circle :cx="NODE_W" :cy="NODE_H / 2" r="5" class="port port-out"
+              @mousedown.stop="startConnect(node.id)" />
           </g>
         </svg>
       </div>
@@ -208,8 +271,21 @@ function addNode() {
 .canvas-area { flex: 1; overflow: auto; background: var(--wx-bg-sunken); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-lg); }
 .canvas-svg { display: block; cursor: default; user-select: none; }
 .canvas-svg.running .pulse { animation: dash-anim 1s linear infinite; stroke-dasharray: 8 4; }
+.canvas-svg.connecting { cursor: crosshair; }
 @keyframes dash-anim { to { stroke-dashoffset: -24; } }
-.node-group { cursor: grab; }
-.node-group:active { cursor: grabbing; }
-.node-group.selected rect:first-child { stroke: var(--wx-brand-600); }
+.node-body { cursor: grab; }
+.node-group:active .node-body { cursor: grabbing; }
+.node-group.selected rect.node-body { stroke: var(--wx-brand-600); }
+
+/* edges: bấm để xoá, hover đổi màu cảnh báo */
+.edge { cursor: pointer; }
+.edge:hover .edge-line { stroke: var(--wx-status-danger-text); }
+
+/* cổng nối */
+.port { fill: var(--wx-bg-base); stroke: var(--wx-border-default); stroke-width: 1.5; opacity: 0.45; transition: opacity 0.15s, transform 0.1s; }
+.node-group:hover .port { opacity: 1; }
+.port-out { cursor: crosshair; }
+.port-out:hover { fill: var(--wx-brand-600); stroke: var(--wx-brand-600); r: 6; }
+.port-in { pointer-events: none; }
+.canvas-svg.connecting .port-in { opacity: 1; }
 </style>

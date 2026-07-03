@@ -12,16 +12,23 @@ withDefaults(defineProps<{
   description?: string
   /** illustration: gradient blob hoặc emoji */
   variant?: 'gradient' | 'plain' | 'dark'
+  /** sắc thái màu phản ánh đúng mức độ nghiêm trọng của lỗi:
+   *  danger  = sự cố thật (500) — đỏ
+   *  warning = cần chú ý nhưng không phải sự cố hệ thống (403/503/đang xây dựng) — cam
+   *  info    = trung tính, chỉ là điều hướng sai (404) — xanh dương
+   *  brand   = không phải trạng thái lỗi (coming soon...) — màu thương hiệu mặc định */
+  tone?: 'brand' | 'danger' | 'warning' | 'info'
   /** mã code monospace nhỏ (request id, error id) */
   errorId?: string
 }>(), {
   variant: 'gradient',
+  tone: 'brand',
   description: '',
 })
 </script>
 
 <template>
-  <div class="err-shell" :data-variant="variant">
+  <div class="err-shell" :data-variant="variant" :data-tone="tone">
     <div class="err-blob err-blob--1" aria-hidden="true" />
     <div class="err-blob err-blob--2" aria-hidden="true" />
 
@@ -86,6 +93,31 @@ withDefaults(defineProps<{
   opacity: 0.35;
 }
 .err-shell[data-variant="plain"] .err-blob { display: none; }
+
+/* ── Tone: màu phản ánh đúng mức độ nghiêm trọng ── */
+.err-shell[data-tone="danger"] .err-blob--1 { background: var(--wx-gradient-danger); }
+.err-shell[data-tone="danger"] .err-blob--2 { background: var(--wx-danger-solid); }
+.err-shell[data-tone="danger"] .err-code {
+  background: var(--wx-gradient-danger);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.err-shell[data-tone="warning"] .err-blob--1 { background: var(--wx-gradient-warning); }
+.err-shell[data-tone="warning"] .err-blob--2 { background: var(--wx-warning-solid); }
+.err-shell[data-tone="warning"] .err-code {
+  background: var(--wx-gradient-warning);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.err-shell[data-tone="info"] .err-blob--1 { background: linear-gradient(to right, var(--wx-info-solid), var(--wx-brand-primary)); }
+.err-shell[data-tone="info"] .err-blob--2 { background: var(--wx-info-solid); }
+.err-shell[data-tone="info"] .err-code {
+  background: linear-gradient(to right, var(--wx-info-solid), var(--wx-info-text));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
 
 .err-main {
   position: relative;

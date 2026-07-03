@@ -14,13 +14,15 @@ const progress = ref(62)
     title="Đang bảo trì hệ thống"
     description="Chúng tôi đang triển khai bản cập nhật quan trọng. Hệ thống sẽ trở lại sớm — cảm ơn bạn đã kiên nhẫn."
     variant="gradient"
+    tone="warning"
   >
     <template #illustration>
       <div class="wrench" aria-hidden="true">🔧</div>
     </template>
 
     <template #actions>
-      <BaseTag size="md" variant="warning" text="503 service unavailable" />
+      <BaseTag size="md" variant="warning" label="503 service unavailable" />
+      <BaseButton variant="ghost" size="lg" @click="$router.back()">← Quay lại</BaseButton>
       <RouterLink to="/" class="no-link">
         <BaseButton variant="ghost" size="lg">Về trang chủ</BaseButton>
       </RouterLink>

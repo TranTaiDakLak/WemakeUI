@@ -43,13 +43,13 @@ const products = [
       <BaseButton size="sm">+ Tạo đơn</BaseButton>
     </template>
 
-    <div class="kpi-grid">
+    <div class="kpi-grid" v-reveal>
       <BaseCard padded shadow="sm">
         <div class="metric">
           <div class="metric-label">Doanh thu hôm nay</div>
           <div class="metric-value">128.420.000₫</div>
           <div class="metric-foot">
-            <BaseTag size="sm" variant="success" text="+12%" />
+            <BaseTag size="sm" variant="success" label="+12%" />
             <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesUp], 100, 24)" fill="none" stroke="#10b981" stroke-width="1.5" /></svg>
           </div>
         </div>
@@ -59,7 +59,7 @@ const products = [
           <div class="metric-label">Đơn hàng</div>
           <div class="metric-value">1,284</div>
           <div class="metric-foot">
-            <BaseTag size="sm" variant="success" text="+58 đơn" />
+            <BaseTag size="sm" variant="success" label="+58 đơn" />
             <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesVolatile], 100, 24)" fill="none" stroke="#2563eb" stroke-width="1.5" /></svg>
           </div>
         </div>
@@ -69,7 +69,7 @@ const products = [
           <div class="metric-label">Giá trị TB</div>
           <div class="metric-value">1.840.000₫</div>
           <div class="metric-foot">
-            <BaseTag size="sm" variant="warning" text="-2%" />
+            <BaseTag size="sm" variant="warning" label="-2%" />
             <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesDown], 100, 24)" fill="none" stroke="#f59e0b" stroke-width="1.5" /></svg>
           </div>
         </div>
@@ -79,14 +79,14 @@ const products = [
           <div class="metric-label">Hủy đơn</div>
           <div class="metric-value">18</div>
           <div class="metric-foot">
-            <BaseTag size="sm" variant="danger" text="1.4%" />
+            <BaseTag size="sm" variant="danger" label="1.4%" />
             <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesDown], 100, 24)" fill="none" stroke="#ef4444" stroke-width="1.5" /></svg>
           </div>
         </div>
       </BaseCard>
     </div>
 
-    <div class="cols">
+    <div class="cols" v-reveal>
       <BasePanel title="Đơn hàng gần đây" tone="default">
         <template #actions>
           <BaseButton variant="ghost" size="sm">Xem tất cả →</BaseButton>
@@ -105,7 +105,7 @@ const products = [
                 </span>
               </td>
               <td>{{ o.total }}</td>
-              <td><BaseTag size="sm" :variant="statusVariant(o.status)" :text="statusLabel(o.status)" /></td>
+              <td><BaseTag size="sm" :variant="statusVariant(o.status)" :label="statusLabel(o.status)" /></td>
             </tr>
           </tbody>
         </table>
@@ -119,9 +119,9 @@ const products = [
               <span class="prod-name">{{ p.name }}</span>
               <BaseTag
                 v-if="p.stock === 0"
-                size="sm" variant="danger" text="hết hàng"
+                size="sm" variant="danger" label="hết hàng"
               />
-              <BaseTag v-else-if="p.stock < 200" size="sm" variant="warning" :text="`${p.stock} còn`" />
+              <BaseTag v-else-if="p.stock < 200" size="sm" variant="warning" :label="`${p.stock} còn`" />
               <span class="prod-rev">{{ p.revenue }}</span>
             </div>
             <BaseProgress :value="(p.sales / 250) * 100" size="sm" variant="primary" />

@@ -32,19 +32,19 @@ import { computed } from 'vue'
       <div class="blog-inner">
         <div class="tag-bar">
           <BaseTag
-            v-for="t in TAGS" :key="t" :text="t" size="sm"
+            v-for="t in TAGS" :key="t" :label="t" size="sm"
             :variant="activeTag === t ? 'primary' : 'neutral'"
             style="cursor: pointer"
             @click="activeTag = t"
           />
         </div>
 
-        <div class="posts-grid">
-          <a v-for="p in filtered" :key="p.id" href="#/landing/blog-post" class="post-card">
+        <div class="posts-grid" v-reveal>
+          <a v-for="(p, i) in filtered" :key="p.id" v-reveal="i * 60" href="#/landing/blog/post" class="post-card">
             <div class="post-thumb">{{ p.thumb }}</div>
             <div class="post-body">
               <div class="post-meta">
-                <BaseTag :text="p.tag" size="sm" variant="neutral" />
+                <BaseTag :label="p.tag" size="sm" variant="neutral" />
                 <span class="post-date">{{ p.date }}</span>
                 <span class="post-read">{{ p.readTime }} đọc</span>
               </div>

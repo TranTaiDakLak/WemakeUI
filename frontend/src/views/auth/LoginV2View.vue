@@ -21,16 +21,16 @@ function submit() {
   <AuthLayout aside-tone="brand">
     <template #aside>
       <div class="hero">
-        <div class="auth-brand">
-          <div class="auth-brand__logo">W</div>
+        <RouterLink to="/" class="auth-brand">
+          <img src="/logo.png" alt="WemakeUI" class="auth-brand__logo" />
           <span class="auth-brand__name">WemakeUI</span>
-        </div>
+        </RouterLink>
 
         <div class="hero-illust" aria-hidden="true">
           <div class="hero-card hero-card--1">
             <div class="hero-card__title">Doanh thu hôm nay</div>
             <div class="hero-card__value">128.420.000₫</div>
-            <BaseTag size="sm" variant="success" text="+12% so với hôm qua" />
+            <BaseTag size="sm" variant="success" label="+12% so với hôm qua" />
           </div>
           <div class="hero-card hero-card--2">
             <div class="hero-card__title">Đơn hàng</div>
@@ -85,16 +85,11 @@ function submit() {
 
 <style scoped>
 .hero { display: flex; flex-direction: column; gap: var(--wx-space-5); }
-.auth-brand { display: flex; align-items: center; gap: var(--wx-space-2); color: white; }
+.auth-brand { display: flex; align-items: center; gap: var(--wx-space-2); color: white; text-decoration: none; }
 .auth-brand__logo {
   width: 40px; height: 40px;
-  border-radius: var(--wx-radius-lg);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,0.2);
-  font-weight: var(--wx-fw-bold);
-  font-size: var(--wx-fs-18);
+  object-fit: contain;
+  display: inline-block;
 }
 .auth-brand__name { font-size: var(--wx-fs-18); font-weight: var(--wx-fw-semibold); }
 

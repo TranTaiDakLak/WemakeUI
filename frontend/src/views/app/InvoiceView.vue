@@ -32,8 +32,8 @@ function fmt(n: number) { return n.toLocaleString('vi-VN') + ' ₫' }
       <BaseButton size="sm" variant="primary">+ Tạo hoá đơn</BaseButton>
     </template>
 
-    <div class="kpi-row">
-      <BaseCard v-for="[label, val, variant] in [['Tổng doanh thu', fmt(total), ''], ['Đã nhận', fmt(paid), 'success'], ['Chờ thu', fmt(pending), 'warning'], ['Quá hạn', fmt(overdue), 'danger']]" :key="label" class="kpi-card">
+    <div class="kpi-row" v-reveal>
+      <BaseCard v-for="[label, val, variant] in [['Tổng doanh thu', fmt(total), ''], ['Đã nhận', fmt(paid), 'success'], ['Chờ thu', fmt(pending), 'warning'], ['Quá hạn', fmt(overdue), 'danger']]" :key="label" class="kpi-card" hover-effect="lift">
         <template #body>
           <span class="kpi-label">{{ label }}</span>
           <span class="kpi-val" :data-variant="variant">{{ val }}</span>
@@ -41,7 +41,7 @@ function fmt(n: number) { return n.toLocaleString('vi-VN') + ' ₫' }
       </BaseCard>
     </div>
 
-    <div class="invoice-table-wrap">
+    <div class="invoice-table-wrap" v-reveal>
       <table class="invoice-table">
         <thead>
           <tr>

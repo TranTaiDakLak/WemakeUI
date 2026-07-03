@@ -33,34 +33,34 @@ const totalMrr = '1.562 triệu'
       <BaseButton size="sm">Xuất báo cáo</BaseButton>
     </template>
 
-    <div class="kpi-grid">
+    <div class="kpi-grid" v-reveal>
       <BaseCard padded shadow="sm">
         <div class="m-label">MRR</div>
         <div class="m-value">{{ totalMrr }}</div>
-        <BaseTag size="sm" variant="success" text="+12.4% m-m" />
+        <BaseTag size="sm" variant="success" label="+12.4% m-m" />
         <svg class="spark" viewBox="0 0 120 32"><path :d="sparkArea([...seriesUp], 120, 32, 2)" fill="rgba(37,99,235,0.18)" /><path :d="sparkPath([...seriesUp], 120, 32, 2)" stroke="#2563eb" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">ARR</div>
         <div class="m-value">18,7 tỷ</div>
-        <BaseTag size="sm" variant="success" text="+28% y-y" />
+        <BaseTag size="sm" variant="success" label="+28% y-y" />
         <svg class="spark" viewBox="0 0 120 32"><path :d="sparkPath([...seriesUp], 120, 32, 2)" stroke="#10b981" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">Churn rate</div>
         <div class="m-value">3.2%</div>
-        <BaseTag size="sm" variant="warning" text="+0.4%" />
+        <BaseTag size="sm" variant="warning" label="+0.4%" />
         <svg class="spark" viewBox="0 0 120 32"><path :d="sparkPath([...seriesDown], 120, 32, 2)" stroke="#ef4444" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">NPS</div>
         <div class="m-value">62</div>
-        <BaseTag size="sm" variant="success" text="+4 điểm" />
+        <BaseTag size="sm" variant="success" label="+4 điểm" />
         <svg class="spark" viewBox="0 0 120 32"><path :d="sparkPath([...seriesFlat], 120, 32, 2)" stroke="#94a3b8" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
     </div>
 
-    <div class="cols">
+    <div class="cols" v-reveal>
       <BaseCard title="MRR theo tháng" subtitle="So với mục tiêu" padded shadow="sm">
         <svg class="big-chart" viewBox="0 0 600 220" preserveAspectRatio="none">
           <path :d="sparkArea([...seriesUp, ...seriesUp], 600, 220, 12)" fill="rgba(37,99,235,0.15)" />
@@ -84,7 +84,7 @@ const totalMrr = '1.562 triệu'
       </BasePanel>
     </div>
 
-    <BasePanel title="Retention cohort">
+    <BasePanel v-reveal title="Retention cohort">
       <table class="cohort">
         <thead><tr>
           <th>Tháng</th><th>KH mới</th>
@@ -97,7 +97,7 @@ const totalMrr = '1.562 triệu'
             <td><div class="cell" :style="{ background: `rgba(37,99,235,${c.retain / 100})` }">{{ c.retain }}%</div></td>
             <td><div class="cell" :style="{ background: `rgba(37,99,235,${(c.retain - 5) / 100})` }">{{ Math.max(0, c.retain - 5) }}%</div></td>
             <td><div class="cell" :style="{ background: `rgba(37,99,235,${(c.retain - 12) / 100})` }">{{ Math.max(0, c.retain - 12) }}%</div></td>
-            <td><BaseTag :variant="c.churn > 12 ? 'warning' : 'success'" :text="`${c.churn}%`" size="sm" /></td>
+            <td><BaseTag :variant="c.churn > 12 ? 'warning' : 'success'" :label="`${c.churn}%`" size="sm" /></td>
           </tr>
         </tbody>
       </table>

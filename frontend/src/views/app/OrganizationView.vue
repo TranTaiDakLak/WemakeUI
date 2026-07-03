@@ -41,7 +41,7 @@ const TEAMS = [
     <BaseTabs v-model="tab" :tabs="tabs" />
 
     <!-- Thành viên -->
-    <div v-if="tab === 'thanh-vien'" class="member-table-wrap">
+    <div v-if="tab === 'thanh-vien'" class="member-table-wrap" v-reveal>
       <table class="member-table">
         <thead>
           <tr><th>Thành viên</th><th>Email</th><th>Vai trò</th><th>Trạng thái</th><th>Tham gia</th><th>Hành động</th></tr>
@@ -70,8 +70,8 @@ const TEAMS = [
     </div>
 
     <!-- Nhóm -->
-    <div v-if="tab === 'nhom'" class="teams-grid">
-      <BaseCard v-for="team in TEAMS" :key="team.id">
+    <div v-if="tab === 'nhom'" class="teams-grid" v-reveal>
+      <BaseCard v-for="team in TEAMS" :key="team.id" hover-effect="lift">
         <template #header>
           <div class="team-head">
             <span class="team-name">{{ team.name }}</span>

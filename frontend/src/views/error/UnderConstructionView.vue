@@ -19,15 +19,17 @@ function subscribe() {
     title="Tính năng đang xây dựng"
     description="Chúng tôi đang phát triển trang này. Đăng ký để nhận thông báo ngay khi sẵn sàng."
     variant="gradient"
+    tone="warning"
   >
     <template #illustration>
       <div class="emoji">🏗️</div>
     </template>
 
     <template #actions>
-      <BaseTag size="md" variant="primary" text="dự kiến: tháng 6/2026" />
+      <BaseTag size="md" variant="primary" label="dự kiến: tháng 6/2026" />
+      <BaseButton variant="ghost" size="lg" @click="$router.back()">← Quay lại</BaseButton>
       <RouterLink to="/" class="no-link">
-        <BaseButton variant="ghost" size="lg">← Về trang chủ</BaseButton>
+        <BaseButton variant="ghost" size="lg">Về trang chủ</BaseButton>
       </RouterLink>
     </template>
 

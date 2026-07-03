@@ -49,7 +49,8 @@ const SECTIONS: SidebarSection[] = [
   /* ── Top ── */
   {
     items: [
-      { id: '/', label: 'Tổng quan', icon: ICON_HOME, href: '#/' },
+      { id: '/lab', label: 'Tổng quan', icon: ICON_HOME, href: '#/lab' },
+      { id: '/showcase/apps', label: 'Bộ giao diện hoàn chỉnh', icon: ICON_APP, href: '#/showcase/apps' },
     ],
   },
   /* ── Demo Apps — entry points, mỗi app có sidebar riêng ── */
@@ -93,10 +94,10 @@ const SECTIONS: SidebarSection[] = [
         :sections="SECTIONS"
         :active-id="activeId"
         brand="WemakeUI"
+        logo-src="/logo.png"
         :logo-gradient="true"
         collapse-position="header"
       />
-
     </template>
 
     <div class="demo-content">

@@ -119,7 +119,7 @@ function resend() {
     <div v-else class="success">
       <div class="success-icon">🛡️</div>
       <h2>Xác thực thành công</h2>
-      <BaseTag size="md" variant="success" text="đã xác minh" />
+      <BaseTag size="md" variant="success" label="đã xác minh" />
       <RouterLink to="/dashboard/overview" class="cta">
         <BaseButton block>Vào dashboard →</BaseButton>
       </RouterLink>

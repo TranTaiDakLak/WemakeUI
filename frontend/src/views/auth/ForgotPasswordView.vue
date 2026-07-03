@@ -48,7 +48,7 @@ async function submit() {
       />
       <h2>Đã gửi đường dẫn</h2>
       <p>Kiểm tra hộp thư <strong>{{ email }}</strong>. Đường dẫn có hiệu lực trong 30 phút.</p>
-      <BaseTag size="md" variant="success" text="đã gửi" />
+      <BaseTag size="md" variant="success" label="đã gửi" />
       <div class="sent-actions">
         <BaseButton variant="ghost" @click="sent = false">Gửi lại email khác</BaseButton>
         <RouterLink to="/auth/login">

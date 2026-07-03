@@ -43,38 +43,38 @@ function intensity(d: number, h: number): number {
       <BaseButton size="sm">30 ngày</BaseButton>
     </template>
 
-    <div class="kpi-grid">
+    <div class="kpi-grid" v-reveal>
       <BaseCard padded shadow="sm">
         <div class="metric">
           <div class="metric-label">Phiên truy cập</div>
           <div class="metric-value">25,632</div>
-          <BaseTag size="sm" variant="success" text="+8.2% w-w" />
+          <BaseTag size="sm" variant="success" label="+8.2% w-w" />
         </div>
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="metric">
           <div class="metric-label">Lượt xem trang</div>
           <div class="metric-value">182,408</div>
-          <BaseTag size="sm" variant="success" text="+12% w-w" />
+          <BaseTag size="sm" variant="success" label="+12% w-w" />
         </div>
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="metric">
           <div class="metric-label">Thời gian TB</div>
           <div class="metric-value">3:42</div>
-          <BaseTag size="sm" variant="success" text="+18s" />
+          <BaseTag size="sm" variant="success" label="+18s" />
         </div>
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="metric">
           <div class="metric-label">Tỷ lệ bounce</div>
           <div class="metric-value">38.4%</div>
-          <BaseTag size="sm" variant="warning" text="-2.1%" />
+          <BaseTag size="sm" variant="warning" label="-2.1%" />
         </div>
       </BaseCard>
     </div>
 
-    <div class="cols">
+    <div class="cols" v-reveal>
       <BaseCard title="Lượt xem theo giờ" padded shadow="sm">
         <svg class="chart" viewBox="0 0 600 220" preserveAspectRatio="none">
           <path :d="sparkArea([...seriesVolatile, ...seriesUp, ...seriesVolatile], 600, 220, 8)" fill="rgba(37,99,235,0.15)" />
@@ -88,7 +88,7 @@ function intensity(d: number, h: number): number {
             <div class="src-line">
               <strong>{{ t.src }}</strong>
               <span>{{ t.val.toLocaleString('vi-VN') }}</span>
-              <BaseTag :variant="t.delta.startsWith('+') ? 'success' : 'danger'" :text="t.delta" size="sm" />
+              <BaseTag :variant="t.delta.startsWith('+') ? 'success' : 'danger'" :label="t.delta" size="sm" />
             </div>
             <BaseProgress :value="t.pct" size="sm" variant="primary" />
           </li>
@@ -96,7 +96,7 @@ function intensity(d: number, h: number): number {
       </BaseCard>
     </div>
 
-    <BaseCard title="Phễu chuyển đổi" subtitle="từ truy cập → đơn hàng" padded shadow="sm">
+    <BaseCard v-reveal title="Phễu chuyển đổi" subtitle="từ truy cập → đơn hàng" padded shadow="sm">
       <ul class="funnel">
         <li v-for="(f, i) in funnel" :key="f.step" class="funnel-step">
           <div class="funnel-bar" :style="{ width: `${f.pct}%` }">
@@ -110,7 +110,7 @@ function intensity(d: number, h: number): number {
       </ul>
     </BaseCard>
 
-    <BaseCard title="Heatmap traffic" subtitle="Theo ngày × giờ" padded shadow="sm">
+    <BaseCard v-reveal title="Heatmap traffic" subtitle="Theo ngày × giờ" padded shadow="sm">
       <div class="heatmap">
         <div class="hm-yax">
           <span v-for="d in days" :key="d">{{ d }}</span>

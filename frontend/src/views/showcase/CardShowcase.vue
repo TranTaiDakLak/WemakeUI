@@ -187,6 +187,59 @@ const gboxCollapsed = ref(false)
         </div>
       </GroupBox>
 
+      <!-- ── Hover Effect variants ── -->
+      <GroupBox title="hoverEffect — kiểu hover nâng cao">
+        <div class="card-grid">
+
+          <div class="card-item">
+            <p class="card-label">hover-effect="glow"</p>
+            <BaseCard hover-effect="glow" title="Glow" subtitle="viền gradient phát sáng">
+              Vùng xanh gradient fade vào trong từ rìa.
+            </BaseCard>
+          </div>
+
+          <div class="card-item">
+            <p class="card-label">hover-effect="lift"</p>
+            <BaseCard hover-effect="lift" title="Lift" subtitle="nhấc lên + shadow sâu">
+              translateY(-4px) kèm shadow lan rộng.
+            </BaseCard>
+          </div>
+
+          <div class="card-item">
+            <p class="card-label">hover-effect="shimmer"</p>
+            <BaseCard hover-effect="shimmer" title="Shimmer" subtitle="ánh sáng sweep">
+              Scale nhẹ + ánh sáng brand sweep qua.
+            </BaseCard>
+          </div>
+
+          <div class="card-item">
+            <p class="card-label">hover-effect="glow-lift"</p>
+            <BaseCard hover-effect="glow-lift" title="Glow + Lift" subtitle="kết hợp cả hai">
+              ::before (glow) + transform/shadow (lift) — không conflict.
+            </BaseCard>
+          </div>
+
+          <div class="card-item">
+            <p class="card-label">hover-effect="glow-shimmer"</p>
+            <BaseCard hover-effect="glow-shimmer" title="Glow + Shimmer" subtitle="kết hợp cả hai">
+              ::before (glow) + ::after (shimmer) — không conflict.
+            </BaseCard>
+          </div>
+
+          <div class="card-item">
+            <p class="card-label">accentColor — viền trái + glow theo màu riêng</p>
+            <BaseCard accent-color="#2563eb" hover-effect="glow-lift" title="Accent xanh" subtitle="accentColor=&quot;#2563eb&quot;">
+              Override màu glow/lift, không phụ thuộc brand color.
+            </BaseCard>
+          </div>
+
+        </div>
+        <p class="hover-note">
+          Lưu ý: <code>lift</code> và <code>shimmer</code> không combine được với nhau vì cả hai cùng dùng
+          <code>transform</code> (translateY vs scale) — sẽ ghi đè lẫn nhau.
+        </p>
+      </GroupBox>
+
       <!-- ── GroupBox ── -->
       <GroupBox title="GroupBox — variant đơn giản">
         <div class="card-grid">
@@ -242,7 +295,15 @@ const gboxCollapsed = ref(false)
           </div>
           <div class="anatomy-item">
             <span class="anatomy-key">hoverable</span>
-            <span class="anatomy-val">translateY(-2px) + shadow++ khi hover. Không áp dụng khi disabled.</span>
+            <span class="anatomy-val">translateY(-2px) + shadow++ khi hover. Không áp dụng khi disabled. Deprecated — dùng hoverEffect.</span>
+          </div>
+          <div class="anatomy-item">
+            <span class="anatomy-key">hoverEffect</span>
+            <span class="anatomy-val">none · glow · lift · shimmer · glow-lift · glow-shimmer — xem chi tiết ở nhóm "hoverEffect" phía trên.</span>
+          </div>
+          <div class="anatomy-item">
+            <span class="anatomy-key">accentColor</span>
+            <span class="anatomy-val">CSS color — thêm viền trái 3px + nhuộm màu glow/lift riêng, thay vì brand-primary mặc định.</span>
           </div>
           <div class="anatomy-item">
             <span class="anatomy-key">clickable</span>
@@ -342,6 +403,14 @@ const gboxCollapsed = ref(false)
   display: flex;
   flex-direction: column;
   gap: var(--wx-space-2);
+}
+
+/* ── Hover effect note ── */
+.hover-note {
+  margin: 0;
+  font-size: var(--wx-fs-13);
+  color: var(--wx-text-secondary);
+  line-height: 1.5;
 }
 
 /* ── code inline ── */

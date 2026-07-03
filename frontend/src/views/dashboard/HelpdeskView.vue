@@ -39,30 +39,30 @@ const agents = [
       <BaseButton size="sm">+ Ticket</BaseButton>
     </template>
 
-    <div class="kpi-grid">
+    <div class="kpi-grid" v-reveal>
       <BaseCard padded shadow="sm">
         <div class="m-label">Ticket đang mở</div>
         <div class="m-value">38</div>
-        <BaseTag size="sm" variant="warning" text="5 critical" />
+        <BaseTag size="sm" variant="warning" label="5 critical" />
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">SLA tuân thủ</div>
         <div class="m-value">94.2%</div>
-        <BaseTag size="sm" variant="success" text="đạt mục tiêu 90%" />
+        <BaseTag size="sm" variant="success" label="đạt mục tiêu 90%" />
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">First response TB</div>
         <div class="m-value">14 phút</div>
-        <BaseTag size="sm" variant="primary" text="-2 phút" />
+        <BaseTag size="sm" variant="primary" label="-2 phút" />
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">CSAT</div>
         <div class="m-value">4.7 / 5</div>
-        <BaseTag size="sm" variant="success" text="218 đánh giá" />
+        <BaseTag size="sm" variant="success" label="218 đánh giá" />
       </BaseCard>
     </div>
 
-    <div class="cols">
+    <div class="cols" v-reveal>
       <BasePanel title="Ticket mới nhất">
         <table class="tickets">
           <thead><tr>
@@ -73,8 +73,8 @@ const agents = [
             <tr v-for="t in tickets" :key="t.id">
               <td><code class="mono">{{ t.id }}</code></td>
               <td class="subj">{{ t.subj }}</td>
-              <td><BaseTag :variant="pVariant(t.priority)" :text="t.priority" size="sm" /></td>
-              <td><BaseTag :variant="sVariant(t.status)" :text="sLabel(t.status)" size="sm" /></td>
+              <td><BaseTag :variant="pVariant(t.priority)" :label="t.priority" size="sm" /></td>
+              <td><BaseTag :variant="sVariant(t.status)" :label="sLabel(t.status)" size="sm" /></td>
               <td><BaseAvatar :name="t.agent" size="xs" /></td>
               <td class="muted small">{{ t.age }}</td>
             </tr>
@@ -96,7 +96,7 @@ const agents = [
       </BasePanel>
     </div>
 
-    <BaseCard title="Phân loại ticket" padded shadow="sm">
+    <BaseCard v-reveal title="Phân loại ticket" padded shadow="sm">
       <div class="topics">
         <div v-for="(c, i) in [
           { label: 'Đăng nhập', count: 28 },

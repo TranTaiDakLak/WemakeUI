@@ -39,10 +39,10 @@ function pick(id: string) {
 <template>
   <AuthLayout :no-aside="true" align="top">
     <header class="auth-head">
-      <div class="brand">
-        <div class="brand-logo">W</div>
+      <RouterLink to="/" class="brand">
+        <img src="/logo.png" alt="WemakeUI" class="brand-logo" />
         <span class="brand-name">WemakeUI</span>
-      </div>
+      </RouterLink>
       <h1>Chọn workspace</h1>
       <p>Bạn có quyền truy cập <strong>{{ workspaces.length }}</strong> workspace.
         Chọn một để tiếp tục.</p>
@@ -65,14 +65,14 @@ function pick(id: string) {
         <div class="ws-body">
           <div class="ws-line">
             <strong>{{ w.name }}</strong>
-            <BaseTag :text="w.role" size="sm" :variant="w.role === 'owner' ? 'primary' : w.role === 'admin' ? 'info' : 'neutral'" />
+            <BaseTag :label="w.role" size="sm" :variant="w.role === 'owner' ? 'primary' : w.role === 'admin' ? 'info' : 'neutral'" />
           </div>
           <div class="ws-sub">
             <span>{{ w.subdomain }}.wemake.app</span>
             <span class="dot">•</span>
             <span>{{ w.members }} thành viên</span>
             <span class="dot">•</span>
-            <BaseTag :text="w.plan" size="sm" :variant="w.plan === 'pro' ? 'primary' : w.plan === 'team' ? 'success' : 'neutral'" />
+            <BaseTag :label="w.plan" size="sm" :variant="w.plan === 'pro' ? 'primary' : w.plan === 'team' ? 'success' : 'neutral'" />
           </div>
         </div>
         <div class="ws-avatars">
@@ -94,16 +94,11 @@ function pick(id: string) {
 
 <style scoped>
 .auth-head { display: flex; flex-direction: column; gap: var(--wx-space-2); }
-.brand { display: flex; align-items: center; gap: var(--wx-space-2); }
+.brand { display: flex; align-items: center; gap: var(--wx-space-2); text-decoration: none; color: inherit; }
 .brand-logo {
   width: 32px; height: 32px;
-  border-radius: var(--wx-radius-lg);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--wx-gradient-button);
-  color: white;
-  font-weight: var(--wx-fw-bold);
+  object-fit: contain;
+  display: inline-block;
 }
 .brand-name { font-size: var(--wx-fs-16); font-weight: var(--wx-fw-semibold); }
 .auth-head h1 { margin: 0; font-size: var(--wx-fs-28); font-weight: var(--wx-fw-semibold); letter-spacing: var(--wx-tracking-tight); }

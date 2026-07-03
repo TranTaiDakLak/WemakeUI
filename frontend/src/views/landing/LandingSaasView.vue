@@ -31,7 +31,7 @@ const LOGOS = ['Công ty TNHH ABC', 'Startup XYZ', 'Tập đoàn DEF', 'Corp GHI
         </p>
         <div class="hero-actions">
           <BaseButton variant="primary" size="lg" tag="a" href="#/auth/register">Bắt đầu miễn phí</BaseButton>
-          <BaseButton variant="secondary" size="lg" tag="a" href="#/showcase">Xem showcase</BaseButton>
+          <BaseButton variant="secondary" size="lg" tag="a" href="#/lab">Xem showcase</BaseButton>
         </div>
         <p class="hero-social">Được tin dùng bởi 1,200+ developer · ⭐ 4.9/5</p>
       </div>
@@ -50,8 +50,8 @@ const LOGOS = ['Công ty TNHH ABC', 'Startup XYZ', 'Tập đoàn DEF', 'Corp GHI
       <div class="section-inner">
         <h2 class="section-title">Mọi thứ bạn cần để ship nhanh</h2>
         <p class="section-desc">Từ token đến page template — không cần build từ đầu.</p>
-        <div class="features-grid">
-          <div v-for="f in FEATURES" :key="f.title" class="feature-card">
+        <div class="features-grid" v-reveal>
+          <div v-for="(f, i) in FEATURES" :key="f.title" v-reveal="i * 60" class="feature-card">
             <component :is="f.icon" class="feature-icon" :size="28" />
             <h3 class="feature-name">{{ f.title }}</h3>
             <p class="feature-desc">{{ f.desc }}</p>
@@ -61,7 +61,7 @@ const LOGOS = ['Công ty TNHH ABC', 'Startup XYZ', 'Tập đoàn DEF', 'Corp GHI
     </section>
 
     <!-- CTA -->
-    <section class="cta-section">
+    <section class="cta-section" v-reveal>
       <div class="cta-inner">
         <h2 class="cta-title">Sẵn sàng xây dựng<br>sản phẩm tuyệt vời?</h2>
         <p class="cta-desc">Dùng thử miễn phí 14 ngày, không cần thẻ tín dụng.</p>

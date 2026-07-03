@@ -8,6 +8,8 @@
  *  - aside:   override left panel content (mặc định: brand + tagline + testimonial)
  *  - footer:  footer dưới form (privacy / terms / version)
  */
+import { RouterLink } from 'vue-router'
+
 withDefaults(defineProps<{
   /** ẩn aside (cho login-v2 alt layout) */
   noAside?: boolean
@@ -27,10 +29,10 @@ withDefaults(defineProps<{
     <aside v-if="!noAside" class="auth-aside" :data-tone="asideTone">
       <div class="auth-aside__content">
         <slot name="aside">
-          <div class="auth-brand">
-            <div class="auth-brand__logo">W</div>
+          <RouterLink to="/" class="auth-brand">
+            <img src="/logo.png" alt="WemakeUI" class="auth-brand__logo" />
             <span class="auth-brand__name">WemakeUI</span>
-          </div>
+          </RouterLink>
           <h1 class="auth-tagline">
             Bộ UI kit <em>cross-platform</em> cho team Việt.
           </h1>
@@ -140,22 +142,11 @@ withDefaults(defineProps<{
   gap: var(--wx-space-5);
 }
 
-.auth-brand { display: flex; align-items: center; gap: var(--wx-space-2); }
+.auth-brand { display: flex; align-items: center; gap: var(--wx-space-2); text-decoration: none; color: inherit; }
 .auth-brand__logo {
   width: 40px; height: 40px;
-  border-radius: var(--wx-radius-lg);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--wx-gradient-button);
-  color: white;
-  font-weight: var(--wx-fw-bold);
-  font-size: var(--wx-fs-18);
-}
-.auth-aside[data-tone="brand"] .auth-brand__logo,
-.auth-aside[data-tone="dark"]  .auth-brand__logo {
-  background: rgba(255, 255, 255, 0.20);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.20);
+  object-fit: contain;
+  display: inline-block;
 }
 .auth-brand__name {
   font-size: var(--wx-fs-18);

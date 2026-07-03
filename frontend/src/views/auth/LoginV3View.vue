@@ -165,10 +165,10 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
     <div class="v3-wrap">
 
       <!-- brand -->
-      <div class="v3-brand">
-        <div class="v3-logo" aria-hidden="true">W</div>
+      <RouterLink to="/" class="v3-brand">
+        <img src="/logo.png" alt="WemakeUI" class="v3-logo" />
         <span class="v3-brand-name">WemakeUI</span>
-      </div>
+      </RouterLink>
 
       <!-- card -->
       <div class="v3-card" :class="{ 'v3-card--shake': cardShake }">
@@ -396,15 +396,12 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   display: flex;
   align-items: center;
   gap: var(--wx-space-2);
+  text-decoration: none;
+  color: inherit;
 }
 .v3-logo {
   width: 36px; height: 36px;
-  border-radius: var(--wx-radius-lg);
-  background: var(--wx-gradient-button, var(--wx-brand-primary));
-  display: flex; align-items: center; justify-content: center;
-  font-size: var(--wx-fs-16);
-  font-weight: var(--wx-fw-bold);
-  color: #fff;
+  object-fit: contain;
   flex-shrink: 0;
 }
 .v3-brand-name {

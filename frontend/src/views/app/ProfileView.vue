@@ -22,7 +22,7 @@ const recent = [
 <template>
   <AppPageLayout section="app" current="hồ sơ" page-title="Hồ sơ cá nhân" page-description="Thông tin cá nhân và lịch sử hoạt động">
     <template #actions>
-      <BaseButton size="sm" variant="secondary" tag="a" href="#/app/profile/edit">Chỉnh sửa</BaseButton>
+      <BaseButton size="sm" variant="secondary" tag="a" href="#/app/profile-edit">Chỉnh sửa</BaseButton>
     </template>
 
     <div class="profile-grid">
@@ -50,7 +50,7 @@ const recent = [
           <template #header><span class="card-label">Kỹ năng</span></template>
           <template #body>
             <div class="skills">
-              <BaseTag v-for="s in skills" :key="s" :text="s" size="sm" variant="neutral" />
+              <BaseTag v-for="s in skills" :key="s" :label="s" size="sm" variant="neutral" />
             </div>
           </template>
         </BaseCard>
@@ -58,8 +58,8 @@ const recent = [
 
       <!-- right: stats + activity -->
       <div class="profile-main">
-        <div class="stats-row">
-          <BaseCard v-for="s in stats" :key="s.label" class="stat-card">
+        <div class="stats-row" v-reveal>
+          <BaseCard v-for="(s, i) in stats" :key="s.label" v-reveal="i * 60" class="stat-card" hover-effect="lift">
             <template #body>
               <span class="stat-value">{{ s.value }}</span>
               <span class="stat-label">{{ s.label }}</span>

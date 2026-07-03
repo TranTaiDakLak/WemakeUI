@@ -47,9 +47,9 @@ function submit() {
   <AppShell variant="topnav" :max-width="1200" centered background="base">
     <template #topbar>
       <div class="brand">
-        <div class="logo">W</div>
+        <img src="/logo.png" alt="WemakeUI" class="logo" />
         <span class="brand-name">WemakeUI</span>
-        <BaseTag size="sm" variant="info" text="beta" />
+        <BaseTag size="sm" variant="info" label="beta" />
       </div>
     </template>
 
@@ -76,7 +76,7 @@ function submit() {
 
     <!-- ── main ── -->
     <section class="hero">
-      <BaseTag size="md" variant="primary" text="Mới · v0.3.0" />
+      <BaseTag size="md" variant="primary" label="Mới · v0.3.0" />
       <h1 class="hero-title">
         UI kit Vue 3 cross-platform
         <span class="hero-grad">cho mọi nền tảng</span>
@@ -190,14 +190,7 @@ function submit() {
 .logo {
   width: 32px;
   height: 32px;
-  border-radius: var(--wx-radius-lg);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--wx-gradient-button);
-  color: white;
-  font-weight: var(--wx-fw-bold);
-  font-size: var(--wx-fs-16);
+  object-fit: contain;
 }
 .brand-name {
   font-size: var(--wx-fs-16);

@@ -21,7 +21,7 @@ function setState(s: typeof state.value) { state.value = s }
       <BaseSpinner size="lg" />
       <h2>Đang chờ xác minh</h2>
       <p>Mở hộp thư của bạn — đường dẫn có hiệu lực trong 30 phút.</p>
-      <BaseTag size="md" variant="primary" text="đang chờ" />
+      <BaseTag size="md" variant="primary" label="đang chờ" />
       <div class="actions">
         <BaseButton variant="ghost">Mở Gmail</BaseButton>
         <BaseButton variant="ghost">Mở Outlook</BaseButton>
@@ -41,7 +41,7 @@ function setState(s: typeof state.value) { state.value = s }
       />
       <h2>Xác minh thành công!</h2>
       <p>Email của bạn đã được xác minh. Bạn có thể tiếp tục.</p>
-      <BaseTag size="md" variant="success" text="đã xác minh" />
+      <BaseTag size="md" variant="success" label="đã xác minh" />
       <RouterLink to="/auth/onboarding" class="cta-link">
         <BaseButton block>Tiếp tục onboarding →</BaseButton>
       </RouterLink>
@@ -58,7 +58,7 @@ function setState(s: typeof state.value) { state.value = s }
       />
       <h2>Đường dẫn đã hết hạn</h2>
       <p>Đường dẫn xác minh chỉ có hiệu lực trong 30 phút. Hãy yêu cầu gửi lại.</p>
-      <BaseTag size="md" variant="warning" text="hết hạn" />
+      <BaseTag size="md" variant="warning" label="hết hạn" />
       <BaseButton block @click="setState('pending')">Gửi đường dẫn mới</BaseButton>
     </div>
 
@@ -72,7 +72,7 @@ function setState(s: typeof state.value) { state.value = s }
       />
       <h2>Không thể xác minh</h2>
       <p>Đường dẫn không hợp lệ hoặc đã được sử dụng. Vui lòng thử lại.</p>
-      <BaseTag size="md" variant="danger" text="lỗi" />
+      <BaseTag size="md" variant="danger" label="lỗi" />
       <BaseButton block @click="setState('pending')">Yêu cầu đường dẫn mới</BaseButton>
     </div>
 

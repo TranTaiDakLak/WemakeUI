@@ -56,7 +56,7 @@ function subscribe() {
       <BaseInput v-model="email" type="email" placeholder="ban@congty.vn" />
       <BaseButton type="submit">Báo tôi khi ra mắt</BaseButton>
     </form>
-    <BaseTag v-else size="md" variant="success" :text="`✓ đã đăng ký (${email})`" />
+    <BaseTag v-else size="md" variant="success" :label="`✓ đã đăng ký (${email})`" />
 
     <div class="social">
       <BaseButton variant="ghost">𝕏 Twitter</BaseButton>

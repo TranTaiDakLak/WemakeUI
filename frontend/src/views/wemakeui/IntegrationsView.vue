@@ -62,8 +62,8 @@ const TYPE_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'neutral'> =
     </template>
 
     <div class="section-title">Tích hợp bên ngoài</div>
-    <div class="integrations-grid">
-      <BaseCard v-for="itg in INTEGRATIONS" :key="itg.id" class="itg-card">
+    <div class="integrations-grid" v-reveal>
+      <BaseCard v-for="(itg, i) in INTEGRATIONS" :key="itg.id" v-reveal="i * 60" class="itg-card" hover-effect="lift">
         <template #header>
           <div class="itg-head">
             <div class="itg-icon">{{ itg.icon }}</div>
@@ -125,7 +125,7 @@ const TYPE_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'neutral'> =
       </BaseCard>
     </Transition>
 
-    <div class="wh-table-wrap">
+    <div class="wh-table-wrap" v-reveal>
       <table class="wh-table">
         <thead><tr><th>Bật</th><th>URL</th><th>Sự kiện</th><th>Deliveries</th><th>Lỗi</th><th></th></tr></thead>
         <tbody>

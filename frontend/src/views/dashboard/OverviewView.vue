@@ -39,12 +39,12 @@ const activity = [
       <BaseButton size="sm">Xuất CSV</BaseButton>
     </template>
 
-    <div class="kpi-grid">
-      <BaseCard v-for="k in kpi" :key="k.label" padded shadow="sm" radius="lg" hoverable>
+    <div class="kpi-grid" v-reveal>
+      <BaseCard v-for="(k, i) in kpi" :key="k.label" v-reveal="i * 60" padded shadow="sm" radius="lg" hover-effect="lift">
         <div class="kpi">
           <div class="kpi-head">
             <span class="kpi-label">{{ k.label }}</span>
-            <BaseTag size="sm" :variant="k.tone" :text="k.delta" />
+            <BaseTag size="sm" :variant="k.tone" :label="k.delta" />
           </div>
           <div class="kpi-value">{{ k.value }}</div>
           <svg class="kpi-spark" viewBox="0 0 120 32" preserveAspectRatio="none">
@@ -55,11 +55,11 @@ const activity = [
       </BaseCard>
     </div>
 
-    <div class="cols">
-      <BaseCard title="Doanh thu theo ngày" subtitle="So sánh 14 ngày gần nhất" padded shadow="sm">
+    <div class="cols" v-reveal>
+      <BaseCard title="Doanh thu theo ngày" subtitle="So sánh 14 ngày gần nhất" padded shadow="sm" hover-effect="glow">
         <template #actions>
-          <BaseTag text="primary" size="sm" variant="primary" />
-          <BaseTag text="last week" size="sm" />
+          <BaseTag label="primary" size="sm" variant="primary" />
+          <BaseTag label="last week" size="sm" />
         </template>
         <svg class="chart" viewBox="0 0 600 200" preserveAspectRatio="none">
           <path :d="sparkArea([...seriesVolatile, ...seriesUp], 600, 200, 8)" fill="rgba(37,99,235,0.15)" />
@@ -72,7 +72,7 @@ const activity = [
         </div>
       </BaseCard>
 
-      <BaseCard title="Phân bổ gói" padded shadow="sm">
+      <BaseCard title="Phân bổ gói" padded shadow="sm" hover-effect="glow">
         <div class="donut">
           <svg viewBox="0 0 42 42" class="donut-svg" aria-hidden="true">
             <circle cx="21" cy="21" r="15.91" fill="white" stroke="#f1f5f9" stroke-width="3" />
@@ -102,7 +102,7 @@ const activity = [
       </BaseCard>
     </div>
 
-    <BasePanel title="Hoạt động gần đây" description="20 sự kiện cuối · realtime">
+    <BasePanel v-reveal title="Hoạt động gần đây" description="20 sự kiện cuối · realtime">
       <template #actions>
         <BaseAvatarGroup :max="3" size="xs">
           <BaseAvatar name="A" size="xs" status="online" />

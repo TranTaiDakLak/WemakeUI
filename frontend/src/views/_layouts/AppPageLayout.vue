@@ -68,7 +68,7 @@ const SECTIONS: Record<string, SidebarSection[]> = {
       { id: 'chat',    label: 'Nhắn tin', icon: I.chat, href: '#/app/chat',    badge: 3 },
     ]},
     { label: 'Công việc', items: [
-      { id: 'invoice',  label: 'Hoá đơn',     icon: I.invoice, href: '#/app/invoice' },
+      { id: 'invoice',  label: 'Hoá đơn',     icon: I.invoice, href: '#/app/invoices' },
       { id: 'calendar', label: 'Lịch',         icon: I.cal,     href: '#/app/calendar' },
       { id: 'files',    label: 'Tệp quản lý',  icon: I.file,    href: '#/app/files' },
     ]},
@@ -166,6 +166,7 @@ const activeId = computed(() => {
         :active-id="activeId"
         :collapsed="collapsed"
         :brand="cfg.brand"
+        logo-src="/logo.png"
         @update:collapsed="(v: boolean) => collapsed = v"
       />
     </template>
@@ -177,7 +178,7 @@ const activeId = computed(() => {
         <span>{{ cfg.breadcrumb }}</span>
         <span class="bc-sep">/</span>
         <strong>{{ current }}</strong>
-        <BaseTag size="sm" :variant="cfg.tagVariant" text="demo" />
+        <BaseTag size="sm" :variant="cfg.tagVariant" label="demo" />
       </template>
       <template v-if="$slots.actions" #actions>
         <slot name="actions" />

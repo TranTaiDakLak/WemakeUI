@@ -26,7 +26,7 @@ import { computed } from 'vue'
 
     <section class="careers-section">
       <div class="careers-inner">
-        <div class="culture-grid">
+        <div class="culture-grid" v-reveal>
           <div v-for="[icon, label, desc] in [['🏖️','Flexible work','Remote-first, flexi hours'],['📚','L&D budget','2M/năm cho học tập'],['🏥','Bảo hiểm đầy đủ','BHXH + bảo hiểm sức khoẻ'],['💰','Stock options','ESOP cho nhân viên toàn thời gian']]" :key="label" class="culture-card">
             <span class="culture-icon">{{ icon }}</span>
             <span class="culture-label">{{ label }}</span>
@@ -38,11 +38,11 @@ import { computed } from 'vue'
           <div class="jobs-header">
             <h2 class="jobs-title">Vị trí đang tuyển ({{ filtered.length }})</h2>
             <div class="dept-filters">
-              <BaseTag v-for="d in DEPTS" :key="d" :text="d" size="sm" :variant="filter === d ? 'primary' : 'neutral'" style="cursor:pointer" @click="filter = d" />
+              <BaseTag v-for="d in DEPTS" :key="d" :label="d" size="sm" :variant="filter === d ? 'primary' : 'neutral'" style="cursor:pointer" @click="filter = d" />
             </div>
           </div>
 
-          <div class="jobs-list">
+          <div class="jobs-list" v-reveal>
             <div v-for="job in filtered" :key="job.id" class="job-card">
               <div class="job-info">
                 <h3 class="job-title">{{ job.title }}</h3>

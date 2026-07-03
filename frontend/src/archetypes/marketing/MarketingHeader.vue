@@ -29,8 +29,8 @@ function isActive(to: string) {
 
       <!-- Logo -->
       <RouterLink to="/home" class="mkt-logo">
-        <span class="mkt-logo__mark">W</span>
-        <span class="mkt-logo__text">emake</span>
+        <img src="/logo.png" alt="WemakeUI" class="mkt-logo__mark" />
+        <span class="mkt-logo__text">WemakeUI</span>
       </RouterLink>
 
       <!-- Desktop nav -->
@@ -122,15 +122,7 @@ function isActive(to: string) {
 .mkt-logo__mark {
   width: 32px;
   height: 32px;
-  border-radius: var(--wx-radius-lg);
-  background: var(--wx-brand-primary);
-  color: #fff;
-  font-size: var(--wx-fs-18);
-  font-weight: var(--wx-fw-bold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: -1px;
+  object-fit: contain;
   flex-shrink: 0;
 }
 

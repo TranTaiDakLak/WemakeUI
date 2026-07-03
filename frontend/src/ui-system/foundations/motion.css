@@ -112,7 +112,7 @@
 
 /* ── Scroll Reveal ────────────────────────────────────── */
 @keyframes wx-reveal-up {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(50px); }
   to   { opacity: 1; transform: translateY(0);   }
 }
 @keyframes wx-reveal-in {
@@ -125,18 +125,27 @@
 }
 
 .wx-reveal {
-  opacity: 0;
+  opacity: 0 !important;
+  transform: translateY(50px) !important;
+  /* decelerate (thay vì ease-out-expo) — opacity/translate tăng đều suốt 0.9s
+     thay vì "pop" xong trong 200-300ms đầu, để mắt kịp thấy chuyển động dần dần. */
+  transition: opacity 0.9s cubic-bezier(0, 0, 0.2, 1), transform 0.9s cubic-bezier(0, 0, 0.2, 1) !important;
+  transition-delay: var(--stagger-delay, 0ms) !important;
 }
 .wx-reveal.is-revealed {
-  animation: wx-reveal-up var(--wx-d-normal, 240ms) var(--wx-ease-decelerate, cubic-bezier(0, 0, 0.2, 1)) both;
-  animation-delay: var(--stagger-delay, 0ms);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+.wx-reveal--fade {
+  transform: none !important;
 }
 .wx-reveal--fade.is-revealed {
-  animation-name: wx-reveal-in;
+  transform: none !important;
 }
-@media (prefers-reduced-motion: reduce) {
-  .wx-reveal { opacity: 1 !important; }
-  .wx-reveal.is-revealed { animation: none !important; }
+/* prefers-reduced-motion: v-reveal tự thêm --fade + --reduced-motion (xem v-reveal.ts) —
+   bỏ chuyển động trượt, chỉ giữ fade nhanh/nhẹ để nội dung không "bụp" hiện trơ trọi. */
+.wx-reveal--reduced-motion {
+  transition: opacity 0.35s linear !important;
 }
 
 /* ── Live ping dot ────────────────────────────────────── */

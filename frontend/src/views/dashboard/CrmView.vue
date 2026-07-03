@@ -44,7 +44,7 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
       <BaseButton size="sm">+ Deal mới</BaseButton>
     </template>
 
-    <div class="summary">
+    <div class="summary" v-reveal>
       <BaseCard padded shadow="sm">
         <div class="metric"><span>Pipeline value</span><strong>2.680 triệu</strong></div>
       </BaseCard>
@@ -59,8 +59,8 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
       </BaseCard>
     </div>
 
-    <div class="board">
-      <div v-for="s in stages" :key="s.id" class="col">
+    <div class="board" v-reveal>
+      <div v-for="(s, i) in stages" :key="s.id" v-reveal="i * 60" class="col">
         <header class="col-head">
           <div class="col-title">
             <span class="dot" :style="{ background: s.color }" />
@@ -75,7 +75,7 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
             <strong>{{ c.company }}</strong>
             <p>{{ c.deal }}</p>
             <footer class="card-foot">
-              <BaseTag size="sm" variant="primary" :text="c.amount" />
+              <BaseTag size="sm" variant="primary" :label="c.amount" />
               <BaseAvatar :name="c.owner" size="xs" />
             </footer>
           </article>
@@ -84,7 +84,7 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
       </div>
     </div>
 
-    <BaseCard title="Top sales — 30 ngày" padded shadow="sm">
+    <BaseCard v-reveal title="Top sales — 30 ngày" padded shadow="sm">
       <ul class="leaderboard">
         <li v-for="(p, i) in [
           { who: 'Trần Quốc Anh', deals: 12, value: '480tr', win: 38 },
@@ -97,7 +97,7 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
           <strong>{{ p.who }}</strong>
           <span>{{ p.deals }} deals</span>
           <span>{{ p.value }}</span>
-          <BaseTag :text="`${p.win}%`" size="sm" variant="success" />
+          <BaseTag :label="`${p.win}%`" size="sm" variant="success" />
         </li>
       </ul>
     </BaseCard>

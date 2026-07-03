@@ -26,7 +26,7 @@ const X_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
     <header class="topnav">
       <div class="topnav-inner">
         <RouterLink to="/" class="brand">
-          <span class="brand-logo" aria-hidden="true">W</span>
+          <img src="/logo.png" alt="WemakeUI" class="brand-logo" />
           <span class="brand-name">WemakeUI</span>
         </RouterLink>
 
@@ -97,10 +97,9 @@ const X_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 
 .brand { display: flex; align-items: center; gap: var(--wx-space-2); text-decoration: none; }
 .brand-logo {
-  width: 32px; height: 32px; border-radius: var(--wx-radius-md);
-  background: var(--wx-gradient-button);
-  color: white; font-weight: 800; font-size: 16px;
-  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  object-fit: contain;
+  display: inline-block;
 }
 .brand-name { font-weight: 700; font-size: var(--wx-fs-16); color: var(--wx-content-primary); }
 

@@ -42,18 +42,18 @@ function retry() { window.location.reload() }
       <div class="status-row">
         <span>Kết nối</span>
         <BaseTag
-          :text="online ? 'online' : 'offline'"
+          :label="online ? 'online' : 'offline'"
           :variant="online ? 'success' : 'danger'"
           size="sm"
         />
       </div>
       <div class="status-row">
         <span>Mutation queue</span>
-        <BaseTag text="3 chờ sync" variant="warning" size="sm" />
+        <BaseTag label="3 chờ sync" variant="warning" size="sm" />
       </div>
       <div class="status-row">
         <span>Cache còn hạn</span>
-        <BaseTag text="14 mục" variant="neutral" size="sm" />
+        <BaseTag label="14 mục" variant="neutral" size="sm" />
       </div>
       <p class="hint">
         Mọi thao tác bạn làm offline sẽ được đẩy lên khi mạng quay lại

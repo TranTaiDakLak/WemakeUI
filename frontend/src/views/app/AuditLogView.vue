@@ -39,7 +39,7 @@ const filtered = computed(() => LOGS.filter(l => {
       <div class="action-filters">
         <BaseTag
           v-for="a in ACTIONS" :key="a"
-          :text="a" size="sm"
+          :label="a" size="sm"
           :variant="actionFilter === a ? 'primary' : 'neutral'"
           style="cursor: pointer"
           @click="actionFilter = a"
@@ -47,7 +47,7 @@ const filtered = computed(() => LOGS.filter(l => {
       </div>
     </div>
 
-    <div class="log-table-wrap">
+    <div class="log-table-wrap" v-reveal>
       <table class="log-table">
         <thead>
           <tr><th>Thời gian</th><th>Actor</th><th>Hành động</th><th>Đối tượng</th><th>IP</th><th>Chi tiết</th></tr>

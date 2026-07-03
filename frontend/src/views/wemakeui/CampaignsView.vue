@@ -374,7 +374,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
     </div>
 
     <!-- ── Table ── -->
-    <div class="table-wrap">
+    <div class="table-wrap" v-reveal>
       <!-- Loading skeleton -->
       <Transition name="skel-fade">
         <div v-if="tableLoading" class="table-skel">
@@ -440,7 +440,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
                     <BaseTag
                       v-for="t in c.tags.slice(0, 2)"
                       :key="t"
-                      :text="t"
+                      :label="t"
                       size="sm"
                       variant="neutral"
                     />
@@ -677,7 +677,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
           <BaseTag
             v-for="t in detailTarget.tags"
             :key="t"
-            :text="t"
+            :label="t"
             size="sm"
             variant="neutral"
           />

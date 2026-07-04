@@ -49,6 +49,7 @@ export type { FlagValue } from './useFlag'
 export { useScrollReveal } from './useScrollReveal'
 export type { ScrollRevealOptions } from './useScrollReveal'
 export { useStagger } from './useStagger'
+export { useSmoothScroll } from './useSmoothScroll'
 
 /* ── phase 9 — form / crud state ──────────────────────── */
 export { useCrudState } from './useCrudState'

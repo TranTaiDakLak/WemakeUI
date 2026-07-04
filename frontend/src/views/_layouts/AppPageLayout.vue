@@ -167,6 +167,7 @@ const activeId = computed(() => {
         :collapsed="collapsed"
         :brand="cfg.brand"
         logo-src="/logo.png"
+        brand-href="#/"
         @update:collapsed="(v: boolean) => collapsed = v"
       />
     </template>

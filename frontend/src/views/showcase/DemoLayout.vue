@@ -95,6 +95,7 @@ const SECTIONS: SidebarSection[] = [
         :active-id="activeId"
         brand="WemakeUI"
         logo-src="/logo.png"
+        brand-href="#/"
         :logo-gradient="true"
         collapse-position="header"
       />

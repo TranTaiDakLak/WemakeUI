@@ -9,12 +9,12 @@ import { RouterLink } from 'vue-router'
     <MarketingHeader />
 
     <main class="faq-main">
-      <div class="faq-page__hero">
+      <div class="faq-page__hero" v-reveal>
         <h1 class="faq-page__title">Câu hỏi thường gặp</h1>
         <p class="faq-page__sub">Không tìm thấy câu trả lời? <RouterLink to="/contact" class="faq-page__contact-link">Liên hệ chúng tôi</RouterLink></p>
       </div>
 
-      <div class="faq-page__content">
+      <div class="faq-page__content" v-reveal="80">
         <FAQAccordion :searchable="true" />
       </div>
     </main>

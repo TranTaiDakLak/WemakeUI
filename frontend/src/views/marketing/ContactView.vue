@@ -36,14 +36,14 @@ const STATS = [
     <BaseToast />
 
     <main>
-      <div class="contact-hero">
+      <div class="contact-hero" v-reveal>
         <h1 class="contact-hero__title">Liên hệ với Wemake</h1>
         <p class="contact-hero__sub">Đội ngũ của chúng tôi sẵn sàng giúp bạn tìm giải pháp phù hợp.</p>
       </div>
 
       <div class="contact-container">
         <!-- left: about + stats -->
-        <div class="contact-left">
+        <div class="contact-left" v-reveal>
           <div class="contact-story">
             <h2 class="contact-story__title">Câu chuyện Wemake</h2>
             <p class="contact-story__text">

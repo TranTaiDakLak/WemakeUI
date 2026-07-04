@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue'
 import BaseToast from './components/common/BaseToast.vue'
 import { useTheme } from './ui-system/composables/useTheme'
+import { useSmoothScroll } from './composables/useSmoothScroll'
 
 useTheme()
+
+let stopSmoothScroll = () => {}
+onMounted(() => { stopSmoothScroll = useSmoothScroll({ lerp: 0.3 }) })
+onUnmounted(() => stopSmoothScroll())
 </script>
 
 <template>

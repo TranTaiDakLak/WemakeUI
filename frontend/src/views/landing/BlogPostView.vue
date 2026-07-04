@@ -6,7 +6,7 @@ import { BaseButton, BaseBadge, BaseAvatar } from '../../components/common'
 <template>
   <LandingLayout>
     <article class="post-wrap">
-      <header class="post-header">
+      <header class="post-header" v-reveal>
         <div class="post-tags">
           <BaseBadge text="performance" variant="info" />
           <span class="read-time">8 phút đọc</span>
@@ -21,7 +21,7 @@ import { BaseButton, BaseBadge, BaseAvatar } from '../../components/common'
         </div>
       </header>
 
-      <div class="post-content">
+      <div class="post-content" v-reveal="80">
         <p class="lead">Khi lần đầu thử render 10.000 dòng dữ liệu với một DataGrid thông thường, trình duyệt mất gần 3 giây để render. Với virtual scroll đúng cách, chúng tôi đưa con số đó xuống dưới 50ms.</p>
 
         <h2>Virtual scroll là gì và tại sao cần?</h2>
@@ -47,7 +47,7 @@ const visibleRows = rows.slice(startIndex, endIndex)</code></pre>
         </div>
       </div>
 
-      <footer class="post-footer">
+      <footer class="post-footer" v-reveal>
         <div class="author-card">
           <BaseAvatar name="Trần Văn C" size="lg" />
           <div>

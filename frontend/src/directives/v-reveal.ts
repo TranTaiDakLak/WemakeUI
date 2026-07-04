@@ -13,6 +13,29 @@ import type { Directive } from 'vue'
 
 const observerMap = new WeakMap<Element, IntersectionObserver>()
 
+export interface RevealConfig {
+  /** % phần tử phải lọt viewport để kích hoạt reveal (0–1). Mặc định 0.15. */
+  threshold: number
+  /** Margin ảo quanh viewport khi tính giao nhau — số âm để kích hoạt sớm hơn. */
+  rootMargin: string
+}
+
+const revealConfig: RevealConfig = {
+  threshold: 0.15,
+  rootMargin: '0px',
+}
+
+/**
+ * configureReveal — chỉnh thời điểm kích hoạt v-reveal cho toàn app tiêu thụ
+ * thư viện (gọi 1 lần lúc bootstrap, ví dụ trong main.ts). Tốc độ/khoảng cách
+ * animation chỉnh qua CSS var --wx-reveal-* (tokens.css), không qua hàm này.
+ *
+ *   configureReveal({ threshold: 0.3, rootMargin: '0px 0px -10% 0px' })
+ */
+export function configureReveal(config: Partial<RevealConfig>) {
+  Object.assign(revealConfig, config)
+}
+
 export const vReveal: Directive<HTMLElement, number | undefined> = {
   mounted(el, binding) {
     // Respect reduced motion — bỏ hiệu ứng trượt (chuyển động lớn, dễ gây khó chịu)
@@ -44,7 +67,7 @@ export const vReveal: Directive<HTMLElement, number | undefined> = {
             }
           }
         },
-        { threshold: 0.15 },
+        { threshold: revealConfig.threshold, rootMargin: revealConfig.rootMargin },
       )
 
       observer.observe(el)

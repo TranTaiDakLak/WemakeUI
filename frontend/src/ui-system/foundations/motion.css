@@ -126,10 +126,13 @@
 
 .wx-reveal {
   opacity: 0 !important;
-  transform: translateY(50px) !important;
-  /* decelerate (thay vì ease-out-expo) — opacity/translate tăng đều suốt 0.9s
-     thay vì "pop" xong trong 200-300ms đầu, để mắt kịp thấy chuyển động dần dần. */
-  transition: opacity 0.9s cubic-bezier(0, 0, 0.2, 1), transform 0.9s cubic-bezier(0, 0, 0.2, 1) !important;
+  transform: translateY(var(--wx-reveal-distance, 50px)) !important;
+  /* decelerate (thay vì ease-out-expo) — opacity/translate tăng đều suốt cả quãng
+     thay vì "pop" xong trong 200-300ms đầu, để mắt kịp thấy chuyển động dần dần.
+     Tốc độ/khoảng cách chỉnh qua --wx-reveal-* (tokens.css) — app tiêu thụ thư viện
+     override 3 biến này ở :root thay vì sửa file này. */
+  transition: opacity var(--wx-reveal-duration, 1.1s) var(--wx-reveal-easing, cubic-bezier(0, 0, 0.2, 1)),
+              transform var(--wx-reveal-duration, 1.1s) var(--wx-reveal-easing, cubic-bezier(0, 0, 0.2, 1)) !important;
   transition-delay: var(--stagger-delay, 0ms) !important;
 }
 .wx-reveal.is-revealed {

@@ -11,6 +11,7 @@ import { Icon } from '@iconify/vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import BaseButton from '../../components/common/BaseButton.vue'
 import { ACTION_ICONS, type ActionIconName } from '../../utils/actionIcons'
+import { useTheme } from '../../ui-system/composables/useTheme'
 
 /* ── WemakeUI built-in ACTION_ICONS — danh sách và mapping pastel class ──
  *  Ported từ WemakeHRM. Mỗi icon = 1 SVG string dùng trực tiếp với
@@ -218,7 +219,11 @@ const ROWS: IconRow[] = [
 /* ── State ── */
 const size = ref<16 | 20 | 24 | 32 | 40>(24)
 const weightIndex = ref(2) // index trong weight matrix global (0..5)
-const dark = ref(false)
+/* Toggle Light/Dark riêng để so sánh icon ở cả 2 theme cạnh nhau — nhưng
+   mặc định đồng bộ với theme thật của site để không bị "nửa tối nửa sáng"
+   khi mới vào trang. */
+const { isDark } = useTheme()
+const dark = ref(isDark.value)
 const colored = ref(true)
 const filterText = ref('')
 

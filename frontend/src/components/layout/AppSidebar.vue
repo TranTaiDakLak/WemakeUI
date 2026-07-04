@@ -25,6 +25,8 @@ const props = withDefaults(defineProps<{
   logoGradient?: boolean
   /** URL ảnh logo — nếu bỏ trống, dùng chữ cái đầu của `brand` làm mark mặc định */
   logoSrc?: string
+  /** href cho logo/brand ở header — nếu có, brand trở thành link (vd: "#/" để về trang chủ) */
+  brandHref?: string
   /** width khi mở rộng (px) */
   width?: number
   /** width khi collapsed (px) */
@@ -148,6 +150,16 @@ function onNavigate(item: SidebarItem, e: MouseEvent) {
   emit('select', item)
 }
 
+function onBrandClick(e: MouseEvent) {
+  if (props.brandHref?.startsWith('#/')) {
+    e.preventDefault()
+    const target = props.brandHref.slice(1)
+    if (router.currentRoute.value.fullPath !== target) {
+      void router.push(target)
+    }
+  }
+}
+
 watch(() => props.activeId, () => {
   // khi đổi activeId, đảm bảo group cha của nó đang expanded
   for (const sec of props.sections) {
@@ -171,7 +183,12 @@ watch(() => props.activeId, () => {
   >
     <header class="wx-sidebar__header" data-part="header">
       <slot name="brand">
-        <div class="wx-sidebar__brand">
+        <component
+          :is="brandHref ? 'a' : 'div'"
+          class="wx-sidebar__brand"
+          :href="brandHref || undefined"
+          @click="brandHref ? onBrandClick($event) : undefined"
+        >
           <img
             v-if="logoSrc"
             :src="logoSrc"
@@ -187,7 +204,7 @@ watch(() => props.activeId, () => {
             <span>W</span>
           </div>
           <span v-if="!collapsed" class="wx-sidebar__brand-name">{{ brand }}</span>
-        </div>
+        </component>
       </slot>
       <button
         v-if="collapsible && collapsePosition === 'header'"
@@ -426,6 +443,19 @@ watch(() => props.activeId, () => {
   align-items: center;
   gap: var(--wx-space-2);
   min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+a.wx-sidebar__brand {
+  cursor: pointer;
+  border-radius: var(--wx-radius-md);
+}
+a.wx-sidebar__brand:hover {
+  opacity: 0.85;
+}
+a.wx-sidebar__brand:focus-visible {
+  outline: 2px solid var(--wx-border-focus);
+  outline-offset: 2px;
 }
 .wx-sidebar__logo {
   display: inline-flex;

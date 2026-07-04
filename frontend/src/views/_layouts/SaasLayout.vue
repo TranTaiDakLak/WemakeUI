@@ -91,6 +91,7 @@ const activeId = computed(() => props.current)
         :collapsed="collapsed"
         brand="WemakeUI"
         logo-src="/logo.png"
+        brand-href="#/"
         @update:collapsed="(v: boolean) => collapsed = v"
       />
     </template>

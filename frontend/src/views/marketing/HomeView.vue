@@ -16,16 +16,16 @@ import { RouterLink } from 'vue-router'
       <MarketingHero />
 
       <!-- Partner marquee -->
-      <PartnerLoop />
+      <PartnerLoop v-reveal />
 
       <!-- Tech expertise grid -->
-      <TechGrid />
+      <TechGrid v-reveal />
 
       <!-- Case studies -->
-      <CaseStudyGrid />
+      <CaseStudyGrid v-reveal />
 
       <!-- CTA band -->
-      <section class="home-cta-band">
+      <section class="home-cta-band" v-reveal>
         <div class="home-cta-band__inner">
           <h2 class="home-cta-band__title">Sẵn sàng tự động hóa?</h2>
           <p class="home-cta-band__sub">Bắt đầu miễn phí 14 ngày, không cần thẻ tín dụng.</p>

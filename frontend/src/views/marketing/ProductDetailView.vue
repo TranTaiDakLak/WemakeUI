@@ -63,16 +63,16 @@ const product = computed(() => PRODUCT_DATA[slug.value])
 
       <div class="pd-container">
         <!-- overview -->
-        <section class="pd-section">
+        <section class="pd-section" v-reveal>
           <h2 class="pd-section__title">Tổng quan</h2>
           <p class="pd-overview">{{ product.overview }}</p>
         </section>
 
         <!-- features -->
-        <section class="pd-section">
+        <section class="pd-section" v-reveal>
           <h2 class="pd-section__title">Tính năng nổi bật</h2>
           <div class="pd-features">
-            <div v-for="f in product.features" :key="f" class="pd-feature">
+            <div v-for="(f, i) in product.features" :key="f" class="pd-feature" v-reveal="i * 50">
               <span class="pd-feature__check" :style="{ color: product.color }">✓</span>
               {{ f }}
             </div>
@@ -80,7 +80,7 @@ const product = computed(() => PRODUCT_DATA[slug.value])
         </section>
 
         <!-- faq -->
-        <section class="pd-section">
+        <section class="pd-section" v-reveal>
           <h2 class="pd-section__title">Câu hỏi thường gặp</h2>
           <FAQAccordion :searchable="false" />
         </section>

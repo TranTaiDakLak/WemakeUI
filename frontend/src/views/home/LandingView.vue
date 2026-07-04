@@ -119,8 +119,6 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
       </div>
 
       <div class="lp-hero__inner">
-        <img src="/logo.png" alt="WemakeUI" class="lp-hero__logo lp-reveal" style="--reveal-d:0ms" />
-        <span class="lp-badge lp-reveal" style="--reveal-d:80ms">Vue 3 · TypeScript · Vite 6</span>
         <h1 class="lp-hero__title lp-reveal" style="--reveal-d:160ms">
           Bộ UI kit Vue 3<br />
           <span class="lp-hero__grad">cho mọi nền tảng</span>
@@ -226,7 +224,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
         <p class="lp-cta__sub">Đọc hướng dẫn, xem component trực tiếp, hoặc clone từ GitHub.</p>
         <div class="lp-cta__btns">
           <RouterLink to="/docs">
-            <BaseButton variant="cta" size="lg">Mở tài liệu</BaseButton>
+            <BaseButton variant="secondary" size="lg">Mở tài liệu</BaseButton>
           </RouterLink>
           <RouterLink to="/lab">
             <BaseButton variant="secondary" size="lg">Khám phá ngay</BaseButton>
@@ -263,8 +261,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   position: sticky;
   top: 0;
   z-index: var(--wx-z-header, 200);
-  background: color-mix(in srgb, var(--wx-surface-base) 84%, transparent);
-  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--wx-surface-base) 96%, transparent);
   border-bottom: 1px solid var(--wx-border-default);
 }
 .lp-nav__inner {
@@ -298,13 +295,16 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 .lp-nav__link {
   padding: 7px 14px;
   border-radius: var(--wx-radius-md);
+  border: 1px solid var(--wx-border-default);
+  background: var(--wx-surface-base);
   font-size: 14px;
   font-weight: 500;
   color: var(--wx-text-secondary);
   text-decoration: none;
-  transition: background var(--wx-d-fast, 150ms) ease, color var(--wx-d-fast, 150ms) ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: background var(--wx-d-fast, 150ms) ease, color var(--wx-d-fast, 150ms) ease, border-color var(--wx-d-fast, 150ms) ease;
 }
-.lp-nav__link:hover { background: var(--wx-surface-sunken); color: var(--wx-text-primary); }
+.lp-nav__link:hover { background: var(--wx-surface-sunken); color: var(--wx-text-primary); border-color: var(--wx-text-tertiary, #cbd5e1); }
 .lp-icon-btn {
   display: inline-flex;
   align-items: center;
@@ -318,9 +318,10 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   color: var(--wx-text-secondary);
   cursor: pointer;
   text-decoration: none;
-  transition: background var(--wx-d-fast, 150ms) ease, color var(--wx-d-fast, 150ms) ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: background var(--wx-d-fast, 150ms) ease, color var(--wx-d-fast, 150ms) ease, border-color var(--wx-d-fast, 150ms) ease;
 }
-.lp-icon-btn:hover { background: var(--wx-surface-sunken); color: var(--wx-text-primary); }
+.lp-icon-btn:hover { background: var(--wx-surface-sunken); color: var(--wx-text-primary); border-color: var(--wx-text-tertiary, #cbd5e1); }
 
 /* ── Hero ── */
 .lp-hero {
@@ -346,24 +347,6 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   position: relative;
   max-width: 720px;
   margin: 0 auto;
-}
-.lp-hero__logo {
-  width: 84px;
-  height: 84px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto 20px;
-}
-.lp-badge {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--wx-border-default);
-  background: var(--wx-surface-elevated);
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--wx-text-secondary);
-  margin-bottom: 24px;
 }
 .lp-hero__title {
   margin: 0;
@@ -418,9 +401,8 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   padding: 12px 14px;
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-lg, 14px);
-  background: color-mix(in srgb, var(--wx-surface-elevated) 90%, transparent);
+  background: color-mix(in srgb, var(--wx-surface-elevated) 96%, transparent);
   box-shadow: var(--wx-shadow-lg);
-  backdrop-filter: blur(8px);
 }
 .lp-float__card--row { flex-direction: row; align-items: center; gap: 10px; }
 .lp-float__card--tags { flex-direction: row; gap: 6px; }
@@ -799,6 +781,18 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   flex-wrap: wrap;
 }
 .lp-cta__btns a { text-decoration: none; }
+/* Nút "cta" bên trong banner cũng nền gradient --wx-gradient-cta như banner
+   → trùng màu, gần như biến mất. Đổi thành nền trắng đặc + chữ brand để nổi bật. */
+.lp-cta__btns :deep(.wx-btn--cta) {
+  background: #fff;
+  color: var(--wx-brand-primary);
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.25);
+}
+.lp-cta__btns :deep(.wx-btn--cta:hover:not(:disabled)) {
+  background: #fff;
+  filter: brightness(0.97);
+  box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.3);
+}
 .lp-cta__btns :deep(.wx-btn--secondary) {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.5);

@@ -25,7 +25,7 @@ const PARTNERS = [
     <MarketingHeader />
 
     <main>
-      <div class="partners-hero">
+      <div class="partners-hero" v-reveal>
         <h1 class="partners-hero__title">Đối tác của Wemake</h1>
         <p class="partners-hero__sub">Chúng tôi hợp tác với các doanh nghiệp hàng đầu Việt Nam để mang lại giải pháp tốt nhất.</p>
       </div>
@@ -54,7 +54,7 @@ const PARTNERS = [
         </div>
 
         <!-- become a partner -->
-        <div class="partner-join">
+        <div class="partner-join" v-reveal>
           <h2 class="partner-join__title">Trở thành đối tác của Wemake</h2>
           <p class="partner-join__sub">Cùng xây dựng hệ sinh thái tự động hóa đa kênh mạnh mẽ nhất Đông Nam Á.</p>
           <RouterLink to="/contact" class="partner-join__btn">Đăng ký hợp tác</RouterLink>

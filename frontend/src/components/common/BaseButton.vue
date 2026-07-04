@@ -100,7 +100,7 @@ defineEmits<{
 /* ── Primary — gradient button token ── */
 .wx-btn--primary {
   background: var(--wx-gradient-button);
-  color: var(--wx-text-inverse);
+  color: var(--wx-text-on-brand);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
     0 1px 3px rgba(0, 0, 0, 0.12),
@@ -124,7 +124,7 @@ defineEmits<{
 /* ── CTA — deeper gradient ── */
 .wx-btn--cta {
   background: var(--wx-gradient-cta);
-  color: var(--wx-text-inverse);
+  color: var(--wx-text-on-brand);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 14px -2px rgba(58, 123, 213, 0.35);
 }
 .wx-btn--cta:hover:not(:disabled) {
@@ -176,7 +176,7 @@ defineEmits<{
 /* ── Danger — gradient ── */
 .wx-btn--danger {
   background: var(--wx-gradient-danger);
-  color: var(--wx-text-inverse);
+  color: var(--wx-text-on-brand);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(220, 38, 38, 0.25);
 }
 .wx-btn--danger:hover:not(:disabled) {
@@ -189,7 +189,7 @@ defineEmits<{
 /* ── Success — gradient ── */
 .wx-btn--success {
   background: var(--wx-gradient-success);
-  color: var(--wx-text-inverse);
+  color: var(--wx-text-on-brand);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(22, 163, 74, 0.25);
 }
 .wx-btn--success:hover:not(:disabled) {
@@ -200,7 +200,7 @@ defineEmits<{
 /* ── Warning — gradient ── */
 .wx-btn--warning {
   background: var(--wx-gradient-warning);
-  color: var(--wx-text-inverse);
+  color: var(--wx-text-on-brand);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(217, 119, 6, 0.25);
 }
 .wx-btn--warning:hover:not(:disabled) {

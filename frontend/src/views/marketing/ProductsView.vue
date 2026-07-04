@@ -59,7 +59,7 @@ const PRODUCTS = [
     <MarketingHeader />
 
     <main>
-      <div class="products-hero">
+      <div class="products-hero" v-reveal>
         <h1 class="products-hero__title">Hệ sinh thái sản phẩm Wemake</h1>
         <p class="products-hero__sub">Mỗi sản phẩm giải quyết một bài toán thực tế — kết hợp lại thành một nền tảng hoàn chỉnh.</p>
       </div>

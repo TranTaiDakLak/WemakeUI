@@ -39,7 +39,9 @@ export * from './components/permission'
 export * from './composables'
 
 // ── Directives ─────────────────────────────────────────────────
-export { vCan, vFlag, registerDirectives } from './directives'
+export { vCan, vFlag, vReveal, registerDirectives } from './directives'
+export { configureReveal } from './directives/v-reveal'
+export type { RevealConfig } from './directives/v-reveal'
 
 // ── Design Tokens ──────────────────────────────────────────────
 export * from './ui-system/tokens'

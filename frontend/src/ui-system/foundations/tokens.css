@@ -52,6 +52,9 @@
   --wx-text-muted: #9ca3af;
   --wx-text-disabled: #d1d5db;
   --wx-text-inverse: #ffffff;
+  /* Cố định trắng — dùng cho chữ trên nền gradient thương hiệu (luôn xanh, không đổi theo theme),
+     khác với --wx-text-inverse vốn đảo màu theo light/dark. */
+  --wx-text-on-brand: #ffffff;
   --wx-text-link: #2563eb;
 
   /* ── Surface ────────────────────────────────────────── */
@@ -172,6 +175,13 @@
   --wx-ease-out: var(--wx-easing-out);
   --wx-ease-bounce: var(--wx-easing-bounce);
   --wx-ease-spring: var(--wx-easing-spring);
+
+  /* Scroll-reveal (v-reveal) — override ở app tiêu thụ thư viện để đổi tốc độ/độ mượt,
+     không cần sửa source. Xem thêm configureReveal() trong 'directives/v-reveal' cho
+     threshold/rootMargin của IntersectionObserver. */
+  --wx-reveal-duration: 1.1s;
+  --wx-reveal-distance: 50px;
+  --wx-reveal-easing: cubic-bezier(0, 0, 0.2, 1);
 
   /* ── Z-Index ────────────────────────────────────────── */
   --wx-z-behind: -1;

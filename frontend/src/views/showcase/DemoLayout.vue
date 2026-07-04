@@ -40,10 +40,8 @@ const ICON_PAT  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
 const ICON_CODE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`
 const ICON_LOCK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
 const ICON_WARN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`
-const ICON_DASH = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>`
 const ICON_APP  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg>`
 const ICON_LAND = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`
-const ICON_WC   = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`
 
 const SECTIONS: SidebarSection[] = [
   /* ── Top ── */
@@ -51,17 +49,6 @@ const SECTIONS: SidebarSection[] = [
     items: [
       { id: '/lab', label: 'Tổng quan', icon: ICON_HOME, href: '#/lab' },
       { id: '/showcase/apps', label: 'Bộ giao diện hoàn chỉnh', icon: ICON_APP, href: '#/showcase/apps' },
-    ],
-  },
-  /* ── Demo Apps — entry points, mỗi app có sidebar riêng ── */
-  {
-    label: 'Demo Apps',
-    items: [
-      { id: '/home',               label: 'Trang chủ',      icon: ICON_HOME, href: '#/home' },
-      { id: '/saas/dashboard',     label: 'SaaS Dashboard', icon: ICON_DASH, href: '#/saas/dashboard' },
-      { id: '/dashboard/overview', label: 'Dashboards',     icon: ICON_DASH, href: '#/dashboard/overview' },
-      { id: '/app/profile',        label: 'App Pages',      icon: ICON_APP,  href: '#/app/profile' },
-      { id: '/wemakeui',          label: 'WemakeUI',      icon: ICON_WC,   href: '#/wemakeui' },
     ],
   },
   /* ── Component library ── */

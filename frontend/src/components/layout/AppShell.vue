@@ -16,6 +16,7 @@
  *   footer                — bottom bar (toàn shell)
  */
 import { computed, ref, onMounted, onBeforeUnmount, useSlots } from 'vue'
+import { useSmoothScroll } from '../../composables/useSmoothScroll'
 
 const props = withDefaults(defineProps<{
   variant?: 'sidebar' | 'topnav' | 'split'
@@ -110,6 +111,20 @@ const cssVars = computed(() => ({
   '--wx-shell-topbar-h': `${props.topbarHeight}px`,
   '--wx-shell-max-w': props.maxWidth ? `${props.maxWidth}px` : 'none',
 }))
+
+/* ── Momentum scroll cho vùng cuộn nội bộ (.wx-shell__main) ──
+   Lenis global (App.vue) chỉ điều khiển window — shell này tự cuộn bên trong
+   1 div riêng (overflow-y: auto) nên cần instance Lenis riêng, scoped vào
+   chính div đó. */
+const mainEl = ref<HTMLElement | null>(null)
+const mainInnerEl = ref<HTMLElement | null>(null)
+let stopSmoothScroll = () => {}
+onMounted(() => {
+  if (mainEl.value && mainInnerEl.value) {
+    stopSmoothScroll = useSmoothScroll({ wrapper: mainEl.value, content: mainInnerEl.value, lerp: 0.3 })
+  }
+})
+onBeforeUnmount(() => stopSmoothScroll())
 </script>
 
 <template>
@@ -131,8 +146,10 @@ const cssVars = computed(() => ({
         <aside v-if="hasSubSidebar" class="wx-shell__sub-sidebar" data-part="sub-sidebar">
           <slot name="sub-sidebar" />
         </aside>
-        <main class="wx-shell__main" data-part="main">
-          <slot />
+        <main ref="mainEl" class="wx-shell__main" data-part="main">
+          <div ref="mainInnerEl" class="wx-shell__main-inner">
+            <slot />
+          </div>
         </main>
       </div>
     </template>
@@ -146,11 +163,14 @@ const cssVars = computed(() => ({
         </div>
       </header>
       <main
+        ref="mainEl"
         class="wx-shell__main wx-shell__main--centered"
         :class="{ 'wx-shell__main--max': maxWidth && centered }"
         data-part="main"
       >
-        <slot />
+        <div ref="mainInnerEl" class="wx-shell__main-inner">
+          <slot />
+        </div>
       </main>
     </template>
 

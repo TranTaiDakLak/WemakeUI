@@ -129,18 +129,18 @@ import { RouterLink } from 'vue-router'
   color: var(--wx-text-primary); letter-spacing: -0.5px;
   display: block; margin-bottom: var(--wx-space-3);
 }
-.home-footer__tagline { font-size: var(--wx-text-sm); color: var(--wx-text-secondary); line-height: 1.6; margin: 0; }
+.home-footer__tagline { font-size: var(--wx-fs-14); color: var(--wx-text-secondary); line-height: 1.6; margin: 0; }
 
 .home-footer__links { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--wx-space-6); }
 .home-footer__col { display: flex; flex-direction: column; gap: var(--wx-space-2); }
 .home-footer__col-title {
-  font-size: var(--wx-text-xs); font-weight: 600;
+  font-size: var(--wx-fs-12); font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.06em;
-  color: var(--wx-text-tertiary);
+  color: var(--wx-text-muted);
   margin: 0 0 var(--wx-space-1);
 }
 .home-footer__link {
-  font-size: var(--wx-text-sm); color: var(--wx-text-secondary);
+  font-size: var(--wx-fs-14); color: var(--wx-text-secondary);
   text-decoration: none;
 }
 .home-footer__link:hover { color: var(--wx-text-primary); }
@@ -149,7 +149,7 @@ import { RouterLink } from 'vue-router'
   max-width: 1200px; margin: 0 auto;
   padding: var(--wx-space-5) var(--wx-space-6);
   border-top: 1px solid var(--wx-border-subtle);
-  font-size: var(--wx-text-sm); color: var(--wx-text-tertiary);
+  font-size: var(--wx-fs-14); color: var(--wx-text-muted);
 }
 .home-footer__bottom p { margin: 0; }
 </style>

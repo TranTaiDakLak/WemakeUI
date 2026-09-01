@@ -107,7 +107,7 @@ function toggle(id: string) {
   left: var(--wx-space-4);
   top: 50%; transform: translateY(-50%);
   width: 18px; height: 18px;
-  color: var(--wx-text-tertiary);
+  color: var(--wx-text-muted);
   pointer-events: none;
 }
 .faq-search__input {
@@ -129,8 +129,8 @@ function toggle(id: string) {
 .faq-empty {
   text-align: center;
   padding: var(--wx-space-10);
-  color: var(--wx-text-tertiary);
-  font-size: var(--wx-text-sm);
+  color: var(--wx-text-muted);
+  font-size: var(--wx-fs-14);
 }
 
 .faq-list { display: flex; flex-direction: column; gap: var(--wx-space-2); }
@@ -166,7 +166,7 @@ function toggle(id: string) {
 .faq-item__chevron {
   flex-shrink: 0;
   width: 20px; height: 20px;
-  color: var(--wx-text-tertiary);
+  color: var(--wx-text-muted);
   transition: transform var(--wx-d-fast);
 }
 .faq-item__chevron--open { transform: rotate(180deg); color: var(--wx-primary); }
@@ -177,7 +177,7 @@ function toggle(id: string) {
   border-top: 1px solid var(--wx-border-subtle);
 }
 .faq-item__a p {
-  font-size: var(--wx-text-sm);
+  font-size: var(--wx-fs-14);
   color: var(--wx-text-secondary);
   line-height: 1.7;
   margin: var(--wx-space-3) 0 0;

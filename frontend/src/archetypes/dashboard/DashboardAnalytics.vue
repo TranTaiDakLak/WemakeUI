@@ -255,12 +255,12 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value) })
   margin: 0;
 }
 .a-hint {
-  font-size: var(--wx-text-xs);
-  color: var(--wx-text-tertiary);
+  font-size: var(--wx-fs-12);
+  color: var(--wx-text-muted);
   margin: 0 0 var(--wx-space-3);
 }
 .a-badge {
-  font-size: var(--wx-text-xs);
+  font-size: var(--wx-fs-12);
   font-weight: 500;
   padding: 2px 8px;
   border-radius: var(--wx-radius-full);
@@ -269,20 +269,20 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value) })
   border: 1px solid var(--wx-border-subtle);
 }
 .a-filter-tag {
-  font-size: var(--wx-text-xs);
-  color: var(--wx-text-tertiary);
+  font-size: var(--wx-fs-12);
+  color: var(--wx-text-muted);
   margin: var(--wx-space-2) 0 0;
 }
 .timeline-wrap { max-height: 260px; overflow-y: auto; }
 
-.pf-desc { font-size: var(--wx-text-sm); color: var(--wx-text-secondary); margin: 0 0 var(--wx-space-4); }
+.pf-desc { font-size: var(--wx-fs-14); color: var(--wx-text-secondary); margin: 0 0 var(--wx-space-4); }
 .pf-foot { padding-top: var(--wx-space-4); border-top: 1px solid var(--wx-border-subtle); margin-top: var(--wx-space-4); }
 
-.pf-table { width: 100%; border-collapse: collapse; font-size: var(--wx-text-sm); }
+.pf-table { width: 100%; border-collapse: collapse; font-size: var(--wx-fs-14); }
 .pf-table th, .pf-table td {
   text-align: left;
   padding: var(--wx-space-2) var(--wx-space-3);
   border-bottom: 1px solid var(--wx-border-subtle);
 }
-.pf-table th { font-weight: 500; color: var(--wx-text-secondary); font-size: var(--wx-text-xs); }
+.pf-table th { font-weight: 500; color: var(--wx-text-secondary); font-size: var(--wx-fs-12); }
 </style>

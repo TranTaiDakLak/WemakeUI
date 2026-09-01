@@ -54,7 +54,7 @@ const ENV_COLOR: Record<string, string> = {
         <!-- env status pills -->
         <div class="d-hero__env">
           <span class="d-hero__live">
-            <span class="wx-live-ping" style="color: #22c55e; margin-right: 6px" />
+            <span class="wx-live-ping" style="color: var(--wx-success-solid); margin-right: 6px" />
             Realtime
           </span>
           <span
@@ -127,7 +127,7 @@ const ENV_COLOR: Record<string, string> = {
 
 .d-hero__left {}
 .d-hero__greeting {
-  font-size: var(--wx-text-sm);
+  font-size: var(--wx-fs-14);
   color: var(--wx-text-secondary);
   margin: 0 0 var(--wx-space-1);
 }
@@ -139,8 +139,8 @@ const ENV_COLOR: Record<string, string> = {
   line-height: 1.25;
 }
 .d-hero__date {
-  font-size: var(--wx-text-xs);
-  color: var(--wx-text-tertiary);
+  font-size: var(--wx-fs-12);
+  color: var(--wx-text-muted);
   margin: 0;
   text-transform: capitalize;
 }
@@ -155,7 +155,7 @@ const ENV_COLOR: Record<string, string> = {
 .d-hero__env {
   display: flex;
   align-items: center;
-  gap: var(--wx-space-1-5);
+  gap: var(--wx-space-2);
   flex-wrap: wrap;
   justify-content: flex-end;
 }
@@ -166,11 +166,11 @@ const ENV_COLOR: Record<string, string> = {
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--wx-success);
+  color: var(--wx-success-text);
   padding: 3px 10px;
   border-radius: var(--wx-radius-full);
-  background: color-mix(in srgb, var(--wx-success) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--wx-success) 25%, transparent);
+  background: color-mix(in srgb, var(--wx-success-solid) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--wx-success-solid) 25%, transparent);
 }
 .d-hero__env-pill {
   display: inline-flex;
@@ -214,16 +214,16 @@ const ENV_COLOR: Record<string, string> = {
 .alert-items {
   display: flex;
   flex-direction: column;
-  gap: var(--wx-space-1-5);
+  gap: var(--wx-space-2);
   flex: 1;
 }
 .alert-item {
   display: flex;
   align-items: center;
   gap: var(--wx-space-2);
-  font-size: var(--wx-text-sm);
+  font-size: var(--wx-fs-14);
 }
-.alert-item--danger { color: var(--wx-danger); }
-.alert-item--warning { color: var(--wx-warning); }
+.alert-item--danger { color: var(--wx-danger-text); }
+.alert-item--warning { color: var(--wx-warning-text); }
 .alert-icon { font-size: 14px; flex-shrink: 0; }
 </style>

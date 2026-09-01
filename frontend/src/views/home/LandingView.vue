@@ -260,7 +260,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 .lp-nav {
   position: sticky;
   top: 0;
-  z-index: var(--wx-z-header, 200);
+  z-index: var(--wx-z-header);
   background: color-mix(in srgb, var(--wx-surface-base) 96%, transparent);
   border-bottom: 1px solid var(--wx-border-default);
 }
@@ -268,7 +268,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   max-width: 1080px;
   margin: 0 auto;
   height: 60px;
-  padding: 0 24px;
+  padding: 0 var(--wx-space-5);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -277,7 +277,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 18px;
+  font-size: var(--wx-fs-18);
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -297,12 +297,12 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   border-radius: var(--wx-radius-md);
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);
-  font-size: 14px;
+  font-size: var(--wx-fs-14);
   font-weight: 500;
   color: var(--wx-text-secondary);
   text-decoration: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: background var(--wx-d-fast, 150ms) ease, color var(--wx-d-fast, 150ms) ease, border-color var(--wx-d-fast, 150ms) ease;
+  transition: background var(--wx-d-fast) ease, color var(--wx-d-fast) ease, border-color var(--wx-d-fast) ease;
 }
 .lp-nav__link:hover { background: var(--wx-surface-sunken); color: var(--wx-text-primary); border-color: var(--wx-text-muted); }
 .lp-icon-btn {
@@ -311,7 +311,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   justify-content: center;
   width: 36px;
   height: 36px;
-  margin-left: 4px;
+  margin-left: var(--wx-space-1);
   border-radius: var(--wx-radius-md);
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);
@@ -319,7 +319,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   cursor: pointer;
   text-decoration: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: background var(--wx-d-fast, 150ms) ease, color var(--wx-d-fast, 150ms) ease, border-color var(--wx-d-fast, 150ms) ease;
+  transition: background var(--wx-d-fast) ease, color var(--wx-d-fast) ease, border-color var(--wx-d-fast) ease;
 }
 .lp-icon-btn:hover { background: var(--wx-surface-sunken); color: var(--wx-text-primary); border-color: var(--wx-text-muted); }
 
@@ -328,7 +328,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   position: relative;
   overflow: hidden;
   text-align: center;
-  padding: 88px 24px 64px;
+  padding: 88px var(--wx-space-5) var(--wx-space-9);
 }
 .lp-hero__glow {
   position: absolute;
@@ -356,7 +356,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   letter-spacing: -0.03em;
 }
 .lp-hero__grad {
-  background: var(--wx-gradient-button, linear-gradient(135deg, var(--wx-brand-accent), var(--wx-brand-primary)));
+  background: var(--wx-gradient-button);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -370,9 +370,9 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   color: var(--wx-text-secondary);
 }
 .lp-hero__cta {
-  margin-top: 32px;
+  margin-top: var(--wx-space-6);
   display: flex;
-  gap: 12px;
+  gap: var(--wx-space-3);
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -397,17 +397,17 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 .lp-float__card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--wx-space-2);
   padding: 12px 14px;
   border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-lg, 14px);
+  border-radius: var(--wx-radius-lg);
   background: color-mix(in srgb, var(--wx-surface-elevated) 96%, transparent);
   box-shadow: var(--wx-shadow-lg);
 }
 .lp-float__card--row { flex-direction: row; align-items: center; gap: 10px; }
 .lp-float__card--tags { flex-direction: row; gap: 6px; }
 .lp-float__label {
-  font-size: 12px;
+  font-size: var(--wx-fs-12);
   font-weight: 600;
   color: var(--wx-text-secondary);
   white-space: nowrap;
@@ -519,10 +519,10 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 .lp-stats {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 24px;
+  padding: var(--wx-space-5);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: var(--wx-space-4);
 }
 .lp-stat {
   position: relative;
@@ -580,17 +580,17 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   color: var(--wx-brand-primary);
 }
 .lp-stat__label {
-  font-size: 13px;
+  font-size: var(--wx-fs-13);
   color: var(--wx-text-muted);
 }
 .lp-stat__cta {
   display: block;
-  margin-top: 8px;
-  font-size: 12px;
+  margin-top: var(--wx-space-2);
+  font-size: var(--wx-fs-12);
   font-weight: 600;
   color: var(--wx-brand-primary);
   opacity: 0;
-  transition: opacity var(--wx-d-fast, 150ms) ease;
+  transition: opacity var(--wx-d-fast) ease;
 }
 .lp-stat--link:hover .lp-stat__cta { opacity: 1; }
 .lp-stat:hover .lp-stat__num {
@@ -604,18 +604,18 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 .lp-apps {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 40px 24px 8px;
+  padding: var(--wx-space-7) var(--wx-space-5) var(--wx-space-2);
 }
 .lp-apps-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: var(--wx-space-3);
 }
 .lp-app {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--wx-space-3);
   padding: 14px 16px;
   border: 1px solid color-mix(in srgb, var(--wx-border-default) 60%, transparent);
   border-left: 3px solid var(--accent);
@@ -666,18 +666,18 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   color: var(--wx-text-primary);
 }
 .lp-app__cat {
-  font-size: 12px;
+  font-size: var(--wx-fs-12);
   color: var(--wx-text-muted);
 }
 .lp-app__arrow {
   color: var(--accent);
-  font-size: 16px;
+  font-size: var(--wx-fs-16);
   flex-shrink: 0;
-  transition: transform var(--wx-d-fast, 150ms) ease;
+  transition: transform var(--wx-d-fast) ease;
 }
 .lp-app:hover .lp-app__arrow { transform: translateX(3px); }
 .lp-apps-foot {
-  margin-top: 16px;
+  margin-top: var(--wx-space-4);
   text-align: center;
 }
 .lp-apps-foot a { text-decoration: none; }
@@ -686,12 +686,12 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 .lp-features {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 64px 24px;
+  padding: var(--wx-space-9) var(--wx-space-5);
 }
-.lp-section-head { text-align: center; margin-bottom: 40px; }
+.lp-section-head { text-align: center; margin-bottom: var(--wx-space-7); }
 .lp-section-title {
   margin: 0;
-  font-size: 32px;
+  font-size: var(--wx-fs-32);
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -703,11 +703,11 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 .lp-feature-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: var(--wx-space-4);
 }
 .lp-feature {
   position: relative;
-  padding: 24px;
+  padding: var(--wx-space-5);
   border: 1px solid color-mix(in srgb, var(--wx-border-default) 60%, transparent);
   border-radius: var(--wx-radius-xl);
   background: var(--wx-surface-elevated);
@@ -745,7 +745,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 @keyframes lp-shimmer {
   to { transform: translateX(110%); }
 }
-.lp-feature__icon { font-size: 28px; }
+.lp-feature__icon { font-size: var(--wx-fs-28); }
 .lp-feature__title {
   margin: 12px 0 6px;
   font-size: 17px;
@@ -753,30 +753,30 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 }
 .lp-feature__desc {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--wx-fs-14);
   line-height: 1.6;
   color: var(--wx-text-secondary);
 }
 
 /* ── CTA ── */
 .lp-cta {
-  padding: 24px;
+  padding: var(--wx-space-5);
 }
 .lp-cta__inner {
   max-width: 1080px;
   margin: 0 auto;
   text-align: center;
-  padding: 56px 24px;
-  border-radius: var(--wx-radius-3xl, 30px);
-  background: var(--wx-gradient-cta, linear-gradient(135deg, var(--wx-brand-primary), color-mix(in srgb, var(--wx-brand-primary) 60%, #7c3aed)));
-  color: #fff;
+  padding: 56px var(--wx-space-5);
+  border-radius: var(--wx-radius-3xl);
+  background: var(--wx-gradient-cta);
+  color: var(--wx-text-on-brand);
 }
-.lp-cta__title { margin: 0; font-size: 30px; font-weight: 800; color: #fff; }
-.lp-cta__sub { margin: 10px 0 0; font-size: 15.5px; color: rgba(255,255,255,0.82); }
+.lp-cta__title { margin: 0; font-size: 30px; font-weight: 800; color: var(--wx-text-on-brand); }
+.lp-cta__sub { margin: 10px 0 0; font-size: 15.5px; color: color-mix(in srgb, var(--wx-text-on-brand) 82%, transparent); }
 .lp-cta__btns {
-  margin-top: 24px;
+  margin-top: var(--wx-space-6);
   display: flex;
-  gap: 12px;
+  gap: var(--wx-space-3);
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -784,36 +784,36 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 /* Nút "cta" bên trong banner cũng nền gradient --wx-gradient-cta như banner
    → trùng màu, gần như biến mất. Đổi thành nền trắng đặc + chữ brand để nổi bật. */
 .lp-cta__btns :deep(.wx-btn--cta) {
-  background: #fff;
+  background: var(--wx-text-on-brand);
   color: var(--wx-brand-primary);
   box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.25);
 }
 .lp-cta__btns :deep(.wx-btn--cta:hover:not(:disabled)) {
-  background: #fff;
+  background: var(--wx-text-on-brand);
   filter: brightness(0.97);
   box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.3);
 }
 .lp-cta__btns :deep(.wx-btn--secondary) {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.5);
-  color: #fff;
+  background: color-mix(in srgb, var(--wx-text-on-brand) 15%, transparent);
+  border-color: color-mix(in srgb, var(--wx-text-on-brand) 50%, transparent);
+  color: var(--wx-text-on-brand);
   backdrop-filter: blur(4px);
 }
 .lp-cta__btns :deep(.wx-btn--secondary:hover) {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: #fff;
+  background: color-mix(in srgb, var(--wx-text-on-brand) 25%, transparent);
+  border-color: var(--wx-text-on-brand);
 }
 
 /* ── Footer ── */
 .lp-footer {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 32px 24px 56px;
+  padding: var(--wx-space-6) var(--wx-space-5) 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--wx-space-3);
   border-top: 1px solid var(--wx-border-default);
   font-size: 13.5px;
   color: var(--wx-text-muted);
@@ -835,7 +835,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 @media (max-width: 520px) {
   .lp-nav__link { padding: 6px 10px; }
   .lp-hero { padding: 56px 18px 48px; }
-  .lp-hero__title { font-size: 32px; }
+  .lp-hero__title { font-size: var(--wx-fs-32); }
   .lp-apps-grid { grid-template-columns: 1fr; }
 }
 </style>

@@ -32,8 +32,8 @@ import { RouterLink } from 'vue-router'
   color: var(--wx-text-primary);
   margin: 0 0 var(--wx-space-3);
 }
-.faq-page__sub { font-size: var(--wx-text-lg); color: var(--wx-text-secondary); margin: 0; }
-.faq-page__contact-link { color: var(--wx-primary); text-decoration: none; font-weight: 500; }
+.faq-page__sub { font-size: var(--wx-fs-18); color: var(--wx-text-secondary); margin: 0; }
+.faq-page__contact-link { color: var(--wx-brand-primary); text-decoration: none; font-weight: 500; }
 .faq-page__contact-link:hover { text-decoration: underline; }
 .faq-page__content {}
 </style>

@@ -249,7 +249,7 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value) })
   gap: var(--wx-space-2);
 }
 .a-card__title {
-  font-size: var(--wx-text-base);
+  font-size: var(--wx-fs-16);
   font-weight: 600;
   color: var(--wx-text-primary);
   margin: 0;

@@ -211,7 +211,7 @@ defineProps<{
   border-radius: var(--wx-radius-full);
   border: 1.5px solid var(--wx-border-default);
   cursor: pointer;
-  font-size: 13px;
+  font-size: var(--wx-fs-13);
   font-weight: 500;
   color: var(--wx-text-secondary);
   transition: border-color var(--wx-d-micro) var(--wx-ease-standard),
@@ -239,9 +239,9 @@ defineProps<{
 .cff-checkbox-item {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--wx-space-2);
   cursor: pointer;
-  font-size: 13px;
+  font-size: var(--wx-fs-13);
   font-weight: 500;
   color: var(--wx-text-primary);
   user-select: none;

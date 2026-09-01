@@ -129,7 +129,7 @@ const isClickable = computed(() => 'onClick' in attrs)
 
 <style scoped>
 .kpi-inner {
-  padding: 14px 16px 12px;
+  padding: 14px var(--wx-space-4) var(--wx-space-3);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -141,7 +141,7 @@ const isClickable = computed(() => 'onClick' in attrs)
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--wx-space-2);
 }
 
 .kpi-label-wrap {
@@ -158,7 +158,7 @@ const isClickable = computed(() => 'onClick' in attrs)
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: var(--wx-fs-12);
   flex-shrink: 0;
 }
 
@@ -191,7 +191,7 @@ const isClickable = computed(() => 'onClick' in attrs)
 .kpi-metric-row {
   display: flex;
   align-items: baseline;
-  gap: 4px;
+  gap: var(--wx-space-1);
   line-height: 1;
 }
 
@@ -204,7 +204,7 @@ const isClickable = computed(() => 'onClick' in attrs)
 }
 
 .kpi-suffix {
-  font-size: 14px;
+  font-size: var(--wx-fs-14);
   color: var(--wx-text-muted);
   font-weight: var(--wx-fw-medium);
 }
@@ -214,7 +214,7 @@ const isClickable = computed(() => 'onClick' in attrs)
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--wx-space-2);
   margin-top: auto;
 }
 
@@ -226,7 +226,7 @@ const isClickable = computed(() => 'onClick' in attrs)
 }
 
 .kpi-detail {
-  font-size: 12px;
+  font-size: var(--wx-fs-12);
   color: var(--wx-text-secondary);
   white-space: nowrap;
   overflow: hidden;

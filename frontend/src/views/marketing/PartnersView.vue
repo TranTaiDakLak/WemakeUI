@@ -70,7 +70,7 @@ const PARTNERS = [
 .partners-hero {
   text-align: center;
   padding: 120px var(--wx-space-6) var(--wx-space-16);
-  background: linear-gradient(160deg, var(--wx-surface) 0%, color-mix(in srgb, var(--wx-primary) 4%, var(--wx-surface)) 100%);
+  background: linear-gradient(160deg, var(--wx-surface-base) 0%, color-mix(in srgb, var(--wx-brand-primary) 4%, var(--wx-surface-base)) 100%);
 }
 .partners-hero__title {
   font-size: clamp(28px, 5vw, 48px);
@@ -79,7 +79,7 @@ const PARTNERS = [
   color: var(--wx-text-primary);
   margin: 0 0 var(--wx-space-4);
 }
-.partners-hero__sub { font-size: var(--wx-text-lg); color: var(--wx-text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+.partners-hero__sub { font-size: var(--wx-fs-18); color: var(--wx-text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.7; }
 
 .partners-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--wx-space-6) var(--wx-space-20); }
 .partners-grid {
@@ -114,7 +114,7 @@ const PARTNERS = [
   letter-spacing: 0.05em; color: var(--wx-text-muted);
   display: block; margin-bottom: 2px;
 }
-.partner-card__name { font-size: var(--wx-text-base); font-weight: 700; color: var(--wx-text-primary); margin: 0; }
+.partner-card__name { font-size: var(--wx-fs-16); font-weight: 700; color: var(--wx-text-primary); margin: 0; }
 .partner-card__desc { font-size: var(--wx-fs-14); color: var(--wx-text-secondary); line-height: 1.6; margin: 0; flex: 1; }
 .partner-card__tags { display: flex; flex-wrap: wrap; gap: var(--wx-space-2); }
 .partner-tag {
@@ -127,20 +127,20 @@ const PARTNERS = [
 }
 
 .partner-join {
-  background: color-mix(in srgb, var(--wx-primary) 6%, var(--wx-surface));
-  border: 1px solid color-mix(in srgb, var(--wx-primary) 20%, transparent);
+  background: color-mix(in srgb, var(--wx-brand-primary) 6%, var(--wx-surface-base));
+  border: 1px solid color-mix(in srgb, var(--wx-brand-primary) 20%, transparent);
   border-radius: var(--wx-radius-2xl);
   padding: var(--wx-space-12);
   text-align: center;
 }
 .partner-join__title { font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: var(--wx-text-primary); margin: 0 0 var(--wx-space-3); }
-.partner-join__sub { font-size: var(--wx-text-base); color: var(--wx-text-secondary); margin: 0 0 var(--wx-space-6); line-height: 1.7; }
+.partner-join__sub { font-size: var(--wx-fs-16); color: var(--wx-text-secondary); margin: 0 0 var(--wx-space-6); line-height: 1.7; }
 .partner-join__btn {
   display: inline-flex; align-items: center; justify-content: center;
   padding: var(--wx-space-3) var(--wx-space-8);
-  background: var(--wx-primary); color: #fff;
+  background: var(--wx-brand-primary); color: var(--wx-text-on-brand);
   border-radius: var(--wx-radius-lg);
-  font-size: var(--wx-text-base); font-weight: 600;
+  font-size: var(--wx-fs-16); font-weight: 600;
   text-decoration: none;
   transition: all var(--wx-d-fast);
 }

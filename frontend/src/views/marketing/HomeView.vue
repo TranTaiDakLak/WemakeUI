@@ -102,7 +102,7 @@ import { RouterLink } from 'vue-router'
   transition: all var(--wx-d-fast) var(--wx-ease-standard);
 }
 .mkt-cta--primary {
-  background: #fff; color: var(--wx-primary);
+  background: #fff; color: var(--wx-brand-primary);
 }
 .mkt-cta--primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
 .mkt-cta--ghost {
@@ -125,7 +125,7 @@ import { RouterLink } from 'vue-router'
 
 .home-footer__brand {}
 .home-footer__logo {
-  font-size: var(--wx-text-2xl); font-weight: 800;
+  font-size: var(--wx-fs-24); font-weight: 800;
   color: var(--wx-text-primary); letter-spacing: -0.5px;
   display: block; margin-bottom: var(--wx-space-3);
 }

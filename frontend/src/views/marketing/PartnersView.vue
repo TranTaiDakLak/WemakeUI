@@ -109,14 +109,14 @@ const PARTNERS = [
   flex-shrink: 0;
 }
 .partner-card__field {
-  font-size: var(--wx-text-xs);
+  font-size: var(--wx-fs-12);
   font-weight: 500; text-transform: uppercase;
-  letter-spacing: 0.05em; color: var(--wx-text-tertiary);
+  letter-spacing: 0.05em; color: var(--wx-text-muted);
   display: block; margin-bottom: 2px;
 }
 .partner-card__name { font-size: var(--wx-text-base); font-weight: 700; color: var(--wx-text-primary); margin: 0; }
-.partner-card__desc { font-size: var(--wx-text-sm); color: var(--wx-text-secondary); line-height: 1.6; margin: 0; flex: 1; }
-.partner-card__tags { display: flex; flex-wrap: wrap; gap: var(--wx-space-1-5); }
+.partner-card__desc { font-size: var(--wx-fs-14); color: var(--wx-text-secondary); line-height: 1.6; margin: 0; flex: 1; }
+.partner-card__tags { display: flex; flex-wrap: wrap; gap: var(--wx-space-2); }
 .partner-tag {
   font-size: 11px; font-weight: 500;
   padding: 2px 8px;

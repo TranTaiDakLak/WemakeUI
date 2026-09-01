@@ -101,7 +101,7 @@ const product = computed(() => PRODUCT_DATA[slug.value])
 .pd-hero__inner { max-width: 800px; margin: 0 auto; }
 .pd-back {
   display: inline-block; margin-bottom: var(--wx-space-6);
-  font-size: var(--wx-text-sm); color: var(--wx-text-secondary);
+  font-size: var(--wx-fs-14); color: var(--wx-text-secondary);
   text-decoration: none;
 }
 .pd-back:hover { color: var(--wx-text-primary); }
@@ -117,14 +117,14 @@ const product = computed(() => PRODUCT_DATA[slug.value])
 .pd-btn {
   padding: var(--wx-space-2-5) var(--wx-space-6);
   border-radius: var(--wx-radius-lg);
-  font-size: var(--wx-text-sm); font-weight: 600;
+  font-size: var(--wx-fs-14); font-weight: 600;
   text-decoration: none; cursor: pointer; transition: all var(--wx-d-fast);
 }
 .pd-btn--primary { color: #fff; border: none; }
 .pd-btn--primary:hover { opacity: 0.9; transform: translateY(-1px); }
 .pd-btn--ghost { background: none; border: 1px solid var(--wx-border-subtle); color: var(--wx-text-secondary); }
 .pd-btn--ghost:hover { background: var(--wx-surface-elevated); color: var(--wx-text-primary); }
-.pd-version { font-size: var(--wx-text-xs); color: var(--wx-text-tertiary); font-family: monospace; }
+.pd-version { font-size: var(--wx-fs-12); color: var(--wx-text-muted); font-family: monospace; }
 
 .pd-container { max-width: 800px; margin: 0 auto; padding: 0 var(--wx-space-6) var(--wx-space-20); }
 .pd-section { margin-bottom: var(--wx-space-12); }
@@ -134,7 +134,7 @@ const product = computed(() => PRODUCT_DATA[slug.value])
 .pd-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--wx-space-3); }
 .pd-feature {
   display: flex; align-items: flex-start; gap: var(--wx-space-2);
-  font-size: var(--wx-text-sm); color: var(--wx-text-secondary);
+  font-size: var(--wx-fs-14); color: var(--wx-text-secondary);
   padding: var(--wx-space-3);
   background: var(--wx-surface-elevated);
   border-radius: var(--wx-radius-md);

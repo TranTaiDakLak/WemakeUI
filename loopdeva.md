@@ -215,4 +215,32 @@ tự ý dừng sớm hơn.
   - `DashboardActivity.vue` `.job-name{font-size:12px}` (literal, không nằm
     trong diff Dev B) → có thể tokenize `var(--wx-fs-12)` cho đồng bộ.
 
-<!-- Round 2+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 2 (2026-09-02, /loop tự đánh thức lần đầu)
+- PLAN (opus) tiếp tục dọn bug "undefined CSS var" từ backlog round 1: chia
+  6 file còn lại — Dev A = `ContactView.vue` + `HomeView.vue`; Dev B =
+  `ProductsView.vue` + `ProductDetailView.vue` + `PartnersView.vue` +
+  `LandingView.vue`.
+- Dev A commit `4f84556`: 18 chỗ sửa (2 file), typecheck+build:lib PASS.
+- Dev B commit `c0e5a68`: 18 chỗ sửa (4 file), gồm case đặc biệt
+  `LandingView.vue` — xoá hẳn dead fallback `#cbd5e1` thay vì chỉ đổi tên
+  var, đúng luật "không hardcode màu". typecheck+build:lib PASS.
+- Dev C QA: build gate 3/3 PASS (thêm cả `build:app`), 0 overlap file,
+  full-tree grep xác nhận **bug class "undefined CSS var" (`--wx-text-xs`,
+  `--wx-text-sm`, `--wx-text-tertiary`, `--wx-space-1-5`) đã CLOSED toàn bộ
+  repo** (round 1 + round 2 gộp lại xử lý hết). Không cần follow-up commit.
+  **ROUND 2 QA: PASS**.
+- Backlog mới từ Dev C (bổ sung mục A/B cho round sau):
+  - `views/home/LandingView.vue` — rất nhiều px chưa tokenize (font-size,
+    padding, gap ở khoảng dòng 265-838) + vài hex `#fff`/gradient (dòng
+    771-804) → ứng viên tốt cho spacing sweep, hiện là file "bẩn" nhất
+    trong nhóm marketing/landing.
+  - `views/marketing/ProductDetailView.vue` (dòng 12,18,24,30) và
+    `ProductsView.vue` (dòng 22,32,42,52) — hex brand color per-product
+    trong `PRODUCT_DATA`/`PRODUCTS` config, không có comment "cố ý cố định"
+    như case macOS traffic-light — cần xem có nên map sang token hay giữ
+    nguyên kèm comment giải thích.
+  - (vẫn còn từ round 1, chưa ai đụng): `DashboardHero.vue:37,66`
+    `ENV_COLOR` hardcode hex qua `:style`; `DashboardActivity.vue:242`
+    `.job-name{font-size:12px}` literal.
+
+<!-- Round 3+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

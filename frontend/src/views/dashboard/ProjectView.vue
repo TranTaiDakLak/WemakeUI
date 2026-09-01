@@ -74,13 +74,13 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
     <div class="cols" v-reveal>
       <BaseCard title="Burndown chart" subtitle="Lý tưởng vs thực tế" padded shadow="sm">
         <svg class="chart" viewBox="0 0 600 220" preserveAspectRatio="none">
-          <line x1="32" y1="200" x2="580" y2="200" stroke="#e5e7eb" />
+          <line x1="32" y1="200" x2="580" y2="200" stroke="var(--wx-border-default)" />
           <path :d="sparkPath([...sprintIdeal], 580, 200, 16)" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4" fill="none" />
-          <path :d="sparkPath([...sprintActual], 580, 200, 16)" stroke="#2563eb" stroke-width="2" fill="none" />
+          <path :d="sparkPath([...sprintActual], 580, 200, 16)" stroke="var(--wx-brand-primary)" stroke-width="2" fill="none" />
         </svg>
         <div class="legend-row">
           <span class="dot" style="background:#94a3b8" /> Lý tưởng
-          <span class="dot" style="background:#2563eb" /> Thực tế
+          <span class="dot" style="background:var(--wx-brand-primary)" /> Thực tế
         </div>
         <div class="x-labels">
           <span v-for="(d, i) in sprintDays" :key="i">{{ d }}</span>

@@ -63,11 +63,11 @@ const totalMrr = '1.562 triệu'
     <div class="cols" v-reveal>
       <BaseCard title="MRR theo tháng" subtitle="So với mục tiêu" padded shadow="sm">
         <svg class="big-chart" viewBox="0 0 600 220" preserveAspectRatio="none">
-          <path :d="sparkArea([...seriesUp, ...seriesUp], 600, 220, 12)" fill="rgba(37,99,235,0.15)" />
-          <path :d="sparkPath([...seriesUp, ...seriesUp], 600, 220, 12)" stroke="#2563eb" stroke-width="2" fill="none" />
+          <path :d="sparkArea([...seriesUp, ...seriesUp], 600, 220, 12)" fill="color-mix(in srgb, var(--wx-brand-primary) 15%, transparent)" />
+          <path :d="sparkPath([...seriesUp, ...seriesUp], 600, 220, 12)" stroke="var(--wx-brand-primary)" stroke-width="2" fill="none" />
           <path :d="sparkPath([...seriesFlat, ...seriesFlat], 600, 220, 12)" stroke="#94a3b8" stroke-dasharray="4 4" stroke-width="1.5" fill="none" />
         </svg>
-        <div class="legend"><span class="d" style="background:#2563eb" /> Thực tế <span class="d" style="background:#94a3b8" /> Mục tiêu</div>
+        <div class="legend"><span class="d" style="background:var(--wx-brand-primary)" /> Thực tế <span class="d" style="background:#94a3b8" /> Mục tiêu</div>
       </BaseCard>
 
       <BasePanel title="Phân bổ gói" tone="default">

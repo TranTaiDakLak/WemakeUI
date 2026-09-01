@@ -103,6 +103,18 @@ defineProps<{
 .base-badge--solid.base-badge--neutral { background: var(--wx-text-secondary); }
 .wx-dark .base-badge--solid { border-color: var(--wx-surface-base); }
 
+/* Dark mode — brighten feedback hues one step to keep WCAG AA contrast on dark surfaces */
+.wx-dark .base-badge--success { background: var(--wx-success-bg); color: var(--wx-success-text); }
+.wx-dark .base-badge--warning { background: var(--wx-warning-bg); color: var(--wx-warning-text); }
+.wx-dark .base-badge--danger  { background: var(--wx-danger-bg);  color: var(--wx-danger-text); }
+
+.wx-dark .base-badge--success .base-badge__dot,
+.wx-dark .base-badge--dot-only.base-badge--success { background: var(--wx-success-text); }
+.wx-dark .base-badge--warning .base-badge__dot,
+.wx-dark .base-badge--dot-only.base-badge--warning { background: var(--wx-warning-text); }
+.wx-dark .base-badge--danger .base-badge__dot,
+.wx-dark .base-badge--dot-only.base-badge--danger { background: var(--wx-danger-text); }
+
 /* Pulsing (for dot-only indicators) */
 .base-badge--pulsing { animation: badge-pulse 2s infinite; }
 @keyframes badge-pulse {

@@ -792,8 +792,8 @@ const ENV_STATUS = [
   font-size: 11px; font-weight: var(--wx-fw-semibold);
   padding: 3px 8px; border-radius: 20px; position: relative;
 }
-.env-dot--ok  { color: #16a34a; background: rgba(34,197,94,0.1); }
-.env-dot--err { color: #dc2626; background: rgba(239,68,68,0.1); }
+.env-dot--ok  { color: var(--wx-success-text); background: var(--wx-success-bg); }
+.env-dot--err { color: var(--wx-danger-text); background: var(--wx-danger-bg); }
 .env-dot__pulse { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 .env-dot--ok .env-dot__pulse { animation: pulse-ok 2s ease infinite; }
 @keyframes pulse-ok { 0%,100%{opacity:1} 50%{opacity:0.4} }

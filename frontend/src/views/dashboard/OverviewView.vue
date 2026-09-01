@@ -62,12 +62,12 @@ const activity = [
           <BaseTag label="last week" size="sm" />
         </template>
         <svg class="chart" viewBox="0 0 600 200" preserveAspectRatio="none">
-          <path :d="sparkArea([...seriesVolatile, ...seriesUp], 600, 200, 8)" fill="rgba(37,99,235,0.15)" />
-          <path :d="sparkPath([...seriesVolatile, ...seriesUp], 600, 200, 8)" fill="none" stroke="#2563eb" stroke-width="2" />
+          <path :d="sparkArea([...seriesVolatile, ...seriesUp], 600, 200, 8)" fill="color-mix(in srgb, var(--wx-brand-primary) 15%, transparent)" />
+          <path :d="sparkPath([...seriesVolatile, ...seriesUp], 600, 200, 8)" fill="none" stroke="var(--wx-brand-primary)" stroke-width="2" />
           <path :d="sparkPath([...seriesUp, ...seriesFlat], 600, 200, 8)" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4" />
         </svg>
         <div class="chart-legend">
-          <span class="dot" style="background:#2563eb" /> Tuần này
+          <span class="dot" style="background:var(--wx-brand-primary)" /> Tuần này
           <span class="dot" style="background:#94a3b8" /> Tuần trước
         </div>
       </BaseCard>

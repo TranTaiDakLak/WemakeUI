@@ -142,8 +142,9 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
 
 .base-input__field:focus {
   outline: none;
-  border-color: var(--wx-brand-600, #2563eb);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16), 0 0 0 1px rgba(37, 99, 235, 0.30);
+  border-color: var(--wx-brand-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-brand-primary) 16%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--wx-brand-primary) 30%, transparent);
 }
 
 .base-input__field--has-toggle { padding-right: 36px; }

@@ -243,4 +243,45 @@ tự ý dừng sớm hơn.
     `ENV_COLOR` hardcode hex qua `:style`; `DashboardActivity.vue:242`
     `.job-name{font-size:12px}` literal.
 
-<!-- Round 3+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 3 (2026-09-02)
+- PLAN (opus): Dev A = tokenize toàn bộ spacing/font-size khớp lưới 4pt +
+  màu CTA + bỏ dead fallback trong `LandingView.vue` (file bẩn nhất từ
+  backlog round 2); Dev B = dọn "wave 2" của bug undefined-CSS-var
+  (`--wx-text-base/lg/xl/2xl`, `var(--wx-surface)`, `var(--wx-primary)` —
+  KHÔNG PHẢI cùng list round 1/2, đây là biến khác cũng không tồn tại) +
+  `DashboardHero.vue` ENV_COLOR + `DashboardActivity.vue` job-name +
+  per-product hex color (giữ hex, thêm comment giải thích vì bị nối alpha
+  suffix `${color}15` trong :style — không thể tokenize).
+- Dev A commit `6f09dae`: 1 file, 53 dòng đổi cả 2 chiều — spacing/font-size
+  tokenize, CTA color → `var(--wx-text-on-brand)` (KHÔNG dùng
+  `--wx-text-inverse` vì token đó đổi màu theo dark mode, sai cho gradient
+  cố định), bỏ dead fallback (bao gồm sửa luôn 1 a11y bug thật: 8 chỗ
+  `var(--wx-d-fast, 150ms)` có fallback literal làm mất tác dụng override
+  `prefers-reduced-motion→0ms` của hệ thống). typecheck+build:lib PASS.
+- Dev B commit `ef25f53`: 4 file, fix hết wave-2 undefined-var trong đúng 4
+  file được giao (không có var lạ nào khác ngoài list), `ENV_COLOR` đổi hex
+  → `var(--wx-success/warning/danger-solid)`, `.job-name` tokenize,
+  comment tiếng Việt giải thích per-product hex. typecheck+build:lib PASS.
+- Dev C QA: build gate 3/3 PASS, 0 overlap, token tồn tại hết (21+14 tên),
+  dark-mode/`--wx-text-on-brand` đúng (không bị override ở dark-mode.css —
+  cố ý), reduced-motion fix xác nhận đúng, API/script không đổi ngoài dự
+  kiến, review lại 1 judgment call của Dev A (tokenize luôn phần 24px
+  trong `.lp-apps`/`.lp-footer` dù task không liệt kê rõ) → chấp nhận, áp
+  dụng đúng rule chung. **ROUND 3 QA: PASS**, không cần follow-up commit.
+- Backlog ưu tiên cao nhất cho round 4 — **wave 2 của bug undefined-CSS-var
+  còn ở 6 file, đã có full file:line list từ Dev C:**
+  - `archetypes/dashboard/DashboardAnalytics.vue:252`
+  - `archetypes/marketing/FAQAccordion.vue:118,119,125,126,145,161,172`
+  - `views/marketing/ContactView.vue:167,174,185,193,195,198,202,216,232,
+    233,238,240,265`
+  - `views/marketing/FAQView.vue:35,36`
+  - `views/marketing/HomeView.vue:105,128`
+  - `views/marketing/PartnersView.vue:73,82,117,130,131,137,141,143`
+  (Mapping đã biết: `--wx-text-base`→`var(--wx-fs-16)`,
+  `--wx-text-lg`→`var(--wx-fs-18)`, `--wx-text-xl`→`var(--wx-fs-20)`,
+  `--wx-text-2xl`→`var(--wx-fs-24)`, `var(--wx-surface)`→
+  `var(--wx-surface-base)`, `var(--wx-primary)`→`var(--wx-brand-primary)`.)
+  Vẫn còn từ trước: mục A (spacing sweep) và mục B (duplicate button/chip)
+  chưa động tới.
+
+<!-- Round 4+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

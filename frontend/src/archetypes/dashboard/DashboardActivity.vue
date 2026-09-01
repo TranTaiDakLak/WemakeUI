@@ -216,7 +216,7 @@ const tabItems = computed(() => [
   margin-bottom: var(--wx-space-4);
   flex-wrap: wrap;
 }
-.act-title { font-size: var(--wx-text-base); font-weight: 600; margin: 0; color: var(--wx-text-primary); }
+.act-title { font-size: var(--wx-fs-16); font-weight: 600; margin: 0; color: var(--wx-text-primary); }
 .act-tab-area { display: flex; align-items: center; gap: var(--wx-space-2); flex-wrap: wrap; }
 
 .act-table-wrap { overflow-x: auto; }
@@ -239,7 +239,7 @@ const tabItems = computed(() => [
 .act-table tr:last-child td { border-bottom: none; }
 .act-table tr:hover td { background: var(--wx-surface-elevated); }
 
-.job-name { font-family: monospace; font-size: 12px; color: var(--wx-text-primary); }
+.job-name { font-family: monospace; font-size: var(--wx-fs-12); color: var(--wx-text-primary); }
 .err-msg { color: var(--wx-danger-text); font-size: var(--wx-fs-12); max-width: 240px; }
 .cell-muted { color: var(--wx-text-muted); white-space: nowrap; }
 .cell-warn { color: var(--wx-warning-text); font-weight: 500; white-space: nowrap; }
@@ -261,7 +261,7 @@ const tabItems = computed(() => [
   display: flex; align-items: center; gap: var(--wx-space-2);
   padding: var(--wx-space-2) var(--wx-space-3);
   margin-bottom: var(--wx-space-2);
-  background: color-mix(in srgb, var(--wx-primary) 8%, transparent);
+  background: color-mix(in srgb, var(--wx-brand-primary) 8%, transparent);
   border-radius: var(--wx-radius-md);
   font-size: var(--wx-fs-14);
 }

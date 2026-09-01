@@ -35,9 +35,9 @@ const today = computed(() =>
 )
 
 const ENV_COLOR: Record<string, string> = {
-  ok: '#22c55e',
-  degraded: '#f59e0b',
-  down: '#ef4444',
+  ok: 'var(--wx-success-solid)',
+  degraded: 'var(--wx-warning-solid)',
+  down: 'var(--wx-danger-solid)',
 }
 </script>
 
@@ -132,7 +132,7 @@ const ENV_COLOR: Record<string, string> = {
   margin: 0 0 var(--wx-space-1);
 }
 .d-hero__title {
-  font-size: var(--wx-text-2xl);
+  font-size: var(--wx-fs-24);
   font-weight: 700;
   color: var(--wx-text-primary);
   margin: 0 0 var(--wx-space-1);

@@ -10,6 +10,9 @@ const gridRef = ref<HTMLElement | null>(null)
 const { revealed, observe } = useScrollReveal()
 onMounted(() => { if (gridRef.value) observe(gridRef.value) })
 
+// Màu thương hiệu riêng của từng sản phẩm — CỐ Ý giữ hex, không theo theme,
+// vì được nối thêm hậu tố alpha dạng chuỗi (ví dụ color + '15') khi dùng
+// trong :style, nên không thể thay bằng CSS var.
 const PRODUCTS = [
   {
     slug: 'wemakeui',
@@ -107,14 +110,14 @@ const PRODUCTS = [
 .products-hero {
   text-align: center;
   padding: 120px var(--wx-space-6) var(--wx-space-12);
-  background: linear-gradient(160deg, var(--wx-surface) 0%, color-mix(in srgb, var(--wx-primary) 4%, var(--wx-surface)) 100%);
+  background: linear-gradient(160deg, var(--wx-surface-base) 0%, color-mix(in srgb, var(--wx-brand-primary) 4%, var(--wx-surface-base)) 100%);
 }
 .products-hero__title {
   font-size: clamp(28px, 5vw, 48px); font-weight: 700;
   letter-spacing: -0.02em; color: var(--wx-text-primary);
   margin: 0 0 var(--wx-space-4);
 }
-.products-hero__sub { font-size: var(--wx-text-lg); color: var(--wx-text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+.products-hero__sub { font-size: var(--wx-fs-18); color: var(--wx-text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.7; }
 
 .products-container { max-width: 1200px; margin: 0 auto; padding: var(--wx-space-4) var(--wx-space-6) var(--wx-space-20); }
 .products-grid { display: grid; gap: var(--wx-space-5); }
@@ -139,7 +142,7 @@ const PRODUCTS = [
   flex-shrink: 0;
 }
 .product-card__meta {}
-.product-card__name { font-size: var(--wx-text-xl); font-weight: 700; color: var(--wx-text-primary); margin: 0 0 2px; }
+.product-card__name { font-size: var(--wx-fs-20); font-weight: 700; color: var(--wx-text-primary); margin: 0 0 2px; }
 .product-card__version {
   font-size: var(--wx-fs-12); font-weight: 500;
   color: var(--wx-text-muted);
@@ -172,6 +175,6 @@ const PRODUCTS = [
   color: var(--wx-text-secondary);
 }
 .product-btn--ghost:hover { background: var(--wx-surface-elevated); color: var(--wx-text-primary); }
-.product-btn--primary { color: #fff; border: none; }
+.product-btn--primary { color: var(--wx-text-on-brand); border: none; }
 .product-btn--primary:hover { opacity: 0.9; transform: translateY(-1px); }
 </style>

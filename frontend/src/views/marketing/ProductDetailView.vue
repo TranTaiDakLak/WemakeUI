@@ -7,6 +7,9 @@ import FAQAccordion from '@/archetypes/marketing/FAQAccordion.vue'
 const route = useRoute()
 const slug = computed(() => route.params.slug as string)
 
+// Màu thương hiệu riêng của từng sản phẩm — CỐ Ý giữ hex, không theo theme,
+// vì được nối thêm hậu tố alpha dạng chuỗi (ví dụ color + '08') khi dùng
+// trong :style, nên không thể thay bằng CSS var.
 const PRODUCT_DATA: Record<string, { name: string; icon: string; version: string; color: string; tagline: string; overview: string; features: string[] }> = {
   wemakeui: {
     name: 'WemakeUI', icon: '🔗', version: '3.2.1', color: '#2563eb',
@@ -43,7 +46,7 @@ const product = computed(() => PRODUCT_DATA[slug.value])
 
     <main v-if="product">
       <!-- hero -->
-      <div class="pd-hero" :style="{ background: `linear-gradient(160deg, var(--wx-surface) 0%, ${product.color}08 100%)` }">
+      <div class="pd-hero" :style="{ background: `linear-gradient(160deg, var(--wx-surface-base) 0%, ${product.color}08 100%)` }">
         <div class="pd-hero__inner">
           <RouterLink to="/products" class="pd-back">← Tất cả sản phẩm</RouterLink>
           <div class="pd-hero__head">
@@ -112,7 +115,7 @@ const product = computed(() => PRODUCT_DATA[slug.value])
   flex-shrink: 0;
 }
 .pd-hero__name { font-size: clamp(28px, 5vw, 48px); font-weight: 700; letter-spacing: -0.02em; color: var(--wx-text-primary); margin: 0 0 var(--wx-space-1); }
-.pd-hero__tagline { font-size: var(--wx-text-lg); color: var(--wx-text-secondary); margin: 0; }
+.pd-hero__tagline { font-size: var(--wx-fs-18); color: var(--wx-text-secondary); margin: 0; }
 .pd-hero__cta { display: flex; align-items: center; gap: var(--wx-space-3); flex-wrap: wrap; }
 .pd-btn {
   padding: var(--wx-space-2-5) var(--wx-space-6);
@@ -120,7 +123,7 @@ const product = computed(() => PRODUCT_DATA[slug.value])
   font-size: var(--wx-fs-14); font-weight: 600;
   text-decoration: none; cursor: pointer; transition: all var(--wx-d-fast);
 }
-.pd-btn--primary { color: #fff; border: none; }
+.pd-btn--primary { color: var(--wx-text-on-brand); border: none; }
 .pd-btn--primary:hover { opacity: 0.9; transform: translateY(-1px); }
 .pd-btn--ghost { background: none; border: 1px solid var(--wx-border-subtle); color: var(--wx-text-secondary); }
 .pd-btn--ghost:hover { background: var(--wx-surface-elevated); color: var(--wx-text-primary); }
@@ -128,8 +131,8 @@ const product = computed(() => PRODUCT_DATA[slug.value])
 
 .pd-container { max-width: 800px; margin: 0 auto; padding: 0 var(--wx-space-6) var(--wx-space-20); }
 .pd-section { margin-bottom: var(--wx-space-12); }
-.pd-section__title { font-size: var(--wx-text-2xl); font-weight: 700; color: var(--wx-text-primary); margin: 0 0 var(--wx-space-6); }
-.pd-overview { font-size: var(--wx-text-base); color: var(--wx-text-secondary); line-height: 1.8; margin: 0; }
+.pd-section__title { font-size: var(--wx-fs-24); font-weight: 700; color: var(--wx-text-primary); margin: 0 0 var(--wx-space-6); }
+.pd-overview { font-size: var(--wx-fs-16); color: var(--wx-text-secondary); line-height: 1.8; margin: 0; }
 
 .pd-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--wx-space-3); }
 .pd-feature {
@@ -144,7 +147,7 @@ const product = computed(() => PRODUCT_DATA[slug.value])
 .pd-notfound {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   min-height: 60vh; gap: var(--wx-space-4);
-  font-size: var(--wx-text-lg); color: var(--wx-text-secondary);
+  font-size: var(--wx-fs-18); color: var(--wx-text-secondary);
 }
-.pd-notfound a { color: var(--wx-primary); text-decoration: none; }
+.pd-notfound a { color: var(--wx-brand-primary); text-decoration: none; }
 </style>

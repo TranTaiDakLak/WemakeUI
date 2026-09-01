@@ -113,7 +113,7 @@ function toggle(id: string) {
 .faq-search__input {
   width: 100%;
   padding: var(--wx-space-3) var(--wx-space-4) var(--wx-space-3) calc(var(--wx-space-4) + 26px);
-  border: 1px solid var(--wx-border);
+  border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-lg);
   font-size: var(--wx-fs-16);
   background: var(--wx-surface-base);

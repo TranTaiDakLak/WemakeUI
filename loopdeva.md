@@ -182,4 +182,37 @@ tự ý dừng sớm hơn.
 - Backlog để lại cho loop: toàn bộ mục A/B/C/D ở trên (A và D là ưu tiên
   cao nhất để bắt đầu).
 
-<!-- Round 1+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 1 (2026-09-02, chạy qua /loop lần đầu — PLAN opus + Dev A/B/C sonnet)
+- PLAN (opus) chia: Dev A = tokenize spacing/font-size khớp chính xác lưới
+  4pt trong `DashboardKPICard.vue` + `CrudFormFields.vue`; Dev B = bug thật
+  — 7 biến CSS KHÔNG TỒN TẠI (`--wx-text-xs`, `--wx-text-sm`,
+  `--wx-text-tertiary`, `--wx-space-1-5`, `var(--wx-success)`,
+  `var(--wx-danger)`, `var(--wx-warning)`) đang được dùng trong
+  `DashboardHero.vue`, `DashboardActivity.vue`, `DashboardAnalytics.vue`,
+  `FAQAccordion.vue` → khiến font-size/spacing/màu bị silently broken
+  (property bị bỏ qua vì var không có fallback).
+- Dev A commit `7cb85c5`: 2 file, 10 dòng đổi, typecheck+build:lib PASS.
+- Dev B commit `ca38482`: 4 file, 41 chỗ sửa (map sang token thật:
+  `--wx-fs-12/14`, `--wx-text-muted`, `--wx-space-2`,
+  `--wx-success-text`/`-solid`, `--wx-danger-text`, `--wx-warning-text`),
+  typecheck+build:lib PASS.
+- Dev C QA: chạy đủ typecheck + build:lib + build:app (PASS cả 3), verify
+  không đụng file chung, không sửa tokens.css/dark-mode.css, không có
+  hardcode mới, dark-mode override đủ cho cả 4 token dùng, không đổi
+  script/props/lib.ts. **ROUND 1 QA: PASS**, không cần follow-up commit.
+- Backlog mới phát hiện từ Dev C (bổ sung vào mục A/D cho round sau):
+  - Cùng bug "undefined CSS var" (`--wx-text-xs/-sm/-tertiary`,
+    `--wx-space-1-5`) còn ở `views/marketing/{ContactView,HomeView,
+    PartnersView,ProductDetailView,ProductsView}.vue` (đã cố ý để ngoài
+    scope round 1) — ưu tiên cao cho round 2, cùng dạng bug với Dev B vừa
+    fix nên dev tiếp theo có full context để làm nhanh.
+  - `views/home/LandingView.vue:307,324` — `var(--wx-text-tertiary,
+    #cbd5e1)` cùng bug nhưng có hex fallback nên không vỡ visual, vẫn nên
+    dọn theo cùng lượt.
+  - `DashboardHero.vue:37-41` — `ENV_COLOR` object hardcode hex
+    (`#22c55e`/`#f59e0b`/`#ef4444`) bind qua `:style` → nên đổi sang
+    `var(--wx-success-solid)`/`var(--wx-warning-solid)`/`var(--wx-danger-solid)`.
+  - `DashboardActivity.vue` `.job-name{font-size:12px}` (literal, không nằm
+    trong diff Dev B) → có thể tokenize `var(--wx-fs-12)` cho đồng bộ.
+
+<!-- Round 2+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

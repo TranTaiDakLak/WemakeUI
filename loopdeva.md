@@ -284,4 +284,56 @@ tự ý dừng sớm hơn.
   Vẫn còn từ trước: mục A (spacing sweep) và mục B (duplicate button/chip)
   chưa động tới.
 
-<!-- Round 4+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 4 (2026-09-02)
+- PLAN (opus): chia 6 file wave-2 undefined-var còn lại từ backlog round 3
+  — Dev A = `ContactView.vue`(nặng nhất, 19-20 chỗ) + `FAQView.vue` +
+  `DashboardAnalytics.vue`; Dev B = `FAQAccordion.vue` + `PartnersView.vue`
+  + `HomeView.vue`.
+- Dev A commit `3163863`: 3 file, ~23 chỗ sửa, kèm extra fix nút submit
+  ContactView (`var(--wx-primary)` + hardcode `#fff` → `var(--wx-brand-
+  primary)` + `var(--wx-text-on-brand)`). typecheck+build:lib PASS.
+- Dev B commit `ac9bbee`: 3 file, ~21 chỗ sửa, kèm extra fix nút
+  `.partner-join__btn`, cố ý bỏ qua `.mkt-cta--primary{background:#fff}`
+  trong HomeView (nằm trên gradient CTA cố định, không phải bug).
+  typecheck+build:lib PASS.
+- Dev C QA: build gate 3/3 PASS, review kỹ diff/mapping đều đúng. Trong lúc
+  quét toàn bộ mọi `var(--wx-...)` dùng trong repo và đối chiếu với token
+  thật sự tồn tại (không chỉ theo list nghi ngờ có sẵn), phát hiện:
+  - 1 lỗi nhỏ nằm ngay trong file Dev B vừa sửa (`FAQAccordion.vue:116`
+    `var(--wx-border)` không tồn tại) → Dev C tự sửa + commit follow-up
+    `88d1cd9` (map sang `--wx-border-default`).
+  - **WAVE 3 — phát hiện lớn, ~90 chỗ / 20+ file**, KHÔNG sửa trong round
+    này (quá lớn cho 1 round, để PLAN round 5 chia nhỏ). Chia 2 nhóm:
+    - *Không có fallback (visual bug thật)*: `--wx-fs-10/11/17/22/26`,
+      `--wx-fw-normal` (có thể ý là `--wx-fw-regular`), `--wx-space-16/20/
+      2-5`, `--wx-surface-raised/hover/default`, `--wx-danger-subtle`,
+      `--wx-success-subtle`, `--wx-card-accent`. Trải rộng khắp
+      `views/forms/*`, `views/showcase/*`, `views/wemakeui/*`,
+      `views/app/*`, `views/saas/*`, `views/dashboard/*`, và cả
+      `components/common/{BaseFileUpload,BaseSelect,BaseSelectMenu,
+      BaseBadge,BaseTabs,BaseCard,BaseWizard,TagList}.vue`,
+      `components/charts/DonutChart.vue`. **Đây là component library gốc
+      (`components/common/*`) bị dính bug — ưu tiên tuyệt đối cho round
+      5**, vì ảnh hưởng trực tiếp public API của lib, không chỉ demo view.
+    - *Có fallback (an toàn về mặt visual, nhưng nợ đặt tên)*:
+      `--wx-error-bg/text/border` (nên đổi thành `--wx-danger-*` cho khớp
+      tên token thật) ở `LoginV3View.vue`, `AnimationShowcase.vue`; và cả
+      1 bộ naming scheme khác hẳn (`--wx-color-bg-*`, `--wx-color-text-*`,
+      `--wx-color-border-*`, `--wx-color-brand-solid`) chỉ gói gọn trong
+      `IconShowcase.vue` (~30 chỗ) — ưu tiên thấp hơn vì không vỡ visual.
+  - Xác nhận false positive (không phải bug, bỏ qua): `--wx-shell-topbar-h`/
+    `--wx-shell-max-w` (AppShell.vue), `--wx-sidebar-width`/
+    `--wx-sidebar-collapsed-width` (AppSidebar.vue) — set qua inline
+    `:style` từ props, không phải token toàn cục; các chuỗi
+    `` `var(--wx-radius-${k})` `` build động trong TokensShowcase.vue/
+    motionScale.ts/radiusMap.ts/elevationMap.ts/typographyScale.ts/
+    ShimmerBlock.vue — không phải bug.
+  - Xác nhận **wave 1 + wave 2 đã CLOSED hoàn toàn** (full-tree grep 0 hit).
+  **ROUND 4 QA: PASS WITH FOLLOW-UP COMMIT `88d1cd9`**.
+- Backlog cho round 5 — ưu tiên tuyệt đối WAVE 3 (đặc biệt nhóm
+  `components/common/*` vì là public API của lib), xem chi tiết ở trên.
+  Mục A (spacing sweep) và B (duplicate button/chip) vẫn đứng sau wave 3
+  trong thứ tự ưu tiên vì wave 3 là bug thật (giống pattern round 1→4),
+  còn A/B là refactor/polish.
+
+<!-- Round 5+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

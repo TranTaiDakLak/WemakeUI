@@ -205,7 +205,7 @@ function back() {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 4px;
+  gap: var(--wx-space-1);
   padding: var(--wx-space-4) var(--wx-space-2);
   background: var(--wx-surface-base);
   border: 2px solid var(--wx-border-default);

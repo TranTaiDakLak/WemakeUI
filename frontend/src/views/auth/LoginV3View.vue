@@ -567,7 +567,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 16px;
+  padding: 14px var(--wx-space-4);
   border-radius: var(--wx-radius-md);
   background: var(--wx-success-bg);
   color: var(--wx-success-text);
@@ -582,7 +582,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
 .form-alert {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--wx-space-2);
   padding: 10px 14px;
   border-radius: var(--wx-radius-md);
   font-size: var(--wx-fs-13);
@@ -708,8 +708,8 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
+  gap: var(--wx-space-2);
+  padding: var(--wx-space-3) 20px;
   border-radius: var(--wx-radius-xl);
   font-size: var(--wx-fs-13);
   font-weight: var(--wx-fw-medium);

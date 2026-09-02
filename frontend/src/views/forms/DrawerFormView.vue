@@ -174,7 +174,7 @@ function settingRows(): SettingRow[] {
         <div class="fp__meta">
           <span class="fp__meta-label">Components:</span>
           <span v-for="c in ['BaseDrawer','BaseInput','BaseSelect','BaseToggle','BaseTextarea','FormField']" :key="c" class="fp__chip">{{ c }}</span>
-          <span class="fp__meta-label" style="margin-left:8px">Patterns:</span>
+          <span class="fp__meta-label" style="margin-left:var(--wx-space-2)">Patterns:</span>
           <span v-for="p in ['DrawerForm','SettingsPanel','FooterSlot','SlideinPanel']" :key="p" class="fp__chip">{{ p }}</span>
         </div>
       </div>
@@ -187,7 +187,7 @@ function settingRows(): SettingRow[] {
 .fp { min-height: 100vh; background: var(--wx-surface-sunken); }
 .fp__main { max-width: 860px; margin: 0 auto; padding: var(--wx-space-5) var(--wx-space-5) var(--wx-space-10); display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .fp__hdr { margin-top: var(--wx-space-2); }
-.fp__title { margin: 0 0 4px; font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
+.fp__title { margin: 0 0 var(--wx-space-1); font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
 .fp__desc  { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); line-height: 1.6; }
 .fp__card { background: var(--wx-surface-elevated); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-xl); padding: var(--wx-space-5); display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .fp__card--info { background: color-mix(in srgb, var(--wx-brand-primary) 5%, var(--wx-surface-elevated)); border-color: color-mix(in srgb, var(--wx-brand-primary) 20%, transparent); }
@@ -202,7 +202,7 @@ function settingRows(): SettingRow[] {
 .fp__code pre { margin: 0; padding: var(--wx-space-4); font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); color: var(--wx-text-secondary); line-height: 1.65; overflow-x: auto; }
 .fp__meta { display: flex; align-items: center; gap: var(--wx-space-2); flex-wrap: wrap; padding-top: var(--wx-space-2); border-top: 1px solid var(--wx-border-subtle); }
 .fp__meta-label { font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
-.fp__chip { display: inline-flex; padding: 2px 8px; border-radius: var(--wx-radius-full); font-size: 10px; background: var(--wx-surface-sunken); border: 1px solid var(--wx-border-subtle); color: var(--wx-text-secondary); font-family: var(--wx-font-mono); }
+.fp__chip { display: inline-flex; padding: 2px var(--wx-space-2); border-radius: var(--wx-radius-full); font-size: 10px; background: var(--wx-surface-sunken); border: 1px solid var(--wx-border-subtle); color: var(--wx-text-secondary); font-family: var(--wx-font-mono); }
 
 /* Summary card */
 .df-summary { display: flex; flex-direction: column; }

@@ -134,7 +134,7 @@ const showCode = ref(false)
 .fp { min-height: 100vh; background: var(--wx-surface-sunken); }
 .fp__main { max-width: 900px; margin: 0 auto; padding: var(--wx-space-5) var(--wx-space-5) var(--wx-space-10); display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .fp__hdr { margin-top: var(--wx-space-2); }
-.fp__title { margin: 0 0 4px; font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
+.fp__title { margin: 0 0 var(--wx-space-1); font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
 .fp__desc { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); }
 .fp__card { background: var(--wx-surface-elevated); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-xl); padding: var(--wx-space-5); display: flex; flex-direction: column; gap: var(--wx-space-3); }
 .fp__card-title { margin: 0; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-bold); text-transform: uppercase; letter-spacing: .6px; color: var(--wx-text-muted); }
@@ -146,13 +146,13 @@ const showCode = ref(false)
 .fp__code pre { margin: 0; padding: var(--wx-space-4); font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); color: var(--wx-text-secondary); line-height: 1.65; overflow-x: auto; }
 .fp__meta { display: flex; align-items: center; gap: var(--wx-space-2); flex-wrap: wrap; padding-top: var(--wx-space-2); border-top: 1px solid var(--wx-border-subtle); }
 .fp__meta-label { font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
-.fp__chip { display: inline-flex; padding: 2px 8px; border-radius: var(--wx-radius-full); font-size: 10px; background: var(--wx-surface-sunken); border: 1px solid var(--wx-border-subtle); color: var(--wx-text-secondary); font-family: var(--wx-font-mono); }
+.fp__chip { display: inline-flex; padding: 2px var(--wx-space-2); border-radius: var(--wx-radius-full); font-size: 10px; background: var(--wx-surface-sunken); border: 1px solid var(--wx-border-subtle); color: var(--wx-text-secondary); font-family: var(--wx-font-mono); }
 
 /* Input group */
 .ig-wrap { display: flex; align-items: stretch; }
 .ig-addon {
   display: flex; align-items: center;
-  padding: 0 12px;
+  padding: 0 var(--wx-space-3);
   background: var(--wx-surface-sunken);
   border: 1px solid var(--wx-border-default);
   font-size: var(--wx-fs-13);
@@ -165,7 +165,7 @@ const showCode = ref(false)
 .ig-addon--text  { font-size: var(--wx-fs-13); }
 .ig-input {
   flex: 1; min-width: 0;
-  padding: 8px 12px;
+  padding: var(--wx-space-2) var(--wx-space-3);
   border: 1px solid var(--wx-border-default);
   border-radius: 0;
   background: var(--wx-bg-base);
@@ -183,7 +183,7 @@ const showCode = ref(false)
 /* Suffix button */
 .ig-input--btn-right { border-radius: var(--wx-radius-md) 0 0 var(--wx-radius-md); }
 .ig-btn {
-  padding: 0 16px;
+  padding: 0 var(--wx-space-4);
   background: var(--wx-brand-primary);
   color: #fff;
   border: 1px solid var(--wx-brand-primary);

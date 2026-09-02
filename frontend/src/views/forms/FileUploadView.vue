@@ -208,7 +208,7 @@ function onDrop(e: DragEvent) {
 .fp { min-height: 100vh; background: var(--wx-surface-sunken); }
 .fp__main { max-width: 720px; margin: 0 auto; padding: var(--wx-space-5) var(--wx-space-5) var(--wx-space-10); display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .fp__hdr { margin-top: var(--wx-space-2); }
-.fp__title { margin: 0 0 4px; font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
+.fp__title { margin: 0 0 var(--wx-space-1); font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
 .fp__desc  { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); line-height: 1.6; }
 .fp__card { background: var(--wx-surface-elevated); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-xl); padding: var(--wx-space-5); display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .fp__card--info { background: color-mix(in srgb, var(--wx-brand-primary) 5%, var(--wx-surface-elevated)); border-color: color-mix(in srgb, var(--wx-brand-primary) 20%, transparent); }
@@ -223,14 +223,14 @@ function onDrop(e: DragEvent) {
 .fp__code pre { margin: 0; padding: var(--wx-space-4); font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); color: var(--wx-text-secondary); line-height: 1.65; overflow-x: auto; }
 .fp__meta { display: flex; align-items: center; gap: var(--wx-space-2); flex-wrap: wrap; padding-top: var(--wx-space-2); border-top: 1px solid var(--wx-border-subtle); }
 .fp__meta-label { font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
-.fp__chip { display: inline-flex; padding: 2px 8px; border-radius: var(--wx-radius-full); font-size: 10px; background: var(--wx-surface-sunken); border: 1px solid var(--wx-border-subtle); color: var(--wx-text-secondary); font-family: var(--wx-font-mono); }
+.fp__chip { display: inline-flex; padding: 2px var(--wx-space-2); border-radius: var(--wx-radius-full); font-size: 10px; background: var(--wx-surface-sunken); border: 1px solid var(--wx-border-subtle); color: var(--wx-text-secondary); font-family: var(--wx-font-mono); }
 
 /* Drop zone */
 .fu-zone {
   display: block;
   border: 2px dashed var(--wx-border-default);
   border-radius: var(--wx-radius-lg);
-  padding: 40px 24px;
+  padding: var(--wx-space-7) var(--wx-space-5);
   text-align: center;
   cursor: pointer;
   transition: border-color var(--wx-d-fast, 150ms), background var(--wx-d-fast, 150ms);
@@ -242,7 +242,7 @@ function onDrop(e: DragEvent) {
 }
 .fu-zone__input { display: none; }
 .fu-zone__icon { color: var(--wx-text-muted); margin-bottom: var(--wx-space-2); }
-.fu-zone__text { margin: 0 0 4px; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); }
+.fu-zone__text { margin: 0 0 var(--wx-space-1); font-size: var(--wx-fs-14); color: var(--wx-text-secondary); }
 .fu-zone__link { color: var(--wx-brand-primary); text-decoration: underline; }
 .fu-zone__sub  { margin: 0; font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
 
@@ -259,12 +259,12 @@ function onDrop(e: DragEvent) {
 .fu-item__info { flex: 1; min-width: 0; }
 .fu-item__name { font-size: var(--wx-fs-13); color: var(--wx-text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .fu-item__meta { font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
-.fu-item__bar  { height: 3px; background: var(--wx-border-subtle); border-radius: 2px; overflow: hidden; margin-top: 4px; }
+.fu-item__bar  { height: 3px; background: var(--wx-border-subtle); border-radius: 2px; overflow: hidden; margin-top: var(--wx-space-1); }
 .fu-item__fill { height: 100%; background: var(--wx-brand-primary); border-radius: 2px; transition: width var(--wx-d-micro, 100ms) linear; }
-.fu-item__status { display: flex; align-items: center; gap: 4px; font-size: var(--wx-fs-12); margin-top: 3px; }
+.fu-item__status { display: flex; align-items: center; gap: var(--wx-space-1); font-size: var(--wx-fs-12); margin-top: 3px; }
 .fu-item__status--done { color: #16a34a; }
 .fu-item__remove {
-  flex-shrink: 0; background: none; border: none; padding: 4px; cursor: pointer;
+  flex-shrink: 0; background: none; border: none; padding: var(--wx-space-1); cursor: pointer;
   color: var(--wx-text-muted); border-radius: var(--wx-radius-sm);
   display: flex; align-items: center; justify-content: center;
   transition: color var(--wx-d-fast, 150ms), background var(--wx-d-fast, 150ms);

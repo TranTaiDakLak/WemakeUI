@@ -141,7 +141,7 @@ const day = ref('mon')
         <div class="fp__meta">
           <span class="fp__meta-label">Components:</span>
           <span v-for="c in ['BaseCheckbox','BaseRadio','BaseToggle','FormField']" :key="c" class="fp__chip">{{ c }}</span>
-          <span class="fp__meta-label" style="margin-left:8px">Patterns:</span>
+          <span class="fp__meta-label" style="margin-left:var(--wx-space-2)">Patterns:</span>
           <span v-for="p in ['CheckList','RadioGroup','ToggleList']" :key="p" class="fp__chip">{{ p }}</span>
         </div>
       </div>
@@ -154,7 +154,7 @@ const day = ref('mon')
 .fp { min-height: 100vh; background: var(--wx-surface-sunken); }
 .fp__main { max-width: 900px; margin: 0 auto; padding: var(--wx-space-5) var(--wx-space-5) var(--wx-space-10); display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .fp__hdr { margin-top: var(--wx-space-2); }
-.fp__title { margin: 0 0 4px; font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
+.fp__title { margin: 0 0 var(--wx-space-1); font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
 .fp__desc  { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); }
 .fp__hint  { margin: 0; font-size: var(--wx-fs-13); color: var(--wx-text-secondary); }
 .fp__card { background: var(--wx-surface-elevated); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-xl); padding: var(--wx-space-5); display: flex; flex-direction: column; gap: var(--wx-space-3); }
@@ -163,7 +163,7 @@ const day = ref('mon')
 .fp__check-list { display: flex; flex-direction: column; gap: 2px; }
 .fp__check-item { display: flex; flex-direction: column; gap: 2px; padding: var(--wx-space-2) 0; border-bottom: 1px solid var(--wx-border-subtle); }
 .fp__check-item:last-child { border-bottom: none; }
-.fp__check-desc { font-size: var(--wx-fs-12); color: var(--wx-text-muted); padding-left: 24px; }
+.fp__check-desc { font-size: var(--wx-fs-12); color: var(--wx-text-muted); padding-left: var(--wx-space-5); }
 
 .fp__toggle-list { display: flex; flex-direction: column; }
 .fp__toggle-item { display: flex; align-items: center; justify-content: space-between; gap: var(--wx-space-4); padding: var(--wx-space-3) 0; border-bottom: 1px solid var(--wx-border-subtle); }
@@ -178,5 +178,5 @@ const day = ref('mon')
 .fp__code pre { margin: 0; padding: var(--wx-space-4); font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); color: var(--wx-text-secondary); line-height: 1.65; overflow-x: auto; }
 .fp__meta { display: flex; align-items: center; gap: var(--wx-space-2); flex-wrap: wrap; padding-top: var(--wx-space-2); border-top: 1px solid var(--wx-border-subtle); }
 .fp__meta-label { font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
-.fp__chip { display: inline-flex; padding: 2px 8px; border-radius: var(--wx-radius-full); font-size: 10px; background: var(--wx-surface-sunken); border: 1px solid var(--wx-border-subtle); color: var(--wx-text-secondary); font-family: var(--wx-font-mono); }
+.fp__chip { display: inline-flex; padding: 2px var(--wx-space-2); border-radius: var(--wx-radius-full); font-size: 10px; background: var(--wx-surface-sunken); border: 1px solid var(--wx-border-subtle); color: var(--wx-text-secondary); font-family: var(--wx-font-mono); }
 </style>

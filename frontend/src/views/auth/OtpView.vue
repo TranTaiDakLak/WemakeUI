@@ -164,7 +164,7 @@ function resend() {
   outline: none;
   border-color: var(--wx-brand-primary);
   background: var(--wx-surface-base);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-brand-primary) 18%, transparent);
 }
 .otp-cell--filled { border-color: var(--wx-brand-primary); }
 .otp-cell--error { border-color: var(--wx-danger-solid); }

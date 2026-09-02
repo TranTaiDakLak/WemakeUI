@@ -99,7 +99,7 @@ onBeforeUnmount(stopStream)
       </GroupBox>
 
       <GroupBox title="LogViewer (virtual scroll)">
-        <div class="muted" style="margin-bottom: 8px;">
+        <div class="muted" style="margin-bottom: var(--wx-space-2);">
           <b>Hướng dẫn:</b> bấm vào dòng có <code>▸</code> để mở chi tiết · search highlight với <mark>mark</mark> · scroll lên sẽ hiện badge "+N log mới ↓" · cuộn xuống đáy auto bật follow lại
         </div>
         <div style="height: 540px;">
@@ -124,6 +124,6 @@ onBeforeUnmount(stopStream)
 }
 .row { display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center; }
 .muted { color: var(--wx-text-muted); font-size: 12px; }
-.muted code { font-family: var(--wx-font-mono); background: var(--wx-surface-sunken); padding: 1px 4px; border-radius: 3px; }
-.muted mark { background: var(--wx-warning-bg); color: var(--wx-warning-text); padding: 0 4px; border-radius: 3px; }
+.muted code { font-family: var(--wx-font-mono); background: var(--wx-surface-sunken); padding: 1px var(--wx-space-1); border-radius: 3px; }
+.muted mark { background: var(--wx-warning-bg); color: var(--wx-warning-text); padding: 0 var(--wx-space-1); border-radius: 3px; }
 </style>

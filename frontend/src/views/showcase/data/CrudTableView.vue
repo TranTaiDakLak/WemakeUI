@@ -347,7 +347,7 @@ const densityMap: Record<Density, { td: string; th: string }> = {
 .anatomy-item {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
   padding: var(--wx-space-3);
   background: var(--wx-surface-sunken);
   border-radius: var(--wx-radius-md);
@@ -369,7 +369,7 @@ const densityMap: Record<Density, { td: string; th: string }> = {
   font-size: var(--wx-fs-12);
   background: color-mix(in srgb, var(--wx-brand-primary) 10%, transparent);
   color: var(--wx-brand-primary);
-  padding: 1px 4px;
+  padding: 1px var(--wx-space-1);
   border-radius: 3px;
 }
 </style>

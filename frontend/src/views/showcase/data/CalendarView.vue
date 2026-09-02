@@ -71,6 +71,6 @@ function onDateClick(d: string) {
   flex-direction: column;
   gap: var(--space-md);
 }
-p { font-size: 13px; margin: 4px 0; color: var(--wx-text-secondary); }
+p { font-size: 13px; margin: var(--wx-space-1) 0; color: var(--wx-text-secondary); }
 p b { color: var(--wx-brand-primary); }
 </style>

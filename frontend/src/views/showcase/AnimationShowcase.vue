@@ -250,7 +250,7 @@ const EASE_TOKENS = [
                 </div>
               </Transition>
             </div>
-            <div class="demo-actions" style="margin-top:8px">
+            <div class="demo-actions" style="margin-top:var(--wx-space-2)">
               <BaseButton variant="secondary" size="sm" @click="showSlideRight = !showSlideRight">
                 {{ showSlideRight ? 'Đóng' : 'Mở Drawer' }}
               </BaseButton>
@@ -625,7 +625,7 @@ const EASE_TOKENS = [
   overflow: hidden;
 }
 .token-table__head {
-  padding: 10px 16px;
+  padding: 10px var(--wx-space-4);
   font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-bold);
   text-transform: uppercase;
@@ -638,7 +638,7 @@ const EASE_TOKENS = [
   display: flex;
   align-items: center;
   gap: var(--wx-space-3);
-  padding: 10px 16px;
+  padding: 10px var(--wx-space-4);
   font-size: var(--wx-fs-12);
   border-bottom: 1px solid var(--wx-border-subtle);
   flex-wrap: wrap;
@@ -665,7 +665,7 @@ const EASE_TOKENS = [
  */
 .chip {
   display: inline-flex;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
   font-size: 10px;
   font-weight: var(--wx-fw-semibold);
@@ -702,7 +702,7 @@ const EASE_TOKENS = [
   font-weight: var(--wx-fw-semibold);
   color: var(--wx-text-primary);
 }
-.token-chips { display: flex; gap: 4px; flex-wrap: wrap; }
+.token-chips { display: flex; gap: var(--wx-space-1); flex-wrap: wrap; }
 
 /* demo area */
 .demo-area {
@@ -726,7 +726,7 @@ const EASE_TOKENS = [
 .demo-box--brand   { background: var(--wx-brand-primary); color: #fff; }
 .demo-box--surface { background: var(--wx-surface-elevated); border: 1px solid var(--wx-border-default); color: var(--wx-text-primary); }
 .demo-box--shadow  { box-shadow: 0 8px 24px -4px rgba(0,0,0,.16); width: 140px; height: 80px; }
-.demo-box--drawer  { width: 100%; height: 90px; border-radius: 0; justify-content: flex-end; padding-right: 16px; }
+.demo-box--drawer  { width: 100%; height: 90px; border-radius: 0; justify-content: flex-end; padding-right: var(--wx-space-4); }
 
 .demo-actions { display: flex; align-items: center; gap: var(--wx-space-2); }
 .demo-note { margin: 0; font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
@@ -803,14 +803,14 @@ const EASE_TOKENS = [
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-xl);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 4px; cursor: pointer;
+  gap: var(--wx-space-1); cursor: pointer;
 }
 .hover-label { font-size: var(--wx-fs-13); font-weight: var(--wx-fw-semibold); color: var(--wx-text-primary); }
 .hover-sub   { font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
 .hover-code  {
   font-family: var(--wx-font-mono); font-size: 10px;
   color: var(--wx-text-muted); background: var(--wx-surface-sunken);
-  padding: 4px 8px; border-radius: var(--wx-radius-sm);
+  padding: var(--wx-space-1) var(--wx-space-2); border-radius: var(--wx-radius-sm);
   border: 1px solid var(--wx-border-subtle);
 }
 
@@ -835,7 +835,7 @@ const EASE_TOKENS = [
 .hover-scale:hover { transform: scale(1.03); }
 
 .hover-reveal { position: relative; overflow: hidden; }
-.hover-reveal__content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: 100%; height: 100%; }
+.hover-reveal__content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--wx-space-1); width: 100%; height: 100%; }
 .hover-reveal__action {
   position: absolute; inset: 0;
   background: color-mix(in srgb, var(--wx-brand-primary) 90%, transparent);
@@ -854,7 +854,7 @@ const EASE_TOKENS = [
   display: flex;
   background: var(--wx-surface-sunken);
   border-radius: var(--wx-radius-lg);
-  padding: 4px;
+  padding: var(--wx-space-1);
   gap: 0;
 }
 .tab-indicator {
@@ -868,7 +868,7 @@ const EASE_TOKENS = [
 }
 .tab-btn {
   flex: 1; position: relative; z-index: 1;
-  padding: 8px 12px; border: none; background: transparent;
+  padding: var(--wx-space-2) var(--wx-space-3); border: none; background: transparent;
   font-size: var(--wx-fs-13); font-family: var(--wx-font-primary);
   font-weight: var(--wx-fw-medium); color: var(--wx-text-muted);
   border-radius: calc(var(--wx-radius-lg) - 4px); cursor: pointer;
@@ -909,9 +909,9 @@ const EASE_TOKENS = [
 }
 
 /* ── Error shake ── */
-.shake-field { padding: 4px; }
+.shake-field { padding: var(--wx-space-1); }
 .fake-input {
-  width: 100%; padding: 8px 12px;
+  width: 100%; padding: var(--wx-space-2) var(--wx-space-3);
   border: 1.5px solid var(--wx-danger-border);
   border-radius: var(--wx-radius-md);
   background: var(--wx-danger-bg);

@@ -73,7 +73,7 @@ function onCardClick(card: KanbanCard) {
       </PageHeader>
 
       <GroupBox title="Project tracker (kéo thả thử)">
-        <div class="muted" style="margin-bottom: 12px;">
+        <div class="muted" style="margin-bottom: var(--wx-space-3);">
           <b>Cách dùng:</b> kéo card từ column này sang column khác · click card để mở chi tiết · column "Review" có giới hạn 5 cards
         </div>
         <Kanban v-model="columns" @card-move="onCardMove" @card-click="onCardClick" />

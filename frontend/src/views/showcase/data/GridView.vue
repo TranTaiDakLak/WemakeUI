@@ -105,7 +105,7 @@ const selectedCount = computed(() => selected.value.size)
       </GroupBox>
 
       <GroupBox title="DataGridPro (full features)">
-        <div class="muted" style="margin-bottom: 8px;">
+        <div class="muted" style="margin-bottom: var(--wx-space-2);">
           <b>Tính năng:</b> sort (click header) · resize (kéo cạnh phải) · reorder (kéo header) · pin (⋮) · multi-select (checkbox) · inline edit (dblclick cell) · density toggle · saved views · export CSV/JSON
         </div>
         <div style="height: 560px;">

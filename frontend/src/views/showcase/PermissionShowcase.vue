@@ -297,7 +297,7 @@ code {
   display: inline-flex;
   align-items: center;
   gap: var(--wx-space-1);
-  padding: 6px 12px;
+  padding: 6px var(--wx-space-3);
   border-radius: var(--wx-radius-md);
   border: 1px solid var(--wx-border-default);
   cursor: pointer;
@@ -315,7 +315,7 @@ code {
 .flag-btn {
   font-family: inherit;
   font-size: var(--wx-fs-13);
-  padding: 6px 12px;
+  padding: 6px var(--wx-space-3);
   border-radius: var(--wx-radius-md);
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);
@@ -332,7 +332,7 @@ code {
 .check-table th,
 .check-table td {
   text-align: left;
-  padding: 8px 12px;
+  padding: var(--wx-space-2) var(--wx-space-3);
   border-bottom: 1px solid var(--wx-border-subtle);
 }
 .check-table th {
@@ -349,7 +349,7 @@ code {
   display: inline-flex;
   align-items: center;
   font-size: var(--wx-fs-12);
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
   font-family: var(--wx-font-mono);
 }
@@ -360,7 +360,7 @@ code {
   font-family: inherit;
   font-size: var(--wx-fs-13);
   font-weight: var(--wx-fw-medium);
-  padding: 8px 14px;
+  padding: var(--wx-space-2) 14px;
   border-radius: var(--wx-radius-md);
   background: var(--wx-brand-primary);
   color: var(--wx-text-inverse);
@@ -387,7 +387,7 @@ code {
   align-items: center;
   gap: var(--wx-space-1);
   font-size: var(--wx-fs-13);
-  padding: 6px 12px;
+  padding: 6px var(--wx-space-3);
   border-radius: var(--wx-radius-md);
   background: var(--wx-info-bg);
   color: var(--wx-info-text);

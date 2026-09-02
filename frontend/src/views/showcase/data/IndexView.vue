@@ -156,7 +156,7 @@ const routes = [
 .card-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 .tag {
   font-size: 10px;

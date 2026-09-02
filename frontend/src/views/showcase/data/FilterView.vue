@@ -147,7 +147,7 @@ function removeChip(path: number[]) {
               </tr>
             </tbody>
           </table>
-          <p v-if="filtered.length > 20" class="muted" style="margin-top: 8px; text-align: center;">
+          <p v-if="filtered.length > 20" class="muted" style="margin-top: var(--wx-space-2); text-align: center;">
             Chỉ hiển thị 20 dòng đầu (tổng {{ filtered.length }})
           </p>
           <p v-if="filtered.length === 0" class="muted" style="text-align: center; padding: 20px;">

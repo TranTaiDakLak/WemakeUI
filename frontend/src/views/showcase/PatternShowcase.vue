@@ -383,7 +383,7 @@ const deptOptions = [
 
 .bio-input {
   width: 100%;
-  padding: 8px 12px;
+  padding: var(--wx-space-2) var(--wx-space-3);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
   font-family: var(--wx-font-primary);

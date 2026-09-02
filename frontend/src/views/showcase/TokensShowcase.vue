@@ -431,7 +431,7 @@ function bumpMotion() {
   gap: 2px;
 }
 .theme-btn {
-  padding: 4px 12px;
+  padding: var(--wx-space-1) var(--wx-space-3);
   border: none;
   background: transparent;
   color: rgba(255,255,255,0.85);
@@ -885,14 +885,14 @@ code {
 }
 .pg-variant-switch {
   display: inline-flex;
-  gap: 4px;
+  gap: var(--wx-space-1);
   padding: 3px;
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-full);
   background: var(--wx-bg-sunken);
 }
 .pg-variant-btn {
-  padding: 6px 16px;
+  padding: 6px var(--wx-space-4);
   border: none;
   background: transparent;
   color: var(--wx-content-secondary);
@@ -954,7 +954,7 @@ code {
   color: transparent;
 }
 .pg-demo-badge {
-  padding: 4px 12px;
+  padding: var(--wx-space-1) var(--wx-space-3);
   border-radius: var(--wx-radius-full);
   background: var(--wx-brand-100);
   color: var(--wx-brand-700);

@@ -773,7 +773,7 @@ import '@wemake/ui/style.css'
   border-color: rgba(255, 255, 255, 0.12);
 }
 .seg button {
-  padding: 6px 12px;
+  padding: 6px var(--wx-space-3);
   border: none;
   background: transparent;
   font: inherit;
@@ -791,7 +791,7 @@ import '@wemake/ui/style.css'
   color: #fff;
 }
 .filter-input {
-  padding: 8px 12px;
+  padding: var(--wx-space-2) var(--wx-space-3);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
   font: inherit;
@@ -838,7 +838,7 @@ import '@wemake/ui/style.css'
   background: var(--wx-surface-sunken);
   font-weight: 600;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
   text-align: center;
   padding: var(--wx-space-4) var(--wx-space-3);
 }
@@ -865,7 +865,7 @@ import '@wemake/ui/style.css'
 }
 .set-meta {
   display: flex;
-  gap: 4px;
+  gap: var(--wx-space-1);
   font-size: 11px;
   color: var(--wx-text-secondary);
   font-weight: 400;
@@ -1126,7 +1126,7 @@ import '@wemake/ui/style.css'
 .ai-count {
   font-size: 12px;
   font-weight: 600;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: 999px;
   background: var(--wx-brand-primary, #2563eb);
   color: #fff;
@@ -1203,7 +1203,7 @@ import '@wemake/ui/style.css'
 .ai-pattern-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
   padding-top: var(--wx-space-2);
   border-top: 1px dashed var(--wx-border-default, #e5e7eb);
 }
@@ -1219,7 +1219,7 @@ import '@wemake/ui/style.css'
   font-size: 11px;
   color: var(--wx-text-secondary, #6b7280);
   background: var(--wx-hover-bg, rgba(0, 0, 0, 0.04));
-  padding: 4px 6px;
+  padding: var(--wx-space-1) 6px;
   border-radius: 4px;
   word-break: break-all;
 }

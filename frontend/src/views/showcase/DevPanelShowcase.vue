@@ -113,7 +113,7 @@ import DevPanel from './components/debug/DevPanel.vue'
 .feature-icon { font-size: 28px; }
 .feature-title { font-weight: var(--wx-fw-semibold); font-size: var(--wx-fs-15); }
 .feature-desc { font-size: var(--wx-fs-13); color: var(--wx-content-secondary); margin: 0; line-height: 1.5; }
-.feature-desc code { font-family: var(--wx-font-mono); font-size: 0.85em; background: var(--wx-bg-sunken); padding: 1px 4px; border-radius: 3px; }
+.feature-desc code { font-family: var(--wx-font-mono); font-size: 0.85em; background: var(--wx-bg-sunken); padding: 1px var(--wx-space-1); border-radius: 3px; }
 
 .usage-section { display: flex; flex-direction: column; gap: var(--wx-space-3); }
 .section-title { font-size: var(--wx-fs-18); font-weight: var(--wx-fw-semibold); margin: 0; }
@@ -122,7 +122,7 @@ import DevPanel from './components/debug/DevPanel.vue'
 .shortcut-row { display: flex; align-items: center; gap: var(--wx-space-4); }
 .shortcut-keys { display: flex; align-items: center; gap: var(--wx-space-1); min-width: 200px; }
 .shortcut-label { font-size: var(--wx-fs-14); color: var(--wx-content-secondary); }
-kbd { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); background: var(--wx-bg-sunken); border: 1px solid var(--wx-border-default); border-radius: 4px; padding: 3px 8px; color: var(--wx-content-primary); }
+kbd { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); background: var(--wx-bg-sunken); border: 1px solid var(--wx-border-default); border-radius: 4px; padding: 3px var(--wx-space-2); color: var(--wx-content-primary); }
 .fab-preview { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--wx-brand-600); color: #fff; border-radius: 50%; font-size: 16px; }
 
 .code-block { background: #0d1117; color: #c9d1d9; font-family: var(--wx-font-mono); font-size: var(--wx-fs-13); padding: var(--wx-space-4); border-radius: var(--wx-radius-lg); overflow-x: auto; line-height: 1.6; margin: 0; }

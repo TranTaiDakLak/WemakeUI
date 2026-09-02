@@ -249,7 +249,7 @@ const draftName = ref('Hùng Trần')
             <span v-else class="hint">—</span>
           </dd>
         </dl>
-        <div class="row" style="margin-top: 12px;">
+        <div class="row" style="margin-top: var(--wx-space-3);">
           <input v-model="draftName" class="text-input" />
           <button class="primary-btn" @click="saveName(draftName)">lưu (giả ok)</button>
           <button class="primary-btn primary-btn--ghost" @click="saveName(draftName, true)">lưu (giả fail → rollback)</button>
@@ -316,7 +316,7 @@ code {
 kbd {
   font-family: var(--wx-font-mono);
   font-size: var(--wx-fs-12);
-  padding: 1px 8px;
+  padding: 1px var(--wx-space-2);
   border-radius: var(--wx-radius-sm);
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);
@@ -391,7 +391,7 @@ kbd {
   gap: var(--wx-space-2);
   align-items: center;
   font-size: var(--wx-fs-12);
-  padding: 4px var(--wx-space-2);
+  padding: var(--wx-space-1) var(--wx-space-2);
   background: var(--wx-warning-bg);
   border-radius: var(--wx-radius-sm);
   border-left: 3px solid var(--wx-warning-solid);
@@ -405,7 +405,7 @@ kbd {
 .text-input {
   font-family: inherit;
   font-size: var(--wx-fs-14);
-  padding: 6px 12px;
+  padding: 6px var(--wx-space-3);
   border-radius: var(--wx-radius-md);
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);

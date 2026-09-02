@@ -332,7 +332,7 @@ function resetAllTimers() { cdKey.value++ }
         <h3 class="section__title">StepProgress — horizontal + vertical</h3>
         <div class="card">
           <StepProgress :steps="wizardSteps" :current="wizardCurrent" />
-          <div class="row" style="margin-top: 16px;">
+          <div class="row" style="margin-top: var(--wx-space-4);">
             <button class="reset-btn" @click="wizardCurrent = Math.max(0, wizardCurrent - 1)">← bước trước</button>
             <button class="reset-btn" @click="wizardCurrent = Math.min(wizardSteps.length - 1, wizardCurrent + 1)">bước sau →</button>
           </div>
@@ -345,17 +345,17 @@ function resetAllTimers() { cdKey.value++ }
       <section id="countdown" class="section">
         <h3 class="section__title">CountdownTimer — OTP / session / cooldown</h3>
         <div class="card">
-          <div class="row" style="flex-wrap:wrap; gap: 24px; align-items:center;">
+          <div class="row" style="flex-wrap:wrap; gap: var(--wx-space-5); align-items:center;">
             <CountdownTimer :key="`otp-${cdKey}`" :seconds="30"  label="mã OTP hết hạn sau"   size="md" />
             <CountdownTimer :key="`ses-${cdKey}`" :seconds="120" label="phiên đăng nhập"       size="md" :warn-at="40" :danger-at="15" />
             <CountdownTimer :key="`cd-${cdKey}`"  :seconds="10"  label="gửi lại sau"           size="sm" />
             <CountdownTimer :key="`lg-${cdKey}`"  :seconds="300" label="job chạy lại lúc"      size="lg" :warn-at="20" />
             <CountdownTimer :key="`exp-${cdKey}`" :seconds="5"   label="đã hết hạn"            size="md" :auto-start="false" @expire="() => {}" />
           </div>
-          <p class="hint" style="margin-top:12px;">
+          <p class="hint" style="margin-top:var(--wx-space-3);">
             Vòng tròn chuyển vàng khi gần hết, đỏ + rung khi sắp hết. Expose: <code>start / stop / reset(n)</code>.
           </p>
-          <button class="reset-btn" style="margin-top:8px" @click="resetAllTimers">↻ đặt lại tất cả</button>
+          <button class="reset-btn" style="margin-top:var(--wx-space-2)" @click="resetAllTimers">↻ đặt lại tất cả</button>
         </div>
       </section>
     </main>
@@ -432,7 +432,7 @@ function resetAllTimers() { cdKey.value++ }
 .reset-btn {
   font-family: inherit;
   font-size: var(--wx-fs-13);
-  padding: 4px 12px;
+  padding: var(--wx-space-1) var(--wx-space-3);
   border-radius: var(--wx-radius-md);
   background: var(--wx-surface-base);
   color: var(--wx-text-primary);

@@ -97,25 +97,63 @@ literal, không tự ép về fs-12 (bug thật đã gặp ở round 8, xem log)
   nằm trong `<style scoped>` hoặc 3 inline `style="margin-top:..."` trong
   `AutomationCanvasView.vue`. QA đã đọc toàn bộ diff (không phải spot-check),
   xác nhận 0 chỗ đổi `font-size`, 0 giá trị lẻ bị ép về token.
-- **Còn lại cho round 10+:**
-  - Các view ngoài `views/dashboard/*` chưa sweep hết: `views/showcase/*`
-    (cluster lớn nhất, ước tính ~137 hit), `views/marketing/*` (~9 hit),
-    `views/forms/*`, `views/saas/*`, `views/auth/*` — chưa quét (khác với
-    wave-3 undefined-var đã quét xong toàn bộ các nhóm này ở round 7).
+- **Đã xong (round 10, Dev A, commit `7781926`, QA xác nhận `PASS`):**
+  5 file trong `views/showcase/*` (`OverviewView.vue`, `charts/IndexView.vue`,
+  `TemplateGallery.vue`, `AppTemplatesView.vue`, `shell/SplitShellShowcase.vue`)
+  — convert ~62 declaration khớp chính xác lưới 4pt (padding/margin/gap).
+  `RevealTest.vue` đúng ra để nguyên vì không có `<style scoped>` (toàn bộ
+  spacing nằm ở inline `style=""` trong template).
+- **Còn lại cho round 11+:**
+  - `views/showcase/*` — re-grep sau round 10 còn **59 hit** (giảm nhiều so
+    với ước tính ~137 của round 9), trải trong 18 file: `AnimationShowcase.vue`
+    (13), `IconShowcase.vue` (7), `PermissionShowcase.vue` (6), `AsyncShowcase.vue`
+    (5), `CrudTableView.vue` (4), `ObservabilityShowcase.vue` (4),
+    `TokensShowcase.vue` (4), `LogView.vue` (3), `PlatformShowcase.vue` (3),
+    `DevPanelShowcase.vue` (2), `AppTemplatesView.vue` (1, `scroll-margin-top:
+    80px` — giá trị số khớp lưới nhưng là scroll-anchor offset chứ không phải
+    spacing trang trí, Dev A cố ý để nguyên, cân nhắc kỹ trước khi convert vì
+    khác category với padding/margin/gap), `CalendarView.vue`/`FilterView.vue`/
+    `GridView.vue`/`data/IndexView.vue`/`KanbanView.vue`/`OverviewView.vue`/
+    `PatternShowcase.vue` (1 mỗi file). Phần lớn còn lại là multi-value
+    shorthand chỉ khớp 1 phần (vd `10px 16px`, `padding: 8px 12px`) — cần đọc
+    kỹ để chỉ convert đúng phần khớp, giữ nguyên phần lẻ (theo đúng pattern Dev
+    A round 10 đã làm với `9px 32px 9px 34px`).
+  - `views/marketing/*` (~9 hit, chưa đụng), `views/forms/*`, `views/saas/*`,
+    `views/auth/*` — vẫn chưa quét riêng cho pattern hardcoded-spacing-khớp-
+    lưới (khác với wave-3 undefined-var đã quét xong toàn bộ các nhóm này ở
+    round 6-7).
 
-### B. Duplicate button/badge/chip re-implementation (ưu tiên trung bình)
-Đánh giá case-by-case — CHỈ gộp vào BaseButton/BaseBadge nếu không làm giảm
-polish của thiết kế gốc (marketing hero CTA thường cố ý custom, không ép).
-- `.hero-btn` trong `archetypes/marketing/MarketingHero.vue` vs `.mkt-btn`
-  trong `MarketingHeader.vue` — xem có nên rút thành 1 style dùng chung giữa
-  2 file (không nhất thiết phải là BaseButton) để giảm code trùng.
-- `.row-btn` trong `archetypes/crud/CrudPage.vue` — icon-button pattern,
-  xem xét có nên thành 1 icon-button variant tái dùng được.
-- `.chip` trong `views/auth/EmailVerifyView.vue`, `.tag-more` trong
-  `views/wemakeui/CampaignsView.vue`, các chip ad-hoc trong
-  `views/showcase/{AnimationShowcase,PermissionShowcase}.vue`,
-  `views/showcase/shell/SidebarShellShowcase.vue` → cân nhắc thay bằng
-  `BaseBadge`/`BaseTag` nếu tương đương về mặt visual.
+### B. Duplicate button/badge/chip re-implementation — **CLOSED** (round 10)
+Đã đánh giá case-by-case toàn bộ 6 candidate trong backlog, mỗi candidate đều
+DECLINED kèm rationale comment để lại trong code (round 11+ KHÔNG cần đề xuất
+lại gộp các pattern cụ thể dưới đây trừ khi có thay đổi thiết kế thực sự làm
+thay đổi căn cứ decline):
+- `.hero-btn` (`MarketingHero.vue`) vs `.mkt-btn` (`MarketingHeader.vue`) —
+  DECLINED: hero nằm trên gradient tối cố định (hardcode #fff/rgba glass,
+  fs-16, space-3/6), header theme-aware token-based (fs-13, space-2/4) — gộp
+  cần biến thể "on-dark" không cần thiết.
+- `.row-btn` (`CrudPage.vue`) — DECLINED: bespoke icon-button với hover-fill +
+  icon rotate/translate micro-motion, chỉ 1 consumer, không có giá trị tái sử
+  dụng. Cleanup kèm theo: bỏ dead fallback `var(--wx-danger-solid, #ef4444)`
+  (token đã có thật), `color:#fff`→`var(--wx-text-on-brand)` (2 chỗ hover).
+- `.chip` (`EmailVerifyView.vue`) — DECLINED: render bằng `<button>` với
+  `@click` toggle state demo (pending/verified/expired/error), không phải
+  nhãn tĩnh — BaseBadge/BaseTag render `<span>`, migrate sẽ mất interaction
+  semantics. Cleanup: `.chip.on{color:white}`→`var(--wx-text-on-brand)`.
+- `.tag-more` (`CampaignsView.vue`) — DECLINED: so với BaseBadge `size="lg"`
+  (fs-12, padding 3px 10px, font-weight 600 ép cứng), `.tag-more` chỉ khớp
+  font-size, padding thực tế nhỏ gần nửa (1px 5px) và không ép font-weight —
+  migrate sẽ làm chip "+N" overflow nặng hơn hẳn các BaseTag `sm` cạnh nó.
+- `.chip`/`.chip--d`/`.chip--e` (`AnimationShowcase.vue`) — DECLINED: so với
+  BaseBadge `size="sm"`/`"info"`, không size nào khớp cả font-size lẫn padding
+  cùng lúc (chip: fs 10px/padding 2px 8px; sm: fs 10px/padding 1px 6px;
+  md: fs 11px/padding 2px 8px), và `.chip--d` dùng `color-mix(...
+  var(--wx-brand-primary) 12%...)` bám token brand thật trong khi
+  `BaseBadge--info` hardcode `rgba(59,130,246,.12)` — lệch màu thật, không chỉ
+  lệch size.
+- `.chip` trong `PermissionShowcase.vue`/`SidebarShellShowcase.vue` — xác
+  nhận **stale backlog entry**, cả 2 file có 0 occurrence `.chip`, không có
+  việc gì để làm.
 
 ### C. Dashboard `.metric`/legend-dot pattern trùng lặp
 - **Đã xong (round 9, Dev B, commit `ec28ede` + QA follow-up `6c4603f`):**
@@ -131,11 +169,12 @@ polish của thiết kế gốc (marketing hero CTA thường cố ý custom, kh
   nhưng chunk CSS của view load sau chunk CSS của component con nên thắng
   cascade). Mục C coi như **CLOSED** cho phạm vi `views/dashboard/*` chính —
   còn 1 candidate follow-up (xem dưới), không chặn việc đóng mục C.
-- **Follow-up còn lại:** `WeDashboardV1View.vue` `.env-dot` — Dev B cố ý
-  KHÔNG migrate round này vì có thêm pill background/border-radius/padding
-  + trạng thái pulse-animation ok/err không khớp `LegendDot` trần; để lại
-  làm candidate xem xét kỹ hơn ở round sau (có thể cần biến thể `LegendDot`
-  riêng hoặc giữ nguyên vì đủ khác biệt).
+- **Follow-up còn lại (vẫn mở sau round 10, ưu tiên thấp):** `WeDashboardV1View.vue`
+  `.env-dot` — Dev B cố ý KHÔNG migrate round này vì có thêm pill
+  background/border-radius/padding + trạng thái pulse-animation ok/err không
+  khớp `LegendDot` trần; để lại làm candidate xem xét kỹ hơn ở round sau (có
+  thể cần biến thể `LegendDot` riêng hoặc giữ nguyên vì đủ khác biệt). Round
+  10 không đụng tới file này (xác nhận qua `git show --stat` cả 2 commit).
 
 ### D. GLOBAL AUDIT ROUND categories (chạy round-robin khi backlog A/B/C cạn)
 Mỗi round chọn 1-2 category, quét toàn bộ `frontend/src/**`:
@@ -869,4 +908,136 @@ tự ý dừng sớm hơn.
     category 8 — accessibility) song song với mục A, để tiến gần hơn tới
     điều kiện dừng "3 GLOBAL AUDIT liên tiếp 0 finding" ở mục 6.
 
-<!-- Round 10+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 10 (2026-09-02)
+- Bối cảnh: PLAN + Dev A/B của round này đã chạy trước hai commit độc lập,
+  Dev C (agent này) chỉ chạy QA theo checklist có sẵn — không chạy lại PLAN.
+- Dev A commit `7781926`: 5 file (`views/showcase/{OverviewView,
+  TemplateGallery,AppTemplatesView}.vue`, `views/showcase/charts/IndexView.vue`,
+  `views/showcase/shell/SplitShellShowcase.vue`) — tiếp tục mục A (spacing
+  sweep): convert padding/margin/gap khớp chính xác lưới 4pt sang
+  `var(--wx-space-*)`, chỉ trong `<style scoped>`. `RevealTest.vue` đúng ra
+  bỏ qua (0 dòng đổi) vì không có `<style scoped>`, toàn bộ spacing nằm ở
+  inline `style=""` trong template. typecheck+build:lib PASS (theo commit).
+- Dev B commit `87da65d`: 6 file (`archetypes/crud/CrudPage.vue`,
+  `archetypes/marketing/{MarketingHero,MarketingHeader}.vue`,
+  `views/auth/EmailVerifyView.vue`, `views/showcase/AnimationShowcase.vue`,
+  `views/wemakeui/CampaignsView.vue`) — xử lý mục B (đóng toàn bộ backlog
+  duplicate button/chip): đánh giá 6 candidate, cả 5 candidate thật đều
+  DECLINED kèm rationale comment để lại trong code, 2 candidate xác nhận là
+  stale backlog (0 `.chip` trong `PermissionShowcase.vue`/
+  `SidebarShellShowcase.vue`). Kèm cleanup an toàn không phụ thuộc quyết định
+  consolidate: `CrudPage.vue` bỏ dead fallback `var(--wx-danger-solid,
+  #ef4444)` + 2× `color:#fff`→`var(--wx-text-on-brand)`;
+  `EmailVerifyView.vue` cùng kiểu fix màu. Dev B báo `build:lib` fail 1 lần
+  với lỗi vite-plugin-dts/api-extractor trên `useScrollReveal.d.ts` (file
+  không liên quan, không đụng trong diff này) rồi pass sạch ngay lần retry —
+  gắn cờ là flake pre-existing.
+- Dev C QA (agent này) — verify toàn bộ checklist trước khi accept:
+  - **Build gate**: `typecheck` sạch (exit 0). `build:lib` chạy **2 lần độc
+    lập** để kiểm tra claim flake của Dev B — cả 2 lần đều PASS sạch, không
+    tái hiện lỗi (`ui.css` 234.36kB/gzip 34.72kB, `es.js` 415.90kB/gzip
+    98.34kB, `umd.js` 325.52kB/gzip 84.71kB, dts built ~16.3s cả 2 lần, tổng
+    ~18.2s/lần) — xác nhận flake claim hợp lý (không phải do thay đổi trong
+    round này gây ra, không tái hiện khi build lại). `build:app` PASS (9.04s,
+    mọi chunk build OK, exit 0).
+  - `git show --stat` xác nhận đúng 5 file (Dev A) + 6 file (Dev B), 0
+    overlap, không đụng `tokens.css`/`dark-mode.css`/`flat-mode.css`/`lib.ts`.
+  - **Dev A regression re-check**: đọc TOÀN BỘ diff cả 5 file (không chỉ
+    spot-check) — 0 chỗ đổi `font-size` (mọi `font-size` trong context/diff
+    đều giữ nguyên giá trị px cũ, ví dụ `.hero-title{font-size:28px}`,
+    `.stat-value{font-size:22px}` không đổi), 0 chỗ đổi
+    width/height/grid-template-columns/border-radius (`stats-grid
+    grid-template-columns: repeat(4,1fr)` giữ nguyên, mọi `border-radius`
+    trong diff đều đã dùng `var(--wx-radius-*)` từ trước, không có border-radius
+    px literal nào bị đụng). Mọi giá trị convert đều khớp chính xác thang
+    `--wx-space-1..12` (4/8/12/16/24/32/40/48/64/80/96/128px, đối chiếu
+    `tokens.css` dòng 227-239). Multi-value shorthand chỉ convert đúng phần
+    khớp: spot-verify `TemplateGallery.vue` `.search-input{padding:9px 32px
+    9px 34px}` → `9px var(--wx-space-6) 9px 34px` (32px→space-6, đúng 9px/34px
+    lẻ giữ nguyên); `OverviewView.vue` `.hero{padding:56px 32px 48px}` → `56px
+    var(--wx-space-6) var(--wx-space-8)` (56px off-grid giữ literal, đúng).
+    Verify riêng case `var(--space-lg, 24px)`/`var(--space-md, 16px)` trong
+    `charts/IndexView.vue:286-307` mà Dev A khai báo bỏ qua: grep toàn repo
+    xác nhận `--space-lg`/`--space-md` là 1 family biến **thật, riêng biệt**
+    định nghĩa ở `frontend/src/style.css:76-77` (app-level demo CSS, không
+    phải `tokens.css`), dùng chung ở 7 file khác trong `views/showcase/data/*`
+    + `ShowcaseView.vue` — KHÔNG PHẢI biến `--wx-space-*` của design system,
+    để nguyên là đúng, không phải bug undefined-var.
+  - **Dev B candidate-by-candidate verification** (đọc code hiện tại, không
+    chỉ tin báo cáo):
+    (a) đọc diff `MarketingHero.vue`/`MarketingHeader.vue` xác nhận rationale
+    comment có mặt, nội dung khớp thực tế (hero fs-16+space-3/6 trên gradient
+    cố định, header fs-13+space-2/4 theme-aware).
+    (b) `tokens.css` xác nhận `--wx-danger-solid: #ef4444` (dòng 94) là token
+    thật (bỏ fallback an toàn); `--wx-text-on-brand: #ffffff` (dòng 57) —
+    grep `dark-mode.css` xác nhận **0 override**, nên "an toàn, không đổi
+    theo dark mode" là đúng.
+    (c) đọc template `EmailVerifyView.vue:81-84` xác nhận `.chip` là
+    `<button class="chip" @click="setState(...)">` thật (4 chỗ), không phải
+    `<span>`/`<div>` — rationale "interactive, không migrate" đúng.
+    (d) đọc `CampaignsView.vue` hiện tại: `.tag-more{padding:1px 5px}` (dòng
+    852) và `BaseBadge.vue .base-badge--lg{font-size:12px;padding:3px 10px}`
+    (dòng 56) — khớp chính xác số liệu Dev B trích trong comment.
+    (e) đọc `AnimationShowcase.vue` hiện tại: `.chip{padding:2px 8px;
+    font-size:10px}`, `.chip--d{background:color-mix(in srgb,
+    var(--wx-brand-primary) 12%, transparent)}` và `BaseBadge.vue
+    .base-badge--sm{font-size:10px;padding:1px 6px}`,
+    `.base-badge--md{font-size:11px;padding:2px 8px}`,
+    `.base-badge--info{background:rgba(59,130,246,0.12)}` — khớp chính xác
+    số liệu trong comment, xác nhận "không size nào khớp cả 2 chiều" và
+    "lệch màu thật" đều đúng.
+    (f) grep độc lập `\.chip` trong `PermissionShowcase.vue` và
+    `SidebarShellShowcase.vue` → 0 hit cả 2 file, xác nhận stale backlog.
+  - **New-hardcode check**: grep dòng `+` cả 2 commit cho hex/rgba ngoài
+    `var(--wx-...)` → Dev A: 1 hit (`pm__demo{color:#fff}`) nhưng đối chiếu
+    diff xác nhận đây là full-line reprint của rule có sẵn (chỉ padding đổi,
+    `color:#fff` đã tồn tại từ trước, không phải giá trị mới); Dev B: mọi hit
+    đều nằm trong nội dung comment giải thích rationale (text, không phải
+    code sống) — không có hardcode mới thật sự nào trong cả 2 commit.
+  - **API safety**: đối chiếu hunk header với vị trí `<style scoped>` của
+    `CrudPage.vue` (dòng 549), `MarketingHero.vue` (dòng 134),
+    `MarketingHeader.vue` (dòng 84) — toàn bộ hunk của cả 3 file (dòng 647+,
+    226+, 253+) đều nằm sau `<style scoped>`, không đụng `<script setup>`/
+    `<template>`. Đọc lại toàn bộ diff xác nhận 0 rename prop/emit/slot/class
+    — `EmailVerifyView.vue`/`AnimationShowcase.vue`/`CampaignsView.vue` cũng
+    chỉ đổi giá trị CSS + thêm comment, không đụng script/template.
+  - **Residual re-grep mục A** (độc lập, không dựa vào ước tính cũ): grep lại
+    toàn bộ `views/showcase/**` cho pattern spacing khớp lưới còn sót — còn
+    **59 hit** trải trong 18 file (breakdown đầy đủ đã ghi vào §4.A "Còn lại
+    cho round 11+" ở trên), giảm rõ rệt so với ước tính ~137 của round 9.
+    Phát hiện phụ: `AppTemplatesView.vue:105 scroll-margin-top:80px` — giá
+    trị số khớp `--wx-space-10` nhưng Dev A liệt kê nó vào nhóm "off-grid" —
+    về mặt số học không hẳn chính xác, nhưng đây là scroll-anchor offset
+    (khác category với padding/margin/gap trang trí), để nguyên literal
+    không tính là bug, chỉ là commit-message hơi thiếu chính xác — không cần
+    fix.
+  - Không tìm thấy vấn đề cần follow-up fix. **ROUND 10 QA: PASS**, không có
+    follow-up commit.
+- **MILESTONE — Mục B (duplicate button/badge/chip consolidation) chính thức
+  CLOSED cho dự án này.** Toàn bộ 6 candidate trong backlog đã được đánh giá
+  và xử lý dứt điểm (migrate hoặc decline-with-rationale, comment để lại
+  trong code). Round sau **KHÔNG** cần đề xuất lại gộp `.hero-btn`/`.mkt-btn`,
+  `.row-btn`, `.chip` (EmailVerifyView), `.tag-more` (CampaignsView),
+  `.chip`/`.chip--d`/`.chip--e` (AnimationShowcase) trừ khi có bằng chứng mới
+  (vd BaseBadge đổi cách tính màu sang `color-mix` theo brand token, hoặc
+  `.chip` EmailVerifyView đổi từ `<button>` sang static label).
+- Backlog cho round 11:
+  - **Mục A** — còn `views/showcase/*` (59 hit, breakdown chi tiết ở §4.A),
+    `views/marketing/*` (~9 hit), `views/forms/*`/`views/saas/*`/
+    `views/auth/*` (chưa quét riêng cho spacing-khớp-lưới). Nhắc lại rule:
+    `--wx-fs-11` KHÔNG tồn tại, không ép font-size về token (bug round 8);
+    `scroll-margin-top` là category khác với padding/margin/gap, cân nhắc
+    riêng trước khi convert.
+  - **Mục B** — **CLOSED**, xem MILESTONE ở trên.
+  - **Mục C** — vẫn 1 follow-up mở, ưu tiên thấp: `WeDashboardV1View.vue`
+    `.env-dot` (pill + pulse-animation, có thể cần biến thể `LegendDot`
+    riêng hoặc giữ nguyên).
+  - **Mục D (GLOBAL AUDIT)** — sau 10 round vẫn CHƯA round nào thực sự chạy
+    theo đúng nghĩa category D (§4.D mục 1-10) trên toàn repo. Với mục A đang
+    thu hẹp dần (59 hit còn lại, giảm mạnh từ ~137) và mục B vừa đóng, PLAN
+    round 11 nên **nghiêm túc cân nhắc bắt đầu mục D** — có thể chọn 1
+    category D (vd category 7 — interaction states, hoặc category 8 —
+    accessibility) chạy song song với phần còn lại của mục A, thay vì tiếp
+    tục trì hoãn category D thêm 1 round nữa.
+
+<!-- Round 11+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

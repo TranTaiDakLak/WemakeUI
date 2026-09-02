@@ -58,12 +58,12 @@ function timeOnly(ts: string): string {
           class="timeline-item"
           :class="`timeline-item--${item.variant ?? 'default'}`"
         >
-          <div class="timeline-dot">
+          <div class="timeline-dot" aria-hidden="true">
             <span v-if="item.icon" v-html="item.icon" />
           </div>
           <div class="timeline-content">
             <div class="timeline-meta">
-              <time class="timeline-time">{{ timeOnly(item.ts) }}</time>
+              <time class="timeline-time" :datetime="item.ts">{{ timeOnly(item.ts) }}</time>
               <span v-if="item.actor" class="timeline-actor">{{ item.actor }}</span>
             </div>
             <div class="timeline-title">{{ item.title }}</div>

@@ -61,6 +61,10 @@ export const lightTheme = {
  */
 export function getDensityVars(mode: DensityMode) {
   const d = density[mode]
+  // Lưu ý: `--wx-density-icon-size` và `--wx-density-avatar-size` chưa có consumer nội bộ
+  // (repo này chưa có BaseIcon dùng chung — icon là inline SVG/emoji per-component).
+  // Đây là 2 token nằm trong bộ 10 density token public (xem DESIGN.md §1.7), dành cho
+  // consumer bên ngoài dùng trong CSS của họ — KHÔNG phải dead code, không xoá/đổi tên.
   return {
     '--wx-density-header-height':  d.headerHeight,
     '--wx-density-row-height':     d.rowHeight,

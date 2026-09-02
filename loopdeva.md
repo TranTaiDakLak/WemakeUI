@@ -2707,4 +2707,255 @@ tự ý dừng sớm hơn.
      category duy nhất còn "nguyên" trong toàn bộ backlog), thì xử lý bình
      thường và tiếp tục loop.
 
-<!-- Round 21+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 21 (2026-09-02)
+- PLAN (opus): theo backlog round 20, chọn D#4 làm hạng mục chính — Dev A =
+  đào sâu so sánh style thật giữa `BaseModal`/`BaseDrawer` vs
+  `ConfirmDialog`/`FormModal`/`FormDrawer` (padding/border-radius/
+  header-footer layout/button placement/màu chrome); Dev B = tiếp tục D#9
+  re-grep hardcode CSS full-repo cho `views/**`+`archetypes/**` (mục PLAN
+  round 20 đề xuất), giới hạn `components/**` đã CLOSED từ round 5.
+- Dev A commit `7ba6265`: **phát hiện bug thật nghiêm trọng nhất về UX
+  trong nhiều round gần đây** — footer mặc định của `BaseModal` có nút
+  "đóng/huỷ" (hành động trung tính, không phá huỷ gì) nhưng lại được style
+  bằng `var(--wx-gradient-danger)` (đỏ máu), trong khi `ConfirmDialog`/
+  `FormModal`/`FormDrawer` đều dùng `<BaseButton variant="ghost">` cho nút
+  cancel. Sửa: thay `.modal-btn/--save/--close` bespoke bằng
+  `<BaseButton variant="ghost">` (close) + `<BaseButton variant="primary"
+  :loading>` (save), xoá hẳn `.modal-btn`/`.modal-btn--save`/
+  `.modal-btn--close`/`.modal-spinner`/`@keyframes modal-spin` (BaseButton tự
+  có spinner riêng). Đổi thứ tự footer thành close-trước-save-sau (khớp
+  `ConfirmDialog`/`FormModal`/`FormDrawer`). Đồng bộ thêm: padding
+  header/footer 14px/20px→`var(--wx-space-4) var(--wx-space-5)`, body
+  20px→`var(--wx-space-5)`; title 15px/700/0.2px→`var(--wx-fs-15)`/
+  `var(--wx-fw-bold)`/`var(--wx-tracking-tight)`; nút đóng 28×28→32×32
+  (khớp `BaseDrawer` có sẵn) + hover `var(--wx-hover-bg)`; backdrop
+  `rgba(0,0,0,0.45)`→`var(--wx-bg-overlay)` + `backdrop-filter: blur(2px)`
+  (khớp `BaseDrawer`); border/box-shadow chrome `rgba(59,130,246,...)`→
+  `var(--wx-border-default)`/`var(--wx-shadow-2xl)` ở cả `BaseModal` và
+  `BaseDrawer`; bỏ fill `var(--wx-surface-sunken)` ở modal footer để khớp
+  drawer footer (không fill); `BaseDrawer.vue` sửa kèm 1 a11y bug nhỏ —
+  `aria-label="đóng"` (chữ thường sai chính tả câu)→`"Đóng"`. Cố ý giữ
+  nguyên `intentDialogStyle`/`intentHeaderStyle` (chrome đỏ/cam cho
+  danger/warning confirm dialog — có chủ đích, khác với bug ở nút cancel
+  mặc định). typecheck+build:lib PASS.
+- Dev B commit `da35a24`: 9 file `components/common/**`+`components/
+  data/FilterChips.vue` — fix hardcode màu thật: `BaseTag`/
+  `BasePagination`/`FilterChips` hover `rgba(0,0,0,0.06-0.08)`→
+  `var(--wx-hover-bg)`; `BasePagination` active state `color:#ffffff`→
+  `var(--wx-text-on-brand)`; `BaseBadge` — mapping toàn bộ hex/rgba biến
+  thể success/warning/danger/info sang token thật (`--wx-success-solid/
+  -text`, `--wx-warning-solid/-text`, `--wx-danger-solid/-text`) +
+  `color-mix(in srgb, X 12%, transparent)` cho tint translucent, xoá 3 rule
+  `.wx-dark .base-badge--*.base-badge__dot` trùng lặp (dead code — dot đã
+  dùng `var(--wx-*-text)` trực tiếp, tự cascade đúng giá trị dark qua
+  `.wx-dark` ancestor, không cần override riêng); `BaseToast` close-button
+  `rgba(0,0,0,0.3/0.06/0.6)`→`var(--wx-text-muted)`/`var(--wx-hover-bg)`/
+  `var(--wx-text-primary)`, xoá `.wx-dark .wx-toast__close` override trùng
+  lặp (cùng lý do); `BaseTextarea` error-focus box-shadow
+  `rgba(220,38,38,0.15)`→`color-mix(in srgb, var(--wx-danger-solid) 25%,
+  transparent)` khớp pattern `BaseInput` đã dùng; `BaseCheckbox`/
+  `BaseInput`/`BasePanel` — gỡ dead fallback `var(--token, #hex)` khi token
+  đã confirmed là token thật trong `tokens.css` (không đổi hành vi render).
+  Kèm theo: chạy 1 inventory D#9 quét `<style>` block trong `views/**`+
+  `archetypes/**`, tìm ra **221 hit** hex/rgba còn lại, liệt kê đầy đủ
+  file:line trong commit body. typecheck+build:lib PASS.
+- **Song song, ngoài scope commit**: Dev B trước đó có spawn 1 background
+  sub-agent để hỗ trợ quét D#9 rồi bị redirect sang làm trực tiếp — sub-agent
+  đó chạy xong SAU khi commit `da35a24` đã tạo, trả về 1 inventory RIÊNG,
+  KHÔNG được đưa vào commit — **258 hit**, phương pháp khác: scoped nghiêm
+  ngặt vào `<style>` block, trừ TOÀN BỘ file `MarketingHero.vue` và TOÀN BỘ
+  block `.page.is-dark`/`.is-dark *` của `IconShowcase.vue` (thay vì trừ
+  từng phần như Dev B) — phương pháp này nhiều khả năng ít false-positive
+  hơn 221-list vì loại nguyên khối thay vì loại rải rác.
+- Dev C QA — verify độc lập toàn bộ checklist, không tin theo commit
+  message:
+  - **Build gate**: `typecheck` sạch; `build:lib` chạy 2 lần liên tiếp — y
+    hệt nhau (`ui.css` 235.99 kB/gzip 34.34 kB, `es.js` 423.77 kB/gzip
+    100.16 kB, `umd.js` 330.86 kB/gzip 86.15 kB) — không flake; `build:app`
+    PASS (17.46s, mọi chunk OK).
+  - `git show --stat`: Dev A đúng 2 file (`BaseModal.vue`+`BaseDrawer.vue`),
+    Dev B đúng 9 file, 0 overlap, không đụng `tokens.css`/`dark-mode.css`/
+    `flat-mode.css`/`style.css`/`lib.ts`.
+  - **Dev A — đọc FULL diff + full file `BaseModal.vue`**: grep
+    `--wx-gradient-danger` trong file → **0 hit** (chỉ còn
+    `intentDialogStyle`/`intentHeaderStyle` — 2 computed dùng rgba hex trực
+    tiếp cho intent chrome, KHÔNG dùng `--wx-gradient-danger`, và đúng là
+    không nằm trong diff, byte-identical so với trước — xác nhận đúng
+    "untouched on purpose"). Footer order xác nhận `<BaseButton
+    variant="ghost">` (close) đứng TRƯỚC `<BaseButton variant="primary"
+    :loading>` (save) trong `<slot name="footer">` — cross-check
+    `ConfirmDialog.vue`/`FormModal.vue`/`FormDrawer.vue` cả 3 đều đúng thứ
+    tự `variant="ghost"` (cancel) trước `variant="primary"` (confirm) —
+    khớp 100%. `MODAL_Z_BASE`/`pushZ`/`popZ` grep trong file hiện tại —
+    logic y hệt (base 1000, +10 mỗi lần push, `modalStack` array) và diff
+    xác nhận không có hunk nào chạm khối này. `role="dialog"`/
+    `aria-modal="true"`/`:aria-labelledby="titleId"`/focus-trap
+    (`trapFocusInit`/`trapFocusHandle`/`getFocusables`) — grep xác nhận
+    còn nguyên, diff không chạm. `defineProps`/`defineEmits` — diff-grep
+    riêng cho các dòng đó trên cả 2 file → 0 kết quả, xác nhận không đổi
+    signature/slot nào. `BaseDrawer.vue` aria-label — xác nhận
+    `aria-label="Đóng"` (hoa Đ) đã landed đúng, và width/height 32px của
+    `.wx-drawer__close` xác nhận vốn đã có sẵn từ trước (không nằm trong
+    diff của round này) — khớp claim "unify Modal's 28→32 để bằng Drawer
+    có sẵn", không phải cả 2 cùng đổi.
+  - **Item 6 — đọc lại `BaseModal.vue` end-to-end (306 dòng)**: cấu trúc
+    hợp lý, không còn tham chiếu nào tới `.modal-btn`/`.modal-spinner` (grep
+    riêng xác nhận 0 hit) — style block sạch, không có class mồ côi.
+  - **Dev B — đối chiếu từng token trong diff với `tokens.css`/
+    `dark-mode.css` thật**: `--wx-success-solid/-text`,
+    `--wx-warning-solid/-text`, `--wx-danger-solid/-text`,
+    `--wx-text-on-brand`, `--wx-hover-bg`, `--wx-success-border/-bg`,
+    `--wx-text-muted/-primary`, `--wx-radius-sm`, `--wx-duration-fast`,
+    `--wx-ease-standard/-decelerate`, `--wx-fs-12/-13`, `--wx-brand-primary`,
+    `--wx-border-default`, `--wx-surface-sunken` — tất cả tồn tại thật,
+    không có token ảo nào. `color-mix(in srgb, X 12%/25%, transparent)` —
+    cú pháp hợp lệ, đã dùng ở nơi khác trong codebase (`BaseInput`) từ
+    trước, không phải syntax mới rủi ro. Verify riêng claim "dead-code dot
+    override an toàn": đọc `dark-mode.css:10-11` — selector
+    `.wx-dark, [data-wx-theme="dark"]` set `--wx-success-text: #6ee7b7`/
+    `--wx-danger-text: #fca5a5`/`--wx-warning-text: #fcd34d` ở tầng
+    ancestor → bất kỳ descendant nào dùng `var(--wx-success-text)` (kể cả
+    `.base-badge__dot` không có `.wx-dark` prefix riêng) tự động cascade
+    đúng giá trị dark — xác nhận xoá rule trùng là AN TOÀN, đúng như Dev B
+    khai báo. Cùng logic verify cho `BaseToast` — `dark-mode.css:72`
+    `--wx-hover-bg: rgba(255, 255, 255, 0.08)` khớp CHÍNH XÁC giá trị được
+    ghi trong comment giải thích của Dev B — pixel-identical thật, không
+    phải bịa.
+  - **New-hardcode check (item 5)** — grep dòng `+` của CẢ 2 diff cho
+    `#hex|rgba?\(|px`: chỉ ra đúng những chỗ đã biết/hợp lệ — `blur(2px)`
+    (hiệu ứng filter mới có chủ đích, khớp `BaseDrawer`, không phải
+    spacing/màu hardcode), `width/height: 32px` (đã verify ở trên là giá trị
+    unify có chủ đích), 4 dòng `.base-badge--solid.base-badge--*` box-shadow
+    rgba (context KHÔNG đổi — chỉ `background:` đổi sang var(), rgba
+    box-shadow là dòng pre-existing bị in lại nguyên do cả dòng CSS đổi
+    01 thuộc tính), 1 dòng comment giải thích nhắc lại giá trị rgba của
+    `--wx-hover-bg` (text thuần, không phải CSS ruling). **0 hardcode mới
+    thật sự được thêm vào.**
+  - **Prop/emit/slot/class rename check**: grep diff-pattern cho
+    `defineProps`/`defineEmits`/`<slot`/class rename trên toàn bộ 9 file
+    Dev B → 0 kết quả — xác nhận 100% diff nằm trong `<style scoped>`,
+    không chạm `<template>`/`<script setup>` file nào (khớp public API của
+    dist-lib, không breaking change).
+  - **Spot-check thêm ngoài checklist**: đọc `MarketingHeader.vue:287-291`,
+    `saas/MembersView.vue:295-304`, `saas/VersionsView.vue:130-139`,
+    `saas/SettingsView.vue:540-548` (từ backlog round 22 do inventory thứ 2
+    nêu) — xác nhận đúng là hardcode thật: `.mkt-btn--primary { color: #fff
+    }` trên nền `var(--wx-brand-primary)` solid (cùng pattern nút-trên-nền-
+    brand đã fix nhiều round trước); `MembersView.vue` `.product-status--*`
+    dùng RAW HEX cho color (`#059669`/`#dc2626`/`#d97706` — khớp CHÍNH XÁC
+    3 giá trị Dev B vừa map trong `BaseBadge` sang `--wx-success/-danger/
+    -warning-text`) → ứng viên tốt, cùng pattern; `VersionsView.vue`/
+    `SettingsView.vue` `.count-pill--*`/`.integration-row__status--*` khác
+    1 chút — color ĐÃ dùng token (`var(--wx-danger-solid)` v.v.), chỉ có
+    background rgba() còn hardcode — mức độ nợ nhẹ hơn MembersView (không
+    phải bug màu sai, chỉ là background chưa tokenize qua `color-mix()`).
+    Đọc `CodeBlock.vue:55-109` — xác nhận đây đúng là fixed-dark code panel
+    (`background: #0f172a` cố định, không theo theme, giống terminal/code
+    editor convention) — ủng hộ đề xuất coi là exception category mới thay
+    vì bug cần fix.
+  - **Không phát hiện lỗi nào cần QA follow-up commit** — cả Dev A và Dev B
+    đều đúng 100% theo khai báo, verify độc lập từng điểm.
+- **ROUND 21 QA: PASS**, không cần follow-up commit. Đây là round có
+  finding **thật sự nghiêm trọng nhất về UX-impact trong nhiều round gần
+  đây** (nút dismiss trung tính bị style như hành động phá huỷ — user có
+  thể ngần ngại bấm "đóng" 1 modal thường vì nhìn giống nút xoá/huỷ nguy
+  hiểm) — **KHÔNG tính vào chuỗi "3 GLOBAL AUDIT liên tiếp 0-finding" của
+  §6**. Tally hiện tại: round 17, 18, 19, 20, 21 — **CẢ 5 ROUND LIÊN TIẾP
+  ĐỀU CÓ FINDING THẬT**, chuỗi 0-finding-liên-tiếp cần cho điều kiện dừng
+  vẫn đang là **0/3**, chưa round nào bắt đầu đếm được.
+- **Reconciled D#9 backlog cho round 22** (gộp 221-list đã commit của Dev B
+  với các điểm nổi bật từ inventory 258-hit của sub-agent — sub-agent kia
+  không để lại file/list đầy đủ trên đĩa, Dev C chỉ có tóm tắt các cụm
+  chính từ báo cáo, nên danh sách file:line CHI TIẾT dưới đây dùng 221-list
+  đã commit làm nguồn chính, có chú thích chỗ nào 258-list nhấn mạnh thêm):
+  1. **(a) Real small fixes — ưu tiên cao, làm trước ở round 22:**
+     - `archetypes/marketing/MarketingHeader.vue:289` — `.mkt-btn--primary
+       { color: #fff }` trên nền `var(--wx-brand-primary)` →
+       `var(--wx-text-on-brand)`. Đã Dev C verify code thật, cùng pattern
+       nút-trên-brand đã fix ở round 3/4.
+     - `views/saas/MembersView.vue:302-304` — `.product-status--active/
+       -expired/-pending` raw hex color (`#059669`/`#dc2626`/`#d97706`) →
+       `var(--wx-success-text)`/`var(--wx-danger-text)`/
+       `var(--wx-warning-text)` (background rgba giữ nguyên hoặc đổi
+       `color-mix()` theo pattern `BaseBadge` vừa làm round này) — khớp
+       CHÍNH XÁC giá trị hex vừa map trong `BaseBadge.vue`, độ tin cậy cao.
+     - `views/saas/SettingsView.vue:546-548` + `views/saas/
+       VersionsView.vue:136-138` — background `rgba(16,185,129,0.1-0.12)`/
+       `rgba(239,68,68,0.1-0.12)`/`rgba(59,130,246,0.12)` chưa tokenize
+       (color đã dùng token sẵn) → cân nhắc `color-mix(in srgb,
+       var(--wx-success-solid) 12%, transparent)` theo đúng pattern
+       `BaseBadge` round này, ưu tiên thấp hơn `MembersView` vì không phải
+       lỗi màu sai, chỉ là nợ tokenize nhẹ.
+  2. **(b) Exception category MỚI cần document chính thức (đề xuất KHÔNG
+     fix, chỉ ghi nhận cạnh `MarketingHero.vue` trong luật ở mục 3 phía
+     trên của file này) — "fixed-dark chrome/terminal panel":**
+     `views/_layouts/AuthLayout.vue` (17 hit theo 221-list, dòng 102-255 —
+     glass/gradient login chrome cố định tối), `views/_layouts/
+     SaasLayout.vue` (10 hit, dòng 157-258, cùng lý do), `views/docs/
+     _components/CodeBlock.vue` (11 hit, dòng 60-105 — Dev C đã đọc code
+     thật, xác nhận `background: #0f172a` cố định kiểu terminal/code
+     editor), `views/wemakeui/ConsoleView.vue` (7 hit, dòng 121-133),
+     `views/showcase/DevPanelShowcase.vue` (11 hit, dòng 126-139) — cả 2
+     file console/dev-panel nhiều khả năng cùng convention "terminal luôn
+     tối" như `CodeBlock.vue`, round 22 nên đọc code xác nhận trước khi
+     chính thức thêm vào exception list, không tự động miễn trừ chỉ vì tên
+     file. Sub-agent's 258-list cũng nhấn mạnh đúng các file này.
+  3. **(c) Lower priority — showcase/demo-page decorative gradient, để
+     round 22+ xử lý sau cùng nếu còn dư sức**: `views/showcase/
+     OverviewView.vue` (36 hit, dòng 214-639 — cụm LỚN NHẤT còn lại nhưng
+     là trang demo/marketing cho design system, không phải sản phẩm thật),
+     `views/showcase/TokensShowcase.vue` (17 hit), `views/showcase/
+     TemplateGallery.vue` (18 hit), `views/showcase/IconShowcase.vue`
+     (0 hit trong 221-list vì Dev B đã loại trừ nguyên khối `.page.is-dark`
+     — 258-list cũng loại trừ tương tự nên khả năng cao đây KHÔNG còn residual
+     hit thật, chỉ là false-positive từ demo dark-toggle cố ý — round 22 nên
+     xác nhận lại 1 lần rồi đóng hẳn thay vì để lửng).
+  4. **Toàn bộ 221-list còn lại chưa phân loại ở trên** (các file 1-3 hit
+     rải rác: `CrudPage.vue`, `CaseStudyGrid.vue`, `PartnerLoop.vue`,
+     `TechGrid.vue`, `ShowcaseView.vue`, `AppPageLayout.vue`,
+     `ErrorLayout.vue`, `ContactsView.vue`, `ProductDetailView.vue`,
+     `LockScreenView.vue`, `LoginV2/V3View.vue`, `OnboardingView.vue`,
+     `WorkspacePickerView.vue`, `AnalyticsView.vue`,
+     `WeDashboardV1View.vue`, `DocsLayout.vue`, `DropdownDoc.vue`,
+     `EditModalFormView.vue`, `FileUploadView.vue`, `InputGroupView.vue`,
+     `ValidationView.vue`, `WizardView.vue`, `LandingView.vue`,
+     `AboutView.vue`, `FeaturesView.vue`, `LandingSaasView.vue`,
+     `ContactView.vue`, `HomeView.vue`, `PartnersView.vue`,
+     `ProductsView.vue`, `AnimationShowcase.vue`, `AppTemplatesView.vue`,
+     `OverlayShowcase.vue`, `PrimitivesShowcase.vue`, `data/
+     CrudTableView.vue`, `shell/SplitShellShowcase.vue`, `shell/
+     TopNavShellShowcase.vue`, `AccountsView.vue`, `AdminView.vue`,
+     `CampaignsView.vue`) — full file:line list nằm nguyên trong commit
+     body `da35a24`, round 22 PLAN đọc trực tiếp từ đó thay vì chép lại 2
+     lần. Mỗi file cần đọc code thật để phân loại bug-thật vs exception
+     trước khi convert (không convert máy móc theo số đếm).
+  5. **Ghi chú phương pháp**: 258-list (sub-agent) không có file lưu trên
+     đĩa — chỉ tồn tại dưới dạng tóm tắt trong context orchestrator/round
+     này. Nếu round 22 muốn đối chiếu số liệu chính xác hơn nữa (221 vs
+     258, chênh lệch ~37), cần re-run 1 grep sweep mới bằng đúng phương
+     pháp "trừ nguyên khối MarketingHero.vue + IconShowcase.vue .is-dark"
+     thay vì cố tìm lại report cũ (không còn tồn tại).
+- **Backlog khác carry-forward cho round 22**:
+  - **D#4 (button/modal/table consistency)** — phần modal/drawer/dialog
+    family COI NHƯ ĐÃ XỬ LÝ XONG bởi round này (Dev A). Phần TABLE/GRID
+    của D#4 CHƯA đụng tới — PLAN round 20 backlog đã nêu, xác nhận lại: so
+    sánh `BaseDataGrid.vue` vs `DataGridPro.vue` (header/cell styling có
+    lệch token/spacing/border không), và floating-menu shadow
+    inconsistency giữa `BaseSelect`/`BaseSelectMenu`/`BaseDropdown` (3
+    component cùng render dropdown/menu nổi nhưng có thể dùng box-shadow
+    khác nhau) — round 21 PLAN nêu ra nhưng KHÔNG giao việc, để nguyên làm
+    ứng viên cụ thể cho round 22.
+  - **D#5 (icon-sizing)** — vẫn ở trạng thái "đã document, không cần thêm
+    hành động" từ round 20, không đổi.
+  - Mục A/B/C — vẫn CLOSED/xoá khỏi backlog như round 20.
+- **Ghi chú cho PLAN round 22**: nên chọn giữa 2 hướng — (1) tiếp tục D#9
+  cleanup theo backlog reconciled ở trên (ưu tiên (a) trước), hoặc (2) thử
+  D#4 phần table/grid + floating-menu shadow (category còn "nguyên", có thể
+  cho ra finding thật hoặc là ứng viên tốt cho 1 trong 3 GLOBAL AUDIT
+  0-finding cần thiết ở §6 nếu không tìm ra gì). Vì D#9 (a) đã có 4 file cụ
+  thể sẵn sàng làm ngay (đủ nhỏ cho 1 dev, 1 round), khuyến nghị round 22
+  Dev A = D#9(a) 4 file, Dev B = D#4 table/grid so sánh — tiếp tục đà tìm
+  finding thật của loop, chưa nên ép GLOBAL AUDIT 0-finding sớm khi còn
+  backlog cụ thể chưa cạn.
+
+<!-- Round 22+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

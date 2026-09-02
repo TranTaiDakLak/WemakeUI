@@ -162,7 +162,7 @@ const ENV_COLOR: Record<string, string> = {
 .d-hero__live {
   display: inline-flex;
   align-items: center;
-  font-size: var(--wx-fs-12);
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -176,7 +176,7 @@ const ENV_COLOR: Record<string, string> = {
   display: inline-flex;
   align-items: center;
   gap: var(--wx-space-1);
-  font-size: var(--wx-fs-12);
+  font-size: 11px;
   font-weight: 500;
   padding: 3px 9px;
   border-radius: var(--wx-radius-full);

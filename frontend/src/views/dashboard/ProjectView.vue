@@ -146,7 +146,7 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
 .x-labels {
   display: flex;
   justify-content: space-between;
-  font-size: var(--wx-fs-12);
+  font-size: 11px;
   color: var(--wx-content-muted);
   margin-top: var(--wx-space-1);
 }

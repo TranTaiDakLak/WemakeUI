@@ -169,7 +169,7 @@ const emit = defineEmits<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: var(--wx-space-4);
   font-family: var(--wx-font-primary);
 }
 
@@ -206,7 +206,7 @@ const emit = defineEmits<{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px 20px;
+  gap: var(--wx-space-2) 20px;
 }
 
 .dc-legend-item {
@@ -216,7 +216,7 @@ const emit = defineEmits<{
   font-size: 12px;
   cursor: pointer;
   transition: opacity 0.15s;
-  padding: 2px 4px;
+  padding: 2px var(--wx-space-1);
   border-radius: var(--wx-radius-sm);
 }
 

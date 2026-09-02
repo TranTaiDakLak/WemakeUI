@@ -157,7 +157,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: var(--wx-space-3);
   max-width: 92%;
   max-height: 92%;
 }
@@ -173,7 +173,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
 .lightbox-caption {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--wx-space-3);
   color: rgba(255, 255, 255, 0.9);
   font-size: 13px;
   margin: 0;

@@ -177,7 +177,7 @@ const emit = defineEmits<{
 
 <style scoped>
 .bar-chart { font-family: var(--wx-font-primary); width: 100%; }
-.bc-legend { display: flex; flex-wrap: wrap; gap: 16px; padding: 0 8px 8px; font-size: 12px; color: var(--wx-text-secondary); }
+.bc-legend { display: flex; flex-wrap: wrap; gap: var(--wx-space-4); padding: 0 var(--wx-space-2) var(--wx-space-2); font-size: 12px; color: var(--wx-text-secondary); }
 .bc-legend-item { display: inline-flex; align-items: center; gap: 6px; }
 .bc-legend-dot { width: 10px; height: 10px; border-radius: var(--wx-radius-full); }
 .bc-svg-wrapper { position: relative; width: 100%; }

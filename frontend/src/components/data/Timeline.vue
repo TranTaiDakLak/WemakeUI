@@ -79,20 +79,20 @@ function timeOnly(ts: string): string {
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--wx-space-5);
 }
 
 .timeline-day {
   font-size: 12px;
   font-weight: 700;
   color: var(--wx-text-muted);
-  margin: 0 0 12px;
+  margin: 0 0 var(--wx-space-3);
   letter-spacing: 0.3px;
 }
 
 .timeline-list {
   position: relative;
-  padding-left: 24px;
+  padding-left: var(--wx-space-5);
 }
 
 .timeline-list::before {
@@ -109,8 +109,8 @@ function timeOnly(ts: string): string {
 .timeline-item {
   position: relative;
   display: flex;
-  gap: 12px;
-  padding-bottom: 16px;
+  gap: var(--wx-space-3);
+  padding-bottom: var(--wx-space-4);
 }
 
 .timeline-item:last-child {

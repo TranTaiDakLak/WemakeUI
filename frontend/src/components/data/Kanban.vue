@@ -132,8 +132,8 @@ function onDragEnd() {
 <style scoped>
 .kanban {
   display: flex;
-  gap: 12px;
-  padding: 8px 0;
+  gap: var(--wx-space-3);
+  padding: var(--wx-space-2) 0;
   overflow-x: auto;
   min-height: 400px;
 }
@@ -175,7 +175,7 @@ function onDragEnd() {
   color: var(--wx-text-muted);
   font-family: var(--wx-font-mono);
   background: var(--wx-surface-sunken);
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
 }
 
@@ -183,8 +183,8 @@ function onDragEnd() {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 8px;
+  gap: var(--wx-space-2);
+  padding: var(--wx-space-2);
   overflow-y: auto;
 }
 
@@ -200,7 +200,7 @@ function onDragEnd() {
   background: var(--wx-surface-base);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
-  padding: 10px 12px;
+  padding: 10px var(--wx-space-3);
   cursor: grab;
   transition: all var(--wx-duration-fast);
   box-shadow: var(--wx-shadow-sm);
@@ -238,22 +238,22 @@ function onDragEnd() {
   font-size: 13px;
   font-weight: 600;
   color: var(--wx-text-primary);
-  margin: 0 0 4px;
+  margin: 0 0 var(--wx-space-1);
   line-height: 1.4;
 }
 
 .kanban-card__desc {
   font-size: 12px;
   color: var(--wx-text-secondary);
-  margin: 0 0 8px;
+  margin: 0 0 var(--wx-space-2);
   line-height: 1.4;
 }
 
 .kanban-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  margin-bottom: 8px;
+  gap: var(--wx-space-1);
+  margin-bottom: var(--wx-space-2);
 }
 
 .kanban-tag {

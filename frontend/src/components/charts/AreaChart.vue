@@ -218,7 +218,7 @@ const hoverX = computed(() => {
 
 <style scoped>
 .area-chart { font-family: var(--wx-font-primary); width: 100%; }
-.ac-legend { display: flex; flex-wrap: wrap; gap: 16px; padding: 0 8px 8px; font-size: 12px; color: var(--wx-text-secondary); }
+.ac-legend { display: flex; flex-wrap: wrap; gap: var(--wx-space-4); padding: 0 var(--wx-space-2) var(--wx-space-2); font-size: 12px; color: var(--wx-text-secondary); }
 .ac-legend-item { display: inline-flex; align-items: center; gap: 6px; }
 .ac-legend-dot { width: 10px; height: 10px; border-radius: var(--wx-radius-full); }
 .ac-svg-wrapper { position: relative; width: 100%; }
@@ -230,9 +230,9 @@ const hoverX = computed(() => {
   position: absolute; top: 0; transform: translateX(-50%);
   background: var(--wx-surface-base); border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md); box-shadow: var(--wx-shadow-lg);
-  padding: 8px 10px; pointer-events: none; font-size: 12px; min-width: 120px; z-index: 5;
+  padding: var(--wx-space-2) 10px; pointer-events: none; font-size: 12px; min-width: 120px; z-index: 5;
 }
-.ac-tooltip-title { font-weight: 700; color: var(--wx-text-primary); margin-bottom: 4px; font-size: 11px; }
+.ac-tooltip-title { font-weight: 700; color: var(--wx-text-primary); margin-bottom: var(--wx-space-1); font-size: 11px; }
 .ac-tooltip-row { display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 6px; padding: 2px 0; }
 .ac-tooltip-dot { width: 8px; height: 8px; border-radius: var(--wx-radius-full); }
 .ac-tooltip-name { color: var(--wx-text-secondary); font-size: 11px; }

@@ -145,7 +145,7 @@ const emit = defineEmits<{
 .pie-chart {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: var(--wx-space-5);
   font-family: var(--wx-font-primary);
 }
 
@@ -198,8 +198,8 @@ const emit = defineEmits<{
   display: grid;
   grid-template-columns: 12px 1fr auto auto;
   align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
+  gap: var(--wx-space-2);
+  padding: 6px var(--wx-space-2);
   border-radius: var(--wx-radius-md);
   font-size: 12px;
   cursor: pointer;

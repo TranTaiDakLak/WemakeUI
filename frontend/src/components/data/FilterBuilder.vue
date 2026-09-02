@@ -220,7 +220,7 @@ function isGroup(r: FilterRule | FilterGroup): r is FilterGroup {
 .fb-group {
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-lg);
-  padding: 12px;
+  padding: var(--wx-space-3);
   background: var(--wx-surface-base);
 }
 
@@ -232,7 +232,7 @@ function isGroup(r: FilterRule | FilterGroup): r is FilterGroup {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  gap: 12px;
+  gap: var(--wx-space-3);
 }
 
 .fb-toggle {
@@ -243,7 +243,7 @@ function isGroup(r: FilterRule | FilterGroup): r is FilterGroup {
 }
 
 .fb-toggle__btn {
-  padding: 4px 12px;
+  padding: var(--wx-space-1) var(--wx-space-3);
   border: none;
   background: transparent;
   font-size: 12px;
@@ -265,7 +265,7 @@ function isGroup(r: FilterRule | FilterGroup): r is FilterGroup {
 }
 
 .fb-action-btn {
-  padding: 4px 10px;
+  padding: var(--wx-space-1) 10px;
   border: 1px dashed var(--wx-border-default);
   background: transparent;
   border-radius: var(--wx-radius-md);
@@ -300,7 +300,7 @@ function isGroup(r: FilterRule | FilterGroup): r is FilterGroup {
 
 .fb-nested {
   flex: 1;
-  margin-left: 16px;
+  margin-left: var(--wx-space-4);
   border-left: 2px solid var(--wx-brand-primary);
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
@@ -311,11 +311,11 @@ function isGroup(r: FilterRule | FilterGroup): r is FilterGroup {
   align-items: center;
   gap: 6px;
   width: 100%;
-  padding: 4px 0;
+  padding: var(--wx-space-1) 0;
 }
 
 .fb-input {
-  padding: 5px 8px;
+  padding: 5px var(--wx-space-2);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
   background: var(--wx-surface-sunken);

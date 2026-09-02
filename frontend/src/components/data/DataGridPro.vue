@@ -574,11 +574,11 @@ function downloadFile(content: string, type: string, name: string) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
+  padding: var(--wx-space-2) var(--wx-space-3);
   background: var(--wx-surface-sunken);
   border-bottom: 1px solid var(--wx-border-default);
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--wx-space-2);
 }
 
 .dgp-toolbar__group {
@@ -599,7 +599,7 @@ function downloadFile(content: string, type: string, name: string) {
 }
 
 .dgp-tool-btn {
-  padding: 4px 10px;
+  padding: var(--wx-space-1) 10px;
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);
   border-radius: var(--wx-radius-md);
@@ -633,11 +633,11 @@ function downloadFile(content: string, type: string, name: string) {
 .dgp-density .dgp-tool-btn {
   border: none;
   text-transform: uppercase;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
 }
 
 .dgp-select {
-  padding: 4px 10px;
+  padding: var(--wx-space-1) 10px;
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);
   border-radius: var(--wx-radius-md);
@@ -650,7 +650,7 @@ function downloadFile(content: string, type: string, name: string) {
 .dgp-saveview {
   display: flex;
   gap: 6px;
-  padding: 8px 12px;
+  padding: var(--wx-space-2) var(--wx-space-3);
   background: var(--wx-info-bg);
   border-bottom: 1px solid var(--wx-info-border);
 }
@@ -678,7 +678,7 @@ function downloadFile(content: string, type: string, name: string) {
 
 .dgp-loading,
 .dgp-empty {
-  padding: 32px;
+  padding: var(--wx-space-6);
   text-align: center;
   color: var(--wx-text-muted);
 }
@@ -686,8 +686,8 @@ function downloadFile(content: string, type: string, name: string) {
 .dgp-footer {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 12px;
+  gap: var(--wx-space-3);
+  padding: var(--wx-space-2) var(--wx-space-3);
   background: var(--wx-surface-sunken);
   border-top: 1px solid var(--wx-border-default);
   font-size: 12px;
@@ -709,7 +709,7 @@ function downloadFile(content: string, type: string, name: string) {
 }
 
 .dgp-th {
-  padding: 12px;
+  padding: var(--wx-space-3);
   text-align: left;
   font-size: 11px;
   font-weight: 700;
@@ -763,7 +763,7 @@ function downloadFile(content: string, type: string, name: string) {
 .dgp-th__label { display: inline-block; }
 
 .dgp-th__sort {
-  margin-left: 4px;
+  margin-left: var(--wx-space-1);
   color: var(--wx-brand-primary);
   font-size: 9px;
 }
@@ -778,7 +778,7 @@ function downloadFile(content: string, type: string, name: string) {
   font-size: 14px;
   color: var(--wx-text-muted);
   cursor: pointer;
-  padding: 2px 4px;
+  padding: 2px var(--wx-space-1);
   border-radius: var(--wx-radius-sm);
 }
 
@@ -821,7 +821,7 @@ function downloadFile(content: string, type: string, name: string) {
 }
 
 .dgp-td {
-  padding: 0 12px;
+  padding: 0 var(--wx-space-3);
   border-bottom: 1px solid var(--wx-border-subtle);
   color: var(--wx-text-primary);
   white-space: nowrap;
@@ -853,7 +853,7 @@ function downloadFile(content: string, type: string, name: string) {
 
 .dgp-edit-input {
   width: 100%;
-  padding: 4px 6px;
+  padding: var(--wx-space-1) 6px;
   border: 1px solid var(--wx-brand-focus);
   border-radius: var(--wx-radius-sm);
   background: var(--wx-surface-base);
@@ -879,7 +879,7 @@ function downloadFile(content: string, type: string, name: string) {
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
   box-shadow: var(--wx-shadow-lg);
-  padding: 4px;
+  padding: var(--wx-space-1);
   min-width: 160px;
   font-family: var(--wx-font-primary);
 }
@@ -888,7 +888,7 @@ function downloadFile(content: string, type: string, name: string) {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 6px 12px;
+  padding: 6px var(--wx-space-3);
   border: none;
   background: transparent;
   font-size: 12px;
@@ -905,12 +905,12 @@ function downloadFile(content: string, type: string, name: string) {
 
 .dgp-colmenu__sep {
   height: 1px;
-  margin: 4px 0;
+  margin: var(--wx-space-1) 0;
   background: var(--wx-border-subtle);
 }
 
 /* Header padding theo density — khớp AccountsView */
 .dgp--d-sm .dgp-th { padding: 7px 10px; }
 .dgp--d-md .dgp-th { padding: 12px; }
-.dgp--d-lg .dgp-th { padding: 14px 12px; }
+.dgp--d-lg .dgp-th { padding: 14px var(--wx-space-3); }
 </style>

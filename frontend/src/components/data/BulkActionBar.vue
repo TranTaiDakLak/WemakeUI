@@ -35,8 +35,8 @@ defineEmits<{
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
+  gap: var(--wx-space-3);
+  padding: 10px var(--wx-space-4);
   background: var(--wx-surface-base);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-xl);
@@ -74,7 +74,7 @@ defineEmits<{
   color: var(--wx-text-muted);
   font-size: 13px;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: var(--wx-space-1) var(--wx-space-2);
   border-radius: var(--wx-radius-sm);
   font-family: var(--wx-font-primary);
   transition: all var(--wx-duration-fast);

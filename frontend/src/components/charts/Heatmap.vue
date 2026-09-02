@@ -106,7 +106,7 @@ const heightPx = computed(() => 7 * (props.cellSize + props.cellGap))
 .heatmap {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--wx-space-2);
   font-family: var(--wx-font-primary);
 }
 
@@ -123,7 +123,7 @@ const heightPx = computed(() => 7 * (props.cellSize + props.cellGap))
 .hm-legend {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--wx-space-1);
   font-size: 11px;
   color: var(--wx-text-muted);
 }
@@ -138,7 +138,7 @@ const heightPx = computed(() => 7 * (props.cellSize + props.cellGap))
   font-size: 12px;
   color: var(--wx-text-secondary);
   background: var(--wx-surface-sunken);
-  padding: 4px 10px;
+  padding: var(--wx-space-1) 10px;
   border-radius: var(--wx-radius-md);
   align-self: flex-start;
 }

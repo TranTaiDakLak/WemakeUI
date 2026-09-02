@@ -224,8 +224,8 @@ function downloadLog() {
 .log-toolbar {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
+  gap: var(--wx-space-2);
+  padding: var(--wx-space-2) 10px;
   background: var(--wx-surface-sunken);
   border-bottom: 1px solid var(--wx-border-default);
   flex-shrink: 0;
@@ -254,7 +254,7 @@ function downloadLog() {
 }
 
 .log-level-btn {
-  padding: 4px 8px;
+  padding: var(--wx-space-1) var(--wx-space-2);
   border: 1px solid var(--wx-border-default);
   background: transparent;
   border-radius: var(--wx-radius-sm);
@@ -273,7 +273,7 @@ function downloadLog() {
 .log-level-btn--active.log-level-btn--error { background: var(--wx-danger-bg); color: var(--wx-danger-text); border-color: var(--wx-danger-border); }
 
 .log-tool-btn {
-  padding: 4px 10px;
+  padding: var(--wx-space-1) 10px;
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);
   border-radius: var(--wx-radius-md);
@@ -305,7 +305,7 @@ function downloadLog() {
 }
 
 .log-empty {
-  padding: 24px;
+  padding: var(--wx-space-5);
   text-align: center;
   color: var(--wx-text-muted);
   font-size: 13px;
@@ -318,7 +318,7 @@ function downloadLog() {
 .log-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--wx-space-2);
   padding: 0 10px;
   font-size: 12px;
   white-space: nowrap;
@@ -375,7 +375,7 @@ function downloadLog() {
 .log-details {
   background: var(--wx-surface-sunken);
   border-bottom: 1px solid var(--wx-border-subtle);
-  padding: 8px 60px;
+  padding: var(--wx-space-2) 60px;
 }
 
 .log-details pre {

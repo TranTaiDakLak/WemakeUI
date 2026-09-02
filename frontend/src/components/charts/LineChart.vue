@@ -217,8 +217,8 @@ const hoverX = computed(() => {
 .lc-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  padding: 0 8px 8px;
+  gap: var(--wx-space-4);
+  padding: 0 var(--wx-space-2) var(--wx-space-2);
   font-size: 12px;
   color: var(--wx-text-secondary);
 }
@@ -284,7 +284,7 @@ const hoverX = computed(() => {
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
   box-shadow: var(--wx-shadow-lg);
-  padding: 8px 10px;
+  padding: var(--wx-space-2) 10px;
   pointer-events: none;
   font-size: 12px;
   min-width: 120px;
@@ -294,7 +294,7 @@ const hoverX = computed(() => {
 .lc-tooltip-title {
   font-weight: 700;
   color: var(--wx-text-primary);
-  margin-bottom: 4px;
+  margin-bottom: var(--wx-space-1);
   font-size: 11px;
 }
 

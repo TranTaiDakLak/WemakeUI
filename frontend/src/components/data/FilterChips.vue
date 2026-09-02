@@ -55,20 +55,20 @@ const chips = (g: FilterGroup) => flatten(g)
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-  padding: 8px 0;
+  padding: var(--wx-space-2) 0;
 }
 
 .filter-chips__label {
   font-size: 12px;
   color: var(--wx-text-muted);
-  margin-right: 4px;
+  margin-right: var(--wx-space-1);
 }
 
 .filter-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 3px 4px 3px 10px;
+  padding: 3px var(--wx-space-1) 3px 10px;
   background: var(--wx-info-bg);
   color: var(--wx-info-text);
   border-radius: var(--wx-radius-full);
@@ -102,7 +102,7 @@ const chips = (g: FilterGroup) => flatten(g)
   color: var(--wx-danger-text);
   font-size: 12px;
   cursor: pointer;
-  padding: 3px 8px;
+  padding: 3px var(--wx-space-2);
   border-radius: var(--wx-radius-sm);
   font-family: var(--wx-font-primary);
 }

@@ -229,7 +229,7 @@ function timeOnly(ts: string): string {
 .calendar-nav {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 
 .calendar-title {
@@ -250,7 +250,7 @@ function timeOnly(ts: string): string {
 }
 
 .cal-btn {
-  padding: 5px 12px;
+  padding: 5px var(--wx-space-3);
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);
   border-radius: var(--wx-radius-md);
@@ -293,7 +293,7 @@ function timeOnly(ts: string): string {
 }
 
 .calendar-week-day {
-  padding: 8px;
+  padding: var(--wx-space-2);
   text-align: center;
   font-size: 11px;
   font-weight: 700;
@@ -313,7 +313,7 @@ function timeOnly(ts: string): string {
   flex-direction: column;
   align-items: stretch;
   text-align: left;
-  padding: 4px;
+  padding: var(--wx-space-1);
   background: var(--wx-surface-base);
   border-right: 1px solid var(--wx-border-subtle);
   border-bottom: 1px solid var(--wx-border-subtle);
@@ -360,7 +360,7 @@ function timeOnly(ts: string): string {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin-top: 4px;
+  margin-top: var(--wx-space-1);
 }
 
 .calendar-event {
@@ -388,15 +388,15 @@ function timeOnly(ts: string): string {
 
 /* Agenda */
 .calendar-agenda {
-  padding: 16px;
+  padding: var(--wx-space-4);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--wx-space-4);
 }
 
 .agenda-empty {
   text-align: center;
-  padding: 32px;
+  padding: var(--wx-space-6);
   color: var(--wx-text-muted);
   font-size: 13px;
 }
@@ -405,7 +405,7 @@ function timeOnly(ts: string): string {
   font-size: 12px;
   font-weight: 700;
   color: var(--wx-text-muted);
-  margin: 0 0 8px;
+  margin: 0 0 var(--wx-space-2);
   letter-spacing: 0.3px;
   text-transform: capitalize;
 }
@@ -413,13 +413,13 @@ function timeOnly(ts: string): string {
 .agenda-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 
 .agenda-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--wx-space-3);
   padding: 10px 14px;
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);

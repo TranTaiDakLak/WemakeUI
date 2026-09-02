@@ -1447,4 +1447,125 @@ tự ý dừng sớm hơn.
   - Mục B — vẫn **CLOSED** (không có phát hiện mới nào làm thay đổi căn cứ
     decline).
 
-<!-- Round 13+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 13 (2026-09-02)
+- Bối cảnh: PLAN + Dev A/B của round này đã chạy trước — Dev B commit
+  `649155b` "refactor: tokenize 4pt spacing in remaining common components"
+  (17 file), Dev A commit `de9c197` "refactor: tokenize 4pt spacing in core
+  common components" (6 file), cả 2 đúng backlog round 12 ưu tiên #1
+  (`components/common/**`, 24 file, public API `lib.ts`). Cả 2 dev báo có
+  git race condition khi `git add`/`git commit` chạy gần đồng thời — 1 commit
+  tạm quét nhầm file chưa commit của dev kia, cả 2 tự phát hiện và
+  `git reset --soft`/`git restore --staged` rồi re-commit đúng pathspec. Dev
+  C (agent này) chỉ chạy QA theo checklist có sẵn — không chạy lại PLAN,
+  nhiệm vụ đầu tiên là verify độc lập race-condition recovery thay vì tin
+  self-report.
+- **Verify race-condition recovery (không chỉ tin self-report)**:
+  `git reflog` xác nhận đúng trình tự — Dev B commit lần đầu ra `311bc8d`
+  (quét nhầm), `reset: moving to HEAD~1` về `7d05c65`, rồi re-commit sạch ra
+  `649155b`, sau đó Dev A commit `de9c197`. `git log --all --oneline | grep
+  311bc8d` → **0 kết quả** (commit không nằm trong bất kỳ ref nào, kể cả
+  `--all`, chỉ còn sót lại trong reflog chờ GC) — xác nhận đúng như 2 dev báo,
+  không phải orphan commit trôi nổi trong history thật. `git log
+  7d05c65..de9c197 --oneline` chỉ có đúng 2 commit `649155b`+`de9c197`, không
+  có commit lạ chen giữa.
+- **Build gate 3/3 PASS**: `typecheck` sạch (exit 0, vue-tsc --noEmit không
+  in gì); `build:lib` 15.22s (ui.css 235.76kB/gzip 34.77kB, es.js 415.90kB,
+  umd.js 325.52kB, dts OK); `build:app` 8.14s (mọi chunk build OK, exit 0).
+- **`git show --stat` xác nhận đúng khai báo, 0 overlap**: `649155b` đúng
+  17 file (AnchorBar, BaseBadge, BaseBreadcrumb, BaseCheckbox, BaseDropdown,
+  BaseInput, BaseModal, BasePagination, BaseProgress, BaseRadio, BaseTag,
+  BaseTextarea, BaseToast, BaseToggle, CommandPalette, FormField, StatusBar);
+  `de9c197` đúng 6 file (BaseButton, BaseDataGrid, BaseSelect, BaseSelectMenu,
+  BaseTabs, ContextMenu) — không file nào xuất hiện ở cả 2 commit.
+  `git status --porcelain` hoàn toàn sạch — không có file nào bị bỏ sót/mất
+  trong quá trình race-condition recovery.
+- **Đọc FULL diff cả 2 commit (không spot-check)**: 0 chỗ đổi
+  font-size/width/height/min-height/min-width/border-radius/
+  grid-template-columns/letter-spacing bất kỳ đâu — các dòng match regex do
+  cùng nằm trên 1 khai báo CSS 1 dòng với padding/gap (ví dụ
+  `.wx-btn--sm { padding: ...; font-size: var(--wx-fs-12); gap: ...;
+  min-height: 32px; }`) đã đối chiếu từng cặp trước/sau, xác nhận riêng giá
+  trị font-size/min-height không đổi, chỉ padding/gap đổi.
+- **Verify cụ thể theo checklist**:
+  - `BaseBadge.vue` `font-size: 11px` — cả 2 chỗ (`.base-badge` base rule và
+    `.base-badge--md`) xác nhận **untouched**, chỉ padding đổi.
+  - `BaseAvatarGroup.vue` — xác nhận **zero diff thật** (không xuất hiện
+    trong `git show --stat` của cả 2 commit).
+  - Giá trị âm: `BaseSelectMenu.vue` `margin: -4px -4px 4px` → chỉ giá trị
+    dương thứ 3 đổi thành `var(--wx-space-1)`, `-4px -4px` giữ nguyên literal;
+    `StatusBar.vue` `margin: -1px -4px` giữ nguyên 100%, chỉ `padding: 1px
+    4px` đổi thành `padding: 1px var(--wx-space-1)`.
+  - `BaseDataGrid.vue` non-`--wx-*` scheme (`--bg-primary`, `--text-tertiary`,
+    `--bg-tertiary`, `--border-color`, `--text-secondary`, `--hover-bg`,
+    `--brand-primary`, `--text-primary`) — xác nhận **không bị đụng**, đúng
+    như commit message khai báo "out of scope this round"; chỉ 6 chỗ
+    padding/margin/gap đổi (th/td padding, sort-indicator margin-left,
+    loading padding, shimmer-row gap+margin-bottom).
+  - Đối chiếu **toàn bộ ~37 conversion của cả 2 commit** với scale thật đọc
+    trực tiếp từ `tokens.css` (space-1=4, space-2=8, space-3=12, space-4=16,
+    space-5=24, space-6=32, space-7=40, space-8=48, space-9=64, space-10=80,
+    space-11=96, space-12=128px) — **100% khớp đúng**, không có case ép sai
+    thang (kể cả các giá trị lẻ giữ nguyên literal đúng: 20px `.modal-footer`,
+    28px `.wx-btn--xl`, 10px/14px/6px/9px các chỗ khác — không bị ép).
+  - New-hardcode check: grep dòng `+` cả 2 commit cho hex/rgba → **0 kết
+    quả cả 2 commit**.
+  - API safety: đọc toàn bộ hunk context (`@@` line) — 100% nằm trong
+    `<style scoped>`/`<style>` (không hunk nào thuộc `<script setup>` hay
+    `<template>`), 0 rename prop/emit/slot/class-name. `BaseInput.vue` —
+    xác nhận diff commit thật (2 hunk: `.base-input` gap, `.base-input__field`
+    padding) đúng là CSS-only dù có system note "recently modified on disk";
+    `git status --porcelain` sạch xác nhận không còn thay đổi chưa commit
+    nào trên file này.
+  - **Phát hiện phụ (không phải bug)**: `BaseSelectMenu.vue` và
+    `BaseSelect.vue` mỗi file có **2 khối `<style>`** — 1 `<style scoped>`
+    chính và 1 `<style>` không scoped riêng cho menu teleport-ra-ngoài (có
+    comment sẵn trong code `<!-- Teleported menu — global (not scoped) -->`
+    ở `BaseSelectMenu.vue`) — đây là kiến trúc có sẵn từ trước (Vue Teleport
+    khiến `scoped` CSS không áp dụng được cho DOM bị teleport ra ngoài cây
+    component), không phải Dev A tạo mới hay vi phạm rule. Vài hunk của
+    `de9c197` rơi vào khối `<style>` không-scoped này (`.bsm__menu`,
+    `.bsm__option`, `.base-select__menu`, `.base-select__option` padding/gap)
+    — vẫn 100% CSS-only, không ảnh hưởng API safety, chỉ ghi nhận lại cho rõ.
+  - Re-grep độc lập `components/common/**` (44 file, không có subdirectory)
+    bằng pattern grid-match — chỉ còn đúng 3 hit, cả 3 đều là giá trị **âm**
+    đã biết trước (`BaseAvatarGroup.vue:52,64` `margin-left: -8px`,
+    `BaseSelectMenu.vue:539` `margin: -4px -4px var(--wx-space-1)` — phần âm
+    giữ nguyên, `StatusBar.vue:108` `margin: -1px -4px` — giữ nguyên) — **0
+    positive/off-grid remnant nào còn sót**.
+- **Kết luận: `components/common/**` (24/24 file) chính thức CLOSED cho
+  mục A** — toàn bộ 24 file (18 file round 5 xử lý bug undefined-CSS-var
+  khác + 6 file round 13 mới đụng spacing lần đầu, cộng với 17 file round 13
+  Dev B) nay đã qua ít nhất 1 lượt spacing-sweep sạch, không còn giá trị
+  dương khớp lưới 4pt nào chưa tokenize. Đây là public API quan trọng nhất
+  của `dist-lib/` — milestone lớn cho mục A.
+- **ROUND 13 QA: PASS**, không cần follow-up commit — mọi hạng mục checklist
+  đều đạt ngay từ commit gốc của Dev A/B, không tìm thấy lỗi nhỏ nào cần tự
+  sửa.
+- Backlog cho round 14 (theo đúng thứ tự PLAN round 13 đã flag):
+  1. **Mục A** — `views/docs/**` (25 file, cụm lớn nhất còn lại về số lượng,
+     nhưng demo/doc-only, không phải public API — ưu tiên sau
+     `components/**`); `components/data/**` (9 file, `DataGridPro.vue`
+     ~19 hit — nặng nhất); `components/wemakeui/**` (10 file); `components/
+     charts/**` (6 file); cụm nhỏ rải rác `components/{async,feedback,
+     platform,permission,layout}/*`. Nhắc lại rule: `--wx-fs-11` KHÔNG tồn
+     tại (khác mục), giá trị không khớp thang space thật để nguyên literal,
+     đọc kỹ multi-value shorthand trước khi convert (giống case
+     `BaseSelectMenu`/`StatusBar` round này — chỉ convert đúng phần khớp
+     lưới, giữ nguyên phần âm/lẻ).
+  2. **2 file archetype marketing** `CaseStudyGrid.vue:101` và
+     `TechGrid.vue:50` — cả 2 đều `padding: 80px var(--wx-space-6);` (đã xác
+     nhận qua grep round này) — cần đọc kỹ xem có phải hero-band cố ý giống
+     `MarketingHero.vue` 120px (round 3, giữ nguyên) hay nên convert 80px→
+     `var(--wx-space-10)` (khớp thang thật) trước khi quyết định.
+  3. **`BaseDataGrid.vue` 14-biến non-`--wx-*` alias scheme** (`--bg-primary`,
+     `--text-tertiary`, `--bg-tertiary`, `--border-color`, `--text-secondary`,
+     `--hover-bg`, `--brand-primary`, `--text-primary`, v.v.) — nợ đặt tên,
+     không phải bug (đã an toàn để sửa từ round 12 sau khi `--warning-color`
+     divergence được fix tận gốc), vẫn priority TRUNG BÌNH.
+  4. **`--wx-shadow-focus` thiếu dark-mode.css override** — vẫn mở, system-
+     wide, ưu tiên trung bình, chưa ai đụng kể từ round 11.
+  5. Mục C — vẫn 1 follow-up mở, ưu tiên thấp: `WeDashboardV1View.vue`
+     `.env-dot` (không đổi gì round này).
+  6. Mục B — vẫn **CLOSED** (không có phát hiện mới).
+
+<!-- Round 14+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

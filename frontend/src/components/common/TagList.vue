@@ -47,7 +47,7 @@ const overflowLabel = computed(() => overflow.value.join(', '))
   display: inline-flex;
   align-items: center;
   padding: 2px 6px;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-medium);
   color: var(--wx-text-muted);
   background: var(--wx-surface-sunken);
@@ -59,7 +59,7 @@ const overflowLabel = computed(() => overflow.value.join(', '))
 }
 
 .tag-list__more:hover {
-  background: var(--wx-surface-hover);
+  background: var(--wx-hover-bg);
   color: var(--wx-text-secondary);
 }
 </style>

@@ -152,6 +152,7 @@ function onClick(e: MouseEvent) {
 .wx-card--bordered {
   border: 1px solid color-mix(in srgb, var(--wx-border-default) 60%, transparent);
 }
+/* --wx-card-accent được set qua inline :style từ prop accentColor, không phải token toàn cục — không phải bug undefined-var */
 .wx-card--accent {
   border-left: 3px solid var(--wx-card-accent);
 }

@@ -147,7 +147,7 @@ function finish() {
   color: var(--wx-text-secondary);
 }
 .wx-wiz-btn--ghost:hover:not(:disabled) {
-  background: var(--wx-surface-raised);
+  background: var(--wx-hover-bg);
   color: var(--wx-text-primary);
 }
 

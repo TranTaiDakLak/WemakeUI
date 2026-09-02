@@ -43,7 +43,7 @@ defineProps<{
   font-family: var(--wx-font-primary);
 }
 
-.base-badge--primary { background: var(--wx-surface-hover); color: var(--wx-text-primary); border: 1px solid var(--wx-border-default); }
+.base-badge--primary { background: var(--wx-neutral-bg); color: var(--wx-text-primary); border: 1px solid var(--wx-border-default); }
 .base-badge--success { background: rgba(16, 185, 129, 0.12); color: #059669; }
 .base-badge--warning { background: rgba(245, 158, 11, 0.12); color: #d97706; }
 .base-badge--danger  { background: rgba(239, 68, 68, 0.12);  color: #dc2626; }

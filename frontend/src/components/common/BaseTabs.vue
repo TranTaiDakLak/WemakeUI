@@ -163,6 +163,6 @@ onMounted(() => nextTick(updateIndicator))
 }
 .base-tabs--underline .base-tabs__tab:hover:not(:disabled):not(.base-tabs__tab--active) {
   color: var(--wx-text-primary);
-  background: var(--wx-surface-hover);
+  background: var(--wx-hover-bg);
 }
 </style>

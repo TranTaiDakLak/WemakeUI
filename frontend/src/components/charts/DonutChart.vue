@@ -221,7 +221,7 @@ const emit = defineEmits<{
 }
 
 .dc-legend-item:hover {
-  background: var(--wx-surface-hover);
+  background: var(--wx-hover-bg);
 }
 
 .dc-legend-item--dim {

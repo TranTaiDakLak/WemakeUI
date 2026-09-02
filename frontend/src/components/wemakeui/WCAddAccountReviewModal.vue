@@ -57,7 +57,7 @@ const previewRows = computed(() => props.rows.slice(0, 50))
   padding: 7px 10px;
   background: var(--wx-surface-sunken);
   border-bottom: 1px solid var(--wx-border-default);
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: 600;
   color: var(--wx-text-muted);
   text-transform: uppercase;

@@ -341,7 +341,7 @@ async function toggleIntegration(itg: Integration) {
 
 <style scoped>
 .settings-card {
-  background: var(--wx-surface-default);
+  background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-lg);
   overflow: hidden;
@@ -376,7 +376,7 @@ async function toggleIntegration(itg: Integration) {
 }
 
 .dirty-badge {
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   background: color-mix(in srgb, var(--wx-warning-solid) 15%, transparent);
   color: var(--wx-warning-solid);
@@ -433,7 +433,7 @@ async function toggleIntegration(itg: Integration) {
 
 .notif-section__label {
   margin: 0;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -466,7 +466,7 @@ async function toggleIntegration(itg: Integration) {
 }
 
 .toggle-row:last-child { border-bottom: none; }
-.toggle-row:hover { background: var(--wx-surface-hover); }
+.toggle-row:hover { background: var(--wx-hover-bg); }
 
 .toggle-row__info {
   display: flex;
@@ -505,7 +505,7 @@ async function toggleIntegration(itg: Integration) {
 }
 
 .integration-row:last-child { border-bottom: none; }
-.integration-row:hover { background: var(--wx-surface-hover); }
+.integration-row:hover { background: var(--wx-hover-bg); }
 
 .integration-row__icon { font-size: 22px; flex-shrink: 0; align-self: flex-start; margin-top: 2px; }
 

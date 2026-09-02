@@ -239,7 +239,7 @@ const txSummary: TxSummaryRow[] = [
 }
 
 .chart-card {
-  background: var(--wx-surface-default);
+  background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-lg);
   padding: var(--wx-space-4);
@@ -285,7 +285,7 @@ const txSummary: TxSummaryRow[] = [
   transition: background 0.12s;
 }
 
-.top-member:hover { background: var(--wx-surface-hover); }
+.top-member:hover { background: var(--wx-hover-bg); }
 
 .top-member__rank {
   font-size: var(--wx-fs-12);
@@ -303,11 +303,11 @@ const txSummary: TxSummaryRow[] = [
 }
 
 .top-member__name  { font-size: var(--wx-fs-13); font-weight: var(--wx-fw-medium); color: var(--wx-text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.top-member__email { font-size: var(--wx-fs-11); color: var(--wx-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.top-member__email { font-size: var(--wx-fs-12); color: var(--wx-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .top-member__stats { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
 .top-member__spend   { font-size: var(--wx-fs-13); font-weight: var(--wx-fw-semibold); color: var(--wx-text-primary); white-space: nowrap; }
-.top-member__txcount { font-size: var(--wx-fs-11); color: var(--wx-text-muted); }
+.top-member__txcount { font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
 
 /* ── Summary table ── */
 .summary-table {
@@ -318,7 +318,7 @@ const txSummary: TxSummaryRow[] = [
 .summary-table th {
   padding: var(--wx-space-2) var(--wx-space-3);
   text-align: left;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -334,7 +334,7 @@ const txSummary: TxSummaryRow[] = [
 }
 
 .summary-table tr:last-child td { border-bottom: none; }
-.summary-table tr:hover td { background: var(--wx-surface-hover); }
+.summary-table tr:hover td { background: var(--wx-hover-bg); }
 
 .ta-right { text-align: right; }
 .mono     { font-variant-numeric: tabular-nums; }

@@ -216,7 +216,7 @@ function getMemberProducts(m: Member) {
   margin-bottom: var(--wx-space-4);
 }
 .detail-section__label {
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -285,7 +285,7 @@ function getMemberProducts(m: Member) {
   color: var(--wx-text-primary);
 }
 .product-item__meta {
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   color: var(--wx-text-muted);
 }
 .product-item__since {

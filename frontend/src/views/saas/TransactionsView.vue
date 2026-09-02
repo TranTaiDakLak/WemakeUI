@@ -272,7 +272,7 @@ async function cancelTx(item: Transaction) {
   border-radius: var(--wx-radius-md);
 }
 .tx-amount-label { font-size: var(--wx-fs-13); color: var(--wx-text-secondary); }
-.tx-amount-value { font-size: var(--wx-fs-22); font-weight: var(--wx-fw-bold); color: var(--wx-brand-primary); }
+.tx-amount-value { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); color: var(--wx-brand-primary); }
 
 .tx-badges { display: flex; gap: var(--wx-space-2); flex-wrap: wrap; }
 
@@ -286,7 +286,7 @@ async function cancelTx(item: Transaction) {
 
 .section-label {
   margin: 0;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -328,7 +328,7 @@ async function cancelTx(item: Transaction) {
   width: 44px;
   height: 44px;
   border-radius: var(--wx-radius-full);
-  background: var(--wx-success-subtle);
+  background: var(--wx-success-bg);
   color: var(--wx-success-text);
   font-size: 22px;
   font-weight: var(--wx-fw-bold);

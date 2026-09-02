@@ -129,7 +129,7 @@ function asVer(row: unknown): SoftwareVersion { return row as unknown as Softwar
   height: 20px;
   padding: 0 6px;
   border-radius: var(--wx-radius-full);
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-bold);
 }
 
@@ -148,7 +148,7 @@ function asVer(row: unknown): SoftwareVersion { return row as unknown as Softwar
 
 .ver-code {
   font-family: var(--wx-font-mono, monospace);
-  font-size: var(--wx-fs-22);
+  font-size: var(--wx-fs-24);
   font-weight: var(--wx-fw-bold);
   color: var(--wx-brand-primary);
 }
@@ -179,7 +179,7 @@ function asVer(row: unknown): SoftwareVersion { return row as unknown as Softwar
 .ver-stat__val--fix    { color: var(--wx-danger-solid); }
 .ver-stat__val--update { color: var(--wx-brand-primary); }
 .ver-stat__val--new    { color: var(--wx-success-solid); }
-.ver-stat__label { font-size: var(--wx-fs-11); color: var(--wx-text-muted); text-align: center; }
+.ver-stat__label { font-size: var(--wx-fs-12); color: var(--wx-text-muted); text-align: center; }
 
 /* ── Full changelog ── */
 .changelog-full {
@@ -191,7 +191,7 @@ function asVer(row: unknown): SoftwareVersion { return row as unknown as Softwar
 
 .section-label {
   margin: 0;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.06em;

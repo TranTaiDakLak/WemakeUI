@@ -252,7 +252,7 @@ async function quickAction(label: string) {
 }
 
 .chart-card {
-  background: var(--wx-surface-default);
+  background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-lg);
   padding: var(--wx-space-4);
@@ -285,7 +285,7 @@ async function quickAction(label: string) {
 
 /* ── Pending table ── */
 .pending-section {
-  background: var(--wx-surface-default);
+  background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-lg);
   overflow: hidden;
@@ -318,7 +318,7 @@ async function quickAction(label: string) {
 .ptable th {
   padding: var(--wx-space-2) var(--wx-space-4);
   text-align: left;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -336,11 +336,11 @@ async function quickAction(label: string) {
 }
 
 .ptable tr:last-child td { border-bottom: none; }
-.ptable tr:hover td { background: var(--wx-surface-hover); }
+.ptable tr:hover td { background: var(--wx-hover-bg); }
 
 .tx-code {
   font-family: var(--wx-font-mono, monospace);
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   color: var(--wx-brand-primary);
   background: color-mix(in srgb, var(--wx-brand-primary) 8%, transparent);
   padding: 2px 6px;

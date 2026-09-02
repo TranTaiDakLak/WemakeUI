@@ -72,7 +72,7 @@ function emptyAll() {
 .trash-info { display: flex; align-items: center; gap: var(--wx-space-3); flex: 1; }
 .trash-uid { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); color: var(--wx-brand-600); }
 .trash-name { font-size: var(--wx-fs-13); color: var(--wx-text-primary); }
-.trash-date { font-size: var(--wx-fs-11); color: var(--wx-text-muted); margin-left: auto; }
+.trash-date { font-size: var(--wx-fs-12); color: var(--wx-text-muted); margin-left: auto; }
 .trash-actions { display: flex; gap: var(--wx-space-2); }
 .trash-footer { display: flex; justify-content: flex-end; width: 100%; }
 </style>

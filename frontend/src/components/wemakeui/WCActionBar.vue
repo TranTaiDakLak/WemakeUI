@@ -184,7 +184,7 @@ function currentCategoryLabel() {
 .ab-cat-item:hover { background: var(--wx-surface-sunken); }
 .ab-cat-count {
   margin-left: auto;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   color: var(--wx-text-muted);
   background: var(--wx-surface-sunken);
   padding: 1px 6px;

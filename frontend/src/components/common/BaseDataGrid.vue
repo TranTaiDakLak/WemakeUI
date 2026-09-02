@@ -163,18 +163,19 @@ function realIndex(visibleIdx: number): number {
   <div
     class="datagrid-wrapper"
     tabindex="0"
+    aria-label="Bảng dữ liệu"
     @contextmenu.prevent="emit('contextmenu', $event)"
     @keydown="onKeydown"
   >
     <!-- Loading shimmer -->
-    <div v-if="loading" class="datagrid-loading">
-      <div v-for="i in 8" :key="i" class="shimmer-row">
+    <div v-if="loading" class="datagrid-loading" role="status" aria-busy="true">
+      <div v-for="i in 8" :key="i" class="shimmer-row" aria-hidden="true">
         <div class="shimmer-cell" v-for="j in 5" :key="j" />
       </div>
     </div>
 
     <!-- Empty state -->
-    <div v-else-if="rows.length === 0" class="datagrid-empty">
+    <div v-else-if="rows.length === 0" class="datagrid-empty" role="status">
       <slot name="empty">
         <span class="datagrid-empty__text">Không có dữ liệu</span>
       </slot>
@@ -191,7 +192,7 @@ function realIndex(visibleIdx: number): number {
         <thead>
           <tr>
             <th v-if="showCheckbox" class="col-chk">
-              <input type="checkbox" :checked="allChosen" @change="emit('toggle-all', ($event.target as HTMLInputElement).checked)" />
+              <input type="checkbox" aria-label="Chọn tất cả" :checked="allChosen" @change="emit('toggle-all', ($event.target as HTMLInputElement).checked)" />
             </th>
             <th class="col-stt">STT</th>
             <th
@@ -199,31 +200,35 @@ function realIndex(visibleIdx: number): number {
               :key="col.key"
               :class="[col.class, { 'th-sortable': col.sortable }]"
               :style="{ width: initColWidth(col) }"
+              :aria-sort="col.sortable ? (sortCol === col.key ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none') : undefined"
+              :tabindex="col.sortable ? 0 : undefined"
               @click="onHeaderClick(col)"
+              @keydown.enter.space.prevent="col.sortable ? onHeaderClick(col) : undefined"
             >
               {{ col.label }}
               <span v-if="col.sortable && sortCol === col.key" class="sort-indicator" :class="sortDir">
                 {{ sortDir === 'asc' ? '▲' : '▼' }}
               </span>
-              <span class="col-resizer" @mousedown="onResizeStart(col, $event)" />
+              <span class="col-resizer" aria-hidden="true" @mousedown="onResizeStart(col, $event)" />
             </th>
           </tr>
         </thead>
         <tbody>
           <!-- Virtual scroll: spacer + visible rows -->
           <template v-if="useVirtual">
-            <tr :style="{ height: offsetY + 'px' }" class="spacer-row" />
+            <tr :style="{ height: offsetY + 'px' }" class="spacer-row" aria-hidden="true" />
             <tr
               v-for="(row, vIdx) in visibleRows"
               :key="realIndex(vIdx)"
               :class="getRowClass(row, realIndex(vIdx))"
               :style="{ height: rowHeight + 'px' }"
+              :aria-selected="!!row.chose"
               @mousedown="emit('row-mousedown', realIndex(vIdx), $event)"
               @mouseenter="emit('row-mouseenter', realIndex(vIdx))"
               @dblclick="emit('row-dblclick', realIndex(vIdx))"
             >
               <td v-if="showCheckbox" class="col-chk">
-                <input type="checkbox" :checked="!!row.chose" @change="emit('toggle-row', realIndex(vIdx))" />
+                <input type="checkbox" :aria-label="`Chọn dòng ${realIndex(vIdx) + 1}`" :checked="!!row.chose" @change="emit('toggle-row', realIndex(vIdx))" />
               </td>
               <td class="col-stt">{{ realIndex(vIdx) + 1 }}</td>
               <td
@@ -242,7 +247,7 @@ function realIndex(visibleIdx: number): number {
                 <template v-else>{{ row[col.key] }}</template>
               </td>
             </tr>
-            <tr :style="{ height: (totalHeight - offsetY - visibleRows.length * rowHeight) + 'px' }" class="spacer-row" />
+            <tr :style="{ height: (totalHeight - offsetY - visibleRows.length * rowHeight) + 'px' }" class="spacer-row" aria-hidden="true" />
           </template>
 
           <!-- Non-virtual: render all -->
@@ -251,12 +256,13 @@ function realIndex(visibleIdx: number): number {
               v-for="(row, idx) in rows"
               :key="idx"
               :class="getRowClass(row, idx)"
+              :aria-selected="!!row.chose"
               @mousedown="emit('row-mousedown', idx, $event)"
               @mouseenter="emit('row-mouseenter', idx)"
               @dblclick="emit('row-dblclick', idx)"
             >
               <td v-if="showCheckbox" class="col-chk">
-                <input type="checkbox" :checked="!!row.chose" @change="emit('toggle-row', idx)" />
+                <input type="checkbox" :aria-label="`Chọn dòng ${idx + 1}`" :checked="!!row.chose" @change="emit('toggle-row', idx)" />
               </td>
               <td class="col-stt">{{ idx + 1 }}</td>
               <td

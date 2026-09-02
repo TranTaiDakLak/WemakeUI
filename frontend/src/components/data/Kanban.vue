@@ -93,22 +93,25 @@ function onDragEnd() {
       @dragleave="onDragLeave(col)"
       @drop="onDrop(col, $event)"
     >
-      <div class="kanban-col__header" :style="col.color ? { borderTopColor: col.color } : {}">
+      <div class="kanban-col__header" :style="col.color ? { borderTopColor: col.color } : {}" :aria-label="`${col.title} — ${col.cards.length} thẻ`">
         <span class="kanban-col__title">{{ col.title }}</span>
         <span class="kanban-col__count">
           {{ col.cards.length }}<span v-if="col.limit">/{{ col.limit }}</span>
         </span>
       </div>
-      <div class="kanban-col__body">
+      <div class="kanban-col__body" role="list">
         <div
           v-for="card in col.cards"
           :key="card.id"
           class="kanban-card"
           :class="{ 'kanban-card--dragging': dragCardId === card.id }"
+          role="listitem"
+          tabindex="0"
           draggable="true"
           @dragstart="onDragStart(card, col, $event)"
           @dragend="onDragEnd"
           @click="$emit('card-click', card, col)"
+          @keydown.enter.prevent="$emit('card-click', card, col)"
         >
           <div v-if="card.priority" class="kanban-card__priority" :class="`kanban-card__priority--${card.priority}`">
             {{ card.priority }}
@@ -123,7 +126,7 @@ function onDragEnd() {
             <span class="kanban-card__assignee-name">{{ card.assignee }}</span>
           </div>
         </div>
-        <div v-if="!col.cards.length" class="kanban-col__empty">Chưa có thẻ</div>
+        <div v-if="!col.cards.length" class="kanban-col__empty" role="status">Chưa có thẻ</div>
       </div>
     </div>
   </div>

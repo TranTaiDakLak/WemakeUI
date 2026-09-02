@@ -1,3 +1,7 @@
+<script lang="ts">
+let _groupBoxIdCounter = 0
+</script>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 
@@ -18,6 +22,9 @@ const emit = defineEmits<{
 
 const isCollapsed = computed(() => props.collapsed)
 
+const uid = ++_groupBoxIdCounter
+const bodyId = `gbox-${uid}-body`
+
 function toggle() {
   if (props.collapsible) {
     emit('update:collapsed', !isCollapsed.value)
@@ -30,13 +37,19 @@ function toggle() {
     <div
       class="gbox-header"
       :class="{ 'gbox-header--clickable': props.collapsible }"
+      :role="props.collapsible ? 'button' : undefined"
+      :tabindex="props.collapsible ? 0 : undefined"
+      :aria-expanded="props.collapsible ? !isCollapsed : undefined"
+      :aria-controls="props.collapsible ? bodyId : undefined"
       @click="toggle"
+      @keydown.enter.prevent="props.collapsible ? toggle() : undefined"
+      @keydown.space.prevent="props.collapsible ? toggle() : undefined"
     >
-      <span v-if="props.collapsible" class="gbox-chevron" :class="{ 'gbox-chevron--collapsed': isCollapsed }">▸</span>
+      <span v-if="props.collapsible" class="gbox-chevron" :class="{ 'gbox-chevron--collapsed': isCollapsed }" aria-hidden="true">▸</span>
       {{ props.title }}
     </div>
     <transition name="gbox-collapse">
-      <div v-show="!isCollapsed" class="gbox-body">
+      <div v-show="!isCollapsed" :id="bodyId" class="gbox-body">
         <slot />
       </div>
     </transition>

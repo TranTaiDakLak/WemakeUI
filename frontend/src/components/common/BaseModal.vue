@@ -279,11 +279,11 @@ function trapFocusHandle(e: KeyboardEvent) {
 .modal-footer {
   display: flex;
   justify-content: flex-end;
-  padding: 12px 20px;
+  padding: var(--wx-space-3) 20px;
   border-top: 1px solid var(--wx-border-subtle);
   background: var(--wx-surface-sunken);
   flex-shrink: 0;
-  gap: 8px;
+  gap: var(--wx-space-2);
 }
 
 .modal-btn {
@@ -297,7 +297,7 @@ function trapFocusHandle(e: KeyboardEvent) {
   transition: all var(--wx-d-fast, 150ms) var(--wx-ease-standard);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--wx-space-2);
 }
 .modal-btn:active:not(:disabled) {
   transform: scale(0.98);

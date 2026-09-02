@@ -43,7 +43,7 @@ defineEmits<{
   font-size: 12px;
   font-weight: 600;
   color: var(--text-secondary);
-  margin-bottom: 4px;
+  margin-bottom: var(--wx-space-1);
 }
 
 .base-radio__options--horizontal {
@@ -55,7 +55,7 @@ defineEmits<{
 .base-radio__options--vertical {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 
 .base-radio--disabled {

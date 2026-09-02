@@ -95,7 +95,7 @@ const emit = defineEmits<{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
+  padding: 0 var(--wx-space-3);
   background: var(--wx-surface-sunken);
   border-top: 1px solid var(--wx-border-subtle);
   flex-shrink: 0;
@@ -103,9 +103,9 @@ const emit = defineEmits<{
   font-size: 12px;
   color: var(--wx-text-secondary);
 }
-.statusbar-group { display: flex; align-items: center; gap: 8px; }
+.statusbar-group { display: flex; align-items: center; gap: var(--wx-space-2); }
 .statusbar-item { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
-.statusbar-item--clickable { cursor: pointer; border-radius: var(--wx-radius-sm); padding: 1px 4px; margin: -1px -4px; transition: background var(--wx-duration-fast); }
+.statusbar-item--clickable { cursor: pointer; border-radius: var(--wx-radius-sm); padding: 1px var(--wx-space-1); margin: -1px -4px; transition: background var(--wx-duration-fast); }
 .statusbar-item--clickable:hover { background: var(--wx-hover-bg); }
 .sb-sep { width: 1px; height: 14px; background: var(--wx-border-subtle); flex-shrink: 0; }
 .sb-val { font-weight: 600; }

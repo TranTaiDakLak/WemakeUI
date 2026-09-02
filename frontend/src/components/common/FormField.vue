@@ -165,7 +165,7 @@ const errorId = computed(() => fieldId.value ? `${fieldId.value}-err` : undefine
   line-height: var(--wx-lh-snug);
   display: inline-flex;
   align-items: baseline;
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 .wx-field--dense .wx-field__label { font-size: var(--wx-fs-13); }
 
@@ -205,7 +205,7 @@ const errorId = computed(() => fieldId.value ? `${fieldId.value}-err` : undefine
   line-height: var(--wx-lh-snug);
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 .wx-field__error svg { flex-shrink: 0; }
 

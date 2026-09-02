@@ -60,7 +60,7 @@ watch(
   z-index: var(--wx-z-toast);
   display: flex;
   flex-direction: column-reverse;
-  gap: 8px;
+  gap: var(--wx-space-2);
   pointer-events: none;
   max-width: 380px;
   width: 100%;
@@ -84,8 +84,8 @@ watch(
 .wx-toast {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
+  gap: var(--wx-space-3);
+  padding: var(--wx-space-3) var(--wx-space-4);
   border-radius: 12px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   pointer-events: auto;

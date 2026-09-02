@@ -69,7 +69,7 @@ function onRemove(e: MouseEvent) {
 .wx-tag[data-shape="square"] { border-radius: var(--wx-radius-sm); }
 
 .wx-tag[data-size="sm"] { padding: 2px var(--wx-space-2); font-size: var(--wx-fs-12); }
-.wx-tag[data-size="md"] { padding: 4px var(--wx-space-3); font-size: var(--wx-fs-13); }
+.wx-tag[data-size="md"] { padding: var(--wx-space-1) var(--wx-space-3); font-size: var(--wx-fs-13); }
 .wx-tag[data-size="lg"] { padding: 6px var(--wx-space-4); font-size: var(--wx-fs-14); }
 
 /* variants */

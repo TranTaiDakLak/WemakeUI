@@ -90,7 +90,7 @@ function onItemClick(it: BreadcrumbItem, idx: number, e: MouseEvent) {
 .wx-breadcrumb__link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--wx-space-1);
   color: var(--wx-content-secondary);
   text-decoration: none;
   padding: 2px 6px;

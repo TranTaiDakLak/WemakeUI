@@ -135,7 +135,7 @@ function next() { go(props.modelValue + 1) }
   box-shadow: none;
   min-width: 32px;
   height: 32px;
-  padding: 0 8px;
+  padding: 0 var(--wx-space-2);
   display: inline-flex;
   align-items: center;
   justify-content: center;

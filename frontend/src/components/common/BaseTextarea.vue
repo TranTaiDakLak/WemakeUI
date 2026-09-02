@@ -82,7 +82,7 @@ onMounted(() => nextTick(resize))
               box-shadow var(--wx-d-fast) var(--wx-ease-standard);
 }
 .wx-textarea[data-size="sm"] { font-size: var(--wx-fs-13); padding: 6px 10px; }
-.wx-textarea[data-size="lg"] { font-size: var(--wx-fs-15); padding: 12px 14px; }
+.wx-textarea[data-size="lg"] { font-size: var(--wx-fs-15); padding: var(--wx-space-3) 14px; }
 
 .wx-textarea::placeholder { color: var(--wx-content-muted); }
 

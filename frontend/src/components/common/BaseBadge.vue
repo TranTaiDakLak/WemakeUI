@@ -34,7 +34,7 @@ defineProps<{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
   font-size: 11px;
   font-weight: 600;
@@ -52,7 +52,7 @@ defineProps<{
 .base-badge--neutral { background: var(--wx-neutral-bg); color: var(--wx-neutral-text); border: 1px solid var(--wx-neutral-border); }
 
 .base-badge--sm { font-size: 10px; padding: 1px 6px; }
-.base-badge--md { font-size: 11px; padding: 2px 8px; }
+.base-badge--md { font-size: 11px; padding: 2px var(--wx-space-2); }
 .base-badge--lg { font-size: 12px; padding: 3px 10px; }
 
 /* Dot indicator inline (dot=true + has text) */

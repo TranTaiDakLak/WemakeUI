@@ -44,7 +44,7 @@ const percent = computed(() => Math.min(100, Math.max(0, (props.value / props.ma
 .base-progress {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--wx-space-2);
 }
 
 .base-progress__track {

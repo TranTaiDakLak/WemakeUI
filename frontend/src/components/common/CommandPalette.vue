@@ -247,7 +247,7 @@ defineExpose({ show, hide })
 
 .wx-cmdk__group + .wx-cmdk__group { margin-top: var(--wx-space-2); }
 .wx-cmdk__group-title {
-  padding: var(--wx-space-2) var(--wx-space-3) 4px;
+  padding: var(--wx-space-2) var(--wx-space-3) var(--wx-space-1);
   font-size: var(--wx-fs-12);
   color: var(--wx-content-muted);
   font-weight: var(--wx-fw-medium);
@@ -303,7 +303,7 @@ defineExpose({ show, hide })
   font-size: var(--wx-fs-12);
   color: var(--wx-content-muted);
 }
-.wx-cmdk__foot span { display: inline-flex; align-items: center; gap: 4px; }
+.wx-cmdk__foot span { display: inline-flex; align-items: center; gap: var(--wx-space-1); }
 
 .wx-cmdk__kbd {
   display: inline-flex;
@@ -311,7 +311,7 @@ defineExpose({ show, hide })
   justify-content: center;
   min-width: 20px;
   height: 20px;
-  padding: 0 4px;
+  padding: 0 var(--wx-space-1);
   font-family: var(--wx-font-mono);
   font-size: 11px;
   background: var(--wx-bg-sunken);

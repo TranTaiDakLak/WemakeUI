@@ -141,7 +141,7 @@ onBeforeUnmount(() => observer?.disconnect())
   font-family: var(--wx-font-mono);
   font-size: var(--wx-fs-12);
   color: var(--wx-text-secondary);
-  padding: 4px 10px;
+  padding: var(--wx-space-1) 10px;
   border-radius: var(--wx-radius-sm);
   border: none;
   background: transparent;

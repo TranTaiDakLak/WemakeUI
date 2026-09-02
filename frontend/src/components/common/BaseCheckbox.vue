@@ -77,7 +77,7 @@ watch(() => props.indeterminate, (val) => {
 .base-checkbox {
   display: inline-flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: var(--wx-space-2);
   cursor: pointer;
   user-select: none;
 }

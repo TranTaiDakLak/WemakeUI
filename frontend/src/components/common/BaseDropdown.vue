@@ -83,8 +83,8 @@ onBeforeUnmount(() => document.removeEventListener('click', onClickOutside))
 
 .base-dropdown--bottom-start .base-dropdown__content { left: 0; top: 100%; }
 .base-dropdown--bottom-end .base-dropdown__content { right: 0; top: 100%; }
-.base-dropdown--top-start .base-dropdown__content { left: 0; bottom: 100%; margin-top: 0; margin-bottom: 4px; }
-.base-dropdown--top-end .base-dropdown__content { right: 0; bottom: 100%; margin-top: 0; margin-bottom: 4px; }
+.base-dropdown--top-start .base-dropdown__content { left: 0; bottom: 100%; margin-top: 0; margin-bottom: var(--wx-space-1); }
+.base-dropdown--top-end .base-dropdown__content { right: 0; bottom: 100%; margin-top: 0; margin-bottom: var(--wx-space-1); }
 
 /* Transition */
 .dropdown-enter-active { transition: all 0.15s ease; }

@@ -29,7 +29,7 @@ defineEmits<{
 .base-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--wx-space-2);
   cursor: pointer;
 }
 

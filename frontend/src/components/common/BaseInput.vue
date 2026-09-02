@@ -111,7 +111,7 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
 .base-input {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 
 .base-input__label {
@@ -128,7 +128,7 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
 
 .base-input__field {
   width: 100%;
-  padding: 8px 12px;
+  padding: var(--wx-space-2) var(--wx-space-3);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
   background: var(--wx-surface-elevated);

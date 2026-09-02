@@ -51,7 +51,7 @@ const slots: PropRow[] = [
     <h2>Hướng đặt</h2>
     <p>Bốn giá trị <code class="inline">placement</code> — <code class="inline">top</code> (mặc định), <code class="inline">right</code>, <code class="inline">bottom</code>, <code class="inline">left</code>. Di chuột vào từng nút để xem.</p>
     <DemoBlock :code="placementCode">
-      <div class="row" style="gap:24px">
+      <div class="row" style="gap:var(--wx-space-5)">
         <BaseTooltip content="Tooltip phía trên" placement="top">
           <BaseButton variant="secondary">Top</BaseButton>
         </BaseTooltip>
@@ -100,7 +100,7 @@ const slots: PropRow[] = [
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--wx-space-3);
   align-items: center;
 }
 </style>

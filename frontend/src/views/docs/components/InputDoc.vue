@@ -118,13 +118,13 @@ const emits: PropRow[] = [
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--wx-space-3);
   align-items: center;
 }
 .stack {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--wx-space-4);
   max-width: 360px;
 }
 </style>

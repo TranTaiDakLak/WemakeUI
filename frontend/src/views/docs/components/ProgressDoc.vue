@@ -86,6 +86,6 @@ const props: PropRow[] = [
 .stack {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--wx-space-4);
 }
 </style>

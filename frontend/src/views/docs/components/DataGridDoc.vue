@@ -279,8 +279,8 @@ const slots: PropRow[] = [
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--wx-space-3);
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: var(--wx-space-4);
 }
 </style>

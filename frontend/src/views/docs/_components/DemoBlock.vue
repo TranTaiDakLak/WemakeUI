@@ -55,7 +55,7 @@ const show = ref(false)
   margin: 0 0 28px;
 }
 .demo-block__head {
-  margin-bottom: 12px;
+  margin-bottom: var(--wx-space-3);
 }
 .demo-block__title {
   margin: 0;
@@ -64,7 +64,7 @@ const show = ref(false)
   color: var(--wx-text-primary);
 }
 .demo-block__desc {
-  margin: 4px 0 0;
+  margin: var(--wx-space-1) 0 0;
   font-size: 13.5px;
   line-height: 1.6;
   color: var(--wx-text-secondary);
@@ -83,12 +83,12 @@ const show = ref(false)
   background-position: 0 0, 10px 10px;
 }
 .demo-block__preview.is-padded {
-  padding: 28px 24px;
+  padding: 28px var(--wx-space-5);
 }
 .demo-block__toolbar {
   display: flex;
   justify-content: flex-end;
-  padding: 6px 8px;
+  padding: 6px var(--wx-space-2);
   border-top: 1px solid var(--wx-border-subtle);
   background: var(--wx-surface-elevated);
 }
@@ -96,7 +96,7 @@ const show = ref(false)
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 12px;
+  padding: 5px var(--wx-space-3);
   border: none;
   border-radius: var(--wx-radius-md);
   background: transparent;

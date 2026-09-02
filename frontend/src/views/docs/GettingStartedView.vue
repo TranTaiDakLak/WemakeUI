@@ -93,7 +93,7 @@ const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton
       trước khi dùng và có fallback no-op trên web/mobile, nên dùng được an toàn trong cả vỏ desktop lẫn PWA.
     </div>
 
-    <p class="gs__p" style="margin-top:32px;">
+    <p class="gs__p" style="margin-top:var(--wx-space-6);">
       Sẵn sàng khám phá? Chọn một component ở thanh bên để xem tài liệu, hoặc duyệt
       <RouterLink to="/showcase/apps" class="gs__link">{{ totalAppTemplates }} bộ giao diện</RouterLink>
       (app có navigation + bộ màn auth/error), và
@@ -116,7 +116,7 @@ const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton
 .gs {
   max-width: 880px;
   margin: 0 auto;
-  padding: 40px 32px 96px;
+  padding: var(--wx-space-7) var(--wx-space-6) var(--wx-space-11);
 }
 .gs__eyebrow {
   display: inline-block;
@@ -125,7 +125,7 @@ const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--wx-brand-primary);
-  margin-bottom: 8px;
+  margin-bottom: var(--wx-space-2);
 }
 .gs__title {
   margin: 0;
@@ -135,7 +135,7 @@ const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton
   color: var(--wx-text-primary);
 }
 .gs__lead {
-  margin: 12px 0 0;
+  margin: var(--wx-space-3) 0 0;
   font-size: 16px;
   line-height: 1.7;
   color: var(--wx-text-secondary);
@@ -144,13 +144,13 @@ const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton
   font-size: 20px;
   font-weight: 700;
   color: var(--wx-text-primary);
-  margin: 44px 0 12px;
+  margin: 44px 0 var(--wx-space-3);
 }
 .gs__p {
   font-size: 14.5px;
   line-height: 1.7;
   color: var(--wx-text-secondary);
-  margin: 0 0 16px;
+  margin: 0 0 var(--wx-space-4);
 }
 .gs__code {
   font-family: var(--wx-font-mono);
@@ -162,7 +162,7 @@ const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton
 }
 .gs__note {
   margin-top: 28px;
-  padding: 16px 18px;
+  padding: var(--wx-space-4) 18px;
   border: 1px solid var(--wx-info-border, var(--wx-border-default));
   border-left: 3px solid var(--wx-brand-primary);
   border-radius: var(--wx-radius-lg);
@@ -184,8 +184,8 @@ const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-top: 16px;
-  padding: 16px 18px;
+  margin-top: var(--wx-space-4);
+  padding: var(--wx-space-4) 18px;
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-xl);
   background: var(--wx-surface-elevated);
@@ -221,7 +221,7 @@ const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton
 .gs__browse:hover .gs__browse-arrow { transform: translateX(4px); }
 
 @media (max-width: 640px) {
-  .gs { padding: 28px 16px 72px; }
+  .gs { padding: 28px var(--wx-space-4) 72px; }
   .gs__title { font-size: 27px; }
 }
 </style>

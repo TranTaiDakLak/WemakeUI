@@ -206,12 +206,12 @@ const slots: PropRow[] = [
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--wx-space-3);
   align-items: center;
 }
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+  gap: var(--wx-space-4);
 }
 </style>

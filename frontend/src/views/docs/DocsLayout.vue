@@ -89,7 +89,7 @@ const GITHUB_URL = 'https://github.com/TranTaiDakLak/WemakeUI'
   height: var(--topbar-h);
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--wx-space-4);
   padding: 0 20px;
   background: color-mix(in srgb, var(--wx-surface-base) 86%, transparent);
   backdrop-filter: blur(12px);
@@ -102,7 +102,7 @@ const GITHUB_URL = 'https://github.com/TranTaiDakLak/WemakeUI'
   border: none;
   color: var(--wx-text-secondary);
   cursor: pointer;
-  padding: 4px;
+  padding: var(--wx-space-1);
 }
 .docs-brand {
   display: inline-flex;
@@ -122,11 +122,11 @@ const GITHUB_URL = 'https://github.com/TranTaiDakLak/WemakeUI'
 }
 .docs-nav {
   display: flex;
-  gap: 4px;
-  margin-left: 12px;
+  gap: var(--wx-space-1);
+  margin-left: var(--wx-space-3);
 }
 .docs-nav__link {
-  padding: 6px 12px;
+  padding: 6px var(--wx-space-3);
   border-radius: var(--wx-radius-md);
   font-size: 14px;
   font-weight: 500;
@@ -170,7 +170,7 @@ const GITHUB_URL = 'https://github.com/TranTaiDakLak/WemakeUI'
   left: 0;
   width: var(--sidebar-w);
   overflow-y: auto;
-  padding: 24px 14px 60px;
+  padding: var(--wx-space-5) 14px 60px;
   border-right: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);
   z-index: var(--wx-z-sticky, 100);
@@ -184,7 +184,7 @@ const GITHUB_URL = 'https://github.com/TranTaiDakLak/WemakeUI'
   letter-spacing: 0.06em;
   color: var(--wx-text-muted);
   padding: 0 10px;
-  margin-bottom: 8px;
+  margin-bottom: var(--wx-space-2);
 }
 .docs-side-link {
   display: block;

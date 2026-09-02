@@ -62,7 +62,7 @@ const slots: PropRow[] = [
     <h2>Vị trí mở</h2>
     <p>Bốn giá trị <code class="inline">placement</code> điều khiển góc menu xuất hiện so với trigger.</p>
     <DemoBlock :code="placementCode">
-      <div class="row" style="gap:24px">
+      <div class="row" style="gap:var(--wx-space-5)">
         <BaseDropdown placement="bottom-start">
           <template #trigger>
             <BaseButton variant="secondary">bottom-start</BaseButton>
@@ -125,7 +125,7 @@ const slots: PropRow[] = [
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--wx-space-3);
   align-items: center;
 }
 
@@ -140,7 +140,7 @@ const slots: PropRow[] = [
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 8px 12px;
+  padding: var(--wx-space-2) var(--wx-space-3);
   border: none;
   border-radius: var(--wx-radius-md);
   background: transparent;
@@ -162,7 +162,7 @@ const slots: PropRow[] = [
 }
 .menu-divider {
   height: 1px;
-  margin: 6px 4px;
+  margin: 6px var(--wx-space-1);
   background: var(--wx-border-subtle);
 }
 </style>

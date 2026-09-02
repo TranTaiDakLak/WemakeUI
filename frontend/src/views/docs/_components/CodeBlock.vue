@@ -63,7 +63,7 @@ async function copy() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 8px 6px 14px;
+  padding: 6px var(--wx-space-2) 6px 14px;
   background: rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -79,7 +79,7 @@ async function copy() {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: var(--wx-space-1) 10px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--wx-radius-md);
   background: rgba(255, 255, 255, 0.06);
@@ -97,7 +97,7 @@ async function copy() {
 }
 .code-block__pre {
   margin: 0;
-  padding: 16px;
+  padding: var(--wx-space-4);
   overflow-x: auto;
   font-family: var(--wx-font-mono);
   font-size: 13px;

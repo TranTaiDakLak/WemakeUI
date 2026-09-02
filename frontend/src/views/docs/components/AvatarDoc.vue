@@ -96,7 +96,7 @@ const props: PropRow[] = [
 .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: var(--wx-space-4);
   align-items: center;
 }
 </style>

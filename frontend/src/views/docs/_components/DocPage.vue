@@ -44,7 +44,7 @@ const importLine = props.imports.length
 .doc-page {
   max-width: 880px;
   margin: 0 auto;
-  padding: 40px 32px 96px;
+  padding: var(--wx-space-7) var(--wx-space-6) var(--wx-space-11);
 }
 .doc-page__cat {
   display: inline-block;
@@ -53,7 +53,7 @@ const importLine = props.imports.length
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--wx-brand-primary);
-  margin-bottom: 8px;
+  margin-bottom: var(--wx-space-2);
 }
 .doc-page__title {
   margin: 0;
@@ -70,14 +70,14 @@ const importLine = props.imports.length
   max-width: 640px;
 }
 .doc-page__import {
-  margin: 24px 0 36px;
+  margin: var(--wx-space-5) 0 36px;
 }
 .doc-page__body :deep(h2) {
   font-size: 20px;
   font-weight: 700;
   color: var(--wx-text-primary);
-  margin: 40px 0 16px;
-  padding-top: 12px;
+  margin: var(--wx-space-7) 0 var(--wx-space-4);
+  padding-top: var(--wx-space-3);
   border-top: 1px solid var(--wx-border-subtle);
 }
 .doc-page__body :deep(h2:first-child) {
@@ -89,7 +89,7 @@ const importLine = props.imports.length
   font-size: 14.5px;
   line-height: 1.7;
   color: var(--wx-text-secondary);
-  margin: 0 0 16px;
+  margin: 0 0 var(--wx-space-4);
 }
 .doc-page__body :deep(code.inline) {
   font-family: var(--wx-font-mono);
@@ -101,7 +101,7 @@ const importLine = props.imports.length
 }
 
 @media (max-width: 640px) {
-  .doc-page { padding: 28px 16px 72px; }
+  .doc-page { padding: 28px var(--wx-space-4) 72px; }
   .doc-page__title { font-size: 26px; }
 }
 </style>

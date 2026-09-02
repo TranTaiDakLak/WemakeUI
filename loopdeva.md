@@ -1934,4 +1934,171 @@ tự ý dừng sớm hơn.
      nặng, tách riêng làm việc solo 1 dev nếu muốn giữ 2 dev không đụng
      chung file).
 
-<!-- Round 15+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 16 (2026-09-02)
+- PLAN (opus): xử lý đúng 4 cụm ưu tiên còn lại của mục A theo backlog round
+  15 — Dev A = `style.css` khối utility-class (`.btn`/`.stat-card`/
+  `.section-subtitle`/`.data-table`/`.form-textarea`/`.radio-label`) +
+  `responsive.css` (`.wx-container`/`.wx-page-pad`) + re-point khối alias
+  legacy `--space-xs/sm/md/lg/xl/2xl` sang trỏ `var(--wx-space-*)` (dọn nợ
+  đặt tên tiện thể vì đang sửa cùng file) + `CaseStudyGrid.vue:165`; Dev B =
+  `views/ShowcaseView.vue` (13 inline `style=""` + 12 `<style scoped>`,
+  KHÔNG đụng 5 site `var(--space-*)` alias hiện có để tránh xung đột với
+  việc Dev A đang đổi định nghĩa alias cùng lúc).
+- Dev A commit `786b40c`: 3 file, 21 dòng đổi (10 insertions/10 deletions
+  ròng phần convert + phần alias re-point). Điểm đáng chú ý: re-point
+  `--space-xs/sm/md/lg/xl/2xl` từ literal sang `var(--wx-space-1/2/4/5/6/8)`
+  — đổi NGUỒN giá trị nhưng giữ nguyên TÊN alias, tuyên bố zero-visual-diff.
+  typecheck+build:lib PASS.
+- Dev B commit `ca23a31`: 1 file, 50 dòng đổi (25 conversion: 13 inline +
+  12 `<style scoped>`), cố ý bỏ qua 5 site `var(--space-lg/md/sm)` alias
+  hiện có trong cùng file để không xung đột với việc Dev A đổi định nghĩa
+  alias song song. typecheck+build:lib PASS.
+- Dev C QA — build gate: `npm run typecheck` sạch, `npm run build:lib` chạy
+  2 lần (flake watch) đều PASS y hệt nhau (`ui.css` 237.71 kB/gzip 34.72 kB,
+  `wemake-ui.es.js` 415.90 kB, `wemake-ui.umd.js` 325.52 kB, dts build
+  ~14-15s), `npm run build:app` PASS (7.92s, mọi chunk build OK, không có
+  warning mới). `git show --stat` xác nhận đúng Dev A 3 file
+  (`CaseStudyGrid.vue`, `style.css`, `responsive.css`), Dev B đúng 1 file
+  (`ShowcaseView.vue`), 0 overlap, không đụng
+  `tokens.css`/`dark-mode.css`/`flat-mode.css`/`lib.ts`.
+  - **Đọc FULL diff cả 2 commit**: xác nhận 0 thay đổi
+    `font-size`/`width`/`height`/`min-*`/`max-*`/`border-radius`/
+    `grid-template-columns`/`transform` — mọi hunk chỉ đổi
+    `padding`/`margin`/`gap` (hoặc value bên trong) sang `var(--wx-space-*)`.
+    `responsive.css` breakpoint values (640/768/1024/1280/1536px trong
+    `.wx-container`, 767/768/1280px trong `.wx-page-pad`) giữ nguyên y hệt,
+    chỉ padding-left/right đổi.
+  - **Verify alias re-point value-identical (item 4, safety check quan
+    trọng nhất round này)**: đọc `tokens.css:228-238` xác nhận
+    `--wx-space-1=4px`, `-2=8px`, `-4=16px`, `-5=24px`, `-6=32px`, `-8=48px`
+    — khớp CHÍNH XÁC từng giá trị literal cũ (`--space-xs:4px`→
+    `var(--wx-space-1)`=4px ✓, `-sm:8px`→`var(--wx-space-2)`=8px ✓,
+    `-md:16px`→`var(--wx-space-4)`=16px ✓, `-lg:24px`→`var(--wx-space-5)`
+    =24px ✓, `-xl:32px`→`var(--wx-space-6)`=32px ✓, `-2xl:48px`→
+    `var(--wx-space-8)`=48px ✓) — value-identical 100%, đúng như commit
+    message khai báo. Re-grep toàn repo `var(--space-xs|sm|md|lg|xl|2xl)`:
+    **27 occurrence / 9 file** (khớp đúng số Dev A khai báo "27 external
+    consumers across 9 files") — `ShowcaseView.vue` (5, đúng 5 site Dev B
+    cố ý chừa lại), `style.css` (1, self-consumption dòng 289
+    `.mkt-cta` `margin-bottom: var(--space-lg)`), 7 file
+    `views/showcase/data/{CalendarView,GridView,FilterView,GalleryView,
+    LogView,KanbanView,TimelineView}.vue` (21). Tất cả chỉ dùng alias
+    THEO TÊN (`--space-lg`/`-md`/`-sm`), không quan tâm nguồn giá trị bên
+    trong → definition đổi nguồn (literal→token) nhưng giá trị resolve
+    y hệt nên 0 consumer bị ảnh hưởng, verify thực nghiệm khớp claim.
+  - **Verify `responsive.css`**: build `dist-lib/ui.css` grep `.wx-container`/
+    `.wx-page-pad` → xác nhận output thật có
+    `padding-left:var(--wx-space-4);padding-right:var(--wx-space-4)` (base),
+    `padding-left:var(--wx-space-5);padding-right:var(--wx-space-5)` (≥1024px),
+    và cả 3 breakpoint `.wx-page-pad` đều giữ đúng
+    `padding-left:var(--wx-space-3/5/6)!important;padding-right:...!important`
+    — cả 6 `!important` sống sót nguyên vẹn qua build thật, không chỉ đọc
+    source.
+  - **Verify off-grid survivor trong `style.css` (item 6)**: đọc lại 6 vị
+    trí — `.btn{padding:10px 20px}` ✓, `.badge{padding:2px 10px}` ✓,
+    `.data-table td{padding:14px var(--wx-space-4)}` (14 giữ literal, 16
+    convert) ✓, `.form-input{padding:6px 10px}` ✓,
+    `.form-textarea{padding:var(--wx-space-2) 10px}` (10 giữ literal) ✓,
+    `.chk-label{gap:6px}` ✓ — đúng 100% claim, không có off-grid nào bị ép
+    nhầm.
+  - **Verify `ShowcaseView.vue` (item 7)**: đọc cấu trúc file
+    (`<script setup>` dòng 1-323, `<template>` 325-945, `<style scoped>`
+    947-1184) đối chiếu với vị trí mọi hunk trong diff (dòng 537-1151) →
+    xác nhận **0 hunk chạm `<script setup>`**, mọi sibling declaration
+    trong inline `style=""` (`flex-direction`/`align-items`/
+    `justify-content`) giữ nguyên verbatim, không đổi prop/class/@click/
+    v-if nào. 5 site `var(--space-lg/md/sm)` Dev B khai báo "cố ý chừa" xác
+    nhận đúng còn nguyên (dòng 956/964/965/981/988), không nằm trong bất kỳ
+    hunk nào của diff.
+  - **New-hardcode check (item 8)**: grep dòng `+` cả 2 diff cho
+    hex/rgba → 0 kết quả. `px` còn lại trong dòng `+`: chỉ có `14px`/`10px`
+    (off-grid survivor, đúng khai báo) và `1024px` (giá trị breakpoint
+    media-query có sẵn, xuất hiện lại do cả dòng bị thay khi padding cùng
+    dòng đổi, KHÔNG phải giá trị mới) — không có hardcode mới nào lọt qua.
+  - **Full-repo re-grep item 9 — KẾT LUẬN: mục A ĐÓNG repo-wide.** Chạy lại
+    đúng phương pháp node-script parse-từng-khai-báo (chỉ tính hit khi TOÀN
+    BỘ số trong value `padding`/`margin`/`gap` khớp lưới 4pt
+    4/8/12/16/24/32/40/48/64/80/96/128px, kể cả multi-value shorthand đã
+    convert 1 phần — grep riêng ~50 khai báo mixed `var(--wx-space-*)` +
+    literal còn lại để xác nhận phần literal sót lại luôn off-grid, không
+    có leftover conversion bị bỏ sót) trên toàn `frontend/src`. Kết quả 25
+    hit thô, đối chiếu từng cái với danh sách exception đã biết từ round
+    15 trở về trước:
+    - `BaseAvatarGroup.vue:52,64` `margin-left:-8px` — giá trị âm, exception
+      đã biết (round 13).
+    - `tokens.css:215,336,354` — **false positive**: đây là khai báo custom
+      property `--wx-density-gap: 8px/4px/12px` (density scale gốc), regex
+      match nhầm hậu tố `-gap` chứ không phải property `gap` thật; file này
+      vốn dĩ là nguồn token, ngoài phạm vi mục A theo §3.
+    - `views/forms/FileUploadView.vue:180`, `InputGroupView.vue:114` — đọc
+      lại xác nhận cả 2 nằm trong `<pre>` doc-sample (dòng 161-189 và
+      93-121, HTML-escaped code sample hiển thị cho người dùng đọc, không
+      phải CSS sống) — đúng 2/3 exception `<pre>` doc-sample đã biết từ
+      round 12 (`FloatingLabelsView.vue` không lọt lưới grid lần này nên
+      không xuất hiện trong list, không phải vấn đề).
+    - `views/marketing/{ContactView,FAQView,HomeView,PartnersView,
+      ProductDetailView,ProductsView}.vue` `padding-top:64px` (6 file) —
+      header-compensation cố ý, exception đã biết từ round 12.
+    - `views/showcase/AppTemplatesView.vue:105` — **false positive**: đọc
+      lại xác nhận đây là `scroll-margin-top:80px` (category hoàn toàn khác
+      `margin-top`), regex match nhầm hậu tố; đã xác nhận exception từ
+      round 10.
+    - `views/showcase/RevealTest.vue` (6 hit: `padding:40px` x5,
+      `margin-bottom:24px` x4, `margin:40px 0` x1 trong inline `style=""`)
+      — verify lại file **vẫn không có bất kỳ thẻ `<style>` nào** (grep
+      `<style` = 0 match), toàn bộ styling nằm ở inline `style=""` trong
+      template → đúng exception "không có `<style scoped>`" đã áp dụng
+      nhất quán từ round 10.
+    - Verify thêm ~50 khai báo dạng mixed (`var(--wx-space-*) <literal>px`)
+      trên toàn repo (component/view đã convert 1 phần ở các round trước:
+      `BaseButton`, `BaseModal`, `BaseTabs`, `BaseTextarea`, `DataGridPro`,
+      `LogViewer`, `TemplateGallery`, `docs/*`, v.v.) — mọi literal còn sót
+      lại đều off-grid thật (10/14/18/20/26/28/34/36/56/60/72px...), 0 case
+      lẽ ra phải convert nốt mà bị bỏ sót.
+    - Cũng xác nhận `MarketingHero.vue` 120px không xuất hiện trong list vì
+      không khớp bất kỳ token `--wx-space-*` nào (thang chỉ đến
+      `--wx-space-11=96px`), đúng như quyết định giữ nguyên từ round 3.
+    **Không có cụm mới nào phát sinh** — toàn bộ 25 hit thô đều quy về
+    exception đã biết và đã ghi nhận qua các round trước. **Sau 16 round,
+    mục A (hardcoded spacing sweep) chính thức tuyên bố CLOSED repo-wide**
+    — mọi cụm `padding`/`margin`/`gap` khớp chính xác lưới 4pt trong
+    `frontend/src/**` đã được tokenize hoặc xác nhận có lý do chính đáng để
+    giữ nguyên literal (off-grid fine-tune, giá trị âm, doc-sample trong
+    `<pre>`, file không có `<style scoped>`, token-source file).
+  - **Không có lỗi nhỏ nào cần QA tự sửa** — cả 2 commit đúng 100% theo
+    khai báo, build gate 3/3 PASS, không có hardcode mới, không đụng file
+    ngoài phạm vi.
+- **ROUND 16 QA: PASS**, không cần follow-up commit.
+- Backlog cho round 17:
+  1. **Mục A — CLOSED repo-wide** (xem kết luận item 9 ở trên). Không cần
+     dev nào tiếp tục quét spacing 4pt nữa trừ khi có component/view mới
+     được thêm vào sau này.
+  2. **Mục B — vẫn CLOSED** (không có phát hiện mới từ round 10 tới nay).
+  3. **Mục C** — vẫn 1 follow-up mở, ưu tiên thấp nhất: `WeDashboardV1View.vue`
+     `.env-dot` (pill background/border-radius/padding + pulse-animation
+     không khớp `LegendDot` trần, chưa ai đụng kể từ round 9) — có thể tiếp
+     tục để mở vô thời hạn nếu không ai thấy giá trị làm, hoặc PLAN round
+     nào đó quyết định làm biến thể `LegendDot` riêng hoặc đóng hẳn với lý
+     do "đủ khác biệt, không cần gộp".
+  4. **Naming debt (mới, ưu tiên thấp, không urgent)**: khối alias legacy
+     `--space-xs/sm/md/lg/xl/2xl` (27 consumer/9 file) và `--font-size-*`
+     tương tự trong `style.css` giờ đã trỏ đúng `var(--wx-*)` (an toàn giá
+     trị) nhưng vẫn giữ TÊN cũ khác hệ thống `--wx-*` chính — có thể cân
+     nhắc 1 round riêng migrate thẳng 27+ consumer sang gọi trực tiếp
+     `var(--wx-space-*)`/`var(--wx-fs-*)` rồi xoá hẳn khối alias, thống nhất
+     100% về 1 hệ tên. Không chặn gì cả, chỉ là dọn nợ kỹ thuật.
+  5. **PLAN round 17 nên pivot sang mục D (GLOBAL AUDIT)** — với A, B, và
+     "undefined CSS var" hunt (closed từ round 4 wave 3 + các wave trước)
+     đều đã đóng, không còn cụm spacing/duplicate-component/undefined-var
+     lớn nào chờ xử lý. Ưu tiên các category D chưa từng chạy round riêng:
+     #3 (layout lệch/overflow/text truncate), #5 (icon size so với
+     `--wx-density-icon-size`), #6 (responsive breakpoint sm/md qua
+     `useBreakpoint`), #7 (interaction state loading/empty/error theo
+     DESIGN.md §5), #8 (accessibility aria/alt/contrast/focus/keyboard),
+     #10 (legacy component không còn dùng — audit orphan, KHÔNG tự xoá nếu
+     là public API trong `lib.ts`). Đây sẽ là GLOBAL AUDIT round đầu tiên
+     kể từ khi mục A bắt đầu chiếm ưu thế từ round 1 — điều kiện dừng cần 3
+     round GLOBAL AUDIT liên tiếp 0-finding, nên round 17 là round đầu tiên
+     trong chuỗi đó (chưa đủ điều kiện dừng loop).
+
+<!-- Round 16+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

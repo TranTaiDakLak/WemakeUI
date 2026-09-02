@@ -2234,4 +2234,129 @@ tự ý dừng sớm hơn.
      `--warning-color`/`--error-color`/`--text-secondary`), cùng nhóm 9
      file trước đó từ round 16.
 
+### Round 18 (2026-09-02) — GLOBAL AUDIT ROUND 2 of 3
+- PLAN (opus): lấy 2 hạng mục ưu tiên cao nhất từ backlog round 17 —
+  Dev A = bug thật #2 (`MailboxView.vue`/`WikiView.vue` search trang trí
+  không wire filter); Dev B = 4 file đầu trong batch "0-ARIA" #1
+  (`BaseTooltip`, `ContextMenu`, `BaseSkeleton`, `BaseRadio` — không đụng
+  chung file với Dev A, cả 2 đều nằm ngoài `components/common/**` phía Dev A
+  không chạm tới).
+- Dev A commit `f6ba368`: 2 file — thêm `filteredMails`/`filteredDocs`
+  computed driven bởi `search` (đã trim + lowercase), trỏ `v-for` vào
+  computed thay vì mảng gốc, thêm `EmptyState variant="search"` cho case
+  rỗng kèm `@cta` xoá `search`. `selectedMail` (MailboxView) vẫn resolve
+  trên `MAILS` gốc — không vỡ detail panel giữa lúc gõ tìm kiếm.
+  `filteredDocs` (WikiView) build mảng mới qua `reduce`, không mutate
+  `DOCS` const. Tiện thể gộp 1 `import { computed }` rơi cuối file vào
+  dòng `import { ref } from 'vue'` đầu file (dead code cũ, cả 2 file).
+- Dev B commit `03c450c`: 4 file. `BaseTooltip` — `role="tooltip"` + id
+  duy nhất trên nội dung tip, `aria-describedby` trên wrapper,
+  `@focusin`/`@focusout` gọi lại đúng `show`/`hide` sẵn có (không tạo logic
+  trùng). `ContextMenu` (phức tạp nhất) — `role="menu"`/
+  `aria-orientation` trên container, `role="menuitem"` cho item thường/
+  parent/child, `role="separator"` cho divider, `role="presentation"
+  aria-hidden` cho section header, submenu lồng nhận `role="menu"`, parent
+  có children nhận `aria-haspopup`/`aria-expanded` bind `openSubId`, item
+  disabled nhận `aria-disabled`. Roving virtual focus (`focusedIdx`) lộ ra
+  qua `:id` duy nhất/item (`itemDomId`) + `aria-activedescendant` trên
+  container. `BaseSkeleton` — `role="status" aria-busy aria-live="polite"
+  aria-label="Đang tải..."` trên container ngoài, `aria-hidden="true"`
+  trên từng skeleton-row bên trong. `BaseRadio` — `role="radiogroup"` trên
+  options wrapper, `aria-labelledby` trỏ id label nhóm (chỉ khi có prop
+  `label`), `aria-disabled` theo prop `disabled`.
+- Dev C QA:
+  - **Build gate**: `npm run typecheck` sạch (0 lỗi); `npm run build:lib`
+    chạy 2 lần liên tiếp, output y hệt nhau cả 2 lần (`ui.css` 237.71 kB/
+    gzip 34.72 kB, `wemake-ui.es.js` 420.07 kB/gzip 99.39 kB,
+    `wemake-ui.umd.js` 328.28 kB/gzip 85.61 kB; lần 1 32.52s, lần 2
+    26.67s) — không có flake; `npm run build:app` PASS (25.57s, mọi chunk
+    build OK, kể cả các view vừa sửa).
+  - `git show --stat` xác nhận Dev A đúng 2 file, Dev B đúng 4 file, 0
+    overlap, không đụng `tokens.css`/`dark-mode.css`/`flat-mode.css`/
+    `style.css`/`lib.ts`.
+  - **Đọc FULL diff Dev A cả 2 file**: `filteredMails` match case-
+    insensitive + trimmed trên đúng 3 field (`from`/`subject`/`preview`);
+    `selectedMail` xác nhận vẫn `MAILS.find(...)` (mảng gốc, không phải
+    `filteredMails`) — đúng yêu cầu tường minh, không bị bỏ sót.
+    `filteredDocs` dùng `reduce` build mảng `acc` mới, section giữ nguyên
+    khi label khớp hoặc spread `{ ...section, children: matchingChildren }`
+    khi chỉ children khớp — không có `.push`/gán trực tiếp lên `DOCS`,
+    không mutate const gốc. `activeDoc`/`doc computed`/article rendering
+    hoàn toàn không đổi (diff không chạm dòng nào ngoài phần nav-list).
+    Đối chiếu `EmptyState.vue` — Dev A chỉ dùng prop thật
+    (`variant`/`title`/`description`/`size`/`query`) + emit thật (`cta`),
+    không có prop bịa.
+  - **Đọc FULL diff Dev B cả 4 file, đặc biệt `ContextMenu.vue`**: trace
+    `activeDescendantId` → `actionItems.value[focusedIdx.value]` →
+    `itemDomId(item.id)`; `actionItems` là `props.items.filter(i =>
+    !i.separator && !i.disabled)` — cùng mảng dùng bởi `isFocused()`/
+    `onKeydown` (ArrowUp/Down/Enter) từ trước. Mọi phần tử còn lại trong
+    `actionItems` chỉ render thành 1 trong 2 nhánh template có gắn `:id`
+    (`.dgv-ctx-parent` div hoặc button "Normal item") — vì section-header
+    (`disabled===true`) và separator đã bị filter loại khỏi `actionItems`
+    — nên id tính ra LUÔN khớp đúng DOM node đang focus, không có
+    off-by-one hay trỏ vào phần tử không tồn tại. `aria-expanded` bind
+    `openSubId === item.id` — `openSubId` là ref có sẵn, đổi thật qua
+    `onSubHover` (hover-delay 200ms) và `onItemClick` (click toggle), không
+    phải state chết. Diff xác nhận `onKeydown`, `actionItems`,
+    `adjustPosition`/`posX`/`posY`, mọi `emit` — 0 dòng bị sửa/xoá, chỉ có
+    hunk thêm attribute/computed mới. `BaseTooltip.vue` — `@focusin="show"`
+    `@focusout="hide"` trỏ đúng y hệt hàm `show`/`hide` đã dùng cho
+    `@mouseenter`/`@mouseleave` (không có block logic mới). `BaseSkeleton
+    .vue` — `aria-hidden="true"` nằm trên `.skeleton-row` (decorative),
+    KHÔNG nằm trên `.skeleton-container` (giữ `role="status"`/`aria-live`
+    để vẫn được announce). `BaseRadio.vue` — `:aria-labelledby="label ?
+    groupLabelId : undefined"`, xác nhận đúng hành vi Vue: bind attribute
+    `undefined` → Vue loại hẳn attribute khỏi DOM output (không phải giữ
+    lại attribute rỗng), đúng ý "omitted" trong task.
+  - **Prop/emit/slot/class rename check**: 0 rename trên cả 6 file — chỉ
+    thêm attribute mới (role/aria-*) + 2 khối `<script lang="ts">` id-
+    counter (`ContextMenu`/`BaseTooltip`, cùng pattern module-scope counter
+    có sẵn từ `BaseTabs` round 17), 1 biến `uid`/hàm `itemDomId` nội bộ.
+    `defineProps`/`defineEmits` signature không đổi file nào.
+  - **New-hardcode check**: grep dòng `+` của cả 2 diff cho pattern hex/
+    rgba/px → 0 kết quả (round này thuần attribute/logic). Không đụng var
+    legacy non-wx nào ở `BaseSkeleton`/`BaseRadio`.
+  - **Tone-check tiếng Việt mới**: `"Không tìm thấy thư nào"`/`"Không tìm
+    thấy trang nào"`/`"Thử từ khoá khác hoặc xoá bộ lọc."` khớp đúng mẫu
+    câu EmptyState đã dùng ở `AuditLogView`/`FileManagerView`/`MapView`/
+    `WorkspacePickerView` ("Không tìm thấy X nào" + gợi ý xoá bộ lọc).
+    `aria-label="Đang tải..."` khớp đúng string "Đang tải..." đã dùng ở
+    `DataGridPro.vue`/`DashboardKPIGrid.vue`/`useI18n.ts` — không phải văn
+    phong mới bịa ra.
+  - **Item 8 — spot-check bug class "search trang trí"**: grep toàn bộ
+    `views/**` cho `const search = ref('')` → 10 file. 2 file
+    (`MailboxView`/`WikiView`) là chính round này vừa fix. 8 file còn lại
+    (`MapView`, `WorkspacePickerView`, `FileManagerView`, `AuditLogView`,
+    `SplitShellShowcase`, `SchedulerView`, `FaqView`, `SessionsView`) —
+    đọc từng file, cả 8 đều đã có `.filter(...)`/computed dùng thật
+    `search.value` để lọc danh sách hiển thị (đã fix ở round 15-17 hoặc từ
+    đầu). **Không tìm thêm instance nào của bug class này** — coi như
+    CLOSED sau round 18.
+  - **Không phát hiện lỗi nào cần QA follow-up commit** — cả Dev A và Dev B
+    đều đúng 100% theo khai báo.
+- **ROUND 18 QA: PASS**, không cần follow-up commit. Finding count round
+  này = 2 (1 bug thật đã fix bởi Dev A — search không lọc gì; 4 component
+  vá ARIA gap bởi Dev B) — **KHÔNG PHẢI 0-finding**, nên chuỗi "3 GLOBAL
+  AUDIT liên tiếp 0-finding" của §6 **VẪN CHƯA bắt đầu đếm**. Đây là
+  **GLOBAL AUDIT ROUND 2 of 3**.
+- Backlog cho round 19:
+  1. **0-ARIA component backlog — còn 12 file** (giảm từ 18, trừ 4 file
+     Dev B round 18 vừa xong: `BaseTooltip`/`ContextMenu`/`BaseSkeleton`/
+     `BaseRadio`): `components/common`: `BaseAvatarGroup`, `BaseBadge`,
+     `BaseDataGrid`, `BaseWizard`, `GroupBox`, `StatusBar`, `StatusChip`,
+     `TagList`, `UserDropdown` (9); `components/data`: `Kanban`,
+     `LogViewer`, `Timeline` (3). `FormDrawer`/`FormModal` gần như hết giá
+     trị audit riêng (wrap `BaseModal`/`BaseDrawer` vốn đã có dialog ARIA
+     sẵn, theo PLAN round 17) — bỏ khỏi list ưu tiên, chỉ cân nhắc nếu hết
+     việc khác.
+  2. **Item 8 finding**: 0 — bug class "search trang trí không lọc" xác
+     nhận CLOSED toàn repo sau round 18 (xem chi tiết QA ở trên).
+  3. Mục A/B — vẫn CLOSED. Mục C — vẫn 1 follow-up mở ưu tiên thấp nhất
+     (không đổi): `WeDashboardV1View.vue` `.env-dot`.
+  4. Category D khác để thử nếu muốn đa dạng hoá trước khi quay lại ARIA:
+     #4 (button/modal/table consistency), #5 (icon sizing so với
+     `--wx-density-icon-size`), #6 (responsive breakpoint sm/md), #10
+     (legacy/orphan component audit qua `lib.ts`/import graph).
+
 <!-- Round 17+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

@@ -472,9 +472,7 @@ onBeforeUnmount(() => {
   background: var(--wx-surface-base);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-xl);
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.08),
-    0 10px 24px -4px rgba(0, 0, 0, 0.14);
+  box-shadow: var(--wx-shadow-lift);
   overflow-y: auto;
   max-height: 280px;
   padding: var(--wx-space-1);

@@ -296,8 +296,8 @@ function realIndex(visibleIdx: number): number {
 .datagrid { width: 100%; border-collapse: collapse; font-size: var(--wx-fs-12); background: var(--wx-surface-base); table-layout: fixed; }
 .datagrid--resizing { cursor: col-resize; user-select: none; }
 .datagrid thead { position: sticky; top: 0; z-index: 5; }
-.datagrid th { padding: 9px var(--wx-space-3); text-align: left; font-size: 13px; font-weight: 600; color: var(--wx-text-muted); text-transform: uppercase; letter-spacing: 0.3px; background: var(--wx-surface-sunken); border-bottom: 1px solid var(--wx-border-default); white-space: nowrap; position: relative; }
-.datagrid td { padding: var(--wx-space-2) var(--wx-space-3); color: var(--wx-text-secondary); border-bottom: 1px solid var(--wx-border-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.datagrid th { padding: 9px var(--wx-space-3); text-align: left; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); color: var(--wx-text-muted); text-transform: uppercase; letter-spacing: 0.3px; background: var(--wx-surface-sunken); border-bottom: 1px solid var(--wx-border-default); white-space: nowrap; position: relative; }
+.datagrid td { padding: var(--wx-space-2) var(--wx-space-3); color: var(--wx-text-primary); border-bottom: 1px solid var(--wx-border-subtle); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .datagrid tbody tr:hover td { background: var(--wx-hover-bg); }
 .datagrid tbody tr { cursor: pointer; user-select: none; }
 .datagrid input[type="checkbox"] { accent-color: var(--wx-brand-primary); cursor: pointer; }

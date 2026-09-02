@@ -697,7 +697,7 @@ function downloadFile(content: string, type: string, name: string) {
 
 .dgp-table {
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: var(--wx-fs-12);
   table-layout: fixed;
 }
 
@@ -711,9 +711,10 @@ function downloadFile(content: string, type: string, name: string) {
 .dgp-th {
   padding: var(--wx-space-3);
   text-align: left;
-  font-size: 11px;
-  font-weight: 700;
+  font-size: var(--wx-fs-12);
+  font-weight: var(--wx-fw-semibold);
   color: var(--wx-text-muted);
+  text-transform: uppercase;
   letter-spacing: 0.3px;
   border-bottom: 1px solid var(--wx-border-default);
   background: var(--wx-surface-sunken);
@@ -878,7 +879,7 @@ function downloadFile(content: string, type: string, name: string) {
   background: var(--wx-surface-base);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
-  box-shadow: var(--wx-shadow-lg);
+  box-shadow: var(--wx-shadow-lift);
   padding: var(--wx-space-1);
   min-width: 160px;
   font-family: var(--wx-font-primary);

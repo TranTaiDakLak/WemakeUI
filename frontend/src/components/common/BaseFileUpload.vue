@@ -252,7 +252,7 @@ function fileEmoji(mime: string) {
   text-overflow: ellipsis;
 }
 .wx-fu__item-size {
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   color: var(--wx-text-muted);
 }
 
@@ -272,7 +272,7 @@ function fileEmoji(mime: string) {
   transition: background var(--wx-d-fast), color var(--wx-d-fast);
 }
 .wx-fu__item-rm:hover:not(:disabled) {
-  background: var(--wx-danger-subtle);
+  background: var(--wx-danger-bg);
   color: var(--wx-danger-text);
 }
 .wx-fu__item-rm svg { width: 14px; height: 14px; }

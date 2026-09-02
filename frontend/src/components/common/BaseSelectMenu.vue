@@ -448,7 +448,7 @@ onBeforeUnmount(() => {
   min-height: 30px;
 }
 
-.bsm--sm .bsm__label { font-size: var(--wx-fs-11); }
+.bsm--sm .bsm__label { font-size: var(--wx-fs-12); }
 
 /* ── Drop transition ── */
 .bsm-drop-enter-active { transition: opacity 0.14s ease, transform 0.14s ease; }
@@ -499,7 +499,7 @@ onBeforeUnmount(() => {
 }
 
 .bsm__option--focused,
-.bsm__option:hover { background: var(--wx-hover-bg, var(--wx-surface-hover)); }
+.bsm__option:hover { background: var(--wx-hover-bg); }
 
 .bsm__option--selected {
   color: var(--wx-brand-primary);
@@ -517,7 +517,7 @@ onBeforeUnmount(() => {
 
 .bsm__group-label {
   padding: 6px 10px 3px;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   color: var(--wx-text-muted);
   text-transform: uppercase;

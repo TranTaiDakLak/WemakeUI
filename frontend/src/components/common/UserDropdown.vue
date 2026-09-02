@@ -115,7 +115,7 @@ async function handleLogout() {
 }
 
 .user-menu__email {
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   color: var(--wx-text-muted);
   white-space: nowrap;
   overflow: hidden;
@@ -123,7 +123,7 @@ async function handleLogout() {
 }
 
 .user-menu__role {
-  font-size: var(--wx-fs-10);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -153,7 +153,7 @@ async function handleLogout() {
 }
 
 .user-menu__item:hover:not(:disabled) {
-  background: var(--wx-surface-hover);
+  background: var(--wx-hover-bg);
 }
 
 .user-menu__item:disabled {

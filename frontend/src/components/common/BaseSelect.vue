@@ -350,7 +350,7 @@ onBeforeUnmount(() => {
   font-size: var(--wx-fs-12);
 }
 .base-select--sm .base-select__label {
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
 }
 
 /* ── Drop transition ── */
@@ -420,7 +420,7 @@ onBeforeUnmount(() => {
 
 .base-select__group-label {
   padding: 6px 10px 3px;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   color: var(--wx-text-muted);
   text-transform: uppercase;

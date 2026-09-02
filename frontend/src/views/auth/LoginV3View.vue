@@ -367,13 +367,13 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
 }
 .v3-orb--a {
   width: 560px; height: 560px;
-  background: var(--wx-brand-400, #60a5fa);
+  background: var(--wx-brand-400);
   opacity: .15;
   top: -220px; left: -180px;
 }
 .v3-orb--b {
   width: 420px; height: 420px;
-  background: var(--wx-brand-accent, #06b6d4);
+  background: var(--wx-brand-accent);
   opacity: .12;
   bottom: -200px; right: -140px;
 }
@@ -405,7 +405,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   flex-shrink: 0;
 }
 .v3-brand-name {
-  font-size: var(--wx-fs-17);
+  font-size: var(--wx-fs-16);
   font-weight: var(--wx-fw-semibold);
   color: var(--wx-text-primary);
 }
@@ -545,7 +545,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
 }
 .link-sm {
   font-size: var(--wx-fs-12);
-  color: var(--wx-text-link, var(--wx-brand-primary));
+  color: var(--wx-text-link);
   text-decoration: none;
   font-weight: var(--wx-fw-medium);
 }
@@ -555,7 +555,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   background: none; border: none; padding: 0;
   font-family: var(--wx-font-primary);
   font-size: inherit;
-  color: var(--wx-text-link, var(--wx-brand-primary));
+  color: var(--wx-text-link);
   font-weight: var(--wx-fw-medium);
   cursor: pointer;
 }
@@ -569,12 +569,12 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   gap: 10px;
   padding: 14px 16px;
   border-radius: var(--wx-radius-md);
-  background: var(--wx-success-bg, #f0fdf4);
-  color: var(--wx-success-text, #15803d);
-  border: 1px solid var(--wx-success-border, #86efac);
+  background: var(--wx-success-bg);
+  color: var(--wx-success-text);
+  border: 1px solid var(--wx-success-border);
   font-size: var(--wx-fs-13);
   font-weight: var(--wx-fw-medium);
-  animation: fade-in var(--wx-d-fast, 150ms) var(--wx-ease-decelerate, cubic-bezier(0,0,.2,1));
+  animation: fade-in var(--wx-d-fast) var(--wx-ease-decelerate);
 }
 @keyframes fade-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 
@@ -589,9 +589,9 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   line-height: 1.4;
 }
 .form-alert--error {
-  background: var(--wx-error-bg, #fee2e2);
-  color: var(--wx-error-text, #991b1b);
-  border: 1px solid var(--wx-error-border, #fca5a5);
+  background: var(--wx-danger-bg);
+  color: var(--wx-danger-text);
+  border: 1px solid var(--wx-danger-border);
 }
 
 /* ── Divider ── */
@@ -670,8 +670,8 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   border: 1px solid var(--wx-border-default);
   flex-shrink: 0;
 }
-.s-step--active .s-step-num { background: var(--wx-brand-primary); color: white; border-color: transparent; }
-.s-step--done   .s-step-num { background: var(--wx-success-solid, #16a34a); color: white; border-color: transparent; }
+.s-step--active .s-step-num { background: var(--wx-brand-primary); color: var(--wx-text-on-brand); border-color: transparent; }
+.s-step--done   .s-step-num { background: var(--wx-success-solid); color: var(--wx-text-on-brand); border-color: transparent; }
 .s-step--active .s-step-label { color: var(--wx-text-primary); font-weight: var(--wx-fw-medium); }
 
 .s-strength {
@@ -720,21 +720,21 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   border: 1px solid transparent;
 }
 .v3-toast--success {
-  background: var(--wx-success-bg, #dcfce7);
-  color: var(--wx-success-text, #15803d);
-  border-color: var(--wx-success-border, #86efac);
+  background: var(--wx-success-bg);
+  color: var(--wx-success-text);
+  border-color: var(--wx-success-border);
 }
 .v3-toast--error {
-  background: var(--wx-error-bg, #fee2e2);
-  color: var(--wx-error-text, #991b1b);
-  border-color: var(--wx-error-border, #fca5a5);
+  background: var(--wx-danger-bg);
+  color: var(--wx-danger-text);
+  border-color: var(--wx-danger-border);
 }
 
 .toast-pop-enter-active {
-  transition: all var(--wx-d-fast, 150ms) var(--wx-ease-decelerate, cubic-bezier(0,0,.2,1));
+  transition: all var(--wx-d-fast) var(--wx-ease-decelerate);
 }
 .toast-pop-leave-active {
-  transition: all var(--wx-d-fast, 150ms) var(--wx-ease-accelerate, cubic-bezier(.4,0,1,1));
+  transition: all var(--wx-d-fast) var(--wx-ease-accelerate);
 }
 .toast-pop-enter-from,
 .toast-pop-leave-to {
@@ -745,7 +745,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
 @media (prefers-reduced-motion: reduce) {
   .toast-pop-enter-active,
   .toast-pop-leave-active {
-    transition: opacity var(--wx-d-micro, 100ms) linear;
+    transition: opacity var(--wx-d-micro) linear;
   }
   .toast-pop-enter-from,
   .toast-pop-leave-to {

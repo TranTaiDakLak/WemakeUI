@@ -724,10 +724,12 @@ import '@wemake/ui/style.css'
 .page {
   padding: 0 var(--wx-space-6) var(--wx-space-12);
 }
+/* Preview luôn-tối cố định (giống MarketingHero.vue) — không theo theme của site,
+   nên nền/chữ giữ nguyên hex literal thay vì token phản ứng theme. */
 .page.is-dark {
-  background: var(--wx-color-bg-base, #0b0f17);
-  color: var(--wx-color-text-primary, #e6e8ec);
-  border-radius: var(--wx-radius-lg, 12px);
+  background: #0b0f17;
+  color: #e6e8ec;
+  border-radius: var(--wx-radius-lg);
 }
 
 /* ── Controls ── */
@@ -738,9 +740,9 @@ import '@wemake/ui/style.css'
   align-items: flex-end;
   padding: var(--wx-space-4) var(--wx-space-5);
   margin: var(--wx-space-4) 0;
-  background: var(--wx-color-bg-elevated, #fff);
-  border: 1px solid var(--wx-color-border-default, #e5e7eb);
-  border-radius: var(--wx-radius-lg, 12px);
+  background: var(--wx-surface-elevated);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-lg);
 }
 .is-dark .controls {
   background: rgba(255, 255, 255, 0.04);
@@ -755,16 +757,16 @@ import '@wemake/ui/style.css'
 .control-group > label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--wx-color-text-secondary, #6b7280);
+  color: var(--wx-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 .seg {
   display: inline-flex;
-  border: 1px solid var(--wx-color-border-default, #e5e7eb);
-  border-radius: var(--wx-radius-md, 8px);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-md);
   overflow: hidden;
-  background: var(--wx-color-bg-base, #fff);
+  background: var(--wx-surface-base);
 }
 .is-dark .seg {
   background: transparent;
@@ -778,23 +780,23 @@ import '@wemake/ui/style.css'
   font-size: 13px;
   color: inherit;
   cursor: pointer;
-  border-right: 1px solid var(--wx-color-border-default, #e5e7eb);
+  border-right: 1px solid var(--wx-border-default);
   transition: background 120ms;
 }
 .is-dark .seg button { border-right-color: rgba(255, 255, 255, 0.08); }
 .seg button:last-child { border-right: none; }
-.seg button:hover { background: var(--wx-color-bg-hover, rgba(0, 0, 0, 0.04)); }
+.seg button:hover { background: var(--wx-hover-bg); }
 .seg button.active {
-  background: var(--wx-color-brand-solid, #8b5cf6);
+  background: var(--wx-brand-primary);
   color: #fff;
 }
 .filter-input {
   padding: 8px 12px;
-  border: 1px solid var(--wx-color-border-default, #e5e7eb);
-  border-radius: var(--wx-radius-md, 8px);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-md);
   font: inherit;
   font-size: 14px;
-  background: var(--wx-color-bg-base, #fff);
+  background: var(--wx-surface-base);
   color: inherit;
 }
 .is-dark .filter-input {
@@ -805,10 +807,10 @@ import '@wemake/ui/style.css'
 
 /* ── Comparison grid ── */
 .grid-wrap {
-  border: 1px solid var(--wx-color-border-default, #e5e7eb);
-  border-radius: var(--wx-radius-lg, 12px);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-lg);
   overflow: hidden;
-  background: var(--wx-color-bg-elevated, #fff);
+  background: var(--wx-surface-elevated);
 }
 .is-dark .grid-wrap {
   background: rgba(255, 255, 255, 0.02);
@@ -823,8 +825,8 @@ import '@wemake/ui/style.css'
   align-items: center;
   justify-content: center;
   padding: var(--wx-space-3) var(--wx-space-2);
-  border-right: 1px solid var(--wx-color-border-subtle, #f1f3f5);
-  border-bottom: 1px solid var(--wx-color-border-subtle, #f1f3f5);
+  border-right: 1px solid var(--wx-border-subtle);
+  border-bottom: 1px solid var(--wx-border-subtle);
   min-height: 64px;
 }
 .is-dark .cell {
@@ -833,7 +835,7 @@ import '@wemake/ui/style.css'
 }
 .cell:nth-last-child(-n + var(--cols, 6)) { border-bottom: none; }
 .cell.header {
-  background: var(--wx-color-bg-subtle, #f9fafb);
+  background: var(--wx-surface-sunken);
   font-weight: 600;
   flex-direction: column;
   gap: 4px;
@@ -844,7 +846,7 @@ import '@wemake/ui/style.css'
 .cell.header.current {
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(236, 72, 153, 0.12));
 }
-.concept-header { font-size: 12px; color: var(--wx-color-text-secondary, #6b7280); }
+.concept-header { font-size: 12px; color: var(--wx-text-secondary); }
 .set-name {
   font-size: 15px;
   display: flex;
@@ -856,7 +858,7 @@ import '@wemake/ui/style.css'
   font-weight: 600;
   padding: 2px 6px;
   border-radius: 999px;
-  background: var(--wx-color-brand-solid, #8b5cf6);
+  background: var(--wx-brand-primary);
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -865,13 +867,13 @@ import '@wemake/ui/style.css'
   display: flex;
   gap: 4px;
   font-size: 11px;
-  color: var(--wx-color-text-secondary, #6b7280);
+  color: var(--wx-text-secondary);
   font-weight: 400;
 }
 .set-meta .dot { opacity: 0.5; }
 .set-weight {
   font-size: 11px;
-  color: var(--wx-color-text-tertiary, #9ca3af);
+  color: var(--wx-text-muted);
   font-weight: 500;
 }
 
@@ -880,22 +882,22 @@ import '@wemake/ui/style.css'
   padding-left: var(--wx-space-4);
   font-size: 13px;
   font-weight: 500;
-  color: var(--wx-color-text-secondary, #6b7280);
-  background: var(--wx-color-bg-subtle, #f9fafb);
+  color: var(--wx-text-secondary);
+  background: var(--wx-surface-sunken);
 }
 .is-dark .concept { background: rgba(255, 255, 255, 0.02); }
 
 .icon-cell {
-  color: var(--wx-color-text-primary, #1f2937);
+  color: var(--wx-text-primary);
   transition: background 120ms;
 }
 .is-dark .icon-cell { color: #e6e8ec; }
-.icon-cell.brand { color: var(--wx-color-brand-solid, #8b5cf6); }
+.icon-cell.brand { color: var(--wx-brand-primary); }
 .icon-cell.current {
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.04), rgba(236, 72, 153, 0.04));
 }
 .icon-cell:hover {
-  background: var(--wx-color-bg-hover, rgba(0, 0, 0, 0.04));
+  background: var(--wx-hover-bg);
 }
 .is-dark .icon-cell:hover { background: rgba(255, 255, 255, 0.06); }
 
@@ -903,9 +905,9 @@ import '@wemake/ui/style.css'
 .notes {
   margin-top: var(--wx-space-6);
   padding: var(--wx-space-5);
-  border-radius: var(--wx-radius-lg, 12px);
-  background: var(--wx-color-bg-subtle, #f9fafb);
-  border: 1px solid var(--wx-color-border-default, #e5e7eb);
+  border-radius: var(--wx-radius-lg);
+  background: var(--wx-surface-sunken);
+  border: 1px solid var(--wx-border-default);
 }
 .is-dark .notes {
   background: rgba(255, 255, 255, 0.02);
@@ -917,7 +919,7 @@ import '@wemake/ui/style.css'
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--wx-color-text-secondary, #6b7280);
+  color: var(--wx-text-secondary);
 }
 .notes ul {
   margin: 0;
@@ -929,17 +931,17 @@ import '@wemake/ui/style.css'
 .notes .hint {
   margin-top: var(--wx-space-4);
   padding-top: var(--wx-space-3);
-  border-top: 1px dashed var(--wx-color-border-default, #e5e7eb);
+  border-top: 1px dashed var(--wx-border-default);
   font-size: 13px;
-  color: var(--wx-color-text-tertiary, #9ca3af);
+  color: var(--wx-text-muted);
 }
 .notes code {
   font-family: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
   font-size: 0.875em;
   padding: 1px 6px;
   border-radius: 4px;
-  background: var(--wx-color-bg-base, #fff);
-  border: 1px solid var(--wx-color-border-default, #e5e7eb);
+  background: var(--wx-surface-base);
+  border: 1px solid var(--wx-border-default);
 }
 .is-dark .notes code {
   background: rgba(255, 255, 255, 0.06);
@@ -950,7 +952,7 @@ import '@wemake/ui/style.css'
 .section-divider {
   margin-top: var(--wx-space-12);
   padding-top: var(--wx-space-6);
-  border-top: 2px dashed var(--wx-color-border-default, #e5e7eb);
+  border-top: 2px dashed var(--wx-border-default);
 }
 .is-dark .section-divider { border-top-color: rgba(255, 255, 255, 0.08); }
 .section-divider h2 {
@@ -966,7 +968,7 @@ import '@wemake/ui/style.css'
   margin: 0 0 var(--wx-space-4);
   font-size: 14px;
   line-height: 1.6;
-  color: var(--wx-color-text-secondary, #6b7280);
+  color: var(--wx-text-secondary);
   max-width: 760px;
 }
 
@@ -980,12 +982,12 @@ import '@wemake/ui/style.css'
 .concept-name {
   font-size: 13px;
   font-weight: 600;
-  color: var(--wx-color-text-primary, #1f2937);
+  color: var(--wx-text-primary);
 }
 .is-dark .concept-name { color: #e6e8ec; }
 .concept-context {
   font-size: 11px;
-  color: var(--wx-color-text-tertiary, #9ca3af);
+  color: var(--wx-text-muted);
   line-height: 1.3;
 }
 .emoji-cell { min-height: 96px; }
@@ -994,7 +996,7 @@ import '@wemake/ui/style.css'
 
 /* ── 3D rendered cell ── */
 .threed-cell {
-  background: var(--wx-color-bg-base, #fff);
+  background: var(--wx-surface-base);
   min-height: 120px;
 }
 .is-dark .threed-cell { background: rgba(255, 255, 255, 0.02); }
@@ -1020,8 +1022,8 @@ import '@wemake/ui/style.css'
   width: 36px;
   height: 36px;
   padding: 0;
-  border: 1px solid var(--wx-color-border-default, #e5e7eb);
-  border-radius: var(--wx-radius-md, 8px);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-md);
   cursor: pointer;
   background: transparent;
 }
@@ -1037,7 +1039,7 @@ import '@wemake/ui/style.css'
 }
 .swatch:hover { transform: scale(1.1); }
 .swatch.active {
-  border-color: var(--wx-color-text-primary, #111827);
+  border-color: var(--wx-text-primary);
   transform: scale(1.15);
 }
 .is-dark .swatch.active { border-color: #fff; }
@@ -1047,9 +1049,9 @@ import '@wemake/ui/style.css'
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: var(--wx-space-3);
   padding: var(--wx-space-2);
-  background: var(--wx-color-bg-elevated, #fff);
-  border: 1px solid var(--wx-color-border-default, #e5e7eb);
-  border-radius: var(--wx-radius-lg, 12px);
+  background: var(--wx-surface-elevated);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-lg);
 }
 .is-dark .lord-gallery {
   background: rgba(255, 255, 255, 0.02);
@@ -1062,11 +1064,11 @@ import '@wemake/ui/style.css'
   gap: var(--wx-space-2);
   padding: var(--wx-space-4) var(--wx-space-3);
   background: transparent;
-  border-radius: var(--wx-radius-md, 8px);
+  border-radius: var(--wx-radius-md);
   transition: background 150ms, transform 150ms;
 }
 .lord-card:hover {
-  background: var(--wx-color-bg-hover, rgba(0, 0, 0, 0.03));
+  background: var(--wx-hover-bg);
   transform: translateY(-2px);
 }
 .is-dark .lord-card:hover { background: rgba(255, 255, 255, 0.04); }
@@ -1079,7 +1081,7 @@ import '@wemake/ui/style.css'
 .lord-use-case {
   font-size: 14px;
   font-weight: 600;
-  color: var(--wx-color-text-primary, #1f2937);
+  color: var(--wx-text-primary);
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1096,7 +1098,7 @@ import '@wemake/ui/style.css'
 .lord-context {
   margin-top: 2px;
   font-size: 11px;
-  color: var(--wx-color-text-tertiary, #9ca3af);
+  color: var(--wx-text-muted);
   line-height: 1.4;
   max-width: 180px;
 }
@@ -1107,7 +1109,7 @@ import '@wemake/ui/style.css'
   padding: var(--wx-space-5);
   background: var(--wx-surface-elevated, #fff);
   border: 1px solid var(--wx-border-default, #e5e7eb);
-  border-radius: var(--wx-radius-lg, 12px);
+  border-radius: var(--wx-radius-lg);
 }
 .is-dark .action-icons-section {
   background: rgba(255, 255, 255, 0.02);
@@ -1168,7 +1170,7 @@ import '@wemake/ui/style.css'
   gap: var(--wx-space-3);
   padding: var(--wx-space-4);
   border: 1px solid var(--wx-border-default, #e5e7eb);
-  border-radius: var(--wx-radius-md, 8px);
+  border-radius: var(--wx-radius-md);
   background: var(--wx-surface-base, #fff);
 }
 .is-dark .ai-pattern {
@@ -1234,7 +1236,7 @@ import '@wemake/ui/style.css'
   align-items: center;
   gap: 6px;
   padding: var(--wx-space-3);
-  border-radius: var(--wx-radius-md, 8px);
+  border-radius: var(--wx-radius-md);
   background: var(--wx-surface-base, transparent);
   transition: background 120ms;
 }
@@ -1266,7 +1268,7 @@ import '@wemake/ui/style.css'
   padding: var(--wx-space-3) var(--wx-space-2);
   background: var(--wx-surface-base, #fff);
   border: 1px solid var(--wx-border-default, #e5e7eb);
-  border-radius: var(--wx-radius-md, 8px);
+  border-radius: var(--wx-radius-md);
   cursor: pointer;
   font: inherit;
   color: inherit;
@@ -1322,7 +1324,7 @@ import '@wemake/ui/style.css'
   padding: var(--wx-space-4);
   background: var(--wx-surface-base, #f9fafb);
   border: 1px solid var(--wx-border-default, #e5e7eb);
-  border-radius: var(--wx-radius-md, 8px);
+  border-radius: var(--wx-radius-md);
   font-family: ui-monospace, 'Cascadia Code', monospace;
   font-size: 13px;
   line-height: 1.55;

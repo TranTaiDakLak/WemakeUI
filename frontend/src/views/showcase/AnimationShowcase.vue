@@ -902,12 +902,12 @@ const EASE_TOKENS = [
 .shake-field { padding: 4px; }
 .fake-input {
   width: 100%; padding: 8px 12px;
-  border: 1.5px solid var(--wx-error-border, #fca5a5);
+  border: 1.5px solid var(--wx-danger-border);
   border-radius: var(--wx-radius-md);
-  background: var(--wx-error-bg, #fee2e2);
+  background: var(--wx-danger-bg);
   font-size: var(--wx-fs-13);
   font-family: var(--wx-font-primary);
-  color: var(--wx-error-text, #991b1b);
+  color: var(--wx-danger-text);
   pointer-events: none;
 }
 
@@ -921,7 +921,7 @@ const EASE_TOKENS = [
 .shake-anim { animation: wx-shake 600ms ease-in-out; }
 
 @media (prefers-reduced-motion: reduce) {
-  .shake-anim { animation: none; border-color: var(--wx-error-border, #fca5a5); }
+  .shake-anim { animation: none; border-color: var(--wx-danger-border); }
 }
 
 /* ── Success check ── */
@@ -931,14 +931,14 @@ const EASE_TOKENS = [
 }
 .success-icon { width: 52px; height: 52px; }
 .success-circle {
-  stroke: var(--wx-success-text, #15803d);
+  stroke: var(--wx-success-text);
   stroke-width: 2;
   stroke-dasharray: 166;
   stroke-dashoffset: 166;
   transition: stroke-dashoffset var(--wx-d-normal, 250ms) var(--wx-ease-decelerate, cubic-bezier(0,0,.2,1));
 }
 .success-check {
-  stroke: var(--wx-success-text, #15803d);
+  stroke: var(--wx-success-text);
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;

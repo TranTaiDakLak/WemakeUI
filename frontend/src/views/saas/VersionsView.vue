@@ -133,9 +133,9 @@ function asVer(row: unknown): SoftwareVersion { return row as unknown as Softwar
   font-weight: var(--wx-fw-bold);
 }
 
-.count-pill--fix    { background: rgba(239,68,68,0.12);    color: var(--wx-danger-solid); }
-.count-pill--update { background: rgba(59,130,246,0.12);   color: var(--wx-brand-primary); }
-.count-pill--new    { background: rgba(16,185,129,0.12);   color: var(--wx-success-solid); }
+.count-pill--fix    { background: color-mix(in srgb, var(--wx-danger-solid) 12%, transparent);    color: var(--wx-danger-solid); }
+.count-pill--update { background: color-mix(in srgb, var(--wx-brand-primary) 12%, transparent);   color: var(--wx-brand-primary); }
+.count-pill--new    { background: color-mix(in srgb, var(--wx-success-solid) 12%, transparent);   color: var(--wx-success-solid); }
 .count-empty { color: var(--wx-text-muted); font-size: var(--wx-fs-12); }
 
 /* ── Detail header ── */

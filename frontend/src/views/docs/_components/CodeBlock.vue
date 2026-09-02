@@ -53,6 +53,11 @@ async function copy() {
 </template>
 
 <style scoped>
+/*
+ * Code panel (#0f172a + slate text scale) luôn tối theo quy ước code-editor,
+ * không đổi theo theme sáng/tối của site — giống VS Code/GitHub code block,
+ * nên hardcode màu ở đây là cố ý, không phải thiếu token.
+ */
 .code-block {
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-lg);

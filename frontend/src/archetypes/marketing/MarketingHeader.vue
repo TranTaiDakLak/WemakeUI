@@ -286,7 +286,7 @@ function isActive(to: string) {
 
 .mkt-btn--primary {
   background: var(--wx-brand-primary);
-  color: #fff;
+  color: var(--wx-text-on-brand);
   border-color: var(--wx-brand-primary);
 }
 .mkt-btn--primary:hover {

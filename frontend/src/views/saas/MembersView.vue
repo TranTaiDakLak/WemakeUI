@@ -299,9 +299,9 @@ function getMemberProducts(m: Member) {
   border-radius: var(--wx-radius-full);
   flex-shrink: 0;
 }
-.product-status--active  { background: rgba(16,185,129,0.12); color: #059669; }
-.product-status--expired { background: rgba(239,68,68,0.12);  color: #dc2626; }
-.product-status--pending { background: rgba(245,158,11,0.12); color: #d97706; }
+.product-status--active  { background: color-mix(in srgb, var(--wx-success-solid) 12%, transparent); color: var(--wx-success-text); }
+.product-status--expired { background: color-mix(in srgb, var(--wx-danger-solid) 12%, transparent);  color: var(--wx-danger-text); }
+.product-status--pending { background: color-mix(in srgb, var(--wx-warning-solid) 12%, transparent); color: var(--wx-warning-text); }
 
 /* ── Empty ── */
 .detail-empty {

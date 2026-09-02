@@ -121,6 +121,11 @@ withDefaults(defineProps<{
   padding: var(--wx-space-7);
 }
 .auth-aside[data-tone="gradient"] { background: var(--wx-gradient-bg); }
+/*
+ * data-tone="brand"/"dark" là aside login cố ý luôn tối/brand (hardcode
+ * hex + rgba white-glass) bất kể site đang light hay dark mode — cùng chủ đích
+ * với gradient hero marketing, không phải bug thiếu token.
+ */
 .auth-aside[data-tone="brand"]    { background: linear-gradient(145deg, #1e3a8a, #1d4ed8, #2563eb); color: white; }
 .auth-aside[data-tone="dark"]     { background: #0f172a; color: white; }
 

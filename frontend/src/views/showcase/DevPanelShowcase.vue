@@ -125,6 +125,12 @@ import DevPanel from './components/debug/DevPanel.vue'
 kbd { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); background: var(--wx-bg-sunken); border: 1px solid var(--wx-border-default); border-radius: 4px; padding: 3px var(--wx-space-2); color: var(--wx-content-primary); }
 .fab-preview { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--wx-brand-600); color: #fff; border-radius: 50%; font-size: 16px; }
 
+/*
+ * Code sample + Network Monitor demo panel dùng chung palette terminal
+ * GitHub-dark (#0d1117/#c9d1d9) cộng màu status devtools (method get/post,
+ * status ok/err) — quy ước devtools/log console, cố ý luôn tối bất kể theme
+ * site, không phải thiếu token.
+ */
 .code-block { background: #0d1117; color: #c9d1d9; font-family: var(--wx-font-mono); font-size: var(--wx-fs-13); padding: var(--wx-space-4); border-radius: var(--wx-radius-lg); overflow-x: auto; line-height: 1.6; margin: 0; }
 
 .network-demo { background: #0d1117; color: #c9d1d9; font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); border-radius: var(--wx-radius-lg); overflow: hidden; }

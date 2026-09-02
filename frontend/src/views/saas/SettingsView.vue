@@ -543,8 +543,8 @@ async function toggleIntegration(itg: Integration) {
   white-space: nowrap;
 }
 
-.integration-row__status--ok    { background: rgba(16,185,129,0.1); color: var(--wx-success-solid); }
-.integration-row__status--error { background: rgba(239,68,68,0.1);  color: var(--wx-danger-solid); }
+.integration-row__status--ok    { background: color-mix(in srgb, var(--wx-success-solid) 10%, transparent); color: var(--wx-success-solid); }
+.integration-row__status--error { background: color-mix(in srgb, var(--wx-danger-solid) 10%, transparent);  color: var(--wx-danger-solid); }
 .integration-row__status--idle  { background: var(--wx-surface-sunken); color: var(--wx-text-muted); }
 
 .integration-row__actions {

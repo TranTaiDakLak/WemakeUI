@@ -149,12 +149,22 @@ const activeId = computed(() => props.current)
 </template>
 
 <style scoped>
+/*
+ * Header/topbar chrome (AppTopbar actions + mobile drawer head bên dưới) luôn
+ * render trên var(--wx-gradient-header) — gradient này cố định giữ tông
+ * brand/tối ở cả light lẫn dark mode (không có .wx-dark override). Vì vậy các
+ * lớp white-glass overlay (rgba(255,255,255,...) cho hover/border của
+ * topbar-icon, topbar-hamburger, mob-drawer__close) và dark scrim
+ * rgba(0,0,0,0.45) của mob-backdrop phía dưới đều cố ý hardcode theo tông đó,
+ * không phải bug — chỉ phần chữ/icon chính trên nền mới cần token
+ * --wx-text-on-brand để không bị đổi theo theme.
+ */
 .topbar-icon {
   position: relative;
   width: 32px; height: 32px;
   border: none;
   background: transparent;
-  color: #fff;
+  color: var(--wx-text-on-brand);
   border-radius: var(--wx-radius-full);
   cursor: pointer;
   display: inline-flex;
@@ -162,7 +172,7 @@ const activeId = computed(() => props.current)
   justify-content: center;
 }
 .topbar-icon :deep(svg) { width: 16px; height: 16px; }
-.topbar-icon:hover { background: rgba(255,255,255,0.18); color: #fff; }
+.topbar-icon:hover { background: rgba(255,255,255,0.18); color: var(--wx-text-on-brand); }
 
 /* Hamburger — ẩn trên desktop, hiện trên mobile */
 .topbar-hamburger {
@@ -240,7 +250,7 @@ const activeId = computed(() => props.current)
 .mob-drawer__brand {
   font-size: var(--wx-fs-15);
   font-weight: 800;
-  color: #fff;
+  color: var(--wx-text-on-brand);
   letter-spacing: -0.3px;
 }
 .mob-drawer__close {
@@ -248,7 +258,7 @@ const activeId = computed(() => props.current)
   border: none;
   background: rgba(255,255,255,0.15);
   border-radius: var(--wx-radius-md);
-  color: #fff;
+  color: var(--wx-text-on-brand);
   cursor: pointer;
   display: flex;
   align-items: center;

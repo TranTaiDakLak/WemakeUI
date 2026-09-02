@@ -123,6 +123,7 @@ onUnmounted(() => clearInterval(interval))
 .filter-btn.lvl-error { color: var(--wx-status-danger-text); }
 .filter-btn.lvl-success { color: var(--wx-status-success-text); }
 .filter-btn.lvl-info { color: var(--wx-status-info-text); }
+/* Terminal log console — palette GitHub-dark cố định (#0d1117/#c9d1d9...) theo quy ước log/terminal, không đổi theo theme sáng/tối của site */
 .console-body { height: 480px; overflow-y: auto; font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); background: #0d1117; color: #c9d1d9; padding: var(--wx-space-2) 0; }
 .log-line { display: flex; gap: var(--wx-space-3); padding: 2px var(--wx-space-4); line-height: 1.5; }
 .log-line:hover { background: rgba(255,255,255,0.04); }

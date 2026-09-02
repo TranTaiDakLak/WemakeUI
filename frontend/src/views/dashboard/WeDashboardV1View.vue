@@ -410,7 +410,7 @@ const ENV_STATUS = [
           >
             <span class="alert-icon">{{ a.level === 'danger' ? '🔴' : '⚠️' }}</span>
             {{ a.text }}
-            <BaseButton v-if="a.level === 'danger'" variant="ghost" size="sm" style="color: inherit; padding: 0 4px" @click="errorsDrawer = true">
+            <BaseButton v-if="a.level === 'danger'" variant="ghost" size="sm" style="color: inherit; padding: 0 var(--wx-space-1)" @click="errorsDrawer = true">
               Xem ngay →
             </BaseButton>
           </div>

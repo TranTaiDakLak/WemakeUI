@@ -283,36 +283,36 @@ function realIndex(visibleIdx: number): number {
 </template>
 
 <style scoped>
-.datagrid-wrapper { flex: 1; min-height: 0; overflow: hidden; background: var(--bg-primary); }
+.datagrid-wrapper { flex: 1; min-height: 0; overflow: hidden; background: var(--wx-surface-base); }
 .datagrid-wrapper:focus { outline: none; }
 .datagrid-wrapper:focus-visible { box-shadow: var(--wx-shadow-focus); }
 .datagrid-scroll { height: 100%; overflow: auto; }
-.datagrid { width: 100%; border-collapse: collapse; font-size: var(--font-size-small, 12px); background: var(--bg-primary); table-layout: fixed; }
+.datagrid { width: 100%; border-collapse: collapse; font-size: var(--wx-fs-12); background: var(--wx-surface-base); table-layout: fixed; }
 .datagrid--resizing { cursor: col-resize; user-select: none; }
 .datagrid thead { position: sticky; top: 0; z-index: 5; }
-.datagrid th { padding: 9px var(--wx-space-3); text-align: left; font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.3px; background: var(--bg-tertiary); border-bottom: 1px solid var(--border-color); white-space: nowrap; position: relative; }
-.datagrid td { padding: var(--wx-space-2) var(--wx-space-3); color: var(--text-secondary); border-bottom: 1px solid var(--border-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.datagrid tbody tr:hover td { background: var(--hover-bg); }
+.datagrid th { padding: 9px var(--wx-space-3); text-align: left; font-size: 13px; font-weight: 600; color: var(--wx-text-muted); text-transform: uppercase; letter-spacing: 0.3px; background: var(--wx-surface-sunken); border-bottom: 1px solid var(--wx-border-default); white-space: nowrap; position: relative; }
+.datagrid td { padding: var(--wx-space-2) var(--wx-space-3); color: var(--wx-text-secondary); border-bottom: 1px solid var(--wx-border-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.datagrid tbody tr:hover td { background: var(--wx-hover-bg); }
 .datagrid tbody tr { cursor: pointer; user-select: none; }
-.datagrid input[type="checkbox"] { accent-color: var(--brand-primary); cursor: pointer; }
+.datagrid input[type="checkbox"] { accent-color: var(--wx-brand-primary); cursor: pointer; }
 
 .col-chk { width: 36px; text-align: center; }
-.col-stt { width: 40px; text-align: center; color: var(--text-tertiary); }
+.col-stt { width: 40px; text-align: center; color: var(--wx-text-muted); }
 
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
-.dot-live { background: var(--success-color); }
-.dot-die { background: var(--error-color); }
-.dot-cp { background: var(--warning-color); }
-.val-ok { color: var(--success-color); }
-.val-no { color: var(--text-tertiary); }
+.dot-live { background: var(--wx-success-solid); }
+.dot-die { background: var(--wx-danger-solid); }
+.dot-cp { background: var(--wx-warning-solid); }
+.val-ok { color: var(--wx-success-solid); }
+.val-no { color: var(--wx-text-muted); }
 .row-die td { opacity: 0.6; }
-.row-highlight td { background: var(--active-bg) !important; }
-.cell-selected { background: var(--hover-bg) !important; outline: 2px solid var(--brand-primary); outline-offset: -2px; }
+.row-highlight td { background: var(--wx-active-bg) !important; }
+.cell-selected { background: var(--wx-hover-bg) !important; outline: 2px solid var(--wx-brand-primary); outline-offset: -2px; }
 
 /* Sort */
 .th-sortable { cursor: pointer; user-select: none; }
-.th-sortable:hover { color: var(--text-primary); }
-.sort-indicator { font-size: 10px; margin-left: var(--wx-space-1); color: var(--brand-primary); transition: transform 0.2s; }
+.th-sortable:hover { color: var(--wx-text-primary); }
+.sort-indicator { font-size: 10px; margin-left: var(--wx-space-1); color: var(--wx-brand-primary); transition: transform 0.2s; }
 .sort-indicator.desc { display: inline-block; }
 
 /* Column resizer */
@@ -325,7 +325,7 @@ function realIndex(visibleIdx: number): number {
   cursor: col-resize;
   user-select: none;
 }
-.col-resizer:hover { background: var(--brand-primary); opacity: 0.3; }
+.col-resizer:hover { background: var(--wx-brand-primary); opacity: 0.3; }
 
 /* Spacer rows for virtual scroll */
 .spacer-row td { padding: 0; border: none; }
@@ -337,7 +337,7 @@ function realIndex(visibleIdx: number): number {
   height: 28px;
   flex: 1;
   border-radius: 4px;
-  background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--bg-secondary) 50%, var(--bg-tertiary) 75%);
+  background: linear-gradient(90deg, var(--wx-surface-sunken) 25%, var(--wx-surface-elevated) 50%, var(--wx-surface-sunken) 75%);
   background-size: 400% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
 }
@@ -352,6 +352,6 @@ function realIndex(visibleIdx: number): number {
 }
 .datagrid-empty__text {
   font-size: 14px;
-  color: var(--text-tertiary);
+  color: var(--wx-text-muted);
 }
 </style>

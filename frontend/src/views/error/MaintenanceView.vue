@@ -81,7 +81,7 @@ const progress = ref(62)
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
   font-size: var(--wx-fs-13);
 }
 .todo .cur { font-weight: var(--wx-fw-semibold); color: var(--wx-brand-primary); }

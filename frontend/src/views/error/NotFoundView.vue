@@ -38,7 +38,7 @@ import { BaseButton } from '../../components/common'
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: var(--wx-space-1);
   font-size: var(--wx-fs-13);
   color: var(--wx-content-muted);
 }

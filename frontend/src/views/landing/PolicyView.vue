@@ -60,7 +60,7 @@ import { ref } from 'vue'
 
 .policy-toc { position: sticky; top: 76px; align-self: flex-start; }
 .toc-label { font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); color: var(--wx-content-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--wx-space-3); }
-.toc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.toc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--wx-space-1); }
 .toc-link { font-size: var(--wx-fs-13); color: var(--wx-content-secondary); text-decoration: none; padding: var(--wx-space-1) var(--wx-space-2); border-radius: var(--wx-radius-sm); display: block; border-left: 2px solid transparent; transition: all var(--wx-d-micro); }
 .toc-link:hover { color: var(--wx-content-primary); background: var(--wx-hover-bg); }
 .toc-link.active { color: var(--wx-brand-600); border-left-color: var(--wx-brand-500); background: var(--wx-brand-50); }

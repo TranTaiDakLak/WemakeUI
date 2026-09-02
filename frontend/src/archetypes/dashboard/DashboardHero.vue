@@ -98,7 +98,7 @@ const ENV_COLOR: Record<string, string> = {
           >
             <span class="alert-icon">{{ a.level === 'danger' ? '🔴' : '⚠️' }}</span>
             {{ a.text }}
-            <BaseButton v-if="a.level === 'danger'" variant="ghost" size="sm" style="color: inherit; padding: 0 4px" @click="emit('openErrors')">
+            <BaseButton v-if="a.level === 'danger'" variant="ghost" size="sm" style="color: inherit; padding: 0 var(--wx-space-1)" @click="emit('openErrors')">
               Xem ngay →
             </BaseButton>
           </div>

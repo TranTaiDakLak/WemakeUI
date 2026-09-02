@@ -262,7 +262,7 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value) })
 .a-badge {
   font-size: var(--wx-fs-12);
   font-weight: 500;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
   background: var(--wx-surface-elevated);
   color: var(--wx-text-secondary);

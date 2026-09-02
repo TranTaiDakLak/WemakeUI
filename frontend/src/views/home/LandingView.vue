@@ -398,7 +398,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   display: flex;
   flex-direction: column;
   gap: var(--wx-space-2);
-  padding: 12px 14px;
+  padding: var(--wx-space-3) 14px;
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-lg);
   background: color-mix(in srgb, var(--wx-surface-elevated) 96%, transparent);
@@ -528,7 +528,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   position: relative;
   display: block;
   text-align: center;
-  padding: 22px 12px;
+  padding: 22px var(--wx-space-3);
   border: 1px solid color-mix(in srgb, var(--wx-border-default) 60%, transparent);
   border-radius: var(--wx-radius-xl);
   background: var(--wx-surface-elevated);
@@ -616,7 +616,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   display: flex;
   align-items: center;
   gap: var(--wx-space-3);
-  padding: 14px 16px;
+  padding: 14px var(--wx-space-4);
   border: 1px solid color-mix(in srgb, var(--wx-border-default) 60%, transparent);
   border-left: 3px solid var(--accent);
   border-radius: var(--wx-radius-lg);
@@ -747,7 +747,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 }
 .lp-feature__icon { font-size: var(--wx-fs-28); }
 .lp-feature__title {
-  margin: 12px 0 6px;
+  margin: var(--wx-space-3) 0 6px;
   font-size: 17px;
   font-weight: 700;
 }
@@ -834,7 +834,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 }
 @media (max-width: 520px) {
   .lp-nav__link { padding: 6px 10px; }
-  .lp-hero { padding: 56px 18px 48px; }
+  .lp-hero { padding: 56px 18px var(--wx-space-8); }
   .lp-hero__title { font-size: var(--wx-fs-32); }
   .lp-apps-grid { grid-template-columns: 1fr; }
 }

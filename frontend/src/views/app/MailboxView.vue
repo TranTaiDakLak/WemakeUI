@@ -115,7 +115,7 @@ import { computed } from 'vue'
 .mail-info { flex: 1; min-width: 0; }
 .mail-row1 { display: flex; justify-content: space-between; }
 .mail-from { font-size: var(--wx-fs-13); color: var(--wx-content-primary); }
-.mail-time { font-size: var(--wx-fs-11); color: var(--wx-content-muted); }
+.mail-time { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 .mail-subject { display: block; font-size: var(--wx-fs-13); color: var(--wx-content-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mail-preview { display: block; font-size: var(--wx-fs-12); color: var(--wx-content-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 

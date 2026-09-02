@@ -866,7 +866,7 @@ function quickConnect(a: Account, e: MouseEvent) {
 }
 .detail-section__label {
   margin: 0;
-  font-size: var(--wx-fs-11); font-weight: var(--wx-fw-bold);
+  font-size: var(--wx-fs-12); font-weight: var(--wx-fw-bold);
   text-transform: uppercase; letter-spacing: 0.06em; color: var(--wx-text-muted);
 }
 .detail-row {

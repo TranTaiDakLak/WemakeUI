@@ -69,7 +69,7 @@ const PARTNERS = [
 
 .partners-hero {
   text-align: center;
-  padding: 120px var(--wx-space-6) var(--wx-space-16);
+  padding: 120px var(--wx-space-6) var(--wx-space-9);
   background: linear-gradient(160deg, var(--wx-surface-base) 0%, color-mix(in srgb, var(--wx-brand-primary) 4%, var(--wx-surface-base)) 100%);
 }
 .partners-hero__title {
@@ -81,18 +81,18 @@ const PARTNERS = [
 }
 .partners-hero__sub { font-size: var(--wx-fs-18); color: var(--wx-text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.7; }
 
-.partners-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--wx-space-6) var(--wx-space-20); }
+.partners-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--wx-space-6) var(--wx-space-10); }
 .partners-grid {
   display: grid;
   gap: var(--wx-space-5);
-  margin-bottom: var(--wx-space-16);
+  margin-bottom: var(--wx-space-9);
 }
 @media (min-width: 640px)  { .partners-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .partners-grid { grid-template-columns: repeat(3, 1fr); } }
 
 .partner-card {
   padding: var(--wx-space-6);
-  background: var(--wx-surface-raised);
+  background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-2xl);
   display: flex; flex-direction: column; gap: var(--wx-space-4);

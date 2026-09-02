@@ -23,7 +23,7 @@ import { RouterLink } from 'vue-router'
 
 <style scoped>
 .faq-page { min-height: 100vh; padding-top: 64px; background: var(--wx-surface-base); }
-.faq-main { max-width: 800px; margin: 0 auto; padding: 100px var(--wx-space-6) var(--wx-space-20); }
+.faq-main { max-width: 800px; margin: 0 auto; padding: 100px var(--wx-space-6) var(--wx-space-10); }
 .faq-page__hero { text-align: center; margin-bottom: var(--wx-space-12); }
 .faq-page__title {
   font-size: clamp(28px, 5vw, 48px);

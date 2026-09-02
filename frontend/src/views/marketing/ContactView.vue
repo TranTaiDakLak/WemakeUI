@@ -175,7 +175,7 @@ const STATS = [
 
 .contact-container {
   max-width: 1100px; margin: 0 auto;
-  padding: var(--wx-space-10) var(--wx-space-6) var(--wx-space-20);
+  padding: var(--wx-space-10) var(--wx-space-6) var(--wx-space-10);
   display: grid; gap: var(--wx-space-12);
 }
 @media (min-width: 900px) { .contact-container { grid-template-columns: 1fr 1.4fr; } }
@@ -208,7 +208,7 @@ const STATS = [
 /* form */
 .contact-form-wrap {}
 .contact-form {
-  background: var(--wx-surface-raised);
+  background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-2xl);
   padding: var(--wx-space-8);
@@ -254,7 +254,7 @@ const STATS = [
 
 /* success state */
 .contact-success {
-  background: var(--wx-surface-raised);
+  background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-2xl);
   padding: var(--wx-space-12);

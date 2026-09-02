@@ -837,7 +837,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
 }
 
 .tag-more {
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   color: var(--wx-text-muted);
   padding: 1px 5px;
   background: var(--wx-surface-sunken);
@@ -949,7 +949,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
 
 .detail-section__label {
   margin: 0;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-bold);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -1003,7 +1003,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
 }
 
 .stat-key {
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-medium);
   color: var(--wx-text-muted);
   text-transform: uppercase;

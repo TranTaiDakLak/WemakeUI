@@ -118,7 +118,7 @@ function toggleSelect(id: number) {
 .file-icon { font-size: 32px; }
 .file-name { font-size: var(--wx-fs-13); color: var(--wx-content-primary); font-weight: var(--wx-fw-medium); word-break: break-word; }
 .file-meta { display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-1); }
-.file-size { font-size: var(--wx-fs-11); color: var(--wx-content-muted); }
+.file-size { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 
 .file-list { background: var(--wx-bg-base); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-lg); overflow: hidden; }
 .ftable { width: 100%; border-collapse: collapse; font-size: var(--wx-fs-14); }

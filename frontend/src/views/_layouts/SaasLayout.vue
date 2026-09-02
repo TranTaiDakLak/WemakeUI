@@ -291,7 +291,7 @@ const activeId = computed(() => props.current)
               color var(--wx-d-fast) var(--wx-ease-standard);
 }
 .mob-nav-item:hover {
-  background: var(--wx-surface-hover);
+  background: var(--wx-hover-bg);
   color: var(--wx-text-primary);
 }
 .mob-nav-item--active {

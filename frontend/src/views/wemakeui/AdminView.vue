@@ -438,8 +438,8 @@ onBeforeUnmount(() => document.removeEventListener('mouseup', onMouseup))
 }
 
 /* STATUS BAR segments */
-.sb-seg { font-size: var(--wx-fs-11); color: var(--wx-text-secondary); }
-.sb-div { font-size: var(--wx-fs-11); color: var(--wx-border-default); margin: 0 4px; }
+.sb-seg { font-size: var(--wx-fs-12); color: var(--wx-text-secondary); }
+.sb-div { font-size: var(--wx-fs-12); color: var(--wx-border-default); margin: 0 4px; }
 .sb-status-dot {
   width: 6px;
   height: 6px;
@@ -449,7 +449,7 @@ onBeforeUnmount(() => document.removeEventListener('mouseup', onMouseup))
   margin-right: 4px;
 }
 .sb-more {
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   color: var(--wx-brand-600);
   background: transparent;
   border: none;

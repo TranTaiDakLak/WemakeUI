@@ -87,16 +87,21 @@ literal, không tự ép về fs-12 (bug thật đã gặp ở round 8, xem log)
   Project, Saas) + `WeDashboardV1View.vue` — chỉ convert 4/8/12/16/96px khớp
   chính xác lưới, không đụng width/height/grid-template-columns, không ép các
   giá trị lẻ (2/3/5/6/9/10/14px).
-- **Còn lại cho round 9+:**
-  - `archetypes/dashboard/DashboardKPICard.vue` — chưa sweep.
-  - `archetypes/marketing/MarketingHeader.vue` — chưa sweep (MarketingHero.vue
-    mới chỉ xử lý 1 chỗ ở round 8, phần còn lại của hero + toàn bộ Header
-    chưa đụng).
-  - `archetypes/crud/CrudFormFields.vue`, `CrudPage.vue` — chưa sweep.
-  - Các view ngoài `views/dashboard/*` (vd `views/app/*`, `views/wemakeui/*`,
-    `views/marketing/*`, `views/showcase/*`, `views/forms/*`) chưa được sweep
-    cho pattern spacing 4pt — mới chỉ xử lý wave-3 category-1 (undefined var)
-    ở các round trước, chưa quét riêng hardcoded-px-khớp-token.
+- **Đã xong (round 9, Dev A, commit `2700eac`, QA xác nhận `PASS`):**
+  archetype scope CLOSED — `DashboardKPICard.vue`/`CrudFormFields.vue` đã hết
+  từ round 1; `MarketingHeader.vue` không còn px nào để convert;
+  `MarketingHero.vue`/`CrudPage.vue` chỉ còn giá trị lẻ (2/5/6/10/14px, cộng
+  120px hero cố ý) — QA đã re-grep độc lập cả 5 file, xác nhận đúng claim.
+  Ngoài archetype: 14 file trong `views/app/*` (7 file) + `views/wemakeui/*`
+  (7 file) — 24 chỗ convert 4/8/16px khớp lưới sang `--wx-space-1/2/4`, đều
+  nằm trong `<style scoped>` hoặc 3 inline `style="margin-top:..."` trong
+  `AutomationCanvasView.vue`. QA đã đọc toàn bộ diff (không phải spot-check),
+  xác nhận 0 chỗ đổi `font-size`, 0 giá trị lẻ bị ép về token.
+- **Còn lại cho round 10+:**
+  - Các view ngoài `views/dashboard/*` chưa sweep hết: `views/showcase/*`
+    (cluster lớn nhất, ước tính ~137 hit), `views/marketing/*` (~9 hit),
+    `views/forms/*`, `views/saas/*`, `views/auth/*` — chưa quét (khác với
+    wave-3 undefined-var đã quét xong toàn bộ các nhóm này ở round 7).
 
 ### B. Duplicate button/badge/chip re-implementation (ưu tiên trung bình)
 Đánh giá case-by-case — CHỈ gộp vào BaseButton/BaseBadge nếu không làm giảm
@@ -113,10 +118,24 @@ polish của thiết kế gốc (marketing hero CTA thường cố ý custom, kh
   `BaseBadge`/`BaseTag` nếu tương đương về mặt visual.
 
 ### C. Dashboard `.metric`/legend-dot pattern trùng lặp
-`.metric{gap:4px}` và legend-dot pattern lặp lại ở 8+ file trong
-`views/dashboard/*.vue`. Cân nhắc rút thành 1 composable/component nhỏ dùng
-chung (không bắt buộc phải là component chính thức export trong lib.ts —
-có thể là internal helper trong `views/dashboard/` nếu chỉ dùng ở đó).
+- **Đã xong (round 9, Dev B, commit `ec28ede` + QA follow-up `6c4603f`):**
+  tạo `views/dashboard/_components/{LegendDot,DashMetric}.vue` (internal,
+  không export lib.ts/components/common/index.ts, cùng convention với
+  `views/docs/_components/`). `LegendDot` thay `.dot`/`.d` ở `CrmView`,
+  `OverviewView`, `ProjectView`, `SaasView` (2 chỗ mỗi file — QA follow-up
+  đã migrate nốt `.d` trong `SaasView.vue` mà Dev B bỏ sót). `DashMetric`
+  thay `.metric`/`.metric-label`/`.metric-value` ở `CrmView`/`ProjectView`
+  (size `md`) và `AnalyticsView`/`EcommerceView` (size `lg`, `AnalyticsView`
+  giữ đúng fs-28 gốc qua `:deep(.dash-metric--lg .dash-metric__value)`,
+  QA đã verify override thắng đúng qua CSS output đã build — cùng specificity
+  nhưng chunk CSS của view load sau chunk CSS của component con nên thắng
+  cascade). Mục C coi như **CLOSED** cho phạm vi `views/dashboard/*` chính —
+  còn 1 candidate follow-up (xem dưới), không chặn việc đóng mục C.
+- **Follow-up còn lại:** `WeDashboardV1View.vue` `.env-dot` — Dev B cố ý
+  KHÔNG migrate round này vì có thêm pill background/border-radius/padding
+  + trạng thái pulse-animation ok/err không khớp `LegendDot` trần; để lại
+  làm candidate xem xét kỹ hơn ở round sau (có thể cần biến thể `LegendDot`
+  riêng hoặc giữ nguyên vì đủ khác biệt).
 
 ### D. GLOBAL AUDIT ROUND categories (chạy round-robin khi backlog A/B/C cạn)
 Mỗi round chọn 1-2 category, quét toàn bộ `frontend/src/**`:
@@ -737,4 +756,117 @@ tự ý dừng sớm hơn.
     9 có thể chọn 1 hạng mục A/B/C + 1 category D độc lập file cho 2 dev,
     hoặc 2 category D nếu A/B/C tạm hết việc nhỏ phù hợp trong 1 round.
 
-<!-- Round 9+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 9 (2026-09-02)
+- Bối cảnh: PLAN + Dev A/B của round này đã chạy trước hai commit độc lập,
+  Dev C (agent này) chỉ chạy QA theo checklist có sẵn — không chạy lại PLAN.
+- Dev A commit `2700eac`: 14 file (`views/app/{ApiKeyView,ChatView,
+  ContactsView,MapView,OrderDetailView,PricingView,ProfileView}.vue`,
+  `views/wemakeui/{AccountsView,AdminView,AutomationCanvasView,
+  CampaignsView,ConsoleView,IntegrationsView,SchedulerView}.vue`) — tiếp tục
+  mục A (spacing sweep): convert 24 chỗ padding/margin/gap khớp lưới 4pt
+  (4/8/16px) sang `--wx-space-1/2/4`, giữ nguyên giá trị lẻ (2/6/10px). Kèm
+  claim archetype scope (`DashboardKPICard.vue`, `CrudFormFields.vue`,
+  `MarketingHeader.vue`, `MarketingHero.vue`, `CrudPage.vue`) đã CLOSED —
+  hết giá trị khớp lưới, chỉ còn giá trị lẻ. typecheck+build:lib PASS.
+- Dev B commit `ec28ede`: 8 file (2 file mới
+  `views/dashboard/_components/{LegendDot,DashMetric}.vue` + 6 file sửa
+  `views/dashboard/{AnalyticsView,CrmView,EcommerceView,OverviewView,
+  ProjectView,SaasView}.vue`) — xử lý mục C: rút `LegendDot`/`DashMetric`
+  làm internal helper (không export lib.ts), thay cho pattern `.dot`/`.metric`
+  lặp lại. Tự phát hiện + xử lý đúng 1 discrepancy thật trong lúc làm:
+  `AnalyticsView.vue` gốc dùng fs-28 cho `.metric-value` (khác fs-24 của
+  `EcommerceView`) — giữ nguyên bằng `:deep()` override cục bộ thay vì đổi
+  giá trị mặc định của `DashMetric` size `lg`, tránh đổi visual âm thầm.
+  typecheck+build:lib PASS.
+- Dev C QA (agent này) — verify toàn bộ checklist trước khi accept:
+  - Build gate 3/3 PASS: `typecheck` sạch (exit 0), `build:lib` 15.01s
+    (`ui.css` 234.37kB, `es.js` 415.90kB, `umd.js` 325.52kB, dts OK),
+    `build:app` 9.53s (mọi chunk build OK, exit 0).
+  - `git show --stat` xác nhận đúng 14 file (Dev A) + 8 file = 2 mới + 6 sửa
+    (Dev B), 0 overlap, không đụng `tokens.css`/`dark-mode.css`/
+    `flat-mode.css`/`lib.ts`/`components/common/index.ts`.
+  - **Dev A regression re-check (round-8 repeat risk)**: đọc TOÀN BỘ diff
+    (không chỉ spot-check 5) — 0 chỗ đổi `font-size` (grep ban đầu ra 10 hit
+    nhưng đọc kỹ xác nhận đều là full-line reprint do rule CSS 1 dòng, giá
+    trị font-size 2 bên `-`/`+` giống hệt nhau); cả 24 conversion đều đúng —
+    đối chiếu `tokens.css` xác nhận `--wx-space-1/2/3/4 = 4/8/12/16px`, mọi
+    giá trị convert đều khớp chính xác, mọi giá trị lẻ giữ nguyên (2px trong
+    `.key-value`/`.source-tag`/`.type-tag`/`.filter-btn`/`.cron-code`, 6px
+    trong `.wx-select,.wx-input`, 10px trong `.cron-lg`).
+  - **Archetype "closed" claim**: tự re-grep độc lập cả 5 file
+    (`DashboardKPICard.vue`, `CrudFormFields.vue`, `MarketingHeader.vue`,
+    `MarketingHero.vue`, `CrudPage.vue`) cho pattern
+    `padding|margin|gap: ...px` — xác nhận đúng, chỉ còn giá trị lẻ
+    (2/5/6/10/14px, cộng 120px `.hero` cố ý đã ghi nhận từ round 8) và
+    `MarketingHeader.vue` 0 hit. Claim ĐÚNG.
+  - **Dev B visual-parity audit** (trọng tâm round này) — đọc CURRENT diff +
+    2 file component mới cho cả 4 usage site `LegendDot` (Crm/Overview/
+    Project/SaasView) và 4 usage site `DashMetric` (Crm/Project/Analytics/
+    EcommerceView): mọi CSS declaration gốc (màu, size, gap, font-size,
+    font-weight, letter-spacing) đều được giữ nguyên qua props/slot — không
+    có gì bị rớt âm thầm. `OverviewView`/`ProjectView` giữ đúng
+    `margin-right: var(--wx-space-1)` qua wrapper class `.legend-dot-gap`
+    cục bộ (đúng như thiết kế "layout concern của parent"). Verify riêng
+    `AnalyticsView.vue`'s fs-28 override: đọc `DashMetric.vue` xác nhận
+    `.dash-metric--lg .dash-metric__value` là selector sống thật (root div
+    nhận cả 2 class `dash-metric`+`dash-metric--lg`, `.dash-metric__value`
+    là `<strong>` con) — `:deep()` syntactically đúng. Build xong, đọc CSS
+    output thật (`dist/assets/AnalyticsView-*.css` vs `DashMetric-*.css`) —
+    2 rule cùng specificity (0,3,0) nhưng nằm ở 2 chunk CSS khác nhau; do
+    `AnalyticsView` import `DashMetric` nên chunk CSS của `DashMetric` được
+    link trước, chunk của `AnalyticsView` link sau → override thắng cascade
+    đúng như thiết kế, xác nhận qua code thật (không phải chỉ đọc lý thuyết).
+  - **`.d`-class dot trong SaasView.vue**: đọc file xác nhận `.d` **KHÔNG
+    PHẢI** phần tử khác mục đích — CSS giống hệt pattern `.dot` đã migrate
+    (`display:inline-block;width:8px;height:8px;border-radius:9999px;
+    margin-right:var(--wx-space-1)`), chỉ là 1 usage site Dev B bỏ sót
+    trong chính file họ vừa sửa. **Đây là 1 lỗi nhỏ thật** → tự sửa: migrate
+    `.d` → `<LegendDot color="..." class="legend-dot-gap" />` + xoá rule
+    `.d` không dùng nữa, verify lại `typecheck`+`build:lib`+`build:app`
+    PASS cả 3 (size dist-lib không đổi, xác nhận SaasView không ảnh hưởng
+    lib bundle), commit riêng `6c4603f` ("fix: qa follow-up on round 9 —
+    migrate SaasView.vue's missed .d legend dot to LegendDot").
+  - **lib.ts reachability**: grep `lib.ts` + `components/common/index.ts`
+    cho `LegendDot`/`DashMetric` → 0 hit. Grep `dist-lib/wemake-ui.es.js`
+    cho `legend-dot`/`dash-metric` → 5 hit `legend-dot` nhưng đọc context
+    xác nhận đều là `lc-legend-dot` (class có sẵn, không liên quan, thuộc
+    component `LineChart` public khác) — false positive substring match,
+    0 hit `dash-metric` thật. Xác nhận 2 file mới KHÔNG lọt vào dist-lib.
+  - **`WeDashboardV1View.vue`**: xác nhận không xuất hiện trong `git show
+    --stat` của cả 2 commit — untouched thật.
+  - **New-hardcode check**: grep dòng `+` cả 2 commit cho hex/rgba ngoài
+    `var(--wx-...)` → Dev A 0 hit; Dev B 2 hit, cả 2 đều là `#94a3b8`
+    pre-existing (trước đây nằm trong `style="background:#94a3b8"` inline,
+    giờ chuyển thành prop `color="#94a3b8"` — không phải giá trị mới, chỉ di
+    chuyển vị trí). `LegendDot.vue`'s computed inline `width`/`height` từ
+    prop `size` là ngoại lệ chấp nhận được theo checklist.
+  - **API safety**: Dev A — mọi hunk nằm trong `<style scoped>` hoặc đúng 3
+    inline `style="margin-top:..."` trong `AutomationCanvasView.vue`, không
+    đụng `<script setup>` nào khác/prop/emit. Dev B — script changes chỉ là
+    import statement + template thay `<div class="metric">`/`<span
+    class="dot">` bằng usage component mới (prop passing, slot content),
+    không có logic nghiệp vụ nào bị đổi.
+  - **ROUND 9 QA: PASS WITH FOLLOW-UP COMMIT `6c4603f`.**
+- Backlog cho round 10:
+  - **Mục A** — còn lại: `views/showcase/*` (cluster lớn nhất, ước tính
+    ~137 hit spacing chưa sweep), `views/marketing/*` (~9 hit),
+    `views/forms/*`/`views/saas/*`/`views/auth/*` (chưa quét riêng cho
+    pattern hardcoded-spacing-khớp-token, khác với wave-3 undefined-var đã
+    xong toàn bộ các nhóm này từ round 6-7). Nhắc lại rule: `--wx-fs-11`
+    KHÔNG tồn tại, không ép về fs-12 (bug round 8).
+  - **Mục B** — vẫn chưa động tới: `.hero-btn` vs `.mkt-btn`
+    (`MarketingHero.vue`/`MarketingHeader.vue`), `.row-btn` icon-button
+    pattern (`CrudPage.vue`), chip ad-hoc (`EmailVerifyView.vue` `.chip`,
+    `CampaignsView.vue` `.tag-more`, `AnimationShowcase`/
+    `PermissionShowcase`/`SidebarShellShowcase` chip trong `views/showcase/*`).
+  - **Mục C** — CLOSED cho phạm vi chính, còn 1 follow-up candidate:
+    `WeDashboardV1View.vue` `.env-dot` (pill + pulse-animation, có thể cần
+    biến thể riêng hoặc giữ nguyên — xem xét kỹ hơn nếu PLAN thấy đáng làm).
+  - **Mục D (GLOBAL AUDIT)** — chưa round nào thực sự chạy category D theo
+    đúng nghĩa "audit toàn repo theo 1 category trong §4.D mục 1-10" (round
+    9 vẫn là A+C theo file cụ thể); PLAN round 10 có thể cân nhắc bắt đầu ít
+    nhất 1 category D thật sự (vd category 7 — interaction states, hoặc
+    category 8 — accessibility) song song với mục A, để tiến gần hơn tới
+    điều kiện dừng "3 GLOBAL AUDIT liên tiếp 0 finding" ở mục 6.
+
+<!-- Round 10+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

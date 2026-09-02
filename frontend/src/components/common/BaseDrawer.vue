@@ -107,7 +107,7 @@ onBeforeUnmount(() => {
             v-if="closable"
             class="wx-drawer__close"
             type="button"
-            aria-label="đóng"
+            aria-label="Đóng"
             @click="close"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -141,10 +141,8 @@ onBeforeUnmount(() => {
   position: fixed;
   background: var(--wx-bg-base);
   color: var(--wx-content-primary);
-  border: 1px solid rgba(59, 130, 246, 0.25);
-  box-shadow:
-    0 20px 50px rgba(37, 99, 235, 0.25),
-    0 8px 24px rgba(37, 99, 235, 0.15);
+  border: 1px solid var(--wx-border-default);
+  box-shadow: var(--wx-shadow-2xl);
   z-index: calc(var(--wx-z-overlay) + 1);
   display: flex;
   flex-direction: column;

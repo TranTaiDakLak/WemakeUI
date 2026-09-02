@@ -5,6 +5,7 @@ let _idCounter = 0
 <script setup lang="ts">
 import { ref, watch, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import type { ModalSize } from '../../types'
+import BaseButton from './BaseButton.vue'
 
 type ModalIntent = 'default' | 'danger' | 'warning'
 
@@ -179,18 +180,17 @@ function trapFocusHandle(e: KeyboardEvent) {
         <!-- Footer -->
         <div class="modal-footer">
           <slot name="footer">
-            <button
+            <BaseButton variant="ghost" @click="emit('close')">
+              {{ props.closeLabel }}
+            </BaseButton>
+            <BaseButton
               v-if="props.showSave"
-              class="modal-btn modal-btn--save"
-              :disabled="props.loading"
+              variant="primary"
+              :loading="props.loading"
               @click="emit('save')"
             >
-              <span v-if="props.loading" class="modal-spinner" />
               {{ props.saveLabel }}
-            </button>
-            <button class="modal-btn modal-btn--close" @click="emit('close')">
-              {{ props.closeLabel }}
-            </button>
+            </BaseButton>
           </slot>
         </div>
       </div>
@@ -203,7 +203,8 @@ function trapFocusHandle(e: KeyboardEvent) {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: var(--wx-bg-overlay);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -211,11 +212,9 @@ function trapFocusHandle(e: KeyboardEvent) {
 
 .modal-dialog {
   background: var(--wx-surface-base);
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-2xl, 16px);
-  box-shadow:
-    0 20px 50px rgba(37, 99, 235, 0.25),
-    0 8px 24px rgba(37, 99, 235, 0.15);
+  box-shadow: var(--wx-shadow-2xl);
   width: 90%;
   max-height: 85%;
   display: flex;
@@ -231,17 +230,17 @@ function trapFocusHandle(e: KeyboardEvent) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px;
+  padding: var(--wx-space-4) var(--wx-space-5);
   background: var(--wx-surface-base);
-  border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+  border-bottom: 1px solid var(--wx-border-default);
   flex-shrink: 0;
 }
 
 .modal-title {
-  font-size: 15px;
-  font-weight: 700;
+  font-size: var(--wx-fs-15);
+  font-weight: var(--wx-fw-bold);
   color: var(--wx-text-primary);
-  letter-spacing: 0.2px;
+  letter-spacing: var(--wx-tracking-tight);
   flex: 1;
 }
 
@@ -249,8 +248,8 @@ function trapFocusHandle(e: KeyboardEvent) {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   border: none;
   border-radius: var(--wx-radius-md, 6px);
@@ -261,7 +260,7 @@ function trapFocusHandle(e: KeyboardEvent) {
   transition: background var(--wx-d-fast, 150ms), color var(--wx-d-fast, 150ms);
 }
 .modal-close-btn:hover {
-  background: var(--wx-surface-sunken);
+  background: var(--wx-hover-bg);
   color: var(--wx-text-primary);
 }
 .modal-close-btn:active {
@@ -272,74 +271,18 @@ function trapFocusHandle(e: KeyboardEvent) {
 .modal-body {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: var(--wx-space-5);
 }
 
 /* ── Footer ── */
 .modal-footer {
   display: flex;
   justify-content: flex-end;
-  padding: var(--wx-space-3) 20px;
-  border-top: 1px solid var(--wx-border-subtle);
-  background: var(--wx-surface-sunken);
+  padding: var(--wx-space-4) var(--wx-space-5);
+  border-top: 1px solid var(--wx-border-default);
   flex-shrink: 0;
   gap: var(--wx-space-2);
 }
-
-.modal-btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: var(--wx-radius-lg);
-  font-family: var(--wx-font-primary);
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all var(--wx-d-fast, 150ms) var(--wx-ease-standard);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--wx-space-2);
-}
-.modal-btn:active:not(:disabled) {
-  transform: scale(0.98);
-}
-
-.modal-btn--save {
-  background: var(--wx-gradient-button);
-  color: #fff;
-  box-shadow: var(--wx-shadow-brand);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-.modal-btn--save:hover:not(:disabled) {
-  box-shadow: 0 15px 25px -5px rgba(59, 130, 246, 0.4);
-  filter: brightness(1.05);
-}
-.modal-btn--save:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.modal-btn--close {
-  background: var(--wx-gradient-danger);
-  color: #fff;
-  box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.25);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-.modal-btn--close:hover {
-  box-shadow: 0 15px 25px -5px rgba(239, 68, 68, 0.4);
-  filter: brightness(1.05);
-}
-
-/* Save spinner */
-.modal-spinner {
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: var(--wx-text-inverse);
-  border-radius: var(--wx-radius-full);
-  animation: modal-spin 0.6s linear infinite;
-}
-@keyframes modal-spin { to { transform: rotate(360deg); } }
 
 /* Transition — WX scale-up */
 .modal-enter-active { transition: opacity var(--wx-d-normal, 250ms) var(--wx-ease-decelerate); }

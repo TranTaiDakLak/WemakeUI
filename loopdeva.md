@@ -2359,4 +2359,147 @@ tự ý dừng sớm hơn.
      `--wx-density-icon-size`), #6 (responsive breakpoint sm/md), #10
      (legacy/orphan component audit qua `lib.ts`/import graph).
 
+### Round 19 (2026-09-02) — GLOBAL AUDIT ROUND 3 of 3
+- PLAN (opus): 2 hạng mục độc lập không đụng chung file — Dev A = tiếp tục
+  batch "0-ARIA" (backlog #1 round 18) với 3 file `BaseDataGrid`/`GroupBox`/
+  `Kanban`; Dev B = category D#6 (responsive breakpoint), quét toàn repo
+  `@media (max-width: 768px)`/`640px` so với `useBreakpoint.ts` (`isMobile =
+  width < 768`, `isTablet = width < 1024`) và `responsive.css` (exclusive-
+  bound `767px`/`1023px` khớp `min-width: 768px`/`1024px`) — phát hiện 9 chỗ
+  hardcode biên inclusive gây overlap 1px tại đúng breakpoint.
+- Dev A commit `249404d`: 3 file. `BaseDataGrid` — `aria-label` trên wrapper
+  cuộn; `aria-sort` (`ascending`/`descending`/`none`) + `tabindex=0` +
+  keyboard Enter/Space chỉ trên `<th>` sortable (bind `undefined` khi không
+  sortable → Vue loại hẳn attribute, không phải empty string); `aria-label`
+  checkbox chọn-tất-cả/chọn-dòng; `aria-selected` trên `<tr>` ở CẢ 2 nhánh
+  render (virtual scroll + non-virtual); `role=status aria-busy` cho shimmer
+  loading, `aria-hidden` từng shimmer-row; `role=status` cho empty state;
+  `aria-hidden` trên spacer-row virtual scroll và resize-handle. `GroupBox`
+  — header khả dụng bàn phím (`role=button`/`tabindex`/`aria-expanded`
+  (boolean thật, không String())/`aria-controls` trỏ `bodyId` sinh từ counter
+  module-scope `_groupBoxIdCounter`, tăng 1 lần/instance — cùng pattern
+  `BaseTabs`/`ContextMenu` round 17-18); khi `collapsible=false` cả 4
+  attribute trên đều bind `undefined` → biến mất khỏi DOM thật; chevron
+  `aria-hidden`. `Kanban` — `role=list`/`listitem` đúng cặp trên column-body/
+  card, `aria-label` cột gộp title+số thẻ, `role=status` cho placeholder
+  rỗng, keyboard Enter gọi `$emit('card-click', card, col)` — y hệt payload
+  handler click; `draggable`/`dragstart`/`dragend`/`dragover`/`dragleave`/
+  `drop` giữ nguyên không đổi 1 ký tự nào theo diff.
+- Dev B commit `1fa75bc`: 8 file, 9 chỗ đổi số biên — `768px→767px`:
+  `AppShell.vue`, `BaseToast.vue` (x2, container position + transition),
+  `LandingLayout.vue`; `640px→639px`: `AppTopbar.vue`, `PageHeader.vue`,
+  `BaseDrawer.vue`, `FormField.vue`, `SaasLayout.vue`. `AppShell.vue`/
+  `SaasLayout.vue` còn 1 query `max-width: 480px` riêng mỗi file — cố ý
+  không đụng (tier fine-tune khác, không thuộc bug class này).
+- Dev C QA:
+  - **Build gate**: `npm run typecheck` sạch (0 lỗi); `npm run build:lib`
+    chạy 2 lần liên tiếp — output y hệt nhau (`ui.css` 237.71 kB/gzip
+    34.72 kB, `wemake-ui.es.js` 421.86 kB/gzip 99.78 kB, `wemake-ui.umd.js`
+    329.61 kB/gzip 85.93 kB cả 2 lần) — không flake; `npm run build:app`
+    PASS (8.98s, mọi chunk OK).
+  - `git show --stat`: Dev A đúng 3 file, Dev B đúng 8 file, 0 overlap,
+    không đụng `tokens.css`/`dark-mode.css`/`flat-mode.css`/`style.css`/
+    `responsive.css`/`lib.ts`/`index.ts`.
+  - **Đọc FULL diff + full file cả 3 file Dev A**: xác nhận độc lập từng
+    điểm trong checklist PLAN — `aria-sort` absent thật (bind `undefined`,
+    không phải `""`) trên header không sortable; `aria-selected` có mặt ở
+    CẢ 2 nhánh `<tr>` (virtual `v-if="useVirtual"` và non-virtual
+    `v-else`); keyboard handler sortable gọi thẳng `onHeaderClick(col)` —
+    đúng hàm sort thật (update `sortCol`/`sortDir` + emit `sort`), không
+    phải no-op giả. `GroupBox`: `bodyId = gbox-${uid}-body` với `uid =
+    ++_groupBoxIdCounter` chạy 1 lần trong `<script setup>` (không nằm
+    trong hàm re-run mỗi render) → counter thật module-scope; khi
+    `collapsible=false`, `role`/`tabindex`/`aria-expanded`/`aria-controls`
+    đều bind biểu thức `props.collapsible ? X : undefined` → cả 4 biến mất
+    khỏi DOM đúng yêu cầu. Riêng 2 listener `@keydown.enter.prevent`/
+    `@keydown.space.prevent` VẪN được compile thành listener gắn cứng trên
+    DOM bất kể `collapsible` (do Vue không thể conditional một
+    `@keydown` directive tĩnh) — nhưng vô hại thật: khi `collapsible=false`
+    thì `tabindex` cũng `undefined` nên header không thể nhận focus bàn
+    phím qua Tab, listener không bao giờ được kích hoạt trên thực tế; đây
+    CÙNG PATTERN với `@click="toggle"` đã có sẵn từ trước round này (cũng
+    gắn cứng, cũng tự no-op qua `if (props.collapsible)` bên trong `toggle`)
+    — không phải regression mới, không cần fix. `Kanban`: keyboard Enter
+    emit đúng y hệt args `(card, col)` như click; đối chiếu byte-for-byte
+    `draggable="true"`/`onDragStart`/`onDragEnd`/`onDragOver`/`onDragLeave`/
+    `onDrop` trong diff — toàn bộ là context line, không có `-`/`+` nào
+    chạm vào, xác nhận unchanged thật.
+  - **Grep 9 dòng đổi của Dev B**: từng hunk chỉ đổi đúng số `768→767`/
+    `640→639`, không đụng dòng nào khác trong `@media` block (đối chiếu
+    full diff, không phải chỉ đếm số dòng thay đổi). Re-grep độc lập
+    `AppShell.vue`/`SaasLayout.vue` xác nhận `max-width: 480px` vẫn nguyên
+    2 file. Grep `frontend/dist-lib/ui.css` (minified 1 dòng, dùng script
+    node tách context) cho `767px`/`639px`: đủ mặt 6/7 file thuộc
+    `components/**` (nằm trong `lib.ts` export) — `AppShell` + `BaseToast`
+    (x2) = 3×767px, `FormField`/`BaseDrawer`/`AppTopbar`/`PageHeader` =
+    4×639px, cộng vài chỗ `767px` tiền-tồn tại thuộc `responsive.css`
+    utility class (`wx-hide-mobile`/`wx-grid-*`/`wx-heading-*`/`wx-page-pad`,
+    không thuộc diff này). `LandingLayout.vue`/`SaasLayout.vue` (2/9 chỗ)
+    KHÔNG xuất hiện trong `ui.css` — xác nhận ĐÚNG vì cả 2 nằm ở
+    `views/_layouts/**`, không được export qua `lib.ts` nên không thuộc
+    publishable bundle; verify qua `build:app` (đã PASS) thay vì `ui.css`
+    là đúng path.
+  - **New-hardcode check**: grep dòng `+` cả 2 diff cho hex/rgba/px ngoài 9
+    số biên sanctioned và ARIA addition của Dev A → 0 kết quả.
+  - **Prop/emit/slot/class rename check**: 0 rename trên cả 11 file — Dev A
+    chỉ thêm attribute + 1 script-block counter (cùng pattern có sẵn), Dev B
+    thuần đổi số trong `@media`; `defineProps`/`defineEmits` không đổi file
+    nào.
+  - **Tone-check tiếng Việt mới**: `"Bảng dữ liệu"`, `"Chọn tất cả"`,
+    `"Chọn dòng N"`, `` `${title} — ${count} thẻ` `` khớp văn phong sẵn có
+    (`"Không có dữ liệu"`/`"Chưa có thẻ"` cùng file, `"Đang tải..."` pattern
+    từ round 18).
+  - **Không phát hiện lỗi nào cần QA follow-up commit** — cả Dev A và Dev B
+    đều đúng 100% theo khai báo.
+- **ROUND 19 QA: PASS**, không cần follow-up commit. Finding count round
+  này = 12 (3 component vá ARIA/keyboard gap bởi Dev A + 9 chỗ breakpoint
+  overlap 1px sửa bởi Dev B) — **KHÔNG PHẢI 0-finding**. Vòng này tuy là
+  "GLOBAL AUDIT ROUND 3 of 3" theo thứ tự thời gian (round 17/18/19 liên
+  tiếp đều được gắn nhãn GLOBAL AUDIT) nhưng vì có finding thật, **KHÔNG
+  thoả điều kiện dừng ở §6** (cần đúng 3 GLOBAL AUDIT LIÊN TIẾP đều
+  0-finding) — chuỗi 0-finding-liên-tiếp hiện tại vẫn là **0 round đạt
+  được** (không phải 3), vì cả 3 round 17/18/19 đều có finding thật. Round
+  kế tiếp muốn tính vào chuỗi phải TỰ bắt đầu lại đếm từ 0-finding đầu
+  tiên — không được cộng dồn thời gian đã chạy 3 round liên tiếp làm điều
+  kiện dừng.
+- Backlog cho round 20:
+  1. **0-ARIA component backlog — còn 9 file** (giảm từ 12, trừ 3 file Dev A
+     round 19 vừa xong: `BaseDataGrid`/`GroupBox`/`Kanban`):
+     `components/common`: `BaseAvatarGroup`, `BaseBadge`, `BaseWizard`,
+     `StatusBar`, `StatusChip`, `TagList`, `UserDropdown` (7);
+     `components/data`: `LogViewer`, `Timeline` (2). PLAN round 20 nên
+     spot-check trước khi giao việc: một số trong 9 file này có thể thật sự
+     decorative/low-value (vd `TagList` — hiển thị tag tĩnh, `StatusBar`/
+     `StatusChip` — chấm màu trạng thái đơn thuần có thể đã đủ đạt semantics
+     qua text content) chứ không phải gap ARIA thật cần vá — không convert
+     máy móc theo số đếm thô, đọc từng file để phân loại "gap thật" (ví dụ
+     `UserDropdown`/`BaseWizard`/`LogViewer` nhiều khả năng có interactive
+     element thật cần role/keyboard) vs "decorative, để nguyên".
+  2. **D#5 icon-sizing — `--wx-density-icon-size`**: QA round 19 verify lại
+     bằng grep repo-wide: token định nghĩa 3 biến thể trong `tokens.css`
+     (`213: 16px` default, `334: 14px` compact, `352: 20px` comfortable) và
+     được set qua `theme.ts:71` (`'--wx-density-icon-size': d.iconSize`) —
+     nhưng **0 chỗ nào trong CSS component thật sự dùng
+     `var(--wx-density-icon-size)`** (grep toàn `frontend/src` chỉ ra đúng 4
+     match, đều là định nghĩa/set, không có consumer). Round 20 nên dành 1
+     hạng mục nhỏ riêng để quyết: (a) wire token vào icon size thật ở 1-2 nơi
+     hợp lý (vd icon trong `BaseButton`/`BaseIcon` theo density hiện có), hoặc
+     (b) xác nhận đây là naming debt/token thừa nên cân nhắc bỏ khỏi
+     `theme.ts`/`tokens.css` nếu không có kế hoạch dùng — KHÔNG tự ý xoá
+     ngay, chỉ investigate + đề xuất trong PLAN round 20.
+  3. **D#10 đã CLOSED 0-finding** (PLAN round 19 đã investigate legacy/orphan
+     component qua `lib.ts`/import graph — không tìm thấy orphan component
+     nào) — round 20 KHÔNG cần re-audit lại mục này.
+  4. Mục A/B — vẫn CLOSED. Mục C — vẫn 1 follow-up mở ưu tiên thấp nhất
+     (không đổi): `WeDashboardV1View.vue` `.env-dot`.
+  5. **Ghi chú cho PLAN round 20**: loop đã chạy 19 round. Nếu backlog còn
+     lại sau khi round 20 xử lý xong mục 1-2 ở trên chỉ còn vài item
+     decorative/low-value + mục C `.env-dot` (ưu tiên thấp nhất, tồn tại
+     nhiều round chưa ai đụng vì lý do rủi ro/lợi ích thấp) — PLAN round 20
+     nên nghiêm túc cân nhắc: hoặc backlog đã đủ mỏng để thử 1 GLOBAL AUDIT
+     0-finding thật (bắt đầu lại chuỗi đếm 3-liên-tiếp từ round 20/21), hoặc
+     nên gom toàn bộ phần còn lại thành 1 round "final comprehensive sweep"
+     duy nhất thay vì tiếp tục chia nhỏ theo category D#4/D#6 lặp lại đã quét
+     nhiều lần.
+
 <!-- Round 17+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

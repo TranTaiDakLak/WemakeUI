@@ -2502,4 +2502,209 @@ tự ý dừng sớm hơn.
      duy nhất thay vì tiếp tục chia nhỏ theo category D#4/D#6 lặp lại đã quét
      nhiều lần.
 
-<!-- Round 17+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 20 (2026-09-02)
+- PLAN (opus): 2 hạng mục độc lập không đụng chung file, tiếp tục backlog
+  round 19 — Dev A = 2 file cuối trong batch "0-ARIA" `StatusBar.vue` +
+  `LogViewer.vue`; Dev B = `Timeline.vue` (:datetime attribute) + investigate
+  density-token backlog item (`--wx-density-icon-size`/`-avatar-size`) +
+  đọc lại 6 file "0-ARIA" còn nghi vấn để đóng backlog nếu đúng là decorative.
+- Dev A commit `fc20cf3`: 2 file. `StatusBar.vue` — 5 segment
+  (`live`/`die`/`total`/`highlighted`/`selected`) nhận `role="button"`
+  `tabindex="0"` + `@keydown.enter.space.prevent` gọi lại đúng
+  `emit('segment-click', X)` y hệt handler `@click` sẵn có; progress bar
+  nhận `role="progressbar"` + `aria-valuenow/min/max`, mirror đúng pattern
+  `BaseProgress.vue`. Quyết định KHÔNG thêm `:focus-visible` rule mới vì
+  `foundations/focus.css` đã có sẵn rule global cho
+  `[role="button"], [tabindex]`. `LogViewer.vue` — `.log-row` nhận
+  `role`/`tabindex`/`aria-expanded` bind điều kiện theo `entry.details`
+  (undefined khi không có details, khớp guard `@click` sẵn có) +
+  `@keydown.enter/space.prevent` gọi lại `toggleExpand`; nút filter level +
+  nút follow nhận `aria-pressed` phản ánh state; search input nhận
+  `aria-label`; scroll container nhận `role="log" aria-label="Nhật ký"`
+  (cố ý không thêm `aria-live` vì virtual-scroll re-render window liên tục,
+  sẽ spam screen reader). typecheck+build:lib PASS.
+- Dev B commit `875290c`: 2 file. `Timeline.vue` — `<time class=
+  "timeline-time">` nhận `:datetime="item.ts"` (ISO string gốc, khác với
+  text hiển thị `{{ timeOnly(item.ts) }}` đã cắt chuỗi); `.timeline-dot`
+  nhận `aria-hidden="true"` (icon trang trí, nội dung thật đã có ở
+  title/body). `theme.ts` — chỉ thêm comment tiếng Việt giải thích
+  `--wx-density-icon-size`/`-avatar-size` là 1 phần bộ 10 density token
+  public contract (DESIGN.md §1.7), chưa có consumer nội bộ vì repo chưa có
+  `BaseIcon` dùng chung — không phải dead code, không đổi giá trị/shape
+  object trả về. Kèm theo: đọc lại + đóng 6 hạng mục "0-ARIA" còn nghi vấn
+  (`BaseAvatarGroup`/`BaseBadge`/`StatusChip`/`TagList`/`BaseWizard`/
+  `UserDropdown`, đều xác nhận decorative/đã đủ semantics) + DECLINE vĩnh
+  viễn `WeDashboardV1View.vue` `.env-dot` (đọc lại `LegendDot.vue` — chỉ
+  nhận prop `color`, render span tròn thuần; `.env-dot` là pill có
+  background/padding/border-radius + pulse animation dựa `currentColor` —
+  gộp sẽ mất animation + phải hardcode màu, là regression thật).
+  typecheck+build:lib PASS.
+- Dev C QA — verify độc lập TOÀN BỘ checklist, không tin theo lời khai báo
+  của commit message mà tự đọc code:
+  - **Build gate**: `npm run typecheck` sạch (0 lỗi); `npm run build:lib`
+    chạy 2 lần liên tiếp — output y hệt nhau cả 2 lần (`ui.css` 237.71 kB/
+    gzip 34.72 kB, `wemake-ui.es.js` 423.71 kB/gzip 100.09 kB,
+    `wemake-ui.umd.js` 330.98 kB/gzip 86.16 kB) — **không flake round này**
+    (khác round 17/18, flake không xuất hiện lần này); `npm run build:app`
+    PASS (26.78s, mọi chunk build OK).
+  - `git show --stat`: Dev A đúng 2 file (`StatusBar.vue`+`LogViewer.vue`),
+    Dev B đúng 2 file (`Timeline.vue`+`theme.ts`), 0 overlap, không đụng
+    `tokens.css`/`dark-mode.css`/`flat-mode.css`/`style.css`/`lib.ts`.
+  - **Dev A — đọc FULL diff + full file `StatusBar.vue`**: xác nhận cả 5/5
+    segment keydown handler emit đúng y hệt payload segment-click như
+    sibling click handler (không chỉ kiểm 1 cái mẫu). Grep độc lập
+    `foundations/focus.css` — xác nhận có `:where(...,[role="button"],
+    [role="link"], [tabindex]):focus-visible { outline: 2px solid
+    var(--wx-border-focus); ... }` — đúng như claim, và xác nhận file này
+    được import ở CẢ `foundations/index.ts:29` lẫn `foundations/
+    index.css:12`, và `foundations/index.css` được `lib.ts` import trực
+    tiếp (dòng 15) → chắc chắn nằm trong build thật, không phải file mồ côi.
+    `LogViewer.vue` — đọc `LogView.vue` (showcase demo data) xác nhận cả 2
+    nhánh dữ liệu thật đều tồn tại: entry có `details` (vd "middleware:
+    request.id=..." dòng 19) và entry không có `details` (vd "server
+    started on :3000" dòng 17, field `details` là `undefined` khi
+    `sample.details` không set) — đúng khớp guard `entry.details ?
+    'button' : undefined` sẽ cho ra cả role có mặt lẫn absent thật.
+    `aria-pressed` xác nhận bind biểu thức reactive thật (`enabled.has(lvl)`,
+    `follow`), không phải giá trị tĩnh. Diff của `LogViewer.vue` xác nhận
+    KHÔNG có hunk nào chạm `<script setup>` — toàn bộ `totalHeight`/
+    `offsetY`/`rowHeight`/`onScroll`/`highlight`/`downloadLog` nguyên vẹn
+    100%.
+  - **Dev B — đọc FULL diff + full file cả `Timeline.vue`/`theme.ts`**:
+    `:datetime="item.ts"` xác nhận bind RAW `item.ts` (không phải
+    `timeOnly(item.ts)` hay giá trị slice), trong khi text hiển thị vẫn
+    dùng `{{ timeOnly(item.ts) }}` riêng — đúng 2 biểu thức khác nhau như
+    claim. Đọc `TimelineView.vue` (showcase demo data) xác nhận `ts` thật
+    có dạng `` `${today}T15:42:00` `` — chuỗi datetime ISO-hợp lệ, đủ điều
+    kiện bind `:datetime` theo HTML spec. `aria-hidden="true"` xác nhận CHỈ
+    xuất hiện đúng 1 chỗ trong file — trên `.timeline-dot` — không dính vào
+    `.timeline-content`/`.timeline-title`/`.timeline-body` (nội dung thật).
+    `theme.ts` diff xác nhận thuần comment — đọc lại toàn bộ hàm
+    `getDensityVars()`, object trả về vẫn đúng 10 key, mọi value vẫn trỏ
+    `d.headerHeight`/`d.rowHeight`/.../`d.containerPad` y hệt trước, không
+    đổi 1 ký tự nào ngoài 4 dòng comment thêm vào.
+  - **Spot-check các claim đóng backlog "0-ARIA" của Dev B (đọc file thật,
+    không tin theo commit message)**: `BaseWizard.vue` — xác nhận 3 nút điều
+    hướng đều `type="button"` thật với label hiển thị rõ ("← Quay lại",
+    "Tiếp theo →", "Hoàn tất ✓"). `UserDropdown.vue` — xác nhận trigger là
+    `<button class="user-trigger" :title="auth.user?.email ?? 'User'">`
+    thật; đọc thêm `BaseDropdown.vue` (component cha bọc qua slot `#trigger`)
+    xác nhận `aria-haspopup="true"`/`:aria-expanded="isOpen"`/
+    `:aria-controls="dropdownId"` THẬT SỰ tồn tại trên
+    `.base-dropdown__trigger` (dòng 56-60) bọc quanh slot trigger — claim
+    "đã có từ round 18" đúng, không phải bịa. `WeDashboardV1View.vue`
+    `.env-dot` vs `LegendDot.vue` — đọc cả 2 file xác nhận đúng: `.env-dot`
+    là pill thật (`padding: 3px var(--wx-space-2); border-radius: 20px;`)
+    với `.env-dot__pulse` chạy `animation: pulse-ok 2s ease infinite` dựa
+    `currentColor`, trong khi `LegendDot.vue` chỉ nhận prop `color`/`size`
+    và render 1 `<span>` tĩnh không animation/không pill — DECLINE reasoning
+    của Dev B đúng, migrate sẽ là regression thật. Đọc thêm (ngoài yêu cầu
+    tối thiểu 3 file) `BaseAvatarGroup.vue`/`BaseBadge.vue`/
+    `StatusChip.vue`/`TagList.vue` — cả 4 xác nhận đúng: "+N" overflow là
+    text content thật trong `<span>`, không có phần tử tương tác nào thiếu
+    ARIA; `TagList.vue .tag-list__more` xác nhận có sẵn
+    `:title="overflowLabel"` đúng như claim.
+  - **New-hardcode check**: grep dòng `+` của cả 2 diff cho pattern hex/
+    rgba/px → 0 kết quả (round này thuần attribute/keydown-handler/comment).
+  - **Prop/emit/slot/class rename check**: 0 rename trên cả 4 file —
+    `defineProps`/`defineEmits` signature không đổi file nào, chỉ thêm
+    attribute + keydown handler (StatusBar/LogViewer) hoặc attribute +
+    comment (Timeline/theme.ts).
+  - **Tone-check tiếng Việt mới**: `"Tìm trong log"`/`"Nhật ký"` khớp văn
+    phong sẵn có; comment tiếng Việt trong `theme.ts` tự nhiên, đúng thuật
+    ngữ dự án (density token, public contract).
+  - **Item 8 — full-scope re-grep độc lập `aria-|role=` trên TOÀN BỘ
+    `components/common/**` (43 file) + `components/data/**` (7 file)**:
+    đúng 8 file còn 0 match — `BaseAvatarGroup.vue`, `BaseBadge.vue`,
+    `BaseWizard.vue`, `FormDrawer.vue`, `FormModal.vue`, `StatusChip.vue`,
+    `TagList.vue`, `UserDropdown.vue` (giảm từ 9+`Timeline`/`LogViewer` sau
+    khi round này xử lý — `StatusBar.vue` giờ có 9 match, `LogViewer.vue`
+    6 match, `Timeline.vue` 1 match). Đối chiếu từng file trong 8 file 0-
+    match còn lại: 4 file (`BaseAvatarGroup`/`BaseBadge`/`StatusChip`/
+    `TagList`) xác nhận decorative/non-interactive thật (đã đọc code, xem
+    trên); `BaseWizard` có nút thật với label rõ, không cần ARIA thêm;
+    `UserDropdown` có ARIA nằm ở component cha `BaseDropdown` (đã verify);
+    `FormDrawer`/`FormModal` đọc lại xác nhận đều là wrapper pattern bọc
+    `BaseDrawer`/`BaseModal` — cả 2 component gốc đã có sẵn
+    `role="dialog"`/`aria-modal="true"`/`aria-labelledby`/`aria-label` +
+    nút đóng có `aria-label` (verify trực tiếp trong `BaseModal.vue` dòng
+    151-165, `BaseDrawer.vue` dòng 89-110) — 0 match ở file wrapper là hợp
+    lý, semantics nằm đúng tầng DOM cha. **KẾT LUẬN: cả 8 file 0-match còn
+    lại đều có lý do chính đáng (decorative hoặc semantics đã nằm ở
+    component cha) — KHÔNG có gap ARIA thật nào còn sót trong
+    `components/common/**`/`components/data/**`.**
+  - **Spot-check thêm (ngoài yêu cầu)**: đối chiếu round 17-20 (6 commit
+    ARIA-focused: `e7740d7`/`dda23b7`/`f6ba368`/`03c450c`/`1fa75bc`/
+    `249404d`/`fc20cf3`/`875290c`) — grep dòng `+` toàn bộ cho hex/px/rgba
+    chỉ ra đúng 9 dòng `@media (max-width: 767px/639px)` (breakpoint
+    sanctioned từ round 19, không phải hardcode mới) — xác nhận sạch, không
+    có CSS hardcode nào len lỏi vào qua các round ARIA-focused gần đây.
+  - **Không phát hiện lỗi nào cần QA follow-up commit** — cả Dev A và Dev B
+    đều đúng 100% theo khai báo, verify độc lập từng điểm không dựa vào lời
+    commit message.
+- **ROUND 20 QA: PASS**, không cần follow-up commit — QA review kỹ (không
+  chỉ đọc lướt) không tìm ra bug/gap nào trong 2 commit của round này.
+  Finding count của round 20 tính theo dev work = **2 fix thật** (Dev A:
+  StatusBar 5-segment + LogViewer row ARIA/keyboard gap; Dev B: Timeline
+  `:datetime` attribute gap) — **KHÔNG PHẢI 0-finding**, nên round này
+  KHÔNG tính vào chuỗi "3 GLOBAL AUDIT liên tiếp 0-finding" của §6 (giống
+  logic round 17-19: có finding thật thì không đếm).
+- **MILESTONE — category D#8 (accessibility/ARIA) CLOSED**: sau khi cross-
+  check full-scope re-grep (mục trên) với 4 round liên tiếp (17→20) đã xử
+  lý tuần tự toàn bộ danh sách "0-ARIA component" ban đầu (18 file từ round
+  17), kết luận: **backlog ARIA/accessibility trong
+  `components/common/**`/`components/data/**` đã cạn hết finding thật.**
+  8 file còn lại ở 0-match đều đã đọc code trực tiếp và xác nhận đúng là
+  decorative-only hoặc semantics thuộc về component cha (wrapper pattern)
+  — không phải TODO còn treo, không phải gap bị bỏ sót. Round 21+ KHÔNG
+  cần tiếp tục audit category D#8 trong 2 thư mục này trừ khi có component
+  mới được thêm vào `components/common/**`/`components/data/**` sau này.
+- **Backlog update — mục C**: item `.env-dot` (`WeDashboardV1View.vue`,
+  mở từ round 1, "giữ nguyên vì lợi ích thấp/rủi ro cao") nay đổi trạng
+  thái thành **PERMANENTLY DECLINED** theo investigation thật của Dev B
+  round này (đọc lại `LegendDot.vue` xác nhận migrate sẽ là regression —
+  mất pulse animation + phải hardcode màu). **Xoá khỏi backlog từ round 21
+  trở đi — loop KHÔNG cần nhắc lại item này nữa.**
+- Backlog cho round 21:
+  1. **D#8 (ARIA) — CLOSED**, xem milestone ở trên. Không cần chọn lại
+     category này cho `components/common/**`/`components/data/**` trừ khi
+     có component mới.
+  2. **D#5 (icon-sizing `--wx-density-icon-size`) — vẫn mở, chưa xử lý**:
+     Dev B round này investigate thêm và xác nhận lại kết luận round 19 —
+     0 consumer nội bộ dùng token này, đây là public density-token surface
+     cố ý (DESIGN.md §1.7), đã thêm comment giải thích ở `theme.ts`. PLAN
+     round 21 có thể coi đây là đã "xử lý xong" theo hướng (b) — giữ
+     nguyên + document rõ lý do — không cần thêm hành động nào nữa, có thể
+     đóng luôn nếu PLAN đồng ý với hướng giữ nguyên.
+  3. **Mục C — item `.env-dot` XOÁ KHỎI BACKLOG (PERMANENTLY DECLINED)**,
+     xem chi tiết ở trên. Mục A/B vẫn CLOSED như cũ.
+  4. **D#4 (button/modal/table style consistency) — CHƯA TỪNG thử với
+     finding cụ thể** (chỉ mới được liệt kê tên category từ đầu loop, chưa
+     có round nào thật sự đào sâu). Đề xuất round 21 PLAN chọn category
+     này làm hạng mục chính: so sánh style thật giữa `BaseModal`/
+     `FormModal`/`FormDrawer`/`ConfirmDialog` (padding/border-radius/
+     header-footer layout/button placement có nhất quán không), hoặc so
+     sánh table styling giữa `DataGridPro.vue`/`BaseDataGrid.vue`/các file
+     `*Doc.vue` có bảng ví dụ (`DataGridDoc.vue` v.v.) xem có lệch token/
+     spacing/border style không.
+  5. **D#9 (re-grep hardcode CSS mới len lỏi) — spot-check nhanh của QA
+     round 20 trên riêng các commit ARIA-focused (round 17-20) ra sạch**
+     (xem chi tiết ở trên, chỉ có 9 dòng breakpoint sanctioned, không có
+     hardcode mới), nhưng đây MỚI chỉ là spot-check theo diff của 8 commit
+     cụ thể, CHƯA PHẢI full-repo re-grep độc lập với baseline round 15
+     (lần re-grep toàn repo gần nhất). PLAN round 21 nên cân nhắc dành 1
+     hạng mục full-repo re-grep mục A thật sự (không chỉ diff-based) nếu
+     muốn khép lại nghi vấn này dứt điểm.
+  6. **Ghi chú cho PLAN round 21**: loop đã chạy 20 round, D#8 vừa CLOSED
+     (milestone), mục A/B/C(`.env-dot`) đều CLOSED/xoá khỏi backlog — danh
+     sách hạng mục có finding cụ thể còn lại thực sự chỉ còn D#4 (chưa thử)
+     + D#9 (cần full sweep, chưa chắc có gì) + D#5 (gần như đã xử lý xong
+     theo hướng document). PLAN round 21 nên nghiêm túc thử D#4 CỤ THỂ (so
+     sánh modal/table thật, không chỉ liệt kê tên category) — nếu D#4 sau
+     khi đào sâu cũng chỉ ra 0 finding thật, đó là ứng viên tốt cho 1 trong
+     3 GLOBAL AUDIT 0-finding liên tiếp cần thiết để đạt điều kiện dừng
+     §6. Nếu ngược lại D#4 tìm ra finding thật (nhiều khả năng, vì đây là
+     category duy nhất còn "nguyên" trong toàn bộ backlog), thì xử lý bình
+     thường và tiếp tục loop.
+
+<!-- Round 21+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

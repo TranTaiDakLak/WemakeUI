@@ -138,7 +138,7 @@ const products = [
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--wx-space-3);
 }
-.metric { display: flex; flex-direction: column; gap: 4px; }
+.metric { display: flex; flex-direction: column; gap: var(--wx-space-1); }
 .metric-label { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 .metric-value { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); letter-spacing: var(--wx-tracking-tight); }
 .metric-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--wx-space-2); }
@@ -166,7 +166,7 @@ const products = [
 .prod-line {
   display: flex; align-items: center; gap: var(--wx-space-2);
   font-size: var(--wx-fs-13);
-  margin-bottom: 4px;
+  margin-bottom: var(--wx-space-1);
 }
 .prod-rank {
   width: 20px; height: 20px;

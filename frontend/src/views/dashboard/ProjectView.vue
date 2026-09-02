@@ -133,7 +133,7 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--wx-space-3);
 }
-.metric { display: flex; flex-direction: column; gap: 4px; font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
+.metric { display: flex; flex-direction: column; gap: var(--wx-space-1); font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 .metric strong { font-size: var(--wx-fs-20); color: var(--wx-content-primary); font-weight: var(--wx-fw-bold); }
 .muted { color: var(--wx-content-muted); }
 .small { font-size: var(--wx-fs-12); }
@@ -142,13 +142,13 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
 @media (max-width: 960px) { .cols { grid-template-columns: 1fr; } }
 .chart { width: 100%; height: 220px; }
 .legend-row { display: flex; gap: var(--wx-space-3); font-size: var(--wx-fs-12); color: var(--wx-content-muted); margin-top: var(--wx-space-2); }
-.dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: 4px; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: var(--wx-space-1); }
 .x-labels {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: var(--wx-fs-12);
   color: var(--wx-content-muted);
-  margin-top: 4px;
+  margin-top: var(--wx-space-1);
 }
 
 .team { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--wx-space-2); }

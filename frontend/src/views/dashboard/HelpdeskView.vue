@@ -123,7 +123,7 @@ const agents = [
   gap: var(--wx-space-3);
 }
 .m-label { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
-.m-value { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); margin: 4px 0; letter-spacing: var(--wx-tracking-tight); }
+.m-value { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); margin: var(--wx-space-1) 0; letter-spacing: var(--wx-tracking-tight); }
 .muted { color: var(--wx-content-muted); }
 .small { font-size: var(--wx-fs-12); }
 
@@ -142,7 +142,7 @@ const agents = [
 
 .agents { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--wx-space-3); }
 .agent-row { display: flex; gap: var(--wx-space-2); align-items: flex-start; }
-.agent-info { flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: var(--wx-fs-13); }
+.agent-info { flex: 1; display: flex; flex-direction: column; gap: var(--wx-space-1); font-size: var(--wx-fs-13); }
 
 .topics {
   display: grid;

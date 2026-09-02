@@ -140,7 +140,7 @@ function intensity(d: number, h: number): number {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--wx-space-3);
 }
-.metric { display: flex; flex-direction: column; gap: 4px; }
+.metric { display: flex; flex-direction: column; gap: var(--wx-space-1); }
 .metric-label { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 .metric-value {
   font-size: var(--wx-fs-28);
@@ -169,14 +169,14 @@ function intensity(d: number, h: number): number {
   gap: var(--wx-space-2);
   align-items: center;
   font-size: var(--wx-fs-13);
-  margin-bottom: 4px;
+  margin-bottom: var(--wx-space-1);
 }
 
 .funnel { list-style: none; margin: 0; padding: 0; }
 .funnel-step {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
   margin-bottom: var(--wx-space-2);
 }
 .funnel-bar {
@@ -199,13 +199,13 @@ function intensity(d: number, h: number): number {
   padding-left: var(--wx-space-3);
 }
 
-.heatmap { display: grid; grid-template-columns: 32px 1fr; gap: 4px; }
+.heatmap { display: grid; grid-template-columns: 32px 1fr; gap: var(--wx-space-1); }
 .hm-yax {
   display: flex;
   flex-direction: column;
   font-size: var(--wx-fs-12);
   color: var(--wx-content-muted);
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 .hm-yax span { flex: 1; display: flex; align-items: center; }
 .hm-grid { display: flex; flex-direction: column; gap: 2px; }
@@ -222,6 +222,6 @@ function intensity(d: number, h: number): number {
   justify-content: space-between;
   font-size: var(--wx-fs-12);
   color: var(--wx-content-muted);
-  margin-top: 4px;
+  margin-top: var(--wx-space-1);
 }
 </style>

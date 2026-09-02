@@ -135,7 +135,7 @@ withDefaults(defineProps<{
 /* ── Hero wrapper ── */
 .hero {
   position: relative;
-  padding: 120px var(--wx-space-6) 96px;
+  padding: 120px var(--wx-space-6) var(--wx-space-11);
   background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%);
   overflow: hidden;
 }

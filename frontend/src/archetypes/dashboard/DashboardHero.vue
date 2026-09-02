@@ -162,7 +162,7 @@ const ENV_COLOR: Record<string, string> = {
 .d-hero__live {
   display: inline-flex;
   align-items: center;
-  font-size: 11px;
+  font-size: var(--wx-fs-12);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -175,8 +175,8 @@ const ENV_COLOR: Record<string, string> = {
 .d-hero__env-pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 11px;
+  gap: var(--wx-space-1);
+  font-size: var(--wx-fs-12);
   font-weight: 500;
   padding: 3px 9px;
   border-radius: var(--wx-radius-full);
@@ -225,5 +225,5 @@ const ENV_COLOR: Record<string, string> = {
 }
 .alert-item--danger { color: var(--wx-danger-text); }
 .alert-item--warning { color: var(--wx-warning-text); }
-.alert-icon { font-size: 14px; flex-shrink: 0; }
+.alert-icon { font-size: var(--wx-fs-14); flex-shrink: 0; }
 </style>

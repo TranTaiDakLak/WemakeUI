@@ -112,14 +112,14 @@ const totalMrr = '1.562 triệu'
   gap: var(--wx-space-3);
 }
 .m-label { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
-.m-value { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); margin: 4px 0 4px; letter-spacing: var(--wx-tracking-tight); }
+.m-value { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); margin: var(--wx-space-1) 0 var(--wx-space-1); letter-spacing: var(--wx-tracking-tight); }
 .spark { width: 100%; height: 32px; margin-top: var(--wx-space-2); }
 
 .cols { display: grid; grid-template-columns: 2fr 1fr; gap: var(--wx-space-4); }
 @media (max-width: 960px) { .cols { grid-template-columns: 1fr; } }
 .big-chart { width: 100%; height: 220px; }
 .legend { display: flex; gap: var(--wx-space-3); font-size: var(--wx-fs-12); color: var(--wx-content-muted); margin-top: var(--wx-space-2); }
-.d { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: 4px; }
+.d { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: var(--wx-space-1); }
 
 .plans { list-style: none; margin: 0; padding: 0; }
 .plan-row {
@@ -144,7 +144,7 @@ const totalMrr = '1.562 triệu'
 .cohort th { font-size: var(--wx-fs-12); color: var(--wx-content-muted); font-weight: var(--wx-fw-medium); }
 .cell {
   display: inline-block;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-sm);
   color: white;
   font-weight: var(--wx-fw-semibold);

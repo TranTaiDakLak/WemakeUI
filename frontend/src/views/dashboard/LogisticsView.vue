@@ -135,7 +135,7 @@ const cities = [
   gap: var(--wx-space-3);
 }
 .m-label { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
-.m-value { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); margin: 4px 0; letter-spacing: var(--wx-tracking-tight); }
+.m-value { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); margin: var(--wx-space-1) 0; letter-spacing: var(--wx-tracking-tight); }
 .muted { color: var(--wx-content-muted); }
 .small { font-size: var(--wx-fs-12); }
 
@@ -146,7 +146,7 @@ const cities = [
 .map-svg { width: 100%; height: 320px; }
 
 .warehouses { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--wx-space-3); }
-.warehouses li { display: flex; flex-direction: column; gap: 4px; }
+.warehouses li { display: flex; flex-direction: column; gap: var(--wx-space-1); }
 .w-line { display: flex; justify-content: space-between; align-items: center; font-size: var(--wx-fs-13); }
 
 .ships { width: 100%; border-collapse: collapse; font-size: var(--wx-fs-13); }

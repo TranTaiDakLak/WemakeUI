@@ -125,7 +125,7 @@ const tx = [
   gap: var(--wx-space-3);
 }
 @media (max-width: 880px) { .cols-3 { grid-template-columns: 1fr; } }
-.kpi { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); margin-top: 4px; }
+.kpi { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); margin-top: var(--wx-space-1); }
 .spark-h { width: 100%; height: 32px; margin-top: var(--wx-space-2); }
 
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--wx-space-4); }

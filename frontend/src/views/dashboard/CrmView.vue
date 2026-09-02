@@ -110,7 +110,7 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: var(--wx-space-3);
 }
-.metric { display: flex; flex-direction: column; gap: 4px; font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
+.metric { display: flex; flex-direction: column; gap: var(--wx-space-1); font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 .metric strong { font-size: var(--wx-fs-20); color: var(--wx-content-primary); font-weight: var(--wx-fw-bold); }
 
 .board {
@@ -157,7 +157,7 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
 }
 .card:hover { box-shadow: var(--wx-shadow-md); }
 .card strong { font-size: var(--wx-fs-13); }
-.card p { margin: 4px 0 var(--wx-space-2); font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
+.card p { margin: var(--wx-space-1) 0 var(--wx-space-2); font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 .card-foot { display: flex; align-items: center; justify-content: space-between; }
 
 .empty {

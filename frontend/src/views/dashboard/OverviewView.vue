@@ -156,7 +156,7 @@ const activity = [
   color: var(--wx-content-muted);
   margin-top: var(--wx-space-2);
 }
-.dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: 4px; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: var(--wx-space-1); }
 
 .donut {
   position: relative;

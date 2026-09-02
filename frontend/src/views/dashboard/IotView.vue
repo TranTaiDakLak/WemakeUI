@@ -120,9 +120,9 @@ const aVariant = (s: string) => ({ critical: 'danger', warning: 'warning', info:
   font-variant-numeric: tabular-nums;
   margin: var(--wx-space-1) 0;
 }
-.s-unit { font-size: var(--wx-fs-14); color: var(--wx-content-muted); margin-left: 4px; }
+.s-unit { font-size: var(--wx-fs-14); color: var(--wx-content-muted); margin-left: var(--wx-space-1); }
 .s-spark { width: 100%; height: 40px; }
-.s-range { margin-top: 4px; }
+.s-range { margin-top: var(--wx-space-1); }
 .muted { color: var(--wx-content-muted); }
 .small { font-size: var(--wx-fs-12); }
 

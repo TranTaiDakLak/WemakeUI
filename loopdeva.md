@@ -470,4 +470,112 @@ tự ý dừng sớm hơn.
   - Mục A (spacing sweep còn lại ngoài wave-3) và B (duplicate
     button/chip) vẫn đứng sau wave-3 trong thứ tự ưu tiên.
 
-<!-- Round 7+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 7 (2026-09-02)
+- Bối cảnh: PLAN + Dev A/B của round này đã chạy trước (commit `a14d8cf` +
+  `b198574`), Dev C (agent này) chỉ chạy QA theo checklist có sẵn — không
+  chạy lại PLAN.
+- Dev A commit `a14d8cf`: 10 file (`views/showcase/{AnimationShowcase,
+  CardShowcase,data/CrudTableView,DevPanelShowcase,ObservabilityShowcase,
+  PrimitivesShowcase,TemplateGallery}.vue`, `archetypes/crud/CrudPage.vue`,
+  `archetypes/marketing/FAQAccordion.vue`,
+  `archetypes/dashboard/DashboardActivity.vue`) — map `--wx-fs-11`→
+  `var(--wx-fs-12)` (7 chỗ), `--wx-fs-26`→`var(--wx-fs-28)` (hdr__title,
+  đồng bộ với TemplateGallery), `--wx-fw-normal`→`var(--wx-fw-regular)`,
+  `--wx-surface-hover`→`var(--wx-hover-bg)` (đúng rule `:hover` thật),
+  `--wx-surface-raised`→`var(--wx-surface-elevated)`,
+  `--wx-space-2-5`→`var(--wx-space-3)`. 13 dòng đổi, typecheck+build:lib
+  PASS.
+- Dev B commit `b198574`: 15 file (`views/app/{ChatView,ContactsView,
+  FileManagerView,MailboxView}.vue`, `views/wemakeui/{AccountsView,
+  AdminView,CampaignsView,ConsoleView,ContactsView}.vue`,
+  `views/marketing/{ContactView,FAQView,PartnersView,ProductDetailView,
+  ProductsView}.vue`, `views/_layouts/SaasLayout.vue`) — cùng pattern
+  `--wx-fs-11`→`var(--wx-fs-12)`, `--wx-surface-hover`→`var(--wx-hover-bg)`
+  (SaasLayout `.mob-nav-item:hover`, đúng rule hover thật),
+  `--wx-surface-raised`→`var(--wx-surface-elevated)` (card resting-state:
+  ContactView `.contact-form`/`.contact-success`, PartnersView
+  `.partner-card`, ProductsView `.product-card`), `--wx-space-16`→
+  `var(--wx-space-9)` (64px) và `--wx-space-20`→`var(--wx-space-10)` (80px)
+  — xác nhận interpretation Tailwind-scale đúng (space-16 ý là 4rem=64px,
+  khớp `--wx-space-9` trong tokens.css thật sự = 64px; space-20 = 5rem=80px
+  khớp `--wx-space-10` = 80px), `--wx-space-2-5`→`var(--wx-space-3)`.
+  28 dòng đổi, typecheck+build:lib PASS.
+- Dev C QA (agent này) — verify toàn bộ checklist trước khi accept:
+  - Build gate 3/3 PASS: `typecheck` sạch (exit 0), `build:lib` 18.05s
+    (ui.css 234.37kB, es.js 415.90kB, umd.js 325.52kB, dts OK), `build:app`
+    9.34s (mọi chunk build OK, exit 0).
+  - `git show --stat` xác nhận đúng 10 file (Dev A) + 15 file (Dev B), 0
+    overlap, không đụng `tokens.css`/`dark-mode.css`/`flat-mode.css`/
+    `lib.ts`.
+  - Full-tree re-grep pattern wave-3 category-1
+    (`--wx-(fs-10|fs-11|fs-17|fs-22|fs-26|fw-normal|space-16|space-20|
+    space-2-5|surface-raised|surface-hover|surface-default|danger-subtle|
+    success-subtle)`) trên toàn `frontend/src`: **chỉ còn đúng 2 hit**, khớp
+    chính xác dự đoán trong backlog round 6 — `FloatingLabelsView.vue:125`
+    (đọc lại code: nằm trong `<pre>` doc-sample, đóng `</pre>` ở dòng 131,
+    live CSS thật ở dòng 100/112 đã đúng `var(--wx-fs-14)`, không phải bug)
+    và `LoginV3View.vue:408` (`.v3-brand-name{font-size:var(--wx-fs-17)}`,
+    không có fallback, bug thật, cố ý để lại cho round sau).
+  - Verify các judgment call: (a) đọc `TemplateGallery.vue:438` xác nhận
+    `.hdr__title` đã dùng sẵn `var(--wx-fs-28)` — khớp với
+    `AnimationShowcase.vue` sau khi Dev A đổi fs-26→fs-28, 2 page-header
+    title đồng nhất; (b) đọc `CrudPage.vue:804` và `SaasLayout.vue:294` xác
+    nhận cả 2 đều đúng selector `:hover` thật (`.detail-row:hover`,
+    `.mob-nav-item:hover`), không phải resting-state; (c) đọc
+    `FAQAccordion.vue:141`, `ContactView.vue` (`.contact-form`,
+    `.contact-success`), `PartnersView.vue` (`.partner-card`),
+    `ProductsView.vue` (`.product-card`) xác nhận toàn bộ là resting/default
+    card style (không có `:hover`/`:focus` trong selector) → dùng
+    `--wx-surface-elevated` đúng ngữ nghĩa, không phải `--wx-hover-bg`; (d)
+    đọc `tokens.css` xác nhận scale thật: `--wx-space-9: 64px`,
+    `--wx-space-10: 80px`, `--wx-space-3: 12px` — `DashboardActivity.vue`
+    space-2-5→space-3 là rounding hợp lý (10px ý định → 12px token, dùng
+    cho table cell padding, không đổi layout rõ rệt); marketing
+    space-16→space-9 (64px) và space-20→space-10 (80px) đọc lại context
+    `PartnersView.vue .partners-hero{padding:120px ... var(--wx-space-16)}`
+    — cặp với literal 120px top của 1 hero section lớn, 64px bottom hợp lý
+    hơn nhiều so với đọc "space-16" theo nghĩa literal 16px (sẽ lệch hẳn so
+    với 120px top) → xác nhận Dev B chọn đúng interpretation Tailwind-scale.
+  - Token existence: `--wx-fs-12`(12px)/`--wx-fs-28`(28px),
+    `--wx-fw-regular`(400), `--wx-hover-bg`, `--wx-surface-elevated`,
+    `--wx-space-3`(12px)/`-9`(64px)/`-10`(80px) đều tồn tại trong
+    `tokens.css`; `--wx-hover-bg` và `--wx-surface-elevated` đều có override
+    màu trong `dark-mode.css` (dòng 31, 72).
+  - New-hardcode check: grep diff 2 commit cho hex/rgba/px mới trên dòng
+    `+` (loại trừ `var(--wx-...)`) → 0 kết quả cả 2 commit, không có
+    hardcode mới.
+  - API safety: đọc toàn bộ diff (`git show` từng file) xác nhận 100% nằm
+    trong `<style scoped>`, chỉ đổi giá trị `font-size`/`background`/
+    `padding`/`font-weight`, không đụng `<script setup>`/`<template>`,
+    không đổi prop/emit/slot, `lib.ts` không đổi.
+  - Spot-check false-positive claim của Dev A: đọc
+    `AnimationShowcase.vue:78-82` xác nhận `<code>--wx-d-*</code>` và
+    `<code>--wx-ease-*</code>` là prose text trong `<p class="hdr__sub">`
+    (mô tả token family name cho doc), không phải `var(--wx-d-*)` sống nào
+    trong CSS — xác nhận đúng là false positive, không phải bug thật.
+  - Không tìm thấy vấn đề nào cần follow-up fix. **ROUND 7 QA: PASS**,
+    không có follow-up commit.
+- Full-tree grep cuối cùng xác nhận: **wave-3 category-1 (no-fallback,
+  bug thật) coi như CLOSED toàn bộ repo**, chỉ còn đúng 1 site sống thật
+  chưa xử lý — `views/auth/LoginV3View.vue:408` (`--wx-fs-17`, cố ý deferred
+  vì cần chọn 16 hay 18 tuỳ context). `FloatingLabelsView.vue:125` là
+  exception đã xác nhận không phải bug (doc-sample trong `<pre>`), không
+  tính vào wave-3 còn tồn đọng.
+- Backlog cho round 8 — **ngắn hơn hẳn**, còn lại:
+  - `views/auth/LoginV3View.vue:408` — nốt cuối wave-3 category-1
+    (`--wx-fs-17`→16 hoặc 18 tuỳ context, brand-name cạnh logo 36px).
+  - GROUP 2 (có fallback, an toàn visual, chỉ là nợ đặt tên) — vẫn nguyên,
+    đã re-verify số lượng round này: `--wx-error-bg/text/border`→nên đổi
+    thành `--wx-danger-*` ở `LoginV3View.vue` (dòng 592-594, 728-730, 6 chỗ)
+    và `AnimationShowcase.vue` (dòng 905,907,910,924, 4 chỗ) — có thể gộp
+    chung với fix fs-17 ở LoginV3View.vue trong cùng round vì cùng file.
+  - `views/showcase/IconShowcase.vue` — naming scheme riêng `--wx-color-*`
+    (đã re-grep xác nhận đúng 45 chỗ, khớp con số round 6 ước tính), GROUP 2,
+    ưu tiên thấp hơn vì không vỡ visual (không có bug thật, chỉ là tên biến
+    khác convention).
+  - Mục A (spacing sweep còn lại ngoài wave-3, vd `views/dashboard/*` 10
+    file) và B (duplicate button/chip) vẫn đứng sau GROUP 2 trong thứ tự ưu
+    tiên — có thể PLAN round 8 cân nhắc chuyển sang mục A/B hoặc GLOBAL
+    AUDIT (mục D) nếu muốn xử lý GROUP 2 gộp chung 1 round nhỏ trước.
+
+<!-- Round 8+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

@@ -210,6 +210,8 @@ function isSectionHeader(item: ContextMenuItem): boolean {
   border-radius: var(--wx-radius-lg);
   box-shadow: var(--wx-shadow-xl);
   padding: 4px 0; min-width: 210px;
+  /* outline:none có chủ đích: menu nhận focus() lập trình khi mở (để phím
+     mũi tên điều hướng item), không phải control người dùng tab tới trực tiếp. */
   overflow: visible; outline: none;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);

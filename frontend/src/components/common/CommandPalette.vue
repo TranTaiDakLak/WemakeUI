@@ -233,6 +233,10 @@ defineExpose({ show, hide })
   outline: none;
   font-family: inherit;
 }
+.wx-cmdk__input:focus-visible {
+  box-shadow: var(--wx-shadow-focus);
+  border-radius: var(--wx-radius-sm);
+}
 .wx-cmdk__input::placeholder { color: var(--wx-content-muted); }
 
 .wx-cmdk__list {

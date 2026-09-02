@@ -203,5 +203,9 @@ function next() { go(props.modelValue + 1) }
   background: var(--wx-hover-bg);
   border-color: var(--wx-border-focus);
 }
+.wx-pagination__loadmore:focus-visible {
+  outline: 2px solid var(--wx-border-focus);
+  outline-offset: 2px;
+}
 .wx-pagination__loadmore:disabled { opacity: 0.5; cursor: not-allowed; }
 </style>

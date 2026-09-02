@@ -285,6 +285,7 @@ function realIndex(visibleIdx: number): number {
 <style scoped>
 .datagrid-wrapper { flex: 1; min-height: 0; overflow: hidden; background: var(--bg-primary); }
 .datagrid-wrapper:focus { outline: none; }
+.datagrid-wrapper:focus-visible { box-shadow: var(--wx-shadow-focus); }
 .datagrid-scroll { height: 100%; overflow: auto; }
 .datagrid { width: 100%; border-collapse: collapse; font-size: var(--font-size-small, 12px); background: var(--bg-primary); table-layout: fixed; }
 .datagrid--resizing { cursor: col-resize; user-select: none; }

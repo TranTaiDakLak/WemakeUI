@@ -148,6 +148,8 @@ onBeforeUnmount(() => {
   z-index: calc(var(--wx-z-overlay) + 1);
   display: flex;
   flex-direction: column;
+  /* outline:none có chủ đích: panel nhận focus() lập trình để bẫy focus
+     (focus trap) khi mở drawer, không phải control người dùng tab tới trực tiếp. */
   outline: none;
   font-family: var(--wx-font-primary);
 }

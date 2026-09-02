@@ -128,7 +128,7 @@ watch(() => props.indeterminate, (val) => {
 /* focus ring via label:focus-within */
 .base-checkbox:focus-within .chk-box {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0,123,255,.25);
+  box-shadow: var(--wx-shadow-focus);
 }
 
 .chk-text {

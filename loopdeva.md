@@ -2958,4 +2958,198 @@ tự ý dừng sớm hơn.
   finding thật của loop, chưa nên ép GLOBAL AUDIT 0-finding sớm khi còn
   backlog cụ thể chưa cạn.
 
-<!-- Round 22+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 22 (2026-09-02)
+- PLAN (opus): theo đúng khuyến nghị round 21 — Dev A = D#9(a) 4 file real
+  fix (`MarketingHeader.vue`, `MembersView.vue`, `SettingsView.vue`,
+  `VersionsView.vue`) + D#9(b) chính thức document exception category mới
+  "fixed-dark chrome/terminal panel" trên 5 file (`AuthLayout.vue`,
+  `SaasLayout.vue`, `CodeBlock.vue`, `ConsoleView.vue`,
+  `DevPanelShowcase.vue`); Dev B = D#4 phần table/grid còn lại — so sánh
+  `BaseDataGrid.vue` vs `DataGridPro.vue` th/td styling + floating-menu
+  shadow inconsistency giữa `BaseSelect`/`BaseSelectMenu`/`BaseDropdown`/
+  `DataGridPro` colmenu.
+- Dev A commit `078e24c`: 9 file. Fix thật (5 chỗ): `MarketingHeader.vue`
+  `.mkt-btn--primary { color: #fff }` → `var(--wx-text-on-brand)`;
+  `MembersView.vue` `.product-status--active/-expired/-pending` background
+  `rgba(...,0.12)` → `color-mix(in srgb, var(--wx-success/danger/warning-solid)
+  12%, transparent)` + text color → `var(--wx-success/danger/warning-text)`;
+  `SettingsView.vue` `.integration-row__status--ok/-error` background
+  `rgba(...,0.1)` → `color-mix(... 10%, transparent)` (giữ nguyên `--idle` đã
+  tokenize sẵn); `VersionsView.vue` `.count-pill--fix/-update/-new` background
+  `rgba(...,0.12)` → `color-mix(... 12%, transparent)` (giữ nguyên text color
+  đã tokenize sẵn); `SaasLayout.vue` 4× `color: #fff` trên gradient-header
+  chrome (`.topbar-icon`, `.topbar-icon:hover`, `.mob-drawer__brand`,
+  `.mob-drawer__close`) → `var(--wx-text-on-brand)`. Document-only (thêm
+  comment giải thích, 0 CSS value đổi): `AuthLayout.vue` (aside login
+  brand/dark cố định), `SaasLayout.vue` (block topbar/header chrome —
+  white-glass overlay + dark scrim luôn nằm trên gradient-header cố định),
+  `CodeBlock.vue` (code panel `#0f172a` kiểu code-editor luôn tối),
+  `ConsoleView.vue` (`.console-body` terminal GitHub-dark), `DevPanelShowcase.vue`
+  (`.code-block`/`.network-demo` cùng palette terminal + status devtools).
+  typecheck+build:lib PASS.
+- Dev B commit `9b9efb6`: 5 file. `BaseDataGrid.vue`/`DataGridPro.vue` th/td
+  unify về 1 spec chung (khớp convention `.data-table` đã dùng nơi khác): th
+  `font-size: var(--wx-fs-12)`/`font-weight: var(--wx-fw-semibold)` ở cả 2
+  file (trước đó `BaseDataGrid` hardcode `13px`/`600`, `DataGridPro` hardcode
+  `11px`/`700`); `DataGridPro`'s `.dgp-th` thêm `text-transform: uppercase`
+  để khớp `BaseDataGrid`; td cả 2 file: `color: var(--wx-text-primary)`
+  (tăng contrast) + `border-bottom: var(--wx-border-subtle)` (`DataGridPro`'s
+  `.dgp-td` vốn đã đúng giá trị này từ trước, không đổi); `DataGridPro`'s
+  `font-size: 12px` literal → `var(--wx-fs-12)`. Padding/density tier
+  (`.dgp--d-sm/md/lg`) giữ nguyên không đụng. `BaseSelect.vue`/
+  `BaseSelectMenu.vue`/`BaseDropdown.vue`: box-shadow 2-lớp hardcode
+  `rgba(0,0,0,.08/.12-.14)` → `var(--wx-shadow-lift)`; `DataGridPro.vue`'s
+  `.dgp-colmenu` đổi từ `var(--wx-shadow-lg)` → `var(--wx-shadow-lift)` cho
+  đồng bộ với 3 file kia. typecheck+build:lib PASS.
+- Dev C QA — verify độc lập toàn bộ checklist, không tin theo commit message:
+  - **Build gate**: `typecheck` sạch (0 lỗi); `build:lib` chạy 2 lần liên
+    tiếp — output y hệt nhau cả 2 lần (`ui.css` 236.00 kB/gzip 34.35 kB,
+    `es.js` 423.77 kB/gzip 100.16 kB, `umd.js` 330.86 kB/gzip 86.15 kB, xác
+    nhận byte-exact 235997 bytes qua `wc -c`) — không flake; `build:app` PASS
+    (18.18s, mọi chunk build OK). So với round 21 (`235.99 kB`), `ui.css`
+    tăng ~0.01 kB (7 byte thật) — hợp lý: `color-mix(...)` dài hơn `rgba(...)`
+    (Dev A) phần lớn bù trừ bởi box-shadow 2 dòng rgba rút gọn thành 1
+    `var()` (Dev B), không phải dấu hiệu bất thường.
+  - `git show --stat`: Dev A đúng 9 file, Dev B đúng 5 file, **0 overlap**
+    (đối chiếu tên file từng cái một), không đụng
+    `tokens.css`/`dark-mode.css`/`flat-mode.css`/`style.css`/`lib.ts`.
+  - **Dev A — đọc FULL diff cả 9 file**: cả 3/3 chỗ `color-mix()` khớp
+    CHÍNH XÁC alpha gốc — `MembersView.vue` `0.12→12%` (x3), `SettingsView.vue`
+    `0.1→10%` (x2), `VersionsView.vue` `0.12→12%` (x3) — không có phần trăm
+    nào bị lệch. `SaasLayout.vue` 4× `color:#fff` → `var(--wx-text-on-brand)`
+    xác nhận đúng đủ 4 chỗ, còn rgba glass (`rgba(255,255,255,0.18)`,
+    `rgba(255,255,255,0.15)`) và dark scrim `rgba(0,0,0,0.45)` của
+    `.mob-backdrop` **byte-identical so với trước** (không nằm trong diff).
+    5 comment document-only — đọc trực tiếp 2/5 file: `CodeBlock.vue` comment
+    ghi "`#0f172a` + slate text scale" → grep xác nhận đúng `background:
+    #0f172a` thật ở dòng ngay dưới; `AuthLayout.vue` comment ghi "brand/dark
+    hardcode hex + rgba white-glass" → grep xác nhận đúng
+    `linear-gradient(145deg, #1e3a8a, #1d4ed8, #2563eb)`/`#0f172a` thật ngay
+    dưới. Cả 5 comment đều dùng giá trị hex/palette RIÊNG của từng file
+    (`#0f172a` CodeBlock/AuthLayout khác `#0d1117` DevPanelShowcase/ConsoleView)
+    — xác nhận KHÔNG PHẢI copy-paste boilerplate.
+  - **Dev B — đọc FULL diff cả 5 file**: `BaseDataGrid.vue` th xác nhận đúng
+    `var(--wx-fs-12)`/`var(--wx-fw-semibold)`, td đúng
+    `var(--wx-text-primary)`/`var(--wx-border-subtle)`. `DataGridPro.vue` th
+    xác nhận có thêm `text-transform: uppercase` + khớp cùng font-size/weight
+    với `BaseDataGrid`. Claim "`.dgp-td` đã sẵn khớp spec, không đổi" — verify
+    ĐỘC LẬP bằng cách đọc thẳng rule `.dgp-td` hiện tại (dòng 824-830, không
+    nằm trong diff): `color: var(--wx-text-primary); border-bottom: 1px solid
+    var(--wx-border-subtle);` — đúng, claim thật không phải giả định. 3 file
+    floating-menu (`BaseSelect`/`BaseSelectMenu`/`BaseDropdown`) + `DataGridPro`'s
+    `.dgp-colmenu` đều xác nhận dùng `var(--wx-shadow-lift)`. Re-verify độc lập
+    `--wx-shadow-lift` KHÔNG có override trong `dark-mode.css` (chỉ
+    `--wx-shadow-lg` có, dòng 82) và không xuất hiện trong `flat-mode.css` —
+    grep riêng, không tin theo lời khai commit — xác nhận swap an toàn ở cả 2
+    theme. Padding/density tier (`.dgp--d-sm/md/lg` chỉ đổi `.dgp-th` padding,
+    không đụng font-size/color) và `BaseDataGrid`'s padding (`9px`/
+    `var(--wx-space-2)`) đều giữ nguyên y hệt trước — xác nhận claim đúng.
+  - **Cross-file consistency check (mục 5)**: đọc lại `BaseDataGrid` th/td vs
+    `DataGridPro` th/td cạnh nhau — cả 2 giờ genuinely khớp font-size
+    (`--wx-fs-12`), font-weight (`--wx-fw-semibold`), uppercase-ness (cả 2 có
+    `text-transform: uppercase`), màu (`--wx-text-muted` cho th,
+    `--wx-text-primary` cho td), border token (`--wx-border-default` cho th,
+    `--wx-border-subtle` cho td) — đúng mục tiêu round đề ra. Padding vertical
+    khác nhau (`BaseDataGrid` th `9px` cố định vs `DataGridPro` th
+    `var(--wx-space-3)`/3 tier density; td `BaseDataGrid` có padding dọc còn
+    `DataGridPro` td `padding: 0` vì chiều cao row điều khiển qua
+    `.dgp-tr`/virtual-scroll row-height riêng) — khác biệt này thuộc kiến trúc
+    density/virtualization sẵn có từ trước, không phải phần "unify" round này
+    nhắm tới, hợp lý giữ nguyên.
+  - **New-hardcode check (mục 6)**: grep dòng `+` cả 2 diff cho hex/rgba/px →
+    2 hit, cả 2 đều PRE-EXISTING không phải mới: `.topbar-icon:hover`
+    (`rgba(255,255,255,0.18)` vốn có sẵn, chỉ phần `color:#fff→var()` trong
+    cùng dòng mới đổi) và `.datagrid th/td` (`9px`/`var(--wx-space-3)`/
+    `var(--wx-space-2)` padding vốn có sẵn, chỉ phần font-size/font-weight/
+    color/border trong cùng dòng đổi). **0 hardcode mới thật sự.**
+  - **Prop/emit/slot/class rename check (mục 7)**: cả 14 file — 100% diff nằm
+    trong `<style scoped>`, không hunk nào chạm `<template>`/`<script setup>`;
+    0 class/selector nào đổi tên (chỉ property value đổi) — an toàn cho public
+    API dist-lib (`BaseDataGrid`/`DataGridPro`/`BaseSelect`/`BaseSelectMenu`/
+    `BaseDropdown`/`MarketingHeader` đều ship qua `lib.ts`).
+  - **Investigate thêm cho backlog round 23 (câu hỏi decorative-gradient từ
+    round 21 mục (c))**: đọc trực tiếp `views/showcase/OverviewView.vue` (hero
+    banner dòng 208-316 + `groups` array dòng 15-51/`.group[data-color=...]`
+    dòng 424-428) và `views/showcase/TokensShowcase.vue` (dòng 23-25,
+    428-944). Kết luận: **KHUYẾN NGHỊ GIỮ NGUYÊN (không tokenize), chỉ nên
+    thêm comment document** — 2 pattern khác nhau nhưng đều chính đáng:
+    (1) `.hero`/`.stat-card` của `OverviewView.vue` — nền `linear-gradient`
+    dựa `var(--wx-brand-primary)` trộn thêm hex tím/chàm cố định qua
+    `color-mix()`, rgba(255,255,255,...) glass overlay/text ở trên — CÙNG
+    pattern "fixed-brand-gradient hero chrome" y hệt `MarketingHero.vue`/
+    `AuthLayout.vue`/`SaasLayout.vue` vừa được document chính thức round này;
+    (2) `groups` array (5 nhóm phase màu violet/blue/amber/emerald/rose) +
+    `.group[data-color=...] .group-title` — categorical color-coding cho 5
+    nhóm lộ trình, CÙNG rationale với per-product hex đã DECLINE ở round
+    2-3 và chart-series-colors (mục 3 luật chung file này) — tokenize sẽ cần
+    tạo 5 token "category color" mới không có trong design system hoặc làm
+    giảm khả năng phân biệt nhóm; không phải bug thiếu token. Chưa đọc kỹ
+    `TemplateGallery.vue`/`IconShowcase.vue` (chỉ lướt qua theo pattern đã
+    biết từ round 21 — `IconShowcase.vue` đã xác nhận 0 hit thật trong cả
+    221-list lẫn 258-list do nằm trong block `.is-dark` loại trừ có chủ đích)
+    — round 23 PLAN nên đọc 2 file còn lại trước khi đóng hẳn mục (c), nhưng
+    dựa trên 2/4 file đã đọc kỹ, xác suất cao cả 4 đều là exception hợp lệ chứ
+    không phải bug cần tokenize.
+  - **Không phát hiện lỗi nào cần QA follow-up commit** — cả Dev A và Dev B
+    đều đúng 100% theo khai báo, verify độc lập từng điểm không dựa vào lời
+    commit message.
+- **ROUND 22 QA: PASS**, không cần follow-up commit. Round này có finding
+  thật (5 status-tint hardcode thật + 1 table-styling inconsistency thật giữa
+  2 grid component của lib) — **KHÔNG PHẢI 0-finding**, không tính vào chuỗi
+  "3 GLOBAL AUDIT liên tiếp 0-finding" của §6. Tally cập nhật: round 17, 18,
+  19, 20, 21, 22 — **CẢ 6 ROUND LIÊN TIẾP ĐỀU CÓ FINDING THẬT**, chuỗi
+  0-finding-liên-tiếp cần cho điều kiện dừng vẫn đang **0/3**.
+- **MILESTONE — D#4 (button/modal/table consistency) nay COI NHƯ ĐÃ XỬ LÝ
+  PHẦN LỚN**: family modal/drawer/dialog đã unify ở round 21 (Dev A —
+  `BaseModal`/`BaseDrawer` với `ConfirmDialog`/`FormModal`/`FormDrawer`), gia
+  đình datagrid/table đã unify ở round 22 (Dev B — `BaseDataGrid`/
+  `DataGridPro` th/td + floating-menu shadow). 2/2 nhóm chính trong category
+  D#4 đã có round thật sự đào sâu, tìm ra và fix bug/inconsistency cụ thể —
+  **coi D#4 là LARGELY CLOSED**. Item nhỏ còn sót lại (ưu tiên thấp, không
+  chặn việc coi category đóng): các bảng ví dụ trong `views/docs/*Doc.vue`
+  (`DataGridDoc.vue` v.v.) chưa đối chiếu token/spacing với `.data-table`
+  convention thật; button family nói chung (không chỉ trong modal footer)
+  chưa có 1 round audit riêng dạng "so sánh mọi biến thể BaseButton dùng
+  trong toàn repo" — có thể để dành nếu loop cần thêm 1 category cụ thể sau
+  này, không bắt buộc.
+- Backlog cho round 23:
+  1. **D#9 showcase decorative-gradient (mục (c) round 21)** — xem investigate
+     ở trên: khuyến nghị GIỮ NGUYÊN + thêm comment document (không tokenize)
+     cho `OverviewView.vue` (2 pattern: hero-chrome + category-color-group),
+     cần đọc nốt `TemplateGallery.vue`/`IconShowcase.vue` để xác nhận cùng kết
+     luận trước khi đóng hẳn mục (c). Nếu round 23 xác nhận cả 4 file đều là
+     exception hợp lệ, có thể gộp thành 1 commit document-only (giống pattern
+     Dev A round 22 vừa làm) rồi đóng hẳn.
+  2. **D#9 phần còn lại (mục (d) — ~180 hit rải rác chưa phân loại, xem full
+     list trong commit body `da35a24` round 21)** — nhiều khả năng phần lớn
+     cũng rơi vào các exception category đã biết (per-product/category color,
+     chart series, fixed-dark chrome) dựa theo pattern vừa xác nhận ở
+     `OverviewView.vue`, nhưng CHƯA verify từng file — nếu round 23/24 đọc
+     qua và phần lớn ra exception hợp lệ, đây là tín hiệu tốt để bắt đầu đếm
+     GLOBAL AUDIT 0-finding.
+  3. **D#4 — LARGELY CLOSED** (xem milestone trên), chỉ còn 2 item nhỏ ưu
+     tiên thấp (docs table example, button-variant audit toàn repo) — không
+     bắt buộc làm ngay.
+  4. **D#5 (icon-sizing)** — vẫn ở trạng thái "đã document, không cần thêm
+     hành động" từ round 20, không đổi. **D#8 (ARIA)**, **D#10 (orphan
+     component)** — vẫn CLOSED từ round 19-20. Mục A/B/C — vẫn CLOSED.
+  5. **Đánh giá tổng thể cho PLAN round 23**: loop đã chạy 22 round. Với A,
+     B, C, D#8, D#10 đều đã CLOSED, D#4 nay LARGELY CLOSED, D#5 đã document
+     xong — hạng mục có finding cụ thể, chưa cạn thật sự chỉ còn D#9(c)/(d)
+     (nhiều khả năng phần lớn sẽ ra exception, không phải bug) và 2 category
+     CHƯA TỪNG có round audit riêng dạng đào sâu: **D#3** (layout lệch/
+     overflow/text truncate — mới chỉ được liệt kê tên, chưa ai thật sự quét)
+     và **D#7** (interaction states hover/focus/active/disabled/loading/
+     empty/error theo SCREEN COMPLETION GATE — cũng chưa có round riêng).
+     PLAN round 23 nên cân nhắc: (a) làm nốt D#9(c) cho gọn (nhanh, có thể ra
+     1 round gần-0-finding thật), sau đó (b) mở 1 trong 2 category "chưa từng
+     đào" (D#3 hoặc D#7) làm hạng mục chính — đây là 2 category cuối cùng
+     trong danh sách 10 mục D còn "nguyên" (chưa ai thật sự thử tìm finding
+     cụ thể), nên có khả năng cao nhất cho ra finding thật tiếp theo, hoặc
+     nếu ra 0-finding thì đó là ứng viên hợp lệ đầu tiên cho chuỗi 3 GLOBAL
+     AUDIT liên tiếp cần thiết ở §6. Backlog cụ thể sắp cạn dần — nếu round
+     23-24 cũng không tìm ra finding mới đáng kể ở D#3/D#7/D#9 tail, loop nên
+     bắt đầu nghiêm túc tính đến khả năng đạt điều kiện dừng trong vài round
+     tới.
+
+<!-- Round 23+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

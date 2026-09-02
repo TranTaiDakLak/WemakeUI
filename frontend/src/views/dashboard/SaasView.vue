@@ -68,7 +68,7 @@ const totalMrr = '1.562 triệu'
           <path :d="sparkPath([...seriesUp, ...seriesUp], 600, 220, 12)" stroke="var(--wx-brand-primary)" stroke-width="2" fill="none" />
           <path :d="sparkPath([...seriesFlat, ...seriesFlat], 600, 220, 12)" stroke="#94a3b8" stroke-dasharray="4 4" stroke-width="1.5" fill="none" />
         </svg>
-        <div class="legend"><span class="d" style="background:var(--wx-brand-primary)" /> Thực tế <span class="d" style="background:#94a3b8" /> Mục tiêu</div>
+        <div class="legend"><LegendDot color="var(--wx-brand-primary)" class="legend-dot-gap" /> Thực tế <LegendDot color="#94a3b8" class="legend-dot-gap" /> Mục tiêu</div>
       </BaseCard>
 
       <BasePanel title="Phân bổ gói" tone="default">
@@ -120,7 +120,7 @@ const totalMrr = '1.562 triệu'
 @media (max-width: 960px) { .cols { grid-template-columns: 1fr; } }
 .big-chart { width: 100%; height: 220px; }
 .legend { display: flex; gap: var(--wx-space-3); font-size: var(--wx-fs-12); color: var(--wx-content-muted); margin-top: var(--wx-space-2); }
-.d { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: var(--wx-space-1); }
+.legend-dot-gap { margin-right: var(--wx-space-1); }
 
 .plans { list-style: none; margin: 0; padding: 0; }
 .plan-row {

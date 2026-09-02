@@ -154,7 +154,7 @@ const X_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 .f-link { font-size: var(--wx-fs-13); color: var(--wx-content-muted); text-decoration: none; }
 .f-link:hover { color: var(--wx-content-primary); }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .nav-links, .nav-actions { display: none; }
   .mobile-toggle { display: inline-flex; margin-left: auto; }
 }

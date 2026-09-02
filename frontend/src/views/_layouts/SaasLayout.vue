@@ -194,7 +194,7 @@ const activeId = computed(() => props.current)
   gap: var(--wx-space-3);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .saas-content { padding: 0 var(--wx-space-3) var(--wx-space-5); gap: var(--wx-space-3); }
   :deep(.wx-page-header--padded) { padding: var(--wx-space-3); }
 }

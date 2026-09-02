@@ -358,7 +358,7 @@ onBeforeUnmount(() => stopSmoothScroll())
 }
 
 /* ── Mobile ── */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .wx-shell__sub-sidebar { display: none; }
   .wx-shell__split { flex-direction: column; }
   .wx-shell__split-master {

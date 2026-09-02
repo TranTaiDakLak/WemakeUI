@@ -109,7 +109,7 @@ function goLab() { router.push('/lab') }
 
 /* The user chip in the topbar already shows the same name; on narrow
    viewports the subtitle just duplicates that info AND forces wrap. */
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .topbar-subtitle { display: none; }
 }
 

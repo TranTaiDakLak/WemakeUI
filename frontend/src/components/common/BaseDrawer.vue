@@ -181,7 +181,7 @@ onBeforeUnmount(() => {
 .wx-drawer[data-placement="top"][data-size="xl"], .wx-drawer[data-placement="bottom"][data-size="xl"]  { height: 600px; }
 .wx-drawer[data-placement="top"][data-size="full"], .wx-drawer[data-placement="bottom"][data-size="full"]{ height: 100vh; }
 
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .wx-drawer[data-placement="right"], .wx-drawer[data-placement="left"] {
     width: min(90vw, 400px) !important;
   }

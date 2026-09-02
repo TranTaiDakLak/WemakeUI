@@ -71,7 +71,7 @@ watch(
 
 /* Mobile: neo ở TRÊN cùng (góc dưới bị thanh điều hướng trình duyệt che).
    Căn ngang giữa với lề an toàn; toast mới xếp xuống dưới (column thường). */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .wx-toast-container {
     bottom: auto;
     top: calc(12px + env(safe-area-inset-top, 0px));
@@ -177,7 +177,7 @@ watch(
 .wx-toast-leave-to { opacity: 0; transform: translateX(32px) scale(0.95); }
 
 /* Mobile: toast neo ở trên → trượt xuống từ trên thay vì từ phải */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .wx-toast-enter-from { opacity: 0; transform: translateY(-24px) scale(0.97); }
   .wx-toast-leave-to { opacity: 0; transform: translateY(-24px) scale(0.97); }
 }

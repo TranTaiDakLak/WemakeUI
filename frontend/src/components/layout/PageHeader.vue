@@ -180,7 +180,7 @@ const sizeClass = computed(() => `wx-page-header--${props.size}`)
   flex-shrink: 0;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .wx-page-header { flex-wrap: wrap; }
   .wx-page-header__actions {
     width: 100%;

@@ -214,7 +214,7 @@ const errorId = computed(() => fieldId.value ? `${fieldId.value}-err` : undefine
   opacity: 0.55;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 639px) {
   .wx-field[data-layout="horizontal"] {
     flex-direction: column;
     gap: var(--wx-space-2);

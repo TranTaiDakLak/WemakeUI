@@ -153,7 +153,7 @@ const PRODUCTS = [
 .product-card__tags { display: flex; flex-wrap: wrap; gap: var(--wx-space-2); }
 .product-tag {
   font-size: 11px; font-weight: 500;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
   border: 1px solid;
 }

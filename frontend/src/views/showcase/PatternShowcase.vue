@@ -396,6 +396,7 @@ const deptOptions = [
 .bio-input:focus {
   outline: none;
   border-color: var(--wx-brand-focus);
+  box-shadow: var(--wx-shadow-focus);
 }
 
 .states-grid {

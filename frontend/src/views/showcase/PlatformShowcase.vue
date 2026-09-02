@@ -448,6 +448,10 @@ kbd {
   color: var(--wx-text-primary);
   border-bottom: 1px solid var(--wx-border-subtle);
 }
+.palette__input:focus-visible {
+  box-shadow: var(--wx-shadow-focus);
+  border-radius: var(--wx-radius-sm);
+}
 .palette__list {
   list-style: none;
   margin: 0;

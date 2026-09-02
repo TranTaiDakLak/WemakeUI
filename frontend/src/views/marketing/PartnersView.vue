@@ -119,7 +119,7 @@ const PARTNERS = [
 .partner-card__tags { display: flex; flex-wrap: wrap; gap: var(--wx-space-2); }
 .partner-tag {
   font-size: 11px; font-weight: 500;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
   background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-subtle);

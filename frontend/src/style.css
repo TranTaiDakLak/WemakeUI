@@ -28,7 +28,7 @@
 
   /* Semantic */
   --success-color: var(--wx-success-solid);
-  --warning-color: #ff8000;
+  --warning-color: var(--wx-warning-solid);
   --error-color: var(--wx-danger-solid);
   --error-bg-subtle: var(--wx-danger-bg);
   --info-color: var(--wx-info-solid);

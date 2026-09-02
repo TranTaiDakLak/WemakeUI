@@ -295,7 +295,7 @@ function getMemberProducts(m: Member) {
 .product-item__status {
   font-size: 10px;
   font-weight: 700;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
   flex-shrink: 0;
 }

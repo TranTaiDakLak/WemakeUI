@@ -106,7 +106,7 @@ function asVer(row: unknown): SoftwareVersion { return row as unknown as Softwar
   font-weight: var(--wx-fw-semibold);
   color: var(--wx-brand-primary);
   background: color-mix(in srgb, var(--wx-brand-primary) 8%, transparent);
-  padding: 3px 8px;
+  padding: 3px var(--wx-space-2);
   border-radius: var(--wx-radius-sm);
 }
 

@@ -380,7 +380,7 @@ async function toggleIntegration(itg: Integration) {
   font-weight: var(--wx-fw-semibold);
   background: color-mix(in srgb, var(--wx-warning-solid) 15%, transparent);
   color: var(--wx-warning-solid);
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
 }
 
@@ -538,7 +538,7 @@ async function toggleIntegration(itg: Integration) {
 .integration-row__status {
   font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-medium);
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
   white-space: nowrap;
 }

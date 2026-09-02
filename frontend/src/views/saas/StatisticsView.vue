@@ -250,7 +250,7 @@ const txSummary: TxSummaryRow[] = [
 .chart-card__header {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
   margin-bottom: var(--wx-space-4);
 }
 

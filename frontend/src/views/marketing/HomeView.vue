@@ -76,7 +76,7 @@ import { RouterLink } from 'vue-router'
 
 /* CTA band */
 .home-cta-band {
-  padding: 80px var(--wx-space-6);
+  padding: var(--wx-space-10) var(--wx-space-6);
   background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
 }
 .home-cta-band__inner { max-width: 680px; margin: 0 auto; text-align: center; }

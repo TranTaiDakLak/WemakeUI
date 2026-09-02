@@ -226,6 +226,15 @@ withDefaults(defineProps<{
   margin-bottom: var(--wx-space-10);
 }
 
+/*
+ * Backlog B (round 10) — cân nhắc gộp .hero-btn với .mkt-btn (MarketingHeader.vue)
+ * nhưng QUYẾT ĐỊNH GIỮ NGUYÊN, không gộp: hero nằm trên nền gradient tối cố định
+ * (#0f172a → #2563eb) nên dùng #fff/rgba glass trực tiếp thay vì token theme-aware
+ * (mkt-btn dùng var(--wx-brand-primary)/var(--wx-text-secondary)...), và kích
+ * thước/padding cũng khác hẳn (fs-16 + space-3/space-6 vs fs-13 + space-2/space-4).
+ * Gộp chung sẽ cần thêm biến thể "on-dark" và làm giảm polish cố ý của hero.
+ * Không tự relitigate nếu không có thay đổi thiết kế thực sự.
+ */
 .hero-btn {
   display: inline-flex;
   align-items: center;

@@ -836,6 +836,16 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
   flex-wrap: wrap;
 }
 
+/*
+ * Backlog B (round 10) — so declaration-by-declaration với BaseBadge
+ * size="lg" (font-size 12px, padding 3px 10px, font-weight 600) nhưng
+ * QUYẾT ĐỊNH GIỮ NGUYÊN, không migrate: .tag-more chỉ khớp font-size (fs-12),
+ * còn padding gần gấp đôi (1px 5px ở đây vs 3px 10px ở BaseBadge lg) và
+ * BaseBadge luôn ép font-weight 600 trong khi .tag-more để weight thường —
+ * migrate sẽ làm "+N" overflow indicator to/đậm hơn hẳn so với các BaseTag
+ * size="sm" cạnh nó, phá vỡ ý đồ làm chip phụ mờ nhạt. Không tự relitigate
+ * nếu chưa đổi kích thước.
+ */
 .tag-more {
   font-size: var(--wx-fs-12);
   color: var(--wx-text-muted);

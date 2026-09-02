@@ -253,6 +253,16 @@ function isActive(to: string) {
   margin-top: var(--wx-space-2);
 }
 
+/*
+ * Backlog B (round 10) — cân nhắc gộp .mkt-btn với .hero-btn (MarketingHero.vue)
+ * nhưng QUYẾT ĐỊNH GIỮ NGUYÊN, không gộp: header nằm trên nền theo theme
+ * (var(--wx-surface-base)) nên dùng token-based color để tự đổi theo
+ * light/dark, trong khi hero luôn nằm trên gradient tối cố định nên hero-btn
+ * hardcode #fff/rgba glass. Kích thước cũng khác (fs-13 + space-2/space-4 ở
+ * đây vs fs-16 + space-3/space-6 ở hero). Gộp chung sẽ cần thêm biến thể
+ * "on-dark" không cần thiết. Không tự relitigate nếu không có thay đổi
+ * thiết kế thực sự.
+ */
 /* ── Link buttons — match wx-btn visual style ── */
 .mkt-btn {
   display: inline-flex;

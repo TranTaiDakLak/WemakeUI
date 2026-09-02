@@ -652,7 +652,17 @@ const EASE_TOKENS = [
 .token-row__val--sm { font-size: 10px; color: var(--wx-text-muted); }
 .token-row__use  { margin-left: auto; color: var(--wx-text-muted); font-size: 11px; }
 
-/* chip */
+/*
+ * Backlog B (round 10) — so declaration-by-declaration với BaseBadge
+ * size="sm" nhưng QUYẾT ĐỊNH GIỮ NGUYÊN, không migrate: BaseBadge--sm ép
+ * padding 1px 6px (ở đây là 2px 8px) và BaseBadge--md khớp padding nhưng lại
+ * là font-size 11px (ở đây 10px) — không có size nào khớp cả 2 chiều cùng
+ * lúc. Quan trọng hơn: .chip--d dùng color-mix(var(--wx-brand-primary) 12%)
+ * để tự bám theo token brand (#2563eb), còn BaseBadge--info hardcode
+ * rgba(59,130,246,.12) (#3b82f6) — lệch màu thật, không chỉ lệch số đo. Giữ
+ * nguyên để không tạo drift màu trong trang giới thiệu design token. Không
+ * tự relitigate nếu BaseBadge chưa đổi sang color-mix theo brand token.
+ */
 .chip {
   display: inline-flex;
   padding: 2px 8px;

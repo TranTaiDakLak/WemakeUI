@@ -131,6 +131,15 @@ function setState(s: typeof state.value) { state.value = s }
   padding-top: var(--wx-space-3);
   border-top: 1px dashed var(--wx-border-subtle);
 }
+/*
+ * Backlog B (round 10) — cân nhắc thay .chip bằng BaseBadge/BaseTag nhưng
+ * QUYẾT ĐỊNH GIỮ NGUYÊN, không migrate: .chip ở đây render bằng <button
+ * type="button"> để toggle demo state (pending/verified/expired/error), có
+ * @click + trạng thái .on — đây là interactive control, không phải nhãn tĩnh.
+ * BaseBadge/BaseTag render <span>, không có action/focus/keyboard semantics
+ * nên migrate sẽ làm mất accessibility của toggle. Không tự relitigate nếu
+ * .chip vẫn còn là <button>.
+ */
 .chip {
   background: transparent;
   border: 1px solid var(--wx-border-default);
@@ -141,5 +150,5 @@ function setState(s: typeof state.value) { state.value = s }
   font-family: inherit;
   color: var(--wx-content-secondary);
 }
-.chip.on { background: var(--wx-brand-primary); color: white; border-color: transparent; }
+.chip.on { background: var(--wx-brand-primary); color: var(--wx-text-on-brand); border-color: transparent; }
 </style>

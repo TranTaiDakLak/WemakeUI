@@ -647,6 +647,15 @@ defineExpose({ openAdd: handleOpenAdd })
   flex-wrap: nowrap;
 }
 
+/*
+ * Backlog B (round 10) — cân nhắc gộp .row-btn thành icon-button variant
+ * tái dùng được (BaseButton) nhưng QUYẾT ĐỊNH GIỮ NGUYÊN, không gộp: đây là
+ * bespoke icon-button với hover fill theo màu action + icon rotate/translate
+ * micro-motion riêng (xem .row-btn--edit:hover/.row-btn--delete:hover), chỉ
+ * dùng đúng 1 chỗ trong file này. Tách thành component dùng chung cho pattern
+ * single-consumer sẽ không tạo giá trị tái sử dụng thực sự và làm loãng phần
+ * micro-motion đặc thù. Không tự relitigate nếu chưa có consumer thứ 2.
+ */
 /* ── Row action icon buttons ── */
 .row-btn {
   display: inline-flex;
@@ -682,7 +691,7 @@ defineExpose({ openAdd: handleOpenAdd })
 }
 .row-btn--edit:hover {
   background: var(--wx-brand-primary);
-  color: #fff;
+  color: var(--wx-text-on-brand);
   border-color: var(--wx-brand-primary);
   box-shadow: 0 3px 10px -2px color-mix(in srgb, var(--wx-brand-primary) 50%, transparent);
 }
@@ -693,14 +702,14 @@ defineExpose({ openAdd: handleOpenAdd })
 
 /* Delete — red */
 .row-btn--delete {
-  color: var(--wx-danger-solid, #ef4444);
-  border-color: color-mix(in srgb, var(--wx-danger-solid, #ef4444) 25%, transparent);
+  color: var(--wx-danger-solid);
+  border-color: color-mix(in srgb, var(--wx-danger-solid) 25%, transparent);
 }
 .row-btn--delete:hover {
-  background: var(--wx-danger-solid, #ef4444);
-  color: #fff;
-  border-color: var(--wx-danger-solid, #ef4444);
-  box-shadow: 0 3px 10px -2px color-mix(in srgb, var(--wx-danger-solid, #ef4444) 50%, transparent);
+  background: var(--wx-danger-solid);
+  color: var(--wx-text-on-brand);
+  border-color: var(--wx-danger-solid);
+  box-shadow: 0 3px 10px -2px color-mix(in srgb, var(--wx-danger-solid) 50%, transparent);
 }
 .row-btn--delete:hover .row-btn__icon {
   transform: translateY(-2px) scale(1.15);

@@ -113,7 +113,7 @@ const recent = [
 .activity-item { display: flex; align-items: flex-start; gap: var(--wx-space-3); }
 .act-dot {
   width: 10px; height: 10px; border-radius: var(--wx-radius-full);
-  background: var(--wx-brand-500); margin-top: 4px; flex-shrink: 0;
+  background: var(--wx-brand-500); margin-top: var(--wx-space-1); flex-shrink: 0;
 }
 .act-dot[data-type="close"] { background: var(--wx-status-danger-border); }
 .act-dot[data-type="review"] { background: var(--wx-status-warning-border); }

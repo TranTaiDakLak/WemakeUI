@@ -795,7 +795,7 @@ function quickConnect(a: Account, e: MouseEvent) {
 /* ── Type tag ── */
 .type-tag {
   display: inline-block;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-medium);
   color: var(--wx-text-secondary);

@@ -848,7 +848,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
 /* Platform tag */
 .platform-tag {
   display: inline-block;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-medium);
   color: var(--wx-text-secondary);
@@ -931,7 +931,7 @@ onMounted(() => { setTimeout(() => { tableLoading.value = false }, 650) })
 
 .detail-platform {
   display: inline-block;
-  padding: 4px 12px;
+  padding: var(--wx-space-1) var(--wx-space-3);
   font-size: var(--wx-fs-13);
   font-weight: var(--wx-fw-semibold);
   color: var(--wx-text-secondary);

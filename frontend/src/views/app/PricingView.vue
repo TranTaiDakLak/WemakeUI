@@ -100,7 +100,7 @@ const faqs = [
 .plan-name { font-size: var(--wx-fs-18); font-weight: var(--wx-fw-bold); }
 .plan-price { margin-bottom: var(--wx-space-3); }
 .price-num { font-size: var(--wx-fs-32); font-weight: 800; letter-spacing: var(--wx-tracking-tight); }
-.price-period { font-size: var(--wx-fs-14); color: var(--wx-content-muted); margin-left: 4px; }
+.price-period { font-size: var(--wx-fs-14); color: var(--wx-content-muted); margin-left: var(--wx-space-1); }
 .plan-desc { font-size: var(--wx-fs-14); color: var(--wx-content-muted); margin-bottom: var(--wx-space-4); }
 
 .features { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--wx-space-2); }

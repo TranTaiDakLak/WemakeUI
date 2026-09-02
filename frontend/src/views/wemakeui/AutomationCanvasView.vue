@@ -163,7 +163,7 @@ function addNode() {
           <BaseButton size="sm" variant="primary" @click="addNode">Thêm</BaseButton>
         </div>
 
-        <div class="sidebar-title" style="margin-top: 16px;">Loại node</div>
+        <div class="sidebar-title" style="margin-top: var(--wx-space-4);">Loại node</div>
         <div v-for="(cfg, type) in TYPE_CFG" :key="type" class="type-legend">
           <span class="type-dot" :style="{ background: cfg.color }"></span>
           <span class="type-icon">{{ cfg.icon }}</span>
@@ -171,14 +171,14 @@ function addNode() {
         </div>
 
         <div v-if="selectedNode" class="node-detail">
-          <div class="sidebar-title" style="margin-top: 16px;">Chi tiết node</div>
+          <div class="sidebar-title" style="margin-top: var(--wx-space-4);">Chi tiết node</div>
           <div v-for="n in NODES.filter(nd => nd.id === selectedNode)" :key="n.id" class="node-info">
             <div class="ni-row"><span class="ni-k">ID</span><code>{{ n.id }}</code></div>
             <div class="ni-row"><span class="ni-k">Loại</span><span>{{ n.type }}</span></div>
             <div class="ni-row"><span class="ni-k">Label</span><span>{{ n.label }}</span></div>
             <div class="ni-row"><span class="ni-k">Vị trí</span><span>{{ Math.round(n.x) }}, {{ Math.round(n.y) }}</span></div>
           </div>
-          <BaseButton size="sm" variant="danger" style="margin-top: 8px; width: 100%"
+          <BaseButton size="sm" variant="danger" style="margin-top: var(--wx-space-2); width: 100%"
             @click="NODES = NODES.filter(n => n.id !== selectedNode); EDGES = EDGES.filter(e => e.from !== selectedNode && e.to !== selectedNode); selectedNode = null">
             Xoá node
           </BaseButton>
@@ -258,14 +258,14 @@ function addNode() {
 <style scoped>
 .canvas-container { display: flex; gap: var(--wx-space-4); align-items: flex-start; }
 .canvas-sidebar { width: 200px; flex-shrink: 0; display: flex; flex-direction: column; gap: var(--wx-space-2); }
-.sidebar-title { font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); color: var(--wx-content-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.sidebar-title { font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); color: var(--wx-content-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: var(--wx-space-1); }
 .add-form { display: flex; flex-direction: column; gap: var(--wx-space-2); }
-.wx-select, .wx-input { padding: 6px 8px; border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-md); background: var(--wx-bg-base); color: var(--wx-content-primary); font-size: var(--wx-fs-13); width: 100%; }
+.wx-select, .wx-input { padding: 6px var(--wx-space-2); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-md); background: var(--wx-bg-base); color: var(--wx-content-primary); font-size: var(--wx-fs-13); width: 100%; }
 .type-legend { display: flex; align-items: center; gap: var(--wx-space-2); padding: 3px 0; }
 .type-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .type-icon { font-size: 12px; }
 .node-detail { display: flex; flex-direction: column; gap: var(--wx-space-1); }
-.node-info { display: flex; flex-direction: column; gap: 4px; background: var(--wx-bg-sunken); border-radius: var(--wx-radius-md); padding: var(--wx-space-2); }
+.node-info { display: flex; flex-direction: column; gap: var(--wx-space-1); background: var(--wx-bg-sunken); border-radius: var(--wx-radius-md); padding: var(--wx-space-2); }
 .ni-row { display: flex; justify-content: space-between; font-size: var(--wx-fs-12); }
 .ni-k { color: var(--wx-content-muted); }
 .canvas-area { flex: 1; overflow: auto; background: var(--wx-bg-sunken); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-lg); }

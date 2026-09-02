@@ -627,13 +627,13 @@ function toggleEnabled(j: CronJob) {
 .cron-code {
   font-family: var(--wx-font-mono);
   font-size: var(--wx-fs-12);
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   background: var(--wx-surface-sunken);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-sm);
   color: var(--wx-text-secondary);
 }
-.cron-lg { font-size: var(--wx-fs-14); padding: 4px 10px; }
+.cron-lg { font-size: var(--wx-fs-14); padding: var(--wx-space-1) 10px; }
 
 /* ── Empty state ── */
 .empty-state {

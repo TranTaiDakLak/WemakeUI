@@ -156,7 +156,7 @@ const TYPE_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'neutral'> =
 .itg-info { flex: 1; }
 .itg-name { font-weight: var(--wx-fw-semibold); font-size: var(--wx-fs-15); margin-bottom: var(--wx-space-1); }
 .itg-desc { font-size: var(--wx-fs-13); color: var(--wx-content-secondary); margin: 0 0 var(--wx-space-2); }
-.itg-events { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: var(--wx-space-2); }
+.itg-events { display: flex; flex-wrap: wrap; gap: var(--wx-space-1); margin-bottom: var(--wx-space-2); }
 .event-chip { font-family: var(--wx-font-mono); font-size: 10px; background: var(--wx-bg-sunken); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-sm); padding: 1px 6px; }
 .itg-last { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 .itg-footer { display: flex; gap: var(--wx-space-2); }
@@ -173,7 +173,7 @@ const TYPE_VARIANT: Record<string, 'info' | 'success' | 'warning' | 'neutral'> =
 .wh-table td { padding: var(--wx-space-3) var(--wx-space-4); border-bottom: 1px solid var(--wx-border-subtle); vertical-align: middle; }
 .wh-table tbody tr:last-child td { border-bottom: none; }
 .wh-url { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); word-break: break-all; }
-.events-wrap { display: flex; gap: 4px; flex-wrap: wrap; }
+.events-wrap { display: flex; gap: var(--wx-space-1); flex-wrap: wrap; }
 .num { font-weight: var(--wx-fw-semibold); font-variant-numeric: tabular-nums; }
 .err { color: var(--wx-status-danger-text); }
 .row-act { display: flex; gap: var(--wx-space-2); }

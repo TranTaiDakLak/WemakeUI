@@ -117,7 +117,7 @@ onUnmounted(() => clearInterval(interval))
 .console-toolbar { display: flex; align-items: center; gap: var(--wx-space-4); flex-wrap: wrap; padding: var(--wx-space-3) var(--wx-space-4); border-bottom: 1px solid var(--wx-border-default); background: var(--wx-bg-sunken); }
 .filter-group { display: flex; align-items: center; gap: var(--wx-space-1); }
 .filter-label { font-size: var(--wx-fs-12); color: var(--wx-content-muted); margin-right: var(--wx-space-1); }
-.filter-btn { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); padding: 2px 8px; border-radius: var(--wx-radius-sm); border: 1px solid var(--wx-border-default); background: transparent; color: var(--wx-content-secondary); cursor: pointer; }
+.filter-btn { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); padding: 2px var(--wx-space-2); border-radius: var(--wx-radius-sm); border: 1px solid var(--wx-border-default); background: transparent; color: var(--wx-content-secondary); cursor: pointer; }
 .filter-btn.active { background: var(--wx-brand-600); color: #fff; border-color: var(--wx-brand-600); }
 .filter-btn.lvl-warn { color: var(--wx-status-warning-text); }
 .filter-btn.lvl-error { color: var(--wx-status-danger-text); }

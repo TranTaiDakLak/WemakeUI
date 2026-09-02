@@ -120,12 +120,12 @@ import { computed } from 'vue'
 .map-main { display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .map-canvas { flex: 1; background: var(--wx-bg-sunken); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-lg); position: relative; overflow: hidden; min-height: 300px; display: flex; align-items: center; justify-content: center; }
 .vn-map { width: 100%; max-width: 400px; height: auto; }
-.map-overlay-hint { position: absolute; bottom: var(--wx-space-3); left: 50%; transform: translateX(-50%); font-size: var(--wx-fs-12); color: var(--wx-content-muted); background: var(--wx-bg-overlay); padding: 4px 12px; border-radius: var(--wx-radius-full); }
+.map-overlay-hint { position: absolute; bottom: var(--wx-space-3); left: 50%; transform: translateX(-50%); font-size: var(--wx-fs-12); color: var(--wx-content-muted); background: var(--wx-bg-overlay); padding: var(--wx-space-1) var(--wx-space-3); border-radius: var(--wx-radius-full); }
 
 .location-detail { }
 .detail-head { display: flex; align-items: center; gap: var(--wx-space-3); }
 .detail-icon { font-size: 24px; }
-.detail-name { display: block; font-size: var(--wx-fs-15); font-weight: var(--wx-fw-semibold); margin-bottom: 4px; }
+.detail-name { display: block; font-size: var(--wx-fs-15); font-weight: var(--wx-fw-semibold); margin-bottom: var(--wx-space-1); }
 .detail-rows { display: flex; flex-direction: column; gap: var(--wx-space-3); }
 .detail-row { display: flex; gap: var(--wx-space-3); font-size: var(--wx-fs-14); }
 .detail-key { color: var(--wx-content-muted); min-width: 80px; }

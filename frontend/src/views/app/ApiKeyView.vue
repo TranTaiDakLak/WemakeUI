@@ -98,7 +98,7 @@ function revokeKey(id: number) { KEYS.value = KEYS.value.map(k => k.id === id ? 
 .key-info { display: flex; flex-direction: column; gap: var(--wx-space-2); }
 .key-row1 { display: flex; align-items: center; gap: var(--wx-space-3); }
 .key-name { font-size: var(--wx-fs-15); font-weight: var(--wx-fw-semibold); }
-.key-value { font-family: var(--wx-font-mono); font-size: var(--wx-fs-13); color: var(--wx-content-link); background: var(--wx-bg-sunken); padding: 2px 8px; border-radius: var(--wx-radius-sm); }
+.key-value { font-family: var(--wx-font-mono); font-size: var(--wx-fs-13); color: var(--wx-content-link); background: var(--wx-bg-sunken); padding: 2px var(--wx-space-2); border-radius: var(--wx-radius-sm); }
 .key-meta { display: flex; align-items: center; gap: var(--wx-space-4); font-size: var(--wx-fs-12); color: var(--wx-content-muted); flex-wrap: wrap; }
 .scope-badges { display: flex; gap: var(--wx-space-1); }
 .key-actions { display: flex; gap: var(--wx-space-2); flex-shrink: 0; }

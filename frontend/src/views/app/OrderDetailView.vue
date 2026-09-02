@@ -138,7 +138,7 @@ function fmt(n: number) { return n.toLocaleString('vi-VN') + ' ₫' }
 .step-indicator { display: flex; flex-direction: column; align-items: center; }
 .step-dot { width: 12px; height: 12px; border-radius: var(--wx-radius-full); background: var(--wx-border-default); border: 2px solid var(--wx-bg-base); box-shadow: 0 0 0 2px var(--wx-border-default); flex-shrink: 0; }
 .step-dot.done { background: var(--wx-status-success-border); box-shadow: 0 0 0 2px var(--wx-status-success-border); }
-.step-line { width: 2px; flex: 1; background: var(--wx-border-subtle); margin: 4px 0; min-height: 24px; }
+.step-line { width: 2px; flex: 1; background: var(--wx-border-subtle); margin: var(--wx-space-1) 0; min-height: 24px; }
 .step-line.done { background: var(--wx-status-success-border); }
 .step-info { padding-bottom: var(--wx-space-4); }
 .step-label { display: block; font-size: var(--wx-fs-14); font-weight: var(--wx-fw-medium); color: var(--wx-content-primary); }

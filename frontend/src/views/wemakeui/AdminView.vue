@@ -439,14 +439,14 @@ onBeforeUnmount(() => document.removeEventListener('mouseup', onMouseup))
 
 /* STATUS BAR segments */
 .sb-seg { font-size: var(--wx-fs-12); color: var(--wx-text-secondary); }
-.sb-div { font-size: var(--wx-fs-12); color: var(--wx-border-default); margin: 0 4px; }
+.sb-div { font-size: var(--wx-fs-12); color: var(--wx-border-default); margin: 0 var(--wx-space-1); }
 .sb-status-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: #10b981;
   display: inline-block;
-  margin-right: 4px;
+  margin-right: var(--wx-space-1);
 }
 .sb-more {
   font-size: var(--wx-fs-12);

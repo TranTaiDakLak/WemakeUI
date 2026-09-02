@@ -3,6 +3,7 @@
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseTag, BaseButton, BaseProgress } from '../../components/common'
 import { sparkPath, sparkArea, seriesUp, seriesDown, seriesFlat } from '../_layouts/dashboard-widgets'
+import LegendDot from './_components/LegendDot.vue'
 
 const cohorts = [
   { month: '01/2026', new: 124, retain: 100, churn: 0  },
@@ -74,7 +75,7 @@ const totalMrr = '1.562 triệu'
         <ul class="plans">
           <li v-for="p in plans" :key="p.name" class="plan-row">
             <div class="plan-info">
-              <span class="dot" :style="{ background: p.color }" />
+              <LegendDot :color="p.color" :size="10" />
               <strong>{{ p.name }}</strong>
               <span class="muted">{{ p.count.toLocaleString('vi-VN') }} KH</span>
             </div>
@@ -131,7 +132,6 @@ const totalMrr = '1.562 triệu'
   font-size: var(--wx-fs-13);
 }
 .plan-info { display: flex; align-items: center; gap: var(--wx-space-2); }
-.dot { width: 10px; height: 10px; border-radius: 9999px; flex-shrink: 0; }
 .muted { color: var(--wx-content-muted); }
 .plan-mrr { font-weight: var(--wx-fw-semibold); }
 

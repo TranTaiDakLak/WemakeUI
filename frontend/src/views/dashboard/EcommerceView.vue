@@ -3,6 +3,7 @@
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseTag, BaseButton, BaseAvatar, BaseProgress } from '../../components/common'
 import { sparkPath, sparkArea, seriesUp, seriesDown, seriesVolatile } from '../_layouts/dashboard-widgets'
+import DashMetric from './_components/DashMetric.vue'
 
 const orders = [
   { id: '#1284', customer: 'Nguyễn Văn A', total: '2.450.000₫', status: 'shipped' },
@@ -45,44 +46,36 @@ const products = [
 
     <div class="kpi-grid" v-reveal>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <div class="metric-label">Doanh thu hôm nay</div>
-          <div class="metric-value">128.420.000₫</div>
+        <DashMetric label="Doanh thu hôm nay" value="128.420.000₫" size="lg">
           <div class="metric-foot">
             <BaseTag size="sm" variant="success" label="+12%" />
             <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesUp], 100, 24)" fill="none" stroke="#10b981" stroke-width="1.5" /></svg>
           </div>
-        </div>
+        </DashMetric>
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <div class="metric-label">Đơn hàng</div>
-          <div class="metric-value">1,284</div>
+        <DashMetric label="Đơn hàng" value="1,284" size="lg">
           <div class="metric-foot">
             <BaseTag size="sm" variant="success" label="+58 đơn" />
             <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesVolatile], 100, 24)" fill="none" stroke="#2563eb" stroke-width="1.5" /></svg>
           </div>
-        </div>
+        </DashMetric>
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <div class="metric-label">Giá trị TB</div>
-          <div class="metric-value">1.840.000₫</div>
+        <DashMetric label="Giá trị TB" value="1.840.000₫" size="lg">
           <div class="metric-foot">
             <BaseTag size="sm" variant="warning" label="-2%" />
             <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesDown], 100, 24)" fill="none" stroke="#f59e0b" stroke-width="1.5" /></svg>
           </div>
-        </div>
+        </DashMetric>
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <div class="metric-label">Hủy đơn</div>
-          <div class="metric-value">18</div>
+        <DashMetric label="Hủy đơn" value="18" size="lg">
           <div class="metric-foot">
             <BaseTag size="sm" variant="danger" label="1.4%" />
             <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesDown], 100, 24)" fill="none" stroke="#ef4444" stroke-width="1.5" /></svg>
           </div>
-        </div>
+        </DashMetric>
       </BaseCard>
     </div>
 
@@ -138,9 +131,6 @@ const products = [
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--wx-space-3);
 }
-.metric { display: flex; flex-direction: column; gap: var(--wx-space-1); }
-.metric-label { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
-.metric-value { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); letter-spacing: var(--wx-tracking-tight); }
 .metric-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--wx-space-2); }
 .spark { width: 80px; height: 24px; }
 

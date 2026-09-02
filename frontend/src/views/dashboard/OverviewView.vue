@@ -3,6 +3,7 @@
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseButton, BaseTag, BaseAvatar, BaseAvatarGroup } from '../../components/common'
 import { sparkPath, sparkArea, seriesUp, seriesDown, seriesFlat, seriesVolatile } from '../_layouts/dashboard-widgets'
+import LegendDot from './_components/LegendDot.vue'
 
 const kpi = [
   { label: 'Doanh thu', value: '128 tr', delta: '+12%', tone: 'success', series: seriesUp },
@@ -67,8 +68,8 @@ const activity = [
           <path :d="sparkPath([...seriesUp, ...seriesFlat], 600, 200, 8)" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4" />
         </svg>
         <div class="chart-legend">
-          <span class="dot" style="background:var(--wx-brand-primary)" /> Tuần này
-          <span class="dot" style="background:#94a3b8" /> Tuần trước
+          <LegendDot color="var(--wx-brand-primary)" class="legend-dot-gap" /> Tuần này
+          <LegendDot color="#94a3b8" class="legend-dot-gap" /> Tuần trước
         </div>
       </BaseCard>
 
@@ -94,7 +95,7 @@ const activity = [
         </div>
         <ul class="legend">
           <li v-for="d in donut" :key="d.label">
-            <span class="dot" :style="{ background: d.color }" />
+            <LegendDot :color="d.color" class="legend-dot-gap" />
             <span>{{ d.label }}</span>
             <strong>{{ Math.round((d.value / total) * 100) }}%</strong>
           </li>
@@ -156,7 +157,7 @@ const activity = [
   color: var(--wx-content-muted);
   margin-top: var(--wx-space-2);
 }
-.dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: var(--wx-space-1); }
+.legend-dot-gap { margin-right: var(--wx-space-1); }
 
 .donut {
   position: relative;

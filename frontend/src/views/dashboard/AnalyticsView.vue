@@ -3,6 +3,7 @@
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BaseTag, BaseButton, BaseProgress } from '../../components/common'
 import { sparkPath, sparkArea, seriesUp, seriesVolatile } from '../_layouts/dashboard-widgets'
+import DashMetric from './_components/DashMetric.vue'
 
 const traffic = [
   { src: 'Tìm kiếm Google', val: 12_482, pct: 48, delta: '+8%' },
@@ -45,32 +46,24 @@ function intensity(d: number, h: number): number {
 
     <div class="kpi-grid" v-reveal>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <div class="metric-label">Phiên truy cập</div>
-          <div class="metric-value">25,632</div>
+        <DashMetric label="Phiên truy cập" value="25,632" size="lg">
           <BaseTag size="sm" variant="success" label="+8.2% w-w" />
-        </div>
+        </DashMetric>
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <div class="metric-label">Lượt xem trang</div>
-          <div class="metric-value">182,408</div>
+        <DashMetric label="Lượt xem trang" value="182,408" size="lg">
           <BaseTag size="sm" variant="success" label="+12% w-w" />
-        </div>
+        </DashMetric>
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <div class="metric-label">Thời gian TB</div>
-          <div class="metric-value">3:42</div>
+        <DashMetric label="Thời gian TB" value="3:42" size="lg">
           <BaseTag size="sm" variant="success" label="+18s" />
-        </div>
+        </DashMetric>
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <div class="metric-label">Tỷ lệ bounce</div>
-          <div class="metric-value">38.4%</div>
+        <DashMetric label="Tỷ lệ bounce" value="38.4%" size="lg">
           <BaseTag size="sm" variant="warning" label="-2.1%" />
-        </div>
+        </DashMetric>
       </BaseCard>
     </div>
 
@@ -140,12 +133,11 @@ function intensity(d: number, h: number): number {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--wx-space-3);
 }
-.metric { display: flex; flex-direction: column; gap: var(--wx-space-1); }
-.metric-label { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
-.metric-value {
+/* AnalyticsView's metric value đã luôn là fs-28 (khác EcommerceView đang dùng
+   fs-24 cho cùng DashMetric size="lg") — giữ nguyên bằng override cục bộ để
+   không đổi visual; xem note trong commit body / follow-up backlog. */
+:deep(.dash-metric--lg .dash-metric__value) {
   font-size: var(--wx-fs-28);
-  font-weight: var(--wx-fw-bold);
-  letter-spacing: var(--wx-tracking-tight);
 }
 
 .cols {

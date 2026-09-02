@@ -3,6 +3,8 @@
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseTag, BaseButton, BaseAvatar, BaseAvatarGroup, BaseProgress } from '../../components/common'
 import { sparkPath } from '../_layouts/dashboard-widgets'
+import LegendDot from './_components/LegendDot.vue'
+import DashMetric from './_components/DashMetric.vue'
 
 const tasks = [
   { id: 'T-241', title: 'Triển khai design tokens',  status: 'done',     owner: 'A', priority: 'medium', due: '02/05' },
@@ -42,32 +44,24 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
 
     <div class="summary" v-reveal>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <span>Tiến độ sprint</span>
-          <strong>75%</strong>
+        <DashMetric label="Tiến độ sprint" value="75%">
           <BaseProgress :value="75" size="sm" variant="success" />
-        </div>
+        </DashMetric>
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <span>Tasks hoàn thành</span>
-          <strong>9 / 12</strong>
+        <DashMetric label="Tasks hoàn thành" value="9 / 12">
           <span class="muted small">Còn 3 ngày</span>
-        </div>
+        </DashMetric>
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <span>Velocity</span>
-          <strong>32 SP</strong>
+        <DashMetric label="Velocity" value="32 SP">
           <BaseTag size="sm" variant="success" label="+4 vs sprint trước" />
-        </div>
+        </DashMetric>
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric">
-          <span>Bug đang mở</span>
-          <strong>4</strong>
+        <DashMetric label="Bug đang mở" value="4">
           <BaseTag size="sm" variant="warning" label="2 critical" />
-        </div>
+        </DashMetric>
       </BaseCard>
     </div>
 
@@ -79,8 +73,8 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
           <path :d="sparkPath([...sprintActual], 580, 200, 16)" stroke="var(--wx-brand-primary)" stroke-width="2" fill="none" />
         </svg>
         <div class="legend-row">
-          <span class="dot" style="background:#94a3b8" /> Lý tưởng
-          <span class="dot" style="background:var(--wx-brand-primary)" /> Thực tế
+          <LegendDot color="#94a3b8" class="legend-dot-gap" /> Lý tưởng
+          <LegendDot color="var(--wx-brand-primary)" class="legend-dot-gap" /> Thực tế
         </div>
         <div class="x-labels">
           <span v-for="(d, i) in sprintDays" :key="i">{{ d }}</span>
@@ -133,8 +127,6 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--wx-space-3);
 }
-.metric { display: flex; flex-direction: column; gap: var(--wx-space-1); font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
-.metric strong { font-size: var(--wx-fs-20); color: var(--wx-content-primary); font-weight: var(--wx-fw-bold); }
 .muted { color: var(--wx-content-muted); }
 .small { font-size: var(--wx-fs-12); }
 
@@ -142,7 +134,7 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
 @media (max-width: 960px) { .cols { grid-template-columns: 1fr; } }
 .chart { width: 100%; height: 220px; }
 .legend-row { display: flex; gap: var(--wx-space-3); font-size: var(--wx-fs-12); color: var(--wx-content-muted); margin-top: var(--wx-space-2); }
-.dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; margin-right: var(--wx-space-1); }
+.legend-dot-gap { margin-right: var(--wx-space-1); }
 .x-labels {
   display: flex;
   justify-content: space-between;

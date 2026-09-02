@@ -2,6 +2,8 @@
 /** dashboard/crm — pipeline kanban + leads table */
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BaseTag, BaseButton, BaseAvatar, BaseAvatarGroup } from '../../components/common'
+import LegendDot from './_components/LegendDot.vue'
+import DashMetric from './_components/DashMetric.vue'
 
 const stages = [
   { id: 'lead',     label: 'Tiềm năng',     color: '#94a3b8', deals: 18, value: '320 tr' },
@@ -46,16 +48,16 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
 
     <div class="summary" v-reveal>
       <BaseCard padded shadow="sm">
-        <div class="metric"><span>Pipeline value</span><strong>2.680 triệu</strong></div>
+        <DashMetric label="Pipeline value" value="2.680 triệu" />
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric"><span>Deals đang mở</span><strong>50</strong></div>
+        <DashMetric label="Deals đang mở" value="50" />
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric"><span>Tỷ lệ win</span><strong>32%</strong></div>
+        <DashMetric label="Tỷ lệ win" value="32%" />
       </BaseCard>
       <BaseCard padded shadow="sm">
-        <div class="metric"><span>Vòng đời TB</span><strong>21 ngày</strong></div>
+        <DashMetric label="Vòng đời TB" value="21 ngày" />
       </BaseCard>
     </div>
 
@@ -63,7 +65,7 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
       <div v-for="(s, i) in stages" :key="s.id" v-reveal="i * 60" class="col">
         <header class="col-head">
           <div class="col-title">
-            <span class="dot" :style="{ background: s.color }" />
+            <LegendDot :color="s.color" />
             {{ s.label }}
             <span class="muted">· {{ s.deals }}</span>
           </div>
@@ -110,9 +112,6 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: var(--wx-space-3);
 }
-.metric { display: flex; flex-direction: column; gap: var(--wx-space-1); font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
-.metric strong { font-size: var(--wx-fs-20); color: var(--wx-content-primary); font-weight: var(--wx-fw-bold); }
-
 .board {
   display: grid;
   grid-template-columns: repeat(5, minmax(220px, 1fr));
@@ -142,7 +141,6 @@ const cards: Record<string, Array<{ company: string; deal: string; amount: strin
   border-bottom: 1px solid var(--wx-border-subtle);
 }
 .col-title { display: flex; align-items: center; gap: var(--wx-space-1); font-size: var(--wx-fs-13); font-weight: var(--wx-fw-semibold); }
-.dot { width: 8px; height: 8px; border-radius: 9999px; }
 .muted { color: var(--wx-content-muted); font-weight: var(--wx-fw-regular); }
 .col-value { font-size: var(--wx-fs-12); color: var(--wx-content-muted); font-weight: var(--wx-fw-medium); }
 

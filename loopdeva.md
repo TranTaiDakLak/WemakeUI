@@ -1249,4 +1249,202 @@ tự ý dừng sớm hơn.
   - Mục B — vẫn **CLOSED** (không có phát hiện mới nào làm thay đổi căn cứ
     decline).
 
-<!-- Round 12+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 12 (2026-09-02)
+- Bối cảnh: PLAN + Dev A/B của round này đã chạy trước hai commit độc lập,
+  Dev C (agent này) chỉ chạy QA theo checklist có sẵn — không chạy lại PLAN.
+- Dev A commit `b853844`: 14 file (`views/auth/{LoginV3View,OnboardingView,
+  OtpView}.vue`, `views/forms/{AddModalFormView,ChecksView,DrawerFormView,
+  EditModalFormView,FileUploadView,FloatingLabelsView,FormControlView,
+  InputGroupView,SelectView,ValidationView,WizardView}.vue`) — tiếp tục mục A:
+  convert padding/margin/gap khớp chính xác lưới 4pt sang `var(--wx-space-*)`
+  (53 dòng đổi), cộng 1 bug thật: `OtpView.vue` `.otp-cell:focus` box-shadow
+  đổi từ hardcoded `rgba(37, 99, 235, 0.15)` sang `color-mix(in srgb,
+  var(--wx-brand-primary) 18%, transparent)` khớp đúng pattern đã có ở
+  `FloatingLabelsView`/`InputGroupView`.
+- Dev B commit `52a7ddb`: 11 file (`style.css` + `views/marketing/{HomeView,
+  PartnersView,ProductsView}.vue` + `views/saas/{DashboardView,MembersView,
+  SettingsView,StatisticsView,VersionsView}.vue` + `views/showcase/
+  {PatternShowcase,PlatformShowcase}.vue`) — tiếp tục mục A cho marketing/saas
+  (15 dòng đổi, tôn trọng đúng exclusion `padding-top: 64px` trên
+  `.home`/`.partners-page`/`.products-page`), cộng 2 việc: (1) fix bug thật
+  `style.css` dòng 28 `--warning-color: #ff8000` (literal, lệch token) →
+  `var(--wx-warning-solid)` (`#f59e0b`, đúng token warning chuẩn); (2) 2 rule
+  `:focus-visible`/`:focus` mới (`PlatformShowcase.vue .palette__input`,
+  `PatternShowcase.vue .bio-input`) thêm `box-shadow: var(--wx-shadow-focus)`
+  cho input trước đó `outline:none`/`border:none` không có thay thế focus
+  visible nào — tiếp nối mục D (accessibility) từ round 11.
+- Dev C QA (agent này) — verify toàn bộ checklist trước khi accept:
+  - **Build gate 3/3 PASS**: `typecheck` sạch (exit 0). `build:lib` 18.04s
+    (`ui.css` 234.70kB, `es.js` 415.90kB, `umd.js` 325.52kB, dts OK).
+    `build:app` 9.65s, mọi chunk build OK, exit 0.
+  - `git show --stat` xác nhận đúng 14 file (Dev A) + 11 file (Dev B), 0
+    overlap, không đụng `tokens.css`/`dark-mode.css`/`flat-mode.css`/`lib.ts`.
+    `style.css` trong diff Dev B xác nhận **đúng 1 dòng** thay đổi (dòng 28
+    `--warning-color`), không có gì khác trong file foundation dùng chung bị
+    đụng tới.
+  - **Dev A regression re-check**: đọc TOÀN BỘ diff cả 14 file — 0 chỗ đổi
+    `font-size`/`width`/`height`/`border-radius`/`grid-template-columns`.
+    Đối chiếu thang `--wx-space-*` thật trong `tokens.css`
+    (1=4,2=8,3=12,4=16,5=24,6=32,7=40,8=48,9=64,10=80,11=96,12=128px) — mọi
+    conversion đều khớp chính xác (kể cả case tinh vi: `LoginV3View.vue`
+    `padding: var(--wx-space-3) 20px` — 12px→space-3 đúng, 20px giữ literal
+    đúng vì thang nhảy thẳng 16→24, không có token khớp 20px, giống hệt case
+    fs-11 round 8). Giá trị lẻ (2/3/6/10/14/20px) đều giữ nguyên literal ở
+    mọi file. Đọc trực tiếp `FloatingLabelsView.vue` (dòng 81-131) và
+    `InputGroupView.vue` (dòng 93-121) xác nhận **claim `<pre>` đúng**: cả 2
+    file có block `<pre>` doc-sample (HTML-escaped) chứa `padding: 20px 12px
+    8px;`/`padding: 0 12px;`/`padding: 8px 12px;` dạng literal — hoàn toàn
+    không bị đụng, còn CSS sống thật ở `<style scoped>` (dòng 175 và 155/168)
+    đã được convert đúng sang `var(--wx-space-*)`.
+  - **OtpView.vue focus-ring**: đọc file, xác nhận
+    `box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-brand-primary) 18%,
+    transparent);` — cú pháp hợp lệ, khớp 100% với pattern đã dùng ở
+    `FloatingLabelsView.vue`/`InputGroupView.vue`/`SelectView.vue`
+    (cùng 18% mix).
+  - **Dev B regression re-check**: đọc diff, 0 chỗ đổi font-size/width/
+    height/border-radius. Grep trực tiếp `padding-top: 64px` trên
+    `HomeView.vue`/`PartnersView.vue`/`ProductsView.vue` — xác nhận vẫn
+    **literal, chưa bị convert** (đúng như claim, cố ý exclude).
+  - **style.css blast radius (quan trọng nhất)**: grep toàn repo
+    `var(--warning-color)` — xác nhận đúng **2 consumer**:
+    `BaseDataGrid.vue:305 .dot-cp` và `BaseProgress.vue:71
+    .base-progress__fill--warning`, không có consumer thứ 3 nào bị Dev B bỏ
+    sót. Grep `--btn-add-color` — xác nhận **0 consumer** (chỉ có dòng khai
+    báo `style.css:37`), để nguyên là đúng. Đọc trực tiếp
+    `dist-lib/ui.css` đã build: `--warning-color: var(--wx-warning-solid);`
+    và `--wx-warning-solid: #f59e0b;` — xác nhận **giá trị cuối cùng đã
+    resolve đúng `#f59e0b`, không còn `#ff8000`** trong bundle ship thật.
+  - **Focus-visible rules reachability**: đọc `tokens.css` xác nhận
+    `--wx-shadow-focus`(dòng 151)/`--wx-border-focus`(dòng 69)/
+    `--wx-radius-sm`(dòng 134) đều tồn tại thật. Đọc context đầy đủ
+    `PatternShowcase.vue` dòng 396-400 (`.bio-input:focus` thêm box-shadow
+    ngay sau border-color, không bị rule nào che) và `PlatformShowcase.vue`
+    dòng 441-454 (`.palette__input` trước đó `border:none; outline:none`
+    không có thay thế — `:focus-visible` mới thêm ngay sau, reachable, không
+    xung đột) — cả 2 đúng như khai báo.
+  - **New-hardcode check**: grep dòng `+` cả 2 commit cho hex/rgba/px ngoài
+    `var(--wx-...)` → **0 kết quả cả 2 commit** (Dev B chỉ thêm
+    `var(--wx-shadow-focus)`/`var(--wx-radius-sm)`, không có hex/rgba/px
+    mới). **API safety**: 100% hunk nằm trong `<style scoped>` (trừ 5 chỗ
+    inline `style="margin-left:8px"`→`style="margin-left:var(--wx-space-2)"`
+    trong `<template>` của Dev A — chỉ đổi giá trị attribute, không đổi
+    prop/emit/slot/class nào), `lib.ts` không đổi.
+  - **Residual re-grep mục A** (`views/{forms,auth,marketing,saas}`, pattern
+    grid-match): phát hiện **1 miss thật** — `EditModalFormView.vue:156`,
+    icon SVG nút "Xóa sản phẩm" có `style="margin-right:4px"` inline nằm
+    trong `<template>` sống (không phải `<pre>` doc-sample) mà cả Dev A lẫn
+    Dev B đều bỏ sót, khớp chính xác lưới 4pt. Đã **tự sửa + commit follow-up
+    `1b687d2`** → `var(--wx-space-1)` (đúng convention đã dùng ở
+    `AppSidebar.vue`, `.legend-dot-gap` các view dashboard, `AdminView.vue`).
+    Re-verify sau fix: `typecheck` + `build:lib` PASS. Re-grep lại
+    `views/{forms,auth,marketing,saas}` sau fix — chỉ còn đúng các exception
+    đã biết: `padding-top: 64px` trên 6 file marketing (`ContactView`,
+    `FAQView`, `HomeView`, `PartnersView`, `ProductDetailView`,
+    `ProductsView` — cố ý, header-compensation) và 3 `<pre>` doc-sample
+    (`FileUploadView.vue:180`, `FloatingLabelsView.vue:95`,
+    `InputGroupView.vue:103,114`). **ROUND 12 QA: PASS WITH FOLLOW-UP COMMIT
+    `1b687d2`**.
+- **Đánh giá milestone mục A — KHÔNG đóng repo-wide** (khác với suy đoán ban
+  đầu trong backlog round 11 rằng đây "có thể là milestone lớn thứ 2"): QA
+  chủ động chạy grep pattern grid-match **trên toàn bộ `frontend/src`**
+  (không chỉ 4 nhóm được giao round này) để trả lời đúng câu hỏi "đã đóng
+  repo-wide chưa" — kết quả: **vẫn còn 313 lượt khớp trên >100 file `.vue`**
+  ngoài phạm vi 4 nhóm vừa xử lý. Breakdown theo cụm lớn nhất (toàn bộ chưa
+  từng được mục A đụng tới, kể cả những khu vực tưởng đã "closed" cho bug
+  khác):
+  - `views/docs/**` — **25/25 file** có hit (toàn bộ trang doc, kể cả
+    `DocsLayout.vue`, `_components/{CodeBlock,DemoBlock,DocPage}.vue` và 21
+    file `views/docs/components/*Doc.vue`) — **chưa từng được mục A đụng
+    tới, cụm lớn nhất còn lại**.
+  - `components/common/**` — **24/24 file** có hit (toàn bộ base component:
+    `BaseButton`, `BaseInput`, `BaseModal`, `BaseBadge`, `FormField`, v.v.) —
+    quan trọng: round 5 đã "CLOSE" thư mục này nhưng là cho bug KHÁC
+    (undefined-CSS-var wave 3), KHÔNG phải mục A (spacing sweep) — mục A
+    thực ra **chưa bao giờ chạy qua `components/common/**`**. Đây là public
+    API của lib (export `lib.ts`), ưu tiên cao nếu round sau muốn tiếp tục
+    mục A.
+  - `components/wemakeui/**` — **10/10 file** có hit (toàn bộ `WC*`/`WM*`
+    modal/bar component).
+  - `components/data/**` — **9/9 file** có hit (`DataGridPro`, `Kanban`,
+    `Timeline`, `FilterBuilder`, v.v.).
+  - `components/charts/**` — **6/6 file** có hit (`AreaChart`, `BarChart`,
+    `DonutChart`, `LineChart`, `PieChart`, `Heatmap`).
+  - Cụm nhỏ hơn, rải rác: `components/async/*` (3 file), `components/
+    feedback/*` (2 file), `components/platform/WindowControls.vue` (1),
+    `components/permission/PermissionGate.vue` (1),
+    `components/layout/PageHeader.vue` (1), `views/error/*` (2 file),
+    `views/landing/PolicyView.vue` (1), `views/home/LandingView.vue` (1 —
+    còn sót lại sau round 3), `views/dashboard/WeDashboardV1View.vue` (1 —
+    liên quan `.env-dot`, xem mục C), `archetypes/dashboard/
+    DashboardAnalytics.vue:265` (`padding: 2px 8px` — 1 phần khớp,
+    `DashboardHero.vue:101` inline `style="...padding: 0 4px"`),
+    `archetypes/marketing/CaseStudyGrid.vue` (2: `padding: 80px
+    var(--wx-space-6)` dòng 101 — cần xem có phải hero-band cố ý như
+    `MarketingHero`/`TechGrid` không; `margin-bottom: 4px` dòng 165),
+    `archetypes/marketing/TechGrid.vue:50` (`padding: 80px var(--wx-space-6)`
+    — cùng câu hỏi).
+  - Đã verify (không phải bug/không cần sửa): `views/showcase/**` (5 file,
+    12 hit — toàn bộ đã biết rõ lý do: `AppTemplatesView.vue` scroll-margin,
+    `charts/IndexView.vue`/`data/CrudTableView.vue` fallback của CSS var
+    được JS `:style` điều khiển, `OverviewView.vue` negative margin,
+    `RevealTest.vue` không có `<style scoped>` — tất cả đúng theo quyết định
+    round 9-11, không phải phát hiện mới); `views/marketing/**` (6 hit — cả
+    6 `padding-top: 64px` đã biết, cố ý); `style.css`/`ui-system/foundations/
+    {tokens.css,responsive.css}`/`ui-system/tokens/scales.ts` — đây là file
+    ĐỊNH NGHĨA token/scale gốc, giá trị px trong đó là nguồn, không phải
+    "hardcode cần fix" theo đúng luật ở mục 3.
+  - **Kết luận chính thức: mục A CHƯA đóng repo-wide.** 4 nhóm được giao
+    round 12 (`views/forms/*`, `views/auth/*`, `views/marketing/*` phần
+    spacing, `views/saas/*`) coi như xong, nhưng còn nguyên 1 backlog rất
+    lớn (313 hit, tập trung nặng ở `components/**` và `views/docs/**`) chưa
+    từng được quét — quy mô tương đương hoặc lớn hơn cả cụm `views/showcase`
+    đã mất 3 round (9-11) để xử lý xong. KHÔNG coi đây là milestone đóng mục
+    A — ngược lại, đây là phát hiện mở rộng phạm vi mục A đáng kể cho các
+    round sau.
+- Backlog cho round 13:
+  - **Mục A** — backlog mới, ưu tiên theo thứ tự: (1) `components/common/**`
+    (24 file, public API lib.ts, ưu tiên cao nhất); (2) `views/docs/**` (25
+    file, cụm lớn nhất về số lượng nhưng demo-only, không phải public API);
+    (3) `components/wemakeui/**` (10 file) + `components/data/**` (9 file)
+    + `components/charts/**` (6 file); (4) cụm nhỏ rải rác (`components/
+    {async,feedback,platform,permission,layout}/*`, `views/{error,landing}/*`,
+    `views/home/LandingView.vue` còn sót, `archetypes/dashboard/
+    DashboardAnalytics.vue`+`DashboardHero.vue`, `archetypes/marketing/
+    {CaseStudyGrid,TechGrid}.vue` — 2 file archetype/marketing cần đọc kỹ
+    xem `padding: 80px ...` có phải hero-band cố ý giống `MarketingHero`
+    120px không trước khi convert). Nhắc lại rule: không convert máy móc
+    theo số đếm grep thô, đọc kỹ từng multi-value shorthand; `--wx-fs-11`
+    KHÔNG tồn tại (đừng nhầm với mục A); giá trị không khớp thang
+    `--wx-space-*` thật (1=4,2=8,3=12,4=16,5=24,6=32,7=40,8=48,9=64,10=80,
+    11=96,12=128 — chú ý 20px KHÔNG có token khớp, giống case round 12) để
+    nguyên literal.
+  - **BaseDataGrid.vue non-`--wx-*` var scheme** — vẫn priority TRUNG BÌNH
+    (xem chi tiết mapping ở backlog round 11), nhưng giờ **an toàn tuyệt đối
+    để tự sửa cả 14/14 var** vì `--warning-color` divergence đã được Dev B
+    round này fix tận gốc ở `style.css` — không còn rào cản "1/14 sẽ đổi màu
+    hiển thị thật" như round 11 note. Đây là ứng viên tốt cho round 13 nếu
+    PLAN muốn kết hợp với mục A (cùng file, cùng tinh thần tokenize).
+  - **`--wx-shadow-focus` thiếu dark-mode.css override** — vẫn mở, 11+ file
+    dùng (bao gồm `focus.css` gốc), độ ưu tiên trung bình — đáng dành 1 round
+    riêng vì giờ là fix 1-token, phạm vi rộng nhưng nông (thêm 1 dòng override
+    `rgba(96, 165, 250, 0.25)` khớp tông `--wx-border-focus` dark `#60a5fa`
+    vào `dark-mode.css`), đóng dứt điểm được cả nhánh accessibility/
+    focus-visible của mục D.
+  - **Mục D (GLOBAL AUDIT)** — accessibility/focus-visible đang thu hẹp dần
+    (round 11 xử lý `components/**`+`archetypes/**`, round 12 xử lý thêm 2
+    site view-level). Còn lại: `views/forms/{FloatingLabelsView.vue:101,182,
+    InputGroupView.vue:119,175}`, `views/showcase/TemplateGallery.vue:473`
+    (chưa xử lý); `views/auth/OtpView.vue:164` — ĐÃ xử lý (Dev A round này,
+    xem trên); `views/app/ProfileEditView.vue:93`/`views/landing/
+    ContactView.vue:99` — cần xác nhận lại có phải đã ổn sẵn (case (a) loại
+    "đã có replacement thật") hay vẫn cần fix, round 11 note chưa chốt. Với
+    nhánh accessibility/focus-visible sắp cạn, PLAN round 13+ nên cân nhắc mở
+    rộng mục D sang category khác trong §4.D (2 — spacing/radius/màu
+    inconsistent, 6 — responsive breakpoints, 7 — empty/loading/error states)
+    thay vì tiếp tục dồn hết vào accessibility.
+  - **Mục C** — vẫn 1 follow-up mở, ưu tiên thấp: `WeDashboardV1View.vue`
+    `.env-dot` (không đổi gì round này).
+  - Mục B — vẫn **CLOSED** (không có phát hiện mới nào làm thay đổi căn cứ
+    decline).
+
+<!-- Round 13+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

@@ -188,7 +188,7 @@ const fallbackDesc = computed(() => {
 .wx-error__code {
   font-family: var(--wx-font-mono);
   font-size: var(--wx-fs-12);
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-sm);
   background: rgba(0, 0, 0, 0.06);
   color: var(--wx-text-secondary);
@@ -196,7 +196,7 @@ const fallbackDesc = computed(() => {
 }
 
 .wx-error__desc {
-  margin: 4px 0 0;
+  margin: var(--wx-space-1) 0 0;
   font-size: var(--wx-fs-14);
   line-height: var(--wx-lh-normal);
   color: var(--wx-text-secondary);
@@ -219,7 +219,7 @@ const fallbackDesc = computed(() => {
   font-size: var(--wx-fs-13);
   font-weight: var(--wx-fw-medium);
   border-radius: var(--wx-radius-md);
-  padding: 6px 12px;
+  padding: 6px var(--wx-space-3);
   cursor: pointer;
   border: 1px solid transparent;
   transition: background var(--wx-d-micro) var(--wx-ease-standard);

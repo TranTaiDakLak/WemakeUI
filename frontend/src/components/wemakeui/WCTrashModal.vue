@@ -59,13 +59,13 @@ function emptyAll() {
 .trash-toolbar { display: flex; align-items: center; justify-content: space-between; }
 .trash-count { font-size: var(--wx-fs-13); color: var(--wx-text-secondary); }
 .trash-empty { text-align: center; padding: var(--wx-space-8); font-size: var(--wx-fs-14); color: var(--wx-text-muted); }
-.trash-list { display: flex; flex-direction: column; gap: 4px; max-height: 380px; overflow-y: auto; }
+.trash-list { display: flex; flex-direction: column; gap: var(--wx-space-1); max-height: 380px; overflow-y: auto; }
 .trash-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--wx-space-3);
-  padding: 8px 10px;
+  padding: var(--wx-space-2) 10px;
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-md);
 }

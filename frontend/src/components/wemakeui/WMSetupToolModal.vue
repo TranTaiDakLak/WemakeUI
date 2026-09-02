@@ -224,7 +224,7 @@ function save() {
 .tool-left, .tool-right { display: flex; flex-direction: column; gap: var(--wx-space-3); }
 .form-row { display: flex; align-items: center; gap: var(--wx-space-3); font-size: var(--wx-fs-13); }
 .form-row label { min-width: 130px; color: var(--wx-text-secondary); }
-.form-col { display: flex; flex-direction: column; gap: 4px; font-size: var(--wx-fs-13); }
+.form-col { display: flex; flex-direction: column; gap: var(--wx-space-1); font-size: var(--wx-fs-13); }
 .form-col label { color: var(--wx-text-secondary); }
 .radio-col { display: flex; flex-direction: column; gap: 6px; }
 .mt-2 { margin-top: var(--wx-space-2); }

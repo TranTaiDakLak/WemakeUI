@@ -180,7 +180,7 @@ const fallback = computed(() => {
   font-weight: var(--wx-fw-medium);
   border: 1px solid transparent;
   border-radius: var(--wx-radius-md);
-  padding: 8px 16px;
+  padding: var(--wx-space-2) var(--wx-space-4);
   cursor: pointer;
   transition:
     background var(--wx-d-micro) var(--wx-ease-standard),

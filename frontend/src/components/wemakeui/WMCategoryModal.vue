@@ -71,7 +71,7 @@ function addNew() {
 <style scoped>
 .cat-body { display: flex; flex-direction: column; gap: var(--wx-space-3); }
 .cat-add-row { display: flex; gap: var(--wx-space-2); align-items: center; }
-.cat-list { display: flex; flex-direction: column; gap: 4px; max-height: 320px; overflow-y: auto; }
+.cat-list { display: flex; flex-direction: column; gap: var(--wx-space-1); max-height: 320px; overflow-y: auto; }
 .cat-row {
   display: flex;
   align-items: center;

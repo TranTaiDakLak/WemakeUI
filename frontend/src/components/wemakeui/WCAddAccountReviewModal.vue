@@ -77,6 +77,6 @@ const previewRows = computed(() => props.rows.slice(0, 50))
   white-space: nowrap;
 }
 .stt-col { width: 40px; text-align: center; color: var(--wx-text-muted); }
-.review-more { padding: 8px 12px; font-size: var(--wx-fs-12); color: var(--wx-text-muted); text-align: center; }
+.review-more { padding: var(--wx-space-2) var(--wx-space-3); font-size: var(--wx-fs-12); color: var(--wx-text-muted); text-align: center; }
 .review-footer { display: flex; justify-content: flex-end; gap: var(--wx-space-2); width: 100%; }
 </style>

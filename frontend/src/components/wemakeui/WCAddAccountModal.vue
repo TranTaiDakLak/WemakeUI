@@ -127,7 +127,7 @@ function doPreview() {
         </div>
 
         <div class="recent-formats">
-          <div class="field-section-title" style="margin-top:12px">Format gần đây</div>
+          <div class="field-section-title" style="margin-top:var(--wx-space-3)">Format gần đây</div>
           <div
             v-for="fmt in recentFormats"
             :key="fmt"
@@ -184,8 +184,8 @@ function doPreview() {
 
 .add-left { display: flex; flex-direction: column; overflow-y: auto; max-height: 480px; }
 .field-section-title { font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); color: var(--wx-text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-.field-list { display: flex; flex-direction: column; gap: 4px; }
-.field-row { display: flex; align-items: center; gap: 4px; }
+.field-list { display: flex; flex-direction: column; gap: var(--wx-space-1); }
+.field-row { display: flex; align-items: center; gap: var(--wx-space-1); }
 .field-move-btn { width: 16px; font-size: 10px; color: var(--wx-text-muted); cursor: pointer; user-select: none; text-align: center; }
 .field-move-btn:hover { color: var(--wx-brand-600); }
 .field-move-spacer { width: 16px; }
@@ -208,7 +208,7 @@ function doPreview() {
 .preview-bar {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--wx-space-2);
   padding: 6px 10px;
   background: var(--wx-surface-sunken);
   border-radius: var(--wx-radius-md);

@@ -47,7 +47,7 @@ const CARDS = [
 
 <style scoped>
 .tech-section {
-  padding: 80px var(--wx-space-6);
+  padding: var(--wx-space-10) var(--wx-space-6);
   background: linear-gradient(180deg, var(--wx-surface-sunken) 0%, var(--wx-surface-base) 100%);
 }
 .tech-container { max-width: 1200px; margin: 0 auto; }

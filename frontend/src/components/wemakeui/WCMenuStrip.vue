@@ -80,7 +80,7 @@ const contactItems = [
 
 .wc-drop-menu {
   min-width: 200px;
-  padding: 4px;
+  padding: var(--wx-space-1);
   background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);

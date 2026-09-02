@@ -124,7 +124,7 @@ const relative = computed(() => {
   font-family: inherit;
   font-size: var(--wx-fs-13);
   font-weight: var(--wx-fw-medium);
-  padding: 6px 12px;
+  padding: 6px var(--wx-space-3);
   border-radius: var(--wx-radius-md);
   background: var(--wx-surface-base);
   color: var(--wx-text-primary);

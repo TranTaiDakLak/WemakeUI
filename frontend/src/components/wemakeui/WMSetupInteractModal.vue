@@ -312,7 +312,7 @@ function save() {
 .check-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px 12px;
+  gap: 6px var(--wx-space-3);
 }
 .check-item {
   display: flex;
@@ -322,7 +322,7 @@ function save() {
 .premium-badge {
   font-size: 9px;
   font-weight: 700;
-  padding: 1px 4px;
+  padding: 1px var(--wx-space-1);
   border-radius: var(--wx-radius-sm);
   background: #f59e0b;
   color: #fff;
@@ -330,7 +330,7 @@ function save() {
 }
 .form-row { display: flex; align-items: center; gap: var(--wx-space-3); font-size: var(--wx-fs-13); }
 .form-row label { min-width: 160px; color: var(--wx-text-secondary); }
-.form-col { display: flex; flex-direction: column; gap: 4px; font-size: var(--wx-fs-13); }
+.form-col { display: flex; flex-direction: column; gap: var(--wx-space-1); font-size: var(--wx-fs-13); }
 .form-col label { color: var(--wx-text-secondary); }
 .mt-2 { margin-top: var(--wx-space-2); }
 .mt-3 { margin-top: var(--wx-space-3); }

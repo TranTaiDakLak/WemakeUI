@@ -123,7 +123,7 @@ const state = computed<'allow' | 'rbac-fail' | 'capability-fail'>(() => {
   background: var(--wx-warning-bg);
   border: 1px solid var(--wx-warning-border);
   border-radius: var(--wx-radius-full);
-  padding: 1px 8px;
+  padding: 1px var(--wx-space-2);
   margin-left: var(--wx-space-1);
   letter-spacing: var(--wx-tracking-tight);
 }

@@ -223,7 +223,7 @@ const progressPct = computed(() => {
   font-family: inherit;
   font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-medium);
-  padding: 4px 10px;
+  padding: var(--wx-space-1) 10px;
   border-radius: var(--wx-radius-md);
   background: var(--wx-surface-base);
   color: var(--wx-text-primary);

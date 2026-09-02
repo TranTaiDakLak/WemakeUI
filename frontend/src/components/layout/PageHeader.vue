@@ -120,7 +120,7 @@ const sizeClass = computed(() => `wx-page-header--${props.size}`)
   background: var(--wx-surface-base);
   color: var(--wx-content-secondary);
   cursor: pointer;
-  margin-top: 4px;
+  margin-top: var(--wx-space-1);
   transition:
     background var(--wx-d-fast) var(--wx-ease-standard),
     color var(--wx-d-fast) var(--wx-ease-standard),

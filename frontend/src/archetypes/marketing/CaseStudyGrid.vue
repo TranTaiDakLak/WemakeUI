@@ -98,7 +98,7 @@ const CASES = [
 
 <style scoped>
 .cs-section {
-  padding: 80px var(--wx-space-6);
+  padding: var(--wx-space-10) var(--wx-space-6);
   background: var(--wx-brand-50);
   border-top: 1px solid var(--wx-brand-100);
 }

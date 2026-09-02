@@ -150,7 +150,7 @@ function currentCategoryLabel() {
 
 .ab-field-select {
   height: 30px;
-  padding: 0 8px;
+  padding: 0 var(--wx-space-2);
   font-size: var(--wx-fs-13);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
@@ -165,7 +165,7 @@ function currentCategoryLabel() {
 
 .ab-cat-menu {
   min-width: 200px;
-  padding: 4px;
+  padding: var(--wx-space-1);
   background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
@@ -175,7 +175,7 @@ function currentCategoryLabel() {
 .ab-cat-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--wx-space-2);
   padding: 6px 10px;
   font-size: var(--wx-fs-13);
   border-radius: var(--wx-radius-sm);
@@ -194,7 +194,7 @@ function currentCategoryLabel() {
 .ab-cat-sep {
   height: 1px;
   background: var(--wx-border-subtle);
-  margin: 4px 0;
+  margin: var(--wx-space-1) 0;
 }
 
 </style>

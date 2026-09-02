@@ -37,7 +37,7 @@ const addDataText = ref('')
             placeholder="Dán dữ liệu từ phần mềm khác vào đây..."
             style="font-family:var(--wx-font-mono)"
           />
-          <BaseButton variant="primary" size="sm" style="margin-top:8px">Xử lý dữ liệu</BaseButton>
+          <BaseButton variant="primary" size="sm" style="margin-top:var(--wx-space-2)">Xử lý dữ liệu</BaseButton>
         </GroupBox>
       </template>
 
@@ -62,5 +62,5 @@ const addDataText = ref('')
 
 <style scoped>
 .util-row { display: flex; gap: var(--wx-space-2); align-items: center; }
-.util-result { margin-top: var(--wx-space-3); padding: 8px 10px; background: var(--wx-surface-sunken); border-radius: var(--wx-radius-md); font-size: var(--wx-fs-13); color: var(--wx-text-muted); font-family: var(--wx-font-mono); }
+.util-result { margin-top: var(--wx-space-3); padding: var(--wx-space-2) 10px; background: var(--wx-surface-sunken); border-radius: var(--wx-radius-md); font-size: var(--wx-fs-13); color: var(--wx-text-muted); font-family: var(--wx-font-mono); }
 </style>

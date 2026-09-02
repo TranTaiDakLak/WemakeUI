@@ -97,7 +97,7 @@ defineEmits<{
 }
 
 /* mac traffic lights */
-.wx-wc[data-style='mac'] { gap: 8px; padding: 0 var(--wx-space-2); }
+.wx-wc[data-style='mac'] { gap: var(--wx-space-2); padding: 0 var(--wx-space-2); }
 .wx-wc[data-style='mac'] .wx-wc__dot {
   width: 12px;
   height: 12px;

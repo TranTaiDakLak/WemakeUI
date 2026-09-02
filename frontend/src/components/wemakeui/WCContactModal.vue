@@ -40,12 +40,12 @@ const contacts = [
 </template>
 
 <style scoped>
-.contact-list { display: flex; flex-direction: column; gap: 4px; }
+.contact-list { display: flex; flex-direction: column; gap: var(--wx-space-1); }
 .contact-item {
   display: flex;
   align-items: center;
   gap: var(--wx-space-3);
-  padding: 10px 12px;
+  padding: 10px var(--wx-space-3);
   border-radius: var(--wx-radius-md);
   text-decoration: none;
   color: inherit;

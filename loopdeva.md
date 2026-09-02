@@ -381,4 +381,93 @@ tự ý dừng sớm hơn.
   `LoginV3View.vue`/`AnimationShowcase.vue`; naming scheme riêng
   `--wx-color-*` (~30 chỗ) chỉ trong `IconShowcase.vue`.
 
-<!-- Round 6+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 6 (2026-09-02)
+- PLAN (opus): tiếp tục wave 3 — Dev A = toàn bộ `views/forms/*` (11 file,
+  `.fp__title` fs-22→24, các micro-label/table-header fs-11→12); Dev B =
+  3 file `components/wemakeui/WC{ActionBar,AddAccountReviewModal,
+  TrashModal}.vue` (fs-11→12) + toàn bộ `views/saas/*` (7 file: Dashboard,
+  Members, Products, Settings, Statistics, Transactions, Versions —
+  fs-11→12, fs-22→24 trên stat/amount, `--wx-success-subtle`→
+  `--wx-success-bg`, `--wx-surface-hover`→`--wx-hover-bg` trên rule
+  `:hover` thật, `--wx-surface-default`→`--wx-surface-elevated` trên card
+  resting-state vì `SaasLayout` mặc định `AppShell background="sunken"`).
+- Dev A commit `af43e36`: 11 file, 28 dòng đổi, typecheck+build:lib PASS.
+- Dev B commit `8f1f951`: 10 file, 29 dòng đổi, typecheck+build:lib PASS.
+- Dev C QA: build gate 3/3 PASS (typecheck sạch, build:lib 17.65s —
+  ui.css 234.38kB/dts OK, build:app 9.46s — mọi chunk build OK). `git show
+  --stat` xác nhận đúng 11 file (Dev A) + 10 file (Dev B), 0 overlap, không
+  đụng tokens.css/dark-mode.css/flat-mode.css/lib.ts. Re-grep toàn bộ 21
+  file cho pattern wave-3 category-1: chỉ còn đúng 1 hit
+  (`FloatingLabelsView.vue:125`) — đã đọc lại code, xác nhận đúng như Dev A
+  khai báo: nằm trong `<pre>` documentation code sample (HTML-escaped text
+  `&lt;...&gt;`, không phải `<style>` thật), bản CSS sống thật ở dòng 208
+  đã đúng `var(--wx-fs-12)` — không phải bug, chấp nhận exception. Verify
+  kỹ các judgment call của Dev B: (a) đọc lại từng rule `--wx-surface-hover`
+  → tất cả đều đúng selector `:hover` thật (`.ptable tr:hover td`,
+  `.toggle-row:hover`, `.integration-row:hover`, `.top-member:hover`,
+  `.summary-table tr:hover td`) — không có case resting-state bị gán nhầm;
+  (b) đọc `SaasLayout.vue` xác nhận `<AppShell variant="sidebar"
+  :topbar-height="56">` không truyền prop `background` → dùng default
+  của `AppShell.vue` (`background: 'sunken'` ở dòng 45,
+  `[data-bg="sunken"] → var(--wx-surface-sunken)`) → đúng là nền sunken,
+  card cần `--wx-surface-elevated` để nổi lên — judgment call đúng; (c)
+  `.tx-amount-value` (giá trị giao dịch trong `detail-header` highlight
+  box, màu brand-primary) và `.ver-code` (số version lớn kiểu mono trong
+  `detail-header`) đều đúng là stat/number display lớn, không phải heading
+  — fs-24 hợp lý. `fp__title` cả 11 file forms đều dùng đúng
+  `var(--wx-fs-24)`, không lệch nhau. Token `--wx-fs-12/24`,
+  `--wx-hover-bg`, `--wx-surface-elevated`, `--wx-success-bg` đều tồn tại
+  trong `tokens.css`; 3 token màu (`hover-bg`, `surface-elevated`,
+  `success-bg`) đều có override trong `dark-mode.css`, fs-12/24 không cần
+  (không phải màu). Diff cả 2 commit chỉ thay giá trị `var(--wx-...)`,
+  không có hex/rgba/px mới — các đoạn hex context (`#22c55e`, `#16a34a`
+  trong forms; `#6e7681` v.v.) đều là dòng context (không đổi), pre-existing
+  từ trước, không phải Dev A/B thêm. Cả 2 diff 100% nằm trong `<style
+  scoped>`, không có hunk nào chạm `<script setup>`/`<template>`, `lib.ts`
+  không đổi, 3 file `WC*.vue` chỉ đổi giá trị `font-size`, không đổi tên
+  class/prop/emit/slot nào. **ROUND 6 QA: PASS**, không cần follow-up
+  commit — mọi phát hiện ngoài phạm vi 21 file được ghi backlog bên dưới
+  thay vì tự ý mở rộng scope.
+- Grep xác nhận lại nghi vấn round 5: `views/dashboard/*` **sạch hoàn toàn**
+  wave-3 category-1 (0 hit) — xác nhận, bỏ khỏi backlog.
+- Backlog cho round 7 (full-repo re-grep pattern
+  `--wx-(fs-10|fs-11|fs-17|fs-22|fs-26|fw-normal|space-16|space-20|
+  space-2-5|surface-raised|surface-hover|surface-default|danger-subtle|
+  success-subtle)`, đã trừ các false-positive `--wx-card-accent` trong
+  `BaseCard.vue` và điểm exception `FloatingLabelsView.vue:125`):
+  - `views/showcase/*` (còn `AnimationShowcase.vue` fs-26/fs-11,
+    `CardShowcase.vue` fs-11, `data/CrudTableView.vue` fs-11,
+    `DevPanelShowcase.vue` fs-11, `ObservabilityShowcase.vue` fw-normal +
+    fs-11, `PrimitivesShowcase.vue` fs-11, `TemplateGallery.vue` fs-11).
+  - `views/app/*` (`ChatView.vue` fs-11 x2, `ContactsView.vue` fs-11,
+    `FileManagerView.vue` fs-11, `MailboxView.vue` fs-11).
+  - `views/wemakeui/*` các view còn lại (`AccountsView.vue`,
+    `AdminView.vue` x3, `CampaignsView.vue` x3, `ConsoleView.vue`,
+    `ContactsView.vue`) — đều fs-11.
+  - `views/marketing/*` wave-3 còn sót (`ContactView.vue` space-20 +
+    surface-raised x2, `FAQView.vue` space-20, `PartnersView.vue`
+    space-16 x2 + space-20 + surface-raised, `ProductDetailView.vue`
+    space-2-5 + space-20, `ProductsView.vue` space-20 + surface-raised +
+    space-2-5).
+  - `archetypes/crud/CrudPage.vue` (fs-11 dòng 783, surface-hover dòng 804
+    — cần đọc kỹ selector trước khi map, giống pattern Dev B round 6).
+  - `archetypes/marketing/FAQAccordion.vue:141` (surface-raised).
+  - `archetypes/dashboard/DashboardActivity.vue:235` (space-2-5).
+  - `views/_layouts/SaasLayout.vue:294` — **phát hiện mới round 6**:
+    `.mob-nav-item:hover { background: var(--wx-surface-hover); }`, đã xác
+    nhận đúng là rule `:hover` thật (mobile nav drawer item) → map
+    `var(--wx-hover-bg)` giống pattern Dev B đã verify.
+  - `views/auth/LoginV3View.vue:408` — **phát hiện mới round 6**:
+    `.v3-brand-name { font-size: var(--wx-fs-17); }`, KHÔNG có fallback
+    (khác với các chỗ `--wx-error-*` cùng file có fallback) → bug thật,
+    category 1, cần map (16 hoặc 18 tuỳ context, đây là tên brand cạnh
+    logo 36px nên có thể hợp `--wx-fs-16`).
+  - GROUP 2 (có fallback, ưu tiên thấp hơn, xác nhận vẫn còn nguyên):
+    `--wx-error-bg/text/border` → nên đổi tên thành `--wx-danger-*` ở
+    `LoginV3View.vue` (dòng 592-594, 728-730) và `AnimationShowcase.vue`
+    (dòng 905,907,910,924); naming scheme riêng `--wx-color-*` trong
+    `IconShowcase.vue` (~45 chỗ, nhiều hơn ước tính round 5).
+  - Mục A (spacing sweep còn lại ngoài wave-3) và B (duplicate
+    button/chip) vẫn đứng sau wave-3 trong thứ tự ưu tiên.
+
+<!-- Round 7+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

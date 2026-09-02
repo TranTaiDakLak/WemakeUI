@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseAvatar, BaseInput } from '../../components/common'
+import { EmptyState } from '../../components/feedback'
 
 const FOLDERS = [
   { id: 'inbox',   label: 'Hộp thư đến', count: 12 },
@@ -25,7 +26,15 @@ const search = ref('')
 
 const selectedMail = computed(() => MAILS.find(m => m.id === selected.value))
 
-import { computed } from 'vue'
+const filteredMails = computed(() => {
+  const q = search.value.trim().toLowerCase()
+  if (!q) return MAILS
+  return MAILS.filter(m =>
+    m.from.toLowerCase().includes(q) ||
+    m.subject.toLowerCase().includes(q) ||
+    m.preview.toLowerCase().includes(q)
+  )
+})
 </script>
 
 <template>
@@ -52,8 +61,8 @@ import { computed } from 'vue'
         <div class="mail-search">
           <BaseInput v-model="search" placeholder="Tìm trong hộp thư..." size="sm" clearable />
         </div>
-        <ul class="mail-list">
-          <li v-for="m in MAILS" :key="m.id"
+        <ul v-if="filteredMails.length > 0" class="mail-list">
+          <li v-for="m in filteredMails" :key="m.id"
             class="mail-item" :class="{ selected: selected === m.id, unread: m.unread }"
             @click="selected = m.id">
             <BaseAvatar :name="m.fromShort" size="sm" />
@@ -67,6 +76,15 @@ import { computed } from 'vue'
             </div>
           </li>
         </ul>
+        <EmptyState
+          v-else
+          size="sm"
+          variant="search"
+          :query="search"
+          title="Không tìm thấy thư nào"
+          description="Thử từ khoá khác hoặc xoá bộ lọc."
+          @cta="search = ''"
+        />
       </div>
 
       <!-- detail -->

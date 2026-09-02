@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseInput, BaseButton } from '../../components/common'
+import { EmptyState } from '../../components/feedback'
 
 const search = ref('')
 const activeDoc = ref('bắt đầu')
@@ -109,7 +110,20 @@ function renderMd(text: string): string {
 
 const doc = computed(() => CONTENT[activeDoc.value] || { title: activeDoc.value, body: '<p>Tài liệu đang được biên soạn...</p>' })
 
-import { computed } from 'vue'
+const filteredDocs = computed(() => {
+  const q = search.value.trim().toLowerCase()
+  if (!q) return DOCS
+  return DOCS.reduce<typeof DOCS>((acc, section) => {
+    const sectionMatches = section.label.toLowerCase().includes(q)
+    const matchingChildren = section.children.filter(c => c.label.toLowerCase().includes(q))
+    if (sectionMatches) {
+      acc.push(section)
+    } else if (matchingChildren.length > 0) {
+      acc.push({ ...section, children: matchingChildren })
+    }
+    return acc
+  }, [])
+})
 </script>
 
 <template>
@@ -121,8 +135,8 @@ import { computed } from 'vue'
     <div class="wiki-layout">
       <aside class="wiki-nav">
         <BaseInput v-model="search" placeholder="Tìm tài liệu..." size="sm" />
-        <nav class="wiki-tree">
-          <div v-for="section in DOCS" :key="section.id" class="tree-section">
+        <nav v-if="filteredDocs.length > 0" class="wiki-tree">
+          <div v-for="section in filteredDocs" :key="section.id" class="tree-section">
             <span class="tree-section-label">{{ section.icon }} {{ section.label }}</span>
             <ul class="tree-children">
               <li
@@ -135,6 +149,14 @@ import { computed } from 'vue'
             </ul>
           </div>
         </nav>
+        <EmptyState
+          v-else
+          variant="search"
+          :query="search"
+          title="Không tìm thấy trang nào"
+          description="Thử từ khoá khác hoặc xoá bộ lọc."
+          @cta="search = ''"
+        />
       </aside>
 
       <article class="wiki-article">

@@ -307,7 +307,7 @@ function toggleStar(id: string) {
 .filter-pill {
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-full);
-  padding: 4px var(--wx-space-3);
+  padding: var(--wx-space-1) var(--wx-space-3);
   background: transparent;
   color: var(--wx-content-secondary);
   font-size: var(--wx-fs-12);
@@ -351,7 +351,7 @@ function toggleStar(id: string) {
   content: '';
   position: absolute;
   margin-left: -3px;
-  margin-top: 16px;
+  margin-top: var(--wx-space-4);
   width: 6px; height: 6px;
   border-radius: var(--wx-radius-full);
   background: var(--wx-brand-primary);
@@ -388,7 +388,7 @@ function toggleStar(id: string) {
 }
 .mail-item__tags {
   display: flex;
-  gap: 4px;
+  gap: var(--wx-space-1);
   margin-top: var(--wx-space-1);
   flex-wrap: wrap;
 }
@@ -397,7 +397,7 @@ function toggleStar(id: string) {
   border: none;
   color: var(--wx-content-muted);
   cursor: pointer;
-  padding: 4px;
+  padding: var(--wx-space-1);
   border-radius: var(--wx-radius-sm);
 }
 .mail-item__star--on { color: #f59e0b; }
@@ -410,7 +410,7 @@ function toggleStar(id: string) {
 }
 .mail-empty__icon { font-size: 32px; }
 .mail-empty__title { font-weight: var(--wx-fw-semibold); margin-top: var(--wx-space-2); }
-.mail-empty__desc { font-size: var(--wx-fs-12); margin-top: 4px; }
+.mail-empty__desc { font-size: var(--wx-fs-12); margin-top: var(--wx-space-1); }
 
 /* ── detail ── */
 .detail__inner {
@@ -431,7 +431,7 @@ function toggleStar(id: string) {
   flex-direction: column;
   font-size: var(--wx-fs-13);
 }
-.meta-tags { margin-left: auto; display: flex; gap: 4px; }
+.meta-tags { margin-left: auto; display: flex; gap: var(--wx-space-1); }
 .body {
   font-family: var(--wx-font-primary);
   font-size: var(--wx-fs-15);

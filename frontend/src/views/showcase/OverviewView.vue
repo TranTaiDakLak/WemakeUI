@@ -214,7 +214,7 @@ function routeCountForGroup(nums: number[]) {
     color-mix(in srgb, var(--wx-brand-primary) 60%, #7c3aed) 50%,
     color-mix(in srgb, var(--wx-brand-primary) 40%, #4f46e5) 100%
   );
-  padding: 56px 32px 48px;
+  padding: 56px var(--wx-space-6) var(--wx-space-8);
 }
 .hero-bg-pattern {
   position: absolute;
@@ -231,10 +231,10 @@ function routeCountForGroup(nums: number[]) {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: var(--wx-space-6);
 }
 .hero-eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 var(--wx-space-2);
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -257,7 +257,7 @@ function routeCountForGroup(nums: number[]) {
   background-clip: text;
 }
 .hero-sub {
-  margin: 12px 0 0;
+  margin: var(--wx-space-3) 0 0;
   font-size: 15px;
   color: rgba(255,255,255,0.7);
   line-height: 1.7;
@@ -268,15 +268,15 @@ function routeCountForGroup(nums: number[]) {
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: var(--wx-space-3);
   max-width: 540px;
 }
 .stat-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 16px 12px;
+  gap: var(--wx-space-1);
+  padding: var(--wx-space-4) var(--wx-space-3);
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 16px;
@@ -319,7 +319,7 @@ function routeCountForGroup(nums: number[]) {
 .quick-nav {
   max-width: 1100px;
   margin: -24px auto 0;
-  padding: 0 24px;
+  padding: 0 var(--wx-space-5);
   position: relative;
   z-index: 2;
   display: flex;
@@ -329,8 +329,8 @@ function routeCountForGroup(nums: number[]) {
 .quick-nav-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
+  gap: var(--wx-space-2);
+  padding: 10px var(--wx-space-4);
   background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-default);
   border-radius: 12px;
@@ -361,7 +361,7 @@ function routeCountForGroup(nums: number[]) {
 .content {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 48px 24px 96px;
+  padding: var(--wx-space-8) var(--wx-space-5) var(--wx-space-11);
   display: flex;
   flex-direction: column;
   gap: 56px;
@@ -380,8 +380,8 @@ function routeCountForGroup(nums: number[]) {
 .group-head {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: var(--wx-space-3);
+  margin-bottom: var(--wx-space-5);
 }
 .group-icon-wrap {
   display: flex;
@@ -438,7 +438,7 @@ function routeCountForGroup(nums: number[]) {
   background: var(--wx-surface-elevated);
   border: 1px solid var(--wx-border-default);
   border-radius: 16px;
-  padding: 24px;
+  padding: var(--wx-space-5);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .phase-block:hover {
@@ -449,14 +449,14 @@ function routeCountForGroup(nums: number[]) {
 .phase-meta {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: var(--wx-space-3);
+  margin-bottom: var(--wx-space-4);
   flex-wrap: wrap;
 }
 .phase-chip {
   font-size: 11px;
   font-weight: 700;
-  padding: 4px 12px;
+  padding: var(--wx-space-1) var(--wx-space-3);
   border-radius: 999px;
   letter-spacing: 0.3px;
 }
@@ -495,7 +495,7 @@ function routeCountForGroup(nums: number[]) {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 16px 18px;
+  padding: var(--wx-space-4) 18px;
   border-radius: 12px;
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);
@@ -576,8 +576,8 @@ function routeCountForGroup(nums: number[]) {
 .route-list-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
+  gap: var(--wx-space-3);
+  padding: var(--wx-space-3) var(--wx-space-4);
   border-radius: 10px;
   border: 1px solid transparent;
   background: var(--wx-surface-base);
@@ -641,19 +641,19 @@ function routeCountForGroup(nums: number[]) {
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .hero { padding: 40px 20px 36px; }
+  .hero { padding: var(--wx-space-7) 20px 36px; }
   .hero-title { font-size: 28px; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
-  .quick-nav { margin-top: -16px; padding: 0 16px; }
-  .quick-nav-item { padding: 8px 12px; font-size: 12px; }
-  .content { padding: 32px 16px 64px; gap: 40px; }
+  .quick-nav { margin-top: -16px; padding: 0 var(--wx-space-4); }
+  .quick-nav-item { padding: var(--wx-space-2) var(--wx-space-3); font-size: 12px; }
+  .content { padding: var(--wx-space-6) var(--wx-space-4) var(--wx-space-9); gap: var(--wx-space-7); }
   .route-grid { grid-template-columns: 1fr; }
-  .phase-block { padding: 16px; }
+  .phase-block { padding: var(--wx-space-4); }
   .rli-desc { display: none; }
 }
 
 @media (max-width: 480px) {
-  .hero { padding: 32px 16px 28px; }
+  .hero { padding: var(--wx-space-6) var(--wx-space-4) 28px; }
   .hero-title { font-size: 24px; }
   .hero-eyebrow { font-size: 11px; }
   .stat-value { font-size: 22px; }

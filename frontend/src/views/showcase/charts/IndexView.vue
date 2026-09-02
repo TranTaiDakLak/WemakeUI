@@ -297,8 +297,8 @@ const stacked = ref(false)
 .chart-controls {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: var(--wx-space-3);
+  margin-bottom: var(--wx-space-3);
 }
 
 .grid-2 {
@@ -315,17 +315,17 @@ const stacked = ref(false)
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
+  gap: var(--wx-space-3);
 }
 
 .kpi-card {
-  padding: 14px 16px;
+  padding: 14px var(--wx-space-4);
   background: var(--wx-surface-base);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-lg);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 
 .kpi-head {
@@ -343,7 +343,7 @@ const stacked = ref(false)
 .kpi-delta {
   font-size: 11px;
   font-weight: 700;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-full);
   background: var(--wx-success-bg);
   color: var(--wx-success-text);
@@ -359,7 +359,7 @@ const stacked = ref(false)
   font-weight: 800;
   color: var(--wx-text-primary);
   letter-spacing: -0.01em;
-  margin: 4px 0;
+  margin: var(--wx-space-1) 0;
 }
 
 /* Gauge row */
@@ -367,22 +367,22 @@ const stacked = ref(false)
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 16px;
-  padding: 8px 0;
+  gap: var(--wx-space-4);
+  padding: var(--wx-space-2) 0;
 }
 
 /* Sparkline grid */
 .spark-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 12px;
+  gap: var(--wx-space-3);
 }
 
 .spark-card {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 12px 14px;
+  padding: var(--wx-space-3) 14px;
   background: var(--wx-surface-sunken);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-md);
@@ -397,9 +397,9 @@ const stacked = ref(false)
 .donut-demo-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: var(--wx-space-6);
   justify-content: space-around;
-  padding: 8px 0;
+  padding: var(--wx-space-2) 0;
 }
 
 .donut-demo-item {

@@ -84,14 +84,14 @@ import { appTemplates, totalAppTemplates, totalAppPages } from './appTemplates'
 .apps-main {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 24px 80px;
+  padding: 0 var(--wx-space-5) var(--wx-space-10);
 }
 
 .apps-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 18px;
-  margin-top: 8px;
+  margin-top: var(--wx-space-2);
 }
 
 .app-card {
@@ -118,7 +118,7 @@ import { appTemplates, totalAppTemplates, totalAppPages } from './appTemplates'
 .app-card__top {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--wx-space-3);
 }
 .app-card__icon {
   font-size: 26px;
@@ -154,7 +154,7 @@ import { appTemplates, totalAppTemplates, totalAppPages } from './appTemplates'
 }
 
 .app-card__desc {
-  margin: 14px 0 12px;
+  margin: 14px 0 var(--wx-space-3);
   font-size: 13.5px;
   line-height: 1.6;
   color: var(--wx-text-secondary);
@@ -189,7 +189,7 @@ import { appTemplates, totalAppTemplates, totalAppPages } from './appTemplates'
   font-size: 11.5px;
   font-weight: 600;
   width: fit-content;
-  padding: 2px 8px;
+  padding: 2px var(--wx-space-2);
   border-radius: 999px;
 }
 .app-card__kind--app {
@@ -213,7 +213,7 @@ import { appTemplates, totalAppTemplates, totalAppPages } from './appTemplates'
   font-size: 12px;
   font-weight: 600;
   color: var(--wx-text-secondary);
-  margin-bottom: 8px;
+  margin-bottom: var(--wx-space-2);
 }
 .app-card__screens-list {
   display: flex;
@@ -223,7 +223,7 @@ import { appTemplates, totalAppTemplates, totalAppPages } from './appTemplates'
 .app-card__screen {
   font-size: 12px;
   font-weight: 500;
-  padding: 4px 10px;
+  padding: var(--wx-space-1) 10px;
   border-radius: var(--wx-radius-md);
   border: 1px solid var(--wx-border-default);
   background: var(--wx-surface-base);

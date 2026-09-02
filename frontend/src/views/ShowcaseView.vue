@@ -537,7 +537,7 @@ onMounted(() => {
         </GroupBox>
 
         <GroupBox title="BaseToggle">
-          <div class="row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+          <div class="row" style="flex-direction: column; align-items: flex-start; gap: var(--wx-space-3);">
             <BaseToggle v-model="inputDemo.toggle1" label="Bật thông báo" />
             <BaseToggle v-model="inputDemo.toggle2" label="Tự động cập nhật" />
             <BaseToggle :model-value="true" label="Disabled (on)" disabled />
@@ -546,7 +546,7 @@ onMounted(() => {
         </GroupBox>
 
         <GroupBox title="BaseCheckbox">
-          <div class="row" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+          <div class="row" style="flex-direction: column; align-items: flex-start; gap: var(--wx-space-2);">
             <BaseCheckbox v-model="inputDemo.check1" label="Tôi đồng ý điều khoản" />
             <BaseCheckbox v-model="inputDemo.check2" label="Đăng ký nhận tin" />
             <BaseCheckbox v-model="inputDemo.checkIndeterminate" :indeterminate="inputDemo.checkIndeterminate" label="Indeterminate state" />
@@ -595,10 +595,10 @@ onMounted(() => {
             <BaseInput v-model="loginForm.password" type="password" placeholder="••••••••" :error="loginErrors.password" />
           </FormField>
           <BaseCheckbox v-model="loginForm.remember" label="Ghi nhớ đăng nhập" />
-          <div style="margin-top: 12px;">
+          <div style="margin-top: var(--wx-space-3);">
             <BaseButton variant="primary" block @click="submitLogin">Đăng nhập</BaseButton>
           </div>
-          <div class="row" style="margin-top: 8px; justify-content: center;">
+          <div class="row" style="margin-top: var(--wx-space-2); justify-content: center;">
             <BaseButton variant="text" size="sm">Quên mật khẩu?</BaseButton>
             <BaseButton variant="text" size="sm">Đăng ký</BaseButton>
           </div>
@@ -622,7 +622,7 @@ onMounted(() => {
           </FormField>
           <BaseToggle v-model="regForm.newsletter" label="Nhận bản tin hàng tuần" />
           <BaseCheckbox v-model="regForm.agree" label="Tôi đồng ý với điều khoản sử dụng" />
-          <div class="row" style="margin-top: 12px;">
+          <div class="row" style="margin-top: var(--wx-space-3);">
             <BaseButton
               variant="primary"
               :disabled="!regForm.agree"
@@ -665,7 +665,7 @@ onMounted(() => {
           <FormField label="Thông báo push">
             <BaseToggle :model-value="false" />
           </FormField>
-          <div class="row" style="margin-top: 12px; justify-content: flex-end;">
+          <div class="row" style="margin-top: var(--wx-space-3); justify-content: flex-end;">
             <BaseButton variant="ghost">Hủy</BaseButton>
             <BaseButton variant="primary">Lưu thay đổi</BaseButton>
           </div>
@@ -703,7 +703,7 @@ onMounted(() => {
               @contextmenu="onGridContextMenu"
             />
           </div>
-          <div class="muted" style="margin-top: 8px;">
+          <div class="muted" style="margin-top: var(--wx-space-2);">
             Click vào hàng để bôi đen · Click vào ô để chọn cell · Click header có icon để sort · Kéo cạnh phải header để resize
           </div>
         </GroupBox>
@@ -757,7 +757,7 @@ onMounted(() => {
             <BaseProgress :value="75" striped show-label />
             <BaseProgress :value="progressAuto" striped animated show-label />
           </div>
-          <div class="row" style="margin-top: 12px;">
+          <div class="row" style="margin-top: var(--wx-space-3);">
             <BaseButton size="sm" variant="primary" @click="startAutoProgress">Chạy auto progress</BaseButton>
           </div>
         </GroupBox>
@@ -772,7 +772,7 @@ onMounted(() => {
             <BaseBadge text="Ghost" variant="ghost" />
             <BaseBadge :text="42" variant="primary" />
           </div>
-          <div class="row" style="margin-top: 8px;">
+          <div class="row" style="margin-top: var(--wx-space-2);">
             <BaseBadge dot variant="success" />
             <BaseBadge dot variant="success" pulsing />
             <BaseBadge dot variant="danger" pulsing />
@@ -808,7 +808,7 @@ onMounted(() => {
               <FormField label="Vai trò" layout="vertical"><BaseSelectMenu :model-value="'pro'" :options="planOpts" /></FormField>
               <FormField label="Quốc gia" layout="vertical"><BaseSelectMenu :model-value="'vn'" :options="countryOpts" /></FormField>
             </div>
-            <p class="muted" style="margin-top: 12px;">Modal có thể kéo thả tiêu đề, ESC để đóng, focus trap khi Tab.</p>
+            <p class="muted" style="margin-top: var(--wx-space-3);">Modal có thể kéo thả tiêu đề, ESC để đóng, focus trap khi Tab.</p>
           </BaseModal>
 
           <BaseModal
@@ -826,7 +826,7 @@ onMounted(() => {
         </GroupBox>
 
         <GroupBox title="BaseSkeleton (loading placeholder)">
-          <div class="row" style="margin-bottom: 8px;">
+          <div class="row" style="margin-bottom: var(--wx-space-2);">
             <BaseToggle v-model="skeletonShow" label="Hiện skeleton" />
           </div>
           <BaseSkeleton v-if="skeletonShow" :rows="4" :cols="3" />
@@ -844,7 +844,7 @@ onMounted(() => {
               <BaseButton variant="ghost">{{ p }}</BaseButton>
             </BaseTooltip>
           </div>
-          <div class="row" style="margin-top: 16px;">
+          <div class="row" style="margin-top: var(--wx-space-4);">
             <BaseTooltip content="Custom delay 800ms" :delay="800">
               <BaseButton variant="secondary">Hover (delay 800ms)</BaseButton>
             </BaseTooltip>
@@ -878,7 +878,7 @@ onMounted(() => {
           >
             Chuột phải vào đây để mở context menu
           </div>
-          <div class="muted" style="margin-top: 8px;">
+          <div class="muted" style="margin-top: var(--wx-space-2);">
             Hỗ trợ: section header · separator · submenu · keyboard nav (↑↓ →← Enter Esc) · danger items
           </div>
         </GroupBox>
@@ -999,19 +999,19 @@ onMounted(() => {
 
 .sep {
   color: var(--wx-border-default);
-  margin: 0 4px;
+  margin: 0 var(--wx-space-1);
 }
 
 .menu {
   display: flex;
   flex-direction: column;
-  padding: 4px;
+  padding: var(--wx-space-1);
   min-width: 180px;
 }
 
 .menu-item {
   text-align: left;
-  padding: 8px 12px;
+  padding: var(--wx-space-2) var(--wx-space-3);
   background: transparent;
   border: none;
   border-radius: var(--wx-radius-sm);
@@ -1037,14 +1037,14 @@ onMounted(() => {
 .swatch-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 8px;
+  gap: var(--wx-space-2);
 }
 
 .swatch {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px;
+  padding: var(--wx-space-2);
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-md);
   background: var(--wx-surface-base);
@@ -1081,7 +1081,7 @@ onMounted(() => {
 .gradient-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 8px;
+  gap: var(--wx-space-2);
 }
 
 .gradient-card {
@@ -1101,13 +1101,13 @@ onMounted(() => {
 .space-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--wx-space-2);
 }
 
 .space-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--wx-space-3);
   font-size: 12px;
 }
 
@@ -1135,11 +1135,11 @@ onMounted(() => {
 .type-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--wx-space-2);
 }
 
 .type-row {
-  padding: 4px 0;
+  padding: var(--wx-space-1) 0;
   border-bottom: 1px dashed var(--wx-border-subtle);
 }
 
@@ -1151,8 +1151,8 @@ onMounted(() => {
 .placement-grid {
   display: grid;
   grid-template-columns: repeat(4, max-content);
-  gap: 16px;
-  padding: 32px;
+  gap: var(--wx-space-4);
+  padding: var(--wx-space-6);
   justify-content: center;
 }
 

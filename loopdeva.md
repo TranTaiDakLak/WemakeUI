@@ -2101,4 +2101,137 @@ tự ý dừng sớm hơn.
      round GLOBAL AUDIT liên tiếp 0-finding, nên round 17 là round đầu tiên
      trong chuỗi đó (chưa đủ điều kiện dừng loop).
 
-<!-- Round 16+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 17 (2026-09-02) — GLOBAL AUDIT ROUND 1 of 3
+- PLAN (opus): pivot sang mục D theo backlog round 16 — chọn category #7
+  (interaction state: empty/no-result) cho Dev A và category #8
+  (accessibility: aria-*/role) cho Dev B, 2 hạng mục không đụng chung file
+  (Dev A chỉ `views/**`, Dev B chỉ `components/common/**`).
+- Dev A commit `dda23b7`: 6 file (`views/app/{AuditLogView,FileManagerView,
+  MapView,LearningView}.vue`, `views/auth/WorkspacePickerView.vue`,
+  `views/landing/BlogListView.vue`) — dùng `EmptyState` có sẵn
+  (`components/feedback/EmptyState.vue`), wiring `@cta` reset đúng filter
+  state. Đồng thời phát hiện (không sửa, đúng scope) `MailboxView.vue`/
+  `WikiView.vue` có search input trang trí không wire vào filter nào — bug
+  class khác, để backlog.
+- Dev B commit `e7740d7`: 5 file `components/common/{BaseTabs,BaseProgress,
+  BaseToast,BaseToggle,BaseDropdown}.vue`. BaseTabs full tablist/tab/tabpanel
+  + roving tabindex + arrow-key/Home/End keyboard nav; BaseProgress
+  progressbar role; BaseToast alert/status theo `toast.type`; BaseToggle
+  role=switch; BaseDropdown haspopup/expanded/controls (cố ý KHÔNG thêm
+  role=menu vì panel là slot tự do). Báo cáo 1 build:lib flake tự resolve,
+  nghi race giữa 2 dev chạy build:lib đồng thời.
+- Dev C QA:
+  - **Build gate**: `npm run typecheck` sạch; `npm run build:lib` chạy 2 lần
+    liên tiếp, cả 2 lần PASS y hệt nhau (`ui.css` 237.71 kB/gzip 34.72 kB,
+    `wemake-ui.es.js` 418.50 kB, `wemake-ui.umd.js` 327.21 kB; lần 1
+    ~34.25s wall/19.63s vite, lần 2 ~42.84s wall/18.50s vite) — không tái
+    hiện flake lần này; `npm run build:app` PASS (24.09s, mọi chunk build
+    OK). Đánh giá giả thuyết race của Dev B: **plausible** — 2 commit chỉ
+    cách nhau 65s (15:20:25 → 15:21:30) trong khi 1 lần `build:lib` một
+    mình đã tốn 34-43s (chưa kể sửa file + git add/commit), nên nếu cả 2
+    dev tự chạy full quy trình edit→typecheck→build:lib→commit trong
+    khung ~65s đó, khả năng cao build:lib của 2 dev overlap nhau thật —
+    khuyến nghị round sau cân nhắc serialize lệnh `build:lib` giữa Dev A/B
+    nếu flake tái diễn.
+  - `git show --stat` xác nhận Dev A chỉ đụng `views/**` (6 file), Dev B
+    chỉ đụng `components/common/**` (5 file), 0 overlap, không đụng
+    `tokens.css`/`dark-mode.css`/`flat-mode.css`/`style.css`/`lib.ts`.
+  - **Đọc FULL diff + full file hiện tại cả 6 file Dev A**: mọi cặp
+    v-if/v-else khớp đúng mảng v-for tương ứng. `FileManagerView.vue` dùng
+    đúng chuỗi `v-if="filtered.length===0"` (EmptyState) /
+    `v-else-if="view==='grid'"` (file-grid) / `v-else` (file-list) — 1
+    nhánh EmptyState dùng chung che đúng CẢ 2 chế độ grid/list, không có
+    khoảng trống hay double-render. `MapView.vue` extract đúng
+    `filteredLocations` computed thay literal filter inline trong template,
+    `@cta` reset đúng biến `search`. `AuditLogView.vue` `@cta` reset cả
+    `search` VÀ `actionFilter` khớp đúng 2 ref điều khiển computed
+    `filtered`. `LearningView.vue` `@cta` reset `tab='khoa-hoc'` khớp
+    default value của `tab` ref. `BlogListView.vue` `@cta` reset
+    `activeTag='tất cả'` khớp default; nút "Xem thêm bài viết" được gate
+    thêm `v-if="filtered.length>0"` đúng, không lộ nút khi rỗng.
+    `WorkspacePickerView.vue` `@cta` reset `search`, đúng biến điều khiển
+    hàm `filtered()`. Đối chiếu `EmptyState.vue` xác nhận prop thật
+    (`variant`/`title`/`description`/`icon`/`ctaLabel`/`secondaryLabel`/
+    `size`/`query`, emit `cta`/`secondary`) — cả 6 file dùng đúng tên prop
+    (kể cả kebab-case `cta-label`/`:query`), KHÔNG có prop bịa.
+  - **Đọc FULL diff + full file `BaseTabs.vue` Dev B**: id
+    `base-tabs-${uid}-tab/panel-${key}` sinh từ counter module-scope
+    `_tabsIdCounter` tăng đúng 1 lần/instance (script setup chạy 1 lần/
+    instance) → unique thật giữa nhiều instance cùng lúc. `aria-controls`
+    trên tab trỏ đúng `panelId(tab.key)` khớp `id` của đúng tabpanel cùng
+    `key` (tra theo key, không theo index → không có off-by-one). Trace bộ
+    3 tab với tab giữa disabled: `ArrowRight`/`ArrowLeft` dùng `step()`
+    loop qua modulo, skip đúng tab disabled, wrap đúng ở 2 đầu; `Home`/
+    `End` nhảy đúng tab enabled đầu/cuối. Indicator (`offsetLeft`/
+    `offsetWidth` qua `.base-tabs__tab--active`) không bị đụng — class name
+    giữ nguyên, vẫn hoạt động đúng. `BaseProgress` `aria-valuenow` tính từ
+    `Math.round(percent)` với `percent` là computed thật từ
+    `props.value/props.max`, không hardcode. `BaseToast` `role`/
+    `aria-live` bind động `:role="toast.type==='error'?...":..."` bên
+    trong `v-for`, chuyển đúng theo từng toast instance, không static 1
+    lần. Rà 0 prop/emit/slot/class rename trên cả 5 file — chỉ thêm
+    attribute mới + 1 script-block đếm id, `defineEmits` signature không
+    đổi (chỉ capture biến `emit` để dùng nội bộ trong `selectTab`).
+  - **New-hardcode/Vietnamese-text check**: grep dòng `+` cả 2 diff cho
+    hex/rgba/px → 0 kết quả (round này chỉ đổi script/template). Mọi string
+    tiếng Việt mới (title/description EmptyState, `aria-label="Đóng"`/
+    `"Chuyển đổi"`) đúng văn phong tiếng Việt sẵn có của dự án.
+  - **Spot-check độc lập backlog "0-ARIA"**: grep `aria-|role=` trên
+    10/18 component (`BaseAvatarGroup`, `BaseBadge`, `BaseDataGrid`,
+    `BaseRadio`, `BaseSkeleton`, `BaseTooltip`, `BaseWizard`, `Kanban`,
+    `LogViewer`, `Timeline`) — cả 10 đều 0 match, xác nhận danh sách đúng
+    thật (nhiều hơn mức 3-4 yêu cầu).
+  - **Sanity-check verdict "N/A" của Dev A**: `MailboxView.vue` — `search`
+    ref tồn tại nhưng `v-for="m in MAILS"` dùng thẳng mảng gốc, không
+    filter → đúng "decorative search". `WikiView.vue` tương tự
+    (`v-for="section in DOCS"` không filter). `InvoiceView.vue` — 3
+    `.filter()` chỉ dùng tính tổng KPI (`paid`/`pending`/`overdue`), bảng
+    `v-for="inv in INVOICES"` dùng mảng gốc → đúng "KPI-only filter".
+    `OnboardingView.vue` — `.filter(Boolean).length` chỉ đếm email
+    non-empty cho label nút, không có `v-for` nào lọc theo nó → đúng
+    "non-list filter". Cả 4 verdict N/A đều chính xác, không phải bug bị
+    bỏ sót.
+  - **Phát hiện phụ** (không phải bug, bổ sung naming-debt round 16):
+    `BaseProgress.vue` và `BaseRadio.vue` cũng đang dùng khối alias legacy
+    không-prefix (`var(--border-color)`, `var(--brand-primary)`,
+    `var(--success-color)`, `var(--warning-color)`, `var(--error-color)`,
+    `var(--text-secondary)` — đều trỏ đúng `var(--wx-*)` trong `style.css`,
+    value-safe) — mở rộng phạm vi "Naming debt" đã ghi ở backlog round 16
+    (trước đó chỉ biết 9 file trong `views/*`, nay có thêm 2 file trong
+    `components/common/*`).
+  - **Không phát hiện bug thật nào cần sửa** trong 2 commit — cả Dev A và
+    Dev B đều đúng 100% theo khai báo, build gate 3/3 PASS, 0 overlap, 0
+    hardcode mới, 0 API breaking change.
+- **ROUND 17 QA: PASS**, không cần follow-up commit. Finding count round
+  này = 11 gap thật được PHÁT HIỆN VÀ SỬA bởi Dev A/B (6 view thiếu
+  empty-state + 5 component thiếu ARIA) — **KHÔNG PHẢI 0-finding**, nên
+  chuỗi "3 GLOBAL AUDIT liên tiếp 0-finding" của §6 CHƯA bắt đầu đếm; đây
+  là **GLOBAL AUDIT ROUND 1 of 3** (cần thêm ít nhất 2 round GLOBAL AUDIT
+  liên tiếp sau đó đều 0-finding mới đủ điều kiện dừng).
+- Backlog cho round 18:
+  1. **0-ARIA component backlog — vẫn nguyên 18 file** (Dev B round 17
+     KHÔNG đụng tới danh sách này, 5 file Dev B sửa round này nằm ngoài
+     danh sách 18 file 0-ARIA): `components/common`: `BaseAvatarGroup`,
+     `BaseBadge`, `BaseDataGrid`, `BaseRadio`, `BaseSkeleton`,
+     `BaseTooltip`, `BaseWizard`, `ContextMenu`, `FormDrawer`, `FormModal`,
+     `GroupBox`, `StatusBar`, `StatusChip`, `TagList`, `UserDropdown` (15);
+     `components/data`: `Kanban`, `LogViewer`, `Timeline` (3). PLAN round
+     18 nên chọn 1 batch vừa sức (4-6 file) tiếp tục category D#8, hoặc
+     pivot sang D#4 (button/modal/table consistency)/D#5 (icon size)/D#6
+     (responsive breakpoint)/D#9 (hardcoded CSS tái quét)/D#10 (legacy
+     component orphan) nếu muốn đa dạng category trước khi quay lại ARIA.
+  2. **Bug thật, ưu tiên cao** (khác category với việc round 17 vừa làm):
+     `MailboxView.vue`/`WikiView.vue` — search input trang trí không wire
+     vào filter nào (khác bug class với "thiếu empty-state" — đây là "search
+     làm gì không lọc gì cả"), cần wire vào `v-for` thật (thêm computed
+     filtered list) hoặc bỏ hẳn input nếu chưa định làm search thật.
+  3. Mục A — vẫn CLOSED (không có phát hiện mới round này). Mục B — vẫn
+     CLOSED. Mục C — vẫn 1 follow-up mở ưu tiên thấp nhất:
+     `WeDashboardV1View.vue` `.env-dot`.
+  4. Naming debt (mở rộng, vẫn ưu tiên thấp) — thêm `BaseProgress.vue`,
+     `BaseRadio.vue` vào danh sách file dùng legacy alias var không-prefix
+     (`--border-color`/`--brand-primary`/`--success-color`/
+     `--warning-color`/`--error-color`/`--text-secondary`), cùng nhóm 9
+     file trước đó từ round 16.
+
+<!-- Round 17+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

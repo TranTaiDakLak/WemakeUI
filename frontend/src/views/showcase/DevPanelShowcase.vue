@@ -129,7 +129,7 @@ kbd { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); background: 
 
 .network-demo { background: #0d1117; color: #c9d1d9; font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); border-radius: var(--wx-radius-lg); overflow: hidden; }
 .net-row { display: grid; grid-template-columns: 70px 1fr 70px 70px; gap: var(--wx-space-3); padding: var(--wx-space-2) var(--wx-space-4); border-bottom: 1px solid rgba(255,255,255,0.06); }
-.net-row.header { color: #6e7681; font-size: var(--wx-fs-11); font-weight: var(--wx-fw-semibold); background: rgba(255,255,255,0.03); }
+.net-row.header { color: #6e7681; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); background: rgba(255,255,255,0.03); }
 .method { font-weight: var(--wx-fw-semibold); }
 .method.get { color: #3fb950; }
 .method.post { color: #58a6ff; }

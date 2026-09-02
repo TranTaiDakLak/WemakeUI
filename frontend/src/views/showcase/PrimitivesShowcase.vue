@@ -523,7 +523,7 @@ code {
 }
 .progress-stack { display: flex; flex-direction: column; gap: var(--wx-space-3); }
 .progress-row { display: flex; align-items: center; gap: var(--wx-space-3); }
-.progress-label { font-size: var(--wx-fs-11); font-family: var(--wx-font-mono); color: var(--wx-content-muted); width: 20px; flex-shrink: 0; }
+.progress-label { font-size: var(--wx-fs-12); font-family: var(--wx-font-mono); color: var(--wx-content-muted); width: 20px; flex-shrink: 0; }
 .progress-row > :last-child { flex: 1; }
 
 .shimmer-list-col {

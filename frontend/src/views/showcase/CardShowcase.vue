@@ -367,7 +367,7 @@ const gboxCollapsed = ref(false)
 
 .card-label {
   margin: 0;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.06em;

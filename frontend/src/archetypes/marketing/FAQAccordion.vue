@@ -138,7 +138,7 @@ function toggle(id: string) {
 .faq-item {
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-lg);
-  background: var(--wx-surface-raised);
+  background: var(--wx-surface-elevated);
   overflow: hidden;
   transition: border-color var(--wx-d-fast);
 }

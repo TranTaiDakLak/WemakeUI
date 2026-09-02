@@ -594,7 +594,7 @@ const EASE_TOKENS = [
 
 /* header */
 .hdr { padding-top: var(--wx-space-2); }
-.hdr__title { margin: 0 0 6px; font-size: var(--wx-fs-26); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
+.hdr__title { margin: 0 0 6px; font-size: var(--wx-fs-28); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
 .hdr__sub   { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); }
 
 /* section */
@@ -796,7 +796,7 @@ const EASE_TOKENS = [
   gap: 4px; cursor: pointer;
 }
 .hover-label { font-size: var(--wx-fs-13); font-weight: var(--wx-fw-semibold); color: var(--wx-text-primary); }
-.hover-sub   { font-size: var(--wx-fs-11); color: var(--wx-text-muted); }
+.hover-sub   { font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
 .hover-code  {
   font-family: var(--wx-font-mono); font-size: 10px;
   color: var(--wx-text-muted); background: var(--wx-surface-sunken);

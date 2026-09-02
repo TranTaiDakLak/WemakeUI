@@ -366,7 +366,7 @@ const densityMap: Record<Density, { td: string; th: string }> = {
 }
 .anatomy-desc code {
   font-family: var(--wx-font-mono);
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   background: color-mix(in srgb, var(--wx-brand-primary) 10%, transparent);
   color: var(--wx-brand-primary);
   padding: 1px 4px;

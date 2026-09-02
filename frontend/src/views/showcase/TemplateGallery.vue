@@ -788,7 +788,7 @@ function viewDemo(card: FlatCard, e: Event) {
   position: sticky; top: 0; background: var(--wx-surface-elevated); z-index: 1;
 }
 .pm__title { margin: 0 0 3px; font-size: var(--wx-fs-15); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
-.pm__file  { font-family: var(--wx-font-mono); font-size: var(--wx-fs-11); color: var(--wx-text-muted); }
+.pm__file  { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
 .pm__close { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: var(--wx-radius-md); background: transparent; border: none; color: var(--wx-text-secondary); cursor: pointer; flex-shrink: 0; transition: background var(--wx-d-fast); }
 .pm__close:hover { background: var(--wx-hover-bg); }
 .pm__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--wx-space-2); padding: var(--wx-space-3) var(--wx-space-5); }

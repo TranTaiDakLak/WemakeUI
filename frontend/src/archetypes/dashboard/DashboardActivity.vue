@@ -232,7 +232,7 @@ const tabItems = computed(() => [
 .act-table { width: 100%; border-collapse: collapse; font-size: var(--wx-fs-14); }
 .act-table th, .act-table td {
   text-align: left;
-  padding: var(--wx-space-2-5) var(--wx-space-3);
+  padding: var(--wx-space-3) var(--wx-space-3);
   border-bottom: 1px solid var(--wx-border-subtle);
 }
 .act-table th { font-weight: 500; color: var(--wx-text-secondary); font-size: var(--wx-fs-12); white-space: nowrap; }

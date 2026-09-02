@@ -780,7 +780,7 @@ defineExpose({ openAdd: handleOpenAdd })
 
 .detail-section__label {
   margin: 0;
-  font-size: var(--wx-fs-11);
+  font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -801,7 +801,7 @@ defineExpose({ openAdd: handleOpenAdd })
   transition: background var(--wx-d-fast);
 }
 .detail-row:last-child { border-bottom: none; }
-.detail-row:hover { background: var(--wx-surface-hover); }
+.detail-row:hover { background: var(--wx-hover-bg); }
 
 .detail-key {
   color: var(--wx-text-secondary);

@@ -140,7 +140,7 @@ function toggle() {
   transition: background var(--wx-d-fast) var(--wx-ease-standard);
 }
 .wx-panel__header--clickable:hover {
-  background: var(--wx-hover-bg, rgba(0, 0, 0, 0.02));
+  background: var(--wx-hover-bg);
 }
 
 .wx-panel__chevron {

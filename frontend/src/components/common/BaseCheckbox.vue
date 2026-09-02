@@ -96,29 +96,29 @@ watch(() => props.indeterminate, (val) => {
   flex-shrink: 0;
   width: 16px;
   height: 16px;
-  border-radius: var(--wx-radius-sm, 4px);
-  border: 1.5px solid var(--wx-border-default, #e5e7eb);
-  background: var(--wx-surface-sunken, #f8fafc);
+  border-radius: var(--wx-radius-sm);
+  border: 1.5px solid var(--wx-border-default);
+  background: var(--wx-surface-sunken);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   margin-top: 2px;
   transition:
-    border-color var(--wx-duration-fast, 150ms) var(--wx-ease-standard, cubic-bezier(.4,0,.2,1)),
-    background var(--wx-duration-fast, 150ms) var(--wx-ease-standard, cubic-bezier(.4,0,.2,1)),
-    box-shadow var(--wx-duration-fast, 150ms) var(--wx-ease-standard, cubic-bezier(.4,0,.2,1));
+    border-color var(--wx-duration-fast) var(--wx-ease-standard),
+    background var(--wx-duration-fast) var(--wx-ease-standard),
+    box-shadow var(--wx-duration-fast) var(--wx-ease-standard);
 }
 
 .chk-box--checked,
 .chk-box--indeterminate {
-  border-color: var(--wx-brand-primary, #2563eb);
-  background: var(--wx-brand-primary, #2563eb);
+  border-color: var(--wx-brand-primary);
+  background: var(--wx-brand-primary);
 }
 
 .chk-icon {
   color: #fff;
-  animation: chk-pop var(--wx-duration-fast, 150ms) var(--wx-ease-decelerate, cubic-bezier(0,0,.2,1));
+  animation: chk-pop var(--wx-duration-fast) var(--wx-ease-decelerate);
 }
 @keyframes chk-pop {
   from { opacity: 0; transform: scale(.4); }
@@ -132,18 +132,18 @@ watch(() => props.indeterminate, (val) => {
 }
 
 .chk-text {
-  font-size: var(--wx-fs-13, 13px);
+  font-size: var(--wx-fs-13);
   font-family: var(--wx-font-primary);
-  color: var(--wx-text-primary, #1e293b);
+  color: var(--wx-text-primary);
   line-height: 1.5;
 }
 
 /* error state */
 .base-checkbox--error .chk-box {
-  border-color: var(--wx-danger-solid, #dc2626);
+  border-color: var(--wx-danger-solid);
 }
 .base-checkbox--error .chk-text {
-  color: var(--wx-danger-text, #dc2626);
+  color: var(--wx-danger-text);
 }
 
 /* disabled */
@@ -158,7 +158,7 @@ watch(() => props.indeterminate, (val) => {
   width: 14px;
   height: 14px;
 }
-.base-checkbox--sm .chk-text { font-size: var(--wx-fs-12, 12px); }
+.base-checkbox--sm .chk-text { font-size: var(--wx-fs-12); }
 
 @media (prefers-reduced-motion: reduce) {
   .chk-box { transition: none; }

@@ -99,7 +99,7 @@ onMounted(() => nextTick(resize))
   border-color: var(--wx-status-danger-border, var(--wx-danger-border));
 }
 .wx-textarea[data-state="invalid"]:focus-visible {
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-danger-solid) 25%, transparent);
 }
 .wx-textarea[disabled] {
   opacity: 0.6;

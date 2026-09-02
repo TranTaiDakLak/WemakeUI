@@ -135,7 +135,7 @@ function onRemove(e: MouseEvent) {
   transition: opacity var(--wx-d-micro) var(--wx-ease-standard),
               background var(--wx-d-micro) var(--wx-ease-standard);
 }
-.wx-tag__remove:hover { opacity: 1; background: rgba(0,0,0,0.08); }
+.wx-tag__remove:hover { opacity: 1; background: var(--wx-hover-bg); }
 .wx-tag__remove:focus-visible {
   outline: 2px solid var(--wx-border-focus);
   outline-offset: 1px;

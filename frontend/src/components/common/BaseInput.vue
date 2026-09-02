@@ -136,8 +136,8 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
   font-family: var(--wx-font-primary);
   font-size: 13px;
   transition:
-    border-color var(--wx-duration-fast, 150ms) var(--wx-ease-standard, cubic-bezier(.4,0,.2,1)),
-    box-shadow var(--wx-duration-fast, 150ms) var(--wx-ease-standard, cubic-bezier(.4,0,.2,1));
+    border-color var(--wx-duration-fast) var(--wx-ease-standard),
+    box-shadow var(--wx-duration-fast) var(--wx-ease-standard);
 }
 
 .base-input__field:focus {
@@ -152,17 +152,17 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
 
 /* error state */
 .base-input__wrapper--error .base-input__field {
-  border-color: var(--wx-danger-solid, #dc2626);
-  box-shadow: 0 0 0 3px var(--wx-danger-bg, #fee2e2);
+  border-color: var(--wx-danger-solid);
+  box-shadow: 0 0 0 3px var(--wx-danger-bg);
 }
 .base-input__wrapper--error .base-input__field:focus {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-danger-solid, #dc2626) 25%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-danger-solid) 25%, transparent);
 }
 
 /* success state */
 .base-input__wrapper--success .base-input__field {
-  border-color: var(--wx-success-border, #86efac);
-  box-shadow: 0 0 0 3px var(--wx-success-bg, #f0fdf4);
+  border-color: var(--wx-success-border);
+  box-shadow: 0 0 0 3px var(--wx-success-bg);
 }
 
 /* disabled */
@@ -190,13 +190,13 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
   color: var(--wx-text-muted);
   padding: 0;
   border-radius: var(--wx-radius-sm);
-  transition: color var(--wx-duration-fast, 150ms);
+  transition: color var(--wx-duration-fast);
 }
 .base-input__eye:hover { color: var(--wx-text-primary); }
 
 .base-input__icon--success {
-  color: var(--wx-success-text, #16a34a);
-  animation: icon-pop var(--wx-duration-fast, 150ms) var(--wx-ease-decelerate, cubic-bezier(0,0,.2,1));
+  color: var(--wx-success-text);
+  animation: icon-pop var(--wx-duration-fast) var(--wx-ease-decelerate);
 }
 @keyframes icon-pop {
   from { opacity: 0; transform: scale(.6); }
@@ -205,7 +205,7 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
 
 .base-input__error {
   font-size: 11px;
-  color: var(--wx-danger-text, #dc2626);
+  color: var(--wx-danger-text);
 }
 
 /* ── Size sm ── */

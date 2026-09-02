@@ -93,7 +93,7 @@ const chips = (g: FilterGroup) => flatten(g)
 }
 
 .filter-chip__remove:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--wx-hover-bg);
 }
 
 .filter-chips__clear {

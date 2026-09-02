@@ -146,7 +146,7 @@ watch(
   flex-shrink: 0;
   background: none;
   border: none;
-  color: rgba(0, 0, 0, 0.3);
+  color: var(--wx-text-muted);
   font-size: 18px;
   cursor: pointer;
   padding: 0 2px;
@@ -155,8 +155,8 @@ watch(
   transition: all 0.2s;
 }
 .wx-toast__close:hover {
-  background: rgba(0, 0, 0, 0.06);
-  color: rgba(0, 0, 0, 0.6);
+  background: var(--wx-hover-bg);
+  color: var(--wx-text-primary);
 }
 
 /* ── Dark mode — surface-elevated thay vì white, giữ colored left border ── */
@@ -167,8 +167,10 @@ watch(
   background: var(--wx-surface-elevated);
   border-color: var(--wx-border-default);
 }
-.wx-dark .wx-toast__close { color: var(--wx-text-muted); }
-.wx-dark .wx-toast__close:hover { background: rgba(255,255,255,0.08); color: var(--wx-text-primary); }
+/* .wx-toast__close dark override removed (round 21): base rules above now use
+   var(--wx-text-muted)/var(--wx-hover-bg)/var(--wx-text-primary), which already resolve to
+   the exact same dark-mode values via cascade (--wx-hover-bg is literally rgba(255,255,255,0.08)
+   in .wx-dark) — the old override here was pixel-identical, confirmed against dark-mode.css. */
 
 /* ── Transition — slide in from right ── */
 .wx-toast-enter-active { transition: all 0.3s ease-out; }

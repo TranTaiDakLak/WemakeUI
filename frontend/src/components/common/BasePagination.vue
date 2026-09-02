@@ -154,7 +154,7 @@ function next() { go(props.modelValue + 1) }
 .wx-pagination[data-size="sm"] .wx-pagination__btn { min-width: 28px; height: 28px; font-size: var(--wx-fs-12); }
 
 .wx-pagination__btn:hover:not(:disabled):not([data-active]) {
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--wx-hover-bg);
   color: var(--wx-content-primary);
 }
 .wx-pagination__btn:disabled {
@@ -163,7 +163,7 @@ function next() { go(props.modelValue + 1) }
 }
 .wx-pagination__btn[data-active] {
   background: var(--wx-gradient-button);
-  color: #ffffff;
+  color: var(--wx-text-on-brand);
   font-weight: var(--wx-fw-semibold);
 }
 

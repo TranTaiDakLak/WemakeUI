@@ -76,13 +76,27 @@ hẳn khi 3 GLOBAL AUDIT liên tiếp đều 0 finding (xem mục 6 — Điều 
 Padding/margin/gap dạng px không dùng `var(--wx-space-*)`, đặc biệt các giá
 trị khớp chính xác lưới 4pt (4/8/12/16/24/32/40/48px). Giá trị lẻ (6px, 10px,
 14px...) dùng để fine-tune density — CHỈ đổi nếu khớp token, không ép về
-token gần nhất nếu sẽ đổi layout rõ rệt.
-- `archetypes/dashboard/DashboardKPICard.vue`, `DashboardHero.vue`
-- `archetypes/marketing/MarketingHero.vue`, `MarketingHeader.vue`
-- `archetypes/crud/CrudFormFields.vue`, `CrudPage.vue`
-- `views/dashboard/*.vue` (10 file: Analytics, Crm, Ecommerce, Finance,
-  Helpdesk, Iot, Logistics, Overview, Project, Saas) — nhiều spacing lặp lại
-  giống nhau giữa các file, có thể tokenize hàng loạt.
+token gần nhất nếu sẽ đổi layout rõ rệt. **11px KHÔNG khớp token nào** (scale
+`--wx-fs-*` nhảy thẳng 12→13→14→15→16, không có `--wx-fs-11`) — để nguyên
+literal, không tự ép về fs-12 (bug thật đã gặp ở round 8, xem log).
+- **Đã xong (round 8, Dev B, commit `2fcc9af` + QA fix `f0b6d1b`):**
+  `archetypes/dashboard/DashboardHero.vue`, `archetypes/marketing/
+  MarketingHero.vue` (chỉ 1 chỗ padding trailing 96px→space-11, còn 120px đầu
+  và phần gradient/màu giữ nguyên), toàn bộ `views/dashboard/*.vue` (10 file:
+  Analytics, Crm, Ecommerce, Finance, Helpdesk, Iot, Logistics, Overview,
+  Project, Saas) + `WeDashboardV1View.vue` — chỉ convert 4/8/12/16/96px khớp
+  chính xác lưới, không đụng width/height/grid-template-columns, không ép các
+  giá trị lẻ (2/3/5/6/9/10/14px).
+- **Còn lại cho round 9+:**
+  - `archetypes/dashboard/DashboardKPICard.vue` — chưa sweep.
+  - `archetypes/marketing/MarketingHeader.vue` — chưa sweep (MarketingHero.vue
+    mới chỉ xử lý 1 chỗ ở round 8, phần còn lại của hero + toàn bộ Header
+    chưa đụng).
+  - `archetypes/crud/CrudFormFields.vue`, `CrudPage.vue` — chưa sweep.
+  - Các view ngoài `views/dashboard/*` (vd `views/app/*`, `views/wemakeui/*`,
+    `views/marketing/*`, `views/showcase/*`, `views/forms/*`) chưa được sweep
+    cho pattern spacing 4pt — mới chỉ xử lý wave-3 category-1 (undefined var)
+    ở các round trước, chưa quét riêng hardcoded-px-khớp-token.
 
 ### B. Duplicate button/badge/chip re-implementation (ưu tiên trung bình)
 Đánh giá case-by-case — CHỈ gộp vào BaseButton/BaseBadge nếu không làm giảm
@@ -578,4 +592,149 @@ tự ý dừng sớm hơn.
     tiên — có thể PLAN round 8 cân nhắc chuyển sang mục A/B hoặc GLOBAL
     AUDIT (mục D) nếu muốn xử lý GROUP 2 gộp chung 1 round nhỏ trước.
 
-<!-- Round 8+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 8 (2026-09-02)
+- Bối cảnh: PLAN + Dev A/B của round này đã chạy trước hai commit độc lập,
+  Dev C (agent này) chỉ chạy QA theo checklist có sẵn — không chạy lại PLAN.
+- Dev A commit `e4b2c99`: 3 file (`views/auth/LoginV3View.vue`,
+  `views/showcase/AnimationShowcase.vue`, `views/showcase/IconShowcase.vue`).
+  Đây là nốt cuối cùng của wave-3 category-1 + GROUP 2: map
+  `--wx-error-bg/text/border` (không tồn tại trong `tokens.css`) →
+  `--wx-danger-bg/text/border` thật ở `LoginV3View.vue` (form-alert +
+  toast) và `AnimationShowcase.vue` (4 chỗ); fix `.v3-brand-name` từ
+  `--wx-fs-17` (undefined, dead) → `--wx-fs-16`; đổi `color:white` trên step
+  badge sang `var(--wx-text-on-brand)`; map toàn bộ ~45 chỗ naming scheme
+  riêng `--wx-color-*` trong `IconShowcase.vue` sang token thật
+  (`--wx-color-bg-base`→`--wx-surface-base`, `--wx-color-text-primary`→
+  `--wx-text-primary`, `--wx-color-brand-solid`→`--wx-brand-primary` — đổi
+  màu active-state/badge từ hex fallback tím sang brand blue thật), TRỪ
+  `.page.is-dark` (fixed-dark preview panel cố ý, giữ hex literal
+  `#0b0f17`/`#e6e8ec`, có comment tiếng Việt giải thích lý do — cùng category
+  với fixed-dark hero của `MarketingHero.vue`). Dropped dead literal
+  fallback trên các token đã thật (`--wx-success-*`, `--wx-radius-lg/-md`,
+  `--wx-d-fast/-micro`, `--wx-ease-decelerate/-accelerate`) để
+  `prefers-reduced-motion` override hoạt động đúng thay vì race với fallback
+  ms literal. 90 dòng đổi, typecheck+build:lib PASS (theo commit message).
+- Dev B commit `2fcc9af`: 13 file (`archetypes/dashboard/DashboardHero.vue`,
+  `archetypes/marketing/MarketingHero.vue`, toàn bộ `views/dashboard/*.vue`
+  10 file + `WeDashboardV1View.vue`) — vòng đầu tiên xử lý mục A (BACKLOG
+  §4.A, hardcoded spacing sweep): convert padding/margin/gap/font-size px
+  literal sang token CHỈ khi khớp chính xác giá trị scale (4/8/12/16/96px
+  spacing, 12/13/14/28px font-size), giữ nguyên các giá trị lẻ
+  (2/3/5/6/9/10/14px) và không đụng width/height/grid-template-columns. 52
+  dòng đổi, typecheck+build:lib PASS (theo commit message).
+- Dev C QA (agent này) — verify toàn bộ checklist trước khi accept:
+  - Build gate 3/3 PASS: `typecheck` sạch (exit 0, không lỗi), `build:lib`
+    18.11s (`ui.css` 234.37kB/gzip 34.73kB, `es.js` 415.90kB/gzip 98.34kB,
+    `umd.js` 325.52kB/gzip 84.71kB, dts OK), `build:app` 9.83s (tất cả chunk
+    build OK, `IconShowcase` 45.72kB, `LoginV3View` 12.16kB, `WeDashboardV1View`
+    25.20kB — không có lỗi).
+  - `git show --stat` xác nhận đúng 3 file (Dev A) + 13 file (Dev B), 0
+    overlap, không đụng `tokens.css`/`dark-mode.css`/`flat-mode.css`/
+    `lib.ts`.
+  - **Full-tree re-grep cuối cùng cho TOÀN BỘ wave 1-3 + GROUP 2** (pattern
+    `--wx-text-xs/sm/base/lg/xl/2xl/tertiary`, `--wx-space-1-5/2-5/16/20`,
+    `var(--wx-surface)/(--wx-primary)/(--wx-secondary)`,
+    `--wx-surface-raised/hover/default`, `--wx-danger-subtle`,
+    `--wx-success-subtle`, `--wx-fs-10/11/17/22/26`, `--wx-fw-normal`,
+    `--wx-error-*`, `--wx-color-bg-*/text-*/border-*/brand-*`) trên toàn
+    `frontend/src`: **chỉ còn đúng 1 hit** —
+    `views/forms/FloatingLabelsView.vue:125` (`font-size: var(--wx-fs-11)`),
+    đã đọc lại code xác nhận đúng là false-positive từ round 6/7: nằm trong
+    `<pre>` doc-sample (đóng `</pre>` dòng 131), live CSS thật ở dòng 100/112
+    đã đúng `var(--wx-fs-14)`. Không có hit nào khác ngoài dự kiến.
+  - Đọc `LoginV3View.vue:407-411` xác nhận `.v3-brand-name { font-size:
+    var(--wx-fs-16); ... }` — đã fix đúng, không còn dead token.
+  - Đọc `IconShowcase.vue:723-733` xác nhận `.page.is-dark` GIỮ NGUYÊN hex
+    literal (`background: #0b0f17; color: #e6e8ec;`), có comment tiếng Việt
+    ngay phía trên giải thích "Preview luôn-tối cố định ... không theo theme
+    của site, nên nền/chữ giữ nguyên hex literal thay vì token phản ứng
+    theme" — đúng như khai báo, KHÔNG bị convert nhầm sang token phản ứng
+    theme. Grep xác nhận `--wx-color-brand-solid` không còn tồn tại trong
+    file (0 hit), toàn bộ đã chuyển sang `--wx-brand-primary` (6 chỗ, bao
+    gồm active-state/badge/border/box-shadow) — đúng phạm vi "everywhere
+    EXCEPT dark-preview exception" vì rule `.page.is-dark` chỉ có
+    background/color, không có brand color nào trong đó.
+  - Diff xác nhận `.page.is-dark` hex KHÔNG PHẢI giá trị mới — trước round
+    này nó đã là `var(--wx-color-bg-base, #0b0f17)`/`var(--wx-color-text-
+    primary, #e6e8ec)` (token chết kèm fallback), Dev A chỉ bỏ wrapper token
+    chết, giữ nguyên đúng giá trị hex fallback cũ → không tính là hardcode
+    mới.
+  - **Spot-check spacing conversions của Dev B** — đọc trực tiếp diff hunk
+    của `DashboardHero.vue`, `MarketingHero.vue`, `WeDashboardV1View.vue`,
+    `ProjectView.vue`, `OverviewView.vue`, `SaasView.vue`,
+    `AnalyticsView.vue`: xác nhận `width: 8px; height: 8px` trên `.dot`/`.d`
+    (OverviewView, ProjectView, SaasView) KHÔNG bị đụng, chỉ
+    `margin-right: 4px` cạnh nó được convert; `grid-template-columns: 32px
+    1fr` trong `AnalyticsView.vue .heatmap` giữ nguyên literal, chỉ `gap`
+    convert; `MarketingHero.vue .hero { padding: 120px var(--wx-space-6)
+    96px }` → chỉ số cuối (96px→`--wx-space-11`) đổi, số đầu `120px` và toàn
+    bộ `background: linear-gradient(...)` giữ nguyên không đổi. **PHÁT HIỆN
+    BUG THẬT**: `tokens.css` không có `--wx-fs-11` (scale nhảy thẳng
+    12→13→14→15→16px) nhưng Dev B đã convert 10 chỗ `font-size: 11px` →
+    `var(--wx-fs-12)` (`DashboardHero.vue` `.d-hero__live`/`.d-hero__env-
+    pill`; `WeDashboardV1View.vue` `.env-dot`/`.section-badge`/`.chart-
+    hint`/`.act-table th`/`.retry-badge`/`.acc-phone`/`.err-time`;
+    `ProjectView.vue` `.x-labels`) — đây KHÔNG phải "khớp chính xác scale"
+    như commit message khai báo, mà là âm thầm tăng 11px→12px, vi phạm
+    chính rule Dev B tự đặt ra (giá trị lẻ không khớp token phải giữ
+    nguyên). Đã tự sửa: revert cả 10 chỗ về lại `11px` literal, verify lại
+    `typecheck`+`build:lib` PASS, commit riêng `f0b6d1b` ("fix: qa
+    follow-up on round 8 — revert incorrect 11px->fs-12 conversions").
+  - Token existence + dark-mode: xác nhận tất cả token mới dùng đều tồn tại
+    trong `tokens.css` — `--wx-danger-bg/-text/-border` (dòng 92-95),
+    `--wx-surface-base/-elevated/-sunken` (61-63), `--wx-hover-bg` (125),
+    `--wx-text-primary/-secondary/-muted` (50-52), `--wx-border-default/
+    -subtle` (67-68), `--wx-brand-primary` (18), `--wx-text-on-brand` (57),
+    `--wx-space-1/2/3/4/11` (228-238: 4/8/12/16/96px), `--wx-fs-12/13/14/16/
+    28` (242-250: 12/13/14/16/28px) — không có `--wx-fs-11` (xác nhận bug ở
+    trên). Token màu đều có coverage trong `dark-mode.css` (đã verify ở
+    round 6/7 cho phần lớn các token này, không lặp lại re-check chi tiết
+    từng dòng ở round này vì không có token màu mới ngoài danh sách đã
+    verify).
+  - New-hardcode check: grep diff 2 commit cho hex/rgba mới trên dòng `+`
+    (loại trừ `var(--wx-...)`) → chỉ 2 dòng match, đúng là `.page.is-dark`
+    của Dev A (giá trị pre-existing, không phải mới, đã verify ở trên) —
+    không có hardcode thật sự mới nào khác.
+  - API safety: đọc hunk header (`@@ -line,count`) đối chiếu với vị trí
+    `<style scoped>` của từng file trong cả 2 commit — toàn bộ hunk đều nằm
+    sau dòng `<style scoped>`, không có hunk nào chạm `<script setup>`/
+    `<template>`, không đổi prop/emit/slot, `lib.ts` không đổi.
+  - **ROUND 8 QA: PASS WITH FOLLOW-UP COMMIT `f0b6d1b`.**
+- **MILESTONE — Toàn bộ multi-round "undefined CSS var" bug hunt (wave 1, 2,
+  3, GROUP 2 — trải dài từ round 1 đến round 8) chính thức CLOSED toàn repo.**
+  Full-tree grep cuối cùng (mục trên) chỉ còn đúng 1 hit là false-positive
+  doc-sample đã xác nhận nhiều lần (`FloatingLabelsView.vue:125`, trong
+  `<pre>`, không phải CSS sống). Không còn site sống thật nào tham chiếu
+  token undefined/dead trong toàn bộ `frontend/src/**`.
+- Backlog cho round 9 — chuyển hẳn trọng tâm sang mục A/B/C/D (§4), không
+  còn wave undefined-CSS-var nào phải theo dõi:
+  - **Mục A (spacing sweep)** — round 8 đã xử lý xong toàn bộ
+    `views/dashboard/*.vue` (10 file) + `WeDashboardV1View.vue` +
+    `DashboardHero.vue` + 1 chỗ trong `MarketingHero.vue` (xem §4.A đã cập
+    nhật chi tiết "Đã xong"/"Còn lại"). Còn lại cho round 9+:
+    `DashboardKPICard.vue`, phần còn lại của `MarketingHero.vue` +
+    `MarketingHeader.vue` chưa sweep, `CrudFormFields.vue`/`CrudPage.vue`
+    chưa sweep, và các view ngoài `views/dashboard/*` (app/wemakeui/
+    marketing/showcase/forms) chưa được quét riêng cho hardcoded-spacing
+    (khác với wave-3 undefined-var đã quét xong).
+  - **Lưu ý quan trọng cho round 9+ khi làm mục A**: `--wx-fs-11` KHÔNG tồn
+    tại trong token scale — 11px là giá trị lẻ, để nguyên literal, KHÔNG ép
+    về `--wx-fs-12`. Bug này vừa bị bắt và sửa ở round 8 (commit `f0b6d1b`);
+    PLAN/Dev nên nhắc lại rule này khi giao việc round 9 để tránh lặp lại.
+  - **Mục B** (duplicate button/badge/chip consolidation) — chưa động tới,
+    vẫn nguyên như mô tả §4.B.
+  - **Mục C** (dashboard `.metric`/legend-dot pattern trùng lặp) — chưa động
+    tới, vẫn nguyên như mô tả §4.C. Lưu ý: round 8 đã tokenize một số
+    `.metric{gap:4px}` thành `gap:var(--wx-space-1)` ở nhiều file
+    `views/dashboard/*` nhưng KHÔNG rút thành component/composable dùng
+    chung — mục C (rút gọn duplication) vẫn còn nguyên, chỉ là giá trị bên
+    trong đã tokenize.
+  - **Mục D (GLOBAL AUDIT round-robin)** — từ round 9 trở đi, vì backlog A/B/C
+    không còn cấp bách như trước (đã qua nhiều vòng xử lý wave undefined-var
+    + 1 vòng spacing), PLAN nên bắt đầu cân nhắc xen kẽ category D (component
+    consistency, responsive, a11y, interaction states — §4.D mục 2,6,7,8)
+    song song với việc tiếp tục A/B/C, thay vì chỉ làm A/B/C tuần tự. Round
+    9 có thể chọn 1 hạng mục A/B/C + 1 category D độc lập file cho 2 dev,
+    hoặc 2 category D nếu A/B/C tạm hết việc nhỏ phù hợp trong 1 round.
+
+<!-- Round 9+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

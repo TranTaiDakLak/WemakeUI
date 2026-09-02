@@ -911,6 +911,6 @@ function downloadFile(content: string, type: string, name: string) {
 
 /* Header padding theo density — khớp AccountsView */
 .dgp--d-sm .dgp-th { padding: 7px 10px; }
-.dgp--d-md .dgp-th { padding: 12px; }
+.dgp--d-md .dgp-th { padding: var(--wx-space-3); }
 .dgp--d-lg .dgp-th { padding: 14px var(--wx-space-3); }
 </style>

@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseTag, BaseProgress, BaseCard, BaseTabs } from '../../components/common'
+import { EmptyState } from '../../components/feedback'
 
 const tab = ref('khoa-hoc')
 const tabs = [
@@ -33,7 +34,16 @@ const displaying = computed(() => tab.value === 'khoa-hoc' ? COURSES : tab.value
   <AppPageLayout section="app" current="học tập" page-title="Trung tâm học tập" page-description="Nâng cao kỹ năng với các khoá học được tuyển chọn">
     <BaseTabs v-model="tab" :tabs="tabs" />
 
-    <div class="courses-grid" v-reveal>
+    <EmptyState
+      v-if="displaying.length === 0"
+      variant="filtered"
+      title="Không có khoá học nào"
+      description="Thử chọn tab khác để xem thêm khoá học."
+      cta-label="Xem tất cả khoá học"
+      @cta="tab = 'khoa-hoc'"
+    />
+
+    <div v-else class="courses-grid" v-reveal>
       <BaseCard v-for="(c, i) in displaying" :key="c.id" v-reveal="i * 60" class="course-card" hover-effect="lift">
         <template #header>
           <div class="course-thumb">{{ c.thumb }}</div>

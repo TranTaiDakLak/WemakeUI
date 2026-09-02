@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseInput, BaseCard } from '../../components/common'
+import { EmptyState } from '../../components/feedback'
 
 const search = ref('')
 const selectedLocation = ref<number | null>(1)
@@ -16,6 +17,9 @@ const LOCATIONS = [
 const TYPE_MAP: Record<string, string> = { office: '🏢', warehouse: '🏭', partner: '🤝' }
 const STATUS_VARIANTS: Record<string, 'success' | 'neutral'> = { active: 'success', inactive: 'neutral' }
 const selected = computed(() => LOCATIONS.find(l => l.id === selectedLocation.value))
+const filteredLocations = computed(() =>
+  LOCATIONS.filter(l => !search.value || l.name.toLowerCase().includes(search.value.toLowerCase()))
+)
 
 import { computed } from 'vue'
 </script>
@@ -30,9 +34,9 @@ import { computed } from 'vue'
       <!-- sidebar -->
       <aside class="location-panel">
         <BaseInput v-model="search" placeholder="Tìm địa điểm..." size="sm" />
-        <ul class="location-list">
+        <ul v-if="filteredLocations.length > 0" class="location-list">
           <li
-            v-for="loc in LOCATIONS.filter(l => !search || l.name.toLowerCase().includes(search.toLowerCase()))"
+            v-for="loc in filteredLocations"
             :key="loc.id"
             class="loc-item" :class="{ active: selectedLocation === loc.id }"
             @click="selectedLocation = loc.id"
@@ -45,6 +49,15 @@ import { computed } from 'vue'
             <BaseBadge :text="loc.status === 'active' ? 'hoạt động' : 'tạm dừng'" :variant="STATUS_VARIANTS[loc.status]" size="sm" />
           </li>
         </ul>
+        <EmptyState
+          v-else
+          size="sm"
+          variant="search"
+          :query="search"
+          title="Không tìm thấy địa điểm nào"
+          description="Thử điều chỉnh từ khóa tìm kiếm."
+          @cta="search = ''"
+        />
       </aside>
 
       <!-- map placeholder + detail -->

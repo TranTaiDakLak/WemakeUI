@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import LandingLayout from '../_layouts/LandingLayout.vue'
 import { BaseTag, BaseButton } from '../../components/common'
+import { EmptyState } from '../../components/feedback'
 
 const activeTag = ref('tất cả')
 
@@ -39,7 +40,17 @@ import { computed } from 'vue'
           />
         </div>
 
-        <div class="posts-grid" v-reveal>
+        <div v-if="filtered.length === 0" class="posts-empty">
+          <EmptyState
+            variant="filtered"
+            title="Không có bài viết nào"
+            description="Thử chọn chủ đề khác để xem thêm bài viết."
+            cta-label="Xem tất cả bài viết"
+            @cta="activeTag = 'tất cả'"
+          />
+        </div>
+
+        <div v-else class="posts-grid" v-reveal>
           <a v-for="(p, i) in filtered" :key="p.id" v-reveal="i * 60" href="#/landing/blog/post" class="post-card">
             <div class="post-thumb">{{ p.thumb }}</div>
             <div class="post-body">
@@ -57,7 +68,7 @@ import { computed } from 'vue'
           </a>
         </div>
 
-        <div class="load-more">
+        <div v-if="filtered.length > 0" class="load-more">
           <BaseButton variant="secondary">Xem thêm bài viết</BaseButton>
         </div>
       </div>

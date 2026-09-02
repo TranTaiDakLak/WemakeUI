@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
 import { BaseButton, BaseInput, BaseTag, BaseAvatarGroup, BaseAvatar } from '../../components/common'
+import { EmptyState } from '../../components/feedback'
 
 const search = ref('')
 const selectedId = ref<string | null>(null)
@@ -52,7 +53,16 @@ function pick(id: string) {
       <BaseInput v-model="search" placeholder="Tìm theo tên…" size="md" />
     </div>
 
-    <div class="ws-grid">
+    <EmptyState
+      v-if="filtered().length === 0"
+      variant="search"
+      :query="search"
+      title="Không tìm thấy workspace nào"
+      description="Kiểm tra lại chính tả, hoặc thử từ khoá ngắn gọn hơn."
+      @cta="search = ''"
+    />
+
+    <div v-else class="ws-grid">
       <button
         v-for="w in filtered()"
         :key="w.id"

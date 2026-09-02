@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseInput, BaseTag, BaseBadge } from '../../components/common'
+import { EmptyState } from '../../components/feedback'
 
 const view = ref<'grid' | 'list'>('grid')
 const search = ref('')
@@ -64,7 +65,16 @@ function toggleSelect(id: number) {
     </div>
 
     <!-- grid view -->
-    <div v-if="view === 'grid'" class="file-grid" v-reveal>
+    <div v-if="filtered.length === 0" class="file-empty" v-reveal>
+      <EmptyState
+        variant="search"
+        :query="search"
+        title="Không tìm thấy tệp nào"
+        description="Thử điều chỉnh từ khóa tìm kiếm để xem nhiều tệp hơn."
+        @cta="search = ''"
+      />
+    </div>
+    <div v-else-if="view === 'grid'" class="file-grid" v-reveal>
       <div
         v-for="item in filtered" :key="item.id"
         class="file-card" :class="{ selected: selected.includes(item.id) }"

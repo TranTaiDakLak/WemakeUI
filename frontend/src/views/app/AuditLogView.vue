@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseInput, BaseTag } from '../../components/common'
+import { EmptyState } from '../../components/feedback'
 
 const search = ref('')
 const actionFilter = ref('tất cả')
@@ -48,7 +49,7 @@ const filtered = computed(() => LOGS.filter(l => {
     </div>
 
     <div class="log-table-wrap" v-reveal>
-      <table class="log-table">
+      <table v-if="filtered.length > 0" class="log-table">
         <thead>
           <tr><th>Thời gian</th><th>Actor</th><th>Hành động</th><th>Đối tượng</th><th>IP</th><th>Chi tiết</th></tr>
         </thead>
@@ -84,6 +85,15 @@ const filtered = computed(() => LOGS.filter(l => {
           </template>
         </tbody>
       </table>
+      <EmptyState
+        v-else
+        variant="search"
+        :query="search"
+        title="Không tìm thấy audit log nào"
+        description="Thử điều chỉnh bộ lọc hành động hoặc từ khóa tìm kiếm."
+        cta-label="Xoá bộ lọc"
+        @cta="search = ''; actionFilter = 'tất cả'"
+      />
     </div>
   </AppPageLayout>
 </template>

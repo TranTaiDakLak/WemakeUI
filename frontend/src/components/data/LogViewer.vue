@@ -149,6 +149,7 @@ function downloadLog() {
         v-model="search"
         type="search"
         placeholder="Tìm trong log..."
+        aria-label="Tìm trong log"
         class="log-search"
       />
       <div class="log-levels">
@@ -158,6 +159,7 @@ function downloadLog() {
           type="button"
           class="log-level-btn"
           :class="[`log-level-btn--${lvl}`, { 'log-level-btn--active': enabled.has(lvl) }]"
+          :aria-pressed="enabled.has(lvl)"
           @click="toggleLevel(lvl)"
         >{{ lvl }}</button>
       </div>
@@ -165,6 +167,7 @@ function downloadLog() {
         type="button"
         class="log-tool-btn"
         :class="{ 'log-tool-btn--active': follow }"
+        :aria-pressed="follow"
         @click="follow = !follow; if (follow) scrollToBottom()"
       >
         {{ follow ? '▶ Đang theo dõi' : '⏸ Đã dừng' }}
@@ -174,7 +177,7 @@ function downloadLog() {
     </div>
 
     <!-- Body -->
-    <div ref="scrollEl" class="log-scroll" @scroll="onScroll">
+    <div ref="scrollEl" class="log-scroll" role="log" aria-label="Nhật ký" @scroll="onScroll">
       <div v-if="filtered.length === 0" class="log-empty">Không có log nào khớp</div>
       <div v-else class="log-list" :style="{ height: totalHeight + 'px' }">
         <div :style="{ transform: `translateY(${offsetY}px)` }">
@@ -184,7 +187,12 @@ function downloadLog() {
             class="log-row"
             :class="`log-row--${entry.level}`"
             :style="{ height: rowHeight + 'px' }"
+            :role="entry.details ? 'button' : undefined"
+            :tabindex="entry.details ? 0 : undefined"
+            :aria-expanded="entry.details ? expanded.has(entry.id) : undefined"
             @click="entry.details && toggleExpand(entry.id)"
+            @keydown.enter.prevent="entry.details && toggleExpand(entry.id)"
+            @keydown.space.prevent="entry.details && toggleExpand(entry.id)"
           >
             <span class="log-ts">{{ entry.ts }}</span>
             <span class="log-level" :class="`log-level--${entry.level}`">{{ entry.level.toUpperCase() }}</span>

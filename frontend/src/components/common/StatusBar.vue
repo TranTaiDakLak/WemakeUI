@@ -26,23 +26,53 @@ const emit = defineEmits<{
     <div class="statusbar-group">
       <!-- Default stats (if provided) -->
       <template v-if="props.stats">
-        <span class="statusbar-item statusbar-item--clickable" @click="emit('segment-click', 'live')">
+        <span
+          class="statusbar-item statusbar-item--clickable"
+          role="button"
+          tabindex="0"
+          @click="emit('segment-click', 'live')"
+          @keydown.enter.space.prevent="emit('segment-click', 'live')"
+        >
           Live: <b class="sb-val sb-live">{{ props.stats.live }}</b>
         </span>
         <span class="sb-sep" />
-        <span class="statusbar-item statusbar-item--clickable" @click="emit('segment-click', 'die')">
+        <span
+          class="statusbar-item statusbar-item--clickable"
+          role="button"
+          tabindex="0"
+          @click="emit('segment-click', 'die')"
+          @keydown.enter.space.prevent="emit('segment-click', 'die')"
+        >
           Die: <b class="sb-val sb-die">{{ props.stats.total - props.stats.live }}</b>
         </span>
         <span class="sb-sep" />
-        <span class="statusbar-item statusbar-item--clickable" @click="emit('segment-click', 'total')">
+        <span
+          class="statusbar-item statusbar-item--clickable"
+          role="button"
+          tabindex="0"
+          @click="emit('segment-click', 'total')"
+          @keydown.enter.space.prevent="emit('segment-click', 'total')"
+        >
           Tổng: <b class="sb-val sb-total">{{ props.stats.total }}</b>
         </span>
         <span class="sb-sep" />
-        <span class="statusbar-item statusbar-item--clickable" @click="emit('segment-click', 'highlighted')">
+        <span
+          class="statusbar-item statusbar-item--clickable"
+          role="button"
+          tabindex="0"
+          @click="emit('segment-click', 'highlighted')"
+          @keydown.enter.space.prevent="emit('segment-click', 'highlighted')"
+        >
           Bôi đen: <b class="sb-val sb-highlight">{{ props.stats.highlighted }}</b>
         </span>
         <span class="sb-sep" />
-        <span class="statusbar-item statusbar-item--clickable" @click="emit('segment-click', 'selected')">
+        <span
+          class="statusbar-item statusbar-item--clickable"
+          role="button"
+          tabindex="0"
+          @click="emit('segment-click', 'selected')"
+          @keydown.enter.space.prevent="emit('segment-click', 'selected')"
+        >
           Đã chọn: <b class="sb-val sb-selected">{{ props.stats.selected }}</b>
         </span>
       </template>
@@ -54,7 +84,13 @@ const emit = defineEmits<{
       <template v-if="props.progress >= 0">
         <span class="sb-sep" />
         <span class="statusbar-item statusbar-progress">
-          <span class="statusbar-progress__bar">
+          <span
+            class="statusbar-progress__bar"
+            role="progressbar"
+            :aria-valuenow="Math.round(props.progress)"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
             <span class="statusbar-progress__fill" :style="{ width: Math.min(100, props.progress) + '%' }" />
           </span>
           <span class="statusbar-progress__text">{{ Math.round(props.progress) }}%</span>

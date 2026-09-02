@@ -116,7 +116,7 @@ literal, không tự ép về fs-12 (bug thật đã gặp ở round 8, xem log)
   khác, cố ý để nguyên, đã ghi nhận từ round 10) và `RevealTest.vue` (toàn bộ
   inline `style=""` trong template, không có `<style scoped>`, ngoài scope
   theo đúng quyết định round 10).
-- **Còn lại cho round 12+:**
+- **Còn lại cho round 12+ (đã xử lý qua round 12-15, xem log):**
   - `views/marketing/*` — re-grep round 11 còn **7 hit** (giảm nhẹ so với ước
     tính ~9 của round 10, chưa đụng tới).
   - `views/forms/*` — **21 hit**, chưa quét riêng (cluster lớn nhất còn lại).
@@ -127,6 +127,62 @@ literal, không tự ép về fs-12 (bug thật đã gặp ở round 8, xem log)
   file để loại multi-value shorthand chỉ khớp 1 phần như các round trước —
   dev round 12 cần đọc kỹ theo đúng pattern đã làm ở round 10-11, không convert
   máy móc theo số đếm thô này.)
+- **Đã xong (round 15, Dev A commit `d909077`, QA xác nhận `PASS`):**
+  toàn bộ `views/docs/**` (25 file, 63 conversion) — cụm lớn nhất còn lại từ
+  backlog round 14, bao gồm 3 inline `style=""` sanctioned
+  (`DropdownDoc.vue`/`TooltipDoc.vue` `gap:24px`→`space-5`,
+  `GettingStartedView.vue` `margin-top:32px`→`space-6`). Mục A **CLOSED cho
+  toàn bộ `views/docs/**`** — QA round 15 re-grep độc lập xác nhận 0 residual
+  hit.
+- **Đã xong (round 15, Dev B commit `2f6bcb1`, QA xác nhận `PASS`):**
+  7 view/archetype rải rác (`MaintenanceView.vue`, `NotFoundView.vue`,
+  `PolicyView.vue`, `LandingView.vue` (5 chỗ), `WeDashboardV1View.vue`+
+  `DashboardHero.vue` (inline `style="padding:0 4px"` sanctioned, 1 chỗ mỗi
+  file, cùng 1 pattern trigger-button lặp ở 2 nơi), `DashboardAnalytics.vue`)
+  — 10 conversion. Cộng riêng: `BaseDataGrid.vue` 14-biến alias-scheme (nợ đặt
+  tên từ round 11) migrate xong 100% sang `--wx-*` canonical, pure rename
+  không đổi hành vi (xem mục backlog "BaseDataGrid" cũ, nay CLOSED).
+- **QA round 15 — full-repo re-grep (item 10 checklist) — mục A CHƯA đóng
+  repo-wide, ĐÍNH CHÍNH nhận định sai của round 12 về `style.css`/
+  `responsive.css`:** round 12 từng kết luận "`style.css`/`ui-system/
+  foundations/{tokens.css,responsive.css}` là file ĐỊNH NGHĨA token/scale gốc,
+  loại khỏi phạm vi mục A" — kết luận đó **chỉ đúng cho phần đầu `style.css`**
+  (khối alias `:root{...}` dòng ~20-97, đúng là chỉ trỏ `var(--wx-*)`, không
+  có literal px cần convert) và cho `tokens.css`/`scales.ts` (đúng nghĩa
+  nguồn thang đo). Nhưng **`style.css` còn một khối utility-class riêng
+  (`.btn`, `.stat-card`, `.section-subtitle`, `.data-table th/td`,
+  `.form-textarea`, `.radio-label`...) chưa từng được quét, có literal px
+  khớp lưới thật**: `gap:8px` (dòng 174, `.btn`), `gap:8px` (dòng 240,
+  `.stat-card`), `margin-top:4px` (dòng 301, `.section-subtitle`),
+  `padding:12px 16px`/`padding:14px 16px` (dòng 312/322, `.data-table th/td`
+  — 16px khớp cả 2 dòng, 12px khớp, 14px lẻ giữ), `padding:8px 10px` (dòng
+  394, `.form-textarea` — 10px lẻ giữ), `gap:4px`+`margin-right:12px` (dòng
+  417/419, `.radio-label`). Tương tự, `responsive.css` **không phải file định
+  nghĩa token** — nó là breakpoint utility CSS thật
+  (`.wx-container`/`.wx-page-pad` padding-left/right literal 16/24/12/32px ở
+  các dòng 34-35/40/69/72/75) và cũng chưa từng được quét. Ngoài ra phát hiện
+  1 file **chưa từng nằm trong bất kỳ backlog trước đó**: `views/
+  ShowcaseView.vue` (top-level, route thật `/showcase` qua `router/index.ts:
+  206` — khác hẳn thư mục con `views/showcase/**` đã CLOSED ở round 9-11) —
+  ~25 hit thô (inline `style="margin-top:12px"` rải khắp template +
+  `<style scoped>` từ dòng 947), và 1 hit nhỏ mới trong
+  `archetypes/marketing/CaseStudyGrid.vue:165` (`.cs-label {
+  margin-bottom: 4px; }` — khác với `padding: 80px...` hero-band đã CLOSED
+  round 14, đây là dòng khác trong cùng file chưa từng bị đụng). Các cụm khác
+  grep ra đều đã biết & đúng là exception cố ý, KHÔNG phải phát hiện mới:
+  `views/forms/{FileUploadView,FloatingLabelsView,InputGroupView}.vue` (3
+  `<pre>` doc-sample, round 12 đã xác nhận), `views/marketing/*` 6 file
+  `padding-top:64px` (header-compensation cố ý, round 12), `views/showcase/
+  {AppTemplatesView,charts/IndexView,data/CrudTableView,OverviewView,
+  RevealTest}.vue` (scroll-margin/var-fallback JS-controlled/negative-margin/
+  no-`<style scoped>`, round 9-11), giá trị âm ở `BaseAvatarGroup.vue`/
+  `BaseSelectMenu.vue`/`StatusBar.vue`/`WeDashboardV1View.vue .chart-hint`
+  (round 13, giữ nguyên đúng luật). **Kết luận: mục A KHÔNG đóng repo-wide** —
+  còn ít nhất 4 cụm thật chưa xử lý (`style.css` utility-class block,
+  `responsive.css`, `views/ShowcaseView.vue`, `CaseStudyGrid.vue:165`), tổng
+  cộng ước lượng ~30 declaration cần đọc kỹ theo phương pháp round 14 (parse
+  từng khai báo, chỉ tính hit khi TOÀN BỘ số trong value khớp lưới, tránh
+  false-positive từ multi-selector-per-line) trước khi convert.
 
 ### B. Duplicate button/badge/chip re-implementation — **CLOSED** (round 10)
 Đã đánh giá case-by-case toàn bộ 6 candidate trong backlog, mỗi candidate đều
@@ -1721,5 +1777,161 @@ tự ý dừng sớm hơn.
      còn trong backlog.
   6. 2 file archetype `CaseStudyGrid.vue`/`TechGrid.vue` 80px — **CLOSED
      round này**, không còn trong backlog.
+
+### Round 15 (2026-09-02)
+- Bối cảnh: PLAN + Dev A/B của round này đã chạy trước hai commit độc lập,
+  đúng backlog #1 round 14 đã flag. Dev A commit `d909077` "refactor:
+  tokenize 4pt spacing in views/docs" (25 file, 63 conversion, toàn bộ
+  `views/docs/**`, bao gồm 3 inline `style=""` sanctioned). Dev B commit
+  `2f6bcb1` "refactor: tokenize 4pt spacing in remaining views + migrate
+  BaseDataGrid to canonical --wx-* tokens" (8 file: 7 view/archetype rải rác
+  + `BaseDataGrid.vue` 14-biến alias-scheme migrate 100% sang `--wx-*`, pure
+  rename). Dev C (agent này) chạy QA theo checklist 10 mục có sẵn, không
+  chạy lại PLAN.
+- **Build gate 3/3 PASS**: `typecheck` sạch (exit 0). `build:lib` chạy **2
+  lần liên tiếp** để canh flake pattern round 10/14 — cả 2 lần PASS sạch,
+  kết quả kích thước giống hệt nhau (`ui.css` 237.37kB/gzip 34.71kB,
+  `es.js` 415.90kB, `umd.js` 325.52kB, dts 17.6-18.0s cả 2 lần, tổng build
+  19.7-20.0s) — không tái hiện flake nào round này. `build:app` PASS
+  (10.96s, mọi chunk build OK, exit 0).
+- **`git show --stat` cả 2 commit**: `d909077` đúng **25 file** (đối chiếu
+  từng file với commit message: `DocsLayout.vue` 7, `GettingStartedView.vue`
+  13, `_components/{CodeBlock,DemoBlock,DocPage}.vue` 3/5/8, 20 file
+  `components/*Doc.vue` còn lại 1-5 mỗi file — khớp đúng). `2f6bcb1` đúng
+  **8 file** (`DashboardAnalytics.vue`, `DashboardHero.vue`,
+  `BaseDataGrid.vue`, `WeDashboardV1View.vue`, `MaintenanceView.vue`,
+  `NotFoundView.vue`, `LandingView.vue`, `PolicyView.vue`) — **0 file
+  overlap** giữa 2 commit (2 nhóm thư mục hoàn toàn tách biệt:
+  `views/docs/**` vs `archetypes/dashboard`+`components/common`+
+  `views/{dashboard,error,home,landing}`). `git diff --stat HEAD~2` cho
+  `tokens.css`/`dark-mode.css`/`flat-mode.css`/`style.css`/`lib.ts` → rỗng cả
+  5 file, xác nhận không file foundation/entry nào bị đụng.
+- **Đọc FULL diff cả 2 commit** (632 + 249 dòng, không spot-check): 0 chỗ
+  đổi `font-size`/`width`/`height`/`min-*`/`border-radius`/
+  `grid-template-columns` bất kỳ đâu — mọi hunk chỉ đổi giá trị
+  `padding`/`margin`/`gap` (hoặc rename biến CSS thuần cho `BaseDataGrid.vue`).
+- **Off-grid + giá trị âm survive nguyên vẹn (item 4, ≥10 case cả 2
+  commit)**: đếm được >15 giá trị lẻ giữ nguyên trong shorthand hỗn hợp —
+  6px/14px (`docs-nav__link`, `CodeBlock.vue__bar`, `DropdownDoc.vue
+  .menu-divider`), 14px/60px (`DocsLayout.vue` sidebar), 44px
+  (`GettingStartedView.vue .gs__section-title`), 18px (`.gs__note`/
+  `.gs__cta`), 28px/72px (2 chỗ mobile `.gs`/`.doc-page`), 36px
+  (`DocPage.vue .doc-page__import`), 22px/14px/6px (`LandingView.vue`), 56px/
+  18px (`LandingView.vue` mobile hero) — tất cả đúng thang off-grid
+  (2/5/6/7/9/10/14/18/20/22/28/36/44/56/60/72/88px) task yêu cầu kiểm. Giá
+  trị âm: `WeDashboardV1View.vue:866 .chart-hint { margin: -8px 0
+  var(--wx-space-2); }` — dòng này KHÔNG nằm trong diff round 15 (đã tồn tại
+  từ trước, chỉ dòng padding khác trong cùng file bị đổi), grep riêng xác
+  nhận đây là instance âm duy nhất còn sót trong toàn bộ 33 file 2 commit
+  đụng tới, giữ nguyên literal đúng luật.
+- **`<pre>`-sample trap check (item 5)**: đọc trực tiếp `CodeBlock.vue` và
+  `DemoBlock.vue` — `CodeBlock.vue` dòng 51 `<pre class="code-block__pre">
+  <code>{{ code }}</code></pre>` chỉ interpolate prop `code: string` (nội
+  dung demo code do `DemoBlock.vue` truyền qua `:code="code"`, chính nó cũng
+  chỉ forward prop `code` xuống `CodeBlock` — cả 2 file không có string
+  spacing hardcode nào bị escape ẩn trong `<pre>`/`{{ }}`). Xác nhận claim
+  Dev A đúng.
+- **5 inline style sanctioned (item 6)**: đọc lại hunk đầy đủ cả 5 chỗ —
+  `DropdownDoc.vue`/`TooltipDoc.vue` `style="gap:24px"`→
+  `style="gap:var(--wx-space-5)"` (chỉ đổi value, không đổi attr khác trên
+  cùng thẻ `<div class="row" ...>`); `GettingStartedView.vue`
+  `style="margin-top:32px;"`→`style="margin-top:var(--wx-space-6);"` (chỉ
+  đổi value trên `<p class="gs__p" ...>`); `WeDashboardV1View.vue`/
+  `DashboardHero.vue` `style="color: inherit; padding: 0 4px"`→
+  `style="color: inherit; padding: 0 var(--wx-space-1)"` (chỉ đổi phần
+  `padding`, `color: inherit` và toàn bộ `variant`/`size`/`v-if`/`@click`
+  trên `<BaseButton>` giữ nguyên 100%). Cả 5/5 xác nhận value-only, 0
+  prop/handler/class bị đụng.
+- **`BaseDataGrid.vue` migration (item 7, phần quan trọng nhất)**: grep
+  `var(--` toàn file → **0 hit không bắt đầu bằng `wx-`** (14/14 biến đã
+  rename hết). Đối chiếu cả 14 target với `tokens.css` — tồn tại thật cả 14:
+  `--wx-surface-{base,elevated,sunken}`, `--wx-border-default`,
+  `--wx-text-{primary,secondary,muted}`, `--wx-{hover,active}-bg`,
+  `--wx-brand-primary`, `--wx-{success,warning,danger}-solid`, `--wx-fs-12`.
+  Dark-mode coverage: 10/14 có override thật trong `dark-mode.css`
+  (surface/border/text/hover/active/brand); 4/14
+  (`--wx-{success,warning,danger}-solid`, `--wx-fs-12`) **không có** override
+  dark — nhưng đã verify đây **không phải regression**: đọc `style.css`
+  dòng 30-32/84 xác nhận alias cũ (`--success-color`, `--warning-color`,
+  `--error-color`, `--font-size-small`) vốn dĩ **đã trỏ thẳng** vào chính
+  các token `--wx-*-solid`/`--wx-fs-12` này từ trước (`--success-color:
+  var(--wx-success-solid);` v.v.) — tức là hành vi dark-mode (hoặc thiếu nó)
+  **giống hệt trước và sau migration**, đúng như commit message khai báo
+  "zero visual change intended". `git diff --stat HEAD~2 -- style.css` xác
+  nhận **rỗng thật** — Dev B không đụng file này. Grep toàn `frontend/src`
+  cho `var(--bg-primary)`, `var(--text-tertiary)` v.v. (13 tên cũ, trừ
+  `BaseDataGrid.vue`) → còn 8 consumer khác dùng alias cũ
+  (`BaseSkeleton.vue`, `BaseProgress.vue`, `BaseRadio.vue`) — đúng dự kiến,
+  không phải bug vì alias vẫn tồn tại nguyên vẹn trong `style.css`,
+  `BaseDataGrid.vue` tự nó sạch 100% là đủ theo yêu cầu checklist.
+- **New-hardcode check (item 8)**: grep dòng `+` cả 2 diff cho hex/rgba →
+  **0 kết quả**. Mọi `px` còn lại trong dòng `+` đều thuộc property khác
+  (font-size/width/outline-offset/transition) hoặc là phần off-grid cố ý giữ
+  nguyên của multi-value shorthand — không có hardcode mới nào lọt qua.
+- **Re-grep độc lập item 9**: `views/docs/**` → **0 residual hit**. 7 file
+  Dev B đụng → **0 residual hit dương/off-grid**, chỉ còn đúng 1 instance âm
+  đã biết (`WeDashboardV1View.vue:866`, xem trên) — không phải miss, đúng
+  luật giữ nguyên giá trị âm.
+- **Full-repo re-grep item 10 — mục A KHÔNG đóng repo-wide** (xem chi tiết
+  đầy đủ + breakdown trong BACKLOG mục A ở trên, đã cập nhật): phát hiện 4
+  cụm thật chưa từng được quét trước đây — khối utility-class trong
+  `style.css` (`.btn`/`.stat-card`/`.section-subtitle`/`.data-table`/
+  `.form-textarea`/`.radio-label`, ~8 declaration), `responsive.css`
+  (`.wx-container`/`.wx-page-pad`, ~6 declaration), `views/ShowcaseView.vue`
+  (route thật `/showcase`, khác `views/showcase/**` đã CLOSED, ~25 hit thô
+  cần đọc kỹ lọc false-positive), và 1 hit lẻ mới `archetypes/marketing/
+  CaseStudyGrid.vue:165 .cs-label{margin-bottom:4px}`. Đồng thời **đính
+  chính** kết luận round 12 rằng `style.css`/`responsive.css` là "file định
+  nghĩa token, loại khỏi phạm vi" — chỉ đúng cho khối alias đầu `style.css`
+  và cho `tokens.css`/`scales.ts` thật, KHÔNG đúng cho phần utility-class
+  còn lại của `style.css` lẫn toàn bộ `responsive.css` (đây là utility CSS
+  tiêu thụ giá trị, không phải nơi định nghĩa thang đo). Các cụm khác grep
+  ra đều đã biết và đúng là exception cố ý (không phải miss mới): 3
+  `<pre>` doc-sample trong `views/forms/*`, 6 file `padding-top:64px` trong
+  `views/marketing/*` (header-compensation cố ý), cụm `views/showcase/**`
+  con (scroll-margin/var-fallback JS-controlled/negative-margin/no-scoped-
+  style, đã biết từ round 9-11), và mọi giá trị âm đã biết
+  (`BaseAvatarGroup`/`BaseSelectMenu`/`StatusBar`/`WeDashboardV1View
+  .chart-hint`).
+- **Không có lỗi nhỏ nào trong commit của Dev A/B cần QA tự sửa** — cả 2
+  commit đúng 100% theo khai báo, mọi hạng mục checklist đạt ngay từ commit
+  gốc. Phát hiện ở item 10 không phải bug trong việc Dev A/B vừa làm (họ làm
+  đúng phạm vi được giao) mà là backlog mới lộ ra cho phần `views/**` +
+  `style.css`/`responsive.css` CHƯA từng ai đụng tới — đúng bản chất công
+  việc audit lặp lại nhiều round đã thấy từ round 9→15 (mỗi lần đóng 1 cụm
+  lại lộ ra cụm khác chưa quét).
+- **ROUND 15 QA: PASS**, không cần follow-up commit.
+- Backlog cho round 16:
+  1. **Mục A — VẪN MỞ, KHÔNG closed repo-wide** (đính chính suy đoán ban đầu
+     trong brief round này rằng đây có thể là "milestone đóng toàn bộ mục
+     A" — thực tế qua re-grep KHÔNG phải vậy). 4 cụm ưu tiên cho round 16
+     theo thứ tự: (1) `style.css` khối utility-class (~8 declaration,
+     `.btn`/`.stat-card`/`.section-subtitle`/`.data-table`/`.form-textarea`/
+     `.radio-label` — file dùng chung toàn app, ưu tiên cao); (2)
+     `responsive.css` (~6 declaration, breakpoint utility dùng chung); (3)
+     `views/ShowcaseView.vue` (route thật `/showcase`, ~25 hit thô cần đọc
+     kỹ theo phương pháp node-script round 14 để lọc false-positive trước
+     khi convert, KHÔNG convert máy móc theo số đếm grep thô); (4)
+     `archetypes/marketing/CaseStudyGrid.vue:165` (1 dòng lẻ,
+     `margin-bottom:4px`→`var(--wx-space-1)`, nhanh gọn). Sau khi xử lý hết
+     4 cụm này nên chạy lại đúng full-repo re-grep (cách round 14 — node
+     script parse từng khai báo, chỉ tính hit khi TOÀN BỘ số trong value
+     khớp lưới) 1 lần cuối để xác nhận thật sự đóng repo-wide trước khi
+     tuyên bố CLOSED.
+  2. **Mục C** — vẫn 1 follow-up mở, ưu tiên thấp (không đổi round này):
+     `WeDashboardV1View.vue` `.env-dot` (pill background/border-radius/
+     padding + pulse-animation không khớp `LegendDot` trần, chưa ai đụng kể
+     từ round 9).
+  3. Mục B — vẫn **CLOSED** (không có phát hiện mới).
+  4. `BaseDataGrid.vue` 14-biến alias-scheme — **CLOSED round này** (Dev B,
+     xem trên), không còn trong backlog.
+  5. PLAN round 16 **KHÔNG nên pivot toàn bộ sang mục D** như gợi ý ban đầu
+     trong brief — mục A vẫn còn việc thật cụ thể, ưu tiên xử lý 4 cụm trên
+     trước (đặc biệt `style.css`/`responsive.css` vì ảnh hưởng toàn app, độ
+     rủi ro thấp — cùng pattern đã làm quen 15 round). Có thể kết hợp 1 dev
+     làm mục A (`style.css`+`responsive.css`+`CaseStudyGrid.vue`, gộp 3 việc
+     nhỏ) + 1 dev bắt đầu mục D category đầu tiên (`views/ShowcaseView.vue`
+     nặng, tách riêng làm việc solo 1 dev nếu muốn giữ 2 dev không đụng
+     chung file).
 
 <!-- Round 15+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

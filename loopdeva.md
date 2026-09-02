@@ -1568,4 +1568,158 @@ tự ý dừng sớm hơn.
      `.env-dot` (không đổi gì round này).
   6. Mục B — vẫn **CLOSED** (không có phát hiện mới).
 
-<!-- Round 14+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 14 (2026-09-02)
+- Bối cảnh: PLAN + Dev A/B của round này đã chạy trước — Dev A commit
+  `96ae364` "refactor: tokenize 4pt spacing in data & chart components" (15
+  file: `components/data/**` 9 file + `components/charts/**` 6 file, 96
+  conversion), Dev B commit `d41e251` "refactor: tokenize 4pt spacing in
+  wemakeui/async/feedback components + add dark --wx-shadow-focus" (21 file:
+  18 file `components/{async,feedback,wemakeui,layout,permission,
+  platform}/*` + 2 file archetype (`CaseStudyGrid.vue`/`TechGrid.vue`
+  80px→`var(--wx-space-10)`) + `dark-mode.css` thêm 1 dòng
+  `--wx-shadow-focus`). Cả 2 hạng mục đúng backlog #1/#2/#4 round 13 đã flag.
+  Dev B báo `build:lib` fail 1 lần với lỗi nội bộ `vite-plugin-dts` liên
+  quan `directives/v-can.d.ts` (file Dev B chưa từng đụng), retry ngay lập
+  tức pass sạch không đổi code — nghi flake giống round 10. Dev C (agent
+  này) chạy QA theo checklist có sẵn, không chạy lại PLAN.
+- **Build gate**: `typecheck` sạch (exit 0). `build:lib` chạy **2 lần liên
+  tiếp** để verify claim flake (giống cách round 10 làm) — cả 2 lần đều PASS
+  sạch, không tái hiện lỗi `v-can.d.ts`: lần 1 20.07s (ui.css 237.29kB/gzip
+  34.77kB, es.js 415.90kB, umd.js 325.52kB, dts OK 18.02s), lần 2 20.60s
+  (kết quả kích thước giống hệt lần 1, dts 18.34s) — xác nhận nhất quán với
+  kết luận "flake thoáng qua", không phải lỗi tái lập được, nhưng cũng không
+  chứng minh được nguyên nhân gốc (dts build có bước rollup declaration
+  files riêng, nhạy cảm timing/cache — cùng bản chất với flake round 10).
+  `build:app` PASS (8.42s, mọi chunk build OK, exit 0).
+- **`git show --stat` cả 2 commit**: `96ae364` đúng **15 file** (DataGridPro
+  24, BaseCalendar 11, Kanban 10, LogViewer 8, FilterBuilder 8, Timeline 5,
+  FilterChips 4, BulkActionBar 3, Gallery 2, LineChart 5, AreaChart 4,
+  DonutChart 3, PieChart 3, Heatmap 3, BarChart 3 = 96 conversion khớp đúng
+  commit message); `d41e251` đúng **21 file** (2 archetype + 18 component +
+  `dark-mode.css`) — **0 file overlap** giữa 2 commit. `dark-mode.css` chỉ
+  xuất hiện trong `d41e251`, diff đúng **1 dòng thêm** (`+
+  --wx-shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.25);` chèn ngay sau
+  `--wx-shadow-brand` trong block `.wx-dark, [data-wx-theme="dark"]`), không
+  có dòng nào khác trong file bị đụng.
+- **Đọc FULL diff cả 2 commit** (không chỉ spot-check) cho pattern
+  font-size/width/height/min-width/border-radius/grid-template-columns/
+  z-index: **0 chỗ đổi thật** — mọi hit của grep thô đều là do cùng nằm
+  chung 1 dòng CSS minify-style với khai báo spacing vừa đổi (đối chiếu từng
+  cặp `-`/`+`: `.ac-legend`/`.ac-tooltip-title`/`.bc-legend` (AreaChart/
+  BarChart) — `font-size: 12px`/`11px` không đổi, chỉ `gap`/`padding`/
+  `margin-bottom` đổi; `.wx-retry[data-size='sm'] .wx-retry__caret`/
+  `.review-more`/`.util-result`/`.form-col` (Dev B) — `font-size:
+  var(--wx-fs-*)` không đổi, chỉ padding/gap đổi).
+- **New-hardcode check**: grep dòng `+` cả 2 diff cho hex/rgba ngoài
+  `var(--wx-...)` → chỉ đúng **1 kết quả**, đúng như khai báo — dòng
+  `dark-mode.css` mới (`rgba(96, 165, 250, 0.25)`, khớp tông
+  `--wx-border-focus` dark `#60a5fa` có sẵn). Không có hardcode mới nào
+  khác. API safety: 0 hunk chạm `<script setup>`/`<template>`, 0 rename
+  prop/emit/slot/class — 100% CSS-only trên cả 2 commit.
+- **Spot-check ≥10 conversion đối chiếu trực tiếp `tokens.css` dòng
+  227-239** (space-1=4, space-2=8, space-3=12, space-4=16, space-5=24,
+  space-6=32, space-7=40, space-8=48, space-9=64, space-10=80, space-11=96,
+  space-12=128px) — đã đọc >20 case cả 2 commit, 100% khớp đúng, gồm cả các
+  multi-value shorthand chỉ convert đúng phần khớp lưới: `AreaChart.vue`
+  `gap:16px→space-4`, `padding:0 8px 8px→0 space-2 space-2`, `padding:8px
+  10px→space-2 10px` (10 off-grid giữ nguyên); `Heatmap.vue` `gap:8px→
+  space-2`, `gap:4px→space-1`, `padding:4px 10px→space-1 10px`; `Kanban.vue`
+  `gap:12px→space-3`, `padding:8px 0→space-2 0`, `padding:10px 12px→10px
+  space-3`; `WCAddAccountModal.vue` inline `style="margin-top:12px"→
+  style="margin-top:var(--wx-space-3)"` (1 trong 2 inline style attr được
+  sanction); `WMSetupInteractModal.vue` `gap:6px 12px→6px space-3` (6
+  off-grid giữ), `padding:1px 4px→1px space-1` (1 off-grid giữ).
+- **Off-grid + giá trị âm survive nguyên vẹn (verify đúng 4 case checklist
+  yêu cầu)**: `DonutChart.vue:209` `gap: var(--wx-space-2) 20px` (20px lẻ
+  giữ nguyên, không có token khớp — đúng note "20px không khớp thang" từ
+  round 12); `LogViewer.vue:378` `padding: var(--wx-space-2) 60px` (60px lẻ
+  giữ nguyên); `FilterChips.vue:71` `padding: 3px var(--wx-space-1) 3px
+  10px` (4-value, chỉ giá trị thứ 2 khớp lưới đổi, 3px/3px/10px lẻ giữ
+  nguyên); `Timeline.vue:122` `left: -24px` (giá trị âm định vị dot trên
+  vertical rule — giữ nguyên 100%, không bị nhầm là spacing cần convert dù
+  |-24| khớp lưới).
+- **`CaseStudyGrid.vue`/`TechGrid.vue` 80px→`var(--wx-space-10)`**: đọc lại
+  cả 2 file xác nhận `padding: var(--wx-space-10) var(--wx-space-6);` — 80px
+  khớp chính xác `--wx-space-10`. `MarketingHero.vue:138` xác nhận **vẫn
+  `padding: 120px var(--wx-space-6) var(--wx-space-11);`** — 120px không có
+  token khớp, không bị 2 dev round này đụng tới (đúng quyết định round 3,
+  đây là case khác, cố ý không convert).
+- **`--wx-shadow-focus` dark override — verify hoạt động thật, không chỉ
+  đọc source**: đọc `dark-mode.css` dòng 86 xác nhận đặt đúng vị trí — ngay
+  trong block `.wx-dark, [data-wx-theme="dark"] { ... }`, cạnh
+  `--wx-shadow-brand`, không nằm ngoài block hay sai selector.
+  `tokens.css:151` xác nhận `:root` vẫn giữ nguyên định nghĩa light-mode
+  (`rgba(0, 123, 255, 0.25)`), không bị đụng. Build xong, grep thật
+  `dist-lib/ui.css` xác nhận **cả 2 định nghĩa cùng tồn tại trong output**
+  (`:root{...--wx-shadow-focus: 0 0 0 3px rgba(0, 123, 255, .25);...}` và
+  `.wx-dark,[data-wx-theme="dark"]{...--wx-shadow-focus: 0 0 0 3px
+  rgba(96, 165, 250, .25);...}`) — dark override là custom-property
+  redefinition trong selector khác, không bị rule nào sau đó ghi đè lại
+  (chỉ có đúng 2 chỗ định nghĩa token này trong toàn bộ output, mọi nơi
+  khác chỉ consume qua `var(--wx-shadow-focus)`). `flat-mode.css` xác nhận
+  không định nghĩa `--wx-shadow-focus` (0 hit) → không có xung đột 3-way.
+  Kết luận: fix hoạt động đúng như thiết kế.
+- **Item 9 — re-grep độc lập TOÀN BỘ `components/**`** (không chỉ 36 file
+  round này đụng): dùng grep thô ban đầu ra vài false-positive (do multi-
+  selector-per-line minify style khiến `font-size:12px` bị nhầm khớp), nên
+  viết lại kiểm tra bằng script (node) parse riêng từng khai báo
+  `padding|margin|gap: value;`, bỏ qua khai báo đã có `var(--wx-`, chỉ tính
+  hit khi **toàn bộ** số px trong value đều khớp thang 4pt
+  (4/8/12/16/24/32/40/48/64/80/96/128) — kết quả: chỉ đúng **1 hit thật**
+  còn sót trong toàn bộ `components/**` (9 subfolder: async, charts, common,
+  data, feedback, layout, permission, platform, wemakeui): `DataGridPro.vue:
+  914 .dgp--d-md .dgp-th { padding: 12px; }` — bị Dev A bỏ sót ngay trong
+  file mình vừa sửa (24 conversion khác đã đúng, sót đúng 1 dòng single-
+  value giữa 2 rule sibling `.dgp--d-sm`/`.dgp--d-lg` đã convert phần khớp
+  lưới của chúng).
+  **→ Đã tự sửa + verify + commit follow-up `b11f0b3`**
+  ("fix: qa follow-up on round 14 — tokenize missed padding:12px in
+  DataGridPro.vue", `padding: 12px` → `padding: var(--wx-space-3)`,
+  typecheck+build:lib PASS sau fix). Sau follow-up này: **`components/**`
+  (toàn bộ 9 subfolder, không riêng gì 36 file 2 round 13-14 đụng) CHÍNH
+  THỨC CLOSED cho mục A** — không còn giá trị dương khớp chính xác lưới 4pt
+  nào chưa tokenize trong bất kỳ khai báo padding/margin/gap nào của cây
+  `components/**`.
+  (Ghi chú phụ, không phải bug — đã biết từ trước: `BaseDataGrid.vue` vẫn
+  còn dùng scheme biến không-`--wx-*` (`--bg-primary`, `--text-tertiary`,
+  `--brand-primary`, v.v., 14 biến) nhưng những biến này **có alias thật**
+  trong `frontend/src/style.css` map sang đúng token `--wx-*` tương ứng, và
+  `style.css` được `lib.ts` import + có mặt trong `dist-lib/ui.css` — xác
+  nhận KHÔNG phải "undefined CSS var" bug (khác hẳn wave 1-4), chỉ là nợ đặt
+  tên, giữ nguyên priority trung bình cho round sau như backlog round 13 đã
+  ghi.)
+- **ROUND 14 QA: PASS WITH FOLLOW-UP COMMIT `b11f0b3`**.
+- Backlog cho round 15 (theo đúng đề xuất PLAN round trước + phát hiện QA
+  round này):
+  1. **Mục A** — `components/**` nay đã **CLOSED hoàn toàn** (xem trên).
+     Trọng tâm mục A chuyển hẳn sang `views/**`:
+     - **`views/docs/**`** (25 file, ~61 hit theo ước tính round 13, cụm lớn
+       nhất còn lại) — demo/doc-only, không phải public API `dist-lib/`
+       nhưng vẫn ảnh hưởng UX trang docs. File đậm đặc nhất theo ước tính:
+       `GettingStartedView.vue`, `_components/DocPage.vue`,
+       `DocsLayout.vue`, `_components/DemoBlock.vue`, `DropdownDoc.vue`,
+       `_components/CodeBlock.vue` — nên ưu tiên nhóm này trước nếu chia
+       nhỏ theo round.
+     - Cụm view nhỏ còn rải rác: `views/{error,landing}/*`,
+       `views/home/LandingView.vue` (phần còn sót nếu có), `views/dashboard/
+       WeDashboardV1View.vue`, `archetypes/dashboard/{DashboardAnalytics,
+       DashboardHero}.vue`.
+     Nhắc lại rule không đổi: đọc kỹ multi-value shorthand, giữ nguyên giá
+     trị âm/lẻ (không có token khớp), không convert máy móc theo số đếm
+     grep thô (giống case round 14 QA phát hiện false-positive từ grep đơn
+     giản — nên dùng cách kiểm tra "toàn bộ số trong value đều khớp lưới"
+     thay vì chỉ cần 1 số khớp).
+  2. **`BaseDataGrid.vue` 14-biến alias-scheme** — priority TRUNG BÌNH, nợ
+     đặt tên không phải bug (đã re-confirm round này qua `style.css`), có
+     thể gộp làm 1 round riêng khi mục A ở `views/docs/**` đã ổn định.
+  3. **Mục C** — vẫn 1 follow-up mở, ưu tiên thấp: `WeDashboardV1View.vue`
+     `.env-dot` (pill background/border-radius/padding + pulse-animation
+     không khớp `LegendDot` trần, cần biến thể riêng hoặc giữ nguyên — chưa
+     ai đụng kể từ round 9).
+  4. Mục B — vẫn **CLOSED** (không có phát hiện mới).
+  5. `--wx-shadow-focus` dark-mode override — **CLOSED round này**, không
+     còn trong backlog.
+  6. 2 file archetype `CaseStudyGrid.vue`/`TechGrid.vue` 80px — **CLOSED
+     round này**, không còn trong backlog.
+
+<!-- Round 15+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

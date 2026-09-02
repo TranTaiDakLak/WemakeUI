@@ -23,7 +23,13 @@ const percent = computed(() => Math.min(100, Math.max(0, (props.value / props.ma
 
 <template>
   <div class="base-progress" :class="`base-progress--${size}`">
-    <div class="base-progress__track">
+    <div
+      class="base-progress__track"
+      role="progressbar"
+      :aria-valuenow="Math.round(percent)"
+      aria-valuemin="0"
+      :aria-valuemax="100"
+    >
       <div
         class="base-progress__fill"
         :class="[

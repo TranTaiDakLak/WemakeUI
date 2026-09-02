@@ -1,9 +1,15 @@
+<script lang="ts">
+let _dropdownIdCounter = 0
+</script>
+
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
 defineProps<{
   placement?: 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end'
 }>()
+
+const dropdownId = `base-dropdown-${++_dropdownIdCounter}`
 
 const isOpen = ref(false)
 const triggerRef = ref<HTMLElement>()
@@ -46,11 +52,18 @@ onBeforeUnmount(() => document.removeEventListener('click', onClickOutside))
 
 <template>
   <div class="base-dropdown" :class="[`base-dropdown--${placement ?? 'bottom-start'}`]">
-    <div ref="triggerRef" class="base-dropdown__trigger" @click.stop="toggle">
+    <div
+      ref="triggerRef"
+      class="base-dropdown__trigger"
+      aria-haspopup="true"
+      :aria-expanded="isOpen"
+      :aria-controls="dropdownId"
+      @click.stop="toggle"
+    >
       <slot name="trigger" />
     </div>
     <transition name="dropdown">
-      <div v-if="isOpen" ref="dropRef" class="base-dropdown__content" @click.stop>
+      <div v-if="isOpen" :id="dropdownId" ref="dropRef" class="base-dropdown__content" @click.stop>
         <slot :close="close" />
       </div>
     </transition>

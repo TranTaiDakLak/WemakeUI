@@ -15,7 +15,10 @@ defineEmits<{
     <span class="toggle">
       <input
         type="checkbox"
+        role="switch"
         :checked="modelValue"
+        :aria-checked="modelValue"
+        :aria-label="!label ? 'Chuyển đổi' : undefined"
         :disabled="disabled"
         @change="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
       />

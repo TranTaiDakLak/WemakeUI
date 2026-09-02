@@ -38,6 +38,9 @@ watch(
           :key="toast.id"
           class="wx-toast"
           :class="`wx-toast--${toast.type}`"
+          :role="toast.type === 'error' ? 'alert' : 'status'"
+          :aria-live="toast.type === 'error' ? 'assertive' : 'polite'"
+          aria-atomic="true"
         >
           <div class="wx-toast__icon-badge" :class="`wx-toast__icon-badge--${toast.type}`">
             <span>{{ iconMap[toast.type] }}</span>
@@ -45,7 +48,7 @@ watch(
           <div class="wx-toast__content">
             <p class="wx-toast__message">{{ toast.message }}</p>
           </div>
-          <button class="wx-toast__close" @click="removeToast(toast.id)">&times;</button>
+          <button class="wx-toast__close" aria-label="Đóng" @click="removeToast(toast.id)">&times;</button>
         </div>
       </transition-group>
     </div>

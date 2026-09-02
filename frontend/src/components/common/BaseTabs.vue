@@ -1,3 +1,7 @@
+<script lang="ts">
+let _tabsIdCounter = 0
+</script>
+
 <script setup lang="ts">
 import { ref, watch, nextTick, onMounted } from 'vue'
 
@@ -7,12 +11,21 @@ const props = defineProps<{
   variant?: 'pill' | 'underline'
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   'update:modelValue': [value: string]
 }>()
 
+const uid = ++_tabsIdCounter
+function tabId(key: string) { return `base-tabs-${uid}-tab-${key}` }
+function panelId(key: string) { return `base-tabs-${uid}-panel-${key}` }
+
 const indicatorStyle = ref({ left: '0px', width: '0px' })
 const tabsRef = ref<HTMLElement>()
+const tabButtons = ref<HTMLButtonElement[]>([])
+
+function setTabButtonRef(el: unknown, index: number) {
+  if (el) tabButtons.value[index] = el as HTMLButtonElement
+}
 
 function updateIndicator() {
   if (!tabsRef.value) return
@@ -28,20 +41,71 @@ function updateIndicator() {
 watch(() => props.modelValue, () => nextTick(updateIndicator))
 watch(() => props.tabs, () => nextTick(updateIndicator), { deep: true })
 onMounted(() => nextTick(updateIndicator))
+
+function selectTab(index: number) {
+  const tab = props.tabs[index]
+  if (!tab || tab.disabled) return
+  emit('update:modelValue', tab.key)
+  nextTick(() => tabButtons.value[index]?.focus())
+}
+
+function onTablistKeydown(e: KeyboardEvent) {
+  const { tabs } = props
+  if (!tabs.length) return
+  const enabledIndices = tabs.map((_, i) => i).filter(i => !tabs[i].disabled)
+  if (!enabledIndices.length) return
+  const currentIndex = tabs.findIndex(t => t.key === props.modelValue)
+
+  function step(from: number, dir: 1 | -1) {
+    let i = from
+    for (let count = 0; count < tabs.length; count++) {
+      i = (i + dir + tabs.length) % tabs.length
+      if (!tabs[i].disabled) return i
+    }
+    return from
+  }
+
+  let targetIndex: number | null = null
+  switch (e.key) {
+    case 'ArrowRight':
+      targetIndex = step(currentIndex, 1)
+      break
+    case 'ArrowLeft':
+      targetIndex = step(currentIndex, -1)
+      break
+    case 'Home':
+      targetIndex = enabledIndices[0]
+      break
+    case 'End':
+      targetIndex = enabledIndices[enabledIndices.length - 1]
+      break
+    default:
+      return
+  }
+  e.preventDefault()
+  if (targetIndex !== null) selectTab(targetIndex)
+}
 </script>
 
 <template>
   <div class="base-tabs" :class="`base-tabs--${variant ?? 'pill'}`">
-    <div ref="tabsRef" class="base-tabs__header">
+    <div ref="tabsRef" class="base-tabs__header" role="tablist" @keydown="onTablistKeydown">
       <button
-        v-for="tab in tabs"
+        v-for="(tab, tabIndex) in tabs"
         :key="tab.key"
+        :ref="el => setTabButtonRef(el, tabIndex)"
+        :id="tabId(tab.key)"
+        role="tab"
         class="base-tabs__tab"
         :class="{
           'base-tabs__tab--active': modelValue === tab.key,
           'base-tabs__tab--disabled': tab.disabled
         }"
         :disabled="tab.disabled"
+        :aria-selected="tab.key === modelValue"
+        :aria-disabled="tab.disabled"
+        :aria-controls="panelId(tab.key)"
+        :tabindex="tab.key === modelValue ? 0 : -1"
         @click="!tab.disabled && $emit('update:modelValue', tab.key)"
       >
         <span v-if="tab.icon" class="base-tabs__icon">{{ tab.icon }}</span>
@@ -51,7 +115,13 @@ onMounted(() => nextTick(updateIndicator))
     </div>
     <div class="base-tabs__content">
       <template v-for="tab in tabs" :key="tab.key">
-        <div v-show="modelValue === tab.key">
+        <div
+          v-show="modelValue === tab.key"
+          :id="panelId(tab.key)"
+          role="tabpanel"
+          :aria-labelledby="tabId(tab.key)"
+          tabindex="0"
+        >
           <slot :name="tab.key" />
         </div>
       </template>

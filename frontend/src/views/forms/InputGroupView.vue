@@ -134,10 +134,10 @@ const showCode = ref(false)
 .fp { min-height: 100vh; background: var(--wx-surface-sunken); }
 .fp__main { max-width: 900px; margin: 0 auto; padding: var(--wx-space-5) var(--wx-space-5) var(--wx-space-10); display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .fp__hdr { margin-top: var(--wx-space-2); }
-.fp__title { margin: 0 0 4px; font-size: var(--wx-fs-22); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
+.fp__title { margin: 0 0 4px; font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
 .fp__desc { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); }
 .fp__card { background: var(--wx-surface-elevated); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-xl); padding: var(--wx-space-5); display: flex; flex-direction: column; gap: var(--wx-space-3); }
-.fp__card-title { margin: 0; font-size: var(--wx-fs-11); font-weight: var(--wx-fw-bold); text-transform: uppercase; letter-spacing: .6px; color: var(--wx-text-muted); }
+.fp__card-title { margin: 0; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-bold); text-transform: uppercase; letter-spacing: .6px; color: var(--wx-text-muted); }
 .fp__hint { margin: 0; font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
 .fp__code-head { display: flex; align-items: center; justify-content: space-between; }
 .fp__code-toggle { background: none; border: none; font-family: var(--wx-font-primary); font-size: var(--wx-fs-12); color: var(--wx-brand-primary); cursor: pointer; }

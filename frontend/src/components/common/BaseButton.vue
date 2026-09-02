@@ -41,7 +41,7 @@ defineEmits<{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--wx-space-2, 8px);
+  gap: var(--wx-space-2);
   border: none;
   border-radius: var(--wx-radius-lg);
   font-family: var(--wx-font-primary);
@@ -85,10 +85,10 @@ defineEmits<{
    Old values (13/18/22 px, gaps 5/7) drifted off-scale and showed up in the
    2026-05-25 design audit. Heights also raised to hit WCAG/iOS-HIG touch
    target floors (44px at --lg, 40px at --md). */
-.wx-btn--sm   { padding: 6px 12px;  font-size: var(--wx-fs-12); gap: 4px;  min-height: 32px; }
-.wx-btn--md   { padding: 8px 16px;  font-size: var(--wx-fs-14); gap: 8px;  min-height: 40px; }
-.wx-btn--lg   { padding: 12px 24px; font-size: var(--wx-fs-15); gap: 8px;  min-height: 44px; }
-.wx-btn--xl   { padding: 16px 28px; font-size: var(--wx-fs-16); gap: 12px; min-height: 52px; border-radius: var(--wx-radius-xl); }
+.wx-btn--sm   { padding: 6px var(--wx-space-3);  font-size: var(--wx-fs-12); gap: var(--wx-space-1);  min-height: 32px; }
+.wx-btn--md   { padding: var(--wx-space-2) var(--wx-space-4);  font-size: var(--wx-fs-14); gap: var(--wx-space-2);  min-height: 40px; }
+.wx-btn--lg   { padding: var(--wx-space-3) var(--wx-space-5); font-size: var(--wx-fs-15); gap: var(--wx-space-2);  min-height: 44px; }
+.wx-btn--xl   { padding: var(--wx-space-4) 28px; font-size: var(--wx-fs-16); gap: var(--wx-space-3); min-height: 52px; border-radius: var(--wx-radius-xl); }
 .wx-btn--icon {
   padding: 0;
   /* 40px square = touch-target compliant; old 36px failed audit. */
@@ -212,8 +212,8 @@ defineEmits<{
 .wx-btn--text {
   background: transparent;
   color: var(--wx-text-secondary);
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: var(--wx-space-1);
+  padding-right: var(--wx-space-1);
   font-weight: var(--wx-fw-medium);
   overflow: visible;
 }
@@ -225,8 +225,8 @@ defineEmits<{
 .wx-btn--link {
   background: transparent;
   color: var(--wx-text-link);
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: var(--wx-space-1);
+  padding-right: var(--wx-space-1);
   font-weight: var(--wx-fw-medium);
   overflow: visible;
 }

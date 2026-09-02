@@ -209,7 +209,7 @@ function isSectionHeader(item: ContextMenuItem): boolean {
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-lg);
   box-shadow: var(--wx-shadow-xl);
-  padding: 4px 0; min-width: 210px;
+  padding: var(--wx-space-1) 0; min-width: 210px;
   /* outline:none có chủ đích: menu nhận focus() lập trình khi mở (để phím
      mũi tên điều hướng item), không phải control người dùng tab tới trực tiếp. */
   overflow: visible; outline: none;
@@ -217,7 +217,7 @@ function isSectionHeader(item: ContextMenuItem): boolean {
   -webkit-backdrop-filter: blur(12px);
 }
 .dgv-ctx-item {
-  display: flex; align-items: center; gap: 8px; width: 100%;
+  display: flex; align-items: center; gap: var(--wx-space-2); width: 100%;
   padding: 7px 28px 7px 14px; border: none; background: none;
   text-align: left; font-size: 13px; cursor: pointer;
   color: var(--wx-text-primary); position: relative;
@@ -229,13 +229,13 @@ function isSectionHeader(item: ContextMenuItem): boolean {
 .dgv-ctx-item:hover, .dgv-ctx-item--focused { background: var(--wx-hover-bg); }
 .dgv-ctx-item--danger { color: var(--wx-danger-text); }
 .dgv-ctx-item--danger:hover { background: var(--wx-danger-bg); }
-.dgv-ctx-sep { height: 1px; background: var(--wx-border-subtle); margin: 4px 8px; }
+.dgv-ctx-sep { height: 1px; background: var(--wx-border-subtle); margin: var(--wx-space-1) var(--wx-space-2); }
 .dgv-ctx-section {
-  padding: 6px 14px 4px; font-size: 10px; font-weight: 700;
+  padding: 6px 14px var(--wx-space-1); font-size: 10px; font-weight: 700;
   color: var(--wx-text-muted); text-transform: uppercase;
   letter-spacing: 0.5px; cursor: default;
 }
-.dgv-ctx-parent { cursor: default; padding-right: 32px; }
+.dgv-ctx-parent { cursor: default; padding-right: var(--wx-space-6); }
 .dgv-ctx-parent::after { content: '▸'; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--wx-text-muted); }
 .dgv-ctx-sub {
   display: none; position: absolute; left: 100%; top: -4px;
@@ -243,7 +243,7 @@ function isSectionHeader(item: ContextMenuItem): boolean {
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-lg);
   box-shadow: var(--wx-shadow-xl);
-  padding: 4px 0; min-width: 220px; z-index: 10000;
+  padding: var(--wx-space-1) 0; min-width: 220px; z-index: 10000;
   backdrop-filter: blur(12px);
 }
 .dgv-ctx-sub--open { display: block; }

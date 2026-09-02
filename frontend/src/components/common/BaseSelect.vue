@@ -277,7 +277,7 @@ onBeforeUnmount(() => {
 .base-select {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 
 .base-select__label {
@@ -291,10 +291,10 @@ onBeforeUnmount(() => {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--wx-space-2);
   width: 100%;
   cursor: pointer;
-  padding: 8px 12px;
+  padding: var(--wx-space-2) var(--wx-space-3);
   border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-md);
   background-color: var(--wx-surface-elevated);
@@ -380,14 +380,14 @@ onBeforeUnmount(() => {
     0 10px 24px -4px rgba(0, 0, 0, 0.14);
   overflow-y: auto;
   max-height: 280px;
-  padding: 4px;
+  padding: var(--wx-space-1);
 }
 
 .base-select__option {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--wx-space-2);
   width: 100%;
   padding: 7px 10px;
   border: none;
@@ -430,6 +430,6 @@ onBeforeUnmount(() => {
 .base-select__sep {
   height: 1px;
   background: var(--wx-border-subtle);
-  margin: 4px 0;
+  margin: var(--wx-space-1) 0;
 }
 </style>

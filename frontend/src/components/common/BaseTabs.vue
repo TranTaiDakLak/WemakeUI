@@ -69,7 +69,7 @@ onMounted(() => nextTick(updateIndicator))
   position: relative;
   display: flex;
   background: var(--wx-surface-sunken);
-  padding: 4px;
+  padding: var(--wx-space-1);
   border-radius: var(--wx-radius-xl, 12px);
   margin-bottom: 20px;
 }
@@ -81,8 +81,8 @@ onMounted(() => nextTick(updateIndicator))
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 16px;
+  gap: var(--wx-space-2);
+  padding: 10px var(--wx-space-4);
   border: none;
   background: transparent;
   color: var(--wx-text-secondary);
@@ -125,7 +125,7 @@ onMounted(() => nextTick(updateIndicator))
 /* ── Underline variant ── */
 .base-tabs--underline .base-tabs__header {
   background: transparent;
-  padding: 4px 6px;
+  padding: var(--wx-space-1) 6px;
   border-radius: var(--wx-radius-lg, 8px);
   border: 1px solid var(--wx-border-default);
   margin-bottom: 20px;

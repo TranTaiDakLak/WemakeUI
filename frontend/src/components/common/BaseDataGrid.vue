@@ -290,8 +290,8 @@ function realIndex(visibleIdx: number): number {
 .datagrid { width: 100%; border-collapse: collapse; font-size: var(--font-size-small, 12px); background: var(--bg-primary); table-layout: fixed; }
 .datagrid--resizing { cursor: col-resize; user-select: none; }
 .datagrid thead { position: sticky; top: 0; z-index: 5; }
-.datagrid th { padding: 9px 12px; text-align: left; font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.3px; background: var(--bg-tertiary); border-bottom: 1px solid var(--border-color); white-space: nowrap; position: relative; }
-.datagrid td { padding: 8px 12px; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.datagrid th { padding: 9px var(--wx-space-3); text-align: left; font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.3px; background: var(--bg-tertiary); border-bottom: 1px solid var(--border-color); white-space: nowrap; position: relative; }
+.datagrid td { padding: var(--wx-space-2) var(--wx-space-3); color: var(--text-secondary); border-bottom: 1px solid var(--border-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .datagrid tbody tr:hover td { background: var(--hover-bg); }
 .datagrid tbody tr { cursor: pointer; user-select: none; }
 .datagrid input[type="checkbox"] { accent-color: var(--brand-primary); cursor: pointer; }
@@ -312,7 +312,7 @@ function realIndex(visibleIdx: number): number {
 /* Sort */
 .th-sortable { cursor: pointer; user-select: none; }
 .th-sortable:hover { color: var(--text-primary); }
-.sort-indicator { font-size: 10px; margin-left: 4px; color: var(--brand-primary); transition: transform 0.2s; }
+.sort-indicator { font-size: 10px; margin-left: var(--wx-space-1); color: var(--brand-primary); transition: transform 0.2s; }
 .sort-indicator.desc { display: inline-block; }
 
 /* Column resizer */
@@ -331,8 +331,8 @@ function realIndex(visibleIdx: number): number {
 .spacer-row td { padding: 0; border: none; }
 
 /* Loading shimmer */
-.datagrid-loading { padding: 12px; }
-.shimmer-row { display: flex; gap: 12px; margin-bottom: 8px; }
+.datagrid-loading { padding: var(--wx-space-3); }
+.shimmer-row { display: flex; gap: var(--wx-space-3); margin-bottom: var(--wx-space-2); }
 .shimmer-cell {
   height: 28px;
   flex: 1;

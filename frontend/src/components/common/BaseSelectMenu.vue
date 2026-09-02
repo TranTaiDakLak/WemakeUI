@@ -356,7 +356,7 @@ onBeforeUnmount(() => {
   position: relative;
   display: inline-flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wx-space-1);
 }
 
 .bsm__label {
@@ -477,14 +477,14 @@ onBeforeUnmount(() => {
     0 10px 24px -4px rgba(0, 0, 0, 0.14);
   overflow-y: auto;
   max-height: 280px;
-  padding: 4px;
+  padding: var(--wx-space-1);
 }
 
 .bsm__option {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--wx-space-2);
   width: 100%;
   padding: 7px 10px;
   border: none;
@@ -527,7 +527,7 @@ onBeforeUnmount(() => {
 .bsm__sep {
   height: 1px;
   background: var(--wx-border-subtle);
-  margin: 4px 0;
+  margin: var(--wx-space-1) 0;
 }
 
 /* ── Search input (searchable mode) ── */
@@ -536,7 +536,7 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
-  margin: -4px -4px 4px;
+  margin: -4px -4px var(--wx-space-1);
   border-bottom: 1px solid var(--wx-border-subtle);
   position: sticky;
   top: -4px;
@@ -557,7 +557,7 @@ onBeforeUnmount(() => {
   font-family: var(--wx-font-primary);
   font-size: var(--wx-fs-13);
   color: var(--wx-text-primary);
-  padding: 4px 0;
+  padding: var(--wx-space-1) 0;
 }
 
 .bsm__search-input::placeholder {
@@ -565,7 +565,7 @@ onBeforeUnmount(() => {
 }
 
 .bsm__empty {
-  padding: 12px 10px;
+  padding: var(--wx-space-3) 10px;
   text-align: center;
   font-size: var(--wx-fs-12);
   color: var(--wx-text-muted);

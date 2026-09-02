@@ -162,7 +162,7 @@ const CASES = [
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--wx-text-muted);
-  margin-bottom: 4px;
+  margin-bottom: var(--wx-space-1);
 }
 .cs-text { font-size: var(--wx-fs-13); color: var(--wx-text-secondary); margin: 0; line-height: var(--wx-lh-normal); }
 

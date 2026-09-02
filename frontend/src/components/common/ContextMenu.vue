@@ -1,3 +1,7 @@
+<script lang="ts">
+let _ctxMenuIdCounter = 0
+</script>
+
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import type { ContextMenuItem } from '../../types'
@@ -8,6 +12,9 @@ const props = defineProps<{
   y: number
   items: ContextMenuItem[]
 }>()
+
+const uid = ++_ctxMenuIdCounter
+function itemDomId(id: string) { return `dgv-ctx-${uid}-item-${id}` }
 
 const emit = defineEmits<{
   close: []
@@ -122,6 +129,13 @@ function isFocused(item: ContextMenuItem): boolean {
   return focusedIdx.value >= 0 && actionItems.value[focusedIdx.value]?.id === item.id
 }
 
+// ── a11y: roving virtual focus is tracked via focusedIdx, not real DOM
+// focus — expose the currently-focused item's id for aria-activedescendant.
+const activeDescendantId = computed(() => {
+  const item = focusedIdx.value >= 0 ? actionItems.value[focusedIdx.value] : undefined
+  return item ? itemDomId(item.id) : undefined
+})
+
 // Check if item is a section header (has label, no action, no children, not separator)
 function isSectionHeader(item: ContextMenuItem): boolean {
   return !item.separator && !item.action && !item.children?.length && item.disabled === true && !!item.label
@@ -137,27 +151,35 @@ function isSectionHeader(item: ContextMenuItem): boolean {
       :class="{ 'dgv-ctx--left': subOpenLeft }"
       :style="{ left: posX + 'px', top: posY + 'px' }"
       tabindex="-1"
+      role="menu"
+      aria-orientation="vertical"
+      :aria-activedescendant="activeDescendantId"
       @click.stop
       @keydown="onKeydown"
     >
       <template v-for="item in props.items" :key="item.id">
         <!-- Separator -->
-        <div v-if="item.separator" class="dgv-ctx-sep" />
+        <div v-if="item.separator" class="dgv-ctx-sep" role="separator" />
 
         <!-- Section header -->
-        <div v-else-if="isSectionHeader(item)" class="dgv-ctx-section">
+        <div v-else-if="isSectionHeader(item)" class="dgv-ctx-section" role="presentation" aria-hidden="true">
           {{ item.label }}
         </div>
 
         <!-- Parent with children -->
         <div
           v-else-if="item.children?.length"
+          :id="itemDomId(item.id)"
           class="dgv-ctx-item dgv-ctx-parent"
           :class="{
             'dgv-ctx-parent--active': openSubId === item.id,
             'dgv-ctx-disabled': item.disabled,
             'dgv-ctx-item--focused': isFocused(item)
           }"
+          role="menuitem"
+          :aria-haspopup="true"
+          :aria-expanded="openSubId === item.id"
+          :aria-disabled="item.disabled"
           @click.stop="onItemClick(item)"
           @mouseenter="onSubHover(item.id)"
           @mouseleave="onSubLeave"
@@ -167,14 +189,18 @@ function isSectionHeader(item: ContextMenuItem): boolean {
           <div
             class="dgv-ctx-sub"
             :class="{ 'dgv-ctx-sub--open': openSubId === item.id }"
+            role="menu"
             @mouseenter="onSubHover(item.id)"
             @mouseleave="onSubLeave"
           >
             <button
               v-for="child in item.children"
+              :id="itemDomId(child.id)"
               :key="child.id"
               class="dgv-ctx-item"
               :class="{ 'dgv-ctx-item--danger': child.danger, 'dgv-ctx-disabled': child.disabled }"
+              role="menuitem"
+              :aria-disabled="child.disabled"
               @click.stop="onChildClick(child)"
             >
               <span v-if="child.icon" class="dgv-ctx-icon" v-html="child.icon" />
@@ -186,12 +212,15 @@ function isSectionHeader(item: ContextMenuItem): boolean {
         <!-- Normal item -->
         <button
           v-else
+          :id="itemDomId(item.id)"
           class="dgv-ctx-item"
           :class="{
             'dgv-ctx-item--danger': item.danger,
             'dgv-ctx-disabled': item.disabled,
             'dgv-ctx-item--focused': isFocused(item)
           }"
+          role="menuitem"
+          :aria-disabled="item.disabled"
           @click.stop="onItemClick(item)"
         >
           <span v-if="item.icon" class="dgv-ctx-icon" v-html="item.icon" />

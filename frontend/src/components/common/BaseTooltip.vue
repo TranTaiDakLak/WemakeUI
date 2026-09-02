@@ -1,3 +1,7 @@
+<script lang="ts">
+let _tooltipIdCounter = 0
+</script>
+
 <script setup lang="ts">
 import { ref } from 'vue'
 
@@ -11,6 +15,9 @@ const props = withDefaults(defineProps<{
   delay: 300,
   disabled: false,
 })
+
+const uid = ++_tooltipIdCounter
+const tipId = `base-tooltip-${uid}`
 
 const visible = ref(false)
 let timer: ReturnType<typeof setTimeout> | null = null
@@ -27,10 +34,17 @@ function hide() {
 </script>
 
 <template>
-  <div class="base-tooltip-wrapper" @mouseenter="show" @mouseleave="hide">
+  <div
+    class="base-tooltip-wrapper"
+    :aria-describedby="visible && content ? tipId : undefined"
+    @mouseenter="show"
+    @mouseleave="hide"
+    @focusin="show"
+    @focusout="hide"
+  >
     <slot />
     <transition name="tooltip">
-      <div v-if="visible && content" class="base-tooltip" :class="`base-tooltip--${placement}`">
+      <div v-if="visible && content" :id="tipId" role="tooltip" class="base-tooltip" :class="`base-tooltip--${placement}`">
         <span class="base-tooltip__arrow" />
         {{ content }}
       </div>

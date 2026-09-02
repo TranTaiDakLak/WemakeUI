@@ -1,3 +1,7 @@
+<script lang="ts">
+let _radioIdCounter = 0
+</script>
+
 <script setup lang="ts">
 defineProps<{
   modelValue?: string | number
@@ -11,12 +15,21 @@ defineProps<{
 defineEmits<{
   'update:modelValue': [value: string | number]
 }>()
+
+const uid = ++_radioIdCounter
+const groupLabelId = `base-radio-label-${uid}`
 </script>
 
 <template>
   <div class="base-radio">
-    <span v-if="label" class="base-radio__group-label">{{ label }}</span>
-    <div class="base-radio__options" :class="`base-radio__options--${direction ?? 'horizontal'}`">
+    <span v-if="label" :id="groupLabelId" class="base-radio__group-label">{{ label }}</span>
+    <div
+      class="base-radio__options"
+      :class="`base-radio__options--${direction ?? 'horizontal'}`"
+      role="radiogroup"
+      :aria-labelledby="label ? groupLabelId : undefined"
+      :aria-disabled="disabled"
+    >
       <label
         v-for="opt in options"
         :key="opt.value"

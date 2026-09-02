@@ -11,8 +11,8 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="skeleton-container">
-    <div v-for="r in rows" :key="r" class="skeleton-row">
+  <div class="skeleton-container" role="status" aria-busy="true" aria-live="polite" aria-label="Đang tải...">
+    <div v-for="r in rows" :key="r" class="skeleton-row" aria-hidden="true">
       <div
         v-for="c in cols"
         :key="c"

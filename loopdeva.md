@@ -336,4 +336,49 @@ tự ý dừng sớm hơn.
   trong thứ tự ưu tiên vì wave 3 là bug thật (giống pattern round 1→4),
   còn A/B là refactor/polish.
 
-<!-- Round 5+ sẽ được orchestrator/PLAN append tiếp xuống đây -->
+### Round 5 (2026-09-02)
+- PLAN (opus): wave 3 quá lớn (~90 chỗ/20+ file) cho 1 round, nên chỉ chọn
+  phần giá trị cao nhất — 10 file `components/common/*` +
+  `components/charts/DonutChart.vue` (public API, ship trong dist-lib/),
+  cố ý để lại toàn bộ views/* + `components/wemakeui/*` (3 file
+  `WCActionBar`/`WCAddAccountReviewModal`/`WCTrashModal`) + GROUP 2 cho
+  round 6+. Dev A = `BaseSelect`/`BaseSelectMenu`/`BaseFileUpload`/
+  `UserDropdown`; Dev B = `BaseBadge`/`BaseTabs`/`TagList`/`BaseWizard`/
+  `BaseCard`/`DonutChart`.
+- Dev A commit `2e29c03`: 4 file, map `--wx-fs-11/-10`→`var(--wx-fs-12)`,
+  `--wx-danger-subtle`→`var(--wx-danger-bg)`, bỏ hẳn dead double-fallback
+  `var(--wx-hover-bg, var(--wx-surface-hover))`→`var(--wx-hover-bg)`.
+  typecheck+build:lib PASS.
+- Dev B commit `782f0b8`: 6 file, map `--wx-surface-hover/-raised`→
+  `var(--wx-hover-bg)` cho đúng CÁC RULE `:hover` thật, nhưng
+  `BaseBadge.vue .base-badge--primary` (resting state, KHÔNG phải hover)
+  → đúng ra phải là `var(--wx-neutral-bg)` chứ không phải hover-bg — judgment
+  call đúng, phân biệt được resting vs hover state. `BaseCard.vue`
+  `--wx-card-accent` xác nhận false positive (set qua inline `:style` từ
+  prop `accentColor`, không phải token toàn cục) → chỉ thêm comment giải
+  thích, không đổi code. typecheck+build:lib PASS.
+- Dev C QA: build gate 3/3 PASS, 0 overlap, re-grep `components/common/**`
+  + `components/charts/**` xác nhận 0 hit còn lại (trừ 3 file
+  `components/wemakeui/*` cố ý ngoài scope), review kỹ semantic (phân biệt
+  đúng resting-state vs hover-state, không đè lên `.wx-dark` block có sẵn
+  của BaseBadge), token + dark-mode override đủ, API/lib.ts không đổi.
+  **ROUND 5 QA: PASS**, không cần follow-up commit.
+- Backlog cho round 6 — vẫn còn nguyên phần lớn wave 3 (chưa đụng round
+  này): `views/forms/*`, `views/showcase/*`, `views/wemakeui/*` (bao gồm
+  3 file `WCActionBar`/`WCAddAccountReviewModal`/`WCTrashModal` còn
+  `--wx-fs-11`), `views/app/*`, `views/saas/*`, `views/dashboard/*` — cùng
+  pattern `--wx-fs-10/11/17/22/26`, `--wx-fw-normal`, `--wx-space-16/20/
+  2-5`, `--wx-surface-raised/hover/default`, `--wx-danger-subtle`,
+  `--wx-success-subtle`. Mapping đã verify, dùng lại được:
+  `--wx-fs-11/-10`→`var(--wx-fs-12)`, `--wx-fs-17`→cân nhắc theo context
+  (16 hoặc 18), `--wx-fs-22`→(20 hoặc 24), `--wx-fs-26`→(24 hoặc 28),
+  `--wx-fw-normal`→có thể là `--wx-fw-regular`, `--wx-surface-hover`→
+  `var(--wx-hover-bg)` NẾU đúng là rule `:hover`, nếu là resting state thì
+  cân nhắc `var(--wx-neutral-bg)`/`var(--wx-surface-*)` tuỳ ngữ cảnh (xem
+  case BaseBadge round 5 làm mẫu), `--wx-danger-subtle`/`--wx-success-
+  subtle`→`var(--wx-danger-bg)`/`var(--wx-success-bg)`. GROUP 2 (có
+  fallback, ưu tiên thấp hơn): `--wx-error-*`→`--wx-danger-*` trong
+  `LoginV3View.vue`/`AnimationShowcase.vue`; naming scheme riêng
+  `--wx-color-*` (~30 chỗ) chỉ trong `IconShowcase.vue`.
+
+<!-- Round 6+ sẽ được orchestrator/PLAN append tiếp xuống đây -->

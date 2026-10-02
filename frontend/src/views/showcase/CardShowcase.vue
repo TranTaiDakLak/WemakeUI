@@ -12,7 +12,7 @@ const gboxCollapsed = ref(false)
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="components · card" />
+    <AppTopbar title="MindUI" subtitle="components · card" />
 
     <main class="main">
       <PageHeader

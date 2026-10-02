@@ -36,7 +36,7 @@ import { BaseButton, BaseTag } from '../../components/common'
         <BaseTag size="sm" variant="danger" label="lỗi" />
       </div>
       <p class="status-cap">
-        Xem chi tiết tại <a href="#">status.wemake.app</a>
+        Xem chi tiết tại <a href="#">status.mind.app</a>
       </p>
     </div>
   </ErrorLayout>

@@ -3,7 +3,12 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
-import { BaseButton, BaseInput, FormField, BaseTag } from '../../components/common'
+import AuthHead from '../_layouts/AuthHead.vue'
+import AuthField from '../_layouts/AuthField.vue'
+import { BaseButton, BaseTag } from '../../components/common'
+
+const ICON_MAIL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`
+const ICON_KEY = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3"/></svg>`
 
 const email = ref('')
 const sent = ref(false)
@@ -25,16 +30,26 @@ async function submit() {
 
 <template>
   <AuthLayout>
-    <header class="auth-head">
-      <h1>Quên mật khẩu?</h1>
-      <p>Nhập email — chúng tôi sẽ gửi đường dẫn khôi phục cho bạn.</p>
-    </header>
+    <AuthHead
+      :icon="ICON_KEY"
+      eyebrow="Khôi phục truy cập"
+      title="Quên mật khẩu?"
+      description="Nhập email — chúng tôi sẽ gửi đường dẫn khôi phục cho bạn."
+    />
 
-    <form v-if="!sent" class="auth-form" @submit.prevent="submit">
-      <FormField label="Email tài khoản" :error="error" required>
-        <BaseInput v-model="email" type="email" placeholder="ban@congty.vn" autocomplete="email" />
-      </FormField>
-      <BaseButton type="submit" :loading="loading" block>Gửi đường dẫn khôi phục</BaseButton>
+    <form v-if="!sent" class="auth-form" novalidate @submit.prevent="submit">
+      <AuthField
+        v-model="email"
+        label="Email tài khoản"
+        type="email"
+        :icon="ICON_MAIL"
+        placeholder="ban@congty.vn"
+        autocomplete="email"
+        inputmode="email"
+        :error="error ?? undefined"
+        required
+      />
+      <BaseButton type="submit" size="lg" :loading="loading" block>Gửi đường dẫn khôi phục</BaseButton>
       <RouterLink to="/auth/login" class="link-sm center">← Quay về đăng nhập</RouterLink>
     </form>
 
@@ -64,10 +79,7 @@ async function submit() {
 </template>
 
 <style scoped>
-.auth-head { display: flex; flex-direction: column; gap: var(--wx-space-1); }
-.auth-head h1 { margin: 0; font-size: var(--wx-fs-28); font-weight: var(--wx-fw-semibold); letter-spacing: var(--wx-tracking-tight); }
-.auth-head p { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-content-muted); }
-.auth-form { display: flex; flex-direction: column; gap: var(--wx-space-3); }
+.auth-form { display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .link-sm { font-size: var(--wx-fs-13); color: var(--wx-content-link); text-decoration: none; }
 .link-sm:hover { text-decoration: underline; }
 .center { text-align: center; }

@@ -17,6 +17,13 @@ export const gradients = {
   brandButton: 'linear-gradient(to right, #06b6d4, #2563eb)',
   /** Focus accent gradient */
   brandAccent: 'linear-gradient(to right, #44c3f9, #007bff)',
+  /** Nút chính "solid" (nhận diện MindAds): blue-500 → blue-600, 135° */
+  primarySolid: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+  primarySolidHover: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+  /** Icon-tile đầu form panel: indigo → blue → cyan */
+  iconTile: 'linear-gradient(135deg, #6366f1 0%, #3b82f6 50%, #06b6d4 100%)',
+  /** Thanh loading "laser" */
+  scanner: 'linear-gradient(to right, transparent, #06b6d4, #3b82f6)',
 
   // ── Semantic Dialog Header Gradients ─────────────────
   /** Success dialogs */

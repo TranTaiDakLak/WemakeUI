@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
 export const useAppStore = defineStore('app', () => {
-  const appName = ref('WemakeUI')
+  const appName = ref('MindUI')
   const appVersion = ref('0.1.0')
 
   /* ── Sidebar ─────────────────────────── */

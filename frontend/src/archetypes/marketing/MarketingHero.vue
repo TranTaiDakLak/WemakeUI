@@ -82,12 +82,12 @@ withDefaults(defineProps<{
             <span class="hero__card-dot" style="background:#22c55e" />
             <span class="hero__card-dot" style="background:#f59e0b" />
             <span class="hero__card-dot" style="background:#ef4444" />
-            <span class="hero__card-title">WemakeUI Dashboard</span>
+            <span class="hero__card-title">MindUI Dashboard</span>
           </div>
           <div class="hero__metrics">
             <div class="hero__metric">
               <span class="hero__metric-val" style="color:#22c55e">1,284</span>
-              <span class="hero__metric-lbl">Tài khoản Live</span>
+              <span class="hero__metric-lbl">Tài khoản hoạt động</span>
             </div>
             <div class="hero__metric">
               <span class="hero__metric-val" style="color:#60a5fa">4,821</span>
@@ -211,7 +211,7 @@ withDefaults(defineProps<{
 
 .hero__subtitle {
   font-size: var(--wx-fs-16);
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.86);
   line-height: var(--wx-lh-relaxed);
   margin: 0 0 var(--wx-space-8);
   max-width: 520px;
@@ -248,7 +248,7 @@ withDefaults(defineProps<{
 }
 .hero-btn--primary {
   background: #fff;
-  color: var(--wx-brand-primary);
+  color: var(--wx-brand-700); /* cố định: nền nút luôn trắng, --wx-brand-primary sáng lên ở dark mode → chữ xanh nhạt trên nền trắng */
 }
 .hero-btn--primary:hover {
   transform: translateY(-2px);
@@ -280,7 +280,7 @@ withDefaults(defineProps<{
 }
 .hero__stat-label {
   font-size: var(--wx-fs-12);
-  color: rgba(255,255,255,0.6);
+  color: rgba(255,255,255,0.78);
 }
 .hero__stat-divider {
   width: 1px;
@@ -312,7 +312,7 @@ withDefaults(defineProps<{
 .hero__card-dot { width: 10px; height: 10px; border-radius: 50%; }
 .hero__card-title {
   font-size: var(--wx-fs-12);
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.72);
   margin-left: var(--wx-space-1);
 }
 .hero__metrics {
@@ -323,7 +323,7 @@ withDefaults(defineProps<{
 }
 .hero__metric { display: flex; flex-direction: column; gap: 2px; }
 .hero__metric-val { font-size: var(--wx-fs-20); font-weight: var(--wx-fw-bold); }
-.hero__metric-lbl { font-size: 10px; color: rgba(255,255,255,0.5); }
+.hero__metric-lbl { font-size: 10px; color: rgba(255,255,255,0.74); }
 .hero__sparkline { width: 100%; }
 
 /* ── Floating badges ── */

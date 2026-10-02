@@ -37,7 +37,7 @@ const STATS = [
 
     <main>
       <div class="contact-hero" v-reveal>
-        <h1 class="contact-hero__title">Liên hệ với Wemake</h1>
+        <h1 class="contact-hero__title">Liên hệ với Mind</h1>
         <p class="contact-hero__sub">Đội ngũ của chúng tôi sẵn sàng giúp bạn tìm giải pháp phù hợp.</p>
       </div>
 
@@ -45,9 +45,9 @@ const STATS = [
         <!-- left: about + stats -->
         <div class="contact-left" v-reveal>
           <div class="contact-story">
-            <h2 class="contact-story__title">Câu chuyện Wemake</h2>
+            <h2 class="contact-story__title">Câu chuyện Mind</h2>
             <p class="contact-story__text">
-              Wemake được thành lập năm 2022 bởi đội ngũ kỹ sư và chuyên gia marketing
+              Mind được thành lập năm 2022 bởi đội ngũ kỹ sư và chuyên gia marketing
               với mục tiêu giải quyết bài toán quản lý đa kênh phức tạp cho doanh nghiệp Việt Nam.
             </p>
             <p class="contact-story__text">
@@ -69,7 +69,7 @@ const STATS = [
               <span class="contact-channel__icon">📧</span>
               <div>
                 <p class="contact-channel__label">Email</p>
-                <p class="contact-channel__value">hello@wemake.vn</p>
+                <p class="contact-channel__value">hello@mind.vn</p>
               </div>
             </div>
             <div class="contact-channel">
@@ -212,11 +212,14 @@ const STATS = [
   border: 1px solid var(--wx-border-subtle);
   border-radius: var(--wx-radius-2xl);
   padding: var(--wx-space-8);
+  display: flex; flex-direction: column; gap: var(--wx-space-4); /* khoảng cách đều giữa các trường (trước đó các ô dính sát nhau) */
 }
-.contact-form__title { font-size: var(--wx-fs-20); font-weight: 700; color: var(--wx-text-primary); margin: 0 0 var(--wx-space-6); }
+.contact-form__title { font-size: var(--wx-fs-20); font-weight: 700; color: var(--wx-text-primary); margin: 0 0 var(--wx-space-2); }
 
-.cf-field { margin-bottom: var(--wx-space-4); }
+.cf-field { margin-bottom: 0; }
+.cf-label { display: block; margin-bottom: var(--wx-space-2); font-size: var(--wx-fs-13); font-weight: var(--wx-fw-semibold); color: var(--wx-text-secondary); }
 .cf-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--wx-space-3); }
+@media (max-width: 520px) { .cf-row-2 { grid-template-columns: 1fr; } .contact-form { padding: var(--wx-space-5); } }
 
 .cf-radio-group { display: flex; flex-wrap: wrap; gap: var(--wx-space-2); }
 .cf-radio {
@@ -235,7 +238,7 @@ const STATS = [
 .cf-submit {
   display: flex; align-items: center; justify-content: center; gap: var(--wx-space-2);
   width: 100%; padding: var(--wx-space-3);
-  background: var(--wx-brand-primary); color: var(--wx-text-on-brand);
+  background: var(--wx-brand-600); color: var(--wx-text-on-brand);
   border: none; border-radius: var(--wx-radius-lg);
   font-size: var(--wx-fs-16); font-weight: 600;
   cursor: pointer;

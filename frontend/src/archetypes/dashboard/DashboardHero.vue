@@ -70,10 +70,10 @@ const ENV_COLOR: Record<string, string> = {
 
         <!-- quick action buttons -->
         <div v-if="showActions" class="d-hero__actions">
-          <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/scheduler')">
+          <BaseButton size="sm" variant="ghost" @click="router.push('/mindui/scheduler')">
             ⏳ Scheduler
           </BaseButton>
-          <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">
+          <BaseButton size="sm" variant="ghost" @click="router.push('/mindui/console')">
             🖥 Console
           </BaseButton>
           <BaseButton size="sm" variant="ghost" @click="emit('openCampaignModal')">

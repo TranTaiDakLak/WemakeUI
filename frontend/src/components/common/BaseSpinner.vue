@@ -62,7 +62,7 @@ withDefaults(defineProps<{
       transparent 75%,
       transparent 100%
     );
-  /* mask radial: cắt giữa thành donut. ring dày 33% bán kính. */
+  /* mask radial: cắt giữa thành donut. ring dày 33% bán kính. (#000 chỉ là kênh alpha của mask, không hiển thị ra màu) */
   -webkit-mask: radial-gradient(circle, transparent 60%, #000 62%);
           mask: radial-gradient(circle, transparent 60%, #000 62%);
   -webkit-mask-repeat: no-repeat;

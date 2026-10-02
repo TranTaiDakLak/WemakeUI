@@ -34,7 +34,7 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
 <template>
   <AppPageLayout section="dashboards"
     current="Dự án"
-    page-title="Sprint #18 — WemakeUI v0.6"
+    page-title="Sprint #18 — MindUI v0.6"
     page-description="Đang chạy sprint 2 tuần · 9/12 task hoàn thành."
   >
     <template #actions>
@@ -69,11 +69,11 @@ const sprintDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN', 'T2', 'T3', 'T4', 
       <BaseCard title="Burndown chart" subtitle="Lý tưởng vs thực tế" padded shadow="sm">
         <svg class="chart" viewBox="0 0 600 220" preserveAspectRatio="none">
           <line x1="32" y1="200" x2="580" y2="200" stroke="var(--wx-border-default)" />
-          <path :d="sparkPath([...sprintIdeal], 580, 200, 16)" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4" fill="none" />
+          <path :d="sparkPath([...sprintIdeal], 580, 200, 16)" stroke="var(--wx-chart-muted)" stroke-width="1.5" stroke-dasharray="4 4" fill="none" />
           <path :d="sparkPath([...sprintActual], 580, 200, 16)" stroke="var(--wx-brand-primary)" stroke-width="2" fill="none" />
         </svg>
         <div class="legend-row">
-          <LegendDot color="#94a3b8" class="legend-dot-gap" /> Lý tưởng
+          <LegendDot color="var(--wx-chart-muted)" class="legend-dot-gap" /> Lý tưởng
           <LegendDot color="var(--wx-brand-primary)" class="legend-dot-gap" /> Thực tế
         </div>
         <div class="x-labels">

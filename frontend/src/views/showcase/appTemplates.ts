@@ -32,6 +32,7 @@ export interface AppTemplate {
   /** app shell dùng chung */
   shell: string
   icon: string
+  /** màu nhận diện riêng của app (hex cố định bậc 600, dùng làm viền/tint trên card) — dữ liệu, không phải token theme */
   accent: string
   highlights: string[]
 }
@@ -51,14 +52,14 @@ export const appTemplates: AppTemplate[] = [
     highlights: ['Sidebar nav', 'KPI dashboard', 'CRUD bảng', 'Auth guard'],
   },
   {
-    id: 'wemakeui-platform',
-    name: 'WemakeUI Platform',
+    id: 'mindui-platform',
+    name: 'MindUI Platform',
     desc: 'Nền tảng tự động hoá messaging: tài khoản, phiên kết nối, chiến dịch, danh bạ, plugin, console log, lịch tác vụ, tích hợp, automation canvas.',
     kind: 'app',
-    entry: '/wemakeui',
+    entry: '/mindui',
     pages: 10,
     category: 'SaaS app',
-    shell: 'AppPageLayout · wemakeui',
+    shell: 'AppPageLayout · mindui',
     icon: '🤖',
     accent: '#7c3aed',
     highlights: ['DataGrid + context menu', 'Realtime console', 'Automation canvas', 'Scheduler'],

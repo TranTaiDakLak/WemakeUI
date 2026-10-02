@@ -11,11 +11,15 @@ export function useScrollReveal(options: ScrollRevealOptions = {}) {
   const revealed = ref(false)
   let observer: IntersectionObserver | null = null
 
-  function observe(el: Element) {
-    if (typeof IntersectionObserver === 'undefined') {
+  /** Nhận Element hoặc instance component (template ref trỏ vào component → lấy `$el`). */
+  function observe(target: Element | { $el?: unknown } | null | undefined) {
+    const raw = target && !(target instanceof Element) ? (target as { $el?: unknown }).$el : target
+    // Không phải Element (ref rỗng / component fragment) → hiện luôn thay vì ném lỗi và bị ẩn vĩnh viễn
+    if (typeof IntersectionObserver === 'undefined' || !(raw instanceof Element)) {
       revealed.value = true
       return
     }
+    const el: Element = raw
     observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {

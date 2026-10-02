@@ -1,15 +1,32 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { computed, ref, reactive } from 'vue'
 import SaasLayout from '../_layouts/SaasLayout.vue'
-import { BaseButton, BaseInput, BaseSelectMenu, BaseToggle, BaseCheckbox } from '@/components/common'
+import {
+  BaseBadge, BaseButton, BaseFormPanel, BaseIconTile, BaseInput, BaseOptionRow, BaseSelectMenu, BaseStatusDot, BaseToggle, FormField,
+} from '@/components/common'
+import MindSection from '@/components/mindui/MindSection.vue'
+import { SHELL_ICONS } from '@/components/layout/shell-icons'
 import { useToast } from '@/composables/useToast'
+import type { IconTileTone, StatusDotTone } from '@/types'
 
 const { showToast } = useToast()
 
+/* ── Danh mục cài đặt (nav dọc bên trái — cùng bố cục với Cài đặt tài khoản của app) ── */
+type SectionKey = 'general' | 'notif' | 'security' | 'integrations'
+
+const sections: { key: SectionKey; label: string; hint: string; desc: string; icon: string; tone: IconTileTone }[] = [
+  { key: 'general',      label: 'Chung',     hint: 'Thông tin ứng dụng',      desc: 'Thông tin cơ bản của ứng dụng',               icon: SHELL_ICONS.settings, tone: 'brand' },
+  { key: 'notif',        label: 'Thông báo', hint: 'Kênh và loại thông báo',  desc: 'Cấu hình kênh và loại thông báo',             icon: SHELL_ICONS.bell,     tone: 'blue' },
+  { key: 'security',     label: 'Bảo mật',   hint: 'Xác thực và truy cập',    desc: 'Chính sách xác thực và kiểm soát truy cập',   icon: SHELL_ICONS.shield,   tone: 'success' },
+  { key: 'integrations', label: 'Tích hợp',  hint: 'Dịch vụ bên ngoài',       desc: 'Kết nối với dịch vụ bên ngoài',               icon: SHELL_ICONS.globe,    tone: 'warning' },
+]
+const tab = ref<SectionKey>('general')
+const active = computed(() => sections.find(s => s.key === tab.value) ?? sections[0])
+
 /* ── Section: Chung ── */
 const general = reactive({
-  appName:       'WemakeUI SaaS',
-  supportEmail:  'support@wemakeui.vn',
+  appName:       'MindUI SaaS',
+  supportEmail:  'support@mindui.vn',
   timezone:      'asia-hcmc',
   language:      'vi',
   currency:      'vnd',
@@ -37,8 +54,8 @@ async function saveGeneral() {
 }
 
 function resetGeneral() {
-  general.appName      = 'WemakeUI SaaS'
-  general.supportEmail = 'support@wemakeui.vn'
+  general.appName      = 'MindUI SaaS'
+  general.supportEmail = 'support@mindui.vn'
   general.timezone     = 'asia-hcmc'
   general.language     = 'vi'
   general.currency     = 'vnd'
@@ -94,20 +111,24 @@ interface Integration {
   id: string
   name: string
   desc: string
+  /** SVG html cho ô icon */
   icon: string
+  tone: IconTileTone
   connected: boolean
   status: 'ok' | 'error' | 'idle'
   statusText: string
 }
 
 const integrations = ref<Integration[]>([
-  { id: 'stripe',   name: 'Stripe',        desc: 'Cổng thanh toán quốc tế',    icon: '💳', connected: true,  status: 'ok',    statusText: 'Đang kết nối' },
-  { id: 'payos',    name: 'PayOS',          desc: 'Thanh toán nội địa VN',       icon: '🏦', connected: true,  status: 'ok',    statusText: 'Đang kết nối' },
-  { id: 'sendgrid', name: 'SendGrid',       desc: 'Gửi email hàng loạt',         icon: '📧', connected: false, status: 'idle',  statusText: 'Chưa kết nối' },
-  { id: 'zalo',     name: 'Zalo OA',        desc: 'Thông báo qua Zalo',          icon: '💬', connected: true,  status: 'error', statusText: 'Token hết hạn' },
-  { id: 'slack',    name: 'Slack',          desc: 'Thông báo nội bộ team',       icon: '🔔', connected: false, status: 'idle',  statusText: 'Chưa kết nối' },
-  { id: 'webhook',  name: 'Webhook URL',    desc: 'HTTP callback tùy chỉnh',     icon: '🔗', connected: true,  status: 'ok',    statusText: 'Đang kết nối' },
+  { id: 'stripe',   name: 'Stripe',        desc: 'Cổng thanh toán quốc tế',    icon: SHELL_ICONS.idCard,   tone: 'blue',    connected: true,  status: 'ok',    statusText: 'Đang kết nối' },
+  { id: 'payos',    name: 'PayOS',          desc: 'Thanh toán nội địa VN',       icon: SHELL_ICONS.database, tone: 'success', connected: true,  status: 'ok',    statusText: 'Đang kết nối' },
+  { id: 'sendgrid', name: 'SendGrid',       desc: 'Gửi email hàng loạt',         icon: SHELL_ICONS.message,  tone: 'brand',   connected: false, status: 'idle',  statusText: 'Chưa kết nối' },
+  { id: 'zalo',     name: 'Zalo OA',        desc: 'Thông báo qua Zalo',          icon: SHELL_ICONS.users,    tone: 'blue',    connected: true,  status: 'error', statusText: 'Hết hạn kết nối' },
+  { id: 'slack',    name: 'Slack',          desc: 'Thông báo nội bộ team',       icon: SHELL_ICONS.bell,     tone: 'warning', connected: false, status: 'idle',  statusText: 'Chưa kết nối' },
+  { id: 'webhook',  name: 'Webhook URL',    desc: 'HTTP callback tùy chỉnh',     icon: SHELL_ICONS.sync,     tone: 'neutral', connected: true,  status: 'ok',    statusText: 'Đang kết nối' },
 ])
+
+const STATUS_TONE: Record<Integration['status'], StatusDotTone> = { ok: 'success', error: 'danger', idle: 'neutral' }
 
 const testingId = ref<string | null>(null)
 
@@ -116,7 +137,7 @@ async function testIntegration(itg: Integration) {
   await new Promise(r => setTimeout(r, 1200))
   testingId.value = null
   if (itg.status === 'error') {
-    showToast('error', `${itg.name}: Kết nối thất bại — token hết hạn`)
+    showToast('error', `${itg.name}: Kết nối thất bại — phiên kết nối đã hết hạn`)
   } else if (itg.connected) {
     showToast('success', `${itg.name}: Kết nối thành công`)
   } else {
@@ -131,6 +152,9 @@ async function toggleIntegration(itg: Integration) {
   itg.statusText = itg.connected ? 'Đang kết nối' : 'Chưa kết nối'
   showToast(itg.connected ? 'success' : 'info', `${itg.name}: ${itg.statusText}`)
 }
+
+/** Dấu "chưa lưu" trên nav + đầu panel */
+const dirtyOf = (k: SectionKey) => (k === 'general' ? generalDirty.value : k === 'notif' ? notifDirty.value : k === 'security' ? securityDirty.value : false)
 </script>
 
 <template>
@@ -139,444 +163,299 @@ async function toggleIntegration(itg: Integration) {
     page-title="Cài đặt hệ thống"
     page-description="Cấu hình ứng dụng, thông báo, bảo mật và tích hợp"
   >
-    <!-- ── Section: Chung ── -->
-    <div class="settings-card">
-      <div class="settings-card__header">
-        <div class="settings-card__title-row">
-          <span class="settings-card__icon">⚙️</span>
-          <h3 class="settings-card__title">Cài đặt chung</h3>
-          <span v-if="generalDirty" class="dirty-badge">Chưa lưu</span>
-        </div>
-        <p class="settings-card__desc">Thông tin cơ bản của ứng dụng</p>
-      </div>
+    <div class="st">
+      <nav class="st__nav mind-slim-scroll" aria-label="Danh mục cài đặt hệ thống">
+        <button
+          v-for="s in sections"
+          :key="s.key"
+          type="button"
+          class="st__item"
+          :class="{ 'is-active': tab === s.key }"
+          :aria-current="tab === s.key ? 'page' : undefined"
+          @click="tab = s.key"
+        >
+          <span class="st__ico" v-html="s.icon" />
+          <span class="st__txt">
+            <span class="st__label">{{ s.label }}</span>
+            <span class="st__hint">{{ s.hint }}</span>
+          </span>
+          <span v-if="dirtyOf(s.key)" class="st__dirty" title="Có thay đổi chưa lưu" aria-label="Có thay đổi chưa lưu" />
+        </button>
+      </nav>
 
-      <div class="settings-card__body">
-        <div class="form-row">
-          <div class="form-col">
-            <label class="field-label">Tên ứng dụng</label>
-            <BaseInput v-model="general.appName" placeholder="Tên hiển thị..." @input="generalDirty = true" />
-          </div>
-          <div class="form-col">
-            <label class="field-label">Email hỗ trợ</label>
-            <BaseInput v-model="general.supportEmail" type="email" placeholder="support@..." @input="generalDirty = true" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-col">
-            <label class="field-label">Múi giờ</label>
-            <BaseSelectMenu v-model="general.timezone" :options="timezoneOptions" @update:modelValue="generalDirty = true" />
-          </div>
-          <div class="form-col">
-            <label class="field-label">Ngôn ngữ</label>
-            <BaseSelectMenu v-model="general.language" :options="langOptions" @update:modelValue="generalDirty = true" />
-          </div>
-          <div class="form-col">
-            <label class="field-label">Tiền tệ</label>
-            <BaseSelectMenu v-model="general.currency" :options="currencyOptions" @update:modelValue="generalDirty = true" />
-          </div>
-        </div>
-      </div>
+      <div class="st__main">
+        <BaseFormPanel
+          :key="active.key"
+          class="st__panel"
+          flat
+          :title="active.label"
+          :subtitle="active.desc"
+          :icon="active.icon"
+          :tone="active.tone"
+        >
+          <template v-if="dirtyOf(active.key)" #head-extra>
+            <BaseBadge text="Chưa lưu" variant="warning" dot size="sm" />
+          </template>
 
-      <div class="settings-card__footer">
-        <BaseButton size="sm" variant="ghost" @click="resetGeneral">Khôi phục</BaseButton>
-        <BaseButton size="sm" :disabled="!generalDirty" @click="saveGeneral">Lưu thay đổi</BaseButton>
-      </div>
-    </div>
+          <!-- ── Chung ── -->
+          <div v-if="tab === 'general'" class="st__form">
+            <div class="st__grid st__grid--2">
+              <FormField label="Tên ứng dụng">
+                <BaseInput v-model="general.appName" placeholder="Tên hiển thị..." @input="generalDirty = true" />
+              </FormField>
+              <FormField label="Email hỗ trợ">
+                <BaseInput v-model="general.supportEmail" type="email" placeholder="support@..." @input="generalDirty = true" />
+              </FormField>
+            </div>
+            <div class="st__grid st__grid--3">
+              <FormField label="Múi giờ">
+                <BaseSelectMenu v-model="general.timezone" :options="timezoneOptions" @update:modelValue="generalDirty = true" />
+              </FormField>
+              <FormField label="Ngôn ngữ">
+                <BaseSelectMenu v-model="general.language" :options="langOptions" @update:modelValue="generalDirty = true" />
+              </FormField>
+              <FormField label="Tiền tệ">
+                <BaseSelectMenu v-model="general.currency" :options="currencyOptions" @update:modelValue="generalDirty = true" />
+              </FormField>
+            </div>
+          </div>
 
-    <!-- ── Section: Thông báo ── -->
-    <div class="settings-card">
-      <div class="settings-card__header">
-        <div class="settings-card__title-row">
-          <span class="settings-card__icon">🔔</span>
-          <h3 class="settings-card__title">Thông báo</h3>
-          <span v-if="notifDirty" class="dirty-badge">Chưa lưu</span>
-        </div>
-        <p class="settings-card__desc">Cấu hình kênh và loại thông báo</p>
-      </div>
-
-      <div class="settings-card__body">
-        <div class="notif-section">
-          <p class="notif-section__label">Email</p>
-          <div class="toggle-list">
-            <div class="toggle-row">
-              <div class="toggle-row__info">
-                <span class="toggle-row__name">Thành viên mới đăng ký</span>
-                <span class="toggle-row__desc">Gửi email khi có tài khoản mới</span>
+          <!-- ── Thông báo ── -->
+          <div v-else-if="tab === 'notif'" class="st__form">
+            <MindSection title="Email">
+              <div class="st__rows">
+                <BaseOptionRow v-model="notif.emailNewMember" label="Thành viên mới đăng ký" description="Gửi email khi có tài khoản mới" @update:model-value="notifDirty = true" />
+                <BaseOptionRow v-model="notif.emailNewTx" label="Giao dịch mới" description="Thông báo mỗi giao dịch thành công" @update:model-value="notifDirty = true" />
+                <BaseOptionRow v-model="notif.emailFailedTx" label="Giao dịch thất bại" description="Cảnh báo khi giao dịch lỗi" @update:model-value="notifDirty = true" />
+                <BaseOptionRow v-model="notif.emailLowBalance" label="Số dư thấp" description="Cảnh báo khi credit giảm dưới ngưỡng" @update:model-value="notifDirty = true" />
               </div>
-              <BaseToggle v-model="notif.emailNewMember" @update:modelValue="notifDirty = true" />
-            </div>
-            <div class="toggle-row">
-              <div class="toggle-row__info">
-                <span class="toggle-row__name">Giao dịch mới</span>
-                <span class="toggle-row__desc">Thông báo mỗi giao dịch thành công</span>
+            </MindSection>
+
+            <MindSection title="Báo cáo định kỳ">
+              <div class="st__rows">
+                <BaseOptionRow v-model="notif.dailyReport" indicator="check" label="Báo cáo hàng ngày (8:00 sáng)" @update:model-value="notifDirty = true" />
+                <BaseOptionRow v-model="notif.weeklyReport" indicator="check" label="Báo cáo hàng tuần (Thứ 2, 8:00 sáng)" @update:model-value="notifDirty = true" />
+                <BaseOptionRow v-model="notif.pushDesktop" indicator="check" label="Thông báo desktop" @update:model-value="notifDirty = true" />
               </div>
-              <BaseToggle v-model="notif.emailNewTx" @update:modelValue="notifDirty = true" />
-            </div>
-            <div class="toggle-row">
-              <div class="toggle-row__info">
-                <span class="toggle-row__name">Giao dịch thất bại</span>
-                <span class="toggle-row__desc">Cảnh báo khi giao dịch lỗi</span>
+            </MindSection>
+          </div>
+
+          <!-- ── Bảo mật ── -->
+          <div v-else-if="tab === 'security'" class="st__form">
+            <MindSection title="Chính sách">
+              <div class="st__rows">
+                <BaseOptionRow v-model="security.twoFactor" label="Xác thực 2 bước (2FA)" description="Bắt buộc tất cả admin dùng 2FA" @update:model-value="securityDirty = true" />
+                <BaseOptionRow v-model="security.requireStrongPw" label="Mật khẩu mạnh bắt buộc" description="Tối thiểu 8 ký tự, có chữ hoa và số" @update:model-value="securityDirty = true" />
+                <BaseOptionRow v-model="security.logActivity" label="Ghi log hoạt động" description="Lưu lịch sử đăng nhập và thao tác" @update:model-value="securityDirty = true" />
               </div>
-              <BaseToggle v-model="notif.emailFailedTx" @update:modelValue="notifDirty = true" />
-            </div>
-            <div class="toggle-row">
-              <div class="toggle-row__info">
-                <span class="toggle-row__name">Số dư thấp</span>
-                <span class="toggle-row__desc">Cảnh báo khi credit giảm dưới ngưỡng</span>
+            </MindSection>
+
+            <MindSection title="Truy cập">
+              <div class="st__grid st__grid--2">
+                <FormField label="Timeout phiên làm việc">
+                  <BaseSelectMenu v-model="security.sessionTimeout" :options="timeoutOptions" @update:modelValue="securityDirty = true" />
+                </FormField>
+                <FormField label="IP whitelist" hint="Phân cách bằng dấu phẩy">
+                  <BaseInput v-model="security.ipWhitelist" placeholder="192.168.1.1, 10.0.0.0/24" @input="securityDirty = true" />
+                </FormField>
               </div>
-              <BaseToggle v-model="notif.emailLowBalance" @update:modelValue="notifDirty = true" />
-            </div>
+            </MindSection>
           </div>
-        </div>
 
-        <div class="notif-section">
-          <p class="notif-section__label">Báo cáo định kỳ</p>
-          <div class="checkbox-list">
-            <BaseCheckbox v-model="notif.dailyReport"  label="Báo cáo hàng ngày (8:00 sáng)" @update:modelValue="notifDirty = true" />
-            <BaseCheckbox v-model="notif.weeklyReport"  label="Báo cáo hàng tuần (Thứ 2, 8:00 sáng)" @update:modelValue="notifDirty = true" />
-            <BaseCheckbox v-model="notif.pushDesktop"  label="Thông báo desktop" @update:modelValue="notifDirty = true" />
-          </div>
-        </div>
-      </div>
-
-      <div class="settings-card__footer">
-        <BaseButton size="sm" :disabled="!notifDirty" @click="saveNotif">Lưu thay đổi</BaseButton>
-      </div>
-    </div>
-
-    <!-- ── Section: Bảo mật ── -->
-    <div class="settings-card">
-      <div class="settings-card__header">
-        <div class="settings-card__title-row">
-          <span class="settings-card__icon">🔒</span>
-          <h3 class="settings-card__title">Bảo mật</h3>
-          <span v-if="securityDirty" class="dirty-badge">Chưa lưu</span>
-        </div>
-        <p class="settings-card__desc">Chính sách xác thực và kiểm soát truy cập</p>
-      </div>
-
-      <div class="settings-card__body">
-        <div class="toggle-list">
-          <div class="toggle-row">
-            <div class="toggle-row__info">
-              <span class="toggle-row__name">Xác thực 2 bước (2FA)</span>
-              <span class="toggle-row__desc">Bắt buộc tất cả admin dùng 2FA</span>
-            </div>
-            <BaseToggle v-model="security.twoFactor" @update:modelValue="securityDirty = true" />
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-row__info">
-              <span class="toggle-row__name">Mật khẩu mạnh bắt buộc</span>
-              <span class="toggle-row__desc">Tối thiểu 8 ký tự, có chữ hoa và số</span>
-            </div>
-            <BaseToggle v-model="security.requireStrongPw" @update:modelValue="securityDirty = true" />
-          </div>
-          <div class="toggle-row">
-            <div class="toggle-row__info">
-              <span class="toggle-row__name">Ghi log hoạt động</span>
-              <span class="toggle-row__desc">Lưu lịch sử đăng nhập và thao tác</span>
-            </div>
-            <BaseToggle v-model="security.logActivity" @update:modelValue="securityDirty = true" />
-          </div>
-        </div>
-
-        <div class="form-row mt-4">
-          <div class="form-col">
-            <label class="field-label">Timeout phiên làm việc</label>
-            <BaseSelectMenu v-model="security.sessionTimeout" :options="timeoutOptions" @update:modelValue="securityDirty = true" />
-          </div>
-          <div class="form-col form-col--wide">
-            <label class="field-label">IP whitelist (phân cách bằng dấu phẩy)</label>
-            <BaseInput v-model="security.ipWhitelist" placeholder="192.168.1.1, 10.0.0.0/24" @input="securityDirty = true" />
-          </div>
-        </div>
-      </div>
-
-      <div class="settings-card__footer">
-        <BaseButton size="sm" :disabled="!securityDirty" @click="saveSecurity">Lưu thay đổi</BaseButton>
-      </div>
-    </div>
-
-    <!-- ── Section: Tích hợp ── -->
-    <div class="settings-card">
-      <div class="settings-card__header">
-        <div class="settings-card__title-row">
-          <span class="settings-card__icon">🔌</span>
-          <h3 class="settings-card__title">Tích hợp</h3>
-        </div>
-        <p class="settings-card__desc">Kết nối với dịch vụ bên ngoài</p>
-      </div>
-
-      <div class="settings-card__body">
-        <div class="integration-list">
-          <div v-for="itg in integrations" :key="itg.id" class="integration-row">
-            <span class="integration-row__icon">{{ itg.icon }}</span>
-            <div class="integration-row__body">
-              <div class="integration-row__info">
-                <span class="integration-row__name">{{ itg.name }}</span>
-                <span class="integration-row__desc">{{ itg.desc }}</span>
-              </div>
-              <div class="integration-row__controls">
-                <span
-                  class="integration-row__status"
-                  :class="`integration-row__status--${itg.status}`"
-                >{{ itg.statusText }}</span>
-                <div class="integration-row__actions">
-                  <BaseButton
-                    size="sm"
-                    variant="ghost"
-                    :disabled="testingId === itg.id"
-                    @click="testIntegration(itg)"
-                  >{{ testingId === itg.id ? '...' : 'Test' }}</BaseButton>
-                  <BaseToggle :model-value="itg.connected" @update:modelValue="toggleIntegration(itg)" />
+          <!-- ── Tích hợp ── -->
+          <div v-else class="st__form">
+            <ul class="st__integrations">
+              <li v-for="itg in integrations" :key="itg.id" class="itg">
+                <BaseIconTile :tone="itg.tone" size="md" :icon="itg.icon" />
+                <div class="itg__info">
+                  <span class="itg__name">{{ itg.name }}</span>
+                  <span class="itg__desc">{{ itg.desc }}</span>
                 </div>
-              </div>
-            </div>
+                <div class="itg__controls">
+                  <span class="itg__status" :class="`itg__status--${itg.status}`">
+                    <BaseStatusDot :tone="STATUS_TONE[itg.status]" size="sm" :pulse="itg.status === 'ok'" />{{ itg.statusText }}
+                  </span>
+                  <div class="itg__actions">
+                    <BaseButton
+                      size="sm"
+                      variant="ghost"
+                      :disabled="testingId === itg.id"
+                      @click="testIntegration(itg)"
+                    >{{ testingId === itg.id ? 'Đang thử…' : 'Kiểm tra' }}</BaseButton>
+                    <BaseToggle :model-value="itg.connected" :aria-label="`Bật/tắt ${itg.name}`" @update:modelValue="toggleIntegration(itg)" />
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
-        </div>
+
+          <template v-if="tab === 'general'" #footer>
+            <BaseButton size="sm" variant="ghost" @click="resetGeneral">Khôi phục</BaseButton>
+            <BaseButton size="sm" :disabled="!generalDirty" @click="saveGeneral">Lưu thay đổi</BaseButton>
+          </template>
+          <template v-else-if="tab === 'notif'" #footer>
+            <BaseButton size="sm" :disabled="!notifDirty" @click="saveNotif">Lưu thay đổi</BaseButton>
+          </template>
+          <template v-else-if="tab === 'security'" #footer>
+            <BaseButton size="sm" :disabled="!securityDirty" @click="saveSecurity">Lưu thay đổi</BaseButton>
+          </template>
+        </BaseFormPanel>
       </div>
     </div>
   </SaasLayout>
 </template>
 
 <style scoped>
-.settings-card {
-  background: var(--wx-surface-elevated);
-  border: 1px solid var(--wx-border-subtle);
-  border-radius: var(--wx-radius-lg);
-  overflow: hidden;
+/* ── Bố cục Setting: nav dọc + vùng nội dung ── */
+.st { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: var(--wx-space-5); align-items: start; }
+.st__nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--wx-space-2);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-xl);
+  background: var(--wx-surface-base);
+  box-shadow: var(--wx-shadow-sm);
 }
+.st__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-3);
+  width: 100%;
+  padding: var(--wx-space-2) var(--wx-space-3);
+  border: 0;
+  border-radius: var(--wx-radius-lg);
+  background: transparent;
+  color: var(--wx-text-secondary);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--wx-d-fast) var(--wx-ease-standard), color var(--wx-d-fast) var(--wx-ease-standard);
+}
+.st__item:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); }
+.st__item:focus-visible { outline: 2px solid var(--wx-border-focus); outline-offset: -2px; }
+.st__item.is-active { background: var(--wx-shell-tone-brand-bg); color: var(--wx-shell-tone-brand-fg); }
+.st__item.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: var(--wx-radius-full);
+  background: var(--wx-brand-primary);
+}
+.st__ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--wx-radius-md);
+  background: var(--wx-surface-sunken);
+  color: var(--wx-text-muted);
+}
+.st__ico :deep(svg) { width: 16px; height: 16px; }
+.st__item.is-active .st__ico { background: var(--wx-brand-primary); color: var(--wx-text-inverse); }
+.st__txt { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.st__label { font-size: var(--wx-fs-14); font-weight: var(--wx-fw-semibold); }
+.st__hint { font-size: var(--wx-fs-12); color: var(--wx-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.st__dirty {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wx-warning-solid);
+  box-shadow: 0 0 0 3px var(--wx-warning-bg);
+}
+.st__item.is-active .st__hint { color: var(--wx-shell-tone-brand-fg); }
+.st__main { min-width: 0; }
 
-.settings-card__header {
-  padding: var(--wx-space-4) var(--wx-space-5);
-  border-bottom: 1px solid var(--wx-border-subtle);
+/* ── Panel: khung form-panel, thân thoáng hơn bản popover ── */
+.st__panel { box-shadow: var(--wx-shadow-sm); }
+.st__panel :deep(.wx-form-panel__head) { padding: 14px var(--wx-space-5) 12px; }
+.st__panel :deep(.wx-form-panel__title) { font-size: var(--wx-fs-15); }
+.st__panel :deep(.wx-form-panel__sub) { font-size: var(--wx-fs-12); }
+.st__panel :deep(.wx-form-panel__body) { padding: var(--wx-space-5); }
+.st__panel :deep(.wx-form-panel__foot) { padding: var(--wx-space-3) var(--wx-space-5); }
+
+.st__form { display: flex; flex-direction: column; gap: var(--wx-space-5); }
+.st__grid { display: grid; gap: var(--wx-space-4); }
+.st__grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.st__grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.st__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--wx-space-1);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-lg);
   background: var(--wx-surface-sunken);
 }
 
-.settings-card__title-row {
+/* ── Danh sách tích hợp ── */
+.st__integrations {
   display: flex;
-  align-items: center;
-  gap: var(--wx-space-2);
-  margin-bottom: var(--wx-space-1);
-}
-
-.settings-card__icon { font-size: 18px; }
-
-.settings-card__title {
+  flex-direction: column;
   margin: 0;
-  font-size: var(--wx-fs-15);
-  font-weight: var(--wx-fw-semibold);
-  color: var(--wx-text-primary);
-}
-
-.settings-card__desc {
-  margin: 0;
-  font-size: var(--wx-fs-13);
-  color: var(--wx-text-muted);
-}
-
-.dirty-badge {
-  font-size: var(--wx-fs-12);
-  font-weight: var(--wx-fw-semibold);
-  background: color-mix(in srgb, var(--wx-warning-solid) 15%, transparent);
-  color: var(--wx-warning-solid);
-  padding: 2px var(--wx-space-2);
-  border-radius: var(--wx-radius-full);
-}
-
-.settings-card__body {
-  padding: var(--wx-space-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--wx-space-5);
-}
-
-.settings-card__footer {
-  padding: var(--wx-space-3) var(--wx-space-5);
-  border-top: 1px solid var(--wx-border-subtle);
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--wx-space-2);
-}
-
-/* ── Form layout ── */
-.form-row {
-  display: flex;
-  gap: var(--wx-space-4);
-  flex-wrap: wrap;
-}
-
-.form-col {
-  flex: 1;
-  min-width: 180px;
-  display: flex;
-  flex-direction: column;
-  gap: var(--wx-space-2);
-}
-
-.form-col--wide { flex: 2; }
-
-.field-label {
-  font-size: var(--wx-fs-12);
-  font-weight: var(--wx-fw-medium);
-  color: var(--wx-text-secondary);
-}
-
-.mt-4 { margin-top: var(--wx-space-4); }
-
-/* ── Notification toggles ── */
-.notif-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--wx-space-3);
-}
-
-.notif-section__label {
-  margin: 0;
-  font-size: var(--wx-fs-12);
-  font-weight: var(--wx-fw-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--wx-text-muted);
-}
-
-.toggle-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 1px solid var(--wx-border-subtle);
-  border-radius: var(--wx-radius-md);
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-lg);
   overflow: hidden;
 }
-
-.toggle-row {
+.itg {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--wx-space-3);
   padding: var(--wx-space-3) var(--wx-space-4);
+  background: var(--wx-surface-elevated);
   border-bottom: 1px solid var(--wx-border-subtle);
+  transition: background var(--wx-d-fast) var(--wx-ease-standard);
 }
-
-@media (max-width: 520px) {
-  .toggle-row { padding: var(--wx-space-3); }
-  .settings-card__body { padding: var(--wx-space-4) var(--wx-space-3); }
-  .settings-card__header { padding: var(--wx-space-3); }
-  .settings-card__footer { padding: var(--wx-space-3); }
-}
-
-.toggle-row:last-child { border-bottom: none; }
-.toggle-row:hover { background: var(--wx-hover-bg); }
-
-.toggle-row__info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.toggle-row__name { font-size: var(--wx-fs-13); font-weight: var(--wx-fw-medium); color: var(--wx-text-primary); }
-.toggle-row__desc { font-size: var(--wx-fs-12); color: var(--wx-text-muted); }
-
-.checkbox-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--wx-space-3);
-  padding: var(--wx-space-3) var(--wx-space-4);
-  border: 1px solid var(--wx-border-subtle);
-  border-radius: var(--wx-radius-md);
-}
-
-/* ── Integration list ── */
-.integration-list {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--wx-border-subtle);
-  border-radius: var(--wx-radius-md);
-  overflow: hidden;
-}
-
-.integration-row {
-  display: flex;
+.itg:last-child { border-bottom: 0; }
+.itg:hover { background: var(--wx-hover-bg); }
+.itg__info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.itg__name { font-size: var(--wx-fs-13); font-weight: var(--wx-fw-bold); color: var(--wx-text-primary); }
+.itg__desc { font-size: var(--wx-fs-12); color: var(--wx-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.itg__controls { display: flex; align-items: center; gap: var(--wx-space-3); flex-shrink: 0; }
+.itg__status {
+  display: inline-flex;
   align-items: center;
-  gap: var(--wx-space-3);
-  padding: var(--wx-space-3) var(--wx-space-4);
-  border-bottom: 1px solid var(--wx-border-subtle);
-  transition: background 0.12s;
-}
-
-.integration-row:last-child { border-bottom: none; }
-.integration-row:hover { background: var(--wx-hover-bg); }
-
-.integration-row__icon { font-size: 22px; flex-shrink: 0; align-self: flex-start; margin-top: 2px; }
-
-.integration-row__body {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: var(--wx-space-3);
-}
-
-.integration-row__info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.integration-row__name { font-size: var(--wx-fs-13); font-weight: var(--wx-fw-medium); color: var(--wx-text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.integration-row__desc { font-size: var(--wx-fs-12); color: var(--wx-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-.integration-row__controls {
-  display: flex;
-  align-items: center;
-  gap: var(--wx-space-2);
-  flex-shrink: 0;
-}
-
-.integration-row__status {
+  gap: 6px;
+  padding: 2px var(--wx-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--wx-radius-full);
   font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-medium);
-  padding: 2px var(--wx-space-2);
-  border-radius: var(--wx-radius-full);
   white-space: nowrap;
 }
+.itg__status--ok    { background: var(--wx-success-bg); border-color: var(--wx-success-border); color: var(--wx-success-text); }
+.itg__status--error { background: var(--wx-danger-bg);  border-color: var(--wx-danger-border);  color: var(--wx-danger-text); }
+.itg__status--idle  { background: var(--wx-neutral-bg); border-color: var(--wx-neutral-border); color: var(--wx-neutral-text); }
+.itg__actions { display: flex; align-items: center; gap: var(--wx-space-2); }
 
-.integration-row__status--ok    { background: color-mix(in srgb, var(--wx-success-solid) 10%, transparent); color: var(--wx-success-solid); }
-.integration-row__status--error { background: color-mix(in srgb, var(--wx-danger-solid) 10%, transparent);  color: var(--wx-danger-solid); }
-.integration-row__status--idle  { background: var(--wx-surface-sunken); color: var(--wx-text-muted); }
-
-.integration-row__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--wx-space-2);
-  flex-shrink: 0;
+/* ── Mobile ── */
+@media (max-width: 860px) {
+  .st { grid-template-columns: minmax(0, 1fr); }
+  .st__nav { position: static; flex-direction: row; overflow-x: auto; }
+  .st__item { width: auto; flex-shrink: 0; }
+  .st__hint { display: none; }
+  .st__grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
-
-/* ── Mobile: stack controls below info ── */
-@media (max-width: 520px) {
-  .integration-row {
-    align-items: flex-start;
-    padding: var(--wx-space-3);
-  }
-  .integration-row__body {
-    flex-direction: column;
-    align-items: stretch;
-    gap: var(--wx-space-2);
-  }
-  .integration-row__info {
-    /* Let name/desc show fully without ellipsis on mobile */
-  }
-  .integration-row__name,
-  .integration-row__desc {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
-  }
-  .integration-row__controls {
-    justify-content: flex-end;
-    gap: var(--wx-space-2);
-  }
+@media (max-width: 560px) {
+  .st__grid--2, .st__grid--3 { grid-template-columns: minmax(0, 1fr); }
+  .st__panel :deep(.wx-form-panel__body) { padding: var(--wx-space-3); }
+  .st__panel :deep(.wx-form-panel__head),
+  .st__panel :deep(.wx-form-panel__foot) { padding-left: var(--wx-space-3); padding-right: var(--wx-space-3); }
+  .itg { flex-wrap: wrap; align-items: flex-start; padding: var(--wx-space-3); }
+  .itg__info { flex-basis: calc(100% - 52px); }
+  .itg__desc { white-space: normal; }
+  .itg__controls { width: 100%; justify-content: space-between; }
 }
 </style>

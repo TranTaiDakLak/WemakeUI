@@ -70,39 +70,40 @@ onMounted(() => nextTick(resize))
 .wx-textarea {
   width: 100%;
   font-family: var(--wx-font-primary);
-  font-size: var(--wx-fs-14);
+  font-size: var(--wx-control-fs);
   line-height: var(--wx-lh-normal);
   color: var(--wx-content-primary);
-  background: var(--wx-bg-base);
-  border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-md);
-  padding: var(--wx-space-2) var(--wx-space-3);
+  background: var(--wx-surface-elevated);
+  border: 1px solid var(--wx-border-control);
+  border-radius: var(--wx-radius-ctrl);
+  padding: var(--wx-space-2) var(--wx-control-px);
   resize: vertical;
   transition: border-color var(--wx-d-fast) var(--wx-ease-standard),
               box-shadow var(--wx-d-fast) var(--wx-ease-standard);
 }
-.wx-textarea[data-size="sm"] { font-size: var(--wx-fs-13); padding: 6px 10px; }
-.wx-textarea[data-size="lg"] { font-size: var(--wx-fs-15); padding: var(--wx-space-3) 14px; }
+.wx-textarea[data-size="sm"] { font-size: var(--wx-fs-12); padding: 6px 10px; border-radius: var(--wx-radius-ctrl-sm); }
+.wx-textarea[data-size="lg"] { font-size: var(--wx-fs-14); padding: var(--wx-space-3) 14px; }
 
-.wx-textarea::placeholder { color: var(--wx-content-muted); }
+.wx-textarea::placeholder { color: var(--wx-text-placeholder); }
 
-.wx-textarea:hover:not([disabled]):not([readonly]) {
-  border-color: var(--wx-border-focus);
+.wx-textarea:hover:not([disabled]):not([readonly]):not(:focus) {
+  border-color: var(--wx-border-control-hover);
 }
 .wx-textarea:focus { outline: none; }
 .wx-textarea:focus-visible {
   border-color: var(--wx-border-focus);
-  box-shadow: var(--wx-shadow-focus);
+  box-shadow: var(--wx-ring-focus);
 }
 
 .wx-textarea[data-state="invalid"] {
-  border-color: var(--wx-status-danger-border, var(--wx-danger-border));
+  border-color: var(--wx-danger-solid);
 }
 .wx-textarea[data-state="invalid"]:focus-visible {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-danger-solid) 25%, transparent);
+  box-shadow: var(--wx-ring-danger);
 }
 .wx-textarea[disabled] {
-  opacity: 0.6;
+  color: var(--wx-disabled-text);
+  border-color: var(--wx-border-default);
   cursor: not-allowed;
   background: var(--wx-disabled-bg);
 }

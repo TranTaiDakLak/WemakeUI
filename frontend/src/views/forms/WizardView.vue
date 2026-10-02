@@ -57,7 +57,7 @@ function restart() { step.value = 0; done.value = false; firstName.value = ''; e
 
 <template>
   <div class="fp">
-    <AppTopbar title="WemakeUI" subtitle="forms — wizard" />
+    <AppTopbar title="MindUI" subtitle="forms — wizard" />
     <main class="fp__main">
 
       <div class="fp__hdr">
@@ -220,7 +220,7 @@ function back() { direction.value = 'backward'; step.value-- }
 .fp__desc  { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); line-height: 1.6; }
 .fp__card { background: var(--wx-surface-elevated); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-xl); padding: var(--wx-space-5); display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .fp__card--info { background: color-mix(in srgb, var(--wx-brand-primary) 5%, var(--wx-surface-elevated)); border-color: color-mix(in srgb, var(--wx-brand-primary) 20%, transparent); }
-.fp__card--success { background: color-mix(in srgb, #22c55e 8%, var(--wx-surface-elevated)); border-color: color-mix(in srgb, #22c55e 30%, transparent); color: #16a34a; }
+.fp__card--success { background: color-mix(in srgb, var(--wx-success-solid) 8%, var(--wx-surface-elevated)); border-color: color-mix(in srgb, var(--wx-success-solid) 30%, transparent); color: var(--wx-success-text); }
 .fp__card-title { margin: 0; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-bold); text-transform: uppercase; letter-spacing: .6px; color: var(--wx-text-muted); }
 .fp__form { display: flex; flex-direction: column; gap: var(--wx-space-3); }
 .fp__row  { display: grid; grid-template-columns: 1fr 1fr; gap: var(--wx-space-3); }
@@ -254,14 +254,14 @@ function back() { direction.value = 'backward'; step.value-- }
   flex-shrink: 0;
 }
 .wiz-step--active .wiz-step-dot {
-  border-color: var(--wx-brand-primary);
-  background: var(--wx-brand-primary);
-  color: #fff;
+  border-color: var(--wx-brand-solid);
+  background: var(--wx-brand-solid);
+  color: var(--wx-text-on-brand);
 }
 .wiz-step--done .wiz-step-dot {
-  border-color: var(--wx-brand-primary);
-  background: var(--wx-brand-primary);
-  color: #fff;
+  border-color: var(--wx-brand-solid);
+  background: var(--wx-brand-solid);
+  color: var(--wx-text-on-brand);
 }
 .wiz-step-label { font-size: var(--wx-fs-13); color: var(--wx-text-muted); white-space: nowrap; }
 .wiz-step--active .wiz-step-label { color: var(--wx-text-primary); font-weight: var(--wx-fw-medium); }
@@ -305,7 +305,7 @@ function back() { direction.value = 'backward'; step.value-- }
 
 /* Done state */
 .wiz-done { display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-3); padding: var(--wx-space-4) 0; text-align: center; }
-.wiz-done-title { margin: 0; font-size: var(--wx-fs-18); font-weight: var(--wx-fw-bold); color: #16a34a; }
+.wiz-done-title { margin: 0; font-size: var(--wx-fs-18); font-weight: var(--wx-fw-bold); color: var(--wx-success-text); }
 .wiz-done-sub   { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); }
 .wiz-check-path {
   stroke-dasharray: 40;

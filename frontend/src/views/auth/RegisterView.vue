@@ -3,7 +3,14 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
-import { BaseButton, BaseInput, BaseSelectMenu, FormField, BaseProgress } from '../../components/common'
+import AuthHead from '../_layouts/AuthHead.vue'
+import AuthField from '../_layouts/AuthField.vue'
+import { BaseButton, BaseSelectMenu, FormField, BaseProgress } from '../../components/common'
+
+const ICON_MAIL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`
+const ICON_LOCK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
+const ICON_USER = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`
+const ICON_PHONE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`
 
 const step = ref<1 | 2 | 3>(1)
 const account = ref({ email: '', password: '', confirm: '' })
@@ -67,10 +74,11 @@ function back() {
 
 <template>
   <AuthLayout>
-    <header class="auth-head">
-      <h1>Tạo tài khoản mới</h1>
-      <p>Bước {{ step }}/3 — thông tin cơ bản, hồ sơ, hoàn tất.</p>
-    </header>
+    <AuthHead
+      :eyebrow="`Bước ${step}/3`"
+      title="Tạo tài khoản mới"
+      description="Thông tin cơ bản, hồ sơ, hoàn tất."
+    />
 
     <div class="steps">
       <div v-for="i in 3" :key="i" class="step" :class="{ 'step--active': i === step, 'step--done': i < step }">
@@ -83,30 +91,61 @@ function back() {
 
     <!-- step 1 -->
     <form v-if="step === 1" class="auth-form" @submit.prevent="next">
-      <FormField label="Email công ty" :error="errors.email" required>
-        <BaseInput v-model="account.email" type="email" placeholder="ban@congty.vn" />
-      </FormField>
-      <FormField label="Mật khẩu" :error="errors.password" required hint="Tối thiểu 8 ký tự, có chữ HOA, số, ký tự đặc biệt.">
-        <BaseInput v-model="account.password" type="password" />
-      </FormField>
+      <AuthField
+        v-model="account.email"
+        label="Email công ty"
+        type="email"
+        :icon="ICON_MAIL"
+        placeholder="ban@congty.vn"
+        autocomplete="email"
+        :error="errors.email"
+        required
+      />
+      <AuthField
+        v-model="account.password"
+        label="Mật khẩu"
+        type="password"
+        :icon="ICON_LOCK"
+        autocomplete="new-password"
+        :error="errors.password"
+        hint="Tối thiểu 8 ký tự, có chữ HOA, số, ký tự đặc biệt."
+        required
+      />
       <div v-if="account.password" class="strength">
         <BaseProgress :value="passStrength" :variant="passVariant" size="sm" />
         <span class="strength-label" :data-v="passVariant">{{ passLabel }}</span>
       </div>
-      <FormField label="Xác nhận mật khẩu" :error="errors.confirm" required>
-        <BaseInput v-model="account.confirm" type="password" />
-      </FormField>
+      <AuthField
+        v-model="account.confirm"
+        label="Xác nhận mật khẩu"
+        type="password"
+        :icon="ICON_LOCK"
+        autocomplete="new-password"
+        :error="errors.confirm"
+        required
+      />
       <BaseButton type="submit" block>Tiếp tục →</BaseButton>
     </form>
 
     <!-- step 2 -->
     <form v-else-if="step === 2" class="auth-form" @submit.prevent="next">
-      <FormField label="Họ và tên" :error="errors.fullName" required>
-        <BaseInput v-model="profile.fullName" placeholder="Nguyễn Văn A" />
-      </FormField>
-      <FormField label="Số điện thoại" show-optional>
-        <BaseInput v-model="profile.phone" type="text" placeholder="+84 ..." />
-      </FormField>
+      <AuthField
+        v-model="profile.fullName"
+        label="Họ và tên"
+        :icon="ICON_USER"
+        placeholder="Nguyễn Văn A"
+        autocomplete="name"
+        :error="errors.fullName"
+        required
+      />
+      <AuthField
+        v-model="profile.phone"
+        label="Số điện thoại (không bắt buộc)"
+        type="tel"
+        :icon="ICON_PHONE"
+        placeholder="+84 ..."
+        autocomplete="tel"
+      />
       <FormField label="Quốc gia">
         <BaseSelectMenu v-model="profile.country" :options="countryOpts" />
       </FormField>
@@ -143,10 +182,6 @@ function back() {
 </template>
 
 <style scoped>
-.auth-head { display: flex; flex-direction: column; gap: var(--wx-space-1); }
-.auth-head h1 { margin: 0; font-size: var(--wx-fs-28); font-weight: var(--wx-fw-semibold); letter-spacing: var(--wx-tracking-tight); }
-.auth-head p { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-content-muted); }
-
 .steps {
   display: flex;
   align-items: center;
@@ -179,11 +214,11 @@ function back() {
   font-weight: var(--wx-fw-semibold);
   border: 1px solid var(--wx-border-default);
 }
-.step--active .step-num { background: var(--wx-brand-primary); color: white; border-color: transparent; }
-.step--done .step-num   { background: var(--wx-success-solid); color: white; border-color: transparent; }
-.step--active .step-label { color: var(--wx-content-primary); font-weight: var(--wx-fw-medium); }
+.step--active .step-num { background: var(--wx-shell-grad-solid); color: var(--wx-text-on-brand); border-color: transparent; box-shadow: var(--wx-shadow-brand); }
+.step--done .step-num   { background: var(--wx-success-solid); color: var(--wx-text-on-brand); border-color: transparent; }
+.step--active .step-label { color: var(--wx-content-primary); font-weight: var(--wx-fw-semibold); }
 
-.auth-form { display: flex; flex-direction: column; gap: var(--wx-space-3); }
+.auth-form { display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .auth-row { display: flex; gap: var(--wx-space-2); justify-content: space-between; }
 .strength {
   display: flex;

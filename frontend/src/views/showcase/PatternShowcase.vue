@@ -11,8 +11,14 @@ import {
   FormField, FormModal, FormDrawer, ConfirmDialog,
 } from '../../components/common'
 import { useToast } from '../../composables/useToast'
+import { AnchorBar } from '../../components/common'
+import { phases } from './_phases-data'
 
 const { showToast } = useToast()
+
+/* AnchorBar nằm trong trang (sau PageHeader): sticky ngay dưới AppTopbar 56px, không đè tiêu đề / không chừa khoảng trống */
+const anchors = phases.flatMap(p => p.routes).find(r => r.path === '/showcase/patterns')?.anchors ?? []
+const anchorActive = ref('')
 
 /* ── Add Modal ── */
 const addModalOpen = ref(false)
@@ -101,13 +107,15 @@ const deptOptions = [
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="phase 9 — form popup patterns" />
+    <AppTopbar title="MindUI" subtitle="phase 9 — form popup patterns" />
 
     <main class="main">
       <PageHeader
         title="phase 9 — form popup patterns"
         description="FormModal · FormDrawer · ConfirmDialog — pattern thực chiến với đầy đủ: loading, validation, toast, và trạng thái form."
       />
+
+      <AnchorBar v-if="anchors.length" v-model="anchorActive" :sections="anchors" :sticky-top="64" />
 
       <!-- ── 1. Add Modal ─────────────────────────────── -->
       <section id="add-modal" class="card">

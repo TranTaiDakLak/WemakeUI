@@ -813,7 +813,7 @@ async function handleBulkStage(stage: ContactStage) {
 
 /* ── Row click highlight ── */
 @keyframes row-hl {
-  0%, 40% { background-color: var(--wx-brand-50, #eff6ff); }
+  0%, 40% { background-color: var(--wx-selected-bg, #eff6ff); }
   100%    { background-color: transparent; }
 }
 .row--hl td { animation: row-hl 600ms var(--wx-ease-standard) both; }
@@ -832,7 +832,9 @@ async function handleBulkStage(stage: ContactStage) {
   opacity: 0;
   transition: opacity var(--wx-d-micro, 100ms);
 }
-.ct-row:hover .row-actions { opacity: 1; }
+.ct-row:hover .row-actions,
+.ct-row:focus-within .row-actions { opacity: 1; }
+@media (hover: none) { .row-actions { opacity: 1; } }
 
 /* ── Columns ── */
 .col-check   { width: 44px; }

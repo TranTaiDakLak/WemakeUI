@@ -13,7 +13,7 @@ const CASES = [
     industry: 'Thương mại điện tử',
     company: 'Shopee Vietnam',
     challenge: 'Quản lý 50,000+ chat/ngày từ sellers trên nhiều kênh riêng biệt.',
-    solution: 'Triển khai WemakeUI để hợp nhất kênh, tự động phân loại và gán ticket theo loại vấn đề.',
+    solution: 'Triển khai MindUI để hợp nhất kênh, tự động phân loại và gán ticket theo loại vấn đề.',
     metrics: [
       { value: '78%', label: 'Giảm thời gian xử lý' },
       { value: '3.2×', label: 'Tăng năng suất team' },
@@ -86,7 +86,7 @@ const CASES = [
           </div>
           <div class="cs-card__metrics">
             <div v-for="m in c.metrics" :key="m.label" class="cs-metric">
-              <span class="cs-metric__val" :style="{ color: c.color }">{{ m.value }}</span>
+              <span class="cs-metric__val" :style="{ color: `color-mix(in srgb, ${c.color} 62%, var(--wx-text-primary))` }">{{ m.value }}</span>
               <span class="cs-metric__lbl">{{ m.label }}</span>
             </div>
           </div>
@@ -99,8 +99,8 @@ const CASES = [
 <style scoped>
 .cs-section {
   padding: var(--wx-space-10) var(--wx-space-6);
-  background: var(--wx-brand-50);
-  border-top: 1px solid var(--wx-brand-100);
+  background: var(--wx-shell-tint-bg);
+  border-top: 1px solid var(--wx-shell-tint-bd);
 }
 .cs-container { max-width: 1200px; margin: 0 auto; }
 .cs-header { text-align: center; margin-bottom: var(--wx-space-9); }
@@ -119,7 +119,7 @@ const CASES = [
 
 .cs-card {
   background: var(--wx-surface-base);
-  border: 1px solid var(--wx-brand-100);
+  border: 1px solid var(--wx-shell-tint-bd);
   border-radius: var(--wx-radius-2xl);
   padding: var(--wx-space-6);
   display: flex; flex-direction: column; gap: var(--wx-space-5);
@@ -127,7 +127,7 @@ const CASES = [
 }
 .cs-card:hover {
   box-shadow: 0 12px 32px rgba(37,99,235,0.1);
-  border-color: var(--wx-brand-200);
+  border-color: var(--wx-shell-tint-bd-strong);
   transform: translateY(-4px);
 }
 

@@ -92,7 +92,7 @@ literal, không tự ép về fs-12 (bug thật đã gặp ở round 8, xem log)
   từ round 1; `MarketingHeader.vue` không còn px nào để convert;
   `MarketingHero.vue`/`CrudPage.vue` chỉ còn giá trị lẻ (2/5/6/10/14px, cộng
   120px hero cố ý) — QA đã re-grep độc lập cả 5 file, xác nhận đúng claim.
-  Ngoài archetype: 14 file trong `views/app/*` (7 file) + `views/wemakeui/*`
+  Ngoài archetype: 14 file trong `views/app/*` (7 file) + `views/mindui/*`
   (7 file) — 24 chỗ convert 4/8/16px khớp lưới sang `--wx-space-1/2/4`, đều
   nằm trong `<style scoped>` hoặc 3 inline `style="margin-top:..."` trong
   `AutomationCanvasView.vue`. QA đã đọc toàn bộ diff (không phải spot-check),
@@ -441,7 +441,7 @@ tự ý dừng sớm hơn.
       `--wx-fw-normal` (có thể ý là `--wx-fw-regular`), `--wx-space-16/20/
       2-5`, `--wx-surface-raised/hover/default`, `--wx-danger-subtle`,
       `--wx-success-subtle`, `--wx-card-accent`. Trải rộng khắp
-      `views/forms/*`, `views/showcase/*`, `views/wemakeui/*`,
+      `views/forms/*`, `views/showcase/*`, `views/mindui/*`,
       `views/app/*`, `views/saas/*`, `views/dashboard/*`, và cả
       `components/common/{BaseFileUpload,BaseSelect,BaseSelectMenu,
       BaseBadge,BaseTabs,BaseCard,BaseWizard,TagList}.vue`,
@@ -473,7 +473,7 @@ tự ý dừng sớm hơn.
 - PLAN (opus): wave 3 quá lớn (~90 chỗ/20+ file) cho 1 round, nên chỉ chọn
   phần giá trị cao nhất — 10 file `components/common/*` +
   `components/charts/DonutChart.vue` (public API, ship trong dist-lib/),
-  cố ý để lại toàn bộ views/* + `components/wemakeui/*` (3 file
+  cố ý để lại toàn bộ views/* + `components/mindui/*` (3 file
   `WCActionBar`/`WCAddAccountReviewModal`/`WCTrashModal`) + GROUP 2 cho
   round 6+. Dev A = `BaseSelect`/`BaseSelectMenu`/`BaseFileUpload`/
   `UserDropdown`; Dev B = `BaseBadge`/`BaseTabs`/`TagList`/`BaseWizard`/
@@ -492,12 +492,12 @@ tự ý dừng sớm hơn.
   thích, không đổi code. typecheck+build:lib PASS.
 - Dev C QA: build gate 3/3 PASS, 0 overlap, re-grep `components/common/**`
   + `components/charts/**` xác nhận 0 hit còn lại (trừ 3 file
-  `components/wemakeui/*` cố ý ngoài scope), review kỹ semantic (phân biệt
+  `components/mindui/*` cố ý ngoài scope), review kỹ semantic (phân biệt
   đúng resting-state vs hover-state, không đè lên `.wx-dark` block có sẵn
   của BaseBadge), token + dark-mode override đủ, API/lib.ts không đổi.
   **ROUND 5 QA: PASS**, không cần follow-up commit.
 - Backlog cho round 6 — vẫn còn nguyên phần lớn wave 3 (chưa đụng round
-  này): `views/forms/*`, `views/showcase/*`, `views/wemakeui/*` (bao gồm
+  này): `views/forms/*`, `views/showcase/*`, `views/mindui/*` (bao gồm
   3 file `WCActionBar`/`WCAddAccountReviewModal`/`WCTrashModal` còn
   `--wx-fs-11`), `views/app/*`, `views/saas/*`, `views/dashboard/*` — cùng
   pattern `--wx-fs-10/11/17/22/26`, `--wx-fw-normal`, `--wx-space-16/20/
@@ -517,7 +517,7 @@ tự ý dừng sớm hơn.
 ### Round 6 (2026-09-02)
 - PLAN (opus): tiếp tục wave 3 — Dev A = toàn bộ `views/forms/*` (11 file,
   `.fp__title` fs-22→24, các micro-label/table-header fs-11→12); Dev B =
-  3 file `components/wemakeui/WC{ActionBar,AddAccountReviewModal,
+  3 file `components/mindui/WC{ActionBar,AddAccountReviewModal,
   TrashModal}.vue` (fs-11→12) + toàn bộ `views/saas/*` (7 file: Dashboard,
   Members, Products, Settings, Statistics, Transactions, Versions —
   fs-11→12, fs-22→24 trên stat/amount, `--wx-success-subtle`→
@@ -574,7 +574,7 @@ tự ý dừng sớm hơn.
     fs-11, `PrimitivesShowcase.vue` fs-11, `TemplateGallery.vue` fs-11).
   - `views/app/*` (`ChatView.vue` fs-11 x2, `ContactsView.vue` fs-11,
     `FileManagerView.vue` fs-11, `MailboxView.vue` fs-11).
-  - `views/wemakeui/*` các view còn lại (`AccountsView.vue`,
+  - `views/mindui/*` các view còn lại (`AccountsView.vue`,
     `AdminView.vue` x3, `CampaignsView.vue` x3, `ConsoleView.vue`,
     `ContactsView.vue`) — đều fs-11.
   - `views/marketing/*` wave-3 còn sót (`ContactView.vue` space-20 +
@@ -619,7 +619,7 @@ tự ý dừng sớm hơn.
   `--wx-space-2-5`→`var(--wx-space-3)`. 13 dòng đổi, typecheck+build:lib
   PASS.
 - Dev B commit `b198574`: 15 file (`views/app/{ChatView,ContactsView,
-  FileManagerView,MailboxView}.vue`, `views/wemakeui/{AccountsView,
+  FileManagerView,MailboxView}.vue`, `views/mindui/{AccountsView,
   AdminView,CampaignsView,ConsoleView,ContactsView}.vue`,
   `views/marketing/{ContactView,FAQView,PartnersView,ProductDetailView,
   ProductsView}.vue`, `views/_layouts/SaasLayout.vue`) — cùng pattern
@@ -833,7 +833,7 @@ tự ý dừng sớm hơn.
     nhật chi tiết "Đã xong"/"Còn lại"). Còn lại cho round 9+:
     `DashboardKPICard.vue`, phần còn lại của `MarketingHero.vue` +
     `MarketingHeader.vue` chưa sweep, `CrudFormFields.vue`/`CrudPage.vue`
-    chưa sweep, và các view ngoài `views/dashboard/*` (app/wemakeui/
+    chưa sweep, và các view ngoài `views/dashboard/*` (app/mindui/
     marketing/showcase/forms) chưa được quét riêng cho hardcoded-spacing
     (khác với wave-3 undefined-var đã quét xong).
   - **Lưu ý quan trọng cho round 9+ khi làm mục A**: `--wx-fs-11` KHÔNG tồn
@@ -861,7 +861,7 @@ tự ý dừng sớm hơn.
   Dev C (agent này) chỉ chạy QA theo checklist có sẵn — không chạy lại PLAN.
 - Dev A commit `2700eac`: 14 file (`views/app/{ApiKeyView,ChatView,
   ContactsView,MapView,OrderDetailView,PricingView,ProfileView}.vue`,
-  `views/wemakeui/{AccountsView,AdminView,AutomationCanvasView,
+  `views/mindui/{AccountsView,AdminView,AutomationCanvasView,
   CampaignsView,ConsoleView,IntegrationsView,SchedulerView}.vue`) — tiếp tục
   mục A (spacing sweep): convert 24 chỗ padding/margin/gap khớp lưới 4pt
   (4/8/16px) sang `--wx-space-1/2/4`, giữ nguyên giá trị lẻ (2/6/10px). Kèm
@@ -927,7 +927,7 @@ tự ý dừng sớm hơn.
     lib bundle), commit riêng `6c4603f` ("fix: qa follow-up on round 9 —
     migrate SaasView.vue's missed .d legend dot to LegendDot").
   - **lib.ts reachability**: grep `lib.ts` + `components/common/index.ts`
-    cho `LegendDot`/`DashMetric` → 0 hit. Grep `dist-lib/wemake-ui.es.js`
+    cho `LegendDot`/`DashMetric` → 0 hit. Grep `dist-lib/mind-ui.es.js`
     cho `legend-dot`/`dash-metric` → 5 hit `legend-dot` nhưng đọc context
     xác nhận đều là `lc-legend-dot` (class có sẵn, không liên quan, thuộc
     component `LineChart` public khác) — false positive substring match,
@@ -982,7 +982,7 @@ tự ý dừng sớm hơn.
 - Dev B commit `87da65d`: 6 file (`archetypes/crud/CrudPage.vue`,
   `archetypes/marketing/{MarketingHero,MarketingHeader}.vue`,
   `views/auth/EmailVerifyView.vue`, `views/showcase/AnimationShowcase.vue`,
-  `views/wemakeui/CampaignsView.vue`) — xử lý mục B (đóng toàn bộ backlog
+  `views/mindui/CampaignsView.vue`) — xử lý mục B (đóng toàn bộ backlog
   duplicate button/chip): đánh giá 6 candidate, cả 5 candidate thật đều
   DECLINED kèm rationale comment để lại trong code, 2 candidate xác nhận là
   stale backlog (0 `.chip` trong `PermissionShowcase.vue`/
@@ -1168,7 +1168,7 @@ tự ý dừng sớm hơn.
     `--font-size-small`, `--warning-color` đều CÓ MẶT thật trong CSS output
     đã ship. **KẾT LUẬN: FALSE POSITIVE cho bug-class "undefined var"
     (wave 1-8)** — cả 14 var đều resolve đúng cho bất kỳ consumer nào theo
-    đúng usage đã document (`import '@wemake/ui/style.css'`), KHÔNG bị
+    đúng usage đã document (`import '@mind/ui/style.css'`), KHÔNG bị
     silently-dropped như các bug thật trước đây. Tuy nhiên có 1 finding
     thật (nhẹ hơn) đáng ghi backlog: (1) đây là component duy nhất trong
     `components/common/*`/`components/data/*` dùng lớp "short-name alias"
@@ -1189,9 +1189,9 @@ tự ý dừng sớm hơn.
     an obvious 1:1 mapping" mới được tự sửa) — ghi backlog chi tiết cho
     round 12 (xem dưới). Kiểm tra thêm mức độ ảnh hưởng: `BaseDataGrid` là
     public API thật (export ở `components/common/index.ts` dòng 2 +
-    `dist-lib/wemake-ui.es.js` dòng 11372), nhưng usage trong app demo ít
+    `dist-lib/mind-ui.es.js` dòng 11372), nhưng usage trong app demo ít
     hơn hẳn `DataGridPro` — `BaseDataGrid` chỉ dùng ở 3 file
-    (`views/showcase/data/KanbanView.vue`, `views/wemakeui/AdminView.vue`,
+    (`views/showcase/data/KanbanView.vue`, `views/mindui/AdminView.vue`,
     `views/ShowcaseView.vue`) so với `DataGridPro` dùng ở 9 file — xác nhận
     `DataGridPro` là grid được ưu tiên dùng thực tế, `BaseDataGrid` vẫn
     active nhưng vai trò phụ hơn.
@@ -1419,7 +1419,7 @@ tự ý dừng sớm hơn.
     thực ra **chưa bao giờ chạy qua `components/common/**`**. Đây là public
     API của lib (export `lib.ts`), ưu tiên cao nếu round sau muốn tiếp tục
     mục A.
-  - `components/wemakeui/**` — **10/10 file** có hit (toàn bộ `WC*`/`WM*`
+  - `components/mindui/**` — **10/10 file** có hit (toàn bộ `WC*`/`WM*`
     modal/bar component).
   - `components/data/**` — **9/9 file** có hit (`DataGridPro`, `Kanban`,
     `Timeline`, `FilterBuilder`, v.v.).
@@ -1461,7 +1461,7 @@ tự ý dừng sớm hơn.
   - **Mục A** — backlog mới, ưu tiên theo thứ tự: (1) `components/common/**`
     (24 file, public API lib.ts, ưu tiên cao nhất); (2) `views/docs/**` (25
     file, cụm lớn nhất về số lượng nhưng demo-only, không phải public API);
-    (3) `components/wemakeui/**` (10 file) + `components/data/**` (9 file)
+    (3) `components/mindui/**` (10 file) + `components/data/**` (9 file)
     + `components/charts/**` (6 file); (4) cụm nhỏ rải rác (`components/
     {async,feedback,platform,permission,layout}/*`, `views/{error,landing}/*`,
     `views/home/LandingView.vue` còn sót, `archetypes/dashboard/
@@ -1601,7 +1601,7 @@ tự ý dừng sớm hơn.
   1. **Mục A** — `views/docs/**` (25 file, cụm lớn nhất còn lại về số lượng,
      nhưng demo/doc-only, không phải public API — ưu tiên sau
      `components/**`); `components/data/**` (9 file, `DataGridPro.vue`
-     ~19 hit — nặng nhất); `components/wemakeui/**` (10 file); `components/
+     ~19 hit — nặng nhất); `components/mindui/**` (10 file); `components/
      charts/**` (6 file); cụm nhỏ rải rác `components/{async,feedback,
      platform,permission,layout}/*`. Nhắc lại rule: `--wx-fs-11` KHÔNG tồn
      tại (khác mục), giá trị không khớp thang space thật để nguyên literal,
@@ -1629,8 +1629,8 @@ tự ý dừng sớm hơn.
   `96ae364` "refactor: tokenize 4pt spacing in data & chart components" (15
   file: `components/data/**` 9 file + `components/charts/**` 6 file, 96
   conversion), Dev B commit `d41e251` "refactor: tokenize 4pt spacing in
-  wemakeui/async/feedback components + add dark --wx-shadow-focus" (21 file:
-  18 file `components/{async,feedback,wemakeui,layout,permission,
+  mindui/async/feedback components + add dark --wx-shadow-focus" (21 file:
+  18 file `components/{async,feedback,mindui,layout,permission,
   platform}/*` + 2 file archetype (`CaseStudyGrid.vue`/`TechGrid.vue`
   80px→`var(--wx-space-10)`) + `dark-mode.css` thêm 1 dòng
   `--wx-shadow-focus`). Cả 2 hạng mục đúng backlog #1/#2/#4 round 13 đã flag.
@@ -1723,7 +1723,7 @@ tự ý dừng sớm hơn.
   hit khi **toàn bộ** số px trong value đều khớp thang 4pt
   (4/8/12/16/24/32/40/48/64/80/96/128) — kết quả: chỉ đúng **1 hit thật**
   còn sót trong toàn bộ `components/**` (9 subfolder: async, charts, common,
-  data, feedback, layout, permission, platform, wemakeui): `DataGridPro.vue:
+  data, feedback, layout, permission, platform, mindui): `DataGridPro.vue:
   914 .dgp--d-md .dgp-th { padding: 12px; }` — bị Dev A bỏ sót ngay trong
   file mình vừa sửa (24 conversion khác đã đúng, sót đúng 1 dòng single-
   value giữa 2 rule sibling `.dgp--d-sm`/`.dgp--d-lg` đã convert phần khớp
@@ -1955,7 +1955,7 @@ tự ý dừng sớm hơn.
   alias song song. typecheck+build:lib PASS.
 - Dev C QA — build gate: `npm run typecheck` sạch, `npm run build:lib` chạy
   2 lần (flake watch) đều PASS y hệt nhau (`ui.css` 237.71 kB/gzip 34.72 kB,
-  `wemake-ui.es.js` 415.90 kB, `wemake-ui.umd.js` 325.52 kB, dts build
+  `mind-ui.es.js` 415.90 kB, `mind-ui.umd.js` 325.52 kB, dts build
   ~14-15s), `npm run build:app` PASS (7.92s, mọi chunk build OK, không có
   warning mới). `git show --stat` xác nhận đúng Dev A 3 file
   (`CaseStudyGrid.vue`, `style.css`, `responsive.css`), Dev B đúng 1 file
@@ -2123,7 +2123,7 @@ tự ý dừng sớm hơn.
 - Dev C QA:
   - **Build gate**: `npm run typecheck` sạch; `npm run build:lib` chạy 2 lần
     liên tiếp, cả 2 lần PASS y hệt nhau (`ui.css` 237.71 kB/gzip 34.72 kB,
-    `wemake-ui.es.js` 418.50 kB, `wemake-ui.umd.js` 327.21 kB; lần 1
+    `mind-ui.es.js` 418.50 kB, `mind-ui.umd.js` 327.21 kB; lần 1
     ~34.25s wall/19.63s vite, lần 2 ~42.84s wall/18.50s vite) — không tái
     hiện flake lần này; `npm run build:app` PASS (24.09s, mọi chunk build
     OK). Đánh giá giả thuyết race của Dev B: **plausible** — 2 commit chỉ
@@ -2267,8 +2267,8 @@ tự ý dừng sớm hơn.
 - Dev C QA:
   - **Build gate**: `npm run typecheck` sạch (0 lỗi); `npm run build:lib`
     chạy 2 lần liên tiếp, output y hệt nhau cả 2 lần (`ui.css` 237.71 kB/
-    gzip 34.72 kB, `wemake-ui.es.js` 420.07 kB/gzip 99.39 kB,
-    `wemake-ui.umd.js` 328.28 kB/gzip 85.61 kB; lần 1 32.52s, lần 2
+    gzip 34.72 kB, `mind-ui.es.js` 420.07 kB/gzip 99.39 kB,
+    `mind-ui.umd.js` 328.28 kB/gzip 85.61 kB; lần 1 32.52s, lần 2
     26.67s) — không có flake; `npm run build:app` PASS (25.57s, mọi chunk
     build OK, kể cả các view vừa sửa).
   - `git show --stat` xác nhận Dev A đúng 2 file, Dev B đúng 4 file, 0
@@ -2394,7 +2394,7 @@ tự ý dừng sớm hơn.
 - Dev C QA:
   - **Build gate**: `npm run typecheck` sạch (0 lỗi); `npm run build:lib`
     chạy 2 lần liên tiếp — output y hệt nhau (`ui.css` 237.71 kB/gzip
-    34.72 kB, `wemake-ui.es.js` 421.86 kB/gzip 99.78 kB, `wemake-ui.umd.js`
+    34.72 kB, `mind-ui.es.js` 421.86 kB/gzip 99.78 kB, `mind-ui.umd.js`
     329.61 kB/gzip 85.93 kB cả 2 lần) — không flake; `npm run build:app`
     PASS (8.98s, mọi chunk OK).
   - `git show --stat`: Dev A đúng 3 file, Dev B đúng 8 file, 0 overlap,
@@ -2543,8 +2543,8 @@ tự ý dừng sớm hơn.
   của commit message mà tự đọc code:
   - **Build gate**: `npm run typecheck` sạch (0 lỗi); `npm run build:lib`
     chạy 2 lần liên tiếp — output y hệt nhau cả 2 lần (`ui.css` 237.71 kB/
-    gzip 34.72 kB, `wemake-ui.es.js` 423.71 kB/gzip 100.09 kB,
-    `wemake-ui.umd.js` 330.98 kB/gzip 86.16 kB) — **không flake round này**
+    gzip 34.72 kB, `mind-ui.es.js` 423.71 kB/gzip 100.09 kB,
+    `mind-ui.umd.js` 330.98 kB/gzip 86.16 kB) — **không flake round này**
     (khác round 17/18, flake không xuất hiện lần này); `npm run build:app`
     PASS (26.78s, mọi chunk build OK).
   - `git show --stat`: Dev A đúng 2 file (`StatusBar.vue`+`LogViewer.vue`),
@@ -2894,7 +2894,7 @@ tự ý dừng sớm hơn.
      SaasLayout.vue` (10 hit, dòng 157-258, cùng lý do), `views/docs/
      _components/CodeBlock.vue` (11 hit, dòng 60-105 — Dev C đã đọc code
      thật, xác nhận `background: #0f172a` cố định kiểu terminal/code
-     editor), `views/wemakeui/ConsoleView.vue` (7 hit, dòng 121-133),
+     editor), `views/mindui/ConsoleView.vue` (7 hit, dòng 121-133),
      `views/showcase/DevPanelShowcase.vue` (11 hit, dòng 126-139) — cả 2
      file console/dev-panel nhiều khả năng cùng convention "terminal luôn
      tối" như `CodeBlock.vue`, round 22 nên đọc code xác nhận trước khi

@@ -135,12 +135,14 @@ function onTablistKeydown(e: KeyboardEvent) {
   flex-direction: column;
 }
 
+/* Pill = segmented control kiểu nguồn (LanguageSwitcher): rãnh sunken + viền, mục đang chọn là khối xanh đặc */
 .base-tabs__header {
   position: relative;
   display: flex;
   background: var(--wx-surface-sunken);
+  border: 1px solid var(--wx-border-default);
   padding: var(--wx-space-1);
-  border-radius: var(--wx-radius-xl, 12px);
+  border-radius: var(--wx-radius-lg, 12px);
   margin-bottom: 20px;
 }
 
@@ -152,24 +154,29 @@ function onTablistKeydown(e: KeyboardEvent) {
   align-items: center;
   justify-content: center;
   gap: var(--wx-space-2);
-  padding: 10px var(--wx-space-4);
+  min-height: var(--wx-control-h-md);
+  padding: 0 var(--wx-space-4);
   border: none;
   background: transparent;
   color: var(--wx-text-secondary);
   font-family: var(--wx-font-primary);
-  font-size: 13px;
+  font-size: var(--wx-control-fs);
   font-weight: 600;
   cursor: pointer;
-  border-radius: var(--wx-radius-lg, 8px);
+  border-radius: var(--wx-radius-ctrl);
   transition: color var(--wx-duration-fast) var(--wx-easing-default),
               background var(--wx-duration-fast) var(--wx-easing-default);
 }
+.base-tabs__tab:focus-visible {
+  outline: 2px solid var(--wx-brand-focus);
+  outline-offset: 1px;
+}
 .base-tabs__tab:hover:not(:disabled):not(.base-tabs__tab--active) {
   color: var(--wx-brand-primary);
-  background: color-mix(in srgb, var(--wx-brand-primary) 10%, transparent);
+  background: var(--wx-surface-base);
 }
 .base-tabs__tab--active {
-  color: var(--wx-text-inverse);
+  color: var(--wx-text-on-brand);
 }
 .base-tabs__tab--disabled {
   opacity: 0.5;
@@ -180,10 +187,10 @@ function onTablistKeydown(e: KeyboardEvent) {
   position: absolute;
   top: 4px;
   bottom: 4px;
-  background: var(--wx-gradient-header);
-  border-radius: var(--wx-radius-lg, 8px);
-  box-shadow: var(--wx-shadow-md);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--wx-gradient-primary);
+  border-radius: var(--wx-radius-ctrl);
+  box-shadow: var(--wx-shadow-btn);
+  transition: left var(--wx-d-normal) var(--wx-ease-bounce), width var(--wx-d-normal) var(--wx-ease-bounce);
   z-index: 0;
 }
 
@@ -203,10 +210,11 @@ function onTablistKeydown(e: KeyboardEvent) {
 }
 .base-tabs--underline .base-tabs__tab {
   flex: none;
-  padding: 6px 14px;
-  border-radius: var(--wx-radius-md, 6px);
+  min-height: calc(var(--wx-control-h-md) - 6px);
+  padding: 0 14px;
+  border-radius: var(--wx-radius-ctrl-sm);
   color: var(--wx-text-secondary);
-  font-size: 13px;
+  font-size: var(--wx-control-fs);
   font-weight: 500;
   position: relative;
   transition: color var(--wx-duration-fast) var(--wx-easing-default),
@@ -233,6 +241,6 @@ function onTablistKeydown(e: KeyboardEvent) {
 }
 .base-tabs--underline .base-tabs__tab:hover:not(:disabled):not(.base-tabs__tab--active) {
   color: var(--wx-text-primary);
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral);
 }
 </style>

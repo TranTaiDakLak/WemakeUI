@@ -4,7 +4,16 @@ import MarketingHero from '@/archetypes/marketing/MarketingHero.vue'
 import PartnerLoop from '@/archetypes/marketing/PartnerLoop.vue'
 import TechGrid from '@/archetypes/marketing/TechGrid.vue'
 import CaseStudyGrid from '@/archetypes/marketing/CaseStudyGrid.vue'
+import LandingFooter from '@/views/home/_components/LandingFooter.vue'
+import type { FooterGroup } from '@/views/home/_components/landing-content'
 import { RouterLink } from 'vue-router'
+
+const FOOTER_GROUPS: FooterGroup[] = [
+  { title: 'Sản phẩm', links: [{ label: 'Tất cả sản phẩm', to: '/products' }, { label: 'Bảng giá', to: '/app/pricing' }, { label: 'Bộ giao diện', to: '/showcase/apps' }] },
+  { title: 'Công ty', links: [{ label: 'Đối tác', to: '/partners' }, { label: 'Liên hệ', to: '/contact' }, { label: 'FAQ', to: '/faqs' }, { label: 'Tuyển dụng', to: '/landing/careers' }] },
+  { title: 'Tài nguyên', links: [{ label: 'Tài liệu', to: '/docs' }, { label: 'Blog', to: '/landing/blog' }, { label: 'Changelog', to: '/landing/changelog' }] },
+  { title: 'Pháp lý', links: [{ label: 'Điều khoản sử dụng', to: '/landing/policy' }, { label: 'Chính sách bảo mật', to: '/landing/policy' }] },
+]
 </script>
 
 <template>
@@ -38,36 +47,7 @@ import { RouterLink } from 'vue-router'
     </main>
 
     <!-- Footer -->
-    <footer class="home-footer">
-      <div class="home-footer__inner">
-        <div class="home-footer__brand">
-          <span class="home-footer__logo">Wemake</span>
-          <p class="home-footer__tagline">Nền tảng tự động hóa đa kênh hàng đầu Việt Nam.</p>
-        </div>
-        <div class="home-footer__links">
-          <div class="home-footer__col">
-            <h4 class="home-footer__col-title">Sản phẩm</h4>
-            <RouterLink to="/products" class="home-footer__link">WemakeUI</RouterLink>
-            <RouterLink to="/products" class="home-footer__link">WeDashboard</RouterLink>
-            <RouterLink to="/products" class="home-footer__link">WeAnalytics</RouterLink>
-          </div>
-          <div class="home-footer__col">
-            <h4 class="home-footer__col-title">Công ty</h4>
-            <RouterLink to="/partners" class="home-footer__link">Đối tác</RouterLink>
-            <RouterLink to="/contact" class="home-footer__link">Liên hệ</RouterLink>
-            <RouterLink to="/faqs" class="home-footer__link">FAQ</RouterLink>
-          </div>
-          <div class="home-footer__col">
-            <h4 class="home-footer__col-title">Pháp lý</h4>
-            <RouterLink to="/landing/policy" class="home-footer__link">Điều khoản sử dụng</RouterLink>
-            <RouterLink to="/landing/policy" class="home-footer__link">Chính sách bảo mật</RouterLink>
-          </div>
-        </div>
-      </div>
-      <div class="home-footer__bottom">
-        <p>© 2026 Wemake Technology. All rights reserved.</p>
-      </div>
-    </footer>
+    <LandingFooter :groups="FOOTER_GROUPS" tagline="Nền tảng tự động hóa đa kênh" blurb="Nền tảng tự động hóa đa kênh hàng đầu Việt Nam — quản lý tài khoản, chiến dịch và phiên kết nối ở một nơi." copy="© 2026 Mind Technology. All rights reserved." />
   </div>
 </template>
 
@@ -102,7 +82,7 @@ import { RouterLink } from 'vue-router'
   transition: all var(--wx-d-fast) var(--wx-ease-standard);
 }
 .mkt-cta--primary {
-  background: #fff; color: var(--wx-brand-primary);
+  background: #fff; color: var(--wx-brand-700);
 }
 .mkt-cta--primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
 .mkt-cta--ghost {
@@ -111,45 +91,4 @@ import { RouterLink } from 'vue-router'
   border: 1px solid rgba(255,255,255,0.3);
 }
 .mkt-cta--ghost:hover { background: rgba(255,255,255,0.25); }
-
-/* footer */
-.home-footer { background: var(--wx-surface-sunken); border-top: 1px solid var(--wx-border-subtle); }
-.home-footer__inner {
-  max-width: 1200px; margin: 0 auto;
-  padding: var(--wx-space-12) var(--wx-space-6);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--wx-space-10);
-}
-@media (min-width: 768px) { .home-footer__inner { grid-template-columns: 1fr 2fr; } }
-
-.home-footer__brand {}
-.home-footer__logo {
-  font-size: var(--wx-fs-24); font-weight: 800;
-  color: var(--wx-text-primary); letter-spacing: -0.5px;
-  display: block; margin-bottom: var(--wx-space-3);
-}
-.home-footer__tagline { font-size: var(--wx-fs-14); color: var(--wx-text-secondary); line-height: 1.6; margin: 0; }
-
-.home-footer__links { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--wx-space-6); }
-.home-footer__col { display: flex; flex-direction: column; gap: var(--wx-space-2); }
-.home-footer__col-title {
-  font-size: var(--wx-fs-12); font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.06em;
-  color: var(--wx-text-muted);
-  margin: 0 0 var(--wx-space-1);
-}
-.home-footer__link {
-  font-size: var(--wx-fs-14); color: var(--wx-text-secondary);
-  text-decoration: none;
-}
-.home-footer__link:hover { color: var(--wx-text-primary); }
-
-.home-footer__bottom {
-  max-width: 1200px; margin: 0 auto;
-  padding: var(--wx-space-5) var(--wx-space-6);
-  border-top: 1px solid var(--wx-border-subtle);
-  font-size: var(--wx-fs-14); color: var(--wx-text-muted);
-}
-.home-footer__bottom p { margin: 0; }
 </style>

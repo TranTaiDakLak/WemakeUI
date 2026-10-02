@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<{
   imports?: string[]
   importFrom?: string
 }>(), {
-  importFrom: '@wemake/ui',
+  importFrom: '@mind/ui',
   imports: () => [],
 })
 

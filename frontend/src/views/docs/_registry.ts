@@ -57,6 +57,18 @@ export const docCategories: DocCategory[] = [
     ],
   },
   {
+    label: 'Mẫu Panel (MindAds)',
+    entries: [
+      { slug: 'form-panel',    name: 'BaseFormPanel',    desc: 'Khuôn form/popover — đầu icon-tile, thân, chân',       loader: () => import('./components/FormPanelDoc.vue') },
+      { slug: 'option',        name: 'BaseOptionRow',    desc: 'Hàng chọn bật/tắt + thẻ chọn hành động (OptionCard)',   loader: () => import('./components/OptionDoc.vue') },
+      { slug: 'segmented',     name: 'BaseSegmented',    desc: 'Nhóm nút chọn 1 trong N — primary / neutral',           loader: () => import('./components/SegmentedDoc.vue') },
+      { slug: 'update-banner', name: 'BaseUpdateBanner', desc: 'Banner cập nhật / tải lại — tone, các bước, nổi',       loader: () => import('./components/UpdateBannerDoc.vue') },
+      { slug: 'liquid-loader', name: 'BaseLiquidLoader', desc: 'Lớp phủ loading kiểu liquid — blob, chữ nảy, laser',    loader: () => import('./components/LiquidLoaderDoc.vue') },
+      { slug: 'guide-hint',    name: 'BaseGuideHint',    desc: 'Dấu (i) hover mở popover hướng dẫn — tự lật hướng',     loader: () => import('./components/GuideHintDoc.vue') },
+      { slug: 'status-dot',    name: 'BaseStatusDot',    desc: 'Chấm trạng thái nhỏ — pulse, tone',                     loader: () => import('./components/StatusDotDoc.vue') },
+    ],
+  },
+  {
     label: 'Mẫu Form (Popup)',
     entries: [
       { slug: 'form-modal',     name: 'FormModal',     desc: 'Modal chứa form — submit, loading, validation', loader: () => import('./components/FormModalDoc.vue') },

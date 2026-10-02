@@ -42,8 +42,8 @@ const tx = [
             <span class="muted">cập nhật 12:34 hôm nay</span>
           </div>
           <svg class="bal-spark" viewBox="0 0 600 60" preserveAspectRatio="none">
-            <path :d="sparkArea([...seriesUp, ...seriesUp], 600, 60, 4)" fill="rgba(37,99,235,0.18)" />
-            <path :d="sparkPath([...seriesUp, ...seriesUp], 600, 60, 4)" stroke="#2563eb" stroke-width="1.5" fill="none" />
+            <path :d="sparkArea([...seriesUp, ...seriesUp], 600, 60, 4)" fill="var(--wx-chart-1)" fill-opacity="0.18" />
+            <path :d="sparkPath([...seriesUp, ...seriesUp], 600, 60, 4)" stroke="var(--wx-chart-1)" stroke-width="1.5" fill="none" />
           </svg>
         </div>
       </BaseCard>
@@ -53,17 +53,17 @@ const tx = [
       <BaseCard title="Doanh thu tháng" padded shadow="sm">
         <div class="kpi">820 tr</div>
         <BaseTag size="sm" variant="success" label="+18%" />
-        <svg class="spark-h" viewBox="0 0 100 32"><path :d="sparkPath([...seriesUp])" stroke="#10b981" stroke-width="1.5" fill="none" /></svg>
+        <svg class="spark-h" viewBox="0 0 100 32"><path :d="sparkPath([...seriesUp])" stroke="var(--wx-chart-3)" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
       <BaseCard title="Chi phí tháng" padded shadow="sm">
         <div class="kpi">462 tr</div>
         <BaseTag size="sm" variant="warning" label="+4%" />
-        <svg class="spark-h" viewBox="0 0 100 32"><path :d="sparkPath([...seriesVolatile])" stroke="#f59e0b" stroke-width="1.5" fill="none" /></svg>
+        <svg class="spark-h" viewBox="0 0 100 32"><path :d="sparkPath([...seriesVolatile])" stroke="var(--wx-chart-4)" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
       <BaseCard title="Lợi nhuận ròng" padded shadow="sm">
         <div class="kpi">358 tr</div>
         <BaseTag size="sm" variant="success" label="44% biên" />
-        <svg class="spark-h" viewBox="0 0 100 32"><path :d="sparkPath([...seriesUp])" stroke="#2563eb" stroke-width="1.5" fill="none" /></svg>
+        <svg class="spark-h" viewBox="0 0 100 32"><path :d="sparkPath([...seriesUp])" stroke="var(--wx-chart-1)" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
     </div>
 

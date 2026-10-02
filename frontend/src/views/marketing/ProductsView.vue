@@ -10,13 +10,23 @@ const gridRef = ref<HTMLElement | null>(null)
 const { revealed, observe } = useScrollReveal()
 onMounted(() => { if (gridRef.value) observe(gridRef.value) })
 
+/** Chữ đặt TRÊN nền màu sản phẩm: amber/xanh lá quá sáng cho chữ trắng (≈2:1) → dùng chữ tối. */
+function onColor(hex: string): string {
+  const n = parseInt(hex.slice(1), 16)
+  const lin = (v: number) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4) }
+  const L = 0.2126 * lin((n >> 16) & 255) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255)
+  return L > 0.3 ? '#0f172a' : '#ffffff'
+}
+/** Chữ/icon mang màu sản phẩm trên nền bề mặt: trộn về màu chữ chính của theme để đủ tương phản ở cả light/dark. */
+const accentText = (hex: string) => `color-mix(in srgb, ${hex} 62%, var(--wx-text-primary))`
+
 // Màu thương hiệu riêng của từng sản phẩm — CỐ Ý giữ hex, không theo theme,
 // vì được nối thêm hậu tố alpha dạng chuỗi (ví dụ color + '15') khi dùng
 // trong :style, nên không thể thay bằng CSS var.
 const PRODUCTS = [
   {
-    slug: 'wemakeui',
-    name: 'WemakeUI',
+    slug: 'mindui',
+    name: 'MindUI',
     icon: '🔗',
     version: 'v3.2.1',
     tags: ['WhatsApp', 'Zalo', 'Telegram', 'SMS'],
@@ -63,7 +73,7 @@ const PRODUCTS = [
 
     <main>
       <div class="products-hero" v-reveal>
-        <h1 class="products-hero__title">Hệ sinh thái sản phẩm Wemake</h1>
+        <h1 class="products-hero__title">Hệ sinh thái sản phẩm Mind</h1>
         <p class="products-hero__sub">Mỗi sản phẩm giải quyết một bài toán thực tế — kết hợp lại thành một nền tảng hoàn chỉnh.</p>
       </div>
 
@@ -85,17 +95,17 @@ const PRODUCTS = [
             </div>
             <p class="product-card__desc">{{ p.desc }}</p>
             <div class="product-card__tags">
-              <span v-for="tag in p.tags" :key="tag" class="product-tag" :style="{ color: p.color, borderColor: `${p.color}30`, background: `${p.color}08` }">{{ tag }}</span>
+              <span v-for="tag in p.tags" :key="tag" class="product-tag" :style="{ color: accentText(p.color), borderColor: `${p.color}40`, background: `${p.color}12` }">{{ tag }}</span>
             </div>
             <ul class="product-card__highlights">
               <li v-for="h in p.highlights" :key="h" class="product-hl">
-                <span class="product-hl__check" :style="{ color: p.color }">✓</span>
+                <span class="product-hl__check" :style="{ color: accentText(p.color) }">✓</span>
                 {{ h }}
               </li>
             </ul>
             <div class="product-card__cta">
               <RouterLink :to="`/products/${p.slug}`" class="product-btn product-btn--ghost">Xem chi tiết</RouterLink>
-              <RouterLink to="/auth/register" class="product-btn product-btn--primary" :style="{ background: p.color }">Dùng thử</RouterLink>
+              <RouterLink to="/auth/register" class="product-btn product-btn--primary" :style="{ background: p.color, color: onColor(p.color) }">Dùng thử</RouterLink>
             </div>
           </div>
         </div>
@@ -119,7 +129,7 @@ const PRODUCTS = [
 }
 .products-hero__sub { font-size: var(--wx-fs-18); color: var(--wx-text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.7; }
 
-.products-container { max-width: 1200px; margin: 0 auto; padding: var(--wx-space-4) var(--wx-space-6) var(--wx-space-10); }
+.products-container { max-width: 1200px; margin: 0 auto; padding: var(--wx-space-7) var(--wx-space-6) var(--wx-space-10); }
 .products-grid { display: grid; gap: var(--wx-space-5); }
 @media (min-width: 768px)  { .products-grid { grid-template-columns: repeat(2, 1fr); } }
 

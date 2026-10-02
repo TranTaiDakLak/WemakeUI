@@ -61,22 +61,24 @@ function hide() {
 .base-tooltip {
   position: absolute;
   z-index: var(--wx-z-tooltip);
-  padding: 5px 10px;
-  font-size: 12px;
-  color: #fff;
-  background: #333;
-  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: var(--wx-fs-12);
+  font-weight: var(--wx-fw-medium);
+  color: var(--wx-tooltip-text);
+  background: var(--wx-tooltip-bg);
+  border-radius: var(--wx-radius-ctrl-sm);
+  box-shadow: var(--wx-shadow-tooltip);
   white-space: nowrap;
   pointer-events: none;
   line-height: 1.4;
-  font-family: var(--font-family);
+  font-family: var(--wx-font-primary);
 }
 
 .base-tooltip__arrow {
   position: absolute;
   width: 6px;
   height: 6px;
-  background: #333;
+  background: var(--wx-tooltip-bg);
   transform: rotate(45deg);
 }
 

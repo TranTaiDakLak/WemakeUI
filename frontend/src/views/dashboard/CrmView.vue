@@ -6,11 +6,11 @@ import LegendDot from './_components/LegendDot.vue'
 import DashMetric from './_components/DashMetric.vue'
 
 const stages = [
-  { id: 'lead',     label: 'Tiềm năng',     color: '#94a3b8', deals: 18, value: '320 tr' },
-  { id: 'qualify',  label: 'Đã sàng lọc',   color: '#60a5fa', deals: 12, value: '480 tr' },
-  { id: 'proposal', label: 'Đã báo giá',    color: '#fbbf24', deals: 7,  value: '620 tr' },
-  { id: 'negotiate',label: 'Đang đàm phán', color: '#a78bfa', deals: 4,  value: '480 tr' },
-  { id: 'won',      label: 'Đã chốt',       color: '#10b981', deals: 9,  value: '780 tr' },
+  { id: 'lead',     label: 'Tiềm năng',     color: 'var(--wx-chart-muted)', deals: 18, value: '320 tr' },
+  { id: 'qualify',  label: 'Đã sàng lọc',   color: 'var(--wx-brand-400)', deals: 12, value: '480 tr' },
+  { id: 'proposal', label: 'Đã báo giá',    color: 'var(--wx-chart-4)', deals: 7,  value: '620 tr' },
+  { id: 'negotiate',label: 'Đang đàm phán', color: 'var(--wx-chart-6)', deals: 4,  value: '480 tr' },
+  { id: 'won',      label: 'Đã chốt',       color: 'var(--wx-chart-3)', deals: 9,  value: '780 tr' },
 ] as const
 
 const cards: Record<string, Array<{ company: string; deal: string; amount: string; owner: string }>> = {

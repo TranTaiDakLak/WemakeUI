@@ -15,9 +15,9 @@ const METHOD_VARIANTS: Record<string, 'success' | 'info' | 'warning' | 'danger'>
 }
 
 const SDKs = [
-  { lang: 'JavaScript', icon: '🟨', install: 'npm install @wemake/ui' },
-  { lang: 'TypeScript', icon: '🔷', install: 'npm install @wemake/ui' },
-  { lang: 'Vue 3', icon: '💚', install: 'npm install @wemake/ui' },
+  { lang: 'JavaScript', icon: '🟨', install: 'npm install @mind/ui' },
+  { lang: 'TypeScript', icon: '🔷', install: 'npm install @mind/ui' },
+  { lang: 'Vue 3', icon: '💚', install: 'npm install @mind/ui' },
 ]
 </script>
 
@@ -47,7 +47,7 @@ const SDKs = [
           <div class="step-card">
             <span class="step-num">2</span>
             <h3 class="step-title">Cài đặt SDK</h3>
-            <pre class="code-sm">npm install @wemake/ui</pre>
+            <pre class="code-sm">npm install @mind/ui</pre>
           </div>
           <div class="step-card">
             <span class="step-num">3</span>
@@ -91,7 +91,7 @@ const SDKs = [
 </template>
 
 <style scoped>
-.api-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-10); text-align: center; background: var(--wx-gradient-bg); display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-5); }
+.api-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-10); text-align: center; background: var(--wx-shell-hero-bg); display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-5); }
 .api-title { font-size: var(--wx-fs-40); font-weight: 800; letter-spacing: var(--wx-tracking-tight); margin: 0; }
 .api-desc { font-size: var(--wx-fs-18); color: var(--wx-content-secondary); max-width: 600px; margin: 0; }
 .api-actions { display: flex; gap: var(--wx-space-3); justify-content: center; }
@@ -101,10 +101,10 @@ const SDKs = [
 .section-title { font-size: var(--wx-fs-28); font-weight: var(--wx-fw-bold); letter-spacing: var(--wx-tracking-tight); margin-bottom: var(--wx-space-6); }
 .quick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--wx-space-5); }
 .step-card { padding: var(--wx-space-5); background: var(--wx-bg-base); border: 1px solid var(--wx-border-subtle); border-radius: var(--wx-radius-xl); }
-.step-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--wx-brand-100); color: var(--wx-brand-600); border-radius: var(--wx-radius-full); font-weight: var(--wx-fw-bold); font-size: var(--wx-fs-16); margin-bottom: var(--wx-space-3); }
+.step-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--wx-selected-bg); color: var(--wx-text-link); border-radius: var(--wx-radius-full); font-weight: var(--wx-fw-bold); font-size: var(--wx-fs-16); margin-bottom: var(--wx-space-3); }
 .step-title { font-size: var(--wx-fs-16); font-weight: var(--wx-fw-semibold); margin: 0 0 var(--wx-space-2); }
 .step-desc { font-size: var(--wx-fs-14); color: var(--wx-content-secondary); margin: 0; }
-.code-sm { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); background: var(--wx-bg-sunken); border: 1px solid var(--wx-border-subtle); border-radius: var(--wx-radius-md); padding: var(--wx-space-2) var(--wx-space-3); margin: var(--wx-space-2) 0 0; overflow-x: auto; }
+.code-sm { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); background: var(--wx-bg-sunken); border: 1px solid var(--wx-border-subtle); border-radius: var(--wx-radius-md); padding: var(--wx-space-2) var(--wx-space-3); margin: var(--wx-space-2) 0 0; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
 .endpoint-list { display: flex; flex-direction: column; gap: var(--wx-space-2); }
 .endpoint-row { display: flex; align-items: center; gap: var(--wx-space-4); padding: var(--wx-space-3) var(--wx-space-4); background: var(--wx-bg-base); border: 1px solid var(--wx-border-subtle); border-radius: var(--wx-radius-md); }
 .ep-path { font-family: var(--wx-font-mono); font-size: var(--wx-fs-13); color: var(--wx-content-link); flex: 0 0 auto; }

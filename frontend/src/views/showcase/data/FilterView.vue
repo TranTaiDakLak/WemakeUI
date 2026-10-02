@@ -35,7 +35,7 @@ const fieldLabels = Object.fromEntries(fields.map((f) => [f.key, f.label]))
 const data = Array.from({ length: 50 }).map((_, i) => ({
   id: i + 1,
   username: `user${(i + 1).toString().padStart(3, '0')}`,
-  email: `user${i + 1}@wemake.vn`,
+  email: `user${i + 1}@mind.vn`,
   role: ['admin', 'editor', 'viewer', 'guest'][i % 4],
   amount: 100 + i * 17,
   isVip: i % 5 === 0,
@@ -98,7 +98,7 @@ function removeChip(path: number[]) {
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI · FilterBuilder" subtitle="Phase 4 — data display" />
+    <AppTopbar title="MindUI · FilterBuilder" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="FilterBuilder" description="Bộ lọc nâng cao AND/OR lồng nhau (max depth 3), serialize qua URL base64, share được qua link.">
       </PageHeader>

@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  WemakeUI — Typography numeric scale
+ *  MindUI — Typography numeric scale
  *
  *  Font: Inter (primary). Mono: ui-monospace.
  *  Sentence case Vietnamese — never uppercase except acronym.
@@ -14,6 +14,8 @@
  */
 
 export const fontSize = {
+  10: '10px', /* nhãn field viết hoa, kbd, badge cực nhỏ */
+  11: '11px', /* hint, subtitle panel, nhãn bảng compact */
   12: '12px', /* caption, badge, meta, helper */
   13: '13px', /* secondary meta */
   14: '14px', /* body sm, label, button md, tab */
@@ -41,12 +43,17 @@ export const fontWeight = {
   medium:   500,
   semibold: 600,
   bold:     700,
+  extrabold: 800,
 } as const
 
 export const tracking = {
   tight:  '-0.01em',
   normal: '0',
   wide:   '0.02em',
+  /** tiêu đề panel */
+  snug:   '-0.015em',
+  /** nhãn viết hoa cỡ nhỏ */
+  label:  '0.06em',
 } as const
 
 export type FontSizeToken   = keyof typeof fontSize

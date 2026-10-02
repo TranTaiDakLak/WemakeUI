@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { colorAt, scale, linePath, smoothPath, areaPath, niceTicks, formatCompact } from './chart-utils'
+import { chartColor, scale, linePath, smoothPath, areaPath, niceTicks, formatCompact } from './chart-utils'
 import type { LineSeries } from './LineChart.vue'
 
 const props = withDefaults(defineProps<{
@@ -90,7 +90,7 @@ const seriesShapes = computed(() => {
 
     return {
       ...s,
-      color: s.color ?? colorAt(i),
+      color: s.color ?? chartColor(i),
       path,
       area,
       points: linePoints,
@@ -128,7 +128,7 @@ const hoverX = computed(() => {
   <div class="area-chart">
     <div v-if="showLegend && series.length > 1" class="ac-legend">
       <span v-for="(s, i) in series" :key="s.name" class="ac-legend-item">
-        <span class="ac-legend-dot" :style="{ background: s.color ?? colorAt(i) }" />
+        <span class="ac-legend-dot" :style="{ background: s.color ?? chartColor(i) }" />
         {{ s.name }}
       </span>
     </div>
@@ -194,7 +194,7 @@ const hoverX = computed(() => {
             :cy="s.points[hoverIdx]?.y ?? 0"
             r="4"
             :fill="s.color"
-            stroke="#fff"
+            stroke="var(--wx-surface-base)"
             stroke-width="2"
           />
         </g>

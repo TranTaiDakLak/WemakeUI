@@ -41,7 +41,7 @@ function onDateClick(d: string) {
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI · Calendar" subtitle="Phase 4 — data display" />
+    <AppTopbar title="MindUI · Calendar" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="BaseCalendar" description="Calendar component với 2 view: month grid + agenda. Hỗ trợ events nhiều màu.">
       </PageHeader>

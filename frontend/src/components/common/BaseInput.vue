@@ -54,11 +54,17 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
         'base-input__wrapper--disabled': disabled,
       }"
     >
+      <!-- leading slot: icon/nội dung ngắn ở đầu ô (xem chú thích CSS `.base-input__prefix`) -->
+      <span v-if="$slots.prefix" class="base-input__prefix">
+        <slot name="prefix" />
+      </span>
+
       <input
         v-bind="$attrs"
         :id="inputId"
         class="base-input__field"
         :class="{
+          'base-input__field--has-prefix': !!$slots.prefix,
           'base-input__field--has-toggle': type === 'password',
           'base-input__field--has-icon': success && !hasError,
           [`base-input__field--align-${align ?? (type === 'number' ? 'center' : 'left')}`]: true,
@@ -126,26 +132,37 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
   align-items: center;
 }
 
+/* Control chuẩn nguồn: cao 34px (token), viền slate-300, bo 9px, chữ 13px.
+   Hover đậm viền một bậc; focus = viền xanh + vòng 3px. */
 .base-input__field {
   width: 100%;
-  padding: var(--wx-space-2) var(--wx-space-3);
-  border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-md);
+  min-height: var(--wx-control-h-md);
+  padding: 0 var(--wx-control-px);
+  border: 1px solid var(--wx-border-control);
+  border-radius: var(--wx-radius-ctrl);
   background: var(--wx-surface-elevated);
   color: var(--wx-text-primary);
   font-family: var(--wx-font-primary);
-  font-size: 13px;
+  font-size: var(--wx-control-fs);
   transition:
     border-color var(--wx-duration-fast) var(--wx-ease-standard),
-    box-shadow var(--wx-duration-fast) var(--wx-ease-standard);
+    box-shadow var(--wx-duration-fast) var(--wx-ease-standard),
+    background var(--wx-duration-fast) var(--wx-ease-standard);
+}
+
+.base-input__field::placeholder { color: var(--wx-text-placeholder); }
+
+.base-input__field:hover:not(:disabled):not(:focus):not([readonly]) {
+  border-color: var(--wx-border-control-hover);
 }
 
 .base-input__field:focus {
   outline: none;
-  border-color: var(--wx-brand-primary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-brand-primary) 16%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--wx-brand-primary) 30%, transparent);
+  border-color: var(--wx-border-focus);
+  box-shadow: var(--wx-ring-focus);
 }
+
+.base-input__field[readonly] { background: var(--wx-surface-sunken); }
 
 .base-input__field--has-toggle { padding-right: 36px; }
 .base-input__field--has-icon   { padding-right: 36px; }
@@ -153,23 +170,50 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
 /* error state */
 .base-input__wrapper--error .base-input__field {
   border-color: var(--wx-danger-solid);
-  box-shadow: 0 0 0 3px var(--wx-danger-bg);
 }
 .base-input__wrapper--error .base-input__field:focus {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-danger-solid) 25%, transparent);
+  border-color: var(--wx-danger-solid);
+  box-shadow: var(--wx-ring-danger);
 }
 
 /* success state */
 .base-input__wrapper--success .base-input__field {
-  border-color: var(--wx-success-border);
-  box-shadow: 0 0 0 3px var(--wx-success-bg);
+  border-color: var(--wx-success-solid);
+}
+.base-input__wrapper--success .base-input__field:focus {
+  box-shadow: var(--wx-ring-success);
 }
 
-/* disabled */
+/* disabled — nguồn dùng nền xám + chữ nhạt thay vì chỉ giảm opacity */
 .base-input__wrapper--disabled .base-input__field {
-  opacity: 0.55;
+  background: var(--wx-disabled-bg);
+  color: var(--wx-disabled-text);
+  border-color: var(--wx-border-default);
   cursor: not-allowed;
 }
+
+/* leading slot (#prefix) — icon ở đầu ô, đối xứng với icon bên phải (left 8px, hộp 24px).
+   Bề rộng hộp chỉnh được qua custom property --wx-input-prefix-w (đặt ở phần tử cha) nếu
+   nội dung rộng hơn icon thường. Mặc định pointer-events: none để bấm vào icon vẫn focus input;
+   phần tử tương tác (button/a) bên trong được bật lại bên dưới. */
+.base-input__prefix {
+  position: absolute;
+  left: var(--wx-space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--wx-input-prefix-w, 24px);
+  height: 24px;
+  color: var(--wx-text-muted);
+  pointer-events: none;
+  transition: color var(--wx-duration-fast);
+}
+.base-input__prefix :deep(:is(button, a, [role="button"])) { pointer-events: auto; }
+.base-input__wrapper:focus-within .base-input__prefix { color: var(--wx-brand-primary); }
+.base-input__wrapper--error .base-input__prefix,
+.base-input__wrapper--error:focus-within .base-input__prefix { color: var(--wx-danger-text); }
+.base-input__wrapper--disabled .base-input__prefix,
+.base-input__wrapper--disabled:focus-within .base-input__prefix { color: var(--wx-disabled-text); }
 
 /* right icons */
 .base-input__eye,
@@ -210,10 +254,20 @@ const hasError = computed(() => Boolean(props.error) || props.invalid)
 
 /* ── Size sm ── */
 .base-input--sm .base-input__field {
-  padding: 5px 10px;
+  min-height: var(--wx-control-h-sm);
+  padding-left: calc(var(--wx-control-px) - 2px);
   font-size: 12px;
+  border-radius: var(--wx-radius-ctrl-sm);
+}
+.base-input--sm .base-input__field:not(.base-input__field--has-toggle):not(.base-input__field--has-icon) {
+  padding-right: calc(var(--wx-control-px) - 2px);
 }
 .base-input--sm .base-input__label { font-size: 11px; }
+
+/* Chừa chỗ cho #prefix — đặt SAU khối size sm để thắng padding-left của sm (cùng specificity, sau thắng) */
+.base-input .base-input__field--has-prefix {
+  padding-left: calc(var(--wx-space-2) + var(--wx-input-prefix-w, 24px) + var(--wx-space-1));
+}
 
 /* text alignment */
 .base-input__field--align-left   { text-align: left; }

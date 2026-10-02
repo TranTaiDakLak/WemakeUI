@@ -17,16 +17,23 @@ export const radius = {
   '3xl': '30px',
   '4xl': '32px',
   full: '9999px',
+  /** Control geometry (nguồn MindAds): nút/input 9px, option 10px, tile 11px, menu 14px, panel 16px */
+  'ctrl-sm': '8px',
+  ctrl:  '9px',
+  item:  '10px',
+  tile:  '11px',
+  menu:  '14px',
+  panel: '16px',
 } as const
 
 // ── Elevation (Shadows) ────────────────────────────────
 export const elevation = {
   none:        'none',
-  sm:          '0 1px 2px rgba(0,0,0,0.05)',
-  md:          '0 4px 6px rgba(0,0,0,0.05)',
-  lg:          '0 8px 30px rgba(0,0,0,0.04)',
+  sm:          '0 1px 2px rgba(15,23,42,0.05)',
+  md:          '0 4px 6px -1px rgba(15,23,42,0.06), 0 2px 4px -2px rgba(15,23,42,0.04)',
+  lg:          '0 8px 30px rgba(15,23,42,0.06)',
   xl:          '0 20px 40px -5px rgba(59,130,246,0.15)',
-  '2xl':       '0 20px 50px rgba(59,130,246,0.15)',
+  '2xl':       '0 24px 56px -12px rgba(15,23,42,0.22), 0 4px 12px rgba(15,23,42,0.06)',
   '3xl':       '0 30px 60px -12px rgba(0,0,0,0.1)',
   brandGlow:   '0 10px 20px -5px rgba(58,123,213,0.4)',
   buttonGlow:  '0 4px 15px rgba(59,130,246,0.4)',
@@ -36,15 +43,28 @@ export const elevation = {
   clay:        '20px 20px 60px #bebebe, -20px -20px 60px #ffffff',
   inner:       'inset 0 1px 2px rgba(255,255,255,0.2), 0 4px 6px -1px rgba(0,0,0,0.05)',
   /** Focus ring shadow (brand blue) */
-  focusRing:   '0 0 0 3px rgba(0,123,255,0.25)',
+  focusRing:   '0 0 0 3px rgba(59,130,246,0.18)',
+  /** Nút solid: bóng xanh mềm + hover đậm hơn */
+  btn:         '0 2px 6px rgba(37,99,235,0.32)',
+  btnHover:    '0 4px 10px rgba(37,99,235,0.4)',
+  /** Nổi: popover form / menu dropdown / toast / thẻ mềm / rãnh lõm / icon-tile / tooltip */
+  popover:     '0 16px 40px rgba(15,23,42,0.16), 0 2px 6px rgba(15,23,42,0.06)',
+  menu:        '0 16px 36px -6px rgba(15,23,42,0.14), 0 4px 12px -2px rgba(15,23,42,0.06)',
+  toast:       '0 10px 25px -5px rgba(15,23,42,0.12), 0 8px 10px -6px rgba(15,23,42,0.08)',
+  cardSoft:    '0 1px 2px rgba(15,23,42,0.04), 0 10px 26px -18px rgba(15,23,42,0.18)',
+  insetField:  'inset 0 1px 2px rgba(15,23,42,0.08)',
+  tile:        '0 4px 12px rgba(99,102,241,0.28), inset 0 1px 1px rgba(255,255,255,0.4)',
+  tooltip:     '0 10px 24px -8px rgba(15,23,42,0.45)',
 } as const
 
 // ── Typography ─────────────────────────────────────────
 export const typography = {
   fontFamily: {
-    primary: '"Inter", -apple-system, BlinkMacSystemFont, sans-serif',
-    display: '"Nunito", sans-serif',
-    mono:    'ui-monospace, SFMono-Regular, monospace',
+    primary: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+    display: '"Nunito", "Inter", sans-serif',
+    /** Chakra Petch — font "kỹ thuật" của nguồn; fallback Inter */
+    tech:    '"Chakra Petch", "Inter", sans-serif',
+    mono:    'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
   },
   fontSize: {
     '2xs':  '9px',
@@ -181,7 +201,7 @@ export const density = {
   default: {
     headerHeight:  '56px',
     rowHeight:     '40px',
-    inputHeight:   '36px',
+    inputHeight:   '34px',
     cellPaddingX:  '12px',
     cellPaddingY:  '8px',
     fontSize:      '14px',
@@ -204,6 +224,33 @@ export const density = {
   },
 } as const
 
+// ── Control geometry (compact density) ─────────────────
+/** Chiều cao control theo size. Thiết bị cảm ứng tự nâng lên (44px md) bằng @media (pointer: coarse) trong tokens.css. */
+export const control = {
+  height: { sm: '28px', md: '34px', lg: '40px', xl: '48px' },
+  /** padding ngang + cỡ chữ mặc định trong control */
+  paddingX: '12px',
+  fontSize: '13px',
+} as const
+
+// ── Overlay (backdrop / tooltip / motion) ───────────────
+export const overlay = {
+  backdropBg:   'rgba(15,23,42,0.5)',
+  backdropBlur: '2px',
+  tooltipBg:    '#26304c',
+  tooltipText:  '#eef1fb',
+  durationIn:   '180ms',
+  durationOut:  '140ms',
+} as const
+
+// ── Scrollbar ("Slim Pro") ──────────────────────────────
+export const scrollbar = {
+  width:      '8px',
+  widthThin:  '5px',
+  thumb:      '#cbd5e1',
+  thumbHover: '#94a3b8',
+} as const
+
 export type RadiusToken     = typeof radius
 export type ElevationToken  = typeof elevation
 export type TypographyToken = typeof typography
@@ -213,3 +260,6 @@ export type GlassToken      = typeof glass
 export type ZIndexToken     = typeof zIndex
 export type DensityToken    = typeof density
 export type DensityMode     = keyof typeof density
+export type ControlToken    = typeof control
+export type OverlayToken    = typeof overlay
+export type ScrollbarToken  = typeof scrollbar

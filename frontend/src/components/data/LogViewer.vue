@@ -370,8 +370,8 @@ function downloadLog() {
   border-radius: 2px;
 }
 
-.log-row--error { background: rgba(239, 68, 68, 0.04); }
-.log-row--warn  { background: rgba(245, 158, 11, 0.04); }
+.log-row--error { background: color-mix(in srgb, var(--wx-danger-solid) 4%, transparent); }
+.log-row--warn  { background: color-mix(in srgb, var(--wx-warning-solid) 4%, transparent); }
 
 .log-expand {
   color: var(--wx-text-muted);

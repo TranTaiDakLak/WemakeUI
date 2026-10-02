@@ -190,7 +190,7 @@ const fallbackDesc = computed(() => {
   font-size: var(--wx-fs-12);
   padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-sm);
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--wx-hover-neutral);
   color: var(--wx-text-secondary);
   letter-spacing: var(--wx-tracking-wide);
 }

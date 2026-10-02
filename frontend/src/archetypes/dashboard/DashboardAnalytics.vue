@@ -37,16 +37,25 @@ const LINE_SERIES: LineSeries[] = [
 
 /* ── Donut chart ─────────────────────────────────────────── */
 const PIE_DATA: PieSlice[] = [
-  { label: 'Live',       value: 1284, color: '#22c55e' },
-  { label: 'Die',        value: 891,  color: '#ef4444' },
-  { label: 'Checkpoint', value: 226,  color: '#f59e0b' },
+  { label: 'Hoạt động',    value: 1284, color: '#22c55e' },
+  { label: 'Ngắt kết nối', value: 891,  color: '#ef4444' },
+  { label: 'Chờ xác minh', value: 226,  color: '#f59e0b' },
 ]
+/** Khoá lọc gửi cho DashboardActivity (khớp `status` trong store) — tách khỏi nhãn hiển thị. */
+const PIE_FILTER_KEY: Record<string, string> = {
+  'Hoạt động': 'live',
+  'Ngắt kết nối': 'die',
+  'Chờ xác minh': 'checkpoint',
+}
+const PIE_FILTER_LABEL: Record<string, string> = Object.fromEntries(
+  Object.entries(PIE_FILTER_KEY).map(([label, key]) => [key, label]),
+)
 
 const activeFilter = ref<string | null>(null)
 const emit = defineEmits<{ filterAccounts: [filter: string | null] }>()
 
 function onDonutClick(slice: PieSlice) {
-  const key = slice.label.toLowerCase()
+  const key = PIE_FILTER_KEY[slice.label] ?? slice.label.toLowerCase()
   activeFilter.value = activeFilter.value === key ? null : key
   emit('filterAccounts', activeFilter.value)
 }
@@ -91,7 +100,7 @@ function onBarClick(item: { label: string; value: number }) {
 }
 
 function navToPlatform() {
-  router.push({ path: '/wemakeui/campaigns', query: { platform: selectedPlatform.value ?? '' } })
+  router.push({ path: '/mindui/campaigns', query: { platform: selectedPlatform.value ?? '' } })
   platformDrawer.value = false
 }
 
@@ -109,7 +118,7 @@ const TIMELINE: TimelineItem[] = [
   { id: 2, ts: `${today}T10:15:00`, title: 'Tài khoản @batcong.vn kết nối QR mới',   icon: '📱', variant: 'success' },
   { id: 3, ts: `${today}T09:58:00`, title: 'Plugin ChatGPT v2.1 cập nhật thành công', icon: '🔌', variant: 'success' },
   { id: 4, ts: `${today}T09:30:00`, title: 'Lỗi kết nối server backup — đã recover',  icon: '🚨', variant: 'danger' },
-  { id: 5, ts: `${today}T09:10:00`, title: '47 tài khoản vào trạng thái checkpoint',  icon: '⚠️', variant: 'warning' },
+  { id: 5, ts: `${today}T09:10:00`, title: '47 tài khoản chuyển sang trạng thái chờ xác minh', icon: '⚠️', variant: 'warning' },
   { id: 6, ts: `${today}T08:45:00`, title: '3 phiên mới từ Hà Nội (Viettel)',          icon: '🔗', variant: 'default' },
   { id: 7, ts: `${today}T08:20:00`, title: 'Báo cáo tuần tự động xuất thành công',   icon: '📊', variant: 'info' },
   { id: 8, ts: `${today}T07:55:00`, title: 'Scheduler chạy task queue 12 jobs',        icon: '⏳', variant: 'default' },
@@ -152,16 +161,18 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value) })
             </BaseButton>
           </div>
           <p class="a-hint">Click vào segment để lọc bảng bên dưới</p>
-          <PieChart
-            :data="PIE_DATA" :size="190"
-            :donut="true" :donut-width="36"
-            :show-legend="true"
-            center-label="Tổng"
-            :center-value="(1284 + 891 + 226).toLocaleString('vi-VN')"
-            @click-slice="onDonutClick"
-          />
+          <div class="a-pie">
+            <PieChart
+              :data="PIE_DATA" :size="190"
+              :donut="true" :donut-width="36"
+              :show-legend="true"
+              center-label="Tổng"
+              :center-value="(1284 + 891 + 226).toLocaleString('vi-VN')"
+              @click-slice="onDonutClick"
+            />
+          </div>
           <p v-if="activeFilter" class="a-filter-tag">
-            Đang lọc: <strong>{{ activeFilter }}</strong>
+            Đang lọc: <strong>{{ PIE_FILTER_LABEL[activeFilter] ?? activeFilter }}</strong>
           </p>
         </BaseCard>
       </div>
@@ -190,7 +201,7 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value) })
         >
           <div class="a-card__head">
             <h3 class="a-card__title">Hoạt động hệ thống</h3>
-            <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">Xem tất cả</BaseButton>
+            <BaseButton size="sm" variant="ghost" @click="router.push('/mindui/console')">Xem tất cả</BaseButton>
           </div>
           <div class="timeline-wrap">
             <Timeline :items="TIMELINE" :group-by-day="false" />
@@ -267,6 +278,11 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value) })
   background: var(--wx-surface-elevated);
   color: var(--wx-text-secondary);
   border: 1px solid var(--wx-border-subtle);
+}
+/* thẻ donut hẹp (1/2 hoặc 1/3 hàng): xếp biểu đồ trên, chú giải dưới để nhãn tiếng Việt không bị cắt */
+@media (min-width: 768px) {
+  .a-pie :deep(.pie-chart) { flex-direction: column; align-items: center; }
+  .a-pie :deep(.pc-legend) { width: 100%; flex: none; }
 }
 .a-filter-tag {
   font-size: var(--wx-fs-12);

@@ -1,11 +1,11 @@
 # CLAUDE.md — Central Contract
 
-> **Project:** WemakeUI · **Type:** Cross-platform Vue 3 UI library
+> **Project:** MindUI · **Type:** Cross-platform Vue 3 UI library
 > **Stack:** Vue 3 (Composition API + `<script setup>` + TypeScript 5) · Pinia (optional) · Vue Router 4 (optional) · Vite 6 · CSS variables
 > **Targets:** Web · Mobile (Capacitor / Ionic / PWA) · Desktop (Wails / Tauri / Electron)
 > **Last updated:** 2026-05-07
 
-WemakeUI là bộ UI kit Vue 3 + Design System tách ra từ WemakeUI desktop. Mục tiêu: dùng được trên mọi nền tảng — Web app, Mobile shell, Desktop wrapper — mà không phụ thuộc backend cụ thể.
+MindUI là bộ UI kit Vue 3 + Design System tách ra từ MindUI desktop. Mục tiêu: dùng được trên mọi nền tảng — Web app, Mobile shell, Desktop wrapper — mà không phụ thuộc backend cụ thể.
 
 ## Stack versions
 
@@ -34,9 +34,9 @@ cd frontend && npm run build:lib      # build publishable library → dist-lib/
 
 | File | Mô tả |
 |------|-------|
-| `wemake-ui.es.js` | ESM bundle |
-| `wemake-ui.umd.js` | UMD bundle |
-| `ui.css` | Toàn bộ styles gộp (import qua `@wemake/ui/style.css`) |
+| `mind-ui.es.js` | ESM bundle |
+| `mind-ui.umd.js` | UMD bundle |
+| `ui.css` | Toàn bộ styles gộp (import qua `@mind/ui/style.css`) |
 | `index.d.ts` | TypeScript definitions (generated bởi vite-plugin-dts) |
 
 ## Skill policy

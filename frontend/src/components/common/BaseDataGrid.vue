@@ -11,6 +11,11 @@ const props = withDefaults(defineProps<{
   allChosen?: boolean
   rowHeight?: number
   loading?: boolean
+  /**
+   * Map giá trị ô cột `status` → tông chấm trạng thái (live = xanh · die = đỏ · cp = vàng · idle = xám).
+   * Dòng có tông `die`/`idle` được làm mờ. Mặc định giữ nguyên Live / Die / Checkpoint.
+   */
+  statusMap?: Record<string, 'live' | 'die' | 'cp' | 'idle'>
 }>(), {
   highlightedRows: () => new Set(),
   selectedCells: () => [],
@@ -18,6 +23,7 @@ const props = withDefaults(defineProps<{
   allChosen: false,
   rowHeight: 36,
   loading: false,
+  statusMap: () => ({ Live: 'live', Die: 'die', Checkpoint: 'cp' }),
 })
 
 const emit = defineEmits<{
@@ -140,15 +146,14 @@ function isCellSelected(row: number, col: string): boolean {
 }
 
 function getStatusDot(status: string): string {
-  if (status === 'Live') return 'dot-live'
-  if (status === 'Die') return 'dot-die'
-  if (status === 'Checkpoint') return 'dot-cp'
-  return ''
+  const tone = props.statusMap[status]
+  return tone ? `dot-${tone}` : ''
 }
 
 function getRowClass(row: Record<string, unknown>, idx: number): string {
   const classes: string[] = []
-  if (row.status === 'Die') classes.push('row-die')
+  const tone = props.statusMap[String(row.status ?? '')]
+  if (tone === 'die' || tone === 'idle') classes.push('row-die')
   if (isHighlighted(idx)) classes.push('row-highlight')
   return classes.join(' ')
 }
@@ -199,7 +204,7 @@ function realIndex(visibleIdx: number): number {
               v-for="col in visibleColumns"
               :key="col.key"
               :class="[col.class, { 'th-sortable': col.sortable }]"
-              :style="{ width: initColWidth(col) }"
+              :style="{ width: initColWidth(col), textAlign: col.align }"
               :aria-sort="col.sortable ? (sortCol === col.key ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none') : undefined"
               :tabindex="col.sortable ? 0 : undefined"
               @click="onHeaderClick(col)"
@@ -235,6 +240,7 @@ function realIndex(visibleIdx: number): number {
                 v-for="col in visibleColumns"
                 :key="col.key"
                 :class="[col.class, { 'cell-selected': isCellSelected(realIndex(vIdx), col.key) }]"
+                :style="col.align ? { textAlign: col.align } : undefined"
                 @click="emit('cell-click', realIndex(vIdx), col.key, $event)"
               >
                 <template v-if="col.key === 'status'">
@@ -269,6 +275,7 @@ function realIndex(visibleIdx: number): number {
                 v-for="col in visibleColumns"
                 :key="col.key"
                 :class="[col.class, { 'cell-selected': isCellSelected(idx, col.key) }]"
+                :style="col.align ? { textAlign: col.align } : undefined"
                 @click="emit('cell-click', idx, col.key, $event)"
               >
                 <template v-if="col.key === 'status'">
@@ -289,35 +296,62 @@ function realIndex(visibleIdx: number): number {
 </template>
 
 <style scoped>
-.datagrid-wrapper { flex: 1; min-height: 0; overflow: hidden; background: var(--wx-surface-base); }
+.datagrid-wrapper { flex: 1; min-height: 0; height: 100%; overflow: hidden; background: var(--wx-surface-base); }
 .datagrid-wrapper:focus { outline: none; }
 .datagrid-wrapper:focus-visible { box-shadow: var(--wx-shadow-focus); }
 .datagrid-scroll { height: 100%; overflow: auto; }
-.datagrid { width: 100%; border-collapse: collapse; font-size: var(--wx-fs-12); background: var(--wx-surface-base); table-layout: fixed; }
+.datagrid { width: 100%; border-collapse: collapse; font-size: var(--wx-fs-13); background: var(--wx-surface-base); table-layout: fixed; }
 .datagrid--resizing { cursor: col-resize; user-select: none; }
 .datagrid thead { position: sticky; top: 0; z-index: 5; }
-.datagrid th { padding: 9px var(--wx-space-3); text-align: left; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); color: var(--wx-text-muted); text-transform: uppercase; letter-spacing: 0.3px; background: var(--wx-surface-sunken); border-bottom: 1px solid var(--wx-border-default); white-space: nowrap; position: relative; }
+/* Header kiểu bảng nguồn (compact): 12px / 600 / slate-600, nền sunken, không viết hoa; vạch phân cột mờ ở mép phải */
+.datagrid th { height: 36px; padding: 0 var(--wx-space-3); text-align: left; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); color: var(--wx-text-secondary); letter-spacing: 0.015em; background: var(--wx-surface-sunken); border-bottom: 1px solid var(--wx-border-default); white-space: nowrap; position: relative; }
+.datagrid th::after { content: ''; position: absolute; right: 0; top: 11px; height: 14px; width: 1px; background: var(--wx-border-default); opacity: 0.6; pointer-events: none; }
 .datagrid td { padding: var(--wx-space-2) var(--wx-space-3); color: var(--wx-text-primary); border-bottom: 1px solid var(--wx-border-subtle); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.datagrid tbody tr:hover td { background: var(--wx-hover-bg); }
+.datagrid tbody tr { transition: background var(--wx-d-micro) var(--wx-ease-standard); }
+.datagrid tbody tr:hover td { background: var(--wx-hover-neutral); }
 .datagrid tbody tr { cursor: pointer; user-select: none; }
 .datagrid input[type="checkbox"] { accent-color: var(--wx-brand-primary); cursor: pointer; }
 
-.col-chk { width: 36px; text-align: center; }
+/* Cột chọn: rộng cố định, KHÔNG padding (th/td mặc định padding 12px mỗi bên + border-box
+   chỉ chừa ~12px nội dung → checkbox bị td overflow:hidden/ellipsis cắt thành "☐…").
+   Selector 2 class thắng `.datagrid th/td`; bỏ ellipsis/clip để checkbox không bao giờ bị cắt. */
+.datagrid .col-chk {
+  width: var(--wx-grid-chk-w, 44px);
+  padding: 0;
+  text-align: center;
+  overflow: visible;
+  text-overflow: clip;
+}
+.datagrid .col-chk input[type="checkbox"] { display: block; margin: 0 auto; }
 .col-stt { width: 40px; text-align: center; color: var(--wx-text-muted); }
 
-.status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
-.dot-live { background: var(--wx-success-solid); }
-.dot-die { background: var(--wx-danger-solid); }
+.status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 6px; vertical-align: middle; flex-shrink: 0; }
+/* Live / Die nhấp nháy nhẹ như status-dot của nguồn (không nhấp nháy khi reduce-motion) */
+.dot-live { background: var(--wx-success-solid); animation: wx-grid-dot-live 2s infinite; }
+.dot-die { background: var(--wx-danger-solid); animation: wx-grid-dot-die 2s infinite; }
 .dot-cp { background: var(--wx-warning-solid); }
+.dot-idle { background: var(--wx-text-muted); }
+@keyframes wx-grid-dot-live {
+  0%   { transform: scale(0.95); box-shadow: 0 0 0 0 color-mix(in srgb, var(--wx-success-solid) 70%, transparent); }
+  70%  { transform: scale(1.1);  box-shadow: 0 0 0 4px transparent; }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 transparent; }
+}
+@keyframes wx-grid-dot-die {
+  0%   { transform: scale(0.95); box-shadow: 0 0 0 0 color-mix(in srgb, var(--wx-danger-solid) 70%, transparent); }
+  70%  { transform: scale(1.1);  box-shadow: 0 0 0 4px transparent; }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 transparent; }
+}
+@media (prefers-reduced-motion: reduce) { .dot-live, .dot-die { animation: none; } }
 .val-ok { color: var(--wx-success-solid); }
 .val-no { color: var(--wx-text-muted); }
 .row-die td { opacity: 0.6; }
-.row-highlight td { background: var(--wx-active-bg) !important; }
-.cell-selected { background: var(--wx-hover-bg) !important; outline: 2px solid var(--wx-brand-primary); outline-offset: -2px; }
+.row-highlight td { background: var(--wx-selected-bg) !important; }
+.row-highlight:hover td { background: var(--wx-selected-bg-hover) !important; }
+.cell-selected { background: var(--wx-selected-bg-hover) !important; outline: 2px solid var(--wx-brand-600); outline-offset: -2px; border-radius: var(--wx-radius-sm); }
 
 /* Sort */
 .th-sortable { cursor: pointer; user-select: none; }
-.th-sortable:hover { color: var(--wx-text-primary); }
+.th-sortable:hover { color: var(--wx-text-primary); background: var(--wx-hover-neutral); }
 .sort-indicator { font-size: 10px; margin-left: var(--wx-space-1); color: var(--wx-brand-primary); transition: transform 0.2s; }
 .sort-indicator.desc { display: inline-block; }
 

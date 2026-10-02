@@ -59,3 +59,15 @@ export { default as BaseSelectMenu } from './BaseSelectMenu.vue'
 
 /* ── navigation utilities ───────────────────────────────── */
 export { default as AnchorBar } from './AnchorBar.vue'
+
+/* ── phase 13 additions (MindAds design language primitives) ── */
+export { default as BaseIconTile }     from './BaseIconTile.vue'
+export { default as BaseKbd }          from './BaseKbd.vue'
+export { default as BaseStatusDot }    from './BaseStatusDot.vue'
+export { default as BaseFormPanel }    from './BaseFormPanel.vue'
+export { default as BaseOptionRow }    from './BaseOptionRow.vue'
+export { default as BaseOptionCard }   from './BaseOptionCard.vue'
+export { default as BaseSegmented }    from './BaseSegmented.vue'
+export { default as BaseUpdateBanner } from './BaseUpdateBanner.vue'
+export { default as BaseLiquidLoader } from './BaseLiquidLoader.vue'
+export { default as BaseGuideHint }    from './BaseGuideHint.vue'

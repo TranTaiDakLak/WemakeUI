@@ -8,7 +8,7 @@
  * semantic token via color-mix(). Works in light + dark mode because the
  * mix base is `--wx-surface-elevated`, which already swaps per theme.
  *
- * Ported from WemakeHRM `apps/web/src/styles/table-actions.css`.
+ * Ported from HRM app `apps/web/src/styles/table-actions.css`.
  */
 
 /* ── Hover/focus — suppress the default ghost shadow, lean on brightness ── */

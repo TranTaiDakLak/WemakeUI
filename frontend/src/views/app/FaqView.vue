@@ -15,8 +15,8 @@ const FAQS = [
   { id: 4, q: 'Làm thế nào để xuất dữ liệu?', a: 'Mọi dữ liệu có thể xuất dưới dạng CSV hoặc JSON từ menu Cài đặt → Xuất dữ liệu. Yêu cầu xác nhận email.', tags: ['tính năng', 'kỹ thuật'] },
   { id: 5, q: 'API có rate limit không?', a: 'Gói Free: 100 req/phút. Gói Pro: 1000 req/phút. Gói Enterprise: tuỳ chỉnh theo hợp đồng.', tags: ['kỹ thuật'] },
   { id: 6, q: 'Có hỗ trợ SSO / SAML không?', a: 'Có, nhưng chỉ dành cho gói Enterprise. Hỗ trợ Okta, Google Workspace, Azure AD. Liên hệ sales để được hỗ trợ.', tags: ['bảo mật', 'kỹ thuật'] },
-  { id: 7, q: 'Hướng dẫn hoàn tiền như thế nào?', a: 'Trong vòng 30 ngày, gửi email tới billing@wemakeui.com kèm lý do. Hoàn tiền trong 5-7 ngày làm việc.', tags: ['thanh toán'] },
-  { id: 8, q: 'Có thể dùng trên thiết bị di động không?', a: 'Có. WemakeUI hoạt động tốt trên mọi trình duyệt di động. Ứng dụng native đang được phát triển.', tags: ['tính năng'] },
+  { id: 7, q: 'Hướng dẫn hoàn tiền như thế nào?', a: 'Trong vòng 30 ngày, gửi email tới billing@mindui.com kèm lý do. Hoàn tiền trong 5-7 ngày làm việc.', tags: ['thanh toán'] },
+  { id: 8, q: 'Có thể dùng trên thiết bị di động không?', a: 'Có. MindUI hoạt động tốt trên mọi trình duyệt di động. Ứng dụng native đang được phát triển.', tags: ['tính năng'] },
 ]
 
 const filtered = computed(() => FAQS.filter(f => {

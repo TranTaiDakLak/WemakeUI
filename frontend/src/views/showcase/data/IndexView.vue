@@ -60,7 +60,7 @@ const routes = [
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="phase 4 — data display" />
+    <AppTopbar title="MindUI" subtitle="phase 4 — data display" />
     <main class="main">
       <PageHeader
         title="Phase 4 — Data Display"

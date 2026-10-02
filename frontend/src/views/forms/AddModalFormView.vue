@@ -56,7 +56,7 @@ function roleLabel(v: string) {
 
 <template>
   <div class="fp">
-    <AppTopbar title="WemakeUI" subtitle="forms — add modal" />
+    <AppTopbar title="MindUI" subtitle="forms — add modal" />
     <main class="fp__main">
 
       <div class="fp__hdr">

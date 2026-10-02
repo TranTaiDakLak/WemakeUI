@@ -43,6 +43,20 @@ const stateCode = `<BaseInput
 const sizeCode = `<BaseInput size="sm" placeholder="size sm" />
 <BaseInput size="md" placeholder="size md" />`
 
+const prefixCode = `<script setup lang="ts">
+const searchIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" ' +
+  'stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/>' +
+  '<path d="M21 21l-4.3-4.3"/></svg>'
+<\/script>
+
+<template>
+  <BaseInput v-model="query" placeholder="Tìm kiếm…">
+    <template #prefix><span v-html="searchIcon" /></template>
+  </BaseInput>
+<\/template>`
+
+const searchIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>'
+
 const props: PropRow[] = [
   { name: 'modelValue', type: 'string | number', desc: 'Giá trị input (v-model).' },
   { name: 'type', type: "'text' | 'number' | 'password' | 'email' | 'search' | 'tel' | 'url'", default: "'text'", desc: 'Kiểu input. password tự thêm nút bật/tắt hiển thị.' },
@@ -61,6 +75,10 @@ const emits: PropRow[] = [
   { name: 'update:modelValue', type: '(value: string | number) => void', desc: 'Phát khi giá trị thay đổi.' },
   { name: 'blur', type: '(event: FocusEvent) => void', desc: 'Phát khi ô nhập mất focus.' },
   { name: 'focus', type: '(event: FocusEvent) => void', desc: 'Phát khi ô nhập nhận focus.' },
+]
+
+const slots: PropRow[] = [
+  { name: 'prefix', type: '—', desc: 'Icon / nội dung ngắn ở đầu ô (hộp 24px, đổi bằng --wx-input-prefix-w). Tự chừa padding-left; đổi màu theo focus / lỗi / disabled; bấm vào icon vẫn focus ô nhập.' },
 ]
 </script>
 
@@ -106,11 +124,27 @@ const emits: PropRow[] = [
       </div>
     </DemoBlock>
 
+    <h2>Icon dẫn đầu (prefix)</h2>
+    <p>Slot <code class="inline">#prefix</code> đặt icon ở đầu ô nhập; dùng được với <code class="inline">sm</code> / <code class="inline">md</code> và các trạng thái lỗi, disabled.</p>
+    <DemoBlock :code="prefixCode">
+      <div class="stack">
+        <BaseInput placeholder="Tìm kiếm…">
+          <template #prefix><span v-html="searchIcon" /></template>
+        </BaseInput>
+        <BaseInput size="sm" placeholder="Tìm kiếm (sm)…">
+          <template #prefix><span v-html="searchIcon" /></template>
+        </BaseInput>
+      </div>
+    </DemoBlock>
+
     <h2>Props</h2>
     <PropsTable :rows="props" />
 
     <h2>Sự kiện</h2>
     <PropsTable :rows="emits" name-label="Event" hide-default />
+
+    <h2>Slots</h2>
+    <PropsTable :rows="slots" name-label="Slot" hide-default />
   </DocPage>
 </template>
 

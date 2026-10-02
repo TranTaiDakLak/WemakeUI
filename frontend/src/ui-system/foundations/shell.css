@@ -1,0 +1,419 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ *  MIND UI SYSTEM — Shell Foundations (shell.css)
+ *  Token + style dùng chung cho lớp "shell": rail/sidebar, topbar,
+ *  profile menu, banner, khung form (panel) và khung nền ứng dụng.
+ *
+ *  Quy ước:
+ *   - Token mới có tiền tố  --wx-shell-*  (tham chiếu --wx-* sẵn có,
+ *     nên đổi theme / brand là tự đổi theo).
+ *   - Class global có tiền tố  mind-*  (tránh trùng utility khác).
+ *   - Giá trị hex thô CHỈ nằm ở file này; component dùng token.
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+:root {
+  /* ── Khung ứng dụng ───────────────────────────────────── */
+  --wx-shell-frame-bg: #edf4fc;                     /* nền khung quanh card nội dung */
+  --wx-shell-card-bg: var(--wx-surface-base);
+  --wx-shell-card-radius: var(--wx-radius-xl);
+  --wx-shell-card-shadow: var(--wx-shadow-lg);
+  --wx-shell-gutter: 8px;
+
+  /* ── Rail / Sidebar ───────────────────────────────────── */
+  --wx-shell-rail-w: 64px;
+  --wx-shell-rail-w-open: 240px;
+  --wx-shell-rail-bg: var(--wx-surface-base);
+  --wx-shell-rail-border: var(--wx-border-subtle);
+  --wx-shell-rail-text: var(--wx-text-secondary);
+  --wx-shell-rail-icon: var(--wx-text-muted);
+  --wx-shell-rail-hover-bg: var(--wx-surface-sunken);
+  --wx-shell-rail-hover-fg: var(--wx-text-primary);
+  --wx-shell-rail-active-bg: var(--wx-brand-50);
+  --wx-shell-rail-active-fg: var(--wx-brand-600);
+  --wx-shell-rail-label: var(--wx-text-muted);
+  --wx-shell-rail-item-h: 42px;
+
+  /* ── Topbar (gradient thương hiệu, chữ luôn trắng) ────── */
+  /* Điểm đầu #0c6580 (cyan-800 ngả xanh) thay vì cyan-500 (#06b6d4, trắng chỉ 2.4:1) hay cyan-700 (#0e7490):
+     chữ trắng/phụ trên NỀN KÍNH (glass +12% trắng) ở đầu gradient — ô tìm kiếm, kbd, chip tài khoản — đo được
+     ≥ 4.5:1 tại mọi điểm của gradient (cyan-700 chỉ 3.6–4.3:1 ở đó) mà vẫn giữ tông cyan→xanh nhận diện. */
+  --wx-shell-topbar-bg: linear-gradient(to right, #0c6580 0%, var(--wx-brand-700) 50%, var(--wx-brand-800) 100%);
+  --wx-shell-on-brand: var(--wx-text-on-brand);
+  --wx-shell-on-brand-dim: rgba(255, 255, 255, 0.94);
+  --wx-shell-glass-bg: rgba(255, 255, 255, 0.12);
+  --wx-shell-glass-bg-hover: rgba(255, 255, 255, 0.22);
+  --wx-shell-glass-border: rgba(255, 255, 255, 0.22);
+  --wx-shell-glass-border-hover: rgba(255, 255, 255, 0.34);
+  --wx-shell-brand-tile-bg: #ffffff;
+  --wx-shell-brand-tile-ring: rgba(255, 255, 255, 0.5);
+  --wx-shell-brand-tile-shadow: 0 6px 16px rgba(30, 58, 138, 0.22);
+
+  /* ── Nền đặc cho nút/dải/badge có CHỮ TRẮNG (đạt AA ≥4.5:1) ──
+     --wx-*-solid (cyan/amber/green sáng) dành cho chấm, viền, icon — KHÔNG dùng làm nền chữ trắng. */
+  --wx-shell-solid-info: var(--wx-brand-600);
+  --wx-shell-solid-success: #15803d;
+  --wx-shell-solid-warning: #b45309;
+  --wx-shell-solid-danger: #dc2626;
+
+  /* Gradient đặc (brand-600 → brand-700) cho avatar / badge / nút nhỏ mang CHỮ TRẮNG — đạt AA ở cả light & dark
+     (--wx-gradient-button cyan→xanh chỉ ≈2.4:1, và sáng hơn nữa ở dark mode). */
+  --wx-shell-grad-solid: linear-gradient(135deg, var(--wx-brand-600) 0%, var(--wx-brand-700) 100%);
+
+  /* ── Panel / popover form ─────────────────────────────── */
+  --wx-shell-panel-bg: var(--wx-surface-base);
+  --wx-shell-panel-border: var(--wx-border-default);
+  --wx-shell-panel-radius: var(--wx-radius-xl);
+  --wx-shell-panel-shadow: 0 16px 40px rgba(15, 23, 42, 0.16), 0 2px 6px rgba(15, 23, 42, 0.06);
+  --wx-shell-panel-head-bg: linear-gradient(180deg, var(--wx-surface-base) 0%, var(--wx-surface-sunken) 100%);
+  --wx-shell-panel-foot-bg: var(--wx-surface-sunken);
+  --wx-shell-tile-gradient: linear-gradient(135deg, #6366f1 0%, var(--wx-brand-500) 50%, var(--wx-brand-accent) 100%);
+  --wx-shell-tile-shadow: 0 4px 12px rgba(99, 102, 241, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  --wx-shell-field-bg: var(--wx-surface-sunken);
+
+  /* ── Nhãn định danh (identity card) ───────────────────── */
+  --wx-shell-tone-brand-bg: var(--wx-brand-50);
+  --wx-shell-tone-brand-fg: var(--wx-brand-600);
+  --wx-shell-tone-brand-bd: var(--wx-brand-100);
+  --wx-shell-tone-success-bg: var(--wx-success-bg);
+  --wx-shell-tone-success-fg: var(--wx-success-text);
+  --wx-shell-tone-success-bd: var(--wx-success-border);
+  --wx-shell-tone-warning-bg: var(--wx-warning-bg);
+  --wx-shell-tone-warning-fg: var(--wx-warning-text);
+  --wx-shell-tone-warning-bd: var(--wx-warning-border);
+  --wx-shell-tone-danger-bg: var(--wx-danger-bg);
+  --wx-shell-tone-danger-fg: var(--wx-danger-text);
+  --wx-shell-tone-danger-bd: var(--wx-danger-border);
+  --wx-shell-tone-violet-bg: #f5f3ff;
+  --wx-shell-tone-violet-fg: #7c3aed;
+  --wx-shell-tone-violet-bd: #ddd6fe;
+  --wx-shell-tone-neutral-bg: var(--wx-neutral-bg);
+  --wx-shell-tone-neutral-fg: var(--wx-neutral-text);
+  --wx-shell-tone-neutral-bd: var(--wx-neutral-border);
+
+  /* ── Banner nổi ───────────────────────────────────────── */
+  --wx-shell-banner-bg: color-mix(in srgb, var(--wx-surface-base) 94%, transparent);
+  --wx-shell-banner-shadow: 0 10px 30px rgba(15, 23, 42, 0.14);
+
+  /* ── Nền trang chủ / auth (orb mờ) ────────────────────── */
+  --wx-shell-orb-a: rgba(59, 130, 246, 0.18);
+  --wx-shell-orb-b: rgba(6, 182, 212, 0.15);
+  --wx-shell-orb-c: rgba(168, 85, 247, 0.12);
+  --wx-shell-page-bg: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+
+  /* ── Nền hero / aside / dải CTA ───────────────────────────
+     Thay cho gradient cyan "bầu trời" (--wx-gradient-bg) vốn quá chói và làm chữ tối màu khó đọc.
+     Chỉ trộn màu brand với surface nên light/dark và re-skin brand đều tự đổi theo. */
+  --wx-shell-hero-bg:
+    radial-gradient(70% 90% at 50% 0%, color-mix(in srgb, var(--wx-brand-500) 16%, transparent) 0%, transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--wx-brand-500) 7%, var(--wx-surface-base)) 0%, var(--wx-surface-base) 100%);
+  --wx-shell-aside-bg:
+    radial-gradient(90% 60% at 0% 0%, color-mix(in srgb, var(--wx-brand-500) 20%, transparent) 0%, transparent 70%),
+    radial-gradient(80% 60% at 100% 100%, color-mix(in srgb, var(--wx-brand-accent) 16%, transparent) 0%, transparent 70%),
+    linear-gradient(160deg, color-mix(in srgb, var(--wx-brand-500) 10%, var(--wx-surface-base)) 0%, color-mix(in srgb, var(--wx-brand-500) 5%, var(--wx-surface-sunken)) 100%);
+  /* Dải CTA: xanh đậm cố định (chữ trắng đạt AA ở mọi điểm), không dùng cyan #00d2ff làm nền chữ trắng */
+  --wx-shell-cta-bg:
+    radial-gradient(60% 120% at 100% 0%, color-mix(in srgb, var(--wx-brand-accent) 26%, transparent) 0%, transparent 65%),
+    linear-gradient(135deg, var(--wx-brand-800) 0%, var(--wx-brand-700) 55%, var(--wx-brand-600) 100%);
+  /* Nền section "tint" xanh rất nhạt + viền — trộn với surface nên dark mode tự tối theo
+     (không dùng --wx-brand-50/100 trực tiếp vì thang brand không đổi theo theme → section trắng chói ở dark) */
+  --wx-shell-tint-bg: color-mix(in srgb, var(--wx-brand-500) 6%, var(--wx-surface-base));
+  --wx-shell-tint-bd: color-mix(in srgb, var(--wx-brand-500) 16%, var(--wx-surface-base));
+  --wx-shell-tint-bd-strong: color-mix(in srgb, var(--wx-brand-500) 32%, var(--wx-surface-base));
+  /* Chữ nhấn gradient trên nền sáng (đạt tương phản ≥3:1 cho tiêu đề lớn) */
+  --wx-shell-text-grad: linear-gradient(90deg, var(--wx-brand-700), #0e7490);
+
+  /* ── Trạng thái online / offline ──────────────────────── */
+  --wx-shell-dot-online: var(--wx-success-solid);
+  --wx-shell-dot-offline: var(--wx-text-muted);
+}
+
+.wx-dark,
+[data-wx-theme="dark"] {
+  --wx-shell-frame-bg: #0b1220;
+  --wx-shell-rail-active-bg: rgba(59, 130, 246, 0.2);
+  --wx-shell-rail-active-fg: #93c5fd;
+  --wx-shell-brand-tile-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  --wx-shell-panel-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --wx-shell-tone-brand-bg: rgba(59, 130, 246, 0.16);
+  --wx-shell-tone-brand-fg: #93c5fd;
+  --wx-shell-tone-brand-bd: rgba(59, 130, 246, 0.32);
+  --wx-shell-tone-violet-bg: rgba(139, 92, 246, 0.18);
+  --wx-shell-tone-violet-fg: #c4b5fd;
+  --wx-shell-tone-violet-bd: rgba(139, 92, 246, 0.36);
+  --wx-shell-banner-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --wx-shell-orb-a: rgba(59, 130, 246, 0.22);
+  --wx-shell-orb-b: rgba(34, 211, 238, 0.16);
+  --wx-shell-orb-c: rgba(168, 85, 247, 0.16);
+  --wx-shell-page-bg: linear-gradient(135deg, #080c17 0%, #0b1220 50%, #111827 100%);
+  --wx-shell-text-grad: linear-gradient(90deg, var(--wx-brand-400), var(--wx-brand-accent));
+  --wx-shell-topbar-bg: linear-gradient(to right, #0b5e75 0%, var(--wx-brand-800) 50%, var(--wx-brand-900) 100%);
+}
+
+/* ================================================================
+   DẢI CTA — nền xanh đậm cố định + nút trắng nổi bật
+   Dùng:  <section class="mind-cta-band"> … <h2 class="mind-cta-band__title"> … </section>
+   Nút BaseButton variant cta/primary bên trong tự chuyển sang nền trắng (nếu để nguyên gradient
+   cta thì trùng màu với dải và "biến mất"); variant secondary thành kính mờ.
+   ================================================================ */
+.mind-cta-band {
+  position: relative;
+  background: var(--wx-shell-cta-bg);
+  color: var(--wx-text-on-brand);
+}
+.mind-cta-band__title { color: var(--wx-text-on-brand); }
+.mind-cta-band__desc { color: color-mix(in srgb, var(--wx-text-on-brand) 92%, transparent); }
+.mind-cta-band .wx-btn.wx-btn--cta,
+.mind-cta-band .wx-btn.wx-btn--primary {
+  background: var(--wx-text-on-brand);
+  color: var(--wx-brand-700);
+  border-color: transparent;
+  box-shadow: 0 6px 18px -4px rgba(15, 23, 42, 0.38);
+}
+.mind-cta-band .wx-btn.wx-btn--cta:hover:not(:disabled),
+.mind-cta-band .wx-btn.wx-btn--primary:hover:not(:disabled) {
+  background: var(--wx-brand-50);
+  color: var(--wx-brand-800);
+  filter: none;
+  box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.45);
+}
+.mind-cta-band .wx-btn.wx-btn--secondary {
+  background: color-mix(in srgb, var(--wx-text-on-brand) 14%, transparent);
+  border-color: color-mix(in srgb, var(--wx-text-on-brand) 50%, transparent);
+  color: var(--wx-text-on-brand);
+  box-shadow: none;
+}
+.mind-cta-band .wx-btn.wx-btn--secondary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--wx-text-on-brand) 24%, transparent);
+  border-color: var(--wx-text-on-brand);
+  color: var(--wx-text-on-brand);
+}
+
+/* ================================================================
+   KEYFRAMES dùng chung (tiền tố mind-)
+   ================================================================ */
+@keyframes mind-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes mind-card-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes mind-orb-float {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(30px, 40px) scale(1.05); }
+  100% { transform: translate(-20px, -30px) scale(0.96); }
+}
+@keyframes mind-blob-morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50%      { border-radius: 30% 60% 70% 30% / 50% 60% 30% 60%; }
+}
+@keyframes mind-blob-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes mind-pulse-ring {
+  0%, 100% { transform: scale(1);    opacity: 0.25; }
+  50%      { transform: scale(1.12); opacity: 0.65; }
+}
+@keyframes mind-laser-scan {
+  0%        { transform: translateX(-100%); }
+  45%, 100% { transform: translateX(100%); }
+}
+@keyframes mind-shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+/* ================================================================
+   PANEL — khuôn form popover / modal nhỏ
+   Cấu trúc:  head (icon-tile + title + sub) / body / foot
+   ================================================================ */
+.mind-panel {
+  position: relative;
+  background: var(--wx-shell-panel-bg);
+  border: 1px solid var(--wx-shell-panel-border);
+  border-radius: var(--wx-shell-panel-radius);
+  box-shadow: var(--wx-shell-panel-shadow);
+  overflow: hidden;
+  color: var(--wx-text-primary);
+  font-family: var(--wx-font-primary);
+}
+.mind-panel__head {
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-3);
+  padding: 13px 16px 11px;
+  border-bottom: 1px solid var(--wx-border-subtle);
+  background: var(--wx-shell-panel-head-bg);
+}
+.mind-panel__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: var(--wx-shell-tile-gradient);
+  color: var(--wx-text-on-brand);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--wx-shell-tile-shadow);
+}
+.mind-panel__icon svg { width: 18px; height: 18px; }
+.mind-panel__titles { min-width: 0; line-height: 1.25; }
+.mind-panel__title {
+  font-size: var(--wx-fs-14);
+  font-weight: var(--wx-fw-bold);
+  letter-spacing: var(--wx-tracking-tight);
+  color: var(--wx-text-primary);
+}
+.mind-panel__sub {
+  margin-top: 1px;
+  font-size: 11px;
+  font-weight: var(--wx-fw-semibold);
+  color: var(--wx-text-muted);
+}
+.mind-panel__body { padding: 10px 12px 12px; }
+.mind-panel__body--scroll {
+  max-height: 350px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.mind-panel__foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--wx-space-2);
+  padding: 10px 14px;
+  border-top: 1px solid var(--wx-border-subtle);
+  background: var(--wx-shell-panel-foot-bg);
+}
+.mind-panel__hint {
+  margin-right: auto;
+  font-size: 10.5px;
+  font-weight: var(--wx-fw-semibold);
+  color: var(--wx-text-muted);
+  white-space: nowrap;
+}
+
+/* Item bật/tắt trong panel (danh sách cột, option) */
+.mind-panel-item {
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-2);
+  padding: 7px 10px;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  font-size: 12.5px;
+  font-weight: var(--wx-fw-semibold);
+  color: var(--wx-text-secondary);
+  transition: background var(--wx-d-fast) var(--wx-ease-standard),
+              border-color var(--wx-d-fast) var(--wx-ease-standard),
+              color var(--wx-d-fast) var(--wx-ease-standard);
+}
+.mind-panel-item:hover {
+  background: var(--wx-surface-sunken);
+  border-color: var(--wx-border-default);
+  color: var(--wx-text-primary);
+}
+.mind-panel-item.is-active {
+  background: var(--wx-shell-tone-brand-bg);
+  border-color: var(--wx-shell-tone-brand-bd);
+  border-left: 3px solid var(--wx-brand-500);
+  color: var(--wx-text-primary);
+}
+.mind-panel-item:focus-visible {
+  outline: 2px solid var(--wx-border-focus);
+  outline-offset: -2px;
+}
+.mind-panel-item.is-disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Field có nhãn nhỏ viết hoa trong panel */
+.mind-field { margin-top: 10px; }
+.mind-field__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 10px;
+  font-weight: var(--wx-fw-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--wx-text-muted);
+}
+
+/* Phím tắt */
+.mind-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 18px;
+  padding: 0 5px;
+  border: 1px solid var(--wx-border-default);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--wx-surface-base);
+  color: var(--wx-text-secondary);
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: var(--wx-fw-bold);
+  line-height: 1;
+}
+
+/* Nút icon vuông nhỏ (đóng, pin…) */
+.mind-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--wx-text-muted);
+  cursor: pointer;
+  transition: background var(--wx-d-fast) var(--wx-ease-standard),
+              color var(--wx-d-fast) var(--wx-ease-standard);
+}
+.mind-icon-btn:hover { background: var(--wx-surface-sunken); color: var(--wx-text-primary); }
+.mind-icon-btn:focus-visible { outline: 2px solid var(--wx-border-focus); outline-offset: -1px; }
+.mind-icon-btn svg { width: 14px; height: 14px; }
+
+/* Empty state gọn trong panel */
+.mind-panel-empty {
+  padding: 26px 16px;
+  text-align: center;
+  color: var(--wx-text-muted);
+  font-size: 12.5px;
+  font-weight: var(--wx-fw-medium);
+}
+
+/* ================================================================
+   Thanh cuộn mảnh cho vùng nội dung của shell
+   ================================================================ */
+.mind-slim-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--wx-border-default) transparent;
+}
+.mind-slim-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.mind-slim-scroll::-webkit-scrollbar-track { background: transparent; }
+.mind-slim-scroll::-webkit-scrollbar-thumb {
+  background: var(--wx-border-default);
+  border-radius: var(--wx-radius-full);
+  border: 0;
+}
+
+/* ================================================================
+   Motion: tôn trọng prefers-reduced-motion
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .mind-panel-item,
+  .mind-icon-btn {
+    transition-duration: 0.01ms !important;
+  }
+}

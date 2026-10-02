@@ -13,7 +13,7 @@ const ACTIONS = ['tất cả', 'create', 'update', 'delete', 'login', 'export']
 const LOGS = [
   { id: 1, actor: 'nguyenvana@example.com', action: 'create', resource: 'Invoice #INV-2026-042', ip: '1.2.3.4', ua: 'Chrome 124', time: '2026-05-05 10:42:33', before: null, after: { client: 'Công ty TNHH ABC', amount: 15000000 } },
   { id: 2, actor: 'lethib@example.com', action: 'update', resource: 'User #usr_291 settings', ip: '2.3.4.5', ua: 'Firefox 125', time: '2026-05-05 09:15:02', before: { notif_email: false }, after: { notif_email: true } },
-  { id: 3, actor: 'admin@example.com', action: 'delete', resource: 'API key wm_live_z1y8w', ip: '1.2.3.4', ua: 'Chrome 124', time: '2026-05-04 18:30:11', before: { name: 'Old key', active: true }, after: null },
+  { id: 3, actor: 'admin@example.com', action: 'delete', resource: 'API key mind_live_z1y8w', ip: '1.2.3.4', ua: 'Chrome 124', time: '2026-05-04 18:30:11', before: { name: 'Old key', active: true }, after: null },
   { id: 4, actor: 'tranvanc@example.com', action: 'login', resource: 'Auth session', ip: '5.6.7.8', ua: 'Safari 17', time: '2026-05-04 08:01:55', before: null, after: { method: '2FA' } },
   { id: 5, actor: 'admin@example.com', action: 'export', resource: 'Users CSV (284 records)', ip: '1.2.3.4', ua: 'Chrome 124', time: '2026-05-03 16:44:22', before: null, after: null },
 ]
@@ -102,7 +102,7 @@ const filtered = computed(() => LOGS.filter(l => {
 .filters-row { display: flex; align-items: center; gap: var(--wx-space-4); flex-wrap: wrap; }
 .action-filters { display: flex; flex-wrap: wrap; gap: var(--wx-space-2); }
 
-.log-table-wrap { background: var(--wx-bg-base); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-lg); overflow: hidden; }
+.log-table-wrap { background: var(--wx-bg-base); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-lg); overflow-x: auto; }
 .log-table { width: 100%; border-collapse: collapse; font-size: var(--wx-fs-13); }
 .log-table th { padding: var(--wx-space-3) var(--wx-space-4); text-align: left; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); color: var(--wx-content-muted); background: var(--wx-bg-sunken); border-bottom: 1px solid var(--wx-border-default); }
 .log-row td { padding: var(--wx-space-3) var(--wx-space-4); border-bottom: 1px solid var(--wx-border-subtle); cursor: pointer; }

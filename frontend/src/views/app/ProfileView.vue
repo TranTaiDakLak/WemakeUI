@@ -36,7 +36,7 @@ const recent = [
             </div>
             <h1 class="profile-name">Nguyễn Văn A</h1>
             <p class="profile-role">Senior Frontend Engineer</p>
-            <p class="profile-company">WemakeUI · Hà Nội, Việt Nam</p>
+            <p class="profile-company">MindUI · Hà Nội, Việt Nam</p>
             <p class="profile-bio">Xây dựng UI kit cross-platform cho Vue 3. Đam mê design system, performance, và DX tốt.</p>
             <div class="social-row">
               <BaseButton size="sm" variant="ghost">GitHub</BaseButton>

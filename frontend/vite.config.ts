@@ -34,9 +34,9 @@ export default defineConfig(({ mode }) => {
           cssCodeSplit: false,
           lib: {
             entry: resolve(__dirname, 'src/lib.ts'),
-            name: 'WemakeUI',
+            name: 'MindUI',
             formats: ['es', 'umd'],
-            fileName: (format) => `wemake-ui.${format}.js`,
+            fileName: (format) => `mind-ui.${format}.js`,
           },
           rollupOptions: {
             external: ['vue', 'vue-router', 'pinia', '@vueuse/core', 'lucide-vue-next'],

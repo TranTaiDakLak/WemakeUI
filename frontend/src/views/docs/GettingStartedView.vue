@@ -12,47 +12,47 @@ import { totalAppTemplates, totalAppPages } from '../showcase/appTemplates'
 const templateCount = totalVariants()
 
 const installCode = `# npm
-npm install @wemake/ui vue
+npm install @mind/ui vue
 
 # pnpm
-pnpm add @wemake/ui vue
+pnpm add @mind/ui vue
 
 # yarn
-yarn add @wemake/ui vue`
+yarn add @mind/ui vue`
 
 const setupCode = `// main.ts
 import { createApp } from 'vue'
 import App from './App.vue'
 
 // Bắt buộc: import styles của thư viện một lần ở app root
-import '@wemake/ui/style.css'
+import '@mind/ui/style.css'
 
 createApp(App).mount('#app')`
 
 const usageCode = `<script setup lang="ts">
-import { BaseButton } from '@wemake/ui'
+import { BaseButton } from '@mind/ui'
 <\/script>
 
 <template>
-  <BaseButton variant="primary">Xin chào WemakeUI</BaseButton>
+  <BaseButton variant="primary">Xin chào MindUI</BaseButton>
 <\/template>`
 
 const themeCode = `<script setup lang="ts">
-import { useTheme } from '@wemake/ui'
+import { useTheme } from '@mind/ui'
 
 const { isDark, toggleColorScheme, setBrandColor } = useTheme()
 // toggleColorScheme()      -> đổi sáng/tối
 // setBrandColor('#9333ea') -> đổi màu thương hiệu toàn UI
 <\/script>`
 
-const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton>`
+const buttonDemo = `<BaseButton variant="primary">Xin chào MindUI</BaseButton>`
 </script>
 
 <template>
   <article class="gs">
     <header class="gs__head">
       <span class="gs__eyebrow">Tài liệu</span>
-      <h1 class="gs__title">Bắt đầu với WemakeUI</h1>
+      <h1 class="gs__title">Bắt đầu với MindUI</h1>
       <p class="gs__lead">
         Bộ UI kit Vue 3 đa nền tảng — Web, Mobile (Capacitor/Ionic) và Desktop (Wails/Tauri/Electron).
         80+ component, design tokens, dark mode và tree-shaking sẵn có.
@@ -77,7 +77,7 @@ const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton
     <p class="gs__p">Mọi component là <em>named export</em>, import đúng cái cần để tree-shake tối ưu.</p>
     <DemoBlock :code="usageCode" open>
       <div style="display:flex; justify-content:center;">
-        <BaseButton variant="primary">Xin chào WemakeUI</BaseButton>
+        <BaseButton variant="primary">Xin chào MindUI</BaseButton>
       </div>
     </DemoBlock>
 
@@ -105,7 +105,7 @@ const buttonDemo = `<BaseButton variant="primary">Xin chào WemakeUI</BaseButton
       <span class="gs__browse-icon">▦</span>
       <span class="gs__browse-text">
         <strong>Bộ giao diện hoàn chỉnh</strong>
-        <span>{{ totalAppTemplates }} bộ (SaaS, Dashboard, WemakeUI, Marketing…) · {{ totalAppPages }} trang · app có navigation + bộ màn độc lập (auth/error)</span>
+        <span>{{ totalAppTemplates }} bộ (SaaS, Dashboard, MindUI, Marketing…) · {{ totalAppPages }} trang · app có navigation + bộ màn độc lập (auth/error)</span>
       </span>
       <span class="gs__browse-arrow">→</span>
     </RouterLink>

@@ -121,17 +121,18 @@ const filteredMails = computed(() => {
 .folder-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
 .folder-item { display: flex; align-items: center; justify-content: space-between; padding: var(--wx-space-2) var(--wx-space-3); border-radius: var(--wx-radius-md); cursor: pointer; font-size: var(--wx-fs-14); color: var(--wx-content-secondary); transition: background var(--wx-d-micro); }
 .folder-item:hover { background: var(--wx-hover-bg); color: var(--wx-content-primary); }
-.folder-item.active { background: var(--wx-brand-50); color: var(--wx-brand-600); font-weight: var(--wx-fw-medium); }
+.folder-item.active { background: var(--wx-selected-bg); color: var(--wx-text-link); font-weight: var(--wx-fw-medium); }
 
 .mail-list-panel { border-right: 1px solid var(--wx-border-subtle); display: flex; flex-direction: column; }
 .mail-search { padding: var(--wx-space-3); border-bottom: 1px solid var(--wx-border-subtle); }
 .mail-list { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; }
 .mail-item { display: flex; gap: var(--wx-space-3); padding: var(--wx-space-3) var(--wx-space-4); cursor: pointer; border-bottom: 1px solid var(--wx-border-subtle); transition: background var(--wx-d-micro); }
 .mail-item:hover { background: var(--wx-hover-bg); }
-.mail-item.selected { background: var(--wx-brand-50); }
+.mail-item.selected { background: var(--wx-selected-bg); }
 .mail-item.unread .mail-from, .mail-item.unread .mail-subject { font-weight: var(--wx-fw-semibold); }
 .mail-info { flex: 1; min-width: 0; }
-.mail-row1 { display: flex; justify-content: space-between; }
+.mail-row1 { display: flex; justify-content: space-between; gap: var(--wx-space-2); }
+.mail-time { flex-shrink: 0; }
 .mail-from { font-size: var(--wx-fs-13); color: var(--wx-content-primary); }
 .mail-time { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 .mail-subject { display: block; font-size: var(--wx-fs-13); color: var(--wx-content-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -145,5 +146,5 @@ const filteredMails = computed(() => {
 .detail-body { font-size: var(--wx-fs-15); line-height: var(--wx-lh-relaxed); color: var(--wx-content-secondary); display: flex; flex-direction: column; gap: var(--wx-space-3); }
 .detail-actions { display: flex; gap: var(--wx-space-2); margin-top: var(--wx-space-5); }
 
-@media (max-width: 900px) { .mailbox { grid-template-columns: 1fr; } .mail-detail, .folders { display: none; } }
+@media (max-width: 900px) { .mailbox { grid-template-columns: minmax(0, 1fr); min-height: 0; } .mail-detail, .folders { display: none; } }
 </style>

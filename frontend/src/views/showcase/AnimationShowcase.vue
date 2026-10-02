@@ -69,7 +69,7 @@ const EASE_TOKENS = [
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="animation showcase" />
+    <AppTopbar title="MindUI" subtitle="animation showcase" />
 
     <main class="main">
 
@@ -671,7 +671,7 @@ const EASE_TOKENS = [
   font-weight: var(--wx-fw-semibold);
 }
 .chip--d { background: color-mix(in srgb, var(--wx-brand-primary) 12%, transparent); color: var(--wx-brand-primary); }
-.chip--e { background: color-mix(in srgb, #10b981 12%, transparent); color: #059669; }
+.chip--e { background: color-mix(in srgb, var(--wx-chart-3) 12%, transparent); color: var(--wx-success-text); }
 
 /* demo grid */
 .demo-grid {
@@ -723,9 +723,9 @@ const EASE_TOKENS = [
   display: flex; align-items: center; justify-content: center;
   font-size: var(--wx-fs-12); font-weight: var(--wx-fw-medium);
 }
-.demo-box--brand   { background: var(--wx-brand-primary); color: #fff; }
+.demo-box--brand   { background: var(--wx-brand-solid); color: var(--wx-text-on-brand); }
 .demo-box--surface { background: var(--wx-surface-elevated); border: 1px solid var(--wx-border-default); color: var(--wx-text-primary); }
-.demo-box--shadow  { box-shadow: 0 8px 24px -4px rgba(0,0,0,.16); width: 140px; height: 80px; }
+.demo-box--shadow  { box-shadow: var(--wx-shadow-lg); width: 140px; height: 80px; }
 .demo-box--drawer  { width: 100%; height: 90px; border-radius: 0; justify-content: flex-end; padding-right: var(--wx-space-4); }
 
 .demo-actions { display: flex; align-items: center; gap: var(--wx-space-2); }
@@ -820,7 +820,7 @@ const EASE_TOKENS = [
 }
 .hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px -6px rgba(0,0,0,.18);
+  box-shadow: var(--wx-shadow-popover);
 }
 .hover-glow {
   transition: box-shadow var(--wx-d-fast, 150ms) var(--wx-ease-standard, cubic-bezier(.4,0,.2,1));
@@ -838,8 +838,8 @@ const EASE_TOKENS = [
 .hover-reveal__content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--wx-space-1); width: 100%; height: 100%; }
 .hover-reveal__action {
   position: absolute; inset: 0;
-  background: color-mix(in srgb, var(--wx-brand-primary) 90%, transparent);
-  color: #fff; display: flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--wx-brand-solid) 90%, transparent);
+  color: var(--wx-text-on-brand); display: flex; align-items: center; justify-content: center;
   font-size: var(--wx-fs-13); font-weight: var(--wx-fw-semibold);
   opacity: 0;
   transition: opacity var(--wx-d-fast, 150ms) var(--wx-ease-standard, cubic-bezier(.4,0,.2,1));
@@ -863,7 +863,7 @@ const EASE_TOKENS = [
   height: calc(100% - 8px);
   background: var(--wx-surface-elevated);
   border-radius: calc(var(--wx-radius-lg) - 4px);
-  box-shadow: 0 1px 4px rgba(0,0,0,.1);
+  box-shadow: var(--wx-shadow-sm);
   transition: transform var(--wx-d-fast, 150ms) var(--wx-ease-spring, cubic-bezier(.34,1.56,.64,1));
 }
 .tab-btn {

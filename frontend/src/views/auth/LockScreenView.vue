@@ -3,9 +3,12 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
-import { BaseButton, BaseInput, BaseAvatar, FormField } from '../../components/common'
+import AuthField from '../_layouts/AuthField.vue'
+import { BaseButton, BaseAvatar } from '../../components/common'
 import { DotLottieVue } from '@lottiefiles/dotlottie-vue'
 import lockedJson from '@/assets/animations/locked.json'
+
+const ICON_LOCK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
 
 const password = ref('')
 const error = ref<string | null>(null)
@@ -57,14 +60,21 @@ async function unlock() {
       <div class="lock-user">
         <BaseAvatar name="Lê Văn A" size="xl" status="busy" ring />
         <h2>Lê Văn A</h2>
-        <p class="muted">le.a@wemake.vn</p>
+        <p class="muted">le.a@mind.vn</p>
       </div>
 
       <form class="lock-pw" @submit.prevent="unlock">
-        <FormField label="Mật khẩu" :error="error" required>
-          <BaseInput v-model="password" type="password" autocomplete="current-password" />
-        </FormField>
-        <BaseButton type="submit" :loading="loading" block>Mở khoá</BaseButton>
+        <AuthField
+          v-model="password"
+          label="Mật khẩu"
+          type="password"
+          :icon="ICON_LOCK"
+          placeholder="••••••••"
+          autocomplete="current-password"
+          :error="error ?? undefined"
+          required
+        />
+        <BaseButton type="submit" size="lg" :loading="loading" block>Mở khoá</BaseButton>
         <p class="muted small">demo: <code>demo1234</code></p>
       </form>
 

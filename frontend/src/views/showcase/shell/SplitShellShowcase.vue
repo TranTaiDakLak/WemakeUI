@@ -122,7 +122,7 @@ function toggleStar(id: string) {
     :topbar-height="56"
   >
     <template #topbar>
-      <AppTopbar title="WemakeUI" subtitle="split-pane shell — hộp thư">
+      <AppTopbar title="MindUI" subtitle="split-pane shell — hộp thư">
         <template #actions>
           <BaseButton variant="ghost" size="sm" @click="showSheetOnMobile = true">
             Mở bottom sheet
@@ -317,9 +317,9 @@ function toggleStar(id: string) {
 }
 .filter-pill:hover { background: var(--wx-surface-sunken); }
 .filter-pill--active {
-  background: var(--wx-brand-primary);
-  border-color: var(--wx-brand-primary);
-  color: white;
+  background: var(--wx-brand-solid);
+  border-color: var(--wx-brand-solid);
+  color: var(--wx-text-on-brand);
 }
 
 .mail-list {
@@ -343,7 +343,7 @@ function toggleStar(id: string) {
   outline-offset: -2px;
 }
 .mail-item--selected {
-  background: rgba(37, 99, 235, 0.08);
+  background: color-mix(in srgb, var(--wx-brand-primary) 8%, transparent);
 }
 .mail-item--unread .mail-item__from,
 .mail-item--unread .mail-item__subject { font-weight: var(--wx-fw-semibold); }
@@ -400,7 +400,7 @@ function toggleStar(id: string) {
   padding: var(--wx-space-1);
   border-radius: var(--wx-radius-sm);
 }
-.mail-item__star--on { color: #f59e0b; }
+.mail-item__star--on { color: var(--wx-warning-solid); }
 .mail-item__star:hover { background: var(--wx-surface-sunken); }
 
 .mail-empty {

@@ -1,5 +1,15 @@
-export type AccountStatus = 'Live' | 'Die' | 'Checkpoint'
+/**
+ * Trạng thái của một bản ghi trong lưới demo.
+ * Tông màu chấm trạng thái: Hoạt động = xanh · Chờ duyệt = vàng · Lưu trữ = xám (xem `statusMap` của BaseDataGrid).
+ */
+export type AccountStatus = 'Hoạt động' | 'Chờ duyệt' | 'Lưu trữ'
 
+/**
+ * Một dòng của lưới dữ liệu demo (trang `/mindui`). Tên trường giữ nguyên để tương thích ngược;
+ * nhãn hiển thị do `DEFAULT_COLUMNS` (stores/mindui/settings.ts) quyết định:
+ * uid → Mã · password → Loại · twofa → Phiên bản · email → Liên hệ · cookie → Tệp đính kèm · token → Đã duyệt
+ * fullName → Tiêu đề · friends → Lượt xem · follower → Lượt tải · statusAds → Giai đoạn.
+ */
 export interface AccountRow {
   id: number
   chose: boolean

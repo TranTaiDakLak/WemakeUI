@@ -47,8 +47,8 @@ function submit() {
   <AppShell variant="topnav" :max-width="1200" centered background="base">
     <template #topbar>
       <div class="brand">
-        <img src="/logo.png" alt="WemakeUI" class="logo" />
-        <span class="brand-name">WemakeUI</span>
+        <img src="/logo.png" alt="MindUI" class="logo" />
+        <span class="brand-name">MindUI</span>
         <BaseTag size="sm" variant="info" label="beta" />
       </div>
     </template>
@@ -89,7 +89,7 @@ function submit() {
         <BaseButton size="lg" variant="cta">Cài đặt qua npm</BaseButton>
         <BaseButton size="lg" variant="ghost">Xem demo trực tiếp</BaseButton>
       </div>
-      <code class="hero-cmd">npm install @wemake/ui</code>
+      <code class="hero-cmd">npm install @mind/ui</code>
     </section>
 
     <PageHeader
@@ -156,7 +156,7 @@ function submit() {
       <div class="contact-side">
         <BasePanel title="Thông tin">
           <ul class="info-list">
-            <li><strong>Email:</strong> hello@wemake.vn</li>
+            <li><strong>Email:</strong> hello@mind.vn</li>
             <li><strong>Hotline:</strong> 1900 xxxx</li>
             <li><strong>Văn phòng:</strong> Tầng 4, toà ABC, Hà Nội</li>
           </ul>
@@ -174,7 +174,7 @@ function submit() {
 
     <template #footer>
       <div class="foot">
-        <span>© 2026 WemakeUI · sentence case · vietnamese</span>
+        <span>© 2026 MindUI · sentence case · vietnamese</span>
       </div>
     </template>
   </AppShell>
@@ -225,7 +225,7 @@ function submit() {
 }
 .nav-link:hover { background: var(--wx-surface-sunken); color: var(--wx-content-primary); }
 .nav-link--active {
-  background: rgba(37, 99, 235, 0.08);
+  background: color-mix(in srgb, var(--wx-brand-primary) 8%, transparent);
   color: var(--wx-brand-primary);
   font-weight: var(--wx-fw-medium);
 }
@@ -289,10 +289,10 @@ function submit() {
   font-family: var(--wx-font-mono);
   font-size: var(--wx-fs-13);
   color: var(--wx-content-secondary);
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--wx-glass-medium-bg);
   padding: 6px var(--wx-space-3);
   border-radius: var(--wx-radius-md);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--wx-border-subtle);
 }
 
 /* ── features ── */

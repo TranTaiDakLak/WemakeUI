@@ -1,4 +1,4 @@
-import { ref, computed, type Ref } from 'vue'
+import { ref, computed, toRaw, type Ref } from 'vue'
 
 /**
  * useOptimistic — update local trước, call API, rollback nếu lỗi.
@@ -18,6 +18,15 @@ interface Pending<T> {
 }
 
 let nextId = 0
+
+/** Snapshot sâu của giá trị hiện tại. Phải `toRaw` trước: structuredClone ném DataCloneError với Proxy reactive của Vue. */
+function snapshot<T>(v: T): T {
+  const raw = toRaw(v)
+  if (typeof structuredClone === 'function') {
+    try { return structuredClone(raw) } catch { /* fallback JSON bên dưới */ }
+  }
+  return JSON.parse(JSON.stringify(raw)) as T
+}
 
 export function useOptimistic<T>(initial: T) {
   const value = ref<T>(initial) as Ref<T>
@@ -40,9 +49,7 @@ export function useOptimistic<T>(initial: T) {
   }): Promise<R | null> {
     error.value = null
     const id = ++nextId
-    const prev = structuredClone
-      ? structuredClone(value.value)
-      : (JSON.parse(JSON.stringify(value.value)) as T)
+    const prev = snapshot(value.value)
     const next = opts.optimistic(value.value)
     value.value = next
     pendings.value.push({ id, prev })

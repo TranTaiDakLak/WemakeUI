@@ -67,7 +67,7 @@ function onCardClick(card: KanbanCard) {
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI · Kanban" subtitle="Phase 4 — data display" />
+    <AppTopbar title="MindUI · Kanban" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="Kanban board" description="Drag-drop card giữa các column. HTML5 native drag-drop, không phụ thuộc thư viện.">
       </PageHeader>

@@ -12,31 +12,36 @@ import type { ColumnConfig } from '../../../types'
 const router = useRouter()
 const { showToast } = useToast()
 
+/* Dữ liệu demo trung tính (đơn hàng) — cột/nhãn không gắn với một nghiệp vụ cụ thể. */
 const columns = ref<ColumnConfig[]>([
-  { key: 'username', label: 'Tài khoản', visible: true, group: 'main', width: '160px', sortable: true },
+  { key: 'code', label: 'Mã đơn', visible: true, group: 'main', width: '140px', sortable: true },
+  { key: 'customer', label: 'Khách hàng', visible: true, group: 'main', width: '180px', sortable: true },
   { key: 'email', label: 'Email', visible: true, group: 'main', width: '220px', sortable: true },
-  { key: 'role', label: 'Vai trò', visible: true, group: 'main', width: '120px', sortable: true },
-  { key: 'status', label: 'Trạng thái', visible: true, group: 'main', width: '120px', sortable: true },
-  { key: 'cookie', label: 'Cookie', visible: true, group: 'main', width: '80px' },
-  { key: 'token', label: 'Token', visible: true, group: 'main', width: '80px' },
-  { key: 'lastLogin', label: 'Đăng nhập cuối', visible: true, group: 'main', width: '160px', sortable: true },
+  { key: 'category', label: 'Danh mục', visible: true, group: 'main', width: '140px', sortable: true },
+  { key: 'status', label: 'Trạng thái', visible: true, group: 'main', width: '130px', sortable: true },
+  { key: 'paid', label: 'Thanh toán', visible: true, group: 'main', width: '120px' },
+  { key: 'invoice', label: 'Hoá đơn', visible: true, group: 'main', width: '110px' },
+  { key: 'updatedAt', label: 'Cập nhật cuối', visible: true, group: 'main', width: '160px', sortable: true },
   { key: 'note', label: 'Ghi chú', visible: true, group: 'main', width: '200px' },
 ])
 
+const STATUSES = ['Hoạt động', 'Chờ duyệt', 'Tạm dừng', 'Đã huỷ']
+const CUSTOMERS = ['Nguyễn Văn An', 'Trần Thị Bình', 'Lê Hoàng Cường', 'Phạm Minh Đức', 'Võ Thanh Hà', 'Đặng Quốc Khánh']
+const CATEGORIES = ['Văn phòng phẩm', 'Điện tử', 'Gia dụng', 'Thời trang']
+
 function generateRows(n: number) {
-  const statuses = ['Live', 'Die', 'Checkpoint']
-  const roles = ['Admin', 'Editor', 'Viewer', 'Guest']
   const out = []
   for (let i = 0; i < n; i++) {
     out.push({
       id: i + 1,
-      username: `user${(i + 1).toString().padStart(4, '0')}`,
-      email: `user${i + 1}@wemake.vn`,
-      role: roles[i % roles.length],
-      status: statuses[i % statuses.length],
-      cookie: i % 3 === 0 ? '✓' : '✗',
-      token: i % 2 === 0 ? '✓' : '✗',
-      lastLogin: `2026-05-${((i % 28) + 1).toString().padStart(2, '0')}`,
+      code: `DH-${(i + 1).toString().padStart(4, '0')}`,
+      customer: CUSTOMERS[i % CUSTOMERS.length],
+      email: `khach${i + 1}@mind.vn`,
+      category: CATEGORIES[i % CATEGORIES.length],
+      status: STATUSES[i % STATUSES.length],
+      paid: i % 3 === 0 ? '✓' : '✗',
+      invoice: i % 2 === 0 ? '✓' : '✗',
+      updatedAt: `2026-05-${((i % 28) + 1).toString().padStart(2, '0')}`,
       note: i % 5 === 0 ? 'Khách VIP' : '',
     })
   }
@@ -89,7 +94,7 @@ const selectedCount = computed(() => selected.value.size)
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI · DataGridPro" subtitle="Phase 4 — data display" />
+    <AppTopbar title="MindUI · DataGridPro" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="DataGridPro" description="Bảng dữ liệu nâng cao đầy đủ feature: sort, virtual scroll, resize, pin, reorder, multi-select, inline edit, saved views, export.">
       </PageHeader>

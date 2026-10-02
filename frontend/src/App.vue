@@ -12,7 +12,7 @@ onUnmounted(() => stopSmoothScroll())
 </script>
 
 <template>
-  <div id="wemake-ui-root">
+  <div id="mind-ui-root">
     <router-view v-slot="{ Component, route }">
       <Transition name="page">
         <component :is="Component" :key="route.path" />
@@ -24,7 +24,7 @@ onUnmounted(() => stopSmoothScroll())
 </template>
 
 <style>
-#wemake-ui-root {
+#mind-ui-root {
   min-height: 100vh;
   background: var(--wx-surface-sunken);
   color: var(--wx-text-primary);

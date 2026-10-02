@@ -39,6 +39,15 @@ const plusIcon = '<svg width="14" height="14" viewBox="0 0 24 24" ' +
 
 const blockCode = `<BaseButton block>Nút full-width</BaseButton>`
 
+const linkCode = `<!-- có href → render <a>; target="_blank" tự thêm rel="noopener noreferrer" -->
+<BaseButton href="https://example.com" target="_blank" variant="secondary">Mở trang ngoài</BaseButton>
+
+<!-- tag: truyền thẻ hoặc component (vd RouterLink) -->
+<BaseButton :tag="RouterLink" to="/docs" variant="ghost">Về tài liệu</BaseButton>
+
+<!-- disabled / loading: aria-disabled + tabindex=-1 + chặn điều hướng -->
+<BaseButton href="/x" disabled>Không khả dụng</BaseButton>`
+
 const props: PropRow[] = [
   { name: 'variant', type: "'primary' | 'secondary' | 'neutral' | 'ghost' | 'danger' | 'success' | 'warning' | 'cta' | 'link' | 'text'", default: "'primary'", desc: 'Kiểu hiển thị / màu sắc của nút.' },
   { name: 'size', type: "'sm' | 'md' | 'lg' | 'xl' | 'icon'", default: "'md'", desc: "Kích thước. 'icon' cho nút chỉ chứa icon vuông." },
@@ -48,6 +57,10 @@ const props: PropRow[] = [
   { name: 'icon', type: 'string', desc: 'Chuỗi HTML SVG hiện ở bên trái nhãn.' },
   { name: 'iconRight', type: 'string', desc: 'Chuỗi HTML SVG hiện ở bên phải nhãn.' },
   { name: 'block', type: 'boolean', default: 'false', desc: 'Trải rộng nút theo chiều ngang (full-width).' },
+  { name: 'tag', type: 'string | Component', default: "'button' (hoặc 'a' khi có href)", desc: "Thẻ/component gốc, vd 'a' hoặc RouterLink (kèm to). Thẻ khác 'button' không gắn type; disabled/loading dùng aria-disabled." },
+  { name: 'href', type: 'string', desc: 'Có href thì render thẻ <a> (trừ khi truyền tag khác).' },
+  { name: 'target', type: 'string', desc: 'Thuộc tính target của link (chỉ áp dụng khi không phải <button>).' },
+  { name: 'rel', type: 'string', desc: 'Thuộc tính rel. Khi target="_blank" mà không truyền rel → tự dùng "noopener noreferrer".' },
 ]
 
 const emits: PropRow[] = [
@@ -112,6 +125,15 @@ const emits: PropRow[] = [
     <p>Dùng <code class="inline">block</code> để nút trải rộng theo container — hợp với form mobile.</p>
     <DemoBlock :code="blockCode">
       <BaseButton block>Nút full-width</BaseButton>
+    </DemoBlock>
+
+    <h2>Dạng link</h2>
+    <p>Truyền <code class="inline">href</code> hoặc <code class="inline">tag</code> để nút render thành thẻ <code class="inline">&lt;a&gt;</code> / component điều hướng mà giữ nguyên diện mạo.</p>
+    <DemoBlock :code="linkCode">
+      <div class="row">
+        <BaseButton href="https://example.com" target="_blank" variant="secondary">Mở trang ngoài</BaseButton>
+        <BaseButton href="/x" disabled>Không khả dụng</BaseButton>
+      </div>
     </DemoBlock>
 
     <h2>Props</h2>

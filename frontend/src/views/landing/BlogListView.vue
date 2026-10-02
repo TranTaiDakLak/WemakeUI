@@ -12,9 +12,9 @@ const POSTS = [
   { id: 1, title: 'DataGridPro với 10.000 dòng: bí quyết virtual scroll 60fps', date: '2026-05-01', author: 'Trần Văn C', tag: 'performance', readTime: '8 phút', thumb: '📊', excerpt: 'Chia sẻ kỹ thuật tối ưu DataGrid để scroll mượt mà ngay cả với 100k rows — window virtualization, row measurement và tricky edge cases.' },
   { id: 2, title: 'Xây dựng design token đúng cách với CSS custom properties', date: '2026-04-25', author: 'Lê Thị B', tag: 'design system', readTime: '6 phút', thumb: '🎨', excerpt: 'Hướng dẫn tổ chức token từ raw → semantic → component. Tại sao không được hardcode màu sắc và làm thế nào để dark mode không đau.' },
   { id: 3, title: 'Accessibility trong Vue 3: Checklist thực chiến', date: '2026-04-18', author: 'Nguyễn Thị D', tag: 'accessibility', readTime: '10 phút', thumb: '♿', excerpt: 'Hơn 20 điểm kiểm tra accessibility mà mọi Vue component cần pass: focus trap, ARIA, keyboard nav, contrast ratio và cách test bằng axe.' },
-  { id: 4, title: 'WemakeUI v0.8 ra mắt: Chart system và 27 page template mới', date: '2026-04-10', author: 'Nguyễn Văn A', tag: 'news', readTime: '4 phút', thumb: '🚀', excerpt: 'Phiên bản 0.8 bổ sung 7 chart SVG thuần (không deps), 27 page template auth + dashboard + error, DevPanel và hơn 40 bug fix.' },
+  { id: 4, title: 'MindUI v0.8 ra mắt: Chart system và 27 page template mới', date: '2026-04-10', author: 'Nguyễn Văn A', tag: 'news', readTime: '4 phút', thumb: '🚀', excerpt: 'Phiên bản 0.8 bổ sung 7 chart SVG thuần (không deps), 27 page template auth + dashboard + error, DevPanel và hơn 40 bug fix.' },
   { id: 5, title: 'Vue 3 Composition API best practices: composable design patterns', date: '2026-04-02', author: 'Trần Văn C', tag: 'tutorial', readTime: '12 phút', thumb: '🧩', excerpt: 'Cách thiết kế composable tốt: naming convention, return value, state management và cách tránh reactivity pitfalls phổ biến.' },
-  { id: 6, title: 'Bundle size dưới 200KB: code splitting chiến lược', date: '2026-03-25', author: 'Nguyễn Văn A', tag: 'performance', readTime: '7 phút', thumb: '⚡', excerpt: 'Phân tích bundle WemakeUI và chiến lược chia nhỏ chunk: dynamic import, defineAsyncComponent, prefetch on hover và font subset.' },
+  { id: 6, title: 'Bundle size dưới 200KB: code splitting chiến lược', date: '2026-03-25', author: 'Nguyễn Văn A', tag: 'performance', readTime: '7 phút', thumb: '⚡', excerpt: 'Phân tích bundle MindUI và chiến lược chia nhỏ chunk: dynamic import, defineAsyncComponent, prefetch on hover và font subset.' },
 ]
 
 const filtered = computed(() => activeTag.value === 'tất cả' ? POSTS : POSTS.filter(p => p.tag === activeTag.value))
@@ -26,7 +26,7 @@ import { computed } from 'vue'
   <LandingLayout>
     <section class="blog-hero">
       <h1 class="blog-title">Blog</h1>
-      <p class="blog-desc">Kiến thức, tutorial và cập nhật từ đội ngũ WemakeUI.</p>
+      <p class="blog-desc">Kiến thức, tutorial và cập nhật từ đội ngũ MindUI.</p>
     </section>
 
     <section class="blog-section">
@@ -77,7 +77,7 @@ import { computed } from 'vue'
 </template>
 
 <style scoped>
-.blog-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-8); text-align: center; background: var(--wx-gradient-bg); }
+.blog-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-8); text-align: center; background: var(--wx-shell-hero-bg); }
 .blog-title { font-size: var(--wx-fs-48); font-weight: 800; letter-spacing: var(--wx-tracking-tight); margin-bottom: var(--wx-space-3); }
 .blog-desc { font-size: var(--wx-fs-18); color: var(--wx-content-secondary); margin: 0; }
 

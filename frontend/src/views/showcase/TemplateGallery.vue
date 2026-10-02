@@ -86,7 +86,7 @@ function copyCode() {
     '',
     `## Patterns\n${c.variant.patterns.join(', ')}`,
     '',
-    `## Import\n${c.variant.components.map(s => `import { ${s} } from '@wemake/ui'`).join('\n')}`,
+    `## Import\n${c.variant.components.map(s => `import { ${s} } from '@mind/ui'`).join('\n')}`,
     '',
     c.variant.prompt ? `## Prompt\n${c.variant.prompt}` : '',
   ].filter(Boolean).join('\n')
@@ -103,7 +103,7 @@ function viewDemo(card: FlatCard, e: Event) {
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="template gallery" />
+    <AppTopbar title="MindUI" subtitle="template gallery" />
 
     <main class="main">
 
@@ -188,107 +188,107 @@ function viewDemo(card: FlatCard, e: Event) {
           >
             <svg class="tcard__wire" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <template v-if="card.page.group === 'Auth'">
-                <rect x="22" y="4" width="56" height="52" rx="4" fill="rgba(255,255,255,.15)"/>
-                <rect x="30" y="10" width="40" height="5" rx="2" fill="rgba(255,255,255,.5)"/>
-                <rect x="30" y="18" width="40" height="7" rx="2" fill="rgba(255,255,255,.2)"/>
-                <rect x="30" y="29" width="40" height="7" rx="2" fill="rgba(255,255,255,.2)"/>
-                <rect x="30" y="40" width="40" height="8" rx="3" fill="rgba(255,255,255,.45)"/>
+                <rect x="22" y="4" width="56" height="52" rx="4" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="30" y="10" width="40" height="5" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
+                <rect x="30" y="18" width="40" height="7" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="30" y="29" width="40" height="7" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="30" y="40" width="40" height="8" rx="3" fill="var(--wx-text-on-brand)" fill-opacity=".45"/>
               </template>
               <template v-else-if="card.page.group === 'Landing'">
-                <rect x="0" y="0" width="100" height="8" rx="1" fill="rgba(255,255,255,.2)"/>
-                <rect x="10" y="12" width="80" height="14" rx="3" fill="rgba(255,255,255,.18)"/>
-                <rect x="25" y="16" width="50" height="5" rx="2" fill="rgba(255,255,255,.45)"/>
-                <rect x="35" y="28" width="30" height="6" rx="2" fill="rgba(255,255,255,.5)"/>
-                <rect x="0" y="38" width="31" height="12" rx="2" fill="rgba(255,255,255,.15)"/>
-                <rect x="35" y="38" width="31" height="12" rx="2" fill="rgba(255,255,255,.15)"/>
-                <rect x="70" y="38" width="30" height="12" rx="2" fill="rgba(255,255,255,.15)"/>
+                <rect x="0" y="0" width="100" height="8" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="10" y="12" width="80" height="14" rx="3" fill="var(--wx-text-on-brand)" fill-opacity=".18"/>
+                <rect x="25" y="16" width="50" height="5" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".45"/>
+                <rect x="35" y="28" width="30" height="6" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
+                <rect x="0" y="38" width="31" height="12" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="35" y="38" width="31" height="12" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="70" y="38" width="30" height="12" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
               </template>
               <template v-else-if="card.page.group === 'Error'">
-                <rect x="15" y="8" width="70" height="44" rx="5" fill="rgba(255,255,255,.12)"/>
-                <rect x="30" y="14" width="40" height="8" rx="2" fill="rgba(255,255,255,.3)"/>
-                <rect x="35" y="26" width="30" height="4" rx="1" fill="rgba(255,255,255,.2)"/>
-                <rect x="32" y="35" width="16" height="7" rx="2" fill="rgba(255,255,255,.4)"/>
-                <rect x="52" y="35" width="16" height="7" rx="2" fill="rgba(255,255,255,.2)"/>
+                <rect x="15" y="8" width="70" height="44" rx="5" fill="var(--wx-text-on-brand)" fill-opacity=".12"/>
+                <rect x="30" y="14" width="40" height="8" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".3"/>
+                <rect x="35" y="26" width="30" height="4" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="32" y="35" width="16" height="7" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".4"/>
+                <rect x="52" y="35" width="16" height="7" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
               </template>
               <template v-else-if="card.page.group === 'Billing'">
-                <rect x="0" y="4" width="30" height="50" rx="3" fill="rgba(255,255,255,.15)"/>
-                <rect x="35" y="4" width="30" height="50" rx="3" fill="rgba(255,255,255,.28)"/>
-                <rect x="70" y="4" width="30" height="50" rx="3" fill="rgba(255,255,255,.15)"/>
-                <rect x="40" y="10" width="20" height="4" rx="1" fill="rgba(255,255,255,.6)"/>
-                <rect x="42" y="18" width="16" height="6" rx="1" fill="rgba(255,255,255,.4)"/>
-                <rect x="40" y="40" width="20" height="8" rx="2" fill="rgba(255,255,255,.5)"/>
+                <rect x="0" y="4" width="30" height="50" rx="3" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="35" y="4" width="30" height="50" rx="3" fill="var(--wx-text-on-brand)" fill-opacity=".28"/>
+                <rect x="70" y="4" width="30" height="50" rx="3" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="40" y="10" width="20" height="4" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".6"/>
+                <rect x="42" y="18" width="16" height="6" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".4"/>
+                <rect x="40" y="40" width="20" height="8" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
               </template>
               <template v-else-if="card.page.group === 'Basic' || card.page.group === 'Advanced' || card.page.group === 'Modal & Drawer'">
-                <rect x="10" y="4" width="80" height="52" rx="3" fill="rgba(255,255,255,.12)"/>
-                <rect x="16" y="9" width="30" height="3" rx="1" fill="rgba(255,255,255,.4)"/>
-                <rect x="16" y="15" width="68" height="7" rx="2" fill="rgba(255,255,255,.2)"/>
-                <rect x="16" y="26" width="68" height="7" rx="2" fill="rgba(255,255,255,.2)"/>
-                <rect x="16" y="37" width="32" height="7" rx="2" fill="rgba(255,255,255,.2)"/>
-                <rect x="52" y="37" width="32" height="7" rx="2" fill="rgba(255,255,255,.2)"/>
-                <rect x="42" y="48" width="26" height="5" rx="2" fill="rgba(255,255,255,.5)"/>
+                <rect x="10" y="4" width="80" height="52" rx="3" fill="var(--wx-text-on-brand)" fill-opacity=".12"/>
+                <rect x="16" y="9" width="30" height="3" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".4"/>
+                <rect x="16" y="15" width="68" height="7" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="16" y="26" width="68" height="7" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="16" y="37" width="32" height="7" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="52" y="37" width="32" height="7" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="42" y="48" width="26" height="5" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
               </template>
               <template v-else-if="card.page.group === 'Communication'">
-                <rect x="0" y="0" width="28" height="60" rx="1" fill="rgba(255,255,255,.12)"/>
-                <rect x="32" y="6" width="38" height="7" rx="3" fill="rgba(255,255,255,.3)"/>
-                <rect x="54" y="18" width="38" height="7" rx="3" fill="rgba(255,255,255,.2)"/>
-                <rect x="32" y="30" width="38" height="7" rx="3" fill="rgba(255,255,255,.3)"/>
-                <rect x="54" y="42" width="38" height="7" rx="3" fill="rgba(255,255,255,.2)"/>
+                <rect x="0" y="0" width="28" height="60" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".12"/>
+                <rect x="32" y="6" width="38" height="7" rx="3" fill="var(--wx-text-on-brand)" fill-opacity=".3"/>
+                <rect x="54" y="18" width="38" height="7" rx="3" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="32" y="30" width="38" height="7" rx="3" fill="var(--wx-text-on-brand)" fill-opacity=".3"/>
+                <rect x="54" y="42" width="38" height="7" rx="3" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
               </template>
-              <template v-else-if="card.page.category === 'WemakeUI'">
-                <!-- WemakeUI: sidebar nav + menustrip + datagrid rows + statusbar -->
-                <rect x="0" y="0" width="20" height="60" fill="rgba(255,255,255,.15)"/>
-                <rect x="3" y="4" width="14" height="3" rx="1" fill="rgba(255,255,255,.5)"/>
-                <rect x="3" y="9" width="14" height="2" rx="1" fill="rgba(255,255,255,.25)"/>
-                <rect x="3" y="13" width="14" height="2" rx="1" fill="rgba(255,255,255,.2)"/>
-                <rect x="3" y="17" width="14" height="2" rx="1" fill="rgba(255,255,255,.15)"/>
-                <rect x="3" y="21" width="10" height="2" rx="1" fill="rgba(255,255,255,.15)"/>
-                <rect x="20" y="0" width="80" height="6" fill="rgba(255,255,255,.2)"/>
-                <rect x="22" y="8" width="76" height="5" fill="rgba(255,255,255,.12)"/>
-                <rect x="23" y="9.5" width="22" height="2" rx="1" fill="rgba(255,255,255,.4)"/>
-                <rect x="87" y="9" width="10" height="3.5" rx="1" fill="rgba(255,255,255,.5)"/>
-                <rect x="22" y="16" width="76" height="5" fill="rgba(255,255,255,.28)"/>
-                <rect x="22" y="23" width="76" height="4" fill="rgba(255,255,255,.15)"/>
-                <rect x="22" y="29" width="76" height="4" fill="rgba(255,255,255,.1)"/>
-                <rect x="22" y="35" width="76" height="4" fill="rgba(255,255,255,.18)"/>
-                <rect x="22" y="41" width="76" height="4" fill="rgba(255,255,255,.1)"/>
-                <rect x="22" y="47" width="76" height="4" fill="rgba(255,255,255,.15)"/>
-                <rect x="20" y="54" width="80" height="6" fill="rgba(255,255,255,.22)"/>
+              <template v-else-if="card.page.category === 'MindUI'">
+                <!-- MindUI: sidebar nav + menustrip + datagrid rows + statusbar -->
+                <rect x="0" y="0" width="20" height="60" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="3" y="4" width="14" height="3" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
+                <rect x="3" y="9" width="14" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".25"/>
+                <rect x="3" y="13" width="14" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="3" y="17" width="14" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="3" y="21" width="10" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="20" y="0" width="80" height="6" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="22" y="8" width="76" height="5" fill="var(--wx-text-on-brand)" fill-opacity=".12"/>
+                <rect x="23" y="9.5" width="22" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".4"/>
+                <rect x="87" y="9" width="10" height="3.5" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
+                <rect x="22" y="16" width="76" height="5" fill="var(--wx-text-on-brand)" fill-opacity=".28"/>
+                <rect x="22" y="23" width="76" height="4" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="22" y="29" width="76" height="4" fill="var(--wx-text-on-brand)" fill-opacity=".1"/>
+                <rect x="22" y="35" width="76" height="4" fill="var(--wx-text-on-brand)" fill-opacity=".18"/>
+                <rect x="22" y="41" width="76" height="4" fill="var(--wx-text-on-brand)" fill-opacity=".1"/>
+                <rect x="22" y="47" width="76" height="4" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="20" y="54" width="80" height="6" fill="var(--wx-text-on-brand)" fill-opacity=".22"/>
               </template>
               <template v-else-if="card.page.category === 'WeDashboard' || card.page.category === 'ChartDashboard' || card.page.category === 'Dashboard'">
                 <!-- Dashboard: sidebar + topbar + KPI row + chart areas -->
-                <rect x="0" y="0" width="20" height="60" fill="rgba(255,255,255,.15)"/>
-                <rect x="3" y="4" width="14" height="3" rx="1" fill="rgba(255,255,255,.5)"/>
-                <rect x="3" y="9" width="14" height="2" rx="1" fill="rgba(255,255,255,.25)"/>
-                <rect x="3" y="13" width="14" height="2" rx="1" fill="rgba(255,255,255,.2)"/>
-                <rect x="3" y="17" width="14" height="2" rx="1" fill="rgba(255,255,255,.15)"/>
-                <rect x="20" y="0" width="80" height="7" fill="rgba(255,255,255,.2)"/>
-                <rect x="22" y="10" width="17" height="13" rx="1" fill="rgba(255,255,255,.2)"/>
-                <rect x="41" y="10" width="17" height="13" rx="1" fill="rgba(255,255,255,.2)"/>
-                <rect x="60" y="10" width="17" height="13" rx="1" fill="rgba(255,255,255,.2)"/>
-                <rect x="79" y="10" width="19" height="13" rx="1" fill="rgba(255,255,255,.2)"/>
-                <rect x="25" y="17" width="8" height="3" rx="1" fill="rgba(255,255,255,.5)"/>
-                <rect x="44" y="17" width="8" height="3" rx="1" fill="rgba(255,255,255,.5)"/>
-                <rect x="63" y="17" width="8" height="3" rx="1" fill="rgba(255,255,255,.5)"/>
-                <rect x="82" y="17" width="8" height="3" rx="1" fill="rgba(255,255,255,.5)"/>
-                <rect x="22" y="26" width="47" height="28" rx="2" fill="rgba(255,255,255,.12)"/>
-                <polyline points="24,50 30,43 37,46 43,39 49,44 56,35 67,41" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
-                <rect x="71" y="26" width="27" height="28" rx="2" fill="rgba(255,255,255,.12)"/>
-                <circle cx="84" cy="40" r="9" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="4"/>
-                <path d="M84,31 a9,9 0 0,1 7.8,4.5" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="4"/>
+                <rect x="0" y="0" width="20" height="60" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="3" y="4" width="14" height="3" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
+                <rect x="3" y="9" width="14" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".25"/>
+                <rect x="3" y="13" width="14" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="3" y="17" width="14" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="20" y="0" width="80" height="7" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="22" y="10" width="17" height="13" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="41" y="10" width="17" height="13" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="60" y="10" width="17" height="13" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="79" y="10" width="19" height="13" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="25" y="17" width="8" height="3" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
+                <rect x="44" y="17" width="8" height="3" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
+                <rect x="63" y="17" width="8" height="3" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
+                <rect x="82" y="17" width="8" height="3" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
+                <rect x="22" y="26" width="47" height="28" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".12"/>
+                <polyline points="24,50 30,43 37,46 43,39 49,44 56,35 67,41" fill="none" stroke="var(--wx-text-on-brand)" stroke-opacity=".55" stroke-width="1.5"/>
+                <rect x="71" y="26" width="27" height="28" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".12"/>
+                <circle cx="84" cy="40" r="9" fill="none" stroke="var(--wx-text-on-brand)" stroke-opacity=".3" stroke-width="4"/>
+                <path d="M84,31 a9,9 0 0,1 7.8,4.5" fill="none" stroke="var(--wx-text-on-brand)" stroke-opacity=".7" stroke-width="4"/>
               </template>
               <template v-else>
-                <rect x="0" y="0" width="22" height="60" rx="1" fill="rgba(255,255,255,.12)"/>
-                <rect x="3" y="4" width="16" height="3" rx="1" fill="rgba(255,255,255,.5)"/>
-                <rect x="3" y="10" width="16" height="2" rx="1" fill="rgba(255,255,255,.3)"/>
-                <rect x="3" y="14" width="16" height="2" rx="1" fill="rgba(255,255,255,.3)"/>
-                <rect x="3" y="18" width="16" height="2" rx="1" fill="rgba(255,255,255,.2)"/>
-                <rect x="3" y="22" width="16" height="2" rx="1" fill="rgba(255,255,255,.2)"/>
-                <rect x="26" y="2" width="19" height="12" rx="2" fill="rgba(255,255,255,.22)"/>
-                <rect x="49" y="2" width="19" height="12" rx="2" fill="rgba(255,255,255,.22)"/>
-                <rect x="72" y="2" width="19" height="12" rx="2" fill="rgba(255,255,255,.22)"/>
-                <rect x="26" y="18" width="65" height="16" rx="2" fill="rgba(255,255,255,.15)"/>
-                <rect x="26" y="38" width="30" height="10" rx="2" fill="rgba(255,255,255,.15)"/>
-                <rect x="60" y="38" width="31" height="10" rx="2" fill="rgba(255,255,255,.15)"/>
+                <rect x="0" y="0" width="22" height="60" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".12"/>
+                <rect x="3" y="4" width="16" height="3" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".5"/>
+                <rect x="3" y="10" width="16" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".3"/>
+                <rect x="3" y="14" width="16" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".3"/>
+                <rect x="3" y="18" width="16" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="3" y="22" width="16" height="2" rx="1" fill="var(--wx-text-on-brand)" fill-opacity=".2"/>
+                <rect x="26" y="2" width="19" height="12" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".22"/>
+                <rect x="49" y="2" width="19" height="12" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".22"/>
+                <rect x="72" y="2" width="19" height="12" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".22"/>
+                <rect x="26" y="18" width="65" height="16" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="26" y="38" width="30" height="10" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
+                <rect x="60" y="38" width="31" height="10" rx="2" fill="var(--wx-text-on-brand)" fill-opacity=".15"/>
               </template>
             </svg>
 
@@ -395,7 +395,7 @@ function viewDemo(card: FlatCard, e: Event) {
           </div>
           <div class="pm__section">
             <div class="pm__label">Import</div>
-            <pre class="pm__pre">{{ promptCard.variant.components.map(c => `import { ${c} } from '@wemake/ui'`).join('\n') }}</pre>
+            <pre class="pm__pre">{{ promptCard.variant.components.map(c => `import { ${c} } from '@mind/ui'`).join('\n') }}</pre>
           </div>
           <div class="pm__foot">
             <button class="pm__copy" @click="copyCode">
@@ -531,16 +531,16 @@ function viewDemo(card: FlatCard, e: Event) {
 }
 .ctab:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); }
 .ctab--on {
-  background: var(--ctab-color, var(--wx-brand-primary));
-  color: #fff;
-  border-color: var(--ctab-color, var(--wx-brand-primary));
+  background: var(--ctab-color, var(--wx-brand-solid));
+  color: var(--wx-text-on-brand);
+  border-color: var(--ctab-color, var(--wx-brand-solid));
 }
 .ctab__dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 .ctab__n {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 18px; height: 16px; padding: 0 var(--wx-space-1);
   border-radius: var(--wx-radius-full); font-size: 10px; font-weight: var(--wx-fw-bold);
-  background: rgba(255,255,255,.22);
+  background: color-mix(in srgb, var(--wx-text-on-brand) 22%, transparent);
 }
 .ctab:not(.ctab--on) .ctab__n { background: var(--wx-surface-sunken); color: var(--wx-text-muted); }
 
@@ -619,7 +619,7 @@ function viewDemo(card: FlatCard, e: Event) {
   border-radius: var(--wx-radius-full);
   font-size: 10px; font-weight: var(--wx-fw-semibold);
   font-family: var(--wx-font-primary);
-  color: #fff;
+  color: var(--wx-text-on-brand);
   backdrop-filter: blur(8px);
   border: 1px solid;
   white-space: nowrap;
@@ -629,8 +629,8 @@ function viewDemo(card: FlatCard, e: Event) {
 .tcard__mode {
   padding: 2px 7px;
   border-radius: var(--wx-radius-full);
-  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
-  color: rgba(255,255,255,.9); font-size: 10px;
+  background: color-mix(in srgb, var(--wx-text-on-brand) 18%, transparent); backdrop-filter: blur(6px);
+  color: color-mix(in srgb, var(--wx-text-on-brand) 90%, transparent); font-size: 10px;
   font-family: var(--wx-font-primary); font-weight: var(--wx-fw-medium);
   text-transform: capitalize; flex-shrink: 0;
 }
@@ -640,12 +640,12 @@ function viewDemo(card: FlatCard, e: Event) {
   font-size: 10px; font-weight: var(--wx-fw-bold); font-family: var(--wx-font-mono);
   backdrop-filter: blur(6px);
 }
-.tcard__status--ready { background: rgba(22,163,74,.25); color: #bbf7d0; }
-.tcard__status--draft { background: rgba(0,0,0,.3); color: rgba(255,255,255,.55); }
+.tcard__status--ready { background: color-mix(in srgb, var(--wx-success-solid) 25%, transparent); color: color-mix(in srgb, var(--wx-success-solid) 35%, var(--wx-text-on-brand)); }
+.tcard__status--draft { background: color-mix(in srgb, var(--wx-backdrop-bg) 60%, transparent); color: color-mix(in srgb, var(--wx-text-on-brand) 55%, transparent); }
 
 /* Hover overlay */
 .tcard__overlay {
-  position: absolute; inset: 0; background: rgba(0,0,0,.5);
+  position: absolute; inset: 0; background: var(--wx-backdrop-bg);
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--wx-space-2);
   opacity: 0;
   transition: opacity var(--wx-d-fast) var(--wx-ease-standard);
@@ -665,14 +665,14 @@ function viewDemo(card: FlatCard, e: Event) {
 }
 .tcard:hover .tcard__btn              { transform: translateY(0); }
 .tcard:hover .tcard__btn:nth-child(2) { transition-delay: 60ms; }
-.tcard__btn--primary { background: var(--wx-gradient-button); color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+.tcard__btn--primary { background: var(--wx-gradient-button); color: var(--wx-text-on-brand); box-shadow: var(--wx-shadow-md); }
 .tcard__btn--primary:hover:not(:disabled) { filter: brightness(1.1); }
 .tcard__btn--primary:disabled { opacity: .5; cursor: not-allowed; }
 .tcard__btn--ghost {
-  background: rgba(255,255,255,.15); color: #fff;
-  border: 1px solid rgba(255,255,255,.3); backdrop-filter: blur(4px);
+  background: color-mix(in srgb, var(--wx-text-on-brand) 15%, transparent); color: var(--wx-text-on-brand);
+  border: 1px solid color-mix(in srgb, var(--wx-text-on-brand) 30%, transparent); backdrop-filter: blur(4px);
 }
-.tcard__btn--ghost:hover { background: rgba(255,255,255,.25); }
+.tcard__btn--ghost:hover { background: color-mix(in srgb, var(--wx-text-on-brand) 25%, transparent); }
 
 /* Card body */
 .tcard__body {
@@ -774,12 +774,12 @@ function viewDemo(card: FlatCard, e: Event) {
 }
 
 /* ── Prompt modal ── */
-.pm-back { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: var(--wx-space-4); }
+.pm-back { position: fixed; inset: 0; background: var(--wx-backdrop-bg); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: var(--wx-space-4); }
 .pm {
   background: var(--wx-surface-elevated); border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-2xl); width: 100%; max-width: 540px; max-height: 86vh;
   overflow-y: auto; display: flex; flex-direction: column;
-  box-shadow: 0 24px 64px -12px rgba(0,0,0,.25);
+  box-shadow: var(--wx-shadow-2xl);
 }
 .pm__head {
   display: flex; align-items: flex-start; justify-content: space-between;
@@ -805,6 +805,6 @@ function viewDemo(card: FlatCard, e: Event) {
 .pm__foot { display: flex; align-items: center; gap: var(--wx-space-3); padding: var(--wx-space-4) var(--wx-space-5); border-top: 1px solid var(--wx-border-default); background: var(--wx-surface-sunken); border-radius: 0 0 var(--wx-radius-2xl) var(--wx-radius-2xl); }
 .pm__copy { display: inline-flex; align-items: center; gap: 6px; padding: var(--wx-space-2) 18px; border-radius: var(--wx-radius-lg); border: 1px solid var(--wx-border-default); background: var(--wx-surface-elevated); font-size: var(--wx-fs-13); font-family: var(--wx-font-primary); font-weight: var(--wx-fw-medium); color: var(--wx-text-primary); cursor: pointer; transition: background var(--wx-d-fast); }
 .pm__copy:hover { background: var(--wx-hover-bg); }
-.pm__demo { display: inline-flex; align-items: center; gap: 6px; padding: var(--wx-space-2) 18px; border-radius: var(--wx-radius-lg); border: none; background: var(--wx-gradient-button); color: #fff; font-size: var(--wx-fs-13); font-family: var(--wx-font-primary); font-weight: var(--wx-fw-semibold); cursor: pointer; transition: filter var(--wx-d-fast); }
+.pm__demo { display: inline-flex; align-items: center; gap: 6px; padding: var(--wx-space-2) 18px; border-radius: var(--wx-radius-lg); border: none; background: var(--wx-gradient-button); color: var(--wx-text-on-brand); font-size: var(--wx-fs-13); font-family: var(--wx-font-primary); font-weight: var(--wx-fw-semibold); cursor: pointer; transition: filter var(--wx-d-fast); }
 .pm__demo:hover { filter: brightness(1.08); }
 </style>

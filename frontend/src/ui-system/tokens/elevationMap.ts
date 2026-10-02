@@ -1,15 +1,26 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  WemakeUI — Elevation (shadow) → use case mapping
+ *  MindUI — Elevation (shadow) → use case mapping
  *
  *  CSS vars: --wx-shadow-sm | md | lg | xl | 2xl | brand | focus
  * ═══════════════════════════════════════════════════════════════
  */
 
-export type ShadowKey = 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'brand' | 'focus'
+export type ShadowKey =
+  | 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'brand' | 'focus' | 'lift'
+  | 'btn' | 'btn-hover' | 'popover' | 'menu' | 'toast' | 'card-soft' | 'inset' | 'tile' | 'tooltip'
 
 /** Use-case → shadow mapping. Always reference via this map. */
 export const componentShadow = {
+  buttonSolid:       'btn',
+  buttonSolidHover:  'btn-hover',
+  formPanel:         'popover',
+  selectMenu:        'menu',
+  toastCard:         'toast',
+  cardSoft:          'card-soft',
+  insetField:        'inset',
+  iconTile:          'tile',
+  tooltipPanel:      'tooltip',
   inputFocused:    'sm',
   divider:         'sm',
   cardDefault:     'md',

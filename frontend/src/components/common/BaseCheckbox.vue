@@ -97,8 +97,8 @@ watch(() => props.indeterminate, (val) => {
   width: 16px;
   height: 16px;
   border-radius: var(--wx-radius-sm);
-  border: 1.5px solid var(--wx-border-default);
-  background: var(--wx-surface-sunken);
+  border: 1.5px solid var(--wx-border-check, var(--wx-border-control));
+  background: var(--wx-surface-elevated);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,14 +110,19 @@ watch(() => props.indeterminate, (val) => {
     box-shadow var(--wx-duration-fast) var(--wx-ease-standard);
 }
 
+.base-checkbox:hover .chk-box:not(.chk-box--checked):not(.chk-box--indeterminate) {
+  border-color: var(--wx-text-muted);
+}
+
 .chk-box--checked,
 .chk-box--indeterminate {
-  border-color: var(--wx-brand-primary);
-  background: var(--wx-brand-primary);
+  border-color: var(--wx-brand-600);
+  background: var(--wx-gradient-primary);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--wx-brand-600) 30%, transparent);
 }
 
 .chk-icon {
-  color: #fff;
+  color: var(--wx-text-on-brand);
   animation: chk-pop var(--wx-duration-fast) var(--wx-ease-decelerate);
 }
 @keyframes chk-pop {
@@ -128,7 +133,7 @@ watch(() => props.indeterminate, (val) => {
 /* focus ring via label:focus-within */
 .base-checkbox:focus-within .chk-box {
   outline: none;
-  box-shadow: var(--wx-shadow-focus);
+  box-shadow: var(--wx-ring-focus);
 }
 
 .chk-text {

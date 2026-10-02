@@ -103,7 +103,7 @@ import DevPanel from './components/debug/DevPanel.vue'
 </template>
 
 <style scoped>
-.dp-showcase { max-width: 860px; display: flex; flex-direction: column; gap: var(--wx-space-6); }
+.dp-showcase { max-width: 860px; margin: 0 auto; padding: var(--wx-space-6) var(--wx-space-5) var(--wx-space-10); display: flex; flex-direction: column; gap: var(--wx-space-6); }
 .page-title { font-size: var(--wx-fs-28); font-weight: var(--wx-fw-bold); margin: 0; }
 .page-desc { font-size: var(--wx-fs-15); color: var(--wx-content-secondary); margin: 0; line-height: 1.6; }
 .page-desc code { font-family: var(--wx-font-mono); font-size: 0.9em; background: var(--wx-bg-sunken); padding: 1px 5px; border-radius: 4px; }
@@ -123,7 +123,7 @@ import DevPanel from './components/debug/DevPanel.vue'
 .shortcut-keys { display: flex; align-items: center; gap: var(--wx-space-1); min-width: 200px; }
 .shortcut-label { font-size: var(--wx-fs-14); color: var(--wx-content-secondary); }
 kbd { font-family: var(--wx-font-mono); font-size: var(--wx-fs-12); background: var(--wx-bg-sunken); border: 1px solid var(--wx-border-default); border-radius: 4px; padding: 3px var(--wx-space-2); color: var(--wx-content-primary); }
-.fab-preview { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--wx-brand-600); color: #fff; border-radius: 50%; font-size: 16px; }
+.fab-preview { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--wx-brand-600); color: var(--wx-text-on-brand); border-radius: 50%; font-size: 16px; }
 
 /*
  * Code sample + Network Monitor demo panel dùng chung palette terminal

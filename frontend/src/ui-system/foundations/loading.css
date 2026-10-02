@@ -89,6 +89,7 @@
   .wx-retry__spinner       { animation-duration: 1.2s !important; animation-iteration-count: infinite !important; }
   .wx-job__icon-glyph--spin { animation-duration: 1.5s !important; animation-iteration-count: infinite !important; }
   .wx-job__progress[data-indeterminate='true'] .wx-job__progress-bar { animation-duration: 2.4s !important; animation-iteration-count: infinite !important; }
+  .wx-liquid__scanner      { animation-duration: 2.4s !important; animation-iteration-count: infinite !important; }
   /* pulse / blink / shake — decorative, để chúng dừng theo reduced-motion */
   .wx-live__dot::after,
   .wx-live[data-status='connecting'] .wx-live__dot       { animation: none !important; }

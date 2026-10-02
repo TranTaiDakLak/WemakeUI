@@ -141,7 +141,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
   }
 }
 
-/* Lightbox */
+/* Lightbox — lớp phủ tối cố định (không đổi theo theme): nền/bóng đen giữ nguyên, chữ/nút trắng theo --wx-text-on-brand */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -174,14 +174,14 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
   display: flex;
   align-items: center;
   gap: var(--wx-space-3);
-  color: rgba(255, 255, 255, 0.9);
+  color: color-mix(in srgb, var(--wx-text-on-brand) 90%, transparent);
   font-size: 13px;
   margin: 0;
 }
 
 .lightbox-counter {
   font-family: var(--wx-font-mono);
-  color: rgba(255, 255, 255, 0.5);
+  color: color-mix(in srgb, var(--wx-text-on-brand) 50%, transparent);
 }
 
 .lightbox-btn {
@@ -192,8 +192,8 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
   width: 44px;
   height: 44px;
   border: none;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
+  background: color-mix(in srgb, var(--wx-text-on-brand) 15%, transparent);
+  color: var(--wx-text-on-brand);
   font-size: 28px;
   cursor: pointer;
   border-radius: var(--wx-radius-full);
@@ -204,7 +204,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
 }
 
 .lightbox-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: color-mix(in srgb, var(--wx-text-on-brand) 25%, transparent);
   transform: scale(1.05);
 }
 

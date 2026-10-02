@@ -26,7 +26,7 @@ const PARTNERS = [
 
     <main>
       <div class="partners-hero" v-reveal>
-        <h1 class="partners-hero__title">Đối tác của Wemake</h1>
+        <h1 class="partners-hero__title">Đối tác của Mind</h1>
         <p class="partners-hero__sub">Chúng tôi hợp tác với các doanh nghiệp hàng đầu Việt Nam để mang lại giải pháp tốt nhất.</p>
       </div>
 
@@ -55,7 +55,7 @@ const PARTNERS = [
 
         <!-- become a partner -->
         <div class="partner-join" v-reveal>
-          <h2 class="partner-join__title">Trở thành đối tác của Wemake</h2>
+          <h2 class="partner-join__title">Trở thành đối tác của Mind</h2>
           <p class="partner-join__sub">Cùng xây dựng hệ sinh thái tự động hóa đa kênh mạnh mẽ nhất Đông Nam Á.</p>
           <RouterLink to="/contact" class="partner-join__btn">Đăng ký hợp tác</RouterLink>
         </div>
@@ -81,7 +81,7 @@ const PARTNERS = [
 }
 .partners-hero__sub { font-size: var(--wx-fs-18); color: var(--wx-text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.7; }
 
-.partners-container { max-width: 1200px; margin: 0 auto; padding: 0 var(--wx-space-6) var(--wx-space-10); }
+.partners-container { max-width: 1200px; margin: 0 auto; padding: var(--wx-space-8) var(--wx-space-6) var(--wx-space-10); }
 .partners-grid {
   display: grid;
   gap: var(--wx-space-5);
@@ -130,7 +130,7 @@ const PARTNERS = [
   background: color-mix(in srgb, var(--wx-brand-primary) 6%, var(--wx-surface-base));
   border: 1px solid color-mix(in srgb, var(--wx-brand-primary) 20%, transparent);
   border-radius: var(--wx-radius-2xl);
-  padding: var(--wx-space-12);
+  padding: var(--wx-space-9) var(--wx-space-6);
   text-align: center;
 }
 .partner-join__title { font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: var(--wx-text-primary); margin: 0 0 var(--wx-space-3); }
@@ -138,7 +138,7 @@ const PARTNERS = [
 .partner-join__btn {
   display: inline-flex; align-items: center; justify-content: center;
   padding: var(--wx-space-3) var(--wx-space-8);
-  background: var(--wx-brand-primary); color: var(--wx-text-on-brand);
+  background: var(--wx-brand-600); color: var(--wx-text-on-brand);
   border-radius: var(--wx-radius-lg);
   font-size: var(--wx-fs-16); font-weight: 600;
   text-decoration: none;

@@ -14,11 +14,11 @@ const cohorts = [
 ]
 
 const plans = [
-  { name: 'Free',     count: 1842, mrr: '0₫',         color: '#94a3b8' },
-  { name: 'Starter',  count: 624,  mrr: '124tr',      color: '#60a5fa' },
-  { name: 'Pro',      count: 248,  mrr: '298tr',      color: '#2563eb' },
-  { name: 'Business', count: 84,   mrr: '420tr',      color: '#7c3aed' },
-  { name: 'Enterprise', count: 18, mrr: '720tr',      color: '#0f172a' },
+  { name: 'Free',     count: 1842, mrr: '0₫',         color: 'var(--wx-chart-muted)' },
+  { name: 'Starter',  count: 624,  mrr: '124tr',      color: 'var(--wx-brand-400)' },
+  { name: 'Pro',      count: 248,  mrr: '298tr',      color: 'var(--wx-brand-600)' },
+  { name: 'Business', count: 84,   mrr: '420tr',      color: 'var(--wx-chart-6)' },
+  { name: 'Enterprise', count: 18, mrr: '720tr',      color: 'var(--wx-text-primary)' },
 ]
 const totalMrr = '1.562 triệu'
 </script>
@@ -39,25 +39,25 @@ const totalMrr = '1.562 triệu'
         <div class="m-label">MRR</div>
         <div class="m-value">{{ totalMrr }}</div>
         <BaseTag size="sm" variant="success" label="+12.4% m-m" />
-        <svg class="spark" viewBox="0 0 120 32"><path :d="sparkArea([...seriesUp], 120, 32, 2)" fill="rgba(37,99,235,0.18)" /><path :d="sparkPath([...seriesUp], 120, 32, 2)" stroke="#2563eb" stroke-width="1.5" fill="none" /></svg>
+        <svg class="spark" viewBox="0 0 120 32"><path :d="sparkArea([...seriesUp], 120, 32, 2)" fill="var(--wx-chart-1)" fill-opacity="0.18" /><path :d="sparkPath([...seriesUp], 120, 32, 2)" stroke="var(--wx-chart-1)" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">ARR</div>
         <div class="m-value">18,7 tỷ</div>
         <BaseTag size="sm" variant="success" label="+28% y-y" />
-        <svg class="spark" viewBox="0 0 120 32"><path :d="sparkPath([...seriesUp], 120, 32, 2)" stroke="#10b981" stroke-width="1.5" fill="none" /></svg>
+        <svg class="spark" viewBox="0 0 120 32"><path :d="sparkPath([...seriesUp], 120, 32, 2)" stroke="var(--wx-chart-3)" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">Churn rate</div>
         <div class="m-value">3.2%</div>
         <BaseTag size="sm" variant="warning" label="+0.4%" />
-        <svg class="spark" viewBox="0 0 120 32"><path :d="sparkPath([...seriesDown], 120, 32, 2)" stroke="#ef4444" stroke-width="1.5" fill="none" /></svg>
+        <svg class="spark" viewBox="0 0 120 32"><path :d="sparkPath([...seriesDown], 120, 32, 2)" stroke="var(--wx-chart-5)" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
       <BaseCard padded shadow="sm">
         <div class="m-label">NPS</div>
         <div class="m-value">62</div>
         <BaseTag size="sm" variant="success" label="+4 điểm" />
-        <svg class="spark" viewBox="0 0 120 32"><path :d="sparkPath([...seriesFlat], 120, 32, 2)" stroke="#94a3b8" stroke-width="1.5" fill="none" /></svg>
+        <svg class="spark" viewBox="0 0 120 32"><path :d="sparkPath([...seriesFlat], 120, 32, 2)" stroke="var(--wx-chart-muted)" stroke-width="1.5" fill="none" /></svg>
       </BaseCard>
     </div>
 
@@ -66,9 +66,9 @@ const totalMrr = '1.562 triệu'
         <svg class="big-chart" viewBox="0 0 600 220" preserveAspectRatio="none">
           <path :d="sparkArea([...seriesUp, ...seriesUp], 600, 220, 12)" fill="color-mix(in srgb, var(--wx-brand-primary) 15%, transparent)" />
           <path :d="sparkPath([...seriesUp, ...seriesUp], 600, 220, 12)" stroke="var(--wx-brand-primary)" stroke-width="2" fill="none" />
-          <path :d="sparkPath([...seriesFlat, ...seriesFlat], 600, 220, 12)" stroke="#94a3b8" stroke-dasharray="4 4" stroke-width="1.5" fill="none" />
+          <path :d="sparkPath([...seriesFlat, ...seriesFlat], 600, 220, 12)" stroke="var(--wx-chart-muted)" stroke-dasharray="4 4" stroke-width="1.5" fill="none" />
         </svg>
-        <div class="legend"><LegendDot color="var(--wx-brand-primary)" class="legend-dot-gap" /> Thực tế <LegendDot color="#94a3b8" class="legend-dot-gap" /> Mục tiêu</div>
+        <div class="legend"><LegendDot color="var(--wx-brand-primary)" class="legend-dot-gap" /> Thực tế <LegendDot color="var(--wx-chart-muted)" class="legend-dot-gap" /> Mục tiêu</div>
       </BaseCard>
 
       <BasePanel title="Phân bổ gói" tone="default">
@@ -95,9 +95,9 @@ const totalMrr = '1.562 triệu'
           <tr v-for="c in cohorts" :key="c.month">
             <td>{{ c.month }}</td>
             <td><strong>{{ c.new }}</strong></td>
-            <td><div class="cell" :style="{ background: `rgba(37,99,235,${c.retain / 100})` }">{{ c.retain }}%</div></td>
-            <td><div class="cell" :style="{ background: `rgba(37,99,235,${(c.retain - 5) / 100})` }">{{ Math.max(0, c.retain - 5) }}%</div></td>
-            <td><div class="cell" :style="{ background: `rgba(37,99,235,${(c.retain - 12) / 100})` }">{{ Math.max(0, c.retain - 12) }}%</div></td>
+            <td><div class="cell" :style="{ background: `color-mix(in srgb, var(--wx-brand-solid) ${Math.round((c.retain / 100) * 100)}%, transparent)` }">{{ c.retain }}%</div></td>
+            <td><div class="cell" :style="{ background: `color-mix(in srgb, var(--wx-brand-solid) ${Math.round(((c.retain - 5) / 100) * 100)}%, transparent)` }">{{ Math.max(0, c.retain - 5) }}%</div></td>
+            <td><div class="cell" :style="{ background: `color-mix(in srgb, var(--wx-brand-solid) ${Math.round(((c.retain - 12) / 100) * 100)}%, transparent)` }">{{ Math.max(0, c.retain - 12) }}%</div></td>
             <td><BaseTag :variant="c.churn > 12 ? 'warning' : 'success'" :label="`${c.churn}%`" size="sm" /></td>
           </tr>
         </tbody>
@@ -146,7 +146,7 @@ const totalMrr = '1.562 triệu'
   display: inline-block;
   padding: 2px var(--wx-space-2);
   border-radius: var(--wx-radius-sm);
-  color: white;
+  color: var(--wx-text-on-brand);
   font-weight: var(--wx-fw-semibold);
   min-width: 40px;
   text-align: center;

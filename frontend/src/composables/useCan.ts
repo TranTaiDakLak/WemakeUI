@@ -3,7 +3,7 @@ import { computed, reactive } from 'vue'
 /**
  * useCan — RBAC check `resource.action`.
  *
- * 5 vai trò mặc định (theo WEMAKEUI.md §5.6): owner > admin > member > viewer > guest.
+ * 5 vai trò mặc định (theo MINDUI.md §5.6): owner > admin > member > viewer > guest.
  * Permission strings dạng `team.invite`, `invoice.create`…
  *
  * Pattern singleton — gọi `setRoles([...])` 1 lần khi user login, sau đó mọi `useCan()`

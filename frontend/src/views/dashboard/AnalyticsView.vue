@@ -70,8 +70,8 @@ function intensity(d: number, h: number): number {
     <div class="cols" v-reveal>
       <BaseCard title="Lượt xem theo giờ" padded shadow="sm">
         <svg class="chart" viewBox="0 0 600 220" preserveAspectRatio="none">
-          <path :d="sparkArea([...seriesVolatile, ...seriesUp, ...seriesVolatile], 600, 220, 8)" fill="rgba(37,99,235,0.15)" />
-          <path :d="sparkPath([...seriesVolatile, ...seriesUp, ...seriesVolatile], 600, 220, 8)" fill="none" stroke="#2563eb" stroke-width="2" />
+          <path :d="sparkArea([...seriesVolatile, ...seriesUp, ...seriesVolatile], 600, 220, 8)" fill="var(--wx-chart-1)" fill-opacity="0.15" />
+          <path :d="sparkPath([...seriesVolatile, ...seriesUp, ...seriesVolatile], 600, 220, 8)" fill="none" stroke="var(--wx-chart-1)" stroke-width="2" />
         </svg>
       </BaseCard>
 
@@ -114,7 +114,7 @@ function intensity(d: number, h: number): number {
               v-for="h in 24"
               :key="h"
               class="hm-cell"
-              :style="{ background: `rgba(37,99,235,${intensity(d - 1, h - 1)})` }"
+              :style="{ background: `color-mix(in srgb, var(--wx-brand-solid) ${Math.round((intensity(d - 1, h - 1)) * 100)}%, transparent)` }"
               :title="`${days[d-1]} ${h-1}h: ${Math.round(intensity(d-1, h-1) * 1200)} lượt`"
             />
           </div>
@@ -173,7 +173,7 @@ function intensity(d: number, h: number): number {
 }
 .funnel-bar {
   background: var(--wx-gradient-button);
-  color: white;
+  color: var(--wx-text-on-brand);
   padding: var(--wx-space-2) var(--wx-space-3);
   border-radius: var(--wx-radius-md);
   display: flex;
@@ -206,7 +206,7 @@ function intensity(d: number, h: number): number {
   aspect-ratio: 1;
   border-radius: 2px;
   min-height: 14px;
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 1px solid color-mix(in srgb, var(--wx-surface-base) 50%, transparent);
 }
 .hm-xax {
   grid-column: 2;

@@ -27,7 +27,7 @@ const items: TimelineItem[] = [
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI · Timeline" subtitle="Phase 4 — data display" />
+    <AppTopbar title="MindUI · Timeline" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="Timeline / Activity feed" description="Vertical timeline group theo ngày (Hôm nay / Hôm qua / ...). 5 variant màu.">
       </PageHeader>

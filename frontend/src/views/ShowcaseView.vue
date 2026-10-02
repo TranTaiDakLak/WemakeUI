@@ -94,7 +94,7 @@ const inputDemo = reactive({
   text: '',
   password: 'secret123',
   number: 42,
-  email: 'demo@wemake.vn',
+  email: 'demo@mind.vn',
   errorField: '',
   selectVal: 'pro',
   selectGroupVal: 'apple',
@@ -156,29 +156,41 @@ const countryOpts = [
 ]
 
 /* ── DataGrid state ──────────────────────────────────── */
+/* Dữ liệu demo trung tính (đơn hàng). Nhãn trạng thái được map sang tông chấm qua prop `statusMap` của BaseDataGrid. */
 const gridColumns = ref<ColumnConfig[]>([
-  { key: 'username', label: 'Tài khoản', visible: true, group: 'main', width: '160px', sortable: true },
+  { key: 'code', label: 'Mã đơn', visible: true, group: 'main', width: '140px', sortable: true },
+  { key: 'customer', label: 'Khách hàng', visible: true, group: 'main', width: '180px', sortable: true },
   { key: 'email', label: 'Email', visible: true, group: 'main', width: '220px', sortable: true },
-  { key: 'role', label: 'Vai trò', visible: true, group: 'main', width: '120px' },
-  { key: 'status', label: 'Trạng thái', visible: true, group: 'main', width: '120px', sortable: true },
-  { key: 'cookie', label: 'Cookie', visible: true, group: 'main', width: '80px', align: 'center' },
-  { key: 'token', label: 'Token', visible: true, group: 'main', width: '80px', align: 'center' },
-  { key: 'lastLogin', label: 'Đăng nhập cuối', visible: true, group: 'main', width: '160px', sortable: true },
+  { key: 'category', label: 'Danh mục', visible: true, group: 'main', width: '140px' },
+  { key: 'status', label: 'Trạng thái', visible: true, group: 'main', width: '130px', sortable: true },
+  { key: 'paid', label: 'Thanh toán', visible: true, group: 'main', width: '100px', align: 'center' },
+  { key: 'invoice', label: 'Hoá đơn', visible: true, group: 'main', width: '90px', align: 'center' },
+  { key: 'updatedAt', label: 'Cập nhật cuối', visible: true, group: 'main', width: '160px', sortable: true },
 ])
 
+/** Nhãn trạng thái → tông chấm (live = xanh · cp = vàng · idle = xám · die = đỏ). */
+const GRID_STATUS_TONES: Record<string, 'live' | 'die' | 'cp' | 'idle'> = {
+  'Hoạt động': 'live',
+  'Chờ duyệt': 'cp',
+  'Tạm dừng': 'idle',
+  'Đã huỷ': 'die',
+}
+const GRID_STATUSES = Object.keys(GRID_STATUS_TONES)
+const GRID_CUSTOMERS = ['Nguyễn Văn An', 'Trần Thị Bình', 'Lê Hoàng Cường', 'Phạm Minh Đức', 'Võ Thanh Hà', 'Đặng Quốc Khánh']
+const GRID_CATEGORIES = ['Văn phòng phẩm', 'Điện tử', 'Gia dụng', 'Thời trang']
+
 function generateRows(n: number) {
-  const statuses = ['Live', 'Die', 'Checkpoint']
-  const roles = ['Admin', 'Editor', 'Viewer', 'Guest']
   const out = []
   for (let i = 0; i < n; i++) {
     out.push({
-      username: `user${(i + 1).toString().padStart(3, '0')}`,
-      email: `user${i + 1}@wemake.vn`,
-      role: roles[i % roles.length],
-      status: statuses[i % statuses.length],
-      cookie: i % 3 === 0 ? '✓' : '✗',
-      token: i % 2 === 0 ? '✓' : '✗',
-      lastLogin: `2026-05-${((i % 28) + 1).toString().padStart(2, '0')}`,
+      code: `DH-${(i + 1).toString().padStart(4, '0')}`,
+      customer: GRID_CUSTOMERS[i % GRID_CUSTOMERS.length],
+      email: `khach${i + 1}@mind.vn`,
+      category: GRID_CATEGORIES[i % GRID_CATEGORIES.length],
+      status: GRID_STATUSES[i % GRID_STATUSES.length],
+      paid: i % 3 === 0 ? '✓' : '✗',
+      invoice: i % 2 === 0 ? '✓' : '✗',
+      updatedAt: `2026-05-${((i % 28) + 1).toString().padStart(2, '0')}`,
       chose: false,
     })
   }
@@ -309,7 +321,7 @@ const sampleStats: GridStats = {
 }
 
 /* ── Clipboard demo ──────────────────────────────────── */
-const cbText = ref('Hello WemakeUI!')
+const cbText = ref('Hello MindUI!')
 
 function quickCopy() {
   if (copyToClipboard(cbText.value)) {
@@ -324,7 +336,7 @@ onMounted(() => {
 
 <template>
   <div class="showcase">
-    <AppTopbar title="WemakeUI" subtitle="Cross-platform Vue 3 UI Kit" />
+    <AppTopbar title="MindUI" subtitle="Cross-platform Vue 3 UI Kit" />
 
     <main class="showcase-main">
       <PageHeader
@@ -654,7 +666,7 @@ onMounted(() => {
             <BaseInput model-value="Nguyễn Văn A" size="sm" />
           </FormField>
           <FormField label="Email">
-            <BaseInput model-value="user@wemake.vn" size="sm" />
+            <BaseInput model-value="user@mind.vn" size="sm" />
           </FormField>
           <FormField label="Múi giờ">
             <BaseSelectMenu :model-value="'vn'" :options="countryOpts" size="sm" />
@@ -691,6 +703,7 @@ onMounted(() => {
             <BaseDataGrid
               :columns="gridColumns"
               :rows="gridRows"
+              :status-map="GRID_STATUS_TONES"
               :highlighted-rows="highlightedRows"
               :selected-cells="selectedCells"
               :all-chosen="allChosen"
@@ -712,12 +725,14 @@ onMounted(() => {
           <StatusBar
             :stats="{
               total: gridRows.length,
-              live: gridRows.filter((r) => r.status === 'Live').length,
+              live: gridRows.filter((r) => r.status === 'Hoạt động').length,
               highlighted: highlightedRows.size,
               selected: selectedCells.length,
             }"
+            live-label="Hoạt động"
+            die-label="Không hoạt động"
             status-text="Sẵn sàng"
-            user-name="demo@wemake.vn"
+            user-name="demo@mind.vn"
             version="v0.1.0"
           />
         </GroupBox>
@@ -731,8 +746,8 @@ onMounted(() => {
           <div class="row">
             <BaseButton variant="success" @click="showToast('success', 'Lưu thành công!')">Success</BaseButton>
             <BaseButton variant="danger" @click="showToast('error', 'Có lỗi xảy ra.')">Error</BaseButton>
-            <BaseButton variant="primary" @click="showToast('warning', 'Cảnh báo: dữ liệu sắp đầy.')">Warning</BaseButton>
-            <BaseButton variant="secondary" @click="showToast('info', 'Thông báo: có cập nhật mới.')">Info</BaseButton>
+            <BaseButton variant="warning" @click="showToast('warning', 'Cảnh báo: dữ liệu sắp đầy.')">Warning</BaseButton>
+            <BaseButton variant="primary" @click="showToast('info', 'Thông báo: có cập nhật mới.')">Info</BaseButton>
           </div>
         </GroupBox>
 
@@ -804,7 +819,7 @@ onMounted(() => {
           <BaseModal :show="showModalLg" title="Chi tiết người dùng" size="lg" @close="showModalLg = false">
             <div class="cols-2">
               <FormField label="Tên" layout="vertical"><BaseInput model-value="Nguyễn Văn A" /></FormField>
-              <FormField label="Email" layout="vertical"><BaseInput model-value="a@wemake.vn" /></FormField>
+              <FormField label="Email" layout="vertical"><BaseInput model-value="a@mind.vn" /></FormField>
               <FormField label="Vai trò" layout="vertical"><BaseSelectMenu :model-value="'pro'" :options="planOpts" /></FormField>
               <FormField label="Quốc gia" layout="vertical"><BaseSelectMenu :model-value="'vn'" :options="countryOpts" /></FormField>
             </div>
@@ -904,8 +919,10 @@ onMounted(() => {
         <GroupBox title="StatusBar — full">
           <StatusBar
             :stats="sampleStats"
+            live-label="Hoạt động"
+            die-label="Không hoạt động"
             status-text="Đang chạy"
-            user-name="admin@wemake.vn"
+            user-name="admin@mind.vn"
             expiry-date="2026-12-31"
             version="v0.1.0"
             :progress="68"
@@ -914,7 +931,7 @@ onMounted(() => {
         </GroupBox>
 
         <GroupBox title="StatusBar — minimal (chỉ slots)">
-          <StatusBar status-text="Online">
+          <StatusBar>
             <template #left>
               <span class="muted">CPU: 23%</span>
               <span class="sep">|</span>
@@ -922,7 +939,7 @@ onMounted(() => {
             </template>
             <template #right>
               <BaseBadge dot variant="success" pulsing />
-              <span class="muted">Connected</span>
+              <span class="muted">Online · Đã kết nối</span>
             </template>
           </StatusBar>
         </GroupBox>
@@ -1090,7 +1107,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--wx-text-on-brand);
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.3px;
@@ -1121,7 +1138,7 @@ onMounted(() => {
 
 .space-bar {
   height: 12px;
-  background: linear-gradient(to right, #06b6d4, #2563eb);
+  background: var(--wx-gradient-button);
   border-radius: 4px;
 }
 

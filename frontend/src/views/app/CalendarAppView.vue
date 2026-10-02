@@ -17,6 +17,15 @@ const EVENTS: CalendarEvent[] = [
   { id: '5', title: 'Training Vue 3', start: isoDay(0), variant: 'default' },
   { id: '6', title: 'Release v0.8.0', start: isoDay(10), variant: 'info' },
 ]
+
+// Màu chấm chú giải khớp tông các variant sự kiện của BaseCalendar (không dùng màu CSS thô như blue/red)
+const LEGEND: [string, string][] = [
+  ['var(--wx-brand-500)', 'Cuộc họp'],
+  ['var(--wx-success-solid)', 'Code review'],
+  ['var(--wx-warning-solid)', 'Demo'],
+  ['var(--wx-danger-solid)', 'Nghỉ lễ'],
+  ['#8b5cf6', 'Học tập'],
+]
 </script>
 
 <template>
@@ -26,8 +35,8 @@ const EVENTS: CalendarEvent[] = [
     </template>
 
     <div class="legend-row">
-      <div v-for="[color, label] in [['blue', 'Cuộc họp'], ['green', 'Code review'], ['orange', 'Demo'], ['red', 'Nghỉ lễ'], ['purple', 'Học tập']]" :key="color" class="legend-item">
-        <span class="legend-dot" :style="`background:${color === 'orange' ? '#f59e0b' : color};`" />
+      <div v-for="[color, label] in LEGEND" :key="label" class="legend-item">
+        <span class="legend-dot" :style="{ background: color }" />
         <span>{{ label }}</span>
       </div>
     </div>

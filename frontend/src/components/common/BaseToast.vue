@@ -87,13 +87,13 @@ watch(
 .wx-toast {
   display: flex;
   align-items: center;
-  gap: var(--wx-space-3);
-  padding: var(--wx-space-3) var(--wx-space-4);
-  border-radius: 12px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--wx-radius-lg);
+  box-shadow: var(--wx-shadow-toast);
   pointer-events: auto;
   min-width: 280px;
-  font-family: var(--wx-font-primary, 'Inter', sans-serif);
+  font-family: var(--wx-font-primary);
 }
 
 /* Light mode: white card + colored left border + colored icon badge.
@@ -115,11 +115,11 @@ watch(
   flex-shrink: 0;
   width: 28px;
   height: 28px;
-  border-radius: 8px;
+  border-radius: var(--wx-radius-ctrl-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--wx-text-on-brand);
   font-size: 12px;
   font-weight: 700;
 }
@@ -135,9 +135,10 @@ watch(
 }
 
 .wx-toast__message {
-  font-size: 13px;
+  font-size: var(--wx-fs-13);
+  font-weight: var(--wx-fw-medium);
   color: var(--wx-text-primary);
-  line-height: 1.5;
+  line-height: var(--wx-lh-snug);
   margin: 0;
 }
 
@@ -146,18 +147,24 @@ watch(
   flex-shrink: 0;
   background: none;
   border: none;
-  color: var(--wx-text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--wx-text-light);
   font-size: 18px;
   cursor: pointer;
-  padding: 0 2px;
+  padding: 0;
   line-height: 1;
-  border-radius: 4px;
-  transition: all 0.2s;
+  border-radius: var(--wx-radius-ctrl-sm);
+  transition: background var(--wx-d-fast) var(--wx-ease-standard), color var(--wx-d-fast) var(--wx-ease-standard);
 }
 .wx-toast__close:hover {
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral);
   color: var(--wx-text-primary);
 }
+.wx-toast__close:focus-visible { outline: 2px solid var(--wx-brand-focus); outline-offset: -1px; }
 
 /* ── Dark mode — surface-elevated thay vì white, giữ colored left border ── */
 .wx-dark .wx-toast--success,
@@ -173,8 +180,8 @@ watch(
    in .wx-dark) — the old override here was pixel-identical, confirmed against dark-mode.css. */
 
 /* ── Transition — slide in from right ── */
-.wx-toast-enter-active { transition: all 0.3s ease-out; }
-.wx-toast-leave-active { transition: all 0.2s ease-in; }
+.wx-toast-enter-active { transition: opacity var(--wx-d-normal) var(--wx-ease-bounce), transform var(--wx-d-normal) var(--wx-ease-bounce); }
+.wx-toast-leave-active { transition: opacity var(--wx-d-fast) var(--wx-ease-accelerate), transform var(--wx-d-fast) var(--wx-ease-accelerate); }
 .wx-toast-enter-from { opacity: 0; transform: translateX(32px) scale(0.95); }
 .wx-toast-leave-to { opacity: 0; transform: translateX(32px) scale(0.95); }
 

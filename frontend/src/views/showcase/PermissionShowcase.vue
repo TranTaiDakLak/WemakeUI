@@ -63,7 +63,7 @@ const checks = computed(() => [
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="phase 5 · permission + flag" />
+    <AppTopbar title="MindUI" subtitle="phase 5 · permission + flag" />
     <main class="main">
       <PageHeader
         title="permission (RBAC) + capability (flag)"

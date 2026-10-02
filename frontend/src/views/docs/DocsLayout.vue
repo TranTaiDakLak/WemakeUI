@@ -11,7 +11,7 @@ import { docCategories } from './_registry'
 const { isDark, toggleColorScheme } = useTheme()
 const sidebarOpen = ref(false)
 
-const GITHUB_URL = 'https://github.com/TranTaiDakLak/WemakeUI'
+const GITHUB_URL = 'https://github.com/TranTaiDakLak/MindUI'
 </script>
 
 <template>
@@ -23,8 +23,8 @@ const GITHUB_URL = 'https://github.com/TranTaiDakLak/WemakeUI'
       </button>
 
       <RouterLink to="/" class="docs-brand">
-        <img src="/logo.png" alt="WemakeUI" class="docs-brand__logo" />
-        WemakeUI
+        <img src="/logo.png" alt="MindUI" class="docs-brand__logo" />
+        MindUI
       </RouterLink>
 
       <nav class="docs-nav">

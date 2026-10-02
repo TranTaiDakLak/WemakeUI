@@ -91,7 +91,7 @@ export const useDashboardStore = defineStore('dashboard', () => {
 
   /* alerts */
   const alerts = ref<DashboardAlert[]>([
-    { id: 1, text: '2 tài khoản checkpoint cần xác minh ngay', level: 'danger' },
+    { id: 1, text: '2 tài khoản cần xác minh ngay', level: 'danger' },
     { id: 2, text: '8 lỗi hệ thống trong 24h qua — xem chi tiết', level: 'warning' },
   ])
   const dismissedAlerts = ref<Set<number>>(new Set())
@@ -101,56 +101,56 @@ export const useDashboardStore = defineStore('dashboard', () => {
   /* kpis */
   const kpis = ref<KpiData[]>([
     {
-      label: 'Tài khoản Live', metric: 1284, delta: 12,
+      label: 'Tài khoản hoạt động', metric: 1284, delta: 12,
       iconEmoji: '📱', iconBg: 'green',
-      sparkline: gen(20, 1, 60, 25), sparklineColor: '#22c55e',
-      detail: '47 đang checkpoint',
-      routeTo: '/wemakeui/accounts',
+      sparkline: gen(20, 1, 60, 25), sparklineColor: 'var(--wx-success-solid)',
+      detail: '47 đang chờ xác minh',
+      routeTo: '/mindui/accounts',
     },
     {
       label: 'Phiên hôm nay', metric: 4821, delta: 8,
       iconEmoji: '🔗', iconBg: 'blue',
-      sparkline: gen(20, 2, 55, 20), sparklineColor: '#2563eb',
+      sparkline: gen(20, 2, 55, 20), sparklineColor: 'var(--wx-chart-1)',
       alert: '3 lỗi kết nối', alertLevel: 'warning',
-      routeTo: '/wemakeui/sessions',
+      routeTo: '/mindui/sessions',
     },
     {
       label: 'Chiến dịch', metric: 24, delta: 2,
       iconEmoji: '📣', iconBg: 'purple',
-      sparkline: gen(20, 3, 45, 15), sparklineColor: '#8b5cf6',
+      sparkline: gen(20, 3, 45, 15), sparklineColor: 'var(--wx-chart-6)',
       detail: '5 sắp hoàn thành',
-      routeTo: '/wemakeui/campaigns',
+      routeTo: '/mindui/campaigns',
     },
     {
       label: 'Tỷ lệ giao thành công', metric: '98.4', metricSuffix: '%', delta: -0.2,
       iconEmoji: '✅', iconBg: 'amber',
-      sparkline: gen(20, 4, 90, 8), sparklineColor: '#f59e0b',
+      sparkline: gen(20, 4, 90, 8), sparklineColor: 'var(--wx-chart-4)',
       alert: 'Kiểm tra ngay', alertLevel: 'danger',
-      routeTo: '/wemakeui/sessions',
+      routeTo: '/mindui/sessions',
     },
     {
       label: 'Tin nhắn hôm nay', metric: 142390, delta: 18,
       iconEmoji: '💬', iconBg: 'cyan',
-      sparkline: gen(20, 5, 70, 30), sparklineColor: '#06b6d4',
-      routeTo: '/wemakeui/campaigns',
+      sparkline: gen(20, 5, 70, 30), sparklineColor: 'var(--wx-chart-2)',
+      routeTo: '/mindui/campaigns',
     },
     {
       label: 'Lỗi hệ thống', metric: 8, delta: 3,
       iconEmoji: '🚨', iconBg: 'red',
-      sparkline: gen(20, 6, 30, 25), sparklineColor: '#ef4444',
+      sparkline: gen(20, 6, 30, 25), sparklineColor: 'var(--wx-chart-5)',
       alert: '2 cần xử lý gấp', alertLevel: 'danger',
     },
     {
       label: 'Task hàng đợi', metric: 12, delta: -4,
       iconEmoji: '⏳', iconBg: 'amber',
-      sparkline: gen(20, 7, 40, 18), sparklineColor: '#f59e0b',
+      sparkline: gen(20, 7, 40, 18), sparklineColor: 'var(--wx-chart-4)',
       detail: '3 đang chạy',
-      routeTo: '/wemakeui/scheduler',
+      routeTo: '/mindui/scheduler',
     },
     {
       label: 'Uptime tháng này', metric: '99.8', metricSuffix: '%', delta: 0,
       iconEmoji: '🟢', iconBg: 'slate',
-      sparkline: gen(20, 8, 92, 5), sparklineColor: '#64748b',
+      sparkline: gen(20, 8, 92, 5), sparklineColor: 'var(--wx-text-muted)',
       detail: 'SLA đạt yêu cầu',
     },
   ])
@@ -163,7 +163,7 @@ export const useDashboardStore = defineStore('dashboard', () => {
     { id: 4, msg: 'CDN endpoint /media/upload trả về 503',          time: '10:41', level: 'critical', resolving: false },
     { id: 5, msg: 'Zalo webhook delivery lag > 5s',                 time: '10:55', level: 'warning',  resolving: false },
     { id: 6, msg: 'Scheduler task #44 failed sau 3 retry',          time: '11:02', level: 'warning',  resolving: false },
-    { id: 7, msg: 'Auth token expired cho 4 tài khoản Telegram',    time: '11:10', level: 'warning',  resolving: false },
+    { id: 7, msg: 'Phiên xác thực hết hạn cho 4 tài khoản Telegram', time: '11:10', level: 'warning',  resolving: false },
     { id: 8, msg: 'Database connection pool chạm limit 100/100',    time: '11:15', level: 'critical', resolving: false },
   ])
 
@@ -183,7 +183,7 @@ export const useDashboardStore = defineStore('dashboard', () => {
     { id: 2, name: 'sync_contacts_vnpt',   error: 'API rate limit exceeded',   time: '10:58', retries: 2, retrying: false },
     { id: 3, name: 'export_report_weekly', error: 'Out of memory',             time: '10:30', retries: 1, retrying: false },
     { id: 4, name: 'webhook_zalo_deliver', error: 'Invalid signature',         time: '10:05', retries: 3, retrying: false },
-    { id: 5, name: 'auto_checkpoint_verify', error: 'Session expired during run', time: '09:42', retries: 2, retrying: false },
+    { id: 5, name: 'auto_verify_pending', error: 'Session expired during run', time: '09:42', retries: 2, retrying: false },
   ])
 
   async function retryJob(id: number, showToast: (type: ToastType, msg: string) => void) {
@@ -223,11 +223,11 @@ export const useDashboardStore = defineStore('dashboard', () => {
 
   /* pending tickets */
   const pendingTickets = ref<PendingTicket[]>([
-    { id: 101, title: 'Checkpoint tài khoản @viettel_care không giải quyết được',  priority: 'high',   created: '30 phút trước', assigning: false },
+    { id: 101, title: 'Xác minh tài khoản @viettel_care không hoàn tất được',  priority: 'high',   created: '30 phút trước', assigning: false },
     { id: 102, title: 'Zalo OA bị khoá không gửi được ZNS',                        priority: 'high',   created: '1 giờ trước',   assigning: false },
     { id: 103, title: 'Chiến dịch SMS bị nhà mạng chặn từ khoá',                   priority: 'medium', created: '2 giờ trước',   assigning: false },
     { id: 104, title: 'API Telegram bot trả về 429 liên tục',                       priority: 'medium', created: '3 giờ trước',   assigning: false },
-    { id: 105, title: 'Báo cáo tuần xuất thiếu dữ liệu tài khoản die',             priority: 'low',    created: '5 giờ trước',   assigning: false },
+    { id: 105, title: 'Báo cáo tuần xuất thiếu dữ liệu tài khoản ngắt kết nối',             priority: 'low',    created: '5 giờ trước',   assigning: false },
   ])
 
   async function assignTicket(id: number, showToast: (type: ToastType, msg: string) => void) {

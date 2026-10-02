@@ -6,7 +6,7 @@ const sections = [
   { id: 'su-dung', title: '2. Sử dụng thông tin', content: 'Thông tin được dùng để: cung cấp và cải thiện dịch vụ, gửi email thông báo quan trọng, hỗ trợ kỹ thuật, phân tích hành vi sử dụng để cải thiện UX. Bạn có thể opt-out email marketing bất kỳ lúc nào.' },
   { id: 'bao-mat', title: '3. Bảo mật dữ liệu', content: 'Dữ liệu được mã hoá bằng TLS khi truyền và AES-256 khi lưu trữ. Chúng tôi áp dụng access control nghiêm ngặt và kiểm toán định kỳ. Phát hiện breach sẽ thông báo trong 72 giờ.' },
   { id: 'cookie', title: '4. Cookie và tracking', content: 'Chúng tôi sử dụng cookie cần thiết (session, CSRF) và analytics (Plausible — không track cá nhân). Không có cookie quảng cáo. Bạn có thể xoá cookie bất kỳ lúc nào qua trình duyệt.' },
-  { id: 'quyen', title: '5. Quyền của bạn', content: 'Bạn có quyền: truy cập dữ liệu cá nhân, yêu cầu chỉnh sửa hoặc xoá, xuất dữ liệu (GDPR data portability), phản đối xử lý dữ liệu. Gửi yêu cầu tới privacy@wemakeui.vn.' },
+  { id: 'quyen', title: '5. Quyền của bạn', content: 'Bạn có quyền: truy cập dữ liệu cá nhân, yêu cầu chỉnh sửa hoặc xoá, xuất dữ liệu (GDPR data portability), phản đối xử lý dữ liệu. Gửi yêu cầu tới privacy@mindui.vn.' },
   { id: 'luu-tru', title: '6. Thời gian lưu trữ', content: 'Dữ liệu tài khoản giữ trong thời gian hoạt động + 90 ngày sau khi xoá tài khoản. Log truy cập giữ 30 ngày. Backup giữ 7 ngày. Sau thời hạn, dữ liệu được xoá vĩnh viễn.' },
   { id: 'thay-doi', title: '7. Thay đổi chính sách', content: 'Chúng tôi sẽ thông báo qua email và banner trang web ít nhất 14 ngày trước khi thay đổi quan trọng có hiệu lực. Tiếp tục sử dụng dịch vụ đồng nghĩa với việc chấp nhận chính sách mới.' },
 ]
@@ -34,7 +34,7 @@ import { ref } from 'vue'
       </nav>
 
       <article class="policy-content">
-        <p class="intro-text">WemakeUI cam kết bảo vệ quyền riêng tư và dữ liệu cá nhân của bạn. Chính sách này mô tả cách chúng tôi thu thập, sử dụng và bảo vệ thông tin của bạn.</p>
+        <p class="intro-text">MindUI cam kết bảo vệ quyền riêng tư và dữ liệu cá nhân của bạn. Chính sách này mô tả cách chúng tôi thu thập, sử dụng và bảo vệ thông tin của bạn.</p>
 
         <div v-for="s in sections" :key="s.id" :id="s.id" class="policy-section">
           <h2 class="section-title">{{ s.title }}</h2>
@@ -43,7 +43,7 @@ import { ref } from 'vue'
 
         <div class="contact-box">
           <h3 class="cb-title">Câu hỏi về quyền riêng tư?</h3>
-          <p class="cb-text">Liên hệ DPO của chúng tôi tại <a href="mailto:privacy@wemakeui.vn" class="link">privacy@wemakeui.vn</a> hoặc gửi thư tới: WemakeUI Corp, 123 Lê Lợi, Q.1, TP.HCM.</p>
+          <p class="cb-text">Liên hệ DPO của chúng tôi tại <a href="mailto:privacy@mindui.vn" class="link">privacy@mindui.vn</a> hoặc gửi thư tới: MindUI Corp, 123 Lê Lợi, Q.1, TP.HCM.</p>
         </div>
       </article>
     </div>
@@ -63,7 +63,7 @@ import { ref } from 'vue'
 .toc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--wx-space-1); }
 .toc-link { font-size: var(--wx-fs-13); color: var(--wx-content-secondary); text-decoration: none; padding: var(--wx-space-1) var(--wx-space-2); border-radius: var(--wx-radius-sm); display: block; border-left: 2px solid transparent; transition: all var(--wx-d-micro); }
 .toc-link:hover { color: var(--wx-content-primary); background: var(--wx-hover-bg); }
-.toc-link.active { color: var(--wx-brand-600); border-left-color: var(--wx-brand-500); background: var(--wx-brand-50); }
+.toc-link.active { color: var(--wx-text-link); border-left-color: var(--wx-brand-500); background: var(--wx-selected-bg); }
 
 .policy-content { max-width: 720px; }
 .intro-text { font-size: var(--wx-fs-16); color: var(--wx-content-secondary); line-height: var(--wx-lh-relaxed); margin-bottom: var(--wx-space-6); }

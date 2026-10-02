@@ -82,11 +82,11 @@ const percent = computed(() => Math.min(100, Math.max(0, (props.value / props.ma
 .base-progress__fill--striped {
   background-image: linear-gradient(
     45deg,
-    rgba(255, 255, 255, 0.2) 25%,
+    color-mix(in srgb, var(--wx-text-on-brand) 20%, transparent) 25%,
     transparent 25%,
     transparent 50%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.2) 75%,
+    color-mix(in srgb, var(--wx-text-on-brand) 20%, transparent) 50%,
+    color-mix(in srgb, var(--wx-text-on-brand) 20%, transparent) 75%,
     transparent 75%
   );
   background-size: 16px 16px;

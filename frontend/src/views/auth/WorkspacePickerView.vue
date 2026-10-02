@@ -6,12 +6,14 @@ import AuthLayout from '../_layouts/AuthLayout.vue'
 import { BaseButton, BaseInput, BaseTag, BaseAvatarGroup, BaseAvatar } from '../../components/common'
 import { EmptyState } from '../../components/feedback'
 
+// tên chỉ để sinh chữ cái đầu (1 ký tự/avatar) — avatar xs 20px không đủ chỗ cho 2 ký tự
+const MEMBER_INITIALS = ['An', 'Bình', 'Chi']
 const search = ref('')
 const selectedId = ref<string | null>(null)
 const workspaces = ref([
   {
-    id: 'wm', name: 'WemakeUI', subdomain: 'wemake', role: 'owner',
-    members: 24, plan: 'pro', logoColor: '#2563eb', initial: 'W',
+    id: 'wm', name: 'MindUI', subdomain: 'mind', role: 'owner',
+    members: 24, plan: 'pro', logoColor: '#2563eb', initial: 'M',
   },
   {
     id: 'tc', name: 'TechCorp', subdomain: 'techcorp', role: 'admin',
@@ -19,11 +21,11 @@ const workspaces = ref([
   },
   {
     id: 'sb', name: 'SideBiz', subdomain: 'sidebiz', role: 'member',
-    members: 6, plan: 'free', logoColor: '#10b981', initial: 'S',
+    members: 6, plan: 'free', logoColor: '#059669', initial: 'S',
   },
   {
     id: 'lb', name: 'Lab thực nghiệm', subdomain: 'lab', role: 'viewer',
-    members: 3, plan: 'free', logoColor: '#f59e0b', initial: 'L',
+    members: 3, plan: 'free', logoColor: '#d97706', initial: 'L',
   },
 ])
 
@@ -40,10 +42,6 @@ function pick(id: string) {
 <template>
   <AuthLayout :no-aside="true" align="top">
     <header class="auth-head">
-      <RouterLink to="/" class="brand">
-        <img src="/logo.png" alt="WemakeUI" class="brand-logo" />
-        <span class="brand-name">WemakeUI</span>
-      </RouterLink>
       <h1>Chọn workspace</h1>
       <p>Bạn có quyền truy cập <strong>{{ workspaces.length }}</strong> workspace.
         Chọn một để tiếp tục.</p>
@@ -78,7 +76,7 @@ function pick(id: string) {
             <BaseTag :label="w.role" size="sm" :variant="w.role === 'owner' ? 'primary' : w.role === 'admin' ? 'info' : 'neutral'" />
           </div>
           <div class="ws-sub">
-            <span>{{ w.subdomain }}.wemake.app</span>
+            <span>{{ w.subdomain }}.mind.app</span>
             <span class="dot">•</span>
             <span>{{ w.members }} thành viên</span>
             <span class="dot">•</span>
@@ -87,7 +85,7 @@ function pick(id: string) {
         </div>
         <div class="ws-avatars">
           <BaseAvatarGroup :max="3" size="xs">
-            <BaseAvatar v-for="i in Math.min(w.members, 3)" :key="i" :name="`Người ${i}`" size="xs" />
+            <BaseAvatar v-for="(n, i) in MEMBER_INITIALS.slice(0, Math.min(w.members, 3))" :key="i" :name="n" size="xs" />
           </BaseAvatarGroup>
         </div>
       </button>
@@ -104,17 +102,11 @@ function pick(id: string) {
 
 <style scoped>
 .auth-head { display: flex; flex-direction: column; gap: var(--wx-space-2); }
-.brand { display: flex; align-items: center; gap: var(--wx-space-2); text-decoration: none; color: inherit; }
-.brand-logo {
-  width: 32px; height: 32px;
-  object-fit: contain;
-  display: inline-block;
-}
-.brand-name { font-size: var(--wx-fs-16); font-weight: var(--wx-fw-semibold); }
 .auth-head h1 { margin: 0; font-size: var(--wx-fs-28); font-weight: var(--wx-fw-semibold); letter-spacing: var(--wx-tracking-tight); }
 .auth-head p { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-content-muted); }
 
 .search-wrap { width: 100%; }
+.ws-avatars :deep(.wx-avatar) { box-shadow: 0 0 0 2px var(--wx-surface-base); }
 
 .ws-grid {
   display: flex;
@@ -136,7 +128,7 @@ function pick(id: string) {
   transition: all var(--wx-d-fast) var(--wx-ease-standard);
 }
 .ws-card:hover { border-color: var(--wx-border-focus); transform: translateY(-1px); box-shadow: var(--wx-shadow-md); }
-.ws-card--active { border-color: var(--wx-brand-primary); background: rgba(37, 99, 235, 0.06); }
+.ws-card--active { border-color: var(--wx-brand-primary); background: var(--wx-selected-bg); }
 .ws-card:focus-visible { outline: 2px solid var(--wx-border-focus); outline-offset: 2px; }
 
 .ws-logo {
@@ -160,7 +152,7 @@ function pick(id: string) {
   gap: var(--wx-space-1);
   flex-wrap: wrap;
 }
-.dot { opacity: 0.5; }
+.dot { color: var(--wx-content-muted); }
 
 .ws-actions {
   display: flex;

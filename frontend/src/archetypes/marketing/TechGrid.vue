@@ -84,9 +84,10 @@ const CARDS = [
 
 .tech-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--wx-space-4);
 }
+@media (min-width: 520px)  { .tech-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 768px)  { .tech-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1024px) { .tech-grid { grid-template-columns: repeat(4, 1fr); } }
 

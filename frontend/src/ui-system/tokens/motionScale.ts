@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  WemakeUI — Motion tokens
+ *  MindUI — Motion tokens
  *
  *  CSS vars:
  *    --wx-d-instant | micro | fast | normal | slow | decorative

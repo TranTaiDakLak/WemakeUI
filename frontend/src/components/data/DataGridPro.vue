@@ -424,7 +424,7 @@ function downloadFile(content: string, type: string, name: string) {
       <input
         v-model="newViewName"
         class="dgp-input"
-        placeholder="Tên view (vd: Live đã sort)..."
+        placeholder="Tên view (vd: Đang hoạt động, đã sắp xếp)..."
         @keydown.enter="saveCurrentView"
         @keydown.esc="showSaveViewDialog = false"
       />
@@ -599,53 +599,76 @@ function downloadFile(content: string, type: string, name: string) {
 }
 
 .dgp-tool-btn {
-  padding: var(--wx-space-1) 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--wx-control-h-sm);
+  padding: 0 10px;
   border: 1px solid var(--wx-border-default);
-  background: var(--wx-surface-base);
-  border-radius: var(--wx-radius-md);
+  background: var(--wx-surface-elevated);
+  border-radius: var(--wx-radius-ctrl-sm);
   font-size: 12px;
+  font-weight: var(--wx-fw-semibold);
   color: var(--wx-text-secondary);
   cursor: pointer;
   font-family: var(--wx-font-primary);
   white-space: nowrap;
+  transition: background var(--wx-d-fast) var(--wx-ease-standard), border-color var(--wx-d-fast) var(--wx-ease-standard), color var(--wx-d-fast) var(--wx-ease-standard);
 }
 
 .dgp-tool-btn:hover {
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral-raised);
+  border-color: var(--wx-border-control);
   color: var(--wx-text-primary);
 }
+.dgp-tool-btn:focus-visible { outline: 2px solid var(--wx-brand-focus); outline-offset: 1px; }
 
-.dgp-tool-btn--active {
-  background: var(--wx-brand-primary);
-  color: var(--wx-text-inverse);
-  border-color: var(--wx-brand-primary);
+.dgp-tool-btn--active,
+.dgp-tool-btn--active:hover {
+  background: var(--wx-gradient-primary);
+  color: var(--wx-text-on-brand);
+  border-color: transparent;
 }
 
+/* Nhóm density — segmented control (rãnh sunken + mục chọn xanh đặc) */
 .dgp-density {
   display: inline-flex;
   gap: 2px;
   padding: 2px;
-  background: var(--wx-surface-base);
+  background: var(--wx-surface-sunken);
   border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-md);
+  border-radius: var(--wx-radius-item);
 }
 
 .dgp-density .dgp-tool-btn {
   border: none;
+  background: transparent;
+  min-height: calc(var(--wx-control-h-sm) - 4px);
   text-transform: uppercase;
-  padding: 2px var(--wx-space-2);
+  letter-spacing: 0.02em;
+  padding: 0 var(--wx-space-2);
+}
+.dgp-density .dgp-tool-btn:hover { background: var(--wx-surface-elevated); color: var(--wx-brand-primary); }
+.dgp-density .dgp-tool-btn--active,
+.dgp-density .dgp-tool-btn--active:hover {
+  background: var(--wx-gradient-primary);
+  color: var(--wx-text-on-brand);
+  box-shadow: var(--wx-shadow-sm);
 }
 
 .dgp-select {
-  padding: var(--wx-space-1) 10px;
-  border: 1px solid var(--wx-border-default);
-  background: var(--wx-surface-base);
-  border-radius: var(--wx-radius-md);
+  min-height: var(--wx-control-h-sm);
+  padding: 0 10px;
+  border: 1px solid var(--wx-border-control);
+  background: var(--wx-surface-elevated);
+  border-radius: var(--wx-radius-ctrl-sm);
   font-size: 12px;
   color: var(--wx-text-secondary);
   cursor: pointer;
   font-family: var(--wx-font-primary);
 }
+.dgp-select:hover { border-color: var(--wx-border-control-hover); }
+.dgp-select:focus-visible { outline: none; border-color: var(--wx-border-focus); box-shadow: var(--wx-ring-focus); }
 
 .dgp-saveview {
   display: flex;
@@ -657,16 +680,21 @@ function downloadFile(content: string, type: string, name: string) {
 
 .dgp-input {
   flex: 1;
-  padding: 5px 10px;
-  border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-md);
+  min-height: var(--wx-control-h-sm);
+  padding: 0 10px;
+  border: 1px solid var(--wx-border-control);
+  border-radius: var(--wx-radius-ctrl-sm);
+  background: var(--wx-surface-elevated);
+  color: var(--wx-text-primary);
   font-size: 12px;
   font-family: var(--wx-font-primary);
 }
+.dgp-input::placeholder { color: var(--wx-text-placeholder); }
 
 .dgp-input:focus {
   outline: none;
-  border-color: var(--wx-brand-focus);
+  border-color: var(--wx-border-focus);
+  box-shadow: var(--wx-ring-focus);
 }
 
 /* Body */
@@ -697,7 +725,7 @@ function downloadFile(content: string, type: string, name: string) {
 
 .dgp-table {
   border-collapse: collapse;
-  font-size: var(--wx-fs-12);
+  font-size: var(--wx-fs-13);
   table-layout: fixed;
 }
 
@@ -713,9 +741,8 @@ function downloadFile(content: string, type: string, name: string) {
   text-align: left;
   font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-semibold);
-  color: var(--wx-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+  color: var(--wx-text-secondary);
+  letter-spacing: 0.015em;
   border-bottom: 1px solid var(--wx-border-default);
   background: var(--wx-surface-sunken);
   position: relative;
@@ -785,7 +812,7 @@ function downloadFile(content: string, type: string, name: string) {
 
 .dgp-th__menu:hover {
   color: var(--wx-text-primary);
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral);
 }
 
 .dgp-th__resizer {
@@ -814,11 +841,15 @@ function downloadFile(content: string, type: string, name: string) {
 }
 
 .dgp-tr:hover .dgp-td:not(.dgp-td--pinned-left):not(.dgp-td--pinned-right) {
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral);
 }
 
+/* Hàng chọn: xanh nhạt (nguồn #edf5ff), hover đậm hơn một bậc (#dbeafe) */
 .dgp-tr--selected .dgp-td {
-  background: var(--wx-info-bg) !important;
+  background: var(--wx-selected-bg) !important;
+}
+.dgp-tr--selected:hover .dgp-td {
+  background: var(--wx-selected-bg-hover) !important;
 }
 
 .dgp-td {
@@ -876,11 +907,13 @@ function downloadFile(content: string, type: string, name: string) {
 .dgp-colmenu {
   position: fixed;
   z-index: 9999;
-  background: var(--wx-surface-base);
+  background: color-mix(in srgb, var(--wx-surface-elevated) 98%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-md);
-  box-shadow: var(--wx-shadow-lift);
-  padding: var(--wx-space-1);
+  border-radius: var(--wx-radius-menu);
+  box-shadow: var(--wx-shadow-menu);
+  padding: 5px;
   min-width: 160px;
   font-family: var(--wx-font-primary);
 }
@@ -895,13 +928,15 @@ function downloadFile(content: string, type: string, name: string) {
   font-size: 12px;
   cursor: pointer;
   text-align: left;
-  color: var(--wx-text-primary);
-  border-radius: var(--wx-radius-sm);
+  color: var(--wx-text-secondary);
+  font-weight: var(--wx-fw-medium);
+  border-radius: var(--wx-radius-ctrl-sm);
   font-family: var(--wx-font-primary);
 }
 
 .dgp-colmenu__item:hover {
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral-raised);
+  color: var(--wx-text-primary);
 }
 
 .dgp-colmenu__sep {

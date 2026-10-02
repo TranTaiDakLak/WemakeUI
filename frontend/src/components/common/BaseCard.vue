@@ -150,7 +150,7 @@ function onClick(e: MouseEvent) {
 .wx-card[data-shadow="xl"]   { box-shadow: var(--wx-shadow-xl); }
 
 .wx-card--bordered {
-  border: 1px solid color-mix(in srgb, var(--wx-border-default) 60%, transparent);
+  border: 1px solid var(--wx-border-default);
 }
 /* --wx-card-accent được set qua inline :style từ prop accentColor, không phải token toàn cục — không phải bug undefined-var */
 .wx-card--accent {
@@ -176,10 +176,10 @@ function onClick(e: MouseEvent) {
 }
 .wx-card__title {
   margin: 0;
-  font-size: var(--wx-fs-16);
-  font-weight: var(--wx-fw-semibold);
+  font-size: var(--wx-fs-15);
+  font-weight: var(--wx-fw-bold);
   color: var(--wx-content-primary);
-  letter-spacing: var(--wx-tracking-normal);
+  letter-spacing: var(--wx-tracking-snug);
   line-height: var(--wx-lh-snug);
 }
 .wx-card__subtitle {
@@ -212,6 +212,7 @@ function onClick(e: MouseEvent) {
 /* states */
 .wx-card[data-state="selected"] {
   border-color: var(--wx-brand-primary);
+  background: color-mix(in srgb, var(--wx-brand-500) 4%, var(--wx-surface-elevated));
   box-shadow: 0 0 0 1px var(--wx-brand-primary), var(--wx-shadow-md);
 }
 .wx-card[data-state="disabled"] {
@@ -321,7 +322,7 @@ function onClick(e: MouseEvent) {
   cursor: pointer;
 }
 .wx-card--clickable:focus-visible {
-  outline: 2px solid var(--wx-border-focus);
+  outline: 2px solid var(--wx-brand-focus);
   outline-offset: 2px;
 }
 .wx-card--clickable:active:not([data-state="disabled"]) {

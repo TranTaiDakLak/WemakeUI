@@ -1,19 +1,12 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import { AppShell, AppSidebar } from '../../components/layout'
 import type { SidebarSection, SidebarItem } from '../../components/layout'
-import { AnchorBar } from '../../components/common'
 import { phases } from './_phases-data'
 
 const route    = useRoute()
 const activeId = computed(() => route.path)
-
-/* ── AnchorBar: lấy anchors của route hiện tại ── */
-const currentAnchors = computed(() =>
-  phases.flatMap(p => p.routes).find(r => r.path === route.path)?.anchors ?? []
-)
-const anchorActive = ref('')
 
 /* ── Helper: convert phases → SidebarItem[] (leaf nodes) ── */
 function phaseItems(nums: number[]): SidebarItem[] {
@@ -80,7 +73,7 @@ const SECTIONS: SidebarSection[] = [
       <AppSidebar
         :sections="SECTIONS"
         :active-id="activeId"
-        brand="WemakeUI"
+        brand="MindUI"
         logo-src="/logo.png"
         brand-href="#/"
         :logo-gradient="true"
@@ -89,13 +82,6 @@ const SECTIONS: SidebarSection[] = [
     </template>
 
     <div class="demo-content">
-      <AnchorBar
-        v-if="currentAnchors.length"
-        v-model="anchorActive"
-        :sections="currentAnchors"
-        :sticky-top="56"
-        class="demo-anchor"
-      />
       <RouterView />
     </div>
   </AppShell>
@@ -106,12 +92,5 @@ const SECTIONS: SidebarSection[] = [
   display: flex;
   flex-direction: column;
   min-height: 100%;
-}
-.demo-anchor {
-  border-radius: 0;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  z-index: 9;
 }
 </style>

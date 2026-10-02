@@ -3,7 +3,12 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
-import { BaseButton, BaseInput, FormField, BaseTag, BaseAvatarGroup, BaseAvatar } from '../../components/common'
+import AuthHead from '../_layouts/AuthHead.vue'
+import AuthField from '../_layouts/AuthField.vue'
+import { BaseButton, BaseTag, BaseAvatarGroup, BaseAvatar } from '../../components/common'
+
+const ICON_MAIL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`
+const ICON_LOCK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
 
 const form = ref({ email: '', password: '' })
 
@@ -22,8 +27,8 @@ function submit() {
     <template #aside>
       <div class="hero">
         <RouterLink to="/" class="auth-brand">
-          <img src="/logo.png" alt="WemakeUI" class="auth-brand__logo" />
-          <span class="auth-brand__name">WemakeUI</span>
+          <img src="/logo.png" alt="MindUI" class="auth-brand__logo" />
+          <span class="auth-brand__name">MindUI</span>
         </RouterLink>
 
         <div class="hero-illust" aria-hidden="true">
@@ -38,26 +43,27 @@ function submit() {
           </div>
           <div class="hero-card hero-card--3">
             <BaseAvatarGroup size="md" :max="4">
-              <BaseAvatar name="Nguyễn A" size="sm" />
-              <BaseAvatar name="Trần B" size="sm" />
-              <BaseAvatar name="Lê C" size="sm" />
-              <BaseAvatar name="Phạm D" size="sm" />
-              <BaseAvatar name="Hoàng E" size="sm" />
+              <BaseAvatar name="Nguyễn A" size="md" />
+              <BaseAvatar name="Trần B" size="md" />
+              <BaseAvatar name="Lê C" size="md" />
+              <BaseAvatar name="Phạm D" size="md" />
+              <BaseAvatar name="Hoàng E" size="md" />
             </BaseAvatarGroup>
             <span class="hero-card__sub">5 thành viên đang online</span>
           </div>
         </div>
 
         <p class="hero-cap">
-          Hơn <strong>2,400</strong> team Việt đang dùng WemakeUI mỗi ngày.
+          Hơn <strong>2,400</strong> team Việt đang dùng MindUI mỗi ngày.
         </p>
       </div>
     </template>
 
-    <header class="auth-head">
-      <h1>Quay lại tài khoản của bạn</h1>
-      <p>Phiên bản v2 — input full-width, social trên đỉnh.</p>
-    </header>
+    <AuthHead
+      eyebrow="Chào mừng trở lại"
+      title="Quay lại tài khoản của bạn"
+      description="Phiên bản v2 — social trên đỉnh, form gọn bên dưới."
+    />
 
     <div class="social-grid">
       <BaseButton variant="secondary" block :icon="ICON_GOOGLE">Tiếp tục với Google</BaseButton>
@@ -67,13 +73,9 @@ function submit() {
     <div class="auth-divider"><span>hoặc dùng email</span></div>
 
     <form @submit.prevent="submit" class="auth-form">
-      <FormField label="Email" required>
-        <BaseInput v-model="form.email" type="email" placeholder="ban@congty.vn" />
-      </FormField>
-      <FormField label="Mật khẩu" required>
-        <BaseInput v-model="form.password" type="password" />
-      </FormField>
-      <BaseButton type="submit" :loading="loading" block>Tiếp tục →</BaseButton>
+      <AuthField v-model="form.email" label="Email" type="email" :icon="ICON_MAIL" placeholder="ban@congty.vn" autocomplete="email" required />
+      <AuthField v-model="form.password" label="Mật khẩu" type="password" :icon="ICON_LOCK" placeholder="••••••••" autocomplete="current-password" required />
+      <BaseButton type="submit" size="lg" :loading="loading" block>Tiếp tục →</BaseButton>
     </form>
 
     <p class="auth-foot-text">
@@ -99,8 +101,9 @@ function submit() {
 }
 .hero-card {
   position: absolute;
-  background: white;
+  background: var(--wx-surface-elevated);
   color: var(--wx-content-primary);
+  border: 1px solid var(--wx-border-default);
   border-radius: var(--wx-radius-xl);
   padding: var(--wx-space-3);
   box-shadow: 0 16px 32px rgba(0,0,0,0.18);
@@ -114,14 +117,14 @@ function submit() {
 .hero-card__title { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 .hero-card__value { font-size: var(--wx-fs-20); font-weight: var(--wx-fw-bold); }
 .hero-card__sub { font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
+/* avatar chồng nhau: viền cùng màu thẻ để các vòng tròn tách nhau rõ */
+.hero-card--3 :deep(.wx-avatar) { box-shadow: 0 0 0 2px var(--wx-surface-elevated); }
+.hero-card--3 :deep(.wx-avatar:not(:first-child)) { margin-left: -3px; }
 
 .hero-cap { color: white; font-size: var(--wx-fs-13); margin: 0; }
 .hero-cap strong { color: white; }
 
-.auth-head { display: flex; flex-direction: column; gap: var(--wx-space-1); }
-.auth-head h1 { margin: 0; font-size: var(--wx-fs-28); font-weight: var(--wx-fw-semibold); letter-spacing: var(--wx-tracking-tight); }
-.auth-head p { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-content-muted); }
-.auth-form { display: flex; flex-direction: column; gap: var(--wx-space-3); }
+.auth-form { display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .social-grid { display: flex; flex-direction: column; gap: var(--wx-space-2); }
 .auth-divider {
   display: flex; align-items: center; gap: var(--wx-space-3);

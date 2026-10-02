@@ -54,7 +54,9 @@ input, button, textarea, select {
   background-color: var(--wx-surface-base);
 }
 
-/* ── Scrollbar Styling ────────────────────────────────── */
+/* ── Scrollbar Styling — "Slim Pro" (nguồn MindAds) ───────
+   Track trong suốt; thumb bo tròn, viền trong suốt + background-clip để thumb trông mảnh hơn
+   vùng bấm thật. Firefox không có ::-webkit-scrollbar nên dùng scrollbar-width/color. */
 ::-webkit-scrollbar {
   width: var(--wx-scrollbar-width);
   height: var(--wx-scrollbar-width);
@@ -62,23 +64,34 @@ input, button, textarea, select {
 
 ::-webkit-scrollbar-track {
   background: var(--wx-scrollbar-track);
-  border-radius: var(--wx-radius-lg);
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--wx-scrollbar-thumb);
-  border-radius: var(--wx-radius-lg);
-  border: 2px solid var(--wx-scrollbar-track);
+  border-radius: var(--wx-radius-full);
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--wx-scrollbar-thumb-hover);
 }
 
-/* Compact scrollbar variant */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--wx-scrollbar-thumb) transparent;
+  }
+}
+
+/* Thin scrollbar variant (popover, list trong overlay): 5px */
 .wx-scrollbar-compact::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: var(--wx-scrollbar-width-thin);
+  height: var(--wx-scrollbar-width-thin);
 }
 
 .wx-scrollbar-compact::-webkit-scrollbar-track {
@@ -86,13 +99,19 @@ input, button, textarea, select {
 }
 
 .wx-scrollbar-compact::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.3);
+  background-color: var(--wx-scrollbar-thumb);
   border-radius: var(--wx-radius-full);
   border: none;
+  background-clip: border-box;
 }
 
 .wx-scrollbar-compact::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.5);
+  background-color: var(--wx-scrollbar-thumb-hover);
+}
+
+.wx-scrollbar-compact {
+  scrollbar-width: thin;
+  scrollbar-color: var(--wx-scrollbar-thumb) transparent;
 }
 
 /* ── Reduced Motion ───────────────────────────────────── */

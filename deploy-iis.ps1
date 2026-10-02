@@ -1,8 +1,8 @@
 param(
-  [string]$SiteName = "ui.wemake.vn",
-  [string]$HostName = "ui.wemake.vn",
-  [string]$PhysicalPath = "C:\\inetpub\\wwwroot\\ui.wemake.vn\\frontend\\dist",
-  [string]$AppPoolName = "ui.wemake.vn",
+  [string]$SiteName = "ui.mind.vn",
+  [string]$HostName = "ui.mind.vn",
+  [string]$PhysicalPath = "C:\\inetpub\\wwwroot\\ui.mind.vn\\frontend\\dist",
+  [string]$AppPoolName = "ui.mind.vn",
   [int]$HttpPort = 80,
   [int]$HttpsPort = 443,
   [string]$CertThumbprint = ""

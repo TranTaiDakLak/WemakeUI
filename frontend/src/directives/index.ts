@@ -6,7 +6,7 @@ import { vReveal } from './v-reveal'
 export { vCan, vFlag, vReveal }
 
 /**
- * registerDirectives(app) — đăng ký 1 phát mọi directive WemakeUI.
+ * registerDirectives(app) — đăng ký 1 phát mọi directive MindUI.
  * Caller có thể đăng ký từng cái thủ công nếu muốn tree-shake hơn.
  */
 export function registerDirectives(app: App) {

@@ -9,7 +9,7 @@ import type { PropRow } from '../_components/PropsTable.vue'
 const { showToast } = useToast()
 
 const typesCode = `<script setup lang="ts">
-import { useToast } from '@wemake/ui'
+import { useToast } from '@mind/ui'
 const { showToast } = useToast()
 <\/script>
 
@@ -21,7 +21,7 @@ const { showToast } = useToast()
 <\/template>`
 
 const durationCode = `<script setup lang="ts">
-import { useToast } from '@wemake/ui'
+import { useToast } from '@mind/ui'
 const { showToast } = useToast()
 <\/script>
 

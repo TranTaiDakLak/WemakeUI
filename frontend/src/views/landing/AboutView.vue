@@ -24,7 +24,7 @@ const VALUES: { icon: LucideIcon; title: string; desc: string }[] = [
     <section class="about-hero">
       <div class="inner">
         <h1 class="about-title">Chúng tôi xây dựng UI kit mà <span class="accent">chúng tôi muốn dùng</span></h1>
-        <p class="about-desc">WemakeUI bắt đầu từ nỗi đau thực tế — không có UI kit Vue 3 nào đủ tốt cho production-grade SaaS tiếng Việt. Vì vậy chúng tôi tự làm.</p>
+        <p class="about-desc">MindUI bắt đầu từ nỗi đau thực tế — không có UI kit Vue 3 nào đủ tốt cho production-grade SaaS tiếng Việt. Vì vậy chúng tôi tự làm.</p>
       </div>
     </section>
 
@@ -35,7 +35,7 @@ const VALUES: { icon: LucideIcon; title: string; desc: string }[] = [
           <div>
             <h2 class="section-title">Câu chuyện</h2>
             <p class="section-text">Năm 2024, team chúng tôi mất 6 tuần chỉ để build một màn hình đăng nhập đẹp, responsive và accessible. Không phải vì thiếu người — mà vì không có component library nào đủ tốt cho tiếng Việt và cross-platform.</p>
-            <p class="section-text">Chúng tôi quyết định build WemakeUI từ scratch: design token đầy đủ, dark mode đúng cách, RBAC tích hợp, 50+ page template sẵn sàng dùng. Sau 1 năm, đây là kết quả.</p>
+            <p class="section-text">Chúng tôi quyết định build MindUI từ scratch: design token đầy đủ, dark mode đúng cách, RBAC tích hợp, 50+ page template sẵn sàng dùng. Sau 1 năm, đây là kết quả.</p>
           </div>
           <div class="stats-panel">
             <div v-for="[val, label] in [['120+','components'],['50+','page templates'],['1,200+','developer đang dùng'],['0','external deps cho chart']]" :key="label" class="stat-item">
@@ -77,10 +77,10 @@ const VALUES: { icon: LucideIcon; title: string; desc: string }[] = [
     </section>
 
     <!-- join -->
-    <section class="join-section">
+    <section class="join-section mind-cta-band">
       <div class="inner center">
-        <h2 class="join-title">Muốn gia nhập đội ngũ?</h2>
-        <p class="join-desc">Chúng tôi đang tìm kiếm Vue developer, designer và technical writer.</p>
+        <h2 class="join-title mind-cta-band__title">Muốn gia nhập đội ngũ?</h2>
+        <p class="join-desc mind-cta-band__desc">Chúng tôi đang tìm kiếm Vue developer, designer và technical writer.</p>
         <BaseButton variant="primary" size="lg" tag="a" href="#/landing/careers">Xem vị trí mở</BaseButton>
       </div>
     </section>
@@ -88,9 +88,9 @@ const VALUES: { icon: LucideIcon; title: string; desc: string }[] = [
 </template>
 
 <style scoped>
-.about-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-10); background: var(--wx-gradient-bg); text-align: center; }
+.about-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-10); background: var(--wx-shell-hero-bg); text-align: center; }
 .about-title { font-size: var(--wx-fs-40); font-weight: 800; letter-spacing: var(--wx-tracking-tight); line-height: var(--wx-lh-tight); margin-bottom: var(--wx-space-4); }
-.accent { color: var(--wx-brand-600); }
+.accent { color: var(--wx-text-link); }
 .about-desc { font-size: var(--wx-fs-18); color: var(--wx-content-secondary); max-width: 600px; margin: 0 auto; }
 
 .section { padding: var(--wx-space-10) var(--wx-space-5); }
@@ -105,7 +105,7 @@ const VALUES: { icon: LucideIcon; title: string; desc: string }[] = [
 @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; } }
 .stats-panel { display: grid; grid-template-columns: 1fr 1fr; gap: var(--wx-space-4); background: var(--wx-bg-sunken); border-radius: var(--wx-radius-xl); padding: var(--wx-space-6); }
 .stat-item { display: flex; flex-direction: column; gap: var(--wx-space-1); }
-.stat-val { font-size: var(--wx-fs-32); font-weight: 800; letter-spacing: var(--wx-tracking-tight); color: var(--wx-brand-600); }
+.stat-val { font-size: var(--wx-fs-32); font-weight: 800; letter-spacing: var(--wx-tracking-tight); color: var(--wx-text-link); }
 .stat-label { font-size: var(--wx-fs-13); color: var(--wx-content-muted); }
 
 .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--wx-space-5); }
@@ -117,10 +117,11 @@ const VALUES: { icon: LucideIcon; title: string; desc: string }[] = [
 .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--wx-space-5); }
 .team-card { display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-2); padding: var(--wx-space-5); text-align: center; }
 .member-name { font-size: var(--wx-fs-18); font-weight: var(--wx-fw-semibold); margin: 0; }
-.member-role { font-size: var(--wx-fs-14); color: var(--wx-brand-600); font-weight: var(--wx-fw-medium); }
+.member-role { font-size: var(--wx-fs-14); color: var(--wx-text-link); font-weight: var(--wx-fw-medium); }
 .member-bio { font-size: var(--wx-fs-14); color: var(--wx-content-secondary); line-height: var(--wx-lh-relaxed); margin: 0; }
 
-.join-section { padding: var(--wx-space-10) var(--wx-space-5); background: var(--wx-gradient-cta); }
-.join-title { font-size: var(--wx-fs-32); font-weight: var(--wx-fw-bold); color: white; margin: 0; }
-.join-desc { font-size: var(--wx-fs-16); color: rgba(255,255,255,0.8); margin: 0; }
+/* nền + màu chữ + nút trắng: class global .mind-cta-band (ui-system/foundations/shell.css) */
+.join-section { padding: var(--wx-space-10) var(--wx-space-5); }
+.join-title { font-size: var(--wx-fs-32); font-weight: var(--wx-fw-bold); margin: 0; }
+.join-desc { font-size: var(--wx-fs-16); margin: 0; }
 </style>

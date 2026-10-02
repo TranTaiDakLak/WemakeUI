@@ -61,10 +61,10 @@ const LOGOS = ['Công ty TNHH ABC', 'Startup XYZ', 'Tập đoàn DEF', 'Corp GHI
     </section>
 
     <!-- CTA -->
-    <section class="cta-section" v-reveal>
+    <section class="cta-section mind-cta-band" v-reveal>
       <div class="cta-inner">
-        <h2 class="cta-title">Sẵn sàng xây dựng<br>sản phẩm tuyệt vời?</h2>
-        <p class="cta-desc">Dùng thử miễn phí 14 ngày, không cần thẻ tín dụng.</p>
+        <h2 class="cta-title mind-cta-band__title">Sẵn sàng xây dựng<br>sản phẩm tuyệt vời?</h2>
+        <p class="cta-desc mind-cta-band__desc">Dùng thử miễn phí 14 ngày, không cần thẻ tín dụng.</p>
         <BaseButton variant="cta" size="lg">Bắt đầu ngay hôm nay</BaseButton>
       </div>
     </section>
@@ -72,10 +72,10 @@ const LOGOS = ['Công ty TNHH ABC', 'Startup XYZ', 'Tập đoàn DEF', 'Corp GHI
 </template>
 
 <style scoped>
-.hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-10); background: var(--wx-gradient-bg); text-align: center; }
+.hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-10); background: var(--wx-shell-hero-bg); text-align: center; }
 .hero-inner { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-5); }
 .hero-title { font-size: var(--wx-fs-48); font-weight: 800; line-height: var(--wx-lh-tight); letter-spacing: var(--wx-tracking-tight); margin: 0; }
-.gradient-text { background: var(--wx-gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: var(--wx-brand-600); }
+.gradient-text { background: var(--wx-shell-text-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: var(--wx-brand-600); }
 .hero-desc { font-size: var(--wx-fs-18); color: var(--wx-content-secondary); line-height: var(--wx-lh-normal); max-width: 560px; margin: 0; }
 .hero-actions { display: flex; gap: var(--wx-space-3); justify-content: center; flex-wrap: wrap; }
 .hero-social { font-size: var(--wx-fs-13); color: var(--wx-content-muted); margin: 0; }
@@ -95,8 +95,10 @@ const LOGOS = ['Công ty TNHH ABC', 'Startup XYZ', 'Tập đoàn DEF', 'Corp GHI
 .feature-name { font-size: var(--wx-fs-18); font-weight: var(--wx-fw-semibold); margin: 0 0 var(--wx-space-2); }
 .feature-desc { font-size: var(--wx-fs-14); color: var(--wx-content-secondary); line-height: var(--wx-lh-relaxed); margin: 0; }
 
-.cta-section { padding: var(--wx-space-10) var(--wx-space-5); background: var(--wx-gradient-cta); }
+/* nền + màu chữ + nút trắng nổi bật: class global .mind-cta-band (ui-system/foundations/shell.css) */
+.cta-section { padding: var(--wx-space-10) var(--wx-space-5); }
 .cta-inner { max-width: 600px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-5); }
-.cta-title { font-size: var(--wx-fs-40); font-weight: 800; color: white; letter-spacing: var(--wx-tracking-tight); margin: 0; line-height: var(--wx-lh-tight); }
-.cta-desc { font-size: var(--wx-fs-16); color: rgba(255,255,255,0.8); margin: 0; }
+.cta-title { font-size: var(--wx-fs-40); font-weight: 800; letter-spacing: var(--wx-tracking-tight); margin: 0; line-height: var(--wx-lh-tight); }
+.cta-desc { font-size: var(--wx-fs-16); margin: 0; }
+@media (max-width: 520px) { .cta-title { font-size: var(--wx-fs-32); } .hero-title { font-size: var(--wx-fs-40); } }
 </style>

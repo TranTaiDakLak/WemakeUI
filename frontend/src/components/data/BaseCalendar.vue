@@ -287,7 +287,7 @@ function timeOnly(ts: string): string {
 
 .calendar-week-header {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr)); /* minmax(0): cột đều nhau, không bị nhãn sự kiện nowrap đẩy rộng */
   background: var(--wx-surface-sunken);
   border-bottom: 1px solid var(--wx-border-default);
 }
@@ -304,7 +304,7 @@ function timeOnly(ts: string): string {
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr)); /* minmax(0): cột đều nhau, không bị nhãn sự kiện nowrap đẩy rộng */
   grid-auto-rows: minmax(100px, 1fr);
 }
 
@@ -315,10 +315,13 @@ function timeOnly(ts: string): string {
   text-align: left;
   padding: var(--wx-space-1);
   background: var(--wx-surface-base);
+  color: var(--wx-text-primary);
+  /* <button>: reset viền outset mặc định của trình duyệt (trước đây chỉ khai báo 2 cạnh → viền trắng chói ở dark mode) */
+  border: 0;
   border-right: 1px solid var(--wx-border-subtle);
   border-bottom: 1px solid var(--wx-border-subtle);
   cursor: pointer;
-  transition: background var(--wx-duration-fast);
+  transition: background var(--wx-d-fast);
   font-family: var(--wx-font-primary);
 }
 

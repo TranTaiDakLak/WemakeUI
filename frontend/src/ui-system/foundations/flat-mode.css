@@ -26,9 +26,21 @@
   --wx-gradient-danger: var(--wx-danger-solid);
   --wx-gradient-warning: var(--wx-warning-solid);
   --wx-gradient-divider: var(--wx-border-default);
+  --wx-gradient-primary: var(--wx-brand-600);
+  --wx-gradient-primary-hover: var(--wx-brand-700);
+  --wx-gradient-tile: var(--wx-brand-600);
+  --wx-gradient-tile-blue: var(--wx-brand-600);
+  --wx-gradient-tile-green: var(--wx-success-solid);
+  --wx-gradient-tile-amber: var(--wx-warning-solid);
+  --wx-gradient-tile-red: var(--wx-danger-solid);
+  --wx-gradient-panel-head: var(--wx-surface-base);
+  --wx-gradient-scanner: var(--wx-brand-500);
 
   /* ── Shadow → tone-down (flat aesthetic) ─────────────── */
   --wx-shadow-brand: 0 1px 2px rgba(0, 0, 0, 0.08);
   --wx-shadow-xl: 0 4px 12px rgba(0, 0, 0, 0.06);
   --wx-shadow-2xl: 0 6px 16px rgba(0, 0, 0, 0.08);
+  --wx-shadow-btn: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --wx-shadow-btn-hover: 0 1px 3px rgba(0, 0, 0, 0.14);
+  --wx-shadow-tile: none;
 }

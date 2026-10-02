@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  WemakeUI — Motion utilities (phase 0)
+ *  MindUI — Motion utilities (phase 0)
  *
  *  Generic transition classes & helpers built on --wx-d-* / --wx-ease-*.
  *  prefers-reduced-motion already collapses durations to 0ms in tokens.css.
@@ -38,14 +38,14 @@
 .wx-fade-enter-from,
 .wx-fade-leave-to { opacity: 0; }
 
-/* scale-fade — modal */
+/* scale-fade — modal / popover (nguồn: 180ms ease-out-expo vào, 140ms ease-in ra) */
 .wx-scale-fade-enter-active {
-  transition: opacity var(--wx-d-normal) var(--wx-ease-decelerate),
-              transform var(--wx-d-normal) var(--wx-ease-decelerate);
+  transition: opacity var(--wx-d-overlay-in) var(--wx-ease-bounce),
+              transform var(--wx-d-overlay-in) var(--wx-ease-bounce);
 }
 .wx-scale-fade-leave-active {
-  transition: opacity var(--wx-d-fast) var(--wx-ease-accelerate),
-              transform var(--wx-d-fast) var(--wx-ease-accelerate);
+  transition: opacity var(--wx-d-overlay-out) var(--wx-ease-accelerate),
+              transform var(--wx-d-overlay-out) var(--wx-ease-accelerate);
 }
 .wx-scale-fade-enter-from,
 .wx-scale-fade-leave-to {

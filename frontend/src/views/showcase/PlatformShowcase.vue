@@ -98,7 +98,7 @@ const draftName = ref('Hùng Trần')
 <template>
   <div class="page">
     <OfflineBanner :online="effectiveOnline" :queued="queue.length" />
-    <AppTopbar title="WemakeUI" subtitle="phase 5 · platform adapter" />
+    <AppTopbar title="MindUI" subtitle="phase 5 · platform adapter" />
     <main class="main">
       <PageHeader
         title="cross-platform adapter"
@@ -135,7 +135,7 @@ const draftName = ref('Hùng Trần')
             force
             controls-style="mac"
             controls-placement="left"
-            title="WemakeUI — admin"
+            title="MindUI — admin"
           />
           <div class="frame__body">
             <p>nội dung app — vùng trắng phía dưới titlebar.</p>
@@ -151,7 +151,7 @@ const draftName = ref('Hùng Trần')
             force
             controls-style="windows"
             controls-placement="right"
-            title="WemakeUI Studio"
+            title="MindUI Studio"
           >
             <template #left>
               <span class="title-icon">▣</span>

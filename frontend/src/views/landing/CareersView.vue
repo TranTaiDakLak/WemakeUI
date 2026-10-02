@@ -7,7 +7,7 @@ const filter = ref('tất cả')
 const DEPTS = ['tất cả', 'engineering', 'design', 'marketing']
 
 const JOBS = [
-  { id: 1, title: 'Senior Vue 3 Developer', dept: 'engineering', type: 'Full-time', location: 'Hà Nội / Remote', desc: 'Phát triển và maintain WemakeUI component library. Yêu cầu 3+ năm Vue, TypeScript.' },
+  { id: 1, title: 'Senior Vue 3 Developer', dept: 'engineering', type: 'Full-time', location: 'Hà Nội / Remote', desc: 'Phát triển và maintain MindUI component library. Yêu cầu 3+ năm Vue, TypeScript.' },
   { id: 2, title: 'UI/UX Designer', dept: 'design', type: 'Full-time', location: 'TP.HCM / Remote', desc: 'Thiết kế component mới, cải thiện design system và tài liệu Figma.' },
   { id: 3, title: 'Technical Writer', dept: 'marketing', type: 'Part-time', location: 'Remote', desc: 'Viết tài liệu kỹ thuật, tutorial và changelog. Yêu cầu biết Vue cơ bản.' },
   { id: 4, title: 'DevOps Engineer', dept: 'engineering', type: 'Full-time', location: 'Remote', desc: 'CI/CD pipeline, bundle analysis, lighthouse CI và npm publish automation.' },
@@ -20,7 +20,7 @@ import { computed } from 'vue'
 <template>
   <LandingLayout>
     <section class="careers-hero">
-      <h1 class="careers-title">Gia nhập đội ngũ WemakeUI</h1>
+      <h1 class="careers-title">Gia nhập đội ngũ MindUI</h1>
       <p class="careers-desc">Chúng tôi đang tìm kiếm những người đam mê DX, design system và developer tools.</p>
     </section>
 
@@ -58,7 +58,7 @@ import { computed } from 'vue'
           </div>
 
           <div v-if="filtered.length === 0" class="no-jobs">
-            <span>Không có vị trí phù hợp. Gửi CV tổng hợp tới <a href="mailto:careers@wemakeui.vn">careers@wemakeui.vn</a></span>
+            <span>Không có vị trí phù hợp. Gửi CV tổng hợp tới <a href="mailto:careers@mindui.vn">careers@mindui.vn</a></span>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@ import { computed } from 'vue'
 </template>
 
 <style scoped>
-.careers-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-8); text-align: center; background: var(--wx-gradient-bg); }
+.careers-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-8); text-align: center; background: var(--wx-shell-hero-bg); }
 .careers-title { font-size: var(--wx-fs-40); font-weight: 800; letter-spacing: var(--wx-tracking-tight); margin-bottom: var(--wx-space-3); }
 .careers-desc { font-size: var(--wx-fs-18); color: var(--wx-content-secondary); margin: 0; }
 .careers-section { padding: var(--wx-space-8) var(--wx-space-5); }

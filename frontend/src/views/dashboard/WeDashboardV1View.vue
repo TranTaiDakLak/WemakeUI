@@ -28,7 +28,7 @@ function gen(n: number, seed = 1, base = 50, amp = 20) {
 /* ── Alert banner ─────────────────────────────────────────── */
 const alertDismissed = ref(false)
 const ALERTS = [
-  { id: 1, text: '2 tài khoản checkpoint cần xác minh ngay', level: 'danger' as const },
+  { id: 1, text: '2 tài khoản cần xác minh ngay', level: 'danger' as const },
   { id: 2, text: '8 lỗi hệ thống trong 24h qua — xem chi tiết', level: 'warning' as const },
 ]
 const activeAlerts = computed(() => alertDismissed.value ? [] : ALERTS)
@@ -36,57 +36,57 @@ const activeAlerts = computed(() => alertDismissed.value ? [] : ALERTS)
 /* ── KPI data ─────────────────────────────────────────────── */
 const KPIS = [
   {
-    label: 'Tài khoản Live', metric: 1284, delta: 12,
+    label: 'Tài khoản hoạt động', metric: 1284, delta: 12,
     iconEmoji: '📱', iconBg: 'green' as const,
-    sparkline: gen(20, 1, 60, 25), sparklineColor: '#22c55e',
-    detail: '47 đang checkpoint',
-    action: () => router.push('/wemakeui/accounts'),
+    sparkline: gen(20, 1, 60, 25), sparklineColor: 'var(--wx-success-solid)',
+    detail: '47 đang chờ xác minh',
+    action: () => router.push('/mindui/accounts'),
   },
   {
     label: 'Phiên hôm nay', metric: 4821, delta: 8,
     iconEmoji: '🔗', iconBg: 'blue' as const,
-    sparkline: gen(20, 2, 55, 20), sparklineColor: '#2563eb',
+    sparkline: gen(20, 2, 55, 20), sparklineColor: 'var(--wx-chart-1)',
     alert: '3 lỗi kết nối', alertLevel: 'warning' as const,
-    action: () => router.push({ path: '/wemakeui/sessions', query: { status: 'online' } }),
+    action: () => router.push({ path: '/mindui/sessions', query: { status: 'online' } }),
   },
   {
     label: 'Chiến dịch', metric: 24, delta: 2,
     iconEmoji: '📣', iconBg: 'purple' as const,
-    sparkline: gen(20, 3, 45, 15), sparklineColor: '#8b5cf6',
+    sparkline: gen(20, 3, 45, 15), sparklineColor: 'var(--wx-chart-6)',
     detail: '5 sắp hoàn thành',
-    action: () => router.push({ path: '/wemakeui/campaigns', query: { status: 'running' } }),
+    action: () => router.push({ path: '/mindui/campaigns', query: { status: 'running' } }),
   },
   {
     label: 'Tỷ lệ giao thành công', metric: '98.4', metricSuffix: '%', delta: -0.2,
     iconEmoji: '✅', iconBg: 'amber' as const,
-    sparkline: gen(20, 4, 90, 8), sparklineColor: '#f59e0b',
+    sparkline: gen(20, 4, 90, 8), sparklineColor: 'var(--wx-chart-4)',
     alert: 'Kiểm tra ngay', alertLevel: 'danger' as const,
-    action: () => router.push('/wemakeui/sessions'),
+    action: () => router.push('/mindui/sessions'),
   },
   {
     label: 'Tin nhắn hôm nay', metric: 142390, delta: 18,
     iconEmoji: '💬', iconBg: 'cyan' as const,
-    sparkline: gen(20, 5, 70, 30), sparklineColor: '#06b6d4',
-    action: () => router.push('/wemakeui/campaigns'),
+    sparkline: gen(20, 5, 70, 30), sparklineColor: 'var(--wx-chart-2)',
+    action: () => router.push('/mindui/campaigns'),
   },
   {
     label: 'Lỗi hệ thống', metric: 8, delta: 3,
     iconEmoji: '🚨', iconBg: 'red' as const,
-    sparkline: gen(20, 6, 30, 25), sparklineColor: '#ef4444',
+    sparkline: gen(20, 6, 30, 25), sparklineColor: 'var(--wx-chart-5)',
     alert: '2 cần xử lý gấp', alertLevel: 'danger' as const,
     action: () => { errorsDrawer.value = true },
   },
   {
     label: 'Task hàng đợi', metric: 12, delta: -4,
     iconEmoji: '⏳', iconBg: 'amber' as const,
-    sparkline: gen(20, 7, 40, 18), sparklineColor: '#f59e0b',
+    sparkline: gen(20, 7, 40, 18), sparklineColor: 'var(--wx-chart-4)',
     detail: '3 đang chạy',
-    action: () => router.push('/wemakeui/scheduler'),
+    action: () => router.push('/mindui/scheduler'),
   },
   {
     label: 'Uptime tháng này', metric: '99.8', metricSuffix: '%', delta: 0,
     iconEmoji: '🟢', iconBg: 'slate' as const,
-    sparkline: gen(20, 8, 92, 5), sparklineColor: '#64748b',
+    sparkline: gen(20, 8, 92, 5), sparklineColor: 'var(--wx-text-muted)',
     detail: 'SLA đạt yêu cầu',
     action: undefined,
   },
@@ -102,7 +102,7 @@ const sysErrors = ref<SysError[]>([
   { id: 4, msg: 'CDN endpoint /media/upload trả về 503',          time: '10:41', level: 'critical', resolving: false },
   { id: 5, msg: 'Zalo webhook delivery lag > 5s',                 time: '10:55', level: 'warning',  resolving: false },
   { id: 6, msg: 'Scheduler task #44 failed sau 3 retry',          time: '11:02', level: 'warning',  resolving: false },
-  { id: 7, msg: 'Auth token expired cho 4 tài khoản Telegram',    time: '11:10', level: 'warning',  resolving: false },
+  { id: 7, msg: 'Phiên xác thực hết hạn cho 4 tài khoản Telegram', time: '11:10', level: 'warning',  resolving: false },
   { id: 8, msg: 'Database connection pool chạm limit 100/100',    time: '11:15', level: 'critical', resolving: false },
 ])
 
@@ -117,7 +117,7 @@ async function resolveError(err: SysError) {
 const LINE_SERIES: LineSeries[] = [
   {
     name: 'Phiên kết nối',
-    color: '#2563eb',
+    color: 'var(--wx-chart-1)',
     data: [
       { x: 'T2', y: 3800 }, { x: 'T3', y: 4200 }, { x: 'T4', y: 3950 },
       { x: 'T5', y: 4650 }, { x: 'T6', y: 4100 }, { x: 'T7', y: 3300 },
@@ -126,7 +126,7 @@ const LINE_SERIES: LineSeries[] = [
   },
   {
     name: 'Tin nhắn (÷100)',
-    color: '#06b6d4',
+    color: 'var(--wx-chart-2)',
     data: [
       { x: 'T2', y: 1180 }, { x: 'T3', y: 1340 }, { x: 'T4', y: 1210 },
       { x: 'T5', y: 1560 }, { x: 'T6', y: 1420 }, { x: 'T7', y: 980 },
@@ -137,24 +137,37 @@ const LINE_SERIES: LineSeries[] = [
 
 /* ── Chart: Donut + drill-down ────────────────────────────── */
 const PIE_DATA: PieSlice[] = [
-  { label: 'Live',       value: 1284, color: '#22c55e' },
-  { label: 'Die',        value: 891,  color: '#ef4444' },
-  { label: 'Checkpoint', value: 226,  color: '#f59e0b' },
+  { label: 'Hoạt động',    value: 1284, color: 'var(--wx-success-solid)' },
+  { label: 'Ngắt kết nối', value: 891,  color: 'var(--wx-danger-solid)' },
+  { label: 'Chờ xác minh', value: 226,  color: 'var(--wx-warning-solid)' },
 ]
+/** Khoá lọc gửi cho bảng bên dưới (khớp `status` của tài khoản) — tách khỏi nhãn hiển thị. */
+const PIE_FILTER_KEY: Record<string, string> = {
+  'Hoạt động': 'live',
+  'Ngắt kết nối': 'die',
+  'Chờ xác minh': 'checkpoint',
+}
+const PIE_FILTER_LABEL: Record<string, string> = Object.fromEntries(
+  Object.entries(PIE_FILTER_KEY).map(([label, key]) => [key, label]),
+)
+function filterLabel(key: string | null): string {
+  return key ? (PIE_FILTER_LABEL[key] ?? key) : ''
+}
 const activeAccountFilter = ref<string | null>(null)
 
 function onDonutClick(slice: PieSlice) {
-  const key = slice.label.toLowerCase()
+  const key = PIE_FILTER_KEY[slice.label] ?? slice.label.toLowerCase()
   activeAccountFilter.value = activeAccountFilter.value === key ? null : key
   activeTab.value = 'expiring'
 }
 
 /* ── Chart: Bar + drill-down ──────────────────────────────── */
+/* WhatsApp / Zalo / Telegram: màu nhận diện thương hiệu của từng nền tảng (cố ý hardcode, không có token tương đương) */
 const BAR_DATA = [
   { label: 'WhatsApp', value: 14, color: '#25d366' },
   { label: 'Zalo',     value: 6,  color: '#0068ff' },
   { label: 'Telegram', value: 3,  color: '#229ed9' },
-  { label: 'SMS',      value: 1,  color: '#8b5cf6' },
+  { label: 'SMS',      value: 1,  color: 'var(--wx-chart-6)' },
 ]
 
 const platformDrawer = ref(false)
@@ -194,7 +207,7 @@ const platformCampaigns = computed(() =>
 )
 
 function navigateToPlatformCampaigns() {
-  router.push({ path: '/wemakeui/campaigns', query: { platform: selectedPlatform.value ?? '' } })
+  router.push({ path: '/mindui/campaigns', query: { platform: selectedPlatform.value ?? '' } })
   platformDrawer.value = false
 }
 
@@ -214,7 +227,7 @@ const failedJobs = ref<FailedJob[]>([
   { id: 2, name: 'sync_contacts_vnpt',     error: 'API rate limit exceeded',     time: '10:58', retries: 2, retrying: false },
   { id: 3, name: 'export_report_weekly',   error: 'Out of memory',               time: '10:30', retries: 1, retrying: false },
   { id: 4, name: 'webhook_zalo_deliver',   error: 'Invalid signature',           time: '10:05', retries: 3, retrying: false },
-  { id: 5, name: 'auto_checkpoint_verify', error: 'Session expired during run',  time: '09:42', retries: 2, retrying: false },
+  { id: 5, name: 'auto_verify_pending', error: 'Session expired during run',  time: '09:42', retries: 2, retrying: false },
 ])
 
 async function retryJob(job: FailedJob) {
@@ -255,11 +268,11 @@ async function renewAccount(acc: ExpiringAccount) {
 
 interface PendingTicket { id: number; title: string; priority: 'high' | 'medium' | 'low'; created: string; assigning: boolean }
 const pendingTickets = ref<PendingTicket[]>([
-  { id: 101, title: 'Checkpoint tài khoản @viettel_care không giải quyết được',  priority: 'high',   created: '30 phút trước', assigning: false },
+  { id: 101, title: 'Xác minh tài khoản @viettel_care không hoàn tất được',  priority: 'high',   created: '30 phút trước', assigning: false },
   { id: 102, title: 'Zalo OA bị khoá không gửi được ZNS',                        priority: 'high',   created: '1 giờ trước',   assigning: false },
   { id: 103, title: 'Chiến dịch SMS bị nhà mạng chặn từ khoá',                  priority: 'medium', created: '2 giờ trước',   assigning: false },
   { id: 104, title: 'API Telegram bot trả về 429 liên tục',                      priority: 'medium', created: '3 giờ trước',   assigning: false },
-  { id: 105, title: 'Báo cáo tuần xuất thiếu dữ liệu tài khoản die',            priority: 'low',    created: '5 giờ trước',   assigning: false },
+  { id: 105, title: 'Báo cáo tuần xuất thiếu dữ liệu tài khoản ngắt kết nối',            priority: 'low',    created: '5 giờ trước',   assigning: false },
 ])
 
 async function assignTicket(ticket: PendingTicket) {
@@ -340,7 +353,7 @@ const TIMELINE: TimelineItem[] = [
   { id: 2, ts: `${today}T10:15:00`, title: 'Tài khoản @batcong.vn kết nối QR mới',        icon: '📱', variant: 'success' },
   { id: 3, ts: `${today}T09:58:00`, title: 'Plugin ChatGPT v2.1 cập nhật thành công',     icon: '🔌', variant: 'success' },
   { id: 4, ts: `${today}T09:30:00`, title: 'Lỗi kết nối server backup — đã recover',      icon: '🚨', variant: 'danger' },
-  { id: 5, ts: `${today}T09:10:00`, title: '47 tài khoản vào trạng thái checkpoint',      icon: '⚠️', variant: 'warning' },
+  { id: 5, ts: `${today}T09:10:00`, title: '47 tài khoản chuyển sang trạng thái chờ xác minh',      icon: '⚠️', variant: 'warning' },
   { id: 6, ts: `${today}T08:45:00`, title: '3 phiên mới từ Hà Nội (Viettel)',              icon: '🔗', variant: 'default' },
   { id: 7, ts: `${today}T08:20:00`, title: 'Báo cáo tuần tự động xuất thành công',        icon: '📊', variant: 'info' },
   { id: 8, ts: `${today}T07:55:00`, title: 'Scheduler chạy task queue 12 jobs',           icon: '⏳', variant: 'default' },
@@ -358,7 +371,7 @@ const ENV_STATUS = [
 <template>
   <AppPageLayout section="dashboards"
     current="wedashboard-v1"
-    page-title="WemakeUI Dashboard"
+    page-title="MindUI Dashboard"
     page-description="Tổng quan trạng thái và hoạt động hệ thống WhatsApp automation"
   >
     <!-- ── Toast ─────────────────────────────────────────────── -->
@@ -385,10 +398,10 @@ const ENV_STATUS = [
       </div>
 
       <div class="dash-actions">
-        <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/scheduler')">
+        <BaseButton size="sm" variant="ghost" @click="router.push('/mindui/scheduler')">
           ⏳ Scheduler
         </BaseButton>
-        <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">
+        <BaseButton size="sm" variant="ghost" @click="router.push('/mindui/console')">
           🖥 Console
         </BaseButton>
         <BaseButton size="sm" variant="ghost" @click="campaignModal = true">
@@ -443,7 +456,7 @@ const ENV_STATUS = [
       <BaseCard shadow="sm" hover-effect="glow">
         <div class="section-header">
           <h3 class="section-title">Xu hướng 7 ngày</h3>
-          <BaseBadge text="Live" variant="success" dot />
+          <BaseBadge text="Trực tiếp" variant="success" dot />
         </div>
         <LineChart :series="LINE_SERIES" :height="220" :show-grid="true" :show-legend="true" :smooth="true" />
       </BaseCard>
@@ -467,7 +480,7 @@ const ENV_STATUS = [
           />
         </div>
         <div v-if="activeAccountFilter" class="filter-tag">
-          Đang lọc: <strong>{{ activeAccountFilter }}</strong>
+          Đang lọc: <strong>{{ filterLabel(activeAccountFilter) }}</strong>
         </div>
       </BaseCard>
     </div>
@@ -490,7 +503,7 @@ const ENV_STATUS = [
       <BaseCard shadow="sm" hover-effect="glow">
         <div class="section-header">
           <h3 class="section-title">Hoạt động hệ thống</h3>
-          <BaseButton size="sm" variant="ghost" @click="router.push('/wemakeui/console')">
+          <BaseButton size="sm" variant="ghost" @click="router.push('/mindui/console')">
             Xem tất cả
           </BaseButton>
         </div>
@@ -541,7 +554,7 @@ const ENV_STATUS = [
       <!-- Expiring accounts -->
       <div v-else-if="activeTab === 'expiring'" class="act-table-wrap">
         <div v-if="activeAccountFilter" class="filter-notice">
-          <span>Đang lọc theo: <strong>{{ activeAccountFilter }}</strong></span>
+          <span>Đang lọc theo: <strong>{{ filterLabel(activeAccountFilter) }}</strong></span>
           <BaseButton variant="ghost" size="sm" @click="activeAccountFilter = null">✕ Bỏ lọc</BaseButton>
         </div>
         <div v-if="!filteredAccounts.length" class="act-empty">
@@ -566,7 +579,7 @@ const ENV_STATUS = [
               <td class="cell-warn">{{ acc.expiresIn }}</td>
               <td>
                 <BaseBadge
-                  :text="acc.status === 'checkpoint' ? 'Checkpoint' : 'Sắp hết hạn'"
+                  :text="acc.status === 'checkpoint' ? 'Chờ xác minh' : 'Sắp hết hạn'"
                   :variant="acc.status === 'checkpoint' ? 'warning' : 'neutral'"
                   dot
                 />
@@ -923,7 +936,7 @@ const ENV_STATUS = [
 .retry-badge {
   display: inline-block; padding: 1px 6px; border-radius: 4px;
   font-size: 11px; font-weight: var(--wx-fw-bold);
-  background: rgba(239,68,68,0.1); color: #dc2626;
+  background: var(--wx-danger-bg); color: var(--wx-danger-text);
 }
 
 .acc-cell { display: flex; flex-direction: column; gap: 2px; }

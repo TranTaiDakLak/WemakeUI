@@ -18,11 +18,11 @@ const columns: ColumnConfig[] = [
 ]
 
 const rows: Record<string, unknown>[] = [
-  { id: 1, name: 'Nguyễn An', email: 'an@wemake.vn', role: 'Admin' },
-  { id: 2, name: 'Trần Bình', email: 'binh@wemake.vn', role: 'Editor' },
-  { id: 3, name: 'Lê Cường', email: 'cuong@wemake.vn', role: 'Viewer' },
-  { id: 4, name: 'Phạm Dung', email: 'dung@wemake.vn', role: 'Editor' },
-  { id: 5, name: 'Vũ Em', email: 'em@wemake.vn', role: 'Viewer' },
+  { id: 1, name: 'Nguyễn An', email: 'an@mind.vn', role: 'Admin' },
+  { id: 2, name: 'Trần Bình', email: 'binh@mind.vn', role: 'Editor' },
+  { id: 3, name: 'Lê Cường', email: 'cuong@mind.vn', role: 'Viewer' },
+  { id: 4, name: 'Phạm Dung', email: 'dung@mind.vn', role: 'Editor' },
+  { id: 5, name: 'Vũ Em', email: 'em@mind.vn', role: 'Viewer' },
 ]
 
 /* ── Selection ─────────────────────────────────────── */
@@ -54,8 +54,8 @@ const statusMeta: Record<string, { variant: 'success' | 'warning' | 'danger'; la
 
 /* ── Code strings ──────────────────────────────────── */
 const basicCode = `<script setup lang="ts">
-import { DataGridPro } from '@wemake/ui'
-import type { ColumnConfig } from '@wemake/ui'
+import { DataGridPro } from '@mind/ui'
+import type { ColumnConfig } from '@mind/ui'
 
 const columns: ColumnConfig[] = [
   { key: 'id', label: 'ID', visible: true, group: 'Chung', width: '70px', sortable: true },
@@ -65,11 +65,11 @@ const columns: ColumnConfig[] = [
 ]
 
 const rows: Record<string, unknown>[] = [
-  { id: 1, name: 'Nguyễn An', email: 'an@wemake.vn', role: 'Admin' },
-  { id: 2, name: 'Trần Bình', email: 'binh@wemake.vn', role: 'Editor' },
-  { id: 3, name: 'Lê Cường', email: 'cuong@wemake.vn', role: 'Viewer' },
-  { id: 4, name: 'Phạm Dung', email: 'dung@wemake.vn', role: 'Editor' },
-  { id: 5, name: 'Vũ Em', email: 'em@wemake.vn', role: 'Viewer' },
+  { id: 1, name: 'Nguyễn An', email: 'an@mind.vn', role: 'Admin' },
+  { id: 2, name: 'Trần Bình', email: 'binh@mind.vn', role: 'Editor' },
+  { id: 3, name: 'Lê Cường', email: 'cuong@mind.vn', role: 'Viewer' },
+  { id: 4, name: 'Phạm Dung', email: 'dung@mind.vn', role: 'Editor' },
+  { id: 5, name: 'Vũ Em', email: 'em@mind.vn', role: 'Viewer' },
 ]
 <\/script>
 
@@ -81,7 +81,7 @@ const rows: Record<string, unknown>[] = [
 
 const selectionCode = `<script setup lang="ts">
 import { ref } from 'vue'
-import { DataGridPro } from '@wemake/ui'
+import { DataGridPro } from '@mind/ui'
 
 const selected = ref<Set<string | number>>(new Set())
 <\/script>
@@ -100,8 +100,8 @@ const selected = ref<Set<string | number>>(new Set())
 
 const densityCode = `<script setup lang="ts">
 import { ref } from 'vue'
-import { DataGridPro, BaseButton } from '@wemake/ui'
-import type { DataGridDensity } from '@wemake/ui'
+import { DataGridPro, BaseButton } from '@mind/ui'
+import type { DataGridDensity } from '@mind/ui'
 
 const density = ref<DataGridDensity>('md')
 <\/script>
@@ -127,8 +127,8 @@ const density = ref<DataGridDensity>('md')
 <\/template>`
 
 const slotCode = `<script setup lang="ts">
-import { DataGridPro, BaseBadge } from '@wemake/ui'
-import type { ColumnConfig } from '@wemake/ui'
+import { DataGridPro, BaseBadge } from '@mind/ui'
+import type { ColumnConfig } from '@mind/ui'
 
 const columns: ColumnConfig[] = [
   { key: 'id', label: 'ID', visible: true, group: 'Chung', width: '70px' },

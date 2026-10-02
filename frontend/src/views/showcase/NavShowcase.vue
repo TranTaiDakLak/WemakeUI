@@ -27,7 +27,7 @@ const tabs = [
 
 /* ── accordion ── */
 const faq = [
-  { key: 'q1', title: 'WemakeUI là gì?',           description: 'mô tả ngắn' },
+  { key: 'q1', title: 'MindUI là gì?',           description: 'mô tả ngắn' },
   { key: 'q2', title: 'có hỗ trợ dark mode không?', description: 'có, qua data-wx-theme' },
   { key: 'q3', title: 'tree-shake được không?',     description: 'có, named export' },
   { key: 'q4', title: 'tính năng beta',             disabled: true },
@@ -82,7 +82,7 @@ const paletteItems: PaletteItem[] = [
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="phase 2 — navigation" />
+    <AppTopbar title="MindUI" subtitle="phase 2 — navigation" />
     <main class="main">
       <PageHeader
         title="phase 2 — navigation"
@@ -105,7 +105,7 @@ const paletteItems: PaletteItem[] = [
         <h3 class="sub">single open</h3>
         <BaseAccordion :items="faq" :default-open="['q1']">
           <template #q1>
-            <p>WemakeUI là bộ UI kit Vue 3 cross-platform.</p>
+            <p>MindUI là bộ UI kit Vue 3 cross-platform.</p>
           </template>
           <template #q2>
             <p>có. dùng <code>useTheme()</code> với 3 mode: system / light / dark.</p>
@@ -167,7 +167,7 @@ const paletteItems: PaletteItem[] = [
         <p class="muted">Click để scroll đến section. ScrollSpy tự highlight khi cuộn.</p>
 
         <h3 class="sub">sticky (mặc định)</h3>
-        <AnchorBar v-model="anchorActive" :sections="anchorSections" />
+        <AnchorBar v-model="anchorActive" :sections="anchorSections" :sticky-top="64" />
 
         <h3 class="sub">inline (không sticky)</h3>
         <AnchorBar v-model="anchorActive" :sections="anchorSections" inline />

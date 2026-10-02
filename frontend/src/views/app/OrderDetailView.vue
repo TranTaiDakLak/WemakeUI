@@ -9,7 +9,7 @@ const ORDER = {
   customer: { name: 'Nguyễn Văn A', email: 'nguyenvana@example.com', phone: '0987 654 321' },
   address: '123 Đường Lê Lợi, Phường Bến Nghé, Quận 1, TP.HCM',
   items: [
-    { name: 'Áo thun Premium WemakeUI', variant: 'Xanh dương / M', qty: 2, price: 299000 },
+    { name: 'Áo thun Premium MindUI', variant: 'Xanh dương / M', qty: 2, price: 299000 },
     { name: 'Túi canvas thêu logo', variant: 'Nâu', qty: 1, price: 129000 },
   ],
   subtotal: 727000,

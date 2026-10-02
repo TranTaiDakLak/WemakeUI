@@ -1,8 +1,8 @@
 {
-  "name": "@wemake/ui",
+  "name": "@mind/ui",
   "private": false,
   "version": "0.1.0",
-  "description": "WemakeUI — cross-platform Vue 3 UI kit for web, mobile, and desktop applications.",
+  "description": "MindUI — cross-platform Vue 3 UI kit for web, mobile, and desktop applications.",
   "type": "module",
   "license": "MIT",
   "keywords": [
@@ -21,14 +21,14 @@
     "dist-lib",
     "src"
   ],
-  "main": "./dist-lib/wemake-ui.umd.js",
-  "module": "./dist-lib/wemake-ui.es.js",
+  "main": "./dist-lib/mind-ui.umd.js",
+  "module": "./dist-lib/mind-ui.es.js",
   "types": "./dist-lib/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist-lib/index.d.ts",
-      "import": "./dist-lib/wemake-ui.es.js",
-      "require": "./dist-lib/wemake-ui.umd.js"
+      "import": "./dist-lib/mind-ui.es.js",
+      "require": "./dist-lib/mind-ui.umd.js"
     },
     "./style.css": "./dist-lib/ui.css",
     "./tokens": {
@@ -44,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/TranTaiDakLak/WemakeUI.git"
+    "url": "https://github.com/TranTaiDakLak/MindUI.git"
   },
   "sideEffects": [
     "**/*.css"

@@ -28,7 +28,7 @@ const sizeOpts = [
 
 <template>
   <div class="fp">
-    <AppTopbar title="WemakeUI" subtitle="forms — form controls" />
+    <AppTopbar title="MindUI" subtitle="forms — form controls" />
     <main class="fp__main">
 
       <div class="fp__hdr">

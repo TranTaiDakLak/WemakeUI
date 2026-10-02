@@ -59,6 +59,42 @@ const groupLabelId = `base-radio-label-${uid}`
   margin-bottom: var(--wx-space-1);
 }
 
+/* Radio tuỳ biến theo nguồn MindAds: vòng 16px viền 1.5px, chấm 8px bật bằng scale */
+.radio-label input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-grid;
+  place-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1.5px solid var(--wx-border-check, var(--wx-border-control));
+  border-radius: 50%;
+  background: var(--wx-surface-elevated);
+  transition: border-color var(--wx-d-fast) var(--wx-ease-standard),
+              box-shadow var(--wx-d-fast) var(--wx-ease-standard);
+}
+.radio-label input[type="radio"]::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wx-brand-600);
+  transform: scale(0);
+  transition: transform var(--wx-d-fast) var(--wx-ease-bounce);
+}
+.radio-label:hover input[type="radio"]:not(:checked):not(:disabled) {
+  border-color: var(--wx-text-muted);
+}
+.radio-label input[type="radio"]:checked { border-color: var(--wx-brand-600); }
+.radio-label input[type="radio"]:checked::before { transform: scale(1); }
+.radio-label input[type="radio"]:focus-visible {
+  outline: none;
+  box-shadow: var(--wx-ring-focus);
+}
+.radio-label input[type="radio"]:disabled { cursor: not-allowed; }
+
 .base-radio__options--horizontal {
   display: flex;
   flex-wrap: wrap;

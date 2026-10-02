@@ -24,6 +24,9 @@ export {
   glass,
   zIndex,
   density,
+  control,
+  overlay,
+  scrollbar,
 } from './scales'
 export type {
   RadiusToken,
@@ -35,6 +38,9 @@ export type {
   ZIndexToken,
   DensityToken,
   DensityMode,
+  ControlToken,
+  OverlayToken,
+  ScrollbarToken,
 } from './scales'
 
 // ── Layer 2: Semantic Tokens ───────────────────────────

@@ -51,7 +51,7 @@ const ITEM_COLORS: Record<string, string> = { new: 'success', improve: 'info', f
   <LandingLayout>
     <section class="cl-hero">
       <h1 class="cl-title">Changelog</h1>
-      <p class="cl-desc">Theo dõi mọi thay đổi và cập nhật của WemakeUI.</p>
+      <p class="cl-desc">Theo dõi mọi thay đổi và cập nhật của MindUI.</p>
     </section>
 
     <section class="cl-section">
@@ -87,7 +87,7 @@ const ITEM_COLORS: Record<string, string> = { new: 'success', improve: 'info', f
 </template>
 
 <style scoped>
-.cl-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-8); text-align: center; background: var(--wx-gradient-bg); }
+.cl-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-8); text-align: center; background: var(--wx-shell-hero-bg); }
 .cl-title { font-size: var(--wx-fs-48); font-weight: 800; letter-spacing: var(--wx-tracking-tight); margin-bottom: var(--wx-space-3); }
 .cl-desc { font-size: var(--wx-fs-18); color: var(--wx-content-secondary); margin: 0; }
 .cl-section { padding: var(--wx-space-8) var(--wx-space-5); }
@@ -97,7 +97,7 @@ const ITEM_COLORS: Record<string, string> = { new: 'success', improve: 'info', f
 .release-block { padding: var(--wx-space-5); background: var(--wx-bg-base); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-xl); }
 .release-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--wx-space-4); }
 .version-row { display: flex; align-items: center; gap: var(--wx-space-3); }
-.version-num { font-family: var(--wx-font-mono); font-size: var(--wx-fs-20); font-weight: var(--wx-fw-bold); color: var(--wx-brand-600); }
+.version-num { font-family: var(--wx-font-mono); font-size: var(--wx-fs-20); font-weight: var(--wx-fw-bold); color: var(--wx-text-link); }
 .release-date { font-size: var(--wx-fs-13); color: var(--wx-content-muted); }
 
 .change-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--wx-space-2); }
@@ -108,5 +108,6 @@ const ITEM_COLORS: Record<string, string> = { new: 'success', improve: 'info', f
 .cl-subscribe { padding: var(--wx-space-6); background: var(--wx-bg-sunken); border-radius: var(--wx-radius-xl); text-align: center; }
 .sub-title { font-size: var(--wx-fs-20); font-weight: var(--wx-fw-semibold); margin-bottom: var(--wx-space-4); }
 .sub-form { display: flex; gap: var(--wx-space-3); max-width: 400px; margin: 0 auto; }
-.sub-input { flex: 1; padding: var(--wx-space-2) var(--wx-space-3); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-md); background: var(--wx-bg-base); color: var(--wx-content-primary); font-size: var(--wx-fs-14); }
+.sub-form :deep(.wx-btn) { flex-shrink: 0; }
+.sub-input { flex: 1; min-width: 0; padding: var(--wx-space-2) var(--wx-space-3); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-md); background: var(--wx-bg-base); color: var(--wx-content-primary); font-size: var(--wx-fs-14); }
 </style>

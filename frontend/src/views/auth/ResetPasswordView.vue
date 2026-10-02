@@ -3,7 +3,12 @@
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
-import { BaseButton, BaseInput, FormField, BaseProgress } from '../../components/common'
+import AuthHead from '../_layouts/AuthHead.vue'
+import AuthField from '../_layouts/AuthField.vue'
+import { BaseButton, BaseProgress } from '../../components/common'
+
+const ICON_LOCK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
+const ICON_SHIELD = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
 
 const form = ref({ password: '', confirm: '' })
 const errors = ref<Record<string, string>>({})
@@ -46,15 +51,23 @@ async function submit() {
 
 <template>
   <AuthLayout>
-    <header class="auth-head">
-      <h1>Đặt lại mật khẩu</h1>
-      <p>Token hợp lệ. Nhập mật khẩu mới cho tài khoản của bạn.</p>
-    </header>
+    <AuthHead
+      :icon="ICON_SHIELD"
+      eyebrow="Đặt lại truy cập"
+      title="Đặt lại mật khẩu"
+      description="Token hợp lệ. Nhập mật khẩu mới cho tài khoản của bạn."
+    />
 
-    <form v-if="!done" class="auth-form" @submit.prevent="submit">
-      <FormField label="Mật khẩu mới" :error="errors.password" required>
-        <BaseInput v-model="form.password" type="password" />
-      </FormField>
+    <form v-if="!done" class="auth-form" novalidate @submit.prevent="submit">
+      <AuthField
+        v-model="form.password"
+        label="Mật khẩu mới"
+        type="password"
+        :icon="ICON_LOCK"
+        autocomplete="new-password"
+        :error="errors.password"
+        required
+      />
 
       <div class="strength">
         <BaseProgress :value="strength" :variant="variant" size="sm" />
@@ -66,11 +79,17 @@ async function submit() {
         </ul>
       </div>
 
-      <FormField label="Xác nhận mật khẩu" :error="errors.confirm" required>
-        <BaseInput v-model="form.confirm" type="password" />
-      </FormField>
+      <AuthField
+        v-model="form.confirm"
+        label="Xác nhận mật khẩu"
+        type="password"
+        :icon="ICON_LOCK"
+        autocomplete="new-password"
+        :error="errors.confirm"
+        required
+      />
 
-      <BaseButton type="submit" :loading="loading" block>Cập nhật mật khẩu</BaseButton>
+      <BaseButton type="submit" size="lg" :loading="loading" block>Cập nhật mật khẩu</BaseButton>
     </form>
 
     <div v-else class="done">
@@ -90,11 +109,7 @@ async function submit() {
 </template>
 
 <style scoped>
-.auth-head { display: flex; flex-direction: column; gap: var(--wx-space-1); }
-.auth-head h1 { margin: 0; font-size: var(--wx-fs-28); font-weight: var(--wx-fw-semibold); letter-spacing: var(--wx-tracking-tight); }
-.auth-head p { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-content-muted); }
-
-.auth-form { display: flex; flex-direction: column; gap: var(--wx-space-3); }
+.auth-form { display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .strength {
   display: flex;
   flex-direction: column;

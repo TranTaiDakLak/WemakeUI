@@ -54,7 +54,7 @@ const FEATURES = [
       '10 dashboard — overview, analytics, CRM, IoT…',
       '20 app page — mailbox, chat, invoice, calendar…',
       '10 landing page — SaaS, API, blog, careers…',
-      '10 WemakeUI page — admin, campaign, canvas…',
+      '10 MindUI page — admin, campaign, canvas…',
     ],
   },
 ]
@@ -83,9 +83,9 @@ const FEATURES = [
           </div>
         </div>
 
-        <div class="feat-cta" v-reveal>
-          <h2 class="cta-title">Sẵn sàng bắt đầu?</h2>
-          <p class="cta-desc">Dùng thử showcase ngay — không cần cài đặt.</p>
+        <div class="feat-cta mind-cta-band" v-reveal>
+          <h2 class="cta-title mind-cta-band__title">Sẵn sàng bắt đầu?</h2>
+          <p class="cta-desc mind-cta-band__desc">Dùng thử showcase ngay — không cần cài đặt.</p>
           <div class="cta-actions">
             <BaseButton variant="primary" size="lg" tag="a" href="#/">Xem showcase</BaseButton>
             <BaseButton variant="secondary" size="lg" tag="a" href="#/auth/register">Đăng ký miễn phí</BaseButton>
@@ -97,7 +97,7 @@ const FEATURES = [
 </template>
 
 <style scoped>
-.feat-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-8); text-align: center; background: var(--wx-gradient-bg); }
+.feat-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-8); text-align: center; background: var(--wx-shell-hero-bg); }
 .feat-title { font-size: var(--wx-fs-48); font-weight: 800; letter-spacing: var(--wx-tracking-tight); margin-bottom: var(--wx-space-3); }
 .feat-desc { font-size: var(--wx-fs-18); color: var(--wx-content-secondary); margin: 0; }
 .feat-section { padding: var(--wx-space-10) var(--wx-space-5); }
@@ -107,12 +107,14 @@ const FEATURES = [
 .cat-icon { font-size: 24px; }
 .cat-title { font-size: var(--wx-fs-20); font-weight: var(--wx-fw-semibold); margin: 0; flex: 1; }
 .cat-count { font-size: var(--wx-fs-13); color: var(--wx-content-muted); }
-.feat-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: var(--wx-border-subtle); }
-.feat-item { display: flex; align-items: flex-start; gap: var(--wx-space-2); padding: var(--wx-space-3) var(--wx-space-4); background: var(--wx-bg-base); }
+.feat-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 0; background: var(--wx-bg-base); }
+/* viền ô bằng inset shadow (thay cho gap 1px + nền viền) để ô trống cuối lưới không bị tô nền lệch màu */
+.feat-item { display: flex; align-items: flex-start; gap: var(--wx-space-2); padding: var(--wx-space-3) var(--wx-space-4); background: var(--wx-bg-base); box-shadow: inset -1px 0 0 var(--wx-border-subtle), inset 0 -1px 0 var(--wx-border-subtle); }
 .feat-check { color: var(--wx-status-success-text); font-weight: var(--wx-fw-bold); flex-shrink: 0; }
 .feat-name { font-size: var(--wx-fs-14); color: var(--wx-content-secondary); }
-.feat-cta { text-align: center; padding: var(--wx-space-10); background: var(--wx-gradient-cta); border-radius: var(--wx-radius-2xl); display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-4); }
-.cta-title { font-size: var(--wx-fs-32); font-weight: 800; color: white; margin: 0; }
-.cta-desc { font-size: var(--wx-fs-16); color: rgba(255,255,255,0.8); margin: 0; }
+/* nền + màu chữ + nút trắng: class global .mind-cta-band (ui-system/foundations/shell.css) */
+.feat-cta { text-align: center; padding: var(--wx-space-10) var(--wx-space-5); border-radius: var(--wx-radius-2xl); overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-4); }
+.cta-title { font-size: var(--wx-fs-32); font-weight: 800; margin: 0; }
+.cta-desc { font-size: var(--wx-fs-16); margin: 0; }
 .cta-actions { display: flex; gap: var(--wx-space-3); justify-content: center; flex-wrap: wrap; }
 </style>

@@ -20,6 +20,7 @@ const {
 function pickTheme(t: Theme) { setTheme(t) }
 function pickVariant(v: Variant) { setVariant(v) }
 
+/* Hex literal có chủ đích: demo setBrandColor()/setAccentColor() nhận mã hex, preset hiển thị chính mã màu */
 const brandInput = ref('#8b5cf6')
 const accentInput = ref('#ec4899')
 const brandPresets = ['#2563eb', '#8b5cf6', '#ec4899', '#10b981', '#f59e0b', '#ef4444', '#0ea5e9', '#14b8a6'] as const
@@ -47,8 +48,14 @@ interface RadiusItem { name: string; value: string; hint?: string }
 const radiusList: RadiusItem[] = [
   { name: 'none', value: '0' },
   { name: 'sm',   value: '4px' },
-  { name: 'md',   value: '8px',  hint: 'button, input, tooltip, toast' },
-  { name: 'lg',   value: '12px', hint: 'card, group box, list item' },
+  { name: 'md',   value: '8px',  hint: 'tooltip, tag vuông' },
+  { name: 'ctrl-sm', value: '8px',  hint: 'control sm, nút đóng, segmented item' },
+  { name: 'ctrl', value: '9px',  hint: 'button, input, select, tab (nguồn MindAds)' },
+  { name: 'item', value: '10px', hint: 'option trong menu/select' },
+  { name: 'tile', value: '11px', hint: 'icon-tile, option card' },
+  { name: 'lg',   value: '12px', hint: 'card, group box, list item, toast' },
+  { name: 'menu', value: '14px', hint: 'dropdown, select overlay' },
+  { name: 'panel', value: '16px', hint: 'form panel / popover (tương đương xl)' },
   { name: 'xl',   value: '16px', hint: 'modal, drawer' },
   { name: '2xl',  value: '24px', hint: 'feature card, pricing' },
   { name: '3xl',  value: '30px', hint: 'banner CTA' },
@@ -61,11 +68,26 @@ const spaceList = Array.from({ length: 13 }, (_, i) => ({
   px: [0, 4, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 128][i],
 }))
 
-const fsList = [12, 13, 14, 15, 16, 18, 20, 24, 28, 32, 40, 48, 64] as const
+const fsList = [10, 11, 12, 13, 14, 15, 16, 18, 20, 24, 28, 32, 40, 48, 64] as const
 
 const gradientList = [
   'bg', 'header', 'cta', 'button', 'accent', 'text',
   'success', 'danger', 'warning',
+  'primary', 'primary-hover', 'tile', 'tile-blue', 'tile-green', 'tile-amber', 'tile-red',
+  'panel-head', 'scanner',
+] as const
+
+/* ── 9. control & elevation (nhận diện MindAds) ── */
+const controlHeights = ['sm', 'md', 'lg', 'xl'] as const
+const shadowList = [
+  { name: 'btn',       hint: 'nút solid' },
+  { name: 'btn-hover', hint: 'nút solid khi hover' },
+  { name: 'card-soft', hint: 'thẻ mềm trong form' },
+  { name: 'toast',     hint: 'toast' },
+  { name: 'menu',      hint: 'dropdown / select overlay' },
+  { name: 'popover',   hint: 'form panel / popover' },
+  { name: 'tile',      hint: 'icon-tile' },
+  { name: 'tooltip',   hint: 'tooltip / guide hint' },
 ] as const
 
 const durationList = [
@@ -95,7 +117,7 @@ function bumpMotion() {
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="phase 0 — tokens">
+    <AppTopbar title="MindUI" subtitle="phase 0 — tokens">
       <template #actions>
         <div class="theme-switch" role="group" aria-label="chọn theme">
           <button
@@ -123,11 +145,11 @@ function bumpMotion() {
           được generate lại bằng HSL — đây là "màu đơn" cascade qua mọi component.
         </p>
         <div class="row">
-          <div class="swatch" :style="{ background: 'var(--wx-brand-primary)' }">
+          <div class="swatch swatch--primary" :style="{ background: 'var(--wx-brand-primary)' }">
             <span class="swatch-name">brand-primary</span>
             <span class="swatch-val">600</span>
           </div>
-          <div class="swatch" :style="{ background: 'var(--wx-brand-accent)' }">
+          <div class="swatch swatch--accent" :style="{ background: 'var(--wx-brand-accent)' }">
             <span class="swatch-name">brand-accent</span>
             <span class="swatch-val">cyan</span>
           </div>
@@ -143,7 +165,7 @@ function bumpMotion() {
             class="scale-cell"
             :style="{ background: `var(--wx-brand-${s})` }"
           >
-            <span class="scale-stop">{{ s }}</span>
+            <span class="scale-stop" :class="{ 'scale-stop--dark': Number(s) <= 400 }">{{ s }}</span>
           </div>
         </div>
         <div class="scale-strip scale-strip--accent">
@@ -153,7 +175,7 @@ function bumpMotion() {
             class="scale-cell"
             :style="{ background: `var(--wx-accent-${s}, var(--wx-brand-${s}))` }"
           >
-            <span class="scale-stop">{{ s }}</span>
+            <span class="scale-stop" :class="{ 'scale-stop--dark': Number(s) <= 400 }">{{ s }}</span>
           </div>
         </div>
         <span class="muted scale-caption">
@@ -249,7 +271,7 @@ function bumpMotion() {
               />
             </div>
             <div class="feedback-swatches">
-              <div class="fb-cell" :style="{ background: `var(--wx-${f.solid})` }">solid</div>
+              <div class="fb-cell" :class="{ 'fb-cell--dark-text': f.name === 'success' || f.name === 'warning' }" :style="{ background: `var(--wx-${f.solid})` }">solid</div>
               <div
                 class="fb-cell fb-cell--soft"
                 :style="{
@@ -268,7 +290,7 @@ function bumpMotion() {
 
       <!-- ── 2. Gradient ────────────────────────────── -->
       <section class="section">
-        <h2 class="h">2. gradient (11 tokens)</h2>
+        <h2 class="h">2. gradient (nền, nút solid, tile, panel…)</h2>
         <div class="row">
           <div
             v-for="g in gradientList"
@@ -328,6 +350,7 @@ function bumpMotion() {
           <span style="font-weight: var(--wx-fw-medium)">medium 500</span>
           <span style="font-weight: var(--wx-fw-semibold)">semibold 600</span>
           <span style="font-weight: var(--wx-fw-bold)">bold 700</span>
+          <span style="font-weight: var(--wx-fw-extrabold)">extrabold 800</span>
         </div>
       </section>
 
@@ -393,9 +416,31 @@ function bumpMotion() {
         </div>
       </section>
 
-      <!-- ── 8. Sentence case rule ──────────────────── -->
+      <!-- ── 8. Control & elevation ───────────────── -->
       <section class="section">
-        <h2 class="h">8. quy tắc viết — sentence case</h2>
+        <h2 class="h">8. control, viền & đổ bóng — nhận diện MindAds</h2>
+        <p class="muted">control cao <code>--wx-control-h-md</code> = 34px (thiết bị cảm ứng tự nâng lên 44px). viền control <code>--wx-border-control</code>, chữ phụ <code>--wx-text-light</code>.</p>
+
+        <div class="row ctrl-row">
+          <div v-for="h in controlHeights" :key="h" class="ctrl-demo" :style="{ height: `var(--wx-control-h-${h})` }">
+            <span>control-h-{{ h }}</span>
+          </div>
+          <div class="ctrl-demo ctrl-demo--hover" :style="{ height: 'var(--wx-control-h-md)' }">
+            <span>border-control-hover</span>
+          </div>
+        </div>
+
+        <div class="row shadow-row">
+          <div v-for="sh in shadowList" :key="sh.name" class="shadow-card" :style="{ boxShadow: `var(--wx-shadow-${sh.name})` }">
+            <div class="radius-name">shadow-{{ sh.name }}</div>
+            <div class="radius-hint">{{ sh.hint }}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 9. Sentence case rule ──────────────────── -->
+      <section class="section">
+        <h2 class="h">9. quy tắc viết — sentence case</h2>
         <ul class="rule-list">
           <li>✓ "đăng nhập" — không "ĐĂNG NHẬP"</li>
           <li>✓ "tạo đơn hàng mới" — không "Tạo Đơn Hàng Mới"</li>
@@ -425,7 +470,7 @@ function bumpMotion() {
 
 .theme-switch {
   display: inline-flex;
-  background: rgba(255,255,255,0.1);
+  background: color-mix(in srgb, var(--wx-text-on-brand) 10%, transparent);
   border-radius: var(--wx-radius-full);
   padding: 2px;
   gap: 2px;
@@ -434,7 +479,7 @@ function bumpMotion() {
   padding: var(--wx-space-1) var(--wx-space-3);
   border: none;
   background: transparent;
-  color: rgba(255,255,255,0.85);
+  color: color-mix(in srgb, var(--wx-text-on-brand) 85%, transparent);
   border-radius: var(--wx-radius-full);
   font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-medium);
@@ -442,8 +487,8 @@ function bumpMotion() {
   transition: background var(--wx-d-micro) var(--wx-ease-standard);
 }
 .theme-btn[data-active="true"] {
-  background: rgba(255,255,255,0.2);
-  color: #fff;
+  background: color-mix(in srgb, var(--wx-text-on-brand) 20%, transparent);
+  color: var(--wx-text-on-brand);
 }
 
 .section {
@@ -488,10 +533,13 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  color: #fff;
+  color: var(--wx-text-on-brand);
   font-size: var(--wx-fs-12);
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
+.swatch--accent { color: var(--wx-brand-900); text-shadow: none; }
+/* dark mode: brand-primary là xanh sáng (#60a5fa) → chữ trắng chỉ ~2.5:1, đổi sang chữ xanh đậm */
+.wx-dark .swatch--primary { color: var(--wx-brand-900); text-shadow: none; }
 .swatch-name { font-weight: var(--wx-fw-semibold); }
 .swatch-val  { font-family: var(--wx-font-mono); opacity: 0.9; }
 
@@ -507,8 +555,36 @@ code {
 .grad-name {
   font-family: var(--wx-font-mono);
   font-size: var(--wx-fs-12);
-  color: #fff;
+  color: var(--wx-text-on-brand);
   text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* ── 8. control & shadow ─── */
+.ctrl-row { align-items: flex-end; margin-bottom: var(--wx-space-5); }
+.ctrl-demo {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--wx-control-px);
+  min-width: 150px;
+  background: var(--wx-surface-elevated);
+  border: 1px solid var(--wx-border-control);
+  border-radius: var(--wx-radius-ctrl);
+  font-family: var(--wx-font-mono);
+  font-size: var(--wx-fs-12);
+  color: var(--wx-content-secondary);
+}
+.ctrl-demo--hover { border-color: var(--wx-border-control-hover); }
+.shadow-card {
+  width: 190px;
+  min-height: 84px;
+  padding: var(--wx-space-3);
+  background: var(--wx-surface-elevated);
+  border: 1px solid var(--wx-border-subtle);
+  border-radius: var(--wx-radius-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
 }
 
 /* ── 3. radius card ─── */
@@ -621,7 +697,7 @@ code {
   border: none;
   border-radius: var(--wx-radius-md);
   background: var(--wx-gradient-button);
-  color: #fff;
+  color: var(--wx-text-on-brand);
   font-weight: var(--wx-fw-semibold);
   font-size: var(--wx-fs-14);
   cursor: pointer;
@@ -733,10 +809,12 @@ code {
 .scale-stop {
   font-family: var(--wx-font-mono);
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.85);
+  color: color-mix(in srgb, var(--wx-text-on-brand) 85%, transparent);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
   font-weight: var(--wx-fw-semibold);
 }
+/* các bậc sáng (50–400): chữ tối để đọc được (chữ trắng trên #eff6ff chỉ ~1.1:1) */
+.scale-stop--dark { color: var(--wx-brand-900); text-shadow: none; }
 .scale-caption {
   display: block;
   margin-top: var(--wx-space-2);
@@ -781,9 +859,11 @@ code {
   justify-content: center;
   font-size: var(--wx-fs-12);
   font-weight: var(--wx-fw-medium);
-  color: #fff;
+  color: var(--wx-text-on-brand);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
+/* nền success/warning đặc quá sáng cho chữ trắng (~2.2:1) → chữ tối cố định */
+.fb-cell--dark-text { color: var(--wx-text-on-warning); text-shadow: none; }
 .fb-cell--soft {
   border-width: 1px;
   border-style: solid;
@@ -844,7 +924,7 @@ code {
   border: none;
   border-radius: var(--wx-radius-md);
   background: var(--wx-gradient-button);
-  color: #fff;
+  color: var(--wx-text-on-brand);
   font-weight: var(--wx-fw-semibold);
   font-size: var(--wx-fs-13);
   cursor: pointer;
@@ -905,8 +985,8 @@ code {
 }
 .pg-variant-btn:hover { color: var(--wx-content-primary); }
 .pg-variant-btn[data-active="true"] {
-  background: var(--wx-brand-primary);
-  color: #fff;
+  background: var(--wx-brand-solid);
+  color: var(--wx-text-on-brand);
   box-shadow: var(--wx-shadow-sm);
 }
 .pg-state code {
@@ -930,7 +1010,7 @@ code {
   border: none;
   border-radius: var(--wx-radius-md);
   background: var(--wx-gradient-button);
-  color: #fff;
+  color: var(--wx-text-on-brand);
   font-weight: var(--wx-fw-semibold);
   cursor: pointer;
   box-shadow: var(--wx-shadow-brand);
@@ -940,8 +1020,8 @@ code {
   padding: 0 var(--wx-space-5);
   border: none;
   border-radius: var(--wx-radius-md);
-  background: var(--wx-brand-primary);
-  color: #fff;
+  background: var(--wx-brand-solid);
+  color: var(--wx-text-on-brand);
   font-weight: var(--wx-fw-semibold);
   cursor: pointer;
 }

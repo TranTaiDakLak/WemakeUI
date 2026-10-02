@@ -29,8 +29,8 @@ function isActive(to: string) {
 
       <!-- Logo -->
       <RouterLink to="/home" class="mkt-logo">
-        <img src="/logo.png" alt="WemakeUI" class="mkt-logo__mark" />
-        <span class="mkt-logo__text">WemakeUI</span>
+        <img src="/logo.png" alt="MindUI" class="mkt-logo__mark" />
+        <span class="mkt-logo__text">MindUI</span>
       </RouterLink>
 
       <!-- Desktop nav -->
@@ -158,8 +158,8 @@ function isActive(to: string) {
 }
 
 .mkt-nav__link--active {
-  color: var(--wx-brand-primary);
-  background: var(--wx-brand-50);
+  color: var(--wx-text-link);
+  background: var(--wx-selected-bg);
   font-weight: var(--wx-fw-semibold);
 }
 
@@ -240,8 +240,8 @@ function isActive(to: string) {
 }
 
 .mkt-mobile-link--active {
-  color: var(--wx-brand-primary);
-  background: var(--wx-brand-50);
+  color: var(--wx-text-link);
+  background: var(--wx-selected-bg);
 }
 
 .mkt-mobile-cta {
@@ -285,9 +285,9 @@ function isActive(to: string) {
 }
 
 .mkt-btn--primary {
-  background: var(--wx-brand-primary);
+  background: var(--wx-brand-600);
   color: var(--wx-text-on-brand);
-  border-color: var(--wx-brand-primary);
+  border-color: var(--wx-brand-600);
 }
 .mkt-btn--primary:hover {
   background: var(--wx-brand-700);

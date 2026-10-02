@@ -4,10 +4,10 @@ import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseButton, BaseBadge, BaseCard, BaseInput, BaseTag } from '../../components/common'
 
 const KEYS = ref([
-  { id: 1, name: 'Production API', key: 'wm_live_k8x2p...n4q7', created: '2026-01-15', lastUsed: '2 phút trước', active: true, scopes: ['read', 'write'] },
-  { id: 2, name: 'Staging key', key: 'wm_test_m3r9s...v2b5', created: '2026-02-20', lastUsed: '1 ngày trước', active: true, scopes: ['read'] },
-  { id: 3, name: 'CI / CD pipeline', key: 'wm_live_z1y8w...c6d3', created: '2026-03-10', lastUsed: '3 giờ trước', active: true, scopes: ['read', 'write', 'admin'] },
-  { id: 4, name: 'Old integration (deprecated)', key: 'wm_live_a7f2t...p9e1', created: '2025-11-05', lastUsed: '45 ngày trước', active: false, scopes: ['read'] },
+  { id: 1, name: 'Production API', key: 'mind_live_k8x2p...n4q7', created: '2026-01-15', lastUsed: '2 phút trước', active: true, scopes: ['read', 'write'] },
+  { id: 2, name: 'Staging key', key: 'mind_test_m3r9s...v2b5', created: '2026-02-20', lastUsed: '1 ngày trước', active: true, scopes: ['read'] },
+  { id: 3, name: 'CI / CD pipeline', key: 'mind_live_z1y8w...c6d3', created: '2026-03-10', lastUsed: '3 giờ trước', active: true, scopes: ['read', 'write', 'admin'] },
+  { id: 4, name: 'Old integration (deprecated)', key: 'mind_live_a7f2t...p9e1', created: '2025-11-05', lastUsed: '45 ngày trước', active: false, scopes: ['read'] },
 ])
 
 const newName = ref('')

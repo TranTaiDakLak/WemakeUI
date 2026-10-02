@@ -81,7 +81,7 @@ function fileIcon(type: string): string {
 
 <template>
   <div class="fp">
-    <AppTopbar title="WemakeUI" subtitle="forms — file upload" />
+    <AppTopbar title="MindUI" subtitle="forms — file upload" />
     <main class="fp__main">
 
       <div class="fp__hdr">
@@ -262,7 +262,7 @@ function onDrop(e: DragEvent) {
 .fu-item__bar  { height: 3px; background: var(--wx-border-subtle); border-radius: 2px; overflow: hidden; margin-top: var(--wx-space-1); }
 .fu-item__fill { height: 100%; background: var(--wx-brand-primary); border-radius: 2px; transition: width var(--wx-d-micro, 100ms) linear; }
 .fu-item__status { display: flex; align-items: center; gap: var(--wx-space-1); font-size: var(--wx-fs-12); margin-top: 3px; }
-.fu-item__status--done { color: #16a34a; }
+.fu-item__status--done { color: var(--wx-success-text); }
 .fu-item__remove {
   flex-shrink: 0; background: none; border: none; padding: var(--wx-space-1); cursor: pointer;
   color: var(--wx-text-muted); border-radius: var(--wx-radius-sm);

@@ -24,9 +24,9 @@ const { revealed, observe } = useScrollReveal()
 onMounted(() => { if (sectionRef.value) observe(sectionRef.value) })
 
 const DEFAULT_ITEMS: FAQItem[] = [
-  { id: '1', category: 'Sản phẩm', question: 'WemakeUI hỗ trợ những kênh nhắn tin nào?', answer: 'WemakeUI hỗ trợ WhatsApp, WhatsApp Business API, Zalo OA, Zalo ZNS, Telegram, và SMS. Chúng tôi đang phát triển thêm Facebook Messenger và Viber.' },
+  { id: '1', category: 'Sản phẩm', question: 'MindUI hỗ trợ những kênh nhắn tin nào?', answer: 'MindUI hỗ trợ WhatsApp, WhatsApp Business API, Zalo OA, Zalo ZNS, Telegram, và SMS. Chúng tôi đang phát triển thêm Viber và LINE.' },
   { id: '2', category: 'Sản phẩm', question: 'Có thể quản lý bao nhiêu tài khoản cùng lúc?', answer: 'Tuỳ gói: Starter 50 tài khoản, Business 500 tài khoản, Enterprise không giới hạn. Mỗi tài khoản có thể chạy nhiều phiên song song.' },
-  { id: '3', category: 'Kỹ thuật', question: 'API có tài liệu đầy đủ không?', answer: 'Có. Chúng tôi cung cấp REST API đầy đủ tài liệu tại api.wemake.vn, SDK cho Node.js, Python và PHP, cùng Webhook cho event-driven integration.' },
+  { id: '3', category: 'Kỹ thuật', question: 'API có tài liệu đầy đủ không?', answer: 'Có. Chúng tôi cung cấp REST API đầy đủ tài liệu tại api.mind.vn, SDK cho Node.js, Python và PHP, cùng Webhook cho event-driven integration.' },
   { id: '4', category: 'Bảo mật', question: 'Dữ liệu có được mã hóa không?', answer: 'Tất cả dữ liệu được mã hóa AES-256 lúc lưu trữ và TLS 1.3 khi truyền tải. Chúng tôi tuân thủ PDPA và đang trong quá trình đạt ISO 27001.' },
   { id: '5', category: 'Billing', question: 'Có dùng thử miễn phí không?', answer: 'Có! 14 ngày dùng thử miễn phí toàn tính năng, không cần thẻ tín dụng. Sau đó bạn có thể chọn gói phù hợp hoặc huỷ bất kỳ lúc nào.' },
   { id: '6', category: 'Billing', question: 'Có hợp đồng dài hạn bắt buộc không?', answer: 'Không. Tất cả gói đều thanh toán theo tháng, có thể nâng/hạ cấp hoặc huỷ bất cứ lúc nào. Gói năm được discount 20%.' },

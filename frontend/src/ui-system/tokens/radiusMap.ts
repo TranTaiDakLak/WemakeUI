@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  WemakeUI — Radius mapping per component (anatomy)
+ *  MindUI — Radius mapping per component (anatomy)
  *
  *  Hard rule: every component HAS a default radius.
  *  Never `border-radius: 0` for card / button / input / modal / dropdown.
@@ -16,10 +16,12 @@ export type RadiusKey = keyof typeof radius
 /** Default radius for every component in the system. */
 export const componentRadius = {
   /* atom */
-  button:        'md', /* 8px */
-  input:         'md',
-  textarea:      'md',
-  select:        'md',
+  button:        'ctrl', /* 9px — nguồn MindAds */
+  input:         'ctrl',
+  textarea:      'ctrl',
+  select:        'ctrl',
+  option:        'item', /* 10px — option trong menu/select */
+  iconTile:      'tile', /* 11px */
   checkbox:      'sm',
   radio:         'full',
   toggle:        'full',
@@ -42,8 +44,10 @@ export const componentRadius = {
   modal:         'xl',  /* 16px */
   drawer:        'xl',
   bottomSheet:   'xl',
-  dropdown:      'md',
+  dropdown:      'menu',  /* 14px */
+  selectMenu:    'menu',
   popover:       'lg',
+  formPanel:     'panel', /* 16px — popover form (head/body/foot) */
   tooltip:       'md',
   toast:         'md',
   contextMenu:   'md',

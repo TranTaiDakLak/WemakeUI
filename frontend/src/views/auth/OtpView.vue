@@ -3,7 +3,10 @@
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
+import AuthHead from '../_layouts/AuthHead.vue'
 import { BaseButton, BaseTag } from '../../components/common'
+
+const ICON_SHIELD = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
 
 const digits = ref<string[]>(['', '', '', '', '', ''])
 const inputs = ref<HTMLInputElement[]>([])
@@ -74,11 +77,10 @@ function resend() {
 
 <template>
   <AuthLayout>
-    <header class="auth-head">
-      <h1>Xác thực 2 lớp</h1>
-      <p>Nhập mã 6 chữ số chúng tôi vừa gửi về <strong>+84•••245</strong>.</p>
-      <p class="muted small">Mã thử nghiệm: <code>123456</code></p>
-    </header>
+    <AuthHead :icon="ICON_SHIELD" eyebrow="Bảo mật tài khoản" title="Xác thực 2 lớp">
+      Nhập mã 6 chữ số chúng tôi vừa gửi về <strong>+84•••245</strong>.
+      <span class="muted small otp-demo">Mã thử nghiệm: <code>123456</code></span>
+    </AuthHead>
 
     <div v-if="!verified" class="otp-area">
       <div class="otp-grid" @paste="onPaste">
@@ -133,9 +135,7 @@ function resend() {
 </template>
 
 <style scoped>
-.auth-head { display: flex; flex-direction: column; gap: var(--wx-space-1); }
-.auth-head h1 { margin: 0; font-size: var(--wx-fs-28); font-weight: var(--wx-fw-semibold); letter-spacing: var(--wx-tracking-tight); }
-.auth-head p { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-content-muted); }
+.otp-demo { display: block; margin-top: var(--wx-space-1); }
 .muted { color: var(--wx-content-muted); }
 .small { font-size: var(--wx-fs-12); }
 .muted code { font-family: var(--wx-font-mono); padding: 1px 6px; background: var(--wx-surface-sunken); border-radius: var(--wx-radius-sm); }
@@ -191,7 +191,7 @@ function resend() {
   cursor: pointer;
   text-decoration: underline;
 }
-.link-btn:disabled { color: var(--wx-content-disabled); cursor: not-allowed; text-decoration: none; }
+.link-btn:disabled { color: var(--wx-content-muted); cursor: not-allowed; text-decoration: none; }
 
 .success {
   display: flex;

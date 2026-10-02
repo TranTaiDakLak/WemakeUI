@@ -37,14 +37,14 @@ const CONTENT: Record<string, { title: string; body: string }> = {
 ## Cài đặt
 
 \`\`\`bash
-npm install @wemake/ui
+npm install @mind/ui
 \`\`\`
 
 ## Import
 
 \`\`\`ts
-import { BaseButton, useToast } from '@wemake/ui'
-import '@wemake/ui/style.css'
+import { BaseButton, useToast } from '@mind/ui'
+import '@mind/ui/style.css'
 \`\`\`
 
 ## Sử dụng component đầu tiên
@@ -178,7 +178,7 @@ const filteredDocs = computed(() => {
 .tree-children { list-style: none; margin: 0; padding: 0 0 0 var(--wx-space-3); display: flex; flex-direction: column; gap: 2px; }
 .tree-item { font-size: var(--wx-fs-14); padding: var(--wx-space-2) var(--wx-space-3); border-radius: var(--wx-radius-md); cursor: pointer; color: var(--wx-content-secondary); transition: all var(--wx-d-micro); }
 .tree-item:hover { background: var(--wx-hover-bg); color: var(--wx-content-primary); }
-.tree-item.active { background: var(--wx-brand-50); color: var(--wx-brand-600); font-weight: var(--wx-fw-medium); }
+.tree-item.active { background: var(--wx-selected-bg); color: var(--wx-text-link); font-weight: var(--wx-fw-medium); }
 
 .article-title { font-size: var(--wx-fs-32); font-weight: var(--wx-fw-bold); letter-spacing: var(--wx-tracking-tight); margin: 0 0 var(--wx-space-5); }
 .article-body { font-size: var(--wx-fs-15); line-height: var(--wx-lh-relaxed); color: var(--wx-content-primary); }

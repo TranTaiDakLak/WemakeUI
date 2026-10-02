@@ -1,8 +1,8 @@
-# WemakeUI
+# MindUI
 
 > Cross-platform Vue 3 UI template — designed for **Web · Mobile · Desktop**.
 
-WemakeUI is a Vue 3 component library + design system with a built-in showcase you can fork as a starting template. It ships components, composables, design tokens, and foundation styles that work in any Vue 3 environment: a regular web app, a mobile shell (Capacitor / Ionic / PWA), or a desktop wrapper (Wails / Tauri / Electron).
+MindUI is a Vue 3 component library + design system with a built-in showcase you can fork as a starting template. It ships components, composables, design tokens, and foundation styles that work in any Vue 3 environment: a regular web app, a mobile shell (Capacitor / Ionic / PWA), or a desktop wrapper (Wails / Tauri / Electron).
 
 ## Highlights
 
@@ -25,7 +25,7 @@ Opens the showcase at the dev URL. The home route renders [src/views/ShowcaseVie
 ## Use as a library
 
 ```bash
-npm install @wemake/ui
+npm install @mind/ui
 npm install vue                       # peer dep
 npm install vue-router pinia          # optional, only if you use those
 ```
@@ -35,15 +35,15 @@ npm install vue-router pinia          # optional, only if you use those
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import '@wemake/ui/style.css'
-import { BaseButton, useToast } from '@wemake/ui'
+import '@mind/ui/style.css'
+import { BaseButton, useToast } from '@mind/ui'
 
 createApp(App).mount('#app')
 ```
 
 ```vue
 <script setup lang="ts">
-import { BaseButton, BaseInput, useToast } from '@wemake/ui'
+import { BaseButton, BaseInput, useToast } from '@mind/ui'
 
 const { showToast } = useToast()
 </script>

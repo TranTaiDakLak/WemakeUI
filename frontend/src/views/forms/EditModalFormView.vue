@@ -90,7 +90,7 @@ function catLabel(v: string) {
 
 <template>
   <div class="fp">
-    <AppTopbar title="WemakeUI" subtitle="forms — edit modal" />
+    <AppTopbar title="MindUI" subtitle="forms — edit modal" />
     <main class="fp__main">
 
       <div class="fp__hdr">
@@ -268,7 +268,7 @@ function confirmDelete() {
 
 /* Confirm dialog */
 .em-confirm { display: flex; flex-direction: column; align-items: center; gap: var(--wx-space-3); text-align: center; padding: var(--wx-space-2) 0; }
-.em-confirm-icon { color: #f59e0b; }
+.em-confirm-icon { color: var(--wx-warning-solid); }
 .em-confirm-text { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); line-height: 1.6; }
 .em-confirm-actions { display: flex; gap: var(--wx-space-2); }
 </style>

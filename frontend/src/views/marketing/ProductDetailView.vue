@@ -7,14 +7,24 @@ import FAQAccordion from '@/archetypes/marketing/FAQAccordion.vue'
 const route = useRoute()
 const slug = computed(() => route.params.slug as string)
 
+/** Chữ đặt TRÊN nền màu sản phẩm: amber/xanh lá quá sáng cho chữ trắng (≈2:1) → dùng chữ tối. */
+function onColor(hex: string): string {
+  const n = parseInt(hex.slice(1), 16)
+  const lin = (v: number) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4) }
+  const L = 0.2126 * lin((n >> 16) & 255) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255)
+  return L > 0.3 ? '#0f172a' : '#ffffff'
+}
+/** Chữ/icon mang màu sản phẩm trên nền bề mặt: trộn về màu chữ chính của theme để đủ tương phản ở cả light/dark. */
+const accentText = (hex: string) => `color-mix(in srgb, ${hex} 62%, var(--wx-text-primary))`
+
 // Màu thương hiệu riêng của từng sản phẩm — CỐ Ý giữ hex, không theo theme,
 // vì được nối thêm hậu tố alpha dạng chuỗi (ví dụ color + '08') khi dùng
 // trong :style, nên không thể thay bằng CSS var.
 const PRODUCT_DATA: Record<string, { name: string; icon: string; version: string; color: string; tagline: string; overview: string; features: string[] }> = {
-  wemakeui: {
-    name: 'WemakeUI', icon: '🔗', version: '3.2.1', color: '#2563eb',
+  mindui: {
+    name: 'MindUI', icon: '🔗', version: '3.2.1', color: '#2563eb',
     tagline: 'Quản lý đa kênh nhắn tin thông minh',
-    overview: 'WemakeUI là giải pháp quản lý tập trung mọi kênh nhắn tin — WhatsApp, Zalo, Telegram, SMS — trên một dashboard duy nhất. Với AI automation, bạn có thể tự động hóa phản hồi, phân loại hội thoại và tối ưu chiến dịch.',
+    overview: 'MindUI là giải pháp quản lý tập trung mọi kênh nhắn tin — WhatsApp, Zalo, Telegram, SMS — trên một dashboard duy nhất. Với AI automation, bạn có thể tự động hóa phản hồi, phân loại hội thoại và tối ưu chiến dịch.',
     features: ['Session management đa thiết bị', 'AI chatbot với GPT-4 integration', 'Bulk messaging 500K+/giờ', 'Proxy & fingerprint management', 'Webhook & Open API', 'Team collaboration & RBAC'],
   },
   wedashboard: {
@@ -57,7 +67,7 @@ const product = computed(() => PRODUCT_DATA[slug.value])
             </div>
           </div>
           <div class="pd-hero__cta">
-            <RouterLink to="/auth/register" class="pd-btn pd-btn--primary" :style="{ background: product.color }">Dùng thử miễn phí</RouterLink>
+            <RouterLink to="/auth/register" class="pd-btn pd-btn--primary" :style="{ background: product.color, color: onColor(product.color) }">Dùng thử miễn phí</RouterLink>
             <RouterLink to="/contact" class="pd-btn pd-btn--ghost">Liên hệ tư vấn</RouterLink>
             <span class="pd-version">v{{ product.version }}</span>
           </div>
@@ -76,7 +86,7 @@ const product = computed(() => PRODUCT_DATA[slug.value])
           <h2 class="pd-section__title">Tính năng nổi bật</h2>
           <div class="pd-features">
             <div v-for="(f, i) in product.features" :key="f" class="pd-feature" v-reveal="i * 50">
-              <span class="pd-feature__check" :style="{ color: product.color }">✓</span>
+              <span class="pd-feature__check" :style="{ color: accentText(product.color) }">✓</span>
               {{ f }}
             </div>
           </div>
@@ -129,7 +139,7 @@ const product = computed(() => PRODUCT_DATA[slug.value])
 .pd-btn--ghost:hover { background: var(--wx-surface-elevated); color: var(--wx-text-primary); }
 .pd-version { font-size: var(--wx-fs-12); color: var(--wx-text-muted); font-family: monospace; }
 
-.pd-container { max-width: 800px; margin: 0 auto; padding: 0 var(--wx-space-6) var(--wx-space-10); }
+.pd-container { max-width: 800px; margin: 0 auto; padding: var(--wx-space-8) var(--wx-space-6) var(--wx-space-10); }
 .pd-section { margin-bottom: var(--wx-space-12); }
 .pd-section__title { font-size: var(--wx-fs-24); font-weight: 700; color: var(--wx-text-primary); margin: 0 0 var(--wx-space-6); }
 .pd-overview { font-size: var(--wx-fs-16); color: var(--wx-text-secondary); line-height: 1.8; margin: 0; }

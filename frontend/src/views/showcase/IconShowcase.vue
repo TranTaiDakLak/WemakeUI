@@ -13,8 +13,8 @@ import BaseButton from '../../components/common/BaseButton.vue'
 import { ACTION_ICONS, type ActionIconName } from '../../utils/actionIcons'
 import { useTheme } from '../../ui-system/composables/useTheme'
 
-/* ── WemakeUI built-in ACTION_ICONS — danh sách và mapping pastel class ──
- *  Ported từ WemakeHRM. Mỗi icon = 1 SVG string dùng trực tiếp với
+/* ── MindUI built-in ACTION_ICONS — danh sách và mapping pastel class ──
+ *  Ported từ ứng dụng HRM nguồn. Mỗi icon = 1 SVG string dùng trực tiếp với
  *  <BaseButton size="icon" :icon="ACTION_ICONS.xxx">. Pastel màu qua class
  *  .act-* (xem ui-system/foundations/table-actions.css).
  */
@@ -347,20 +347,20 @@ function lordSrc(hash: string) {
   <div class="page" :class="{ 'is-dark': dark }">
     <PageHeader
       title="Icon Showcase — So sánh 5 bộ icon hiện đại"
-      description="Lucide (đang dùng) vs Phosphor · Solar · Tabler · Hugeicons. Bấm thử weight/size/màu để xem bộ nào hợp WemakeUI nhất."
+      description="Lucide (đang dùng) vs Phosphor · Solar · Tabler · Hugeicons. Bấm thử weight/size/màu để xem bộ nào hợp MindUI nhất."
       padded
     />
 
     <!-- ══════════════════════════════════════════════════════════════
-         Section 0 — WemakeUI ACTION_ICONS (built-in)
+         Section 0 — MindUI ACTION_ICONS (built-in)
          47 SVG icon đi kèm thư viện. Dùng trực tiếp với BaseButton
          size="icon" + pastel .act-* class. Không cần Iconify CDN.
          ══════════════════════════════════════════════════════════════ -->
     <section class="action-icons-section">
       <div class="ai-header">
-        <h2>WemakeUI ACTION_ICONS <span class="ai-count">{{ ACTION_ICON_NAMES.length }} icon</span></h2>
+        <h2>MindUI ACTION_ICONS <span class="ai-count">{{ ACTION_ICON_NAMES.length }} icon</span></h2>
         <p>
-          Bộ icon SVG inline đi kèm <code>@wemake/ui</code> — dùng cho table actions,
+          Bộ icon SVG inline đi kèm <code>@mind/ui</code> — dùng cho table actions,
           toolbars, dialogs. Cặp với <code>BaseButton size="icon"</code> + pastel class
           <code>.act-*</code> để có style nhất quán toàn hệ thống.
         </p>
@@ -474,8 +474,8 @@ function lordSrc(hash: string) {
       <!-- Usage snippet -->
       <div class="ai-usage">
         <div class="ai-subtitle">Cách dùng từ dự án khác</div>
-<pre class="ai-code"><code>import { BaseButton, ACTION_ICONS } from '@wemake/ui'
-import '@wemake/ui/style.css'
+<pre class="ai-code"><code>import { BaseButton, ACTION_ICONS } from '@mind/ui'
+import '@mind/ui/style.css'
 
 &lt;BaseButton size="icon" variant="ghost" class="act-approve"
             :icon="ACTION_ICONS.approve" title="Duyệt" /&gt;</code></pre>
@@ -560,13 +560,13 @@ import '@wemake/ui/style.css'
         </div>
 
         <!-- Data rows -->
-        <template v-for="row in filteredRows" :key="row.concept">
-          <div class="cell concept">{{ row.concept }}</div>
+        <template v-for="(row, rowIdx) in filteredRows" :key="row.concept">
+          <div class="cell concept" :class="{ 'last-row': rowIdx === filteredRows.length - 1 }">{{ row.concept }}</div>
           <div
             v-for="set in SETS"
             :key="set.key + row.concept"
             class="cell icon-cell"
-            :class="{ current: set.current, brand: colored }"
+            :class="{ current: set.current, brand: colored, 'last-row': rowIdx === filteredRows.length - 1 }"
           >
             <Icon
               :icon="iconName(set, row.ids[set.key])"
@@ -588,7 +588,7 @@ import '@wemake/ui/style.css'
       <p>
         Outline · bo tròn · nền trong · viền tuỳ chỉnh · animation on hover hoặc loop —
         đây là phong cách 2026 mạnh nhất cho onboarding, empty state, status card cao cấp.
-        Hover vào icon để thấy animation chạy. Đổi màu để xem phối với brand WemakeUI.
+        Hover vào icon để thấy animation chạy. Đổi màu để xem phối với brand MindUI.
       </p>
     </section>
 
@@ -708,7 +708,7 @@ import '@wemake/ui/style.css'
         <li><strong>Trigger</strong>: Hover (1 lần khi rê chuột) — Loop on hover (lặp khi giữ chuột) — Loop always (chạy mãi, dùng cho loading) — Morph (biến đổi 2 chiều) — Click (chạm vào).</li>
         <li><strong>Màu icon</strong> đổi runtime — apply đồng thời cho cả primary + secondary slot nên màu luôn hiện. Stroke 2-4px chỉnh độ dày viền.</li>
         <li>Showcase đang hiển thị 8 icon đã verify (mỗi hash đã test HTTP 200). Muốn thêm: vào <a href="https://lordicon.com/icons" target="_blank" rel="noopener">lordicon.com/icons</a>, chọn icon free, copy 8-char hash từ URL CDN (vd <code>cdn.lordicon.com/xyboiuok.json</code> → hash <code>xyboiuok</code>).</li>
-        <li><strong>License</strong>: 1500+ icon free yêu cầu attribution; full library 12k+ icon cần <a href="https://lordicon.com/pricing" target="_blank" rel="noopener">Lordicon Pro</a> (~$49/năm). Cho production WemakeUI nên dùng tier Pro hoặc download Lottie JSON về <code>public/lottie/</code>.</li>
+        <li><strong>License</strong>: 1500+ icon free yêu cầu attribution; full library 12k+ icon cần <a href="https://lordicon.com/pricing" target="_blank" rel="noopener">Lordicon Pro</a> (~$49/năm). Cho production MindUI nên dùng tier Pro hoặc download Lottie JSON về <code>public/lottie/</code>.</li>
         <li><strong>Alternative miễn phí MIT</strong>: Microsoft Fluent Emoji Animated (3D animated Lottie, ~3000 emoji) — vibe khác (3D thay vì outline).</li>
       </ul>
 
@@ -787,7 +787,7 @@ import '@wemake/ui/style.css'
 .seg button:last-child { border-right: none; }
 .seg button:hover { background: var(--wx-hover-bg); }
 .seg button.active {
-  background: var(--wx-brand-primary);
+  background: var(--wx-brand-solid);
   color: #fff;
 }
 .filter-input {
@@ -833,7 +833,8 @@ import '@wemake/ui/style.css'
   border-right-color: rgba(255, 255, 255, 0.06);
   border-bottom-color: rgba(255, 255, 255, 0.06);
 }
-.cell:nth-last-child(-n + var(--cols, 6)) { border-bottom: none; }
+/* Hàng cuối không viền dưới (đánh dấu bằng class thay cho nth-last-child(-n + var(--cols)) — esbuild không parse được var() trong An+B) */
+.cell.last-row { border-bottom: none; }
 .cell.header {
   background: var(--wx-surface-sunken);
   font-weight: 600;
@@ -858,7 +859,7 @@ import '@wemake/ui/style.css'
   font-weight: 600;
   padding: 2px 6px;
   border-radius: 999px;
-  background: var(--wx-brand-primary);
+  background: var(--wx-brand-solid);
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -1103,7 +1104,7 @@ import '@wemake/ui/style.css'
   max-width: 180px;
 }
 
-/* ── Section 0 · WemakeUI ACTION_ICONS ─────────────────────────── */
+/* ── Section 0 · MindUI ACTION_ICONS ─────────────────────────── */
 .action-icons-section {
   margin: var(--wx-space-4) 0 var(--wx-space-8);
   padding: var(--wx-space-5);
@@ -1128,7 +1129,7 @@ import '@wemake/ui/style.css'
   font-weight: 600;
   padding: 2px var(--wx-space-2);
   border-radius: 999px;
-  background: var(--wx-brand-primary, #2563eb);
+  background: var(--wx-brand-solid);
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.04em;

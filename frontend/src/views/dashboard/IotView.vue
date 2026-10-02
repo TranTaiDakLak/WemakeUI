@@ -83,8 +83,8 @@ const aVariant = (s: string) => ({ critical: 'danger', warning: 'warning', info:
           {{ s.current.toFixed(1) }}<span class="s-unit">{{ s.unit }}</span>
         </div>
         <svg class="s-spark" viewBox="0 0 120 40" preserveAspectRatio="none">
-          <path :d="sparkArea([...s.series], 120, 40, 2)" fill="rgba(37,99,235,0.12)" />
-          <path :d="sparkPath([...s.series], 120, 40, 2)" stroke="#2563eb" stroke-width="1.5" fill="none" />
+          <path :d="sparkArea([...s.series], 120, 40, 2)" fill="var(--wx-chart-1)" fill-opacity="0.12" />
+          <path :d="sparkPath([...s.series], 120, 40, 2)" stroke="var(--wx-chart-1)" stroke-width="1.5" fill="none" />
         </svg>
         <div class="s-range">
           <span class="muted small">{{ s.min }} – {{ s.max }} {{ s.unit }}</span>

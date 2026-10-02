@@ -27,7 +27,7 @@ import { BaseButton, BaseBadge, BaseAvatar } from '../../components/common'
         <h2>Virtual scroll là gì và tại sao cần?</h2>
         <p>Virtual scroll là kỹ thuật chỉ render các row đang nằm trong viewport, thay vì render toàn bộ danh sách. Ví dụ với 10.000 dòng và viewport cao 600px, chúng ta chỉ cần render ~20 dòng thực tế.</p>
 
-        <h2>Cách triển khai trong WemakeUI DataGridPro</h2>
+        <h2>Cách triển khai trong MindUI DataGridPro</h2>
         <p>DataGridPro sử dụng một "window" cố định — chỉ render N rows trong viewport + buffer trước và sau. Khi user scroll, chúng ta cập nhật startIndex và endIndex, tái dùng DOM elements thay vì tạo mới.</p>
 
         <pre class="code-block"><code>// Tính toán rows cần render
@@ -52,7 +52,7 @@ const visibleRows = rows.slice(startIndex, endIndex)</code></pre>
           <BaseAvatar name="Trần Văn C" size="lg" />
           <div>
             <span class="author-name">Trần Văn C</span>
-            <span class="author-role">Lead Engineer tại WemakeUI</span>
+            <span class="author-role">Lead Engineer tại MindUI</span>
             <p class="author-bio">Chuyên Vue + Node.js. Obsessed với performance và developer experience.</p>
           </div>
         </div>

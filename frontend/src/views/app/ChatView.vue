@@ -87,7 +87,7 @@ function send() {
 </template>
 
 <style scoped>
-.chat-wrap { display: grid; grid-template-columns: 280px 1fr; height: 600px; border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-lg); overflow: hidden; background: var(--wx-bg-base); }
+.chat-wrap { display: grid; grid-template-columns: 280px minmax(0, 1fr); height: 600px; border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-lg); overflow: hidden; background: var(--wx-bg-base); }
 
 .contact-list { border-right: 1px solid var(--wx-border-subtle); display: flex; flex-direction: column; }
 .cl-header { display: flex; align-items: center; justify-content: space-between; padding: var(--wx-space-4); border-bottom: 1px solid var(--wx-border-subtle); }
@@ -95,7 +95,7 @@ function send() {
 .contacts { list-style: none; margin: 0; padding: var(--wx-space-2); display: flex; flex-direction: column; gap: 2px; overflow-y: auto; flex: 1; }
 .contact-item { display: flex; align-items: center; gap: var(--wx-space-3); padding: var(--wx-space-3); border-radius: var(--wx-radius-md); cursor: pointer; transition: background var(--wx-d-micro); }
 .contact-item:hover { background: var(--wx-hover-bg); }
-.contact-item.active { background: var(--wx-brand-50); }
+.contact-item.active { background: var(--wx-selected-bg); }
 .contact-avatar-wrap { position: relative; }
 .online-dot { position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-radius: var(--wx-radius-full); background: var(--wx-border-default); border: 2px solid var(--wx-bg-base); }
 .online-dot.online { background: var(--wx-status-success-border); }
@@ -115,10 +115,18 @@ function send() {
 .msg-wrap { display: flex; }
 .msg-wrap.mine { justify-content: flex-end; }
 .bubble { max-width: 70%; background: var(--wx-bg-sunken); border-radius: var(--wx-radius-lg); padding: var(--wx-space-3) var(--wx-space-4); }
-.bubble.mine { background: var(--wx-brand-500); color: white; }
+.bubble.mine { background: var(--wx-brand-600); color: var(--wx-text-on-brand); }
 .bubble-text { margin: 0; font-size: var(--wx-fs-14); line-height: var(--wx-lh-normal); }
-.bubble-time { display: block; font-size: var(--wx-fs-12); margin-top: var(--wx-space-1); opacity: 0.65; text-align: right; }
+.bubble-time { display: block; font-size: var(--wx-fs-12); margin-top: var(--wx-space-1); opacity: 0.85; text-align: right; }
 
 .chat-input { display: flex; gap: var(--wx-space-3); padding: var(--wx-space-3) var(--wx-space-4); border-top: 1px solid var(--wx-border-subtle); }
-.chat-input :deep(.wx-input) { flex: 1; }
+.chat-input :deep(.wx-input) { flex: 1; min-width: 0; }
+.chat-input :deep(.wx-btn) { flex-shrink: 0; }
+.chat-main { min-width: 0; }
+@media (max-width: 720px) {
+  .chat-wrap { grid-template-columns: minmax(0, 1fr); height: auto; }
+  .contact-list { border-right: none; border-bottom: 1px solid var(--wx-border-subtle); max-height: 280px; }
+  .chat-main { min-height: 440px; }
+  .bubble { max-width: 85%; }
+}
 </style>

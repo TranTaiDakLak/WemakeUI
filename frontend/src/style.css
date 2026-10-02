@@ -1,6 +1,6 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  WemakeUI — Global Styles (WX UI System Integration)
+ *  MindUI — Global Styles (WX UI System Integration)
  *
  *  WX foundations (tokens.css, dark-mode.css, etc.) are imported
  *  via the foundations entrypoint at ui-system/foundations/index.ts.
@@ -112,16 +112,21 @@
 }
 
 html {
+  /* Giữ rem = 16px (component dùng px/token là chính); cỡ chữ nền 14px đặt ở body qua density token. */
   font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   font-family: var(--wx-font-primary);
+  font-size: var(--wx-density-font-size);
   background: var(--wx-surface-sunken);
   color: var(--wx-text-primary);
   line-height: 1.6;
+  text-rendering: optimizeLegibility;
   transition: background-color var(--wx-duration-normal) var(--wx-easing-default),
               color var(--wx-duration-normal) var(--wx-easing-default);
 }
@@ -130,24 +135,7 @@ body {
   min-height: 100vh;
 }
 
-/* ─── Scrollbar (WX tokens) ──────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--wx-scrollbar-thumb);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--wx-scrollbar-thumb-hover);
-}
+/* Scrollbar: toàn bộ định nghĩa nằm ở ui-system/foundations/layout.css ("Slim Pro", 8px, theo token). */
 
 /* ─── Utility Classes ─────────────────────────────────────────── */
 .card {
@@ -172,11 +160,12 @@ body {
   align-items: center;
   justify-content: center;
   gap: var(--wx-space-2);
-  padding: 10px 20px;
-  border: none;
-  border-radius: var(--wx-radius-md);
+  min-height: var(--wx-control-h-md);
+  padding: 0 var(--wx-space-4);
+  border: 1px solid transparent;
+  border-radius: var(--wx-radius-ctrl);
   font-family: var(--wx-font-primary);
-  font-size: 14px;
+  font-size: var(--wx-control-fs);
   font-weight: 600;
   cursor: pointer;
   transition: all var(--wx-duration-fast) var(--wx-easing-default);
@@ -184,24 +173,26 @@ body {
 }
 
 .btn-primary {
-  background: var(--wx-gradient-button);
-  color: var(--wx-text-inverse);
+  background: var(--wx-gradient-primary);
+  color: var(--wx-text-on-brand);
+  box-shadow: var(--wx-shadow-btn);
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-  box-shadow: var(--wx-shadow-brand);
+  background: var(--wx-gradient-primary-hover);
+  box-shadow: var(--wx-shadow-btn-hover);
 }
 
 .btn-secondary {
-  background: var(--wx-hover-bg);
-  color: var(--wx-text-primary);
-  border: 1px solid var(--wx-border-default);
+  background: var(--wx-surface-base);
+  color: var(--wx-text-secondary);
+  border-color: var(--wx-border-default);
 }
 
 .btn-secondary:hover {
-  background: var(--wx-active-bg);
+  background: var(--wx-surface-sunken);
+  border-color: var(--wx-border-control);
+  color: var(--wx-text-primary);
 }
 
 .badge {
@@ -309,24 +300,25 @@ body {
 
 .data-table th {
   text-align: left;
-  padding: var(--wx-space-3) var(--wx-space-4);
+  padding: 10px var(--wx-space-4);
   font-size: 12px;
   font-weight: 600;
   color: var(--wx-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.04em;
+  background: var(--wx-surface-sunken);
   border-bottom: 1px solid var(--wx-border-default);
 }
 
 .data-table td {
-  padding: 14px var(--wx-space-4);
-  font-size: 14px;
+  padding: 10px var(--wx-space-4);
+  font-size: 13px;
   color: var(--wx-text-secondary);
-  border-bottom: 1px solid var(--wx-border-default);
+  border-bottom: 1px solid var(--wx-border-subtle);
 }
 
 .data-table tr:hover td {
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral);
 }
 
 /* ─── Animations ──────────────────────────────────────────────── */
@@ -378,39 +370,64 @@ body {
 /* ─── Reusable Form Controls ─────────────────────────────────── */
 .form-input {
   padding: 6px 10px;
-  border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-sm);
-  background: var(--wx-surface-sunken);
-  color: var(--wx-text-secondary);
+  border: 1px solid var(--wx-border-control);
+  border-radius: var(--wx-radius-ctrl-sm);
+  background: var(--wx-surface-base);
+  color: var(--wx-text-primary);
   font-family: var(--wx-font-primary);
   font-size: 12px;
   width: 200px;
-  transition: border-color var(--wx-duration-fast) var(--wx-easing-default);
+  transition: border-color var(--wx-duration-fast) var(--wx-easing-default),
+              box-shadow var(--wx-duration-fast) var(--wx-easing-default);
 }
-.form-input:focus { outline: none; border-color: var(--wx-brand-focus); box-shadow: var(--wx-shadow-focus); }
+.form-input::placeholder { color: var(--wx-text-placeholder); }
+.form-input:hover:not(:disabled):not(:focus) { border-color: var(--wx-border-control-hover); }
+.form-input:focus { outline: none; border-color: var(--wx-brand-focus); box-shadow: var(--wx-ring-focus); }
 .form-input--sm { width: 80px; text-align: center; }
 
 .form-textarea {
   width: 100%; padding: var(--wx-space-2) 10px;
-  border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-sm);
-  background: var(--wx-surface-base); color: var(--wx-text-secondary);
+  border: 1px solid var(--wx-border-control); border-radius: var(--wx-radius-ctrl-sm);
+  background: var(--wx-surface-base); color: var(--wx-text-primary);
   font-family: var(--wx-font-mono); font-size: 12px; resize: vertical;
-  transition: border-color var(--wx-duration-fast) var(--wx-easing-default);
+  transition: border-color var(--wx-duration-fast) var(--wx-easing-default),
+              box-shadow var(--wx-duration-fast) var(--wx-easing-default);
 }
-.form-textarea:focus { outline: none; border-color: var(--wx-brand-focus); box-shadow: var(--wx-shadow-focus); }
+.form-textarea::placeholder { color: var(--wx-text-placeholder); }
+.form-textarea:hover:not(:disabled):not(:focus) { border-color: var(--wx-border-control-hover); }
+.form-textarea:focus { outline: none; border-color: var(--wx-brand-focus); box-shadow: var(--wx-ring-focus); }
 
 /* ─── Number Input (hide native spin buttons) ────────────────── */
 .form-input[type="number"] { -moz-appearance: textfield; }
 .form-input[type="number"]::-webkit-outer-spin-button,
 .form-input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-/* ─── Toggle Switch ──────────────────────────────────────────── */
+/* ─── Toggle Switch ──────────────────────────────────────────────
+   Chuẩn nguồn (preset ToggleSwitch): rãnh 36×20, tay cầm 14px cách mép 3px.
+   Thumb luôn trắng (không theo surface) để đọc rõ cả khi rãnh bật ở dark mode. */
 .toggle { position: relative; display: inline-block; width: 36px; height: 20px; flex-shrink: 0; }
-.toggle input { opacity: 0; width: 0; height: 0; }
-.toggle-slider { position: absolute; cursor: pointer; inset: 0; background: var(--wx-border-default); border-radius: 20px; transition: var(--wx-duration-fast); }
-.toggle-slider::before { content: ''; position: absolute; height: 16px; width: 16px; left: 2px; bottom: 2px; background: var(--wx-surface-base); border-radius: 50%; transition: var(--wx-duration-fast); }
-.toggle input:checked + .toggle-slider { background: var(--wx-brand-primary); }
+.toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+.toggle-slider {
+  position: absolute; cursor: pointer; inset: 0;
+  background: var(--wx-border-control);
+  border-radius: var(--wx-radius-full);
+  box-shadow: var(--wx-shadow-inset);
+  transition: background var(--wx-d-normal) var(--wx-ease-standard),
+              box-shadow var(--wx-d-normal) var(--wx-ease-standard);
+}
+.toggle-slider::before {
+  content: ''; position: absolute; height: 14px; width: 14px; left: 3px; top: 3px;
+  background: var(--wx-text-on-brand); border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.28);
+  transition: transform var(--wx-d-normal) var(--wx-ease-bounce);
+}
+.toggle:hover input:not(:disabled):not(:checked) + .toggle-slider { background: var(--wx-border-control-hover); }
+.toggle input:checked + .toggle-slider {
+  background: var(--wx-gradient-primary);
+  box-shadow: var(--wx-shadow-btn), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
 .toggle input:checked + .toggle-slider::before { transform: translateX(16px); }
+.toggle input:focus-visible + .toggle-slider { outline: 2px solid var(--wx-brand-focus); outline-offset: 2px; }
 
 /* ─── Radio & Checkbox Labels ────────────────────────────────── */
 .radio-label {

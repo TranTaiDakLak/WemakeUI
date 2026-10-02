@@ -25,7 +25,7 @@ const day = ref('mon')
 
 <template>
   <div class="fp">
-    <AppTopbar title="WemakeUI" subtitle="forms — checkboxes & radio" />
+    <AppTopbar title="MindUI" subtitle="forms — checkboxes & radio" />
     <main class="fp__main">
 
       <div class="fp__hdr">

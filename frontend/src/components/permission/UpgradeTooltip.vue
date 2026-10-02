@@ -120,7 +120,7 @@ function hide() { open.value = false }
 .wx-upgrade__desc {
   white-space: normal;
   max-width: 240px;
-  color: rgba(255, 255, 255, 0.78);
+  color: color-mix(in srgb, var(--wx-tooltip-text) 78%, transparent);
   font-size: var(--wx-fs-12);
   line-height: var(--wx-lh-normal);
 }

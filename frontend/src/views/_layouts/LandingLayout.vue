@@ -26,8 +26,8 @@ const X_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
     <header class="topnav">
       <div class="topnav-inner">
         <RouterLink to="/" class="brand">
-          <img src="/logo.png" alt="WemakeUI" class="brand-logo" />
-          <span class="brand-name">WemakeUI</span>
+          <img src="/logo.png" alt="MindUI" class="brand-logo" />
+          <span class="brand-name">MindUI</span>
         </RouterLink>
 
         <nav class="nav-links" role="navigation">
@@ -54,7 +54,7 @@ const X_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
         <div v-if="mobileOpen" class="mobile-menu">
           <a v-for="n in NAV" :key="n.label" :href="n.href" class="mob-link" @click="mobileOpen = false">{{ n.label }}</a>
           <RouterLink to="/auth/login" class="mob-link" @click="mobileOpen = false">Đăng nhập</RouterLink>
-          <BaseButton size="sm" variant="primary" block>Dùng miễn phí</BaseButton>
+          <BaseButton size="sm" variant="primary" block tag="a" href="#/auth/register" @click="mobileOpen = false">Dùng miễn phí</BaseButton>
         </div>
       </Transition>
     </header>
@@ -67,7 +67,7 @@ const X_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
     <!-- footer -->
     <footer class="landing-footer">
       <div class="footer-inner">
-        <span class="footer-brand">WemakeUI © 2026</span>
+        <span class="footer-brand">MindUI © 2026</span>
         <nav class="footer-links">
           <a href="#/landing/policy" class="f-link">Chính sách</a>
           <a href="#/landing/contact" class="f-link">Liên hệ</a>

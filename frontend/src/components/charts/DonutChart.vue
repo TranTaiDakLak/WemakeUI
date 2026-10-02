@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { colorAt } from './chart-utils'
+import { chartColor } from './chart-utils'
 
 function donutArcPath(
   cx: number, cy: number,
@@ -67,7 +67,7 @@ function toggleHide(label: string) {
 const allItems = computed(() =>
   props.data.map((d, i) => ({
     ...d,
-    color: d.color ?? colorAt(i),
+    color: d.color ?? chartColor(i),
     hidden: hiddenLabels.value.has(d.label),
   }))
 )

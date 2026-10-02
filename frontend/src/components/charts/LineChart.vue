@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { CHART_PALETTE, colorAt, scale, linePath, smoothPath, niceTicks, formatCompact } from './chart-utils'
+import { CHART_PALETTE, chartColor, scale, linePath, smoothPath, niceTicks, formatCompact } from './chart-utils'
 
 export interface LineSeries {
   name: string
@@ -66,7 +66,7 @@ const seriesPaths = computed(() =>
     const path = props.smooth ? smoothPath(points) : linePath(points)
     return {
       ...s,
-      color: s.color ?? colorAt(i),
+      color: s.color ?? chartColor(i),
       points,
       path,
     }
@@ -108,7 +108,7 @@ const hoverX = computed(() => {
     <!-- Legend -->
     <div v-if="showLegend && series.length > 1" class="lc-legend">
       <span v-for="(s, i) in series" :key="s.name" class="lc-legend-item">
-        <span class="lc-legend-dot" :style="{ background: s.color ?? colorAt(i) }" />
+        <span class="lc-legend-dot" :style="{ background: s.color ?? chartColor(i) }" />
         {{ s.name }}
       </span>
     </div>
@@ -185,7 +185,7 @@ const hoverX = computed(() => {
             :cy="s.points[hoverIdx]?.y ?? 0"
             r="4"
             :fill="s.color"
-            stroke="#fff"
+            stroke="var(--wx-surface-base)"
             stroke-width="2"
           />
         </g>

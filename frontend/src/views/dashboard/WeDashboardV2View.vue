@@ -16,7 +16,7 @@ const quickActionsRef = ref<InstanceType<typeof DashboardQuickActions> | null>(n
 <template>
   <AppPageLayout section="dashboards"
     current="wedashboard-v2"
-    page-title="WemakeUI Dashboard v2"
+    page-title="MindUI Dashboard v2"
     page-description="Tổng quan trạng thái và hoạt động hệ thống — kiến trúc archetype"
   >
     <BaseToast />

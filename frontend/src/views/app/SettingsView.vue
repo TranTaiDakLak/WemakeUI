@@ -1,21 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import AppPageLayout from '../_layouts/AppPageLayout.vue'
-import { BaseButton, BaseInput, BaseToggle, BaseTabs, BaseCard, BaseBadge, FormField, GroupBox } from '../../components/common'
+import { BaseButton, BaseInput, BaseToggle, BaseBadge, FormField, GroupBox } from '../../components/common'
+import { SHELL_ICONS } from '../../components/layout/shell-icons'
 
 const tab = ref('chung')
+/** Danh mục cài đặt (nav dọc bên trái, bố cục giống trang Setting của MindAds) */
 const tabs = [
-  { key: 'chung', label: 'Chung' },
-  { key: 'bao-mat', label: 'Bảo mật' },
-  { key: 'thong-bao', label: 'Thông báo' },
-  { key: 'giao-dien', label: 'Giao diện' },
-  { key: 'thanh-toan', label: 'Thanh toán' },
+  { key: 'chung',      label: 'Chung',      hint: 'Hồ sơ cá nhân',     icon: SHELL_ICONS.user },
+  { key: 'bao-mat',    label: 'Bảo mật',    hint: 'Mật khẩu, 2FA',     icon: SHELL_ICONS.shield },
+  { key: 'thong-bao',  label: 'Thông báo',  hint: 'Kênh nhận tin',     icon: SHELL_ICONS.bell },
+  { key: 'giao-dien',  label: 'Giao diện',  hint: 'Chế độ sáng / tối', icon: SHELL_ICONS.sun },
+  { key: 'thanh-toan', label: 'Thanh toán', hint: 'Gói và thẻ',        icon: SHELL_ICONS.idCard },
 ]
+const activeTab = computed(() => tabs.find((t) => t.key === tab.value) ?? tabs[0])
 
 const name = ref('Nguyễn Văn A')
 const email = ref('nguyenvana@example.com')
 const phone = ref('0987 654 321')
-const bio = ref('Senior Frontend Engineer tại WemakeUI.')
+const bio = ref('Senior Frontend Engineer tại MindUI.')
 
 const notifs = ref({
   email: true, push: true, sms: false,
@@ -27,7 +30,26 @@ function save() { /* demo */ }
 
 <template>
   <AppPageLayout section="app" current="cài đặt" page-title="Cài đặt tài khoản" page-description="Quản lý hồ sơ, bảo mật và tuỳ chọn cá nhân">
-    <BaseTabs v-model="tab" :tabs="tabs" />
+    <div class="st">
+    <nav class="st__nav mind-slim-scroll" aria-label="Danh mục cài đặt">
+      <button
+        v-for="t in tabs"
+        :key="t.key"
+        type="button"
+        class="st__item"
+        :class="{ 'is-active': tab === t.key }"
+        :aria-current="tab === t.key ? 'page' : undefined"
+        @click="tab = t.key"
+      >
+        <span class="st__ico" v-html="t.icon" />
+        <span class="st__txt">
+          <span class="st__label">{{ t.label }}</span>
+          <span class="st__hint">{{ t.hint }}</span>
+        </span>
+      </button>
+    </nav>
+
+    <div class="st__main" :aria-label="activeTab.label">
 
     <!-- Chung -->
     <GroupBox v-if="tab === 'chung'" title="Thông tin cá nhân">
@@ -143,17 +165,91 @@ function save() { /* demo */ }
       <GroupBox title="Phương thức thanh toán">
         <div class="card-list">
           <div class="card-row">
-            <span>💳 Visa •••• 4242</span>
+            <span class="card-name"><span class="card-ico" v-html="SHELL_ICONS.idCard" />Visa •••• 4242</span>
             <BaseBadge text="mặc định" variant="neutral" size="sm" />
           </div>
           <BaseButton size="sm" variant="ghost">+ Thêm thẻ</BaseButton>
         </div>
       </GroupBox>
     </template>
+    </div>
+    </div>
   </AppPageLayout>
 </template>
 
 <style scoped>
+/* ── Bố cục Setting: nav dọc + vùng nội dung ── */
+.st { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: var(--wx-space-5); align-items: start; }
+.st__nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--wx-space-2);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-xl);
+  background: var(--wx-surface-base);
+  box-shadow: var(--wx-shadow-sm);
+}
+.st__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-3);
+  width: 100%;
+  padding: var(--wx-space-2) var(--wx-space-3);
+  border: 0;
+  border-radius: var(--wx-radius-lg);
+  background: transparent;
+  color: var(--wx-text-secondary);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--wx-d-fast) var(--wx-ease-standard), color var(--wx-d-fast) var(--wx-ease-standard);
+}
+.st__item:hover { background: var(--wx-hover-bg); color: var(--wx-text-primary); }
+.st__item:focus-visible { outline: 2px solid var(--wx-border-focus); outline-offset: -2px; }
+.st__item.is-active { background: var(--wx-shell-tone-brand-bg); color: var(--wx-shell-tone-brand-fg); }
+.st__item.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: var(--wx-radius-full);
+  background: var(--wx-brand-primary);
+}
+.st__ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--wx-radius-md);
+  background: var(--wx-surface-sunken);
+  color: var(--wx-text-muted);
+}
+.st__ico :deep(svg) { width: 16px; height: 16px; }
+.st__item.is-active .st__ico { background: var(--wx-brand-primary); color: var(--wx-text-inverse); }
+.st__txt { display: flex; flex-direction: column; min-width: 0; }
+.st__label { font-size: var(--wx-fs-14); font-weight: var(--wx-fw-semibold); }
+.st__hint { font-size: var(--wx-fs-12); color: var(--wx-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.st__item.is-active .st__hint { color: var(--wx-shell-tone-brand-fg); }
+.st__main { display: flex; flex-direction: column; gap: var(--wx-space-4); min-width: 0; }
+.card-name { display: inline-flex; align-items: center; gap: var(--wx-space-2); }
+.card-ico { display: inline-flex; color: var(--wx-text-muted); }
+.card-ico :deep(svg) { width: 18px; height: 18px; }
+
+@media (max-width: 860px) {
+  .st { grid-template-columns: 1fr; }
+  .st__nav { position: static; flex-direction: row; overflow-x: auto; }
+  .st__item { width: auto; flex-shrink: 0; }
+  .st__hint { display: none; }
+}
+
 .settings-form { display: flex; flex-direction: column; gap: var(--wx-space-4); max-width: 480px; }
 .form-actions { display: flex; gap: var(--wx-space-3); }
 .toggle-row { display: flex; align-items: center; justify-content: space-between; gap: var(--wx-space-4); }
@@ -163,7 +259,7 @@ function save() { /* demo */ }
 .notif-row { display: flex; align-items: center; justify-content: space-between; gap: var(--wx-space-4); padding-bottom: var(--wx-space-4); border-bottom: 1px solid var(--wx-border-subtle); }
 .notif-row:last-child { border-bottom: none; padding-bottom: 0; }
 .sessions-list { display: flex; flex-direction: column; gap: var(--wx-space-3); }
-.session-row { display: flex; align-items: center; justify-content: space-between; padding: var(--wx-space-3); background: var(--wx-bg-sunken); border-radius: var(--wx-radius-md); }
+.session-row { display: flex; align-items: center; justify-content: space-between; padding: var(--wx-space-3); background: var(--wx-surface-sunken); border-radius: var(--wx-radius-md); }
 .sess-label { display: block; font-size: var(--wx-fs-14); }
 .sess-time { display: block; font-size: var(--wx-fs-12); color: var(--wx-content-muted); }
 .billing-plan { display: flex; align-items: center; justify-content: space-between; }

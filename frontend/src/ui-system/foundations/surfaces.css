@@ -67,12 +67,32 @@
   border-radius: var(--wx-radius-lg);
 }
 
+/* ── Popover Surface (form panel nổi: viền slate, bo 16px, bóng sâu) ── */
+.wx-surface-popover {
+  background: var(--wx-surface-elevated);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-panel);
+  box-shadow: var(--wx-shadow-popover);
+  overflow: hidden;
+}
+
+/* ── Menu Surface (dropdown / select overlay: kính mờ, bo 14px) ── */
+.wx-surface-menu {
+  background: color-mix(in srgb, var(--wx-surface-elevated) 98%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-menu);
+  box-shadow: var(--wx-shadow-menu);
+  padding: 5px;
+}
+
 /* ── Overlay Backdrop ─────────────────────────────────── */
 .wx-overlay-backdrop {
   position: fixed;
   inset: 0;
-  background: var(--wx-surface-overlay);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: var(--wx-backdrop-bg);
+  backdrop-filter: blur(var(--wx-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--wx-backdrop-blur));
   z-index: var(--wx-z-overlay);
 }

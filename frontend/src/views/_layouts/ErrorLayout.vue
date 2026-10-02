@@ -70,16 +70,17 @@ withDefaults(defineProps<{
   background: var(--wx-surface-base);
   overflow: hidden;
 }
-.err-shell[data-variant="gradient"] { background: var(--wx-gradient-bg); }
+.err-shell[data-variant="gradient"] { background: var(--wx-shell-hero-bg); }
+/* variant "dark" cố ý luôn tối (hex cố định) bất kể theme */
 .err-shell[data-variant="dark"]     { background: #0f172a; color: white; }
 
-/* decorative blobs */
+/* decorative blobs — nhạt hơn để không "bẩn" nền (blob đỏ/cam trên nền xanh từng ra màu nâu/mận) */
 .err-blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(60px);
+  filter: blur(70px);
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.28;
 }
 .err-blob--1 {
   width: 360px; height: 360px;
@@ -88,9 +89,9 @@ withDefaults(defineProps<{
 }
 .err-blob--2 {
   width: 280px; height: 280px;
-  background: var(--wx-gradient-cta);
+  background: var(--wx-brand-accent);
   bottom: -80px; right: -80px;
-  opacity: 0.35;
+  opacity: 0.2;
 }
 .err-shell[data-variant="plain"] .err-blob { display: none; }
 
@@ -140,7 +141,7 @@ withDefaults(defineProps<{
   font-weight: var(--wx-fw-bold);
   line-height: 1;
   letter-spacing: var(--wx-tracking-tight);
-  background: var(--wx-gradient-text);
+  background: var(--wx-shell-text-grad);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

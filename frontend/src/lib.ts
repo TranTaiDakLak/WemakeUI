@@ -1,13 +1,13 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  WemakeUI — Cross-platform Vue 3 UI Kit
+ *  MindUI — Cross-platform Vue 3 UI Kit
  *  Library entry point: components, composables, tokens, styles.
  *
  *  Targets: Web · Mobile (Capacitor / Ionic) · Desktop (Wails / Tauri / Electron)
  *
  *  Usage:
- *    import { BaseButton, useToast } from '@wemake/ui'
- *    import '@wemake/ui/style.css'
+ *    import { BaseButton, useToast } from '@mind/ui'
+ *    import '@mind/ui/style.css'
  * ═══════════════════════════════════════════════════════════════
  */
 

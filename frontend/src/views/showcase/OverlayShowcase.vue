@@ -51,7 +51,7 @@ const popForm = reactive({ name: '', tag: '' })
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="phase 2 — overlay" />
+    <AppTopbar title="MindUI" subtitle="phase 2 — overlay" />
     <main class="main">
       <PageHeader
         title="phase 2 — overlay"
@@ -216,6 +216,18 @@ const popForm = reactive({ name: '', tag: '' })
               </p>
             </div>
           </BasePopover>
+
+          <BasePopover placement="bottom" align="end" width="240px">
+            <template #trigger>
+              <BaseButton variant="secondary">căn mép phải</BaseButton>
+            </template>
+            <div>
+              <strong>align="end"</strong>
+              <p class="muted" style="margin: 6px 0 0">
+                mép phải panel thẳng mép phải nút; tự dịch để không tràn khỏi viewport.
+              </p>
+            </div>
+          </BasePopover>
         </div>
       </section>
 
@@ -278,8 +290,8 @@ const popForm = reactive({ name: '', tag: '' })
   border: none; cursor: pointer; transition: filter 0.15s;
 }
 .toast-btn:hover { filter: brightness(1.1); }
-.toast-btn--warning { background: var(--wx-warning-solid); color: #fff; }
-.toast-btn--info    { background: var(--wx-info-solid);    color: #fff; }
+.toast-btn--warning { background: var(--wx-warning-solid); color: var(--wx-text-on-warning); }
+.toast-btn--info    { background: var(--wx-info-solid);    color: var(--wx-text-on-brand); }
 
 .row {
   display: flex;

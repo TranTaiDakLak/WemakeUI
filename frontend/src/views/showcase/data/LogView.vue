@@ -83,7 +83,7 @@ onBeforeUnmount(stopStream)
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI · LogViewer" subtitle="Phase 4 — data display" />
+    <AppTopbar title="MindUI · LogViewer" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="LogViewer" description="Streaming log viewer với virtual scroll, level filter, search highlight, follow toggle, download .log.">
       </PageHeader>

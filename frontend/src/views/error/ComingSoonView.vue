@@ -61,7 +61,7 @@ function subscribe() {
     <div class="social">
       <BaseButton variant="ghost">𝕏 Twitter</BaseButton>
       <BaseButton variant="ghost">in LinkedIn</BaseButton>
-      <BaseButton variant="ghost">FB Facebook</BaseButton>
+      <BaseButton variant="ghost">f Facebook</BaseButton>
     </div>
   </ErrorLayout>
 </template>
@@ -107,4 +107,8 @@ function subscribe() {
   flex-wrap: wrap;
   justify-content: center;
 }
+/* Trang nền tối cố định (variant="dark"): nút ghost phải dùng chữ sáng, nếu không ở light theme
+   chữ slate trên nền navy gần như không đọc được. */
+.social :deep(.wx-btn--ghost) { color: rgba(255, 255, 255, 0.82); }
+.social :deep(.wx-btn--ghost:hover:not(:disabled)) { color: #fff; background: rgba(255, 255, 255, 0.12); }
 </style>

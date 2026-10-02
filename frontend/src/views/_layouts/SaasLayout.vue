@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, useSlots, type Slots } from 'vue'
-import { AppShell, AppSidebar, AppTopbar, PageHeader } from '../../components/layout'
+import {
+  AppShell, AppSidebar, AppTopbar, PageHeader,
+  AppBanner, AppBannerStack,
+} from '../../components/layout'
 import type { SidebarSection } from '../../components/layout'
-import UserDropdown from '../../components/common/UserDropdown.vue'
 import NotificationCenter from '../../components/common/NotificationCenter.vue'
+import { useShellChrome } from './useShellChrome'
 
 const props = withDefaults(defineProps<{
   current: string
@@ -14,6 +17,7 @@ const props = withDefaults(defineProps<{
 })
 
 const slots: Slots = useSlots()
+const chrome = useShellChrome()
 const collapsed = ref(false)
 const mobileNavOpen = ref(false)
 
@@ -62,12 +66,25 @@ const sections: SidebarSection[] = [
 const allNavItems = sections.flatMap(s => s.items.map(item => ({ ...item, group: s.label })))
 
 const activeId = computed(() => props.current)
+
+/** icon của mục đang active → hiện trong ô icon của PageHeader */
+const activeIcon = computed(() => allNavItems.find((i) => i.id === activeId.value)?.icon)
 </script>
 
 <template>
-  <AppShell variant="sidebar" :topbar-height="56">
+  <AppShell variant="sidebar" :topbar-height="56" content-style="card">
     <template #topbar>
-      <AppTopbar title="WemakeUI" :subtitle="`saas · ${props.current}`">
+      <AppTopbar
+        title="MindUI"
+        tagline="Quản trị SaaS"
+        :subtitle="`saas · ${props.current}`"
+        searchable
+        search-placeholder="Tìm thành viên, giao dịch…"
+        :user="chrome.user.value"
+        @profile="chrome.openProfile"
+        @upgrade="chrome.openPricing"
+        @logout="chrome.logout"
+      >
         <!-- Hamburger — chỉ hiện trên mobile -->
         <template #left>
           <button class="topbar-hamburger" aria-label="Mở menu" @click="openMobileNav">
@@ -75,13 +92,23 @@ const activeId = computed(() => props.current)
           </button>
         </template>
         <template #actions>
-          <button class="topbar-icon" title="Tìm kiếm" aria-label="Tìm kiếm">
-            <span v-html="ICON.search" />
-          </button>
           <NotificationCenter />
-          <UserDropdown />
         </template>
       </AppTopbar>
+    </template>
+
+    <template #banners>
+      <AppBannerStack inline>
+        <AppBanner
+          v-model="chrome.bannerOpen.value"
+          tone="info"
+          title="Có phiên bản MindUI 0.2.0"
+          description="Bản hiện tại 0.1.0 · Shell, sidebar và menu tài khoản được làm mới."
+          action-label="Xem thay đổi"
+          @action="chrome.openChangelog"
+          @dismiss="chrome.onBannerDismiss"
+        />
+      </AppBannerStack>
     </template>
 
     <template #sidebar>
@@ -89,9 +116,11 @@ const activeId = computed(() => props.current)
         :sections="sections"
         :active-id="activeId"
         :collapsed="collapsed"
-        brand="WemakeUI"
+        brand="MindUI"
         logo-src="/logo.png"
         brand-href="#/"
+        hide-brand
+        persist-key="mind-sidebar-collapsed"
         @update:collapsed="(v: boolean) => collapsed = v"
       />
     </template>
@@ -99,7 +128,9 @@ const activeId = computed(() => props.current)
     <PageHeader
       :title="pageTitle"
       :description="pageDescription"
+      :icon="activeIcon"
       padded
+      bordered
     >
       <template v-if="slots.actions" #actions>
         <slot name="actions" />
@@ -119,7 +150,7 @@ const activeId = computed(() => props.current)
       <nav v-if="mobileNavOpen" class="mob-drawer" aria-label="Navigation">
         <!-- Drawer header -->
         <div class="mob-drawer__head">
-          <span class="mob-drawer__brand">WemakeUI</span>
+          <span class="mob-drawer__brand">MindUI</span>
           <button class="mob-drawer__close" aria-label="Đóng menu" @click="closeMobileNav">
             <span v-html="ICON.close" />
           </button>
@@ -159,36 +190,21 @@ const activeId = computed(() => props.current)
  * không phải bug — chỉ phần chữ/icon chính trên nền mới cần token
  * --wx-text-on-brand để không bị đổi theo theme.
  */
-.topbar-icon {
-  position: relative;
-  width: 32px; height: 32px;
-  border: none;
-  background: transparent;
-  color: var(--wx-text-on-brand);
-  border-radius: var(--wx-radius-full);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.topbar-icon :deep(svg) { width: 16px; height: 16px; }
-.topbar-icon:hover { background: rgba(255,255,255,0.18); color: var(--wx-text-on-brand); }
-
 /* Hamburger — ẩn trên desktop, hiện trên mobile */
 .topbar-hamburger {
   display: none;
-  width: 32px; height: 32px;
-  border: none;
+  width: 34px; height: 34px;
+  border: 1px solid transparent;
   background: transparent;
-  color: rgba(255,255,255,0.9);
-  border-radius: var(--wx-radius-md);
+  color: var(--wx-shell-on-brand);
+  border-radius: 10px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  margin-right: var(--wx-space-1);
 }
 .topbar-hamburger :deep(svg) { width: 18px; height: 18px; }
-.topbar-hamburger:hover { background: rgba(255,255,255,0.15); }
+.topbar-hamburger:hover { background: var(--wx-shell-glass-bg-hover); border-color: var(--wx-shell-glass-border); }
+.topbar-hamburger:focus-visible { outline: 2px solid var(--wx-shell-on-brand); outline-offset: 2px; }
 
 @media (max-width: 480px) {
   .topbar-hamburger { display: inline-flex; }
@@ -244,7 +260,7 @@ const activeId = computed(() => props.current)
   justify-content: space-between;
   padding: 0 var(--wx-space-4);
   height: 56px;
-  background: var(--wx-gradient-header);
+  background: var(--wx-shell-topbar-bg);
   flex-shrink: 0;
 }
 .mob-drawer__brand {
@@ -288,11 +304,12 @@ const activeId = computed(() => props.current)
 }
 
 .mob-nav-item {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--wx-space-3);
   padding: 10px var(--wx-space-3);
-  border-radius: var(--wx-radius-lg);
+  border-radius: var(--wx-radius-md);
   text-decoration: none;
   color: var(--wx-text-secondary);
   font-size: var(--wx-fs-14);
@@ -301,13 +318,24 @@ const activeId = computed(() => props.current)
               color var(--wx-d-fast) var(--wx-ease-standard);
 }
 .mob-nav-item:hover {
-  background: var(--wx-hover-bg);
+  background: var(--wx-shell-rail-hover-bg);
   color: var(--wx-text-primary);
 }
 .mob-nav-item--active {
-  background: color-mix(in srgb, var(--wx-brand-primary) 10%, transparent);
-  color: var(--wx-brand-primary);
+  background: var(--wx-shell-rail-active-bg);
+  color: var(--wx-shell-rail-active-fg);
   font-weight: var(--wx-fw-semibold);
+}
+.mob-nav-item--active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 22px;
+  transform: translateY(-50%);
+  border-radius: var(--wx-radius-full);
+  background: var(--wx-shell-rail-active-fg);
 }
 .mob-nav-item__icon {
   width: 20px; height: 20px;

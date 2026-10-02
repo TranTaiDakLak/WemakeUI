@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
 }>(), {
   width: 120,
   height: 40,
-  color: '#2563eb',
+  color: 'var(--wx-chart-1)',
   fill: false,
   fillOpacity: 0.2,
   smooth: true,

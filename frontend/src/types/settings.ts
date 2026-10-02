@@ -1,4 +1,4 @@
-export type LoginPlatform = 'facebook' | 'instagram' | 'bm'
+export type LoginPlatform = 'internal' | 'external' | 'aggregate'
 export type CaptchaProvider = '2captcha' | 'anticaptcha' | 'capsolver' | 'imagetyperz' | 'deathbycaptcha' | '9kw'
 export type IpProvider = 'none' | 'fpt' | 'xproxy' | 'hma' | 'proxy' | 'proxy_fixed' | 'tinsoft' | 'shoplike' | 'netproxy' | 'netproxy_gb' | 'proxy_popular' | 'proxyfarm' | 'minproxy'
 
@@ -7,51 +7,51 @@ export const CAPTCHA_PROVIDERS: CaptchaProvider[] = ['2captcha', 'anticaptcha', 
 export const IP_PROVIDERS: IpProvider[] = ['none', 'fpt', 'xproxy', 'hma', 'proxy', 'proxy_fixed', 'tinsoft', 'shoplike', 'netproxy', 'netproxy_gb', 'proxy_popular', 'proxyfarm', 'minproxy']
 
 export const CHECK_INFO_ITEMS = [
-  { key: 'uid',            label: 'UID',                    premium: false },
-  { key: 'name',           label: 'Họ tên',                 premium: false },
-  { key: 'friends',        label: 'Bạn bè',                 premium: false },
-  { key: 'follower',       label: 'Theo dõi',               premium: false },
-  { key: 'birthday',       label: 'Sinh nhật',              premium: false },
+  { key: 'uid',            label: 'Mã',                     premium: false },
+  { key: 'name',           label: 'Tiêu đề',                premium: false },
+  { key: 'friends',        label: 'Lượt xem',               premium: false },
+  { key: 'follower',       label: 'Lượt tải',               premium: false },
+  { key: 'birthday',       label: 'Ngày tạo',               premium: false },
   { key: 'phone',          label: 'Số điện thoại',          premium: true  },
   { key: 'email',          label: 'Email liên kết',         premium: false },
   { key: 'status',         label: 'Trạng thái',             premium: false },
-  { key: 'checkpoint',     label: 'Checkpoint',             premium: false },
-  { key: 'bm',             label: 'Business Manager',       premium: true  },
-  { key: 'ads_account',    label: 'Tài khoản quảng cáo',   premium: true  },
+  { key: 'checkpoint',     label: 'Lý do chờ',              premium: false },
+  { key: 'bm',             label: 'Nhóm đơn vị',            premium: true  },
+  { key: 'ads_account',    label: 'Chiến dịch liên quan',   premium: true  },
   { key: 'payment_method', label: 'Phương thức thanh toán', premium: true  },
   { key: 'page',           label: 'Trang',                  premium: false },
   { key: 'group',          label: 'Nhóm',                   premium: true  },
   { key: 'hashtag',        label: 'Hashtag',                premium: true  },
   { key: 'avatar',         label: 'Ảnh đại diện',           premium: false },
   { key: 'cover',          label: 'Ảnh bìa',                premium: false },
-  { key: 'ua',             label: 'Useragent',              premium: false },
-  { key: 'proxy',          label: 'Proxy',                  premium: false },
-  { key: 'ip',             label: 'IP',                     premium: false },
+  { key: 'ua',             label: 'Nguồn tạo',              premium: false },
+  { key: 'proxy',          label: 'Đơn vị phụ trách',       premium: false },
+  { key: 'ip',             label: 'Địa chỉ IP',             premium: false },
   { key: 'location',       label: 'Vị trí',                 premium: false },
-  { key: 'token',          label: 'Token',                  premium: false },
-  { key: 'cookie',         label: 'Cookie',                 premium: false },
+  { key: 'token',          label: 'Trạng thái duyệt',       premium: false },
+  { key: 'cookie',         label: 'Tệp đính kèm',           premium: false },
 ] as const
 
 export const CHECK_ADS_ITEMS = [
-  { key: 'ads_account', label: 'Tài khoản quảng cáo' },
-  { key: 'ads_status',  label: 'Trạng thái quảng cáo' },
+  { key: 'ads_account', label: 'Chiến dịch liên quan' },
+  { key: 'ads_status',  label: 'Trạng thái chiến dịch' },
   { key: 'ads_limit',   label: 'Hạn mức chi tiêu' },
   { key: 'ads_payment', label: 'Phương thức thanh toán' },
-  { key: 'ads_bm',      label: 'Business Manager liên kết' },
+  { key: 'ads_bm',      label: 'Nhóm đơn vị liên kết' },
 ] as const
 
 export const BM_OPERATIONS = [
-  { value: 'createBM',      label: 'Tạo BM' },
-  { value: 'getLinkBM',     label: 'Lấy link nhận BM' },
-  { value: 'receiveLink',   label: 'Nhận link BM' },
-  { value: 'sharePartner',  label: 'Share Partner' },
-  { value: 'checkBM',       label: 'Kiểm tra BM' },
-  { value: 'kickLimit',     label: 'Kick người dùng hạn chế' },
+  { value: 'createBM',      label: 'Tạo nhóm' },
+  { value: 'getLinkBM',     label: 'Lấy liên kết mời' },
+  { value: 'receiveLink',   label: 'Nhận liên kết mời' },
+  { value: 'sharePartner',  label: 'Chia sẻ cho đối tác' },
+  { value: 'checkBM',       label: 'Kiểm tra nhóm' },
+  { value: 'kickLimit',     label: 'Loại người dùng bị hạn chế' },
 ] as const
 
 export const TUT_TYPES = [
-  { value: 'bm5_email', label: 'BM5 via Email' },
-  { value: 'bm5_fb',    label: 'BM5 via Facebook' },
+  { value: 'bm5_email', label: 'Gói qua Email' },
+  { value: 'bm5_fb',    label: 'Gói qua liên kết' },
   { value: 'personal',  label: 'Cá nhân (Personal)' },
 ] as const
 

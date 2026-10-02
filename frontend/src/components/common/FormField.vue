@@ -159,15 +159,15 @@ const errorId = computed(() => fieldId.value ? `${fieldId.value}-err` : undefine
   gap: 2px;
 }
 .wx-field__label {
-  font-size: var(--wx-fs-14);
-  font-weight: var(--wx-fw-medium);
-  color: var(--wx-content-primary);
+  font-size: var(--wx-fs-13);
+  font-weight: var(--wx-fw-semibold);
+  color: var(--wx-content-secondary);
   line-height: var(--wx-lh-snug);
   display: inline-flex;
   align-items: baseline;
   gap: var(--wx-space-1);
 }
-.wx-field--dense .wx-field__label { font-size: var(--wx-fs-13); }
+.wx-field--dense .wx-field__label { font-size: var(--wx-fs-12); }
 
 .wx-field__required {
   color: var(--wx-danger-text);

@@ -48,9 +48,9 @@ const DEFAULT_PARTNERS = [
 .pl-section {
   padding: var(--wx-space-9) 0;
   overflow: hidden;
-  background: var(--wx-brand-50);
-  border-top: 1px solid var(--wx-brand-100);
-  border-bottom: 1px solid var(--wx-brand-100);
+  background: var(--wx-shell-tint-bg);
+  border-top: 1px solid var(--wx-shell-tint-bd);
+  border-bottom: 1px solid var(--wx-shell-tint-bd);
 }
 .pl-label {
   text-align: center;
@@ -89,7 +89,7 @@ const DEFAULT_PARTNERS = [
   gap: 10px;
   padding: var(--wx-space-3) var(--wx-space-5);
   border-radius: var(--wx-radius-lg);
-  border: 1px solid var(--wx-brand-100);
+  border: 1px solid var(--wx-shell-tint-bd);
   background: var(--wx-surface-base);
   white-space: nowrap;
   transition: all var(--wx-d-fast) var(--wx-ease-standard);
@@ -99,7 +99,7 @@ const DEFAULT_PARTNERS = [
 .pl-item:hover {
   filter: grayscale(0) opacity(1);
   box-shadow: 0 4px 16px rgba(37,99,235,0.12);
-  border-color: var(--wx-brand-200);
+  border-color: var(--wx-shell-tint-bd-strong);
   transform: translateY(-2px);
 }
 .pl-item__logo { font-size: 20px; }

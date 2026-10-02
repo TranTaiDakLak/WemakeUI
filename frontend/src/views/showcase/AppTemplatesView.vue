@@ -4,16 +4,39 @@
  * Mỗi card là MỘT sản phẩm cấp app (app shell + navigation trỏ đúng route),
  * khác với Template Gallery (mỗi card = 1 trang lẻ).
  */
-import { RouterLink } from 'vue-router'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
 import AppTopbar from '../../components/layout/AppTopbar.vue'
 import PageHeader from '../../components/layout/PageHeader.vue'
 import { BaseButton } from '../../components/common'
 import { appTemplates, totalAppTemplates, totalAppPages } from './appTemplates'
+
+/**
+ * Anchor kiểu `/showcase/apps#error-pages`: router dùng hash history nên URL thật là
+ * `#/showcase/apps#error-pages` — trình duyệt KHÔNG tự cuộn, pseudo-class :target cũng không khớp.
+ * → tự đọc `route.hash`, cuộn tới card tương ứng và đánh dấu nó (class `app-card--target`).
+ */
+const route = useRoute()
+const gridRef = ref<HTMLElement | null>(null)
+const activeId = computed(() => decodeURIComponent(route.hash.replace(/^#/, '')))
+
+function scrollToActive() {
+  const id = activeId.value
+  if (!id) return
+  nextTick(() => {
+    const el = gridRef.value?.querySelector<HTMLElement>(`[id="${id.replace(/"/g, '')}"]`)
+    if (!el) return
+    const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    el.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' })
+  })
+}
+onMounted(scrollToActive)
+watch(() => route.hash, scrollToActive)
 </script>
 
 <template>
   <div class="apps-page">
-    <AppTopbar title="WemakeUI" subtitle="bộ giao diện hoàn chỉnh" />
+    <AppTopbar title="MindUI" subtitle="bộ giao diện hoàn chỉnh" />
 
     <main class="apps-main">
       <PageHeader
@@ -21,12 +44,13 @@ import { appTemplates, totalAppTemplates, totalAppPages } from './appTemplates'
         :description="`${totalAppTemplates} sản phẩm cấp app — mỗi bộ có app shell + navigation trỏ đúng page, gồm ${totalAppPages} trang. Bấm 'Mở app' để dùng thật.`"
       />
 
-      <div class="apps-grid">
+      <div ref="gridRef" class="apps-grid">
         <article
           v-for="app in appTemplates"
           :id="app.id"
           :key="app.id"
           class="app-card"
+          :class="{ 'app-card--target': activeId === app.id }"
           :style="{ '--accent': app.accent }"
         >
           <div class="app-card__top">
@@ -110,7 +134,8 @@ import { appTemplates, totalAppTemplates, totalAppPages } from './appTemplates'
   box-shadow: var(--wx-shadow-lg);
   border-color: var(--accent);
 }
-.app-card:target {
+.app-card:target,
+.app-card--target {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
 }
@@ -141,7 +166,8 @@ import { appTemplates, totalAppTemplates, totalAppPages } from './appTemplates'
 .app-card__cat {
   font-size: 12px;
   font-weight: 600;
-  color: var(--accent);
+  /* pha accent với màu chữ chính: đủ tương phản cả light lẫn dark (accent thô trên card tối chỉ ~2.3–3:1) */
+  color: color-mix(in srgb, var(--accent) 62%, var(--wx-text-primary));
 }
 .app-card__pages {
   flex-shrink: 0;

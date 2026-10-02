@@ -133,8 +133,8 @@ function next() { go(props.modelValue + 1) }
   border: none;
   outline: none;
   box-shadow: none;
-  min-width: 32px;
-  height: 32px;
+  min-width: calc(var(--wx-control-h-md) - 2px);
+  height: calc(var(--wx-control-h-md) - 2px);
   padding: 0 var(--wx-space-2);
   display: inline-flex;
   align-items: center;
@@ -142,7 +142,8 @@ function next() { go(props.modelValue + 1) }
   background: transparent;
   color: var(--wx-content-secondary);
   font-size: var(--wx-fs-13);
-  border-radius: var(--wx-radius-md);
+  font-weight: var(--wx-fw-medium);
+  border-radius: var(--wx-radius-ctrl-sm);
   cursor: pointer;
   transition: background var(--wx-d-micro) var(--wx-ease-standard),
               color var(--wx-d-micro) var(--wx-ease-standard);
@@ -151,28 +152,29 @@ function next() { go(props.modelValue + 1) }
   outline: 2px solid var(--wx-border-focus);
   outline-offset: 1px;
 }
-.wx-pagination[data-size="sm"] .wx-pagination__btn { min-width: 28px; height: 28px; font-size: var(--wx-fs-12); }
+.wx-pagination[data-size="sm"] .wx-pagination__btn { min-width: var(--wx-control-h-sm); height: var(--wx-control-h-sm); font-size: var(--wx-fs-12); }
 
 .wx-pagination__btn:hover:not(:disabled):not([data-active]) {
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral);
   color: var(--wx-content-primary);
 }
 .wx-pagination__btn:disabled {
   opacity: 0.35;
   cursor: not-allowed;
 }
+/* Trang đang chọn: nền xanh nhạt + chữ xanh (đúng paginator của nguồn) — không dùng khối gradient */
 .wx-pagination__btn[data-active] {
-  background: var(--wx-gradient-button);
-  color: var(--wx-text-on-brand);
-  font-weight: var(--wx-fw-semibold);
+  background: var(--wx-selected-bg);
+  color: var(--wx-selected-text);
+  font-weight: var(--wx-fw-bold);
 }
 
 .wx-pagination__ellipsis {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 32px;
-  height: 32px;
+  min-width: calc(var(--wx-control-h-md) - 2px);
+  height: calc(var(--wx-control-h-md) - 2px);
   color: var(--wx-content-muted);
   font-size: var(--wx-fs-13);
 }
@@ -188,20 +190,20 @@ function next() { go(props.modelValue + 1) }
   appearance: none;
   -webkit-appearance: none;
   outline: none;
-  height: 36px;
+  height: var(--wx-control-h-md);
   padding: 0 var(--wx-space-4);
-  border: 1px solid var(--wx-border-default);
+  border: 1px solid var(--wx-border-control);
   background: var(--wx-bg-base);
   color: var(--wx-content-primary);
-  border-radius: var(--wx-radius-md);
+  border-radius: var(--wx-radius-ctrl);
   font-size: var(--wx-fs-13);
   font-weight: var(--wx-fw-medium);
   cursor: pointer;
   transition: background var(--wx-d-micro) var(--wx-ease-standard);
 }
 .wx-pagination__loadmore:hover:not(:disabled) {
-  background: var(--wx-hover-bg);
-  border-color: var(--wx-border-focus);
+  background: var(--wx-hover-neutral);
+  border-color: var(--wx-border-control-hover);
 }
 .wx-pagination__loadmore:focus-visible {
   outline: 2px solid var(--wx-border-focus);

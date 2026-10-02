@@ -17,12 +17,23 @@
   /* ── Gradients ──────────────────────────────────────── */
   --wx-gradient-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
   --wx-gradient-header: linear-gradient(to right, #0891b2, #2563eb, #1d4ed8);
+  /* Nút solid + tile: giữ sắc xanh nhưng đậm hơn một bậc để không chói trên nền tối */
+  --wx-gradient-primary: linear-gradient(135deg, var(--wx-brand-600) 0%, var(--wx-brand-700) 100%);
+  --wx-gradient-primary-hover: linear-gradient(135deg, var(--wx-brand-500) 0%, var(--wx-brand-600) 100%);
+  --wx-gradient-tile: linear-gradient(135deg, #4f46e5 0%, var(--wx-brand-600) 50%, #0891b2 100%);
+  --wx-gradient-tile-blue: linear-gradient(160deg, var(--wx-brand-500), var(--wx-brand-700));
+  --wx-gradient-tile-green: linear-gradient(160deg, #10b981, #047857);
+  --wx-gradient-tile-amber: linear-gradient(160deg, #f59e0b, #b45309);
+  --wx-gradient-tile-red: linear-gradient(160deg, #ef4444, #b91c1c);
+  --wx-gradient-panel-head: linear-gradient(180deg, var(--wx-surface-elevated) 0%, color-mix(in srgb, var(--wx-brand-500) 8%, var(--wx-surface-elevated)) 100%);
 
   /* ── Text — brightened 1 bậc cho dark mode (đạt WCAG AA) ── */
   --wx-text-primary: #f8fafc;      /* slate-50  — gần trắng, body text */
   --wx-text-secondary: #cbd5e1;    /* slate-300 — label, secondary copy */
   --wx-text-muted: #94a3b8;        /* slate-400 — caption, helper, timestamp */
   --wx-text-disabled: #64748b;     /* slate-500 — disabled chỉ, đủ phân biệt */
+  --wx-text-light: #7c8aa0;        /* ~4:1 trên card tối — placeholder, icon phụ */
+  --wx-text-placeholder: #7c8aa0;
   --wx-text-inverse: #0f172a;
   --wx-text-link: #93c5fd;         /* blue-300, sáng hơn để nổi trên dark */
 
@@ -36,6 +47,9 @@
   --wx-border-default: #243049;     /* row divider, card border */
   --wx-border-subtle: #18223a;      /* tinh tế hơn — giữa surface và default */
   --wx-border-focus: #60a5fa;
+  --wx-border-control: #334155;     /* slate-700 — viền input/secondary trên nền tối */
+  --wx-border-control-hover: #475569;
+  --wx-border-check: #64748b;     /* slate-500 — ~3:1 trên card tối */
   --wx-border-glass: rgba(255, 255, 255, 0.1);
   --wx-border-glass-light: rgba(255, 255, 255, 0.05);
 
@@ -66,6 +80,12 @@
   --wx-neutral-text: #cbd5e1;     /* slate-300 */
   --wx-neutral-border: rgba(148, 163, 184, 0.35);
 
+  /* ── Data-viz palette — khai báo lại các bậc tham chiếu brand/feedback để scope dark theo cây con vẫn đúng ── */
+  --wx-chart-1: var(--wx-brand-primary);
+  --wx-chart-2: var(--wx-brand-accent);
+  --wx-chart-4: var(--wx-warning-solid);
+  --wx-chart-5: var(--wx-danger-solid);
+
   /* ── Interactive States — sáng hơn cho dark visibility ── */
   --wx-selected-bg: rgba(59, 130, 246, 0.25);
   --wx-selected-text: #93c5fd;
@@ -75,6 +95,13 @@
   --wx-active-text: #dbeafe;
   --wx-disabled-bg: rgba(51, 65, 85, 0.5);
   --wx-disabled-text: #64748b;
+  /* Khai báo lại để scope dark theo cây con ([data-wx-theme="dark"] không ở <html>) vẫn tính đúng */
+  --wx-hover-neutral: color-mix(in srgb, var(--wx-text-secondary) 8%, var(--wx-surface-base));
+  --wx-hover-neutral-raised: color-mix(in srgb, var(--wx-text-secondary) 8%, var(--wx-surface-elevated));
+  --wx-pressed-neutral: color-mix(in srgb, var(--wx-text-secondary) 13%, var(--wx-surface-base));
+  --wx-selected-border: rgba(59, 130, 246, 0.45);
+  --wx-selected-bg-hover: rgba(59, 130, 246, 0.35);
+  --wx-selected-border-hover: rgba(96, 165, 250, 0.6);
 
   /* ── Elevation ──────────────────────────────────────── */
   --wx-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
@@ -84,9 +111,26 @@
   --wx-shadow-2xl: 0 20px 50px rgba(0, 0, 0, 0.5);
   --wx-shadow-brand: 0 4px 15px rgba(59, 130, 246, 0.3);
   --wx-shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.25);
+  --wx-ring-focus: 0 0 0 3px rgba(96, 165, 250, 0.25);
+  --wx-ring-danger: 0 0 0 3px rgba(248, 113, 113, 0.25);
+  --wx-ring-success: 0 0 0 3px rgba(52, 211, 153, 0.25);
+  --wx-shadow-btn: 0 2px 8px rgba(0, 0, 0, 0.45);
+  --wx-shadow-btn-hover: 0 4px 12px rgba(0, 0, 0, 0.55);
+  --wx-shadow-popover: 0 16px 40px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.4);
+  --wx-shadow-menu: 0 16px 36px -6px rgba(0, 0, 0, 0.55), 0 4px 12px -2px rgba(0, 0, 0, 0.4);
+  --wx-shadow-toast: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --wx-shadow-card-soft: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 26px -18px rgba(0, 0, 0, 0.6);
+  --wx-shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+  --wx-shadow-tile: 0 4px 12px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+  --wx-shadow-tooltip: 0 10px 24px -8px rgba(0, 0, 0, 0.7);
+
+  /* ── Overlay ────────────────────────────────────────── */
+  --wx-backdrop-bg: rgba(2, 6, 23, 0.65);
+  --wx-tooltip-bg: #334155;
+  --wx-tooltip-text: #f1f5f9;
 
   /* ── Scrollbar ──────────────────────────────────────── */
-  --wx-scrollbar-track: #1e293b;
+  --wx-scrollbar-track: transparent;
   --wx-scrollbar-thumb: #475569;
   --wx-scrollbar-thumb-hover: #64748b;
 

@@ -12,6 +12,7 @@ const totalDone   = computed(() => phases.filter(p => p.status === 'done').lengt
 const visible = ref(false)
 onMounted(() => { setTimeout(() => (visible.value = true), 60) })
 
+/* gradient/màu nhóm: bảng màu nhận diện riêng từng phase (hex cố định, chữ trắng đặt lên trên) — không phải token theme */
 const groups = [
   {
     label: 'Design System',
@@ -69,7 +70,7 @@ function routeCountForGroup(nums: number[]) {
         <div class="hero-text">
           <p class="hero-eyebrow">Component Lab</p>
           <h1 class="hero-title">
-            WemakeUI
+            MindUI
             <span class="hero-accent">Showcase</span>
           </h1>
           <p class="hero-sub">
@@ -144,7 +145,7 @@ function routeCountForGroup(nums: number[]) {
             class="phase-block"
           >
             <div class="phase-meta">
-              <span class="phase-chip" :style="{ background: group.gradient, color: '#fff' }">
+              <span class="phase-chip" :style="{ background: group.gradient, color: 'var(--wx-text-on-brand)' }">
                 Phase {{ phase.n }}
               </span>
               <span class="phase-name">{{ phase.title }}</span>
@@ -220,9 +221,9 @@ function routeCountForGroup(nums: number[]) {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle at 20% 80%, rgba(255,255,255,0.06) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 60%);
+    radial-gradient(circle at 20% 80%, color-mix(in srgb, var(--wx-text-on-brand) 6%, transparent) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--wx-text-on-brand) 4%, transparent) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--wx-text-on-brand) 2%, transparent) 0%, transparent 60%);
   pointer-events: none;
 }
 .hero-inner {
@@ -239,19 +240,19 @@ function routeCountForGroup(nums: number[]) {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: rgba(255,255,255,0.5);
+  color: color-mix(in srgb, var(--wx-text-on-brand) 50%, transparent);
 }
 .hero-title {
   margin: 0;
   font-size: 40px;
   font-weight: 800;
-  color: #fff;
+  color: var(--wx-text-on-brand);
   letter-spacing: -1px;
   line-height: 1.1;
 }
 .hero-accent {
   display: block;
-  background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+  background: linear-gradient(90deg, color-mix(in srgb, var(--wx-text-on-brand) 90%, transparent), color-mix(in srgb, var(--wx-text-on-brand) 60%, transparent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -259,7 +260,7 @@ function routeCountForGroup(nums: number[]) {
 .hero-sub {
   margin: var(--wx-space-3) 0 0;
   font-size: 15px;
-  color: rgba(255,255,255,0.7);
+  color: color-mix(in srgb, var(--wx-text-on-brand) 70%, transparent);
   line-height: 1.7;
   max-width: 520px;
 }
@@ -277,8 +278,8 @@ function routeCountForGroup(nums: number[]) {
   align-items: center;
   gap: var(--wx-space-1);
   padding: var(--wx-space-4) var(--wx-space-3);
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.15);
+  background: color-mix(in srgb, var(--wx-text-on-brand) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--wx-text-on-brand) 15%, transparent);
   border-radius: 16px;
   backdrop-filter: blur(12px);
   text-decoration: none;
@@ -286,31 +287,31 @@ function routeCountForGroup(nums: number[]) {
   transition: all 0.2s ease;
 }
 .stat-card:hover {
-  background: rgba(255,255,255,0.18);
+  background: color-mix(in srgb, var(--wx-text-on-brand) 18%, transparent);
   transform: translateY(-2px);
 }
 .stat-card--success {
-  background: rgba(34,197,94,0.2);
-  border-color: rgba(34,197,94,0.35);
+  background: color-mix(in srgb, var(--wx-success-solid) 20%, transparent);
+  border-color: color-mix(in srgb, var(--wx-success-solid) 35%, transparent);
 }
 .stat-card--brand {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.25);
+  background: color-mix(in srgb, var(--wx-text-on-brand) 15%, transparent);
+  border-color: color-mix(in srgb, var(--wx-text-on-brand) 25%, transparent);
   cursor: pointer;
 }
 .stat-card--brand:hover {
-  background: rgba(255,255,255,0.28);
-  border-color: rgba(255,255,255,0.4);
+  background: color-mix(in srgb, var(--wx-text-on-brand) 28%, transparent);
+  border-color: color-mix(in srgb, var(--wx-text-on-brand) 40%, transparent);
 }
 .stat-value {
   font-size: 28px;
   font-weight: 800;
-  color: #fff;
+  color: var(--wx-text-on-brand);
   line-height: 1;
 }
 .stat-label {
   font-size: 11px;
-  color: rgba(255,255,255,0.65);
+  color: color-mix(in srgb, var(--wx-text-on-brand) 65%, transparent);
   font-weight: 500;
   text-align: center;
 }
@@ -338,12 +339,12 @@ function routeCountForGroup(nums: number[]) {
   color: var(--wx-text-primary);
   font-size: 13px;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: var(--wx-shadow-md);
   transition: all 0.2s ease;
 }
 .quick-nav-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  box-shadow: var(--wx-shadow-lg);
   border-color: color-mix(in srgb, var(--wx-brand-primary) 40%, transparent);
 }
 .qn-icon { font-size: 16px; }
@@ -390,7 +391,7 @@ function routeCountForGroup(nums: number[]) {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: var(--wx-shadow-md);
 }
 .group-icon {
   font-size: 18px;
@@ -443,7 +444,7 @@ function routeCountForGroup(nums: number[]) {
 }
 .phase-block:hover {
   border-color: color-mix(in srgb, var(--wx-brand-primary) 25%, var(--wx-border-default));
-  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  box-shadow: var(--wx-shadow-md);
 }
 
 .phase-meta {
@@ -520,7 +521,7 @@ function routeCountForGroup(nums: number[]) {
 .route-card:hover {
   border-color: color-mix(in srgb, var(--wx-brand-primary) 40%, var(--wx-border-default));
   background: color-mix(in srgb, var(--wx-brand-primary) 3%, var(--wx-surface-base));
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  box-shadow: var(--wx-shadow-md);
   transform: translateY(-2px);
 }
 .route-card:hover::before {
@@ -589,7 +590,7 @@ function routeCountForGroup(nums: number[]) {
 .route-list-item:hover {
   border-color: var(--wx-border-default);
   background: color-mix(in srgb, var(--wx-brand-primary) 4%, var(--wx-surface-base));
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: var(--wx-shadow-sm);
 }
 .route-list-item:hover .rli-arrow {
   transform: translateX(3px);
@@ -626,17 +627,17 @@ function routeCountForGroup(nums: number[]) {
 
 /* ── Dark mode ──────────────────────────────────────────────── */
 .wx-dark .stat-card {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.12);
+  background: color-mix(in srgb, var(--wx-text-on-brand) 8%, transparent);
+  border-color: color-mix(in srgb, var(--wx-text-on-brand) 12%, transparent);
 }
 .wx-dark .quick-nav-item {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: var(--wx-shadow-lg);
 }
 .wx-dark .phase-block {
   background: var(--wx-surface-elevated);
 }
 .wx-dark .route-card:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  box-shadow: var(--wx-shadow-lg);
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */

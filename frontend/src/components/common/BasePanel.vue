@@ -140,7 +140,7 @@ function toggle() {
   transition: background var(--wx-d-fast) var(--wx-ease-standard);
 }
 .wx-panel__header--clickable:hover {
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral);
 }
 
 .wx-panel__chevron {
@@ -167,12 +167,14 @@ function toggle() {
 .wx-panel__title {
   margin: 0;
   font-size: var(--wx-fs-14);
-  font-weight: var(--wx-fw-semibold);
+  font-weight: var(--wx-fw-bold);
+  letter-spacing: var(--wx-tracking-snug);
   color: var(--wx-content-primary);
 }
 .wx-panel__desc {
   margin: 0;
-  font-size: var(--wx-fs-12);
+  font-size: var(--wx-fs-11);
+  font-weight: var(--wx-fw-semibold);
   color: var(--wx-content-muted);
 }
 .wx-panel__actions {

@@ -25,7 +25,7 @@ const statusLabel = (s: string) =>
   s === 'delivered' ? 'đã giao'  : 'huỷ'
 
 const products = [
-  { name: 'Áo thun WemakeUI', sales: 248, stock: 1248, revenue: '124tr', trend: 'up' },
+  { name: 'Áo thun MindUI', sales: 248, stock: 1248, revenue: '124tr', trend: 'up' },
   { name: 'Sticker pack',     sales: 184, stock: 542,  revenue: '36tr',  trend: 'up' },
   { name: 'Cốc gradient',     sales: 92,  stock: 124,  revenue: '24tr',  trend: 'down' },
   { name: 'Sổ tay design',    sales: 64,  stock: 0,    revenue: '12tr',  trend: 'flat' },
@@ -49,7 +49,7 @@ const products = [
         <DashMetric label="Doanh thu hôm nay" value="128.420.000₫" size="lg">
           <div class="metric-foot">
             <BaseTag size="sm" variant="success" label="+12%" />
-            <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesUp], 100, 24)" fill="none" stroke="#10b981" stroke-width="1.5" /></svg>
+            <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesUp], 100, 24)" fill="none" stroke="var(--wx-chart-3)" stroke-width="1.5" /></svg>
           </div>
         </DashMetric>
       </BaseCard>
@@ -57,7 +57,7 @@ const products = [
         <DashMetric label="Đơn hàng" value="1,284" size="lg">
           <div class="metric-foot">
             <BaseTag size="sm" variant="success" label="+58 đơn" />
-            <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesVolatile], 100, 24)" fill="none" stroke="#2563eb" stroke-width="1.5" /></svg>
+            <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesVolatile], 100, 24)" fill="none" stroke="var(--wx-chart-1)" stroke-width="1.5" /></svg>
           </div>
         </DashMetric>
       </BaseCard>
@@ -65,7 +65,7 @@ const products = [
         <DashMetric label="Giá trị TB" value="1.840.000₫" size="lg">
           <div class="metric-foot">
             <BaseTag size="sm" variant="warning" label="-2%" />
-            <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesDown], 100, 24)" fill="none" stroke="#f59e0b" stroke-width="1.5" /></svg>
+            <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesDown], 100, 24)" fill="none" stroke="var(--wx-chart-4)" stroke-width="1.5" /></svg>
           </div>
         </DashMetric>
       </BaseCard>
@@ -73,7 +73,7 @@ const products = [
         <DashMetric label="Hủy đơn" value="18" size="lg">
           <div class="metric-foot">
             <BaseTag size="sm" variant="danger" label="1.4%" />
-            <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesDown], 100, 24)" fill="none" stroke="#ef4444" stroke-width="1.5" /></svg>
+            <svg class="spark" viewBox="0 0 100 24"><path :d="sparkPath([...seriesDown], 100, 24)" fill="none" stroke="var(--wx-chart-5)" stroke-width="1.5" /></svg>
           </div>
         </DashMetric>
       </BaseCard>

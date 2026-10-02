@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { colorAt, scale, niceTicks, formatCompact } from './chart-utils'
+import { chartColor, scale, niceTicks, formatCompact } from './chart-utils'
 
 export interface BarItem {
   label: string
@@ -77,7 +77,7 @@ const bars = computed(() => {
         y,
         w: Math.max(0, barWidth.value - 2),
         h,
-        color: d.color ?? s.color ?? colorAt(sIdx),
+        color: d.color ?? s.color ?? chartColor(sIdx),
         label: d.label,
         value: d.value,
         seriesName: s.name,
@@ -98,7 +98,7 @@ const emit = defineEmits<{
   <div class="bar-chart">
     <div v-if="showLegend && normSeries.length > 1" class="bc-legend">
       <span v-for="(s, i) in normSeries" :key="s.name" class="bc-legend-item">
-        <span class="bc-legend-dot" :style="{ background: s.color ?? colorAt(i) }" />
+        <span class="bc-legend-dot" :style="{ background: s.color ?? chartColor(i) }" />
         {{ s.name }}
       </span>
     </div>

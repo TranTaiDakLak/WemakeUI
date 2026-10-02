@@ -44,9 +44,9 @@ const activeColor = computed(() => {
     return c
   }
   // Default: green → amber → red based on percent
-  if (percent.value >= 0.85) return '#ef4444'
-  if (percent.value >= 0.6) return '#f59e0b'
-  return '#10b981'
+  if (percent.value >= 0.85) return 'var(--wx-chart-5)'
+  if (percent.value >= 0.6) return 'var(--wx-chart-4)'
+  return 'var(--wx-chart-3)'
 })
 </script>
 

@@ -245,7 +245,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/dashboard/logistics',  name: 'DashLogistics',  component: () => import('../views/dashboard/LogisticsView.vue') },
   { path: '/dashboard/helpdesk',   name: 'DashHelpdesk',   component: () => import('../views/dashboard/HelpdeskView.vue') },
   { path: '/dashboard/iot',        name: 'DashIot',        component: () => import('../views/dashboard/IotView.vue') },
-  { path: '/dashboard/wemakeui-v1', name: 'DashWeDashboardV1', component: () => import('../views/dashboard/WeDashboardV1View.vue') },
+  { path: '/dashboard/mindui-v1', name: 'DashWeDashboardV1', component: () => import('../views/dashboard/WeDashboardV1View.vue') },
 
   /* ── phase 7 — app pages (20) ───────────────────────────────── */
   { path: '/app/profile',       name: 'AppProfile',       component: () => import('../views/app/ProfileView.vue') },
@@ -307,7 +307,7 @@ const routes: RouteRecordRaw[] = [
   /* ── phase 11 — dashboard v2 (archetype-based) ─────────────── */
   { path: '/dashboard/wed-v2', name: 'WeDashboardV2', component: () => import('../views/dashboard/WeDashboardV2View.vue') },
 
-  /* ── phase 12 — Wemake marketing ecosystem ──────────────────── */
+  /* ── phase 12 — Mind marketing ecosystem ──────────────────── */
   { path: '/home',            name: 'MarketingHome',          component: () => import('../views/marketing/HomeView.vue') },
   { path: '/products',        name: 'MarketingProducts',      component: () => import('../views/marketing/ProductsView.vue') },
   { path: '/products/:slug',  name: 'MarketingProductDetail', component: () => import('../views/marketing/ProductDetailView.vue') },
@@ -315,17 +315,17 @@ const routes: RouteRecordRaw[] = [
   { path: '/partners',        name: 'MarketingPartners',      component: () => import('../views/marketing/PartnersView.vue') },
   { path: '/contact',         name: 'MarketingContact',       component: () => import('../views/marketing/ContactView.vue') },
 
-  /* ── phase 7 — wemakeui pages (10) ────────────────────────── */
-  { path: '/wemakeui',               name: 'WCAdmin',        component: () => import('../views/wemakeui/AdminView.vue') },
-  { path: '/wemakeui/accounts',      name: 'WCAccounts',     component: () => import('../views/wemakeui/AccountsView.vue') },
-  { path: '/wemakeui/sessions',      name: 'WCSessions',     component: () => import('../views/wemakeui/SessionsView.vue') },
-  { path: '/wemakeui/contacts',      name: 'WCContacts',     component: () => import('../views/wemakeui/ContactsView.vue') },
-  { path: '/wemakeui/campaigns',     name: 'WCCampaigns',    component: () => import('../views/wemakeui/CampaignsView.vue') },
-  { path: '/wemakeui/plugins',       name: 'WCPlugins',      component: () => import('../views/wemakeui/PluginsView.vue') },
-  { path: '/wemakeui/console',       name: 'WCConsole',      component: () => import('../views/wemakeui/ConsoleView.vue') },
-  { path: '/wemakeui/scheduler',     name: 'WCScheduler',    component: () => import('../views/wemakeui/SchedulerView.vue') },
-  { path: '/wemakeui/integrations',  name: 'WCIntegrations', component: () => import('../views/wemakeui/IntegrationsView.vue') },
-  { path: '/wemakeui/automation',    name: 'WCAutomation',   component: () => import('../views/wemakeui/AutomationCanvasView.vue') },
+  /* ── phase 7 — mindui pages (10) ────────────────────────── */
+  { path: '/mindui',               name: 'WCAdmin',        component: () => import('../views/mindui/AdminView.vue') },
+  { path: '/mindui/accounts',      name: 'WCAccounts',     component: () => import('../views/mindui/AccountsView.vue') },
+  { path: '/mindui/sessions',      name: 'WCSessions',     component: () => import('../views/mindui/SessionsView.vue') },
+  { path: '/mindui/contacts',      name: 'WCContacts',     component: () => import('../views/mindui/ContactsView.vue') },
+  { path: '/mindui/campaigns',     name: 'WCCampaigns',    component: () => import('../views/mindui/CampaignsView.vue') },
+  { path: '/mindui/plugins',       name: 'WCPlugins',      component: () => import('../views/mindui/PluginsView.vue') },
+  { path: '/mindui/console',       name: 'WCConsole',      component: () => import('../views/mindui/ConsoleView.vue') },
+  { path: '/mindui/scheduler',     name: 'WCScheduler',    component: () => import('../views/mindui/SchedulerView.vue') },
+  { path: '/mindui/integrations',  name: 'WCIntegrations', component: () => import('../views/mindui/IntegrationsView.vue') },
+  { path: '/mindui/automation',    name: 'WCAutomation',   component: () => import('../views/mindui/AutomationCanvasView.vue') },
 ]
 
 const router = createRouter({
@@ -334,7 +334,7 @@ const router = createRouter({
 })
 
 /* ── Auth guard for private sections ── */
-const PRIVATE_PREFIXES = ['/saas', '/wemakeui', '/dashboard']
+const PRIVATE_PREFIXES = ['/saas', '/mindui', '/dashboard']
 
 router.beforeEach((to) => {
   const auth = useAuthStore()

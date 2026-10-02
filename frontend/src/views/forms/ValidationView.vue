@@ -53,7 +53,7 @@ const strength = computed(() => {
   return s
 })
 const strengthLabel = computed(() => ['', 'Yếu', 'Trung bình', 'Mạnh', 'Rất mạnh'][strength.value])
-const strengthColor = computed(() => ['', '#ef4444', '#f59e0b', '#22c55e', '#16a34a'][strength.value])
+const strengthColor = computed(() => ['', 'var(--wx-danger-solid)', 'var(--wx-warning-solid)', 'var(--wx-success-solid)', 'var(--wx-success-text)'][strength.value])
 
 function handleSubmit() {
   submitted.value = true
@@ -76,7 +76,7 @@ function reset() {
 
 <template>
   <div class="fp">
-    <AppTopbar title="WemakeUI" subtitle="forms — validation" />
+    <AppTopbar title="MindUI" subtitle="forms — validation" />
     <main class="fp__main">
 
       <div class="fp__hdr">
@@ -224,7 +224,7 @@ function handleSubmit() {
 .fp__desc  { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-text-secondary); line-height: 1.6; }
 .fp__card { background: var(--wx-surface-elevated); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-xl); padding: var(--wx-space-5); display: flex; flex-direction: column; gap: var(--wx-space-4); }
 .fp__card--info { background: color-mix(in srgb, var(--wx-brand-primary) 5%, var(--wx-surface-elevated)); border-color: color-mix(in srgb, var(--wx-brand-primary) 20%, transparent); }
-.fp__card--success { background: color-mix(in srgb, #22c55e 8%, var(--wx-surface-elevated)); border-color: color-mix(in srgb, #22c55e 30%, transparent); color: #16a34a; }
+.fp__card--success { background: color-mix(in srgb, var(--wx-success-solid) 8%, var(--wx-surface-elevated)); border-color: color-mix(in srgb, var(--wx-success-solid) 30%, transparent); color: var(--wx-success-text); }
 .fp__card-title { margin: 0; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-bold); text-transform: uppercase; letter-spacing: .6px; color: var(--wx-text-muted); }
 .fp__form { display: flex; flex-direction: column; gap: var(--wx-space-3); }
 .fp__row  { display: grid; grid-template-columns: 1fr 1fr; gap: var(--wx-space-3); }
@@ -265,7 +265,7 @@ function handleSubmit() {
 .val-success-inner { display: flex; align-items: center; gap: var(--wx-space-3); }
 .val-success-title { margin: 0 0 2px; font-size: var(--wx-fs-15); font-weight: var(--wx-fw-semibold); }
 .val-success-sub   { margin: 0; font-size: var(--wx-fs-13); opacity: .8; }
-.val-check { color: #16a34a; }
+.val-check { color: var(--wx-success-text); }
 .val-check-path {
   stroke-dasharray: 40;
   stroke-dashoffset: 40;

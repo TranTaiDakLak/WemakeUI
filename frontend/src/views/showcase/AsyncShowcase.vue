@@ -183,7 +183,7 @@ function resetAllTimers() { cdKey.value++ }
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="phase 5 · async + feedback" />
+    <AppTopbar title="MindUI" subtitle="phase 5 · async + feedback" />
     <main class="main">
       <PageHeader
         title="async / feedback / job lifecycle"
@@ -191,7 +191,7 @@ function resetAllTimers() { cdKey.value++ }
       />
 
       <!-- anchor nav -->
-      <AnchorBar v-model="activeId" :sections="sections" />
+      <AnchorBar v-model="activeId" :sections="sections" :sticky-top="64" />
 
       <!-- EmptyState -->
       <section id="empty" class="section">

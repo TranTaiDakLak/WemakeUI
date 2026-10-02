@@ -13,7 +13,7 @@ const showCode = ref(false)
 
 <template>
   <div class="fp">
-    <AppTopbar title="WemakeUI" subtitle="forms — floating labels" />
+    <AppTopbar title="MindUI" subtitle="forms — floating labels" />
     <main class="fp__main">
 
       <div class="fp__hdr">

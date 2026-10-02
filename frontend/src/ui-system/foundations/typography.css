@@ -73,6 +73,23 @@
   color: var(--wx-text-muted);
 }
 
+/* Nhãn field cỡ nhỏ trong panel/form (nguồn MindAds) — dùng thêm icon bên trái nếu cần */
+.wx-field-label {
+  display: flex;
+  align-items: center;
+  gap: var(--wx-space-2);
+  margin-bottom: 6px;
+  font-family: var(--wx-font-primary);
+  font-size: var(--wx-fs-10);
+  font-weight: var(--wx-fw-extrabold);
+  letter-spacing: var(--wx-tracking-label);
+  text-transform: uppercase;
+  color: var(--wx-text-muted);
+}
+
+/* Font "kỹ thuật" (Chakra Petch) cho tiêu đề số liệu / logo chữ; fallback Inter */
+.wx-font-tech { font-family: var(--wx-font-tech); }
+
 /* ── Caption / Metadata ───────────────────────────────── */
 .wx-caption {
   font-family: var(--wx-font-primary);

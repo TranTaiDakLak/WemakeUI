@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { AppShell, AppSidebar, AppTopbar, PageHeader } from '../../components/layout'
+import {
+  AppShell, AppSidebar, AppTopbar, PageHeader,
+  TopbarButton, AppBanner, AppBannerStack,
+} from '../../components/layout'
 import type { SidebarSection } from '../../components/layout'
-import { BaseBadge, BaseAvatar, BaseTag } from '../../components/common'
+import { BaseTag } from '../../components/common'
+import { useShellChrome } from './useShellChrome'
 
 const props = withDefaults(defineProps<{
-  section: 'app' | 'dashboards' | 'wemakeui'
+  section: 'app' | 'dashboards' | 'mindui'
   current: string
   pageTitle: string
   pageDescription?: string
@@ -14,6 +18,7 @@ const props = withDefaults(defineProps<{
 
 const route = useRoute()
 const collapsed = ref(false)
+const chrome = useShellChrome()
 
 // ── Icons ───────────────────────────────────────────────────────────────
 const I: Record<string, string> = {
@@ -105,29 +110,29 @@ const SECTIONS: Record<string, SidebarSection[]> = {
       { id: 'iot',      label: 'IoT realtime', icon: I.iot,  href: '#/dashboard/iot' },
     ]},
   ],
-  wemakeui: [
-    { label: 'WemakeUI', items: [
-      { id: 'admin',        label: 'Tổng quan',     icon: I.home,     href: '#/wemakeui' },
-      { id: 'accounts',     label: 'Tài khoản',     icon: I.users,    href: '#/wemakeui/accounts' },
-      { id: 'campaigns',    label: 'Chiến dịch',    icon: I.campaign, href: '#/wemakeui/campaigns', badge: 2 },
-      { id: 'contacts',     label: 'Danh bạ',       icon: I.contacts, href: '#/wemakeui/contacts' },
-      { id: 'sessions',     label: 'Phiên kết nối', icon: I.session,  href: '#/wemakeui/sessions', badge: 8 },
+  mindui: [
+    { label: 'MindUI', items: [
+      { id: 'admin',        label: 'Tổng quan',     icon: I.home,     href: '#/mindui' },
+      { id: 'accounts',     label: 'Tài khoản',     icon: I.users,    href: '#/mindui/accounts' },
+      { id: 'campaigns',    label: 'Chiến dịch',    icon: I.campaign, href: '#/mindui/campaigns', badge: 2 },
+      { id: 'contacts',     label: 'Danh bạ',       icon: I.contacts, href: '#/mindui/contacts' },
+      { id: 'sessions',     label: 'Phiên kết nối', icon: I.session,  href: '#/mindui/sessions', badge: 8 },
     ]},
     { label: 'Hệ thống', items: [
-      { id: 'plugins',      label: 'Plugin',            icon: I.plugin,  href: '#/wemakeui/plugins' },
-      { id: 'console',      label: 'Console / Log',     icon: I.console, href: '#/wemakeui/console' },
-      { id: 'scheduler',    label: 'Lịch tác vụ',      icon: I.clock,   href: '#/wemakeui/scheduler' },
-      { id: 'integrations', label: 'Tích hợp',          icon: I.link,    href: '#/wemakeui/integrations' },
-      { id: 'automation',   label: 'Automation canvas', icon: I.canvas,  href: '#/wemakeui/automation' },
+      { id: 'plugins',      label: 'Plugin',            icon: I.plugin,  href: '#/mindui/plugins' },
+      { id: 'console',      label: 'Console / Log',     icon: I.console, href: '#/mindui/console' },
+      { id: 'scheduler',    label: 'Lịch tác vụ',      icon: I.clock,   href: '#/mindui/scheduler' },
+      { id: 'integrations', label: 'Tích hợp',          icon: I.link,    href: '#/mindui/integrations' },
+      { id: 'automation',   label: 'Automation canvas', icon: I.canvas,  href: '#/mindui/automation' },
     ]},
   ],
 }
 
 // ── Per-section config ──────────────────────────────────────────────────
 const CFG = {
-  app:        { brand: 'WemakeUI',  subtitlePrefix: 'app',       breadcrumb: 'app',        tagVariant: 'primary' as const, defaultId: 'profile'  },
-  dashboards: { brand: 'WemakeUI',  subtitlePrefix: 'dashboard', breadcrumb: 'dashboards', tagVariant: 'primary' as const, defaultId: 'overview' },
-  wemakeui:  { brand: 'WemakeUI', subtitlePrefix: '',           breadcrumb: 'wemakeui',  tagVariant: 'info'    as const, defaultId: 'admin'    },
+  app:        { brand: 'MindUI',  subtitlePrefix: 'app',       breadcrumb: 'app',        tagVariant: 'primary' as const, defaultId: 'profile'  },
+  dashboards: { brand: 'MindUI',  subtitlePrefix: 'dashboard', breadcrumb: 'dashboards', tagVariant: 'primary' as const, defaultId: 'overview' },
+  mindui:  { brand: 'MindUI', subtitlePrefix: '',           breadcrumb: 'mindui',  tagVariant: 'info'    as const, defaultId: 'admin'    },
 }
 
 const cfg = computed(() => CFG[props.section])
@@ -138,26 +143,54 @@ const topbarSubtitle = computed(() =>
 
 const activeId = computed(() => {
   const last = route.path.split('/').filter(Boolean).pop() || ''
-  if (!last || last === 'wemakeui') return cfg.value.defaultId
+  if (!last || last === 'mindui') return cfg.value.defaultId
   return last
+})
+
+/** icon của mục đang active → hiện trong ô icon của PageHeader */
+const activeIcon = computed(() => {
+  for (const sec of SECTIONS[props.section] ?? []) {
+    const hit = sec.items.find((i) => i.id === activeId.value)
+    if (hit?.icon) return hit.icon
+  }
+  return undefined
 })
 </script>
 
 <template>
-  <AppShell variant="sidebar" :topbar-height="56">
+  <AppShell variant="sidebar" :topbar-height="56" content-style="card">
     <template #topbar>
-      <AppTopbar :title="cfg.brand" :subtitle="topbarSubtitle">
+      <AppTopbar
+        :title="cfg.brand"
+        tagline="Giao diện thế hệ mới"
+        :subtitle="topbarSubtitle"
+        searchable
+        search-placeholder="Tìm trang, hành động…"
+        :user="chrome.user.value"
+        @profile="chrome.openProfile"
+        @upgrade="chrome.openPricing"
+        @logout="chrome.logout"
+      >
         <template #actions>
-          <button class="topbar-icon" aria-label="Tìm kiếm">
-            <span v-html="I.search" />
-          </button>
-          <button class="topbar-icon" aria-label="Thông báo">
+          <TopbarButton label="Thông báo" :badge="chrome.unread.value" @click="chrome.openNotifications">
             <span v-html="I.bell" />
-            <BaseBadge text="3" variant="danger" size="sm" solid class="topbar-icon__badge" />
-          </button>
-          <BaseAvatar name="Admin" size="sm" />
+          </TopbarButton>
         </template>
       </AppTopbar>
+    </template>
+
+    <template #banners>
+      <AppBannerStack inline>
+        <AppBanner
+          v-model="chrome.bannerOpen.value"
+          tone="info"
+          title="Có phiên bản MindUI 0.2.0"
+          description="Bản hiện tại 0.1.0 · Shell, sidebar và menu tài khoản được làm mới."
+          action-label="Xem thay đổi"
+          @action="chrome.openChangelog"
+          @dismiss="chrome.onBannerDismiss"
+        />
+      </AppBannerStack>
     </template>
 
     <template #sidebar>
@@ -168,11 +201,13 @@ const activeId = computed(() => {
         :brand="cfg.brand"
         logo-src="/logo.png"
         brand-href="#/"
+        hide-brand
+        persist-key="mind-sidebar-collapsed"
         @update:collapsed="(v: boolean) => collapsed = v"
       />
     </template>
 
-    <PageHeader :title="pageTitle" :description="pageDescription" padded>
+    <PageHeader :title="pageTitle" :description="pageDescription" :icon="activeIcon" padded bordered>
       <template #breadcrumb>
         <RouterLink to="/" class="bc-link">trang chủ</RouterLink>
         <span class="bc-sep">/</span>
@@ -193,23 +228,14 @@ const activeId = computed(() => {
 </template>
 
 <style scoped>
-.topbar-icon {
-  position: relative;
-  width: 32px; height: 32px;
-  border: none; background: transparent;
-  color: #fff;
-  border-radius: var(--wx-radius-full);
-  cursor: pointer;
-  display: inline-flex; align-items: center; justify-content: center;
-}
-.topbar-icon :deep(svg) { width: 16px; height: 16px; }
-.topbar-icon:hover { background: rgba(255,255,255,0.18); color: #fff; }
-.topbar-icon__badge { position: absolute; top: -4px; right: -4px; pointer-events: none; }
 .bc-link { font-size: var(--wx-fs-12); color: var(--wx-content-link); text-decoration: none; }
 .bc-link:hover { text-decoration: underline; }
-.bc-sep { color: var(--wx-content-muted); }
+.bc-sep { color: var(--wx-content-muted); margin: 0 var(--wx-space-1); }
 .page-content {
   padding: 0 var(--wx-space-5) var(--wx-space-9);
   display: flex; flex-direction: column; gap: var(--wx-space-5);
+}
+@media (max-width: 639px) {
+  .page-content { padding: 0 var(--wx-space-3) var(--wx-space-6); }
 }
 </style>

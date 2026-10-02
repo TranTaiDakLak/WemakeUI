@@ -10,7 +10,7 @@ import PageHeader from '../../components/layout/PageHeader.vue'
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="card hover effects" />
+    <AppTopbar title="MindUI" subtitle="card hover effects" />
 
     <main class="main">
       <PageHeader
@@ -130,7 +130,7 @@ import PageHeader from '../../components/layout/PageHeader.vue'
         </p>
         <div class="card-row">
           <BaseCard accent-color="#2563eb" hover-effect="glow-lift" title="SaaS Admin" subtitle="Internal tool · 7 trang" />
-          <BaseCard accent-color="#7c3aed" hover-effect="glow-lift" title="WemakeUI Platform" subtitle="SaaS app · 10 trang" />
+          <BaseCard accent-color="#7c3aed" hover-effect="glow-lift" title="MindUI Platform" subtitle="SaaS app · 10 trang" />
           <BaseCard accent-color="#dc2626" hover-effect="glow-lift" title="Marketing Site" subtitle="Marketing · 6 trang" />
           <BaseCard accent-color="#ea580c" hover-effect="glow-lift" title="Landing Pages" subtitle="Landing · 10 trang" />
         </div>

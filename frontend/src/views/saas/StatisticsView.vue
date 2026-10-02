@@ -21,8 +21,8 @@ const periodOptions  = [
 ]
 const productOptions = [
   { value: 'all',          label: 'Tất cả sản phẩm' },
-  { value: 'pro',          label: 'WemakeUI Pro' },
-  { value: 'basic',        label: 'WemakeUI Basic' },
+  { value: 'pro',          label: 'MindUI Pro' },
+  { value: 'basic',        label: 'MindUI Basic' },
   { value: 'addon',        label: 'Add-on' },
 ]
 const statusOptions  = [
@@ -66,8 +66,8 @@ const revenueSeries = computed<LineSeries[]>(() => [
 
 /* ── Product distribution donut ── */
 const productPie = computed<DonutSlice[]>(() => [
-  { label: 'WemakeUI Pro',   value: 58, color: '#2563eb' },
-  { label: 'WemakeUI Basic', value: 24, color: '#10b981' },
+  { label: 'MindUI Pro',   value: 58, color: '#2563eb' },
+  { label: 'MindUI Basic', value: 24, color: '#10b981' },
   { label: 'Add-on API',      value: 12, color: '#f59e0b' },
   { label: 'Trial',           value: 6,  color: '#8b5cf6' },
 ])
@@ -181,7 +181,7 @@ const txSummary: TxSummaryRow[] = [
     </div>
 
     <!-- Transaction summary table -->
-    <div class="chart-card">
+    <div class="chart-card chart-card--scroll">
       <div class="chart-card__header">
         <h3 class="chart-card__title">Phân tích theo loại giao dịch</h3>
       </div>
@@ -222,19 +222,19 @@ const txSummary: TxSummaryRow[] = [
 
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--wx-space-4);
 }
 
 .charts-row {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: var(--wx-space-4);
 }
 
 .bottom-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--wx-space-4);
 }
 
@@ -246,6 +246,8 @@ const txSummary: TxSummaryRow[] = [
 }
 
 .chart-card--main { overflow: hidden; }
+.chart-card--scroll { overflow-x: auto; }
+.chart-card--scroll .summary-table { min-width: 560px; }
 
 .chart-card__header {
   display: flex;
@@ -353,5 +355,16 @@ const txSummary: TxSummaryRow[] = [
   background: var(--wx-brand-primary);
   border-radius: var(--wx-radius-full);
   transition: width 0.4s ease;
+}
+
+/* Responsive: bố cục 4/2 cột chỉ hợp desktop — thu dần để KPI/biểu đồ không bị bóp méo trên tablet/mobile */
+@media (max-width: 1100px) {
+  .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .charts-row, .bottom-row { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+  .kpi-grid { grid-template-columns: minmax(0, 1fr); }
 }
 </style>

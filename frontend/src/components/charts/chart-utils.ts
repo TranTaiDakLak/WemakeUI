@@ -3,7 +3,9 @@
  * Zero deps, theme-aware via CSS variables.
  */
 
-/* ── Default color palette ───────────────────────── */
+/* ── Default color palette ─────────────────────────
+   Giữ nguyên (export public). Giá trị hex ở đây cũng là fallback của --wx-chart-1..10 (tokens.css);
+   chart dùng chartColor() bên dưới để đi theo token. */
 export const CHART_PALETTE = [
   '#2563eb', // brand
   '#06b6d4', // cyan
@@ -19,6 +21,15 @@ export const CHART_PALETTE = [
 
 export function colorAt(idx: number): string {
   return CHART_PALETTE[idx % CHART_PALETTE.length]
+}
+
+/**
+ * Như `colorAt` nhưng trả `var(--wx-chart-N, <hex>)`: màu theo token (dark mode + re-skin brand tự đổi),
+ * hex chỉ là fallback khi chưa nạp tokens.css. Các chart dùng hàm này cho màu series mặc định.
+ */
+export function chartColor(idx: number): string {
+  const i = idx % CHART_PALETTE.length
+  return `var(--wx-chart-${i + 1}, ${CHART_PALETTE[i]})`
 }
 
 /* ── Linear scale ────────────────────────────────── */

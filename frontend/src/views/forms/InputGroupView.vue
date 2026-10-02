@@ -14,7 +14,7 @@ const showCode = ref(false)
 
 <template>
   <div class="fp">
-    <AppTopbar title="WemakeUI" subtitle="forms — input groups" />
+    <AppTopbar title="MindUI" subtitle="forms — input groups" />
     <main class="fp__main">
 
       <div class="fp__hdr">
@@ -184,9 +184,9 @@ const showCode = ref(false)
 .ig-input--btn-right { border-radius: var(--wx-radius-md) 0 0 var(--wx-radius-md); }
 .ig-btn {
   padding: 0 var(--wx-space-4);
-  background: var(--wx-brand-primary);
-  color: #fff;
-  border: 1px solid var(--wx-brand-primary);
+  background: var(--wx-brand-solid);
+  color: var(--wx-text-on-brand);
+  border: 1px solid var(--wx-brand-solid);
   border-radius: 0 var(--wx-radius-md) var(--wx-radius-md) 0;
   font-family: var(--wx-font-primary);
   font-size: var(--wx-fs-13);

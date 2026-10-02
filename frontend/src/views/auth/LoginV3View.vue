@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import { BaseButton, BaseInput, BaseCheckbox, BaseSelectMenu, BaseProgress, FormField, BaseTabs } from '../../components/common'
+import { BaseButton, BaseCheckbox, BaseSelectMenu, BaseProgress, FormField, BaseTabs } from '../../components/common'
+import AuthField from '../_layouts/AuthField.vue'
+
+const ICON_MAIL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`
+const ICON_LOCK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
+const ICON_USER = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`
+const ICON_PHONE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`
 
 type AuthMode  = 'login' | 'signup'
 type Direction = 'forward' | 'backward'
@@ -159,6 +165,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
     <div class="v3-bg" aria-hidden="true">
       <div class="v3-orb v3-orb--a" />
       <div class="v3-orb v3-orb--b" />
+      <div class="v3-orb v3-orb--c" />
     </div>
 
     <!-- center wrap -->
@@ -166,8 +173,8 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
 
       <!-- brand -->
       <RouterLink to="/" class="v3-brand">
-        <img src="/logo.png" alt="WemakeUI" class="v3-logo" />
-        <span class="v3-brand-name">WemakeUI</span>
+        <span class="v3-logo-tile"><img src="/logo.png" alt="MindUI" class="v3-logo" /></span>
+        <span class="v3-brand-name">MindUI</span>
       </RouterLink>
 
       <!-- card -->
@@ -204,36 +211,36 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
                   {{ lErr.general }}
                 </div>
 
-                <FormField label="Email" :error="lTouched.email ? lErr.email : undefined" required>
-                  <BaseInput
-                    v-model="lForm.email"
-                    type="email"
-                    placeholder="ban@congty.vn"
-                    autocomplete="email"
-                    :invalid="lTouched.email && !!lErr.email"
-                    :success="lTouched.email && !lErr.email && !!lForm.email"
-                    :disabled="lLoading"
-                    @blur="onLBlur('email')"
-                  />
-                </FormField>
+                <AuthField
+                  v-model="lForm.email"
+                  label="Email"
+                  type="email"
+                  :icon="ICON_MAIL"
+                  placeholder="ban@congty.vn"
+                  autocomplete="email"
+                  inputmode="email"
+                  :error="lTouched.email ? lErr.email : undefined"
+                  :disabled="lLoading"
+                  required
+                  @blur="onLBlur('email')"
+                />
 
-                <FormField :error="lTouched.password ? lErr.password : undefined" required>
-                  <template #label>
-                    <span class="field-label-row">
-                      <span>Mật khẩu</span>
-                      <a href="/auth/forgot" class="link-sm">Quên mật khẩu?</a>
-                    </span>
+                <AuthField
+                  v-model="lForm.password"
+                  label="Mật khẩu"
+                  type="password"
+                  :icon="ICON_LOCK"
+                  placeholder="••••••••"
+                  autocomplete="current-password"
+                  :error="lTouched.password ? lErr.password : undefined"
+                  :disabled="lLoading"
+                  required
+                  @blur="onLBlur('password')"
+                >
+                  <template #label-extra>
+                    <RouterLink to="/auth/forgot">Quên mật khẩu?</RouterLink>
                   </template>
-                  <BaseInput
-                    v-model="lForm.password"
-                    type="password"
-                    autocomplete="current-password"
-                    :invalid="lTouched.password && !!lErr.password"
-                    :success="lTouched.password && !lErr.password && !!lForm.password"
-                    :disabled="lLoading"
-                    @blur="onLBlur('password')"
-                  />
-                </FormField>
+                </AuthField>
 
                 <BaseCheckbox v-model="lForm.remember" label="Lưu mật khẩu trên thiết bị này" :disabled="lLoading" />
 
@@ -269,30 +276,20 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
 
               <!-- step 1: account -->
               <form v-if="sStep === 1" class="v3-form" @submit.prevent="nextStep">
-                <FormField label="Email công ty" :error="sErrors.email" required>
-                  <BaseInput v-model="sAccount.email" type="email" placeholder="ban@congty.vn" autocomplete="email" />
-                </FormField>
-                <FormField label="Mật khẩu" :error="sErrors.password" required hint="Tối thiểu 8 ký tự, có chữ HOA, số, ký tự đặc biệt.">
-                  <BaseInput v-model="sAccount.password" type="password" autocomplete="new-password" />
-                </FormField>
+                <AuthField v-model="sAccount.email" label="Email công ty" type="email" :icon="ICON_MAIL" placeholder="ban@congty.vn" autocomplete="email" :error="sErrors.email" required />
+                <AuthField v-model="sAccount.password" label="Mật khẩu" type="password" :icon="ICON_LOCK" autocomplete="new-password" :error="sErrors.password" hint="Tối thiểu 8 ký tự, có chữ HOA, số, ký tự đặc biệt." required />
                 <div v-if="sAccount.password" class="s-strength">
                   <BaseProgress :value="passStrength" :variant="passVariant" size="sm" />
                   <span class="s-strength-label" :data-v="passVariant">{{ passLabel }}</span>
                 </div>
-                <FormField label="Xác nhận mật khẩu" :error="sErrors.confirm" required>
-                  <BaseInput v-model="sAccount.confirm" type="password" autocomplete="new-password" />
-                </FormField>
+                <AuthField v-model="sAccount.confirm" label="Xác nhận mật khẩu" type="password" :icon="ICON_LOCK" autocomplete="new-password" :error="sErrors.confirm" required />
                 <BaseButton type="submit" block>Tiếp tục →</BaseButton>
               </form>
 
               <!-- step 2: profile -->
               <form v-else-if="sStep === 2" class="v3-form" @submit.prevent="nextStep">
-                <FormField label="Họ và tên" :error="sErrors.fullName" required>
-                  <BaseInput v-model="sProfile.fullName" placeholder="Nguyễn Văn A" autocomplete="name" />
-                </FormField>
-                <FormField label="Số điện thoại" show-optional>
-                  <BaseInput v-model="sProfile.phone" type="text" placeholder="+84 ..." />
-                </FormField>
+                <AuthField v-model="sProfile.fullName" label="Họ và tên" :icon="ICON_USER" placeholder="Nguyễn Văn A" autocomplete="name" :error="sErrors.fullName" required />
+                <AuthField v-model="sProfile.phone" label="Số điện thoại (không bắt buộc)" type="tel" :icon="ICON_PHONE" placeholder="+84 ..." autocomplete="tel" />
                 <FormField label="Quốc gia">
                   <BaseSelectMenu v-model="sProfile.country" :options="countryOpts" />
                 </FormField>
@@ -322,7 +319,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
         </div>
       </div>
 
-      <p class="v3-legal">© 2026 WemakeUI · Bảo mật end-to-end</p>
+      <p class="v3-legal">© 2026 MindUI · Bảo mật end-to-end</p>
     </div>
 
     <!-- toast -->
@@ -352,7 +349,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--wx-bg-base);
+  background: var(--wx-shell-page-bg);
   position: relative;
   overflow: hidden;
 }
@@ -364,6 +361,8 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   border-radius: 50%;
   filter: blur(100px);
   opacity: .12;
+  will-change: transform;
+  animation: mind-orb-float 22s ease-in-out infinite alternate;
 }
 .v3-orb--a {
   width: 560px; height: 560px;
@@ -376,6 +375,15 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   background: var(--wx-brand-accent);
   opacity: .12;
   bottom: -200px; right: -140px;
+  animation-delay: -8s;
+}
+.v3-orb--c {
+  width: 320px; height: 320px;
+  background: var(--wx-shell-orb-c);
+  opacity: .5;
+  top: 40%; left: 55%;
+  animation-delay: -14s;
+  animation-duration: 18s;
 }
 
 /* wrap */
@@ -399,8 +407,19 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   text-decoration: none;
   color: inherit;
 }
+.v3-logo-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--wx-surface-base);
+  border: 1px solid var(--wx-border-default);
+  box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.18);
+}
 .v3-logo {
-  width: 36px; height: 36px;
+  width: 30px; height: 30px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -534,6 +553,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   .v3-brand, .v3-card, .v3-tabs, .s-steps,
   .v3-form > * { animation: none; opacity: 1; transform: none; }
   .v3-card--shake { animation: none !important; }
+  .v3-orb { animation: none; }
 }
 
 /* ── Field helpers ── */
@@ -670,7 +690,7 @@ const ICON_MICROSOFT = `<svg width="16" height="16" viewBox="0 0 21 21" xmlns="h
   border: 1px solid var(--wx-border-default);
   flex-shrink: 0;
 }
-.s-step--active .s-step-num { background: var(--wx-brand-primary); color: var(--wx-text-on-brand); border-color: transparent; }
+.s-step--active .s-step-num { background: var(--wx-brand-600); color: var(--wx-text-on-brand); border-color: transparent; }
 .s-step--done   .s-step-num { background: var(--wx-success-solid); color: var(--wx-text-on-brand); border-color: transparent; }
 .s-step--active .s-step-label { color: var(--wx-text-primary); font-weight: var(--wx-fw-medium); }
 

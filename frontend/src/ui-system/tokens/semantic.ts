@@ -18,10 +18,11 @@ export const semanticColors = {
     focus:      colors.blue.brand,    // #007bff — focus rings, links
   },
   text: {
-    primary:    colors.slate[800],    // #1e293b — headings, body
-    secondary:  colors.gray[500],     // #6b7280 — descriptions
-    muted:      colors.gray[400],     // #9ca3af — placeholders, timestamps
-    disabled:   colors.gray[300],     // #d1d5db — disabled label
+    primary:    colors.slate[900],    // #0f172a — headings, body
+    secondary:  colors.slate[600],    // #475569 — descriptions
+    muted:      colors.slate[500],    // #64748b — captions, timestamps
+    disabled:   colors.slate[300],    // #cbd5e1 — disabled label
+    light:      colors.slate[400],    // #94a3b8 — placeholders, minor icons
     inverse:    colors.white,         // white on gradients
     link:       colors.blue[600],     // #2563eb — hyperlinks
   },
@@ -32,8 +33,10 @@ export const semanticColors = {
     overlay:    'rgba(0,0,0,0.2)',    // modal backdrop
   },
   border: {
-    default:    colors.gray[200],     // #e5e7eb — card/input borders
-    subtle:     colors.gray[100],     // #f3f4f6 — dividers
+    default:    colors.slate[200],    // #e2e8f0 — card borders
+    subtle:     colors.slate[100],    // #f1f5f9 — dividers
+    control:    colors.slate[300],    // #cbd5e1 — input / secondary button borders
+    controlHover: colors.slate[400],  // #94a3b8 — control hover border
     focus:      colors.blue.brand,    // #007bff — focus ring
     glass:      'rgba(255,255,255,0.5)',
     glassLight: 'rgba(255,255,255,0.3)',

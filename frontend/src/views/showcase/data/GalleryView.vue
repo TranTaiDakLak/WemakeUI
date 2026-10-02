@@ -19,7 +19,7 @@ const ratios = [
 const items = ref<GalleryItem[]>(
   ratios.map((r, i) => ({
     id: i + 1,
-    src: `https://picsum.photos/seed/wemake-${i + 1}/${r[0]}/${r[1]}`,
+    src: `https://picsum.photos/seed/mind-${i + 1}/${r[0]}/${r[1]}`,
     alt: `Ảnh ${i + 1}`,
     caption: `Ảnh số ${i + 1} (${r[0]}×${r[1]})`,
   })),
@@ -30,7 +30,7 @@ const columns = ref(3)
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI · Gallery" subtitle="Phase 4 — data display" />
+    <AppTopbar title="MindUI · Gallery" subtitle="Phase 4 — data display" />
     <main class="main">
       <PageHeader title="Gallery / Media grid" description="Masonry layout với CSS columns. Lightbox keyboard nav (←→Esc).">
       </PageHeader>

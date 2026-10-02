@@ -94,10 +94,10 @@ const trafficData: PieSlice[] = [
 ]
 
 const donutData: DonutSlice[] = [
-  { label: 'Chức năng A', value: 42, color: '#2563eb' },
-  { label: 'Chức năng B', value: 28, color: '#10b981' },
-  { label: 'Chức năng C', value: 18, color: '#f59e0b' },
-  { label: 'Chức năng D', value: 12, color: '#ef4444' },
+  { label: 'Chức năng A', value: 42, color: 'var(--wx-chart-1)' },
+  { label: 'Chức năng B', value: 28, color: 'var(--wx-chart-3)' },
+  { label: 'Chức năng C', value: 18, color: 'var(--wx-chart-4)' },
+  { label: 'Chức năng D', value: 12, color: 'var(--wx-chart-5)' },
 ]
 
 /* ── Sparkline data ──────────────────────────────── */
@@ -106,10 +106,10 @@ function genSpark(n = 24, seed = 1): number[] {
 }
 
 const kpis = ref([
-  { name: 'Doanh thu', value: '128.4M', delta: '+12.4%', trend: genSpark(24, 1), color: '#10b981', up: true },
-  { name: 'Đơn hàng', value: '1,284', delta: '+8.1%', trend: genSpark(24, 2), color: '#2563eb', up: true },
-  { name: 'Khách mới', value: '312', delta: '-3.2%', trend: genSpark(24, 3), color: '#f59e0b', up: false },
-  { name: 'Tỷ lệ huỷ', value: '2.4%', delta: '+0.3%', trend: genSpark(24, 4), color: '#ef4444', up: false },
+  { name: 'Doanh thu', value: '128.4M', delta: '+12.4%', trend: genSpark(24, 1), color: 'var(--wx-chart-3)', up: true },
+  { name: 'Đơn hàng', value: '1,284', delta: '+8.1%', trend: genSpark(24, 2), color: 'var(--wx-chart-1)', up: true },
+  { name: 'Khách mới', value: '312', delta: '-3.2%', trend: genSpark(24, 3), color: 'var(--wx-chart-4)', up: false },
+  { name: 'Tỷ lệ huỷ', value: '2.4%', delta: '+0.3%', trend: genSpark(24, 4), color: 'var(--wx-chart-5)', up: false },
 ])
 
 /* ── Gauge ───────────────────────────────────────── */
@@ -235,9 +235,9 @@ const stacked = ref(false)
           <Gauge :value="cpuValue" label="CPU" unit="%" />
           <Gauge :value="memValue" label="Memory" unit="%" />
           <Gauge :value="diskValue" label="Disk" unit="%" :thresholds="[
-            { at: 0, color: '#10b981' },
-            { at: 70, color: '#f59e0b' },
-            { at: 90, color: '#ef4444' },
+            { at: 0, color: 'var(--wx-chart-3)' },
+            { at: 70, color: 'var(--wx-chart-4)' },
+            { at: 90, color: 'var(--wx-chart-5)' },
           ]" />
         </div>
         <div class="chart-controls">
@@ -254,15 +254,15 @@ const stacked = ref(false)
           </div>
           <div class="spark-card">
             <span class="spark-label">With fill</span>
-            <Sparkline :values="genSpark(40, 2)" :width="240" :height="50" fill color="#10b981" />
+            <Sparkline :values="genSpark(40, 2)" :width="240" :height="50" fill color="var(--wx-chart-3)" />
           </div>
           <div class="spark-card">
             <span class="spark-label">With dots + last marker</span>
-            <Sparkline :values="genSpark(40, 3)" :width="240" :height="50" color="#f59e0b" show-dots show-last />
+            <Sparkline :values="genSpark(40, 3)" :width="240" :height="50" color="var(--wx-chart-4)" show-dots show-last />
           </div>
           <div class="spark-card">
             <span class="spark-label">No smooth, fill</span>
-            <Sparkline :values="genSpark(40, 4)" :width="240" :height="50" :smooth="false" fill color="#ef4444" />
+            <Sparkline :values="genSpark(40, 4)" :width="240" :height="50" :smooth="false" fill color="var(--wx-chart-5)" />
           </div>
         </div>
       </GroupBox>

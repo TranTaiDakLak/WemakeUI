@@ -155,10 +155,10 @@ const slots: PropRow[] = [
   background: var(--wx-surface-sunken);
 }
 .menu-item--danger {
-  color: var(--wx-danger, #ef4444);
+  color: var(--wx-danger-text);
 }
 .menu-item--danger:hover {
-  background: color-mix(in srgb, var(--wx-danger, #ef4444) 12%, transparent);
+  background: var(--wx-danger-bg);
 }
 .menu-divider {
   height: 1px;

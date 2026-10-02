@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<{
   cellGap?: number
   weeks?: number
 }>(), {
-  baseColor: '#2563eb',
+  baseColor: 'var(--wx-chart-1)',
   cellSize: 12,
   cellGap: 3,
   weeks: 26,
@@ -77,7 +77,7 @@ const heightPx = computed(() => 7 * (props.cellSize + props.cellGap))
           :height="cellSize"
           :rx="2"
           :fill="colorFor(c.value)"
-          :stroke="hover?.idx === i ? '#000' : 'transparent'"
+          :stroke="hover?.idx === i ? 'var(--wx-text-primary)' : 'transparent'"
           stroke-width="1"
           class="hm-cell"
           @mouseenter="hover = { idx: i }"

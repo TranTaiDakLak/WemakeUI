@@ -266,6 +266,6 @@ defineProps<{
 }
 .cff-checkbox-box--checked {
   border-color: var(--wx-brand-primary);
-  background: var(--wx-brand-primary);
+  background: var(--wx-brand-600);
 }
 </style>

@@ -4,6 +4,7 @@ import AppPageLayout from '../_layouts/AppPageLayout.vue'
 import { BaseCard, BasePanel, BaseButton, BaseTag, BaseAvatar, BaseAvatarGroup } from '../../components/common'
 import { sparkPath, sparkArea, seriesUp, seriesDown, seriesFlat, seriesVolatile } from '../_layouts/dashboard-widgets'
 import LegendDot from './_components/LegendDot.vue'
+import DashSection from './_components/DashSection.vue'
 
 const kpi = [
   { label: 'Doanh thu', value: '128 tr', delta: '+12%', tone: 'success', series: seriesUp },
@@ -13,9 +14,9 @@ const kpi = [
 ] as const
 
 const donut = [
-  { label: 'Pro',  value: 62, color: '#2563eb' },
-  { label: 'Free', value: 24, color: '#94a3b8' },
-  { label: 'Team', value: 14, color: '#10b981' },
+  { label: 'Pro',  value: 62, color: 'var(--wx-brand-primary)' },
+  { label: 'Free', value: 24, color: 'var(--wx-text-muted)' },
+  { label: 'Team', value: 14, color: 'var(--wx-success-solid)' },
 ]
 const total = donut.reduce((a, b) => a + b.value, 0)
 
@@ -40,6 +41,7 @@ const activity = [
       <BaseButton size="sm">Xuất CSV</BaseButton>
     </template>
 
+    <DashSection title="Chỉ số chính" subtitle="So với 7 ngày trước">
     <div class="kpi-grid" v-reveal>
       <BaseCard v-for="(k, i) in kpi" :key="k.label" v-reveal="i * 60" padded shadow="sm" radius="lg" hover-effect="lift">
         <div class="kpi">
@@ -49,13 +51,15 @@ const activity = [
           </div>
           <div class="kpi-value">{{ k.value }}</div>
           <svg class="kpi-spark" viewBox="0 0 120 32" preserveAspectRatio="none">
-            <path :d="sparkArea([...k.series])" fill="rgba(37,99,235,0.12)" />
-            <path :d="sparkPath([...k.series])" fill="none" stroke="#2563eb" stroke-width="1.5" />
+            <path :d="sparkArea([...k.series])" fill="color-mix(in srgb, var(--wx-brand-primary) 12%, transparent)" />
+            <path :d="sparkPath([...k.series])" fill="none" stroke="var(--wx-brand-primary)" stroke-width="1.5" />
           </svg>
         </div>
       </BaseCard>
     </div>
+    </DashSection>
 
+    <DashSection title="Xu hướng & cơ cấu" subtitle="14 ngày gần nhất">
     <div class="cols" v-reveal>
       <BaseCard title="Doanh thu theo ngày" subtitle="So sánh 14 ngày gần nhất" padded shadow="sm" hover-effect="glow">
         <template #actions>
@@ -65,18 +69,18 @@ const activity = [
         <svg class="chart" viewBox="0 0 600 200" preserveAspectRatio="none">
           <path :d="sparkArea([...seriesVolatile, ...seriesUp], 600, 200, 8)" fill="color-mix(in srgb, var(--wx-brand-primary) 15%, transparent)" />
           <path :d="sparkPath([...seriesVolatile, ...seriesUp], 600, 200, 8)" fill="none" stroke="var(--wx-brand-primary)" stroke-width="2" />
-          <path :d="sparkPath([...seriesUp, ...seriesFlat], 600, 200, 8)" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4" />
+          <path :d="sparkPath([...seriesUp, ...seriesFlat], 600, 200, 8)" fill="none" stroke="var(--wx-text-muted)" stroke-width="1.5" stroke-dasharray="4 4" />
         </svg>
         <div class="chart-legend">
           <LegendDot color="var(--wx-brand-primary)" class="legend-dot-gap" /> Tuần này
-          <LegendDot color="#94a3b8" class="legend-dot-gap" /> Tuần trước
+          <LegendDot color="var(--wx-text-muted)" class="legend-dot-gap" /> Tuần trước
         </div>
       </BaseCard>
 
       <BaseCard title="Phân bổ gói" padded shadow="sm" hover-effect="glow">
         <div class="donut">
           <svg viewBox="0 0 42 42" class="donut-svg" aria-hidden="true">
-            <circle cx="21" cy="21" r="15.91" fill="white" stroke="#f1f5f9" stroke-width="3" />
+            <circle cx="21" cy="21" r="15.91" fill="var(--wx-surface-base)" stroke="var(--wx-border-subtle)" stroke-width="3" />
             <circle
               v-for="(d, i) in donut"
               :key="i"
@@ -102,6 +106,7 @@ const activity = [
         </ul>
       </BaseCard>
     </div>
+    </DashSection>
 
     <BasePanel v-reveal title="Hoạt động gần đây" description="20 sự kiện cuối · realtime">
       <template #actions>

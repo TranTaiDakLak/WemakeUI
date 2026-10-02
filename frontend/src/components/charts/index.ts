@@ -8,7 +8,7 @@ export { default as Gauge } from './Gauge.vue'
 export { default as Heatmap } from './Heatmap.vue'
 
 export {
-  CHART_PALETTE, colorAt, scale,
+  CHART_PALETTE, colorAt, chartColor, scale,
   linePath, smoothPath, areaPath, arcPath,
   niceTicks, formatCompact,
 } from './chart-utils'

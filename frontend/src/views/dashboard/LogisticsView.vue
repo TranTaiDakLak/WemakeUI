@@ -81,11 +81,11 @@ const cities = [
           <svg viewBox="0 0 60 100" class="map-svg" preserveAspectRatio="xMidYMid meet">
             <!-- Stylized VN coast -->
             <path d="M 22 8 Q 28 14 30 24 L 34 32 L 32 42 L 28 50 L 26 60 L 30 70 L 36 80 L 32 92 L 26 96 L 22 90 Q 24 80 22 70 L 20 56 L 18 42 L 16 28 Z"
-                  fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="0.4" />
+                  fill="var(--wx-chart-1)" fill-opacity="0.08" stroke="var(--wx-chart-1)" stroke-width="0.4" />
             <g v-for="c in cities" :key="c.name">
-              <circle :cx="c.x" :cy="c.y" :r="Math.max(1.2, c.orders / 80)" fill="#2563eb" opacity="0.4" />
-              <circle :cx="c.x" :cy="c.y" r="1.2" fill="#2563eb" />
-              <text :x="c.x + 2" :y="c.y" font-size="2" fill="#1e293b">{{ c.name }} · {{ c.orders }}</text>
+              <circle :cx="c.x" :cy="c.y" :r="Math.max(1.2, c.orders / 80)" fill="var(--wx-chart-1)" opacity="0.4" />
+              <circle :cx="c.x" :cy="c.y" r="1.2" fill="var(--wx-chart-1)" />
+              <text :x="c.x + 2" :y="c.y" font-size="2" fill="var(--wx-text-primary)">{{ c.name }} · {{ c.orders }}</text>
             </g>
           </svg>
         </div>

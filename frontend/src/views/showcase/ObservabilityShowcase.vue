@@ -190,7 +190,7 @@ const statusVariant = (s: string) =>
 </template>
 
 <style scoped>
-.obs-page { display: flex; flex-direction: column; gap: var(--wx-space-6); }
+.obs-page { max-width: 1100px; margin: 0 auto; padding: var(--wx-space-6) var(--wx-space-5) var(--wx-space-10); display: flex; flex-direction: column; gap: var(--wx-space-6); }
 .page-header { display: flex; flex-direction: column; gap: var(--wx-space-2); }
 .page-title { font-size: var(--wx-fs-24); font-weight: var(--wx-fw-bold); margin: 0; }
 .page-desc { font-size: var(--wx-fs-14); color: var(--wx-content-secondary); margin: 0; }

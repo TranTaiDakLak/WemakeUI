@@ -30,8 +30,8 @@ const MOCK: SoftwareVersion[] = [
   },
   {
     id: 2, version: '3.4.2', releaseDate: '12/04/2025', status: 'stable',
-    changelog: 'Sửa lỗi checkpoint, cập nhật WhatsApp API v21',
-    changelogFull: '### Sửa lỗi\n- Fix lỗi checkpoint không nhận được mã xác minh\n- Fix crash khi import danh bạ > 10000 liên hệ\n- Fix lỗi gửi tin nhắn đa phương tiện trên iOS\n\n### Cập nhật\n- WhatsApp Business API v21\n- Facebook Graph API v19',
+    changelog: 'Sửa lỗi xác minh tài khoản, cập nhật WhatsApp API v21',
+    changelogFull: '### Sửa lỗi\n- Fix lỗi không nhận được mã xác minh khi đăng nhập\n- Fix crash khi import danh bạ > 10000 liên hệ\n- Fix lỗi gửi tin nhắn đa phương tiện trên iOS\n\n### Cập nhật\n- WhatsApp Business API v21\n- Facebook Graph API v19',
     fixCount: 12, updateCount: 2, newCount: 0,
   },
   {
@@ -43,7 +43,7 @@ const MOCK: SoftwareVersion[] = [
   {
     id: 4, version: '3.4.0', releaseDate: '10/03/2025', status: 'stable',
     changelog: 'Chiến dịch đa kênh, scheduler cải tiến, bulk import',
-    changelogFull: '### Tính năng mới\n- Chiến dịch đa kênh (Zalo + Facebook cùng lúc)\n- Scheduler hỗ trợ cron expression\n- Bulk import CSV lên đến 50.000 liên hệ\n\n### Cải thiện\n- UI/UX trang campaigns redesign\n- Filter nâng cao cho danh bạ',
+    changelogFull: '### Tính năng mới\n- Chiến dịch đa kênh (Zalo + Telegram cùng lúc)\n- Scheduler hỗ trợ cron expression\n- Bulk import CSV lên đến 50.000 liên hệ\n\n### Cải thiện\n- UI/UX trang campaigns redesign\n- Filter nâng cao cho danh bạ',
     fixCount: 5, updateCount: 8, newCount: 3,
   },
   {

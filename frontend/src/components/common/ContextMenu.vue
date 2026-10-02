@@ -236,8 +236,8 @@ function isSectionHeader(item: ContextMenuItem): boolean {
   position: fixed; z-index: 9999;
   background: var(--wx-surface-base);
   border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-lg);
-  box-shadow: var(--wx-shadow-xl);
+  border-radius: var(--wx-radius-menu);
+  box-shadow: var(--wx-shadow-menu);
   padding: var(--wx-space-1) 0; min-width: 210px;
   /* outline:none có chủ đích: menu nhận focus() lập trình khi mở (để phím
      mũi tên điều hướng item), không phải control người dùng tab tới trực tiếp. */
@@ -255,7 +255,7 @@ function isSectionHeader(item: ContextMenuItem): boolean {
   transition: background var(--wx-duration-fast);
   border-radius: 0;
 }
-.dgv-ctx-item:hover, .dgv-ctx-item--focused { background: var(--wx-hover-bg); }
+.dgv-ctx-item:hover, .dgv-ctx-item--focused { background: var(--wx-hover-neutral); }
 .dgv-ctx-item--danger { color: var(--wx-danger-text); }
 .dgv-ctx-item--danger:hover { background: var(--wx-danger-bg); }
 .dgv-ctx-sep { height: 1px; background: var(--wx-border-subtle); margin: var(--wx-space-1) var(--wx-space-2); }
@@ -270,8 +270,8 @@ function isSectionHeader(item: ContextMenuItem): boolean {
   display: none; position: absolute; left: 100%; top: -4px;
   background: var(--wx-surface-base);
   border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-lg);
-  box-shadow: var(--wx-shadow-xl);
+  border-radius: var(--wx-radius-menu);
+  box-shadow: var(--wx-shadow-menu);
   padding: var(--wx-space-1) 0; min-width: 220px; z-index: 10000;
   backdrop-filter: blur(12px);
 }

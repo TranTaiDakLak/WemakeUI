@@ -23,7 +23,7 @@ const avgRating = (RATINGS.reduce((s, r, i) => s + r * ratingCounts[i], 0) / tot
 </script>
 
 <template>
-  <AppPageLayout section="app" current="sản phẩm" page-title="Chi tiết sản phẩm" page-description="Áo thun premium — WemakeUI Collection 2026">
+  <AppPageLayout section="app" current="sản phẩm" page-title="Chi tiết sản phẩm" page-description="Áo thun premium — MindUI Collection 2026">
     <div class="product-layout">
       <!-- images -->
       <div class="product-images">
@@ -43,8 +43,8 @@ const avgRating = (RATINGS.reduce((s, r, i) => s + r * ratingCounts[i], 0) / tot
           <BaseBadge text="Bán chạy" variant="warning" />
         </div>
 
-        <h1 class="product-name">Áo thun Premium WemakeUI</h1>
-        <p class="product-sku">SKU: WM-TS-2026-042</p>
+        <h1 class="product-name">Áo thun Premium MindUI</h1>
+        <p class="product-sku">SKU: MD-TS-2026-042</p>
 
         <div class="price-row">
           <span class="price">299.000 ₫</span>
@@ -163,7 +163,7 @@ const avgRating = (RATINGS.reduce((s, r, i) => s + r * ratingCounts[i], 0) / tot
 .option-label { font-size: var(--wx-fs-14); color: var(--wx-content-secondary); }
 .colors, .sizes { display: flex; gap: var(--wx-space-2); flex-wrap: wrap; }
 .color-btn, .size-btn { border: 1px solid var(--wx-border-default); background: var(--wx-bg-base); padding: var(--wx-space-1) var(--wx-space-3); border-radius: var(--wx-radius-md); cursor: pointer; font-size: var(--wx-fs-13); color: var(--wx-content-secondary); transition: all var(--wx-d-micro); }
-.color-btn.active, .size-btn.active { border-color: var(--wx-brand-500); color: var(--wx-brand-600); background: var(--wx-brand-50); }
+.color-btn.active, .size-btn.active { border-color: var(--wx-brand-500); color: var(--wx-text-link); background: var(--wx-selected-bg); }
 .qty-row { display: flex; align-items: center; gap: var(--wx-space-4); }
 .qty-control { display: flex; align-items: center; gap: 0; border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-md); overflow: hidden; }
 .qty-btn { border: none; background: var(--wx-bg-sunken); padding: var(--wx-space-2) var(--wx-space-3); cursor: pointer; font-size: 18px; color: var(--wx-content-primary); }

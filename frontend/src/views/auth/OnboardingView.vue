@@ -58,7 +58,7 @@ function back() {
         colors="primary:#8b5cf6,secondary:#ec4899"
         style="width: 80px; height: 80px;"
       />
-      <h1>Chào mừng đến với WemakeUI!</h1>
+      <h1>Chào mừng đến với MindUI!</h1>
       <p>Chúng ta sẽ thiết lập workspace của bạn trong 4 bước nhanh.</p>
       <ul class="hint-list">
         <li><Check :size="14" class="check-icon" /> Tạo workspace cho team</li>

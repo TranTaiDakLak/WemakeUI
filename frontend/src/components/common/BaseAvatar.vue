@@ -60,8 +60,10 @@ const showImg = computed(() => !!props.src)
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--wx-bg-sunken);
-  color: var(--wx-content-secondary);
+  /* Nền tint brand thay vì sunken (#f8fafc ≈ nền thẻ trắng → avatar chữ cái chỉ còn là chữ trơ,
+     chồng nhau trong AvatarGroup thì dính vào nhau). Theo surface nên dark mode tự đổi. */
+  background: color-mix(in srgb, var(--wx-brand-500) 14%, var(--wx-surface-base));
+  color: var(--wx-text-link);
   font-family: var(--wx-font-primary);
   font-weight: var(--wx-fw-semibold);
   overflow: hidden;

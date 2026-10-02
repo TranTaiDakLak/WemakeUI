@@ -1,23 +1,26 @@
 <script setup lang="ts">
 /**
- * LandingView — trang chủ công khai của thư viện WemakeUI ("/").
+ * LandingView — trang chủ công khai của thư viện MindUI ("/").
  * Cổng vào: giới thiệu, cài nhanh, tính năng, dẫn tới Docs và Demo Lab.
  */
 import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
-import { useTheme } from '../../ui-system/composables/useTheme'
 import { BaseButton, BaseToggle, BaseProgress, BaseTag, BaseAvatarGroup } from '../../components/common'
 import Sparkline from '../../components/charts/Sparkline.vue'
 import CodeBlock from '../docs/_components/CodeBlock.vue'
 import { totalVariants } from '../showcase/layout-gallery/layoutRegistry'
 import { appTemplates, totalAppPages, totalApps, totalCollections } from '../showcase/appTemplates'
+import LandingHeader from './_components/LandingHeader.vue'
+import ProductMockup from './_components/ProductMockup.vue'
+import CoreModules from './_components/CoreModules.vue'
+import WorkflowSteps from './_components/WorkflowSteps.vue'
+import BulkShowcase from './_components/BulkShowcase.vue'
+import PricingPlans from './_components/PricingPlans.vue'
+import LandingFooter from './_components/LandingFooter.vue'
+import { GITHUB_URL } from './_components/landing-content'
 
-const { isDark, toggleColorScheme } = useTheme()
-
-const GITHUB_URL = 'https://github.com/TranTaiDakLak/WemakeUI'
-
-const installSnippet = `npm install @wemake/ui vue
-# import '@wemake/ui/style.css' tại app root`
+const installSnippet = `npm install @mind/ui vue
+# import '@mind/ui/style.css' tại app root`
 
 /* ── Entrance animation ── */
 const heroReady = ref(false)
@@ -53,26 +56,8 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
 
 <template>
   <div class="lp">
-    <!-- ── Nav ─────────────────────────────────────────── -->
-    <header class="lp-nav">
-      <div class="lp-nav__inner">
-        <div class="lp-brand">
-          <img src="/logo.png" alt="WemakeUI" class="lp-brand__logo" />
-          WemakeUI
-        </div>
-        <nav class="lp-nav__links">
-          <RouterLink to="/docs" class="lp-nav__link">Tài liệu</RouterLink>
-          <RouterLink to="/lab" class="lp-nav__link">Xem trực tiếp</RouterLink>
-          <button class="lp-icon-btn" type="button" :aria-label="isDark ? 'Chế độ sáng' : 'Chế độ tối'" @click="toggleColorScheme">
-            <svg v-if="!isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          </button>
-          <a :href="GITHUB_URL" target="_blank" rel="noopener" class="lp-icon-btn" aria-label="GitHub">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.21 3.44 9.63 8.21 11.19.6.11.82-.25.82-.56v-2c-3.34.71-4.04-1.58-4.04-1.58-.55-1.36-1.34-1.73-1.34-1.73-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.79 2.81 1.27 3.5.97.11-.76.42-1.27.76-1.56-2.67-.3-5.47-1.3-5.47-5.79 0-1.28.47-2.33 1.24-3.15-.13-.3-.54-1.5.11-3.14 0 0 1.01-.32 3.3 1.2a11.6 11.6 0 0 1 6 0c2.29-1.52 3.3-1.2 3.3-1.2.65 1.64.24 2.84.12 3.14.77.82 1.23 1.87 1.23 3.15 0 4.5-2.81 5.48-5.49 5.77.43.36.81 1.09.81 2.2v3.26c0 .31.22.68.83.56A12.02 12.02 0 0 0 24 12.29C24 5.78 18.63.5 12 .5z"/></svg>
-          </a>
-        </nav>
-      </div>
-    </header>
+    <!-- ── Header ──────────────────────────────────────── -->
+    <LandingHeader />
 
     <!-- ── Hero ────────────────────────────────────────── -->
     <section class="lp-hero" :class="{ 'lp-hero--ready': heroReady }">
@@ -141,6 +126,11 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
           <CodeBlock :code="installSnippet" lang="bash" />
         </div>
       </div>
+
+      <!-- Mockup sản phẩm — dựng bằng HTML/CSS, dữ liệu giả -->
+      <div class="lp-hero__mock lp-reveal" style="--reveal-d:600ms">
+        <ProductMockup />
+      </div>
     </section>
 
     <!-- ── Stats ───────────────────────────────────────── -->
@@ -164,8 +154,11 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
       </div>
     </section>
 
+    <!-- ── Mô-đun cốt lõi ──────────────────────────────── -->
+    <CoreModules />
+
     <!-- ── Bộ giao diện hoàn chỉnh (cấp sản phẩm) ──────────── -->
-    <section class="lp-apps">
+    <section id="lp-apps" class="lp-apps">
       <div class="lp-section-head" v-reveal>
         <h2 class="lp-section-title">Bộ giao diện hoàn chỉnh</h2>
         <p class="lp-section-sub">
@@ -202,10 +195,16 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
       </div>
     </section>
 
+    <!-- ── Quy trình 5 bước ─────────────────────────────── -->
+    <WorkflowSteps />
+
+    <!-- ── Thao tác hàng loạt ───────────────────────────── -->
+    <BulkShowcase />
+
     <!-- ── Features ────────────────────────────────────── -->
     <section class="lp-features">
       <div class="lp-section-head" v-reveal>
-        <h2 class="lp-section-title">Vì sao chọn WemakeUI?</h2>
+        <h2 class="lp-section-title">Vì sao chọn MindUI?</h2>
         <p class="lp-section-sub">Mọi thứ cần để dựng giao diện app nghiêm túc — không phụ thuộc backend.</p>
       </div>
       <div class="lp-feature-grid">
@@ -217,14 +216,17 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
       </div>
     </section>
 
+    <!-- ── Bảng giá hỗ trợ ──────────────────────────────── -->
+    <PricingPlans />
+
     <!-- ── CTA strip ───────────────────────────────────── -->
     <section class="lp-cta">
-      <div class="lp-cta__inner">
-        <h2 class="lp-cta__title">Sẵn sàng xây giao diện?</h2>
-        <p class="lp-cta__sub">Đọc hướng dẫn, xem component trực tiếp, hoặc clone từ GitHub.</p>
+      <div class="lp-cta__inner mind-cta-band">
+        <h2 class="lp-cta__title mind-cta-band__title">Sẵn sàng xây giao diện?</h2>
+        <p class="lp-cta__sub mind-cta-band__desc">Đọc hướng dẫn, xem component trực tiếp, hoặc clone từ GitHub.</p>
         <div class="lp-cta__btns">
           <RouterLink to="/docs">
-            <BaseButton variant="secondary" size="lg">Mở tài liệu</BaseButton>
+            <BaseButton variant="primary" size="lg">Mở tài liệu</BaseButton>
           </RouterLink>
           <RouterLink to="/lab">
             <BaseButton variant="secondary" size="lg">Khám phá ngay</BaseButton>
@@ -237,14 +239,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
     </section>
 
     <!-- ── Footer ──────────────────────────────────────── -->
-    <footer class="lp-footer">
-      <span>WemakeUI · MIT License</span>
-      <div class="lp-footer__links">
-        <RouterLink to="/docs">Tài liệu</RouterLink>
-        <RouterLink to="/lab">Xem trực tiếp</RouterLink>
-        <a :href="GITHUB_URL" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </footer>
+    <LandingFooter />
   </div>
 </template>
 
@@ -255,73 +250,6 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   color: var(--wx-text-primary);
   font-family: var(--wx-font-primary);
 }
-
-/* ── Nav ── */
-.lp-nav {
-  position: sticky;
-  top: 0;
-  z-index: var(--wx-z-header);
-  background: color-mix(in srgb, var(--wx-surface-base) 96%, transparent);
-  border-bottom: 1px solid var(--wx-border-default);
-}
-.lp-nav__inner {
-  max-width: 1080px;
-  margin: 0 auto;
-  height: 60px;
-  padding: 0 var(--wx-space-5);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.lp-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: var(--wx-fs-18);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-.lp-brand__logo {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  display: block;
-}
-.lp-nav__links {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.lp-nav__link {
-  padding: 7px 14px;
-  border-radius: var(--wx-radius-md);
-  border: 1px solid var(--wx-border-default);
-  background: var(--wx-surface-base);
-  font-size: var(--wx-fs-14);
-  font-weight: 500;
-  color: var(--wx-text-secondary);
-  text-decoration: none;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: background var(--wx-d-fast) ease, color var(--wx-d-fast) ease, border-color var(--wx-d-fast) ease;
-}
-.lp-nav__link:hover { background: var(--wx-surface-sunken); color: var(--wx-text-primary); border-color: var(--wx-text-muted); }
-.lp-icon-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  margin-left: var(--wx-space-1);
-  border-radius: var(--wx-radius-md);
-  border: 1px solid var(--wx-border-default);
-  background: var(--wx-surface-base);
-  color: var(--wx-text-secondary);
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: background var(--wx-d-fast) ease, color var(--wx-d-fast) ease, border-color var(--wx-d-fast) ease;
-}
-.lp-icon-btn:hover { background: var(--wx-surface-sunken); color: var(--wx-text-primary); border-color: var(--wx-text-muted); }
 
 /* ── Hero ── */
 .lp-hero {
@@ -356,7 +284,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   letter-spacing: -0.03em;
 }
 .lp-hero__grad {
-  background: var(--wx-gradient-button);
+  background: var(--wx-shell-text-grad);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -381,6 +309,15 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   margin: 36px auto 0;
   max-width: 480px;
   text-align: left;
+}
+.lp-hero__mock {
+  position: relative;
+  z-index: 2;
+  max-width: 1040px;
+  margin: 56px auto 0;
+  /* mờ dần xuống đáy để chuyển mượt sang phần stats */
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, #000 82%, transparent);
 }
 
 /* ── Floating component previews ── */
@@ -768,11 +705,10 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   text-align: center;
   padding: 56px var(--wx-space-5);
   border-radius: var(--wx-radius-3xl);
-  background: var(--wx-gradient-cta);
-  color: var(--wx-text-on-brand);
+  overflow: hidden;
 }
-.lp-cta__title { margin: 0; font-size: 30px; font-weight: 800; color: var(--wx-text-on-brand); }
-.lp-cta__sub { margin: 10px 0 0; font-size: 15.5px; color: color-mix(in srgb, var(--wx-text-on-brand) 82%, transparent); }
+.lp-cta__title { margin: 0; font-size: 30px; font-weight: 800; }
+.lp-cta__sub { margin: 10px 0 0; font-size: 15.5px; }
 .lp-cta__btns {
   margin-top: var(--wx-space-6);
   display: flex;
@@ -781,49 +717,7 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   flex-wrap: wrap;
 }
 .lp-cta__btns a { text-decoration: none; }
-/* Nút "cta" bên trong banner cũng nền gradient --wx-gradient-cta như banner
-   → trùng màu, gần như biến mất. Đổi thành nền trắng đặc + chữ brand để nổi bật. */
-.lp-cta__btns :deep(.wx-btn--cta) {
-  background: var(--wx-text-on-brand);
-  color: var(--wx-brand-primary);
-  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.25);
-}
-.lp-cta__btns :deep(.wx-btn--cta:hover:not(:disabled)) {
-  background: var(--wx-text-on-brand);
-  filter: brightness(0.97);
-  box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.3);
-}
-.lp-cta__btns :deep(.wx-btn--secondary) {
-  background: color-mix(in srgb, var(--wx-text-on-brand) 15%, transparent);
-  border-color: color-mix(in srgb, var(--wx-text-on-brand) 50%, transparent);
-  color: var(--wx-text-on-brand);
-  backdrop-filter: blur(4px);
-}
-.lp-cta__btns :deep(.wx-btn--secondary:hover) {
-  background: color-mix(in srgb, var(--wx-text-on-brand) 25%, transparent);
-  border-color: var(--wx-text-on-brand);
-}
-
-/* ── Footer ── */
-.lp-footer {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: var(--wx-space-6) var(--wx-space-5) 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--wx-space-3);
-  border-top: 1px solid var(--wx-border-default);
-  font-size: 13.5px;
-  color: var(--wx-text-muted);
-}
-.lp-footer__links { display: flex; gap: 18px; }
-.lp-footer__links a {
-  color: var(--wx-text-secondary);
-  text-decoration: none;
-}
-.lp-footer__links a:hover { color: var(--wx-brand-primary); }
+/* Nền xanh đậm + nút trắng/kính mờ: class global .mind-cta-band (ui-system/foundations/shell.css) */
 
 /* ── Responsive ── */
 @media (max-width: 860px) {
@@ -833,7 +727,6 @@ function gridStagger(i: number, cols: number, colMs = 80, rowMs = 220) {
   .lp-apps-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 520px) {
-  .lp-nav__link { padding: 6px 10px; }
   .lp-hero { padding: 56px 18px var(--wx-space-8); }
   .lp-hero__title { font-size: var(--wx-fs-32); }
   .lp-apps-grid { grid-template-columns: 1fr; }

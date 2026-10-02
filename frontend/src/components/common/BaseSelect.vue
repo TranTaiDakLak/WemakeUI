@@ -4,7 +4,7 @@ let _idCounter = 0
 
 <script setup lang="ts">
 /**
- * BaseSelect — select của WemakeUI.
+ * BaseSelect — select của MindUI.
  * Ô đóng giữ dáng input (border, chevron) để khớp các form field khác,
  * nhưng danh sách option là popup custom theo design system (KHÔNG dùng
  * dropdown native của trình duyệt): Teleport, auto-flip, điều hướng bàn phím,
@@ -294,13 +294,14 @@ onBeforeUnmount(() => {
   gap: var(--wx-space-2);
   width: 100%;
   cursor: pointer;
-  padding: var(--wx-space-2) var(--wx-space-3);
-  border: 1px solid var(--wx-border-default);
-  border-radius: var(--wx-radius-md);
+  min-height: var(--wx-control-h-md);
+  padding: 0 var(--wx-control-px);
+  border: 1px solid var(--wx-border-control);
+  border-radius: var(--wx-radius-ctrl);
   background-color: var(--wx-surface-elevated);
   color: var(--wx-text-primary);
   font-family: var(--wx-font-primary);
-  font-size: var(--wx-fs-13);
+  font-size: var(--wx-control-fs);
   text-align: left;
   line-height: 1.4;
   transition:
@@ -308,19 +309,22 @@ onBeforeUnmount(() => {
     box-shadow   var(--wx-d-fast) var(--wx-ease-standard);
 }
 
+.base-select__field:hover:not(:disabled) { border-color: var(--wx-border-control-hover); }
+
 .base-select__field:focus-visible {
   outline: none;
-  border-color: var(--wx-brand-primary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-brand-primary) 18%, transparent);
+  border-color: var(--wx-border-focus);
+  box-shadow: var(--wx-ring-focus);
 }
 
 .base-select--open .base-select__field {
-  border-color: var(--wx-brand-primary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wx-brand-primary) 18%, transparent);
+  border-color: var(--wx-border-focus);
+  box-shadow: var(--wx-ring-focus);
 }
 
 .base-select--disabled .base-select__field {
-  opacity: 0.55;
+  background-color: var(--wx-disabled-bg);
+  color: var(--wx-disabled-text);
   cursor: not-allowed;
   pointer-events: none;
 }
@@ -333,7 +337,7 @@ onBeforeUnmount(() => {
 }
 
 .base-select__value--placeholder {
-  color: var(--wx-text-muted);
+  color: var(--wx-text-placeholder);
 }
 
 .base-select__chevron {
@@ -346,8 +350,10 @@ onBeforeUnmount(() => {
 
 /* ── Size sm ── */
 .base-select--sm .base-select__field {
-  padding: 5px 10px;
+  min-height: var(--wx-control-h-sm);
+  padding: 0 calc(var(--wx-control-px) - 2px);
   font-size: var(--wx-fs-12);
+  border-radius: var(--wx-radius-ctrl-sm);
 }
 .base-select--sm .base-select__label {
   font-size: var(--wx-fs-12);
@@ -369,17 +375,25 @@ onBeforeUnmount(() => {
 
 <!-- Popup Teleport ra body — KHÔNG scoped để style áp được vào nội dung đã teleport -->
 <style>
+/* Overlay kiểu nguồn: kính mờ, bo 14px, bóng sâu, option 36px bo 10px, đang chọn = nền xanh + viền */
 .base-select__menu {
   /* popover band — nổi trên modal (1000), dưới toast (1200) */
   z-index: var(--wx-z-popover);
-  background: var(--wx-surface-base);
-  border: 1px solid var(--wx-border-subtle);
-  border-radius: var(--wx-radius-xl);
-  box-shadow: var(--wx-shadow-lift);
+  background: color-mix(in srgb, var(--wx-surface-elevated) 98%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--wx-border-default);
+  border-radius: var(--wx-radius-menu);
+  box-shadow: var(--wx-shadow-menu);
   overflow-y: auto;
   max-height: 280px;
-  padding: var(--wx-space-1);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  scrollbar-width: thin;
 }
+.base-select__menu::-webkit-scrollbar { width: var(--wx-scrollbar-width-thin); height: var(--wx-scrollbar-width-thin); }
 
 .base-select__option {
   display: flex;
@@ -387,24 +401,39 @@ onBeforeUnmount(() => {
   justify-content: space-between;
   gap: var(--wx-space-2);
   width: 100%;
-  padding: 7px 10px;
-  border: none;
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid transparent;
   background: transparent;
-  border-radius: var(--wx-radius-md);
+  border-radius: var(--wx-radius-item);
   font-family: var(--wx-font-primary);
-  font-size: var(--wx-fs-13);
-  color: var(--wx-text-primary);
+  font-size: var(--wx-fs-12);
+  font-weight: var(--wx-fw-medium);
+  color: var(--wx-text-secondary);
   cursor: pointer;
   text-align: left;
-  transition: background 0.1s;
+  transition: background var(--wx-d-fast) var(--wx-ease-standard),
+              color var(--wx-d-fast) var(--wx-ease-standard),
+              border-color var(--wx-d-fast) var(--wx-ease-standard);
 }
 
 .base-select__option--focused,
-.base-select__option:hover { background: var(--wx-hover-bg, var(--wx-surface-sunken)); }
+.base-select__option:hover {
+  background: var(--wx-hover-neutral-raised);
+  color: var(--wx-text-primary);
+}
 
 .base-select__option--selected {
-  color: var(--wx-brand-primary);
-  font-weight: var(--wx-fw-medium);
+  background: var(--wx-selected-bg);
+  border-color: var(--wx-selected-border);
+  color: var(--wx-selected-text);
+  font-weight: var(--wx-fw-semibold);
+}
+.base-select__option--selected.base-select__option--focused,
+.base-select__option--selected:hover {
+  background: var(--wx-selected-bg-hover);
+  border-color: var(--wx-selected-border-hover);
+  color: var(--wx-selected-text);
 }
 
 .base-select__opt-label {

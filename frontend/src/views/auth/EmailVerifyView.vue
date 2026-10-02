@@ -3,7 +3,10 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import AuthLayout from '../_layouts/AuthLayout.vue'
+import AuthHead from '../_layouts/AuthHead.vue'
 import { BaseButton, BaseTag, BaseSpinner } from '../../components/common'
+
+const ICON_MAIL = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`
 
 const state = ref<'pending' | 'verified' | 'error' | 'expired'>('pending')
 
@@ -12,10 +15,9 @@ function setState(s: typeof state.value) { state.value = s }
 
 <template>
   <AuthLayout>
-    <header class="auth-head">
-      <h1>Xác minh email</h1>
-      <p>Nhấn vào đường dẫn trong email <strong>ban@congty.vn</strong> để hoàn tất.</p>
-    </header>
+    <AuthHead :icon="ICON_MAIL" eyebrow="Xác minh danh tính" title="Xác minh email">
+      Nhấn vào đường dẫn trong email <strong>ban@congty.vn</strong> để hoàn tất.
+    </AuthHead>
 
     <div v-if="state === 'pending'" class="state state--pending">
       <BaseSpinner size="lg" />
@@ -87,9 +89,6 @@ function setState(s: typeof state.value) { state.value = s }
 </template>
 
 <style scoped>
-.auth-head { display: flex; flex-direction: column; gap: var(--wx-space-1); }
-.auth-head h1 { margin: 0; font-size: var(--wx-fs-28); font-weight: var(--wx-fw-semibold); letter-spacing: var(--wx-tracking-tight); }
-.auth-head p { margin: 0; font-size: var(--wx-fs-14); color: var(--wx-content-muted); }
 .muted { color: var(--wx-content-muted); }
 .small { font-size: var(--wx-fs-12); }
 
@@ -150,5 +149,5 @@ function setState(s: typeof state.value) { state.value = s }
   font-family: inherit;
   color: var(--wx-content-secondary);
 }
-.chip.on { background: var(--wx-brand-primary); color: var(--wx-text-on-brand); border-color: transparent; }
+.chip.on { background: var(--wx-brand-600); color: var(--wx-text-on-brand); border-color: transparent; }
 </style>

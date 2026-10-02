@@ -13,7 +13,13 @@
  *   nav                   — top-nav variant (centered nav)
  *   default               — main content
  *   master / detail       — split variant
+ *   banners               — vùng banner neo dưới topbar (dùng <AppBannerStack>)
  *   footer                — bottom bar (toàn shell)
+ *
+ * contentStyle:
+ *   'flat' (mặc định) — main là nền phẳng như cũ
+ *   'card'            — khung nền xanh nhạt + main là card trắng bo góc, đổ bóng, cách mép 8px
+ *                       (dáng "workspace" của MindAds: rail trắng | gutter | card nội dung)
  */
 import { computed, ref, onMounted, onBeforeUnmount, useSlots } from 'vue'
 import { useSmoothScroll } from '../../composables/useSmoothScroll'
@@ -34,6 +40,8 @@ const props = withDefaults(defineProps<{
   centered?: boolean
   /** background style: 'base' | 'sunken' | 'gradient' */
   background?: 'base' | 'sunken' | 'gradient'
+  /** kiểu vùng nội dung (chỉ áp dụng cho variant 'sidebar'): 'flat' | 'card' */
+  contentStyle?: 'flat' | 'card'
 }>(), {
   variant: 'sidebar',
   topbarHeight: 56,
@@ -43,6 +51,7 @@ const props = withDefaults(defineProps<{
   maxWidth: 1200,
   centered: true,
   background: 'sunken',
+  contentStyle: 'flat',
 })
 
 const slots = useSlots()
@@ -51,6 +60,7 @@ const hasSubSidebar = computed(() => Boolean(slots['sub-sidebar']))
 const hasTopbar = computed(() => Boolean(slots['topbar']))
 const hasNav = computed(() => Boolean(slots['nav']))
 const hasFooter = computed(() => Boolean(slots['footer']))
+const hasBanners = computed(() => Boolean(slots['banners']))
 
 /* ── split pane ── */
 const splitLeftWidth = ref(props.splitDefaultLeft)
@@ -132,6 +142,7 @@ onBeforeUnmount(() => stopSmoothScroll())
     class="wx-shell"
     :data-variant="variant"
     :data-bg="background"
+    :data-content="contentStyle"
     :style="cssVars"
   >
     <!-- ── sidebar variant ───────────────────────────────────── -->
@@ -139,6 +150,9 @@ onBeforeUnmount(() => stopSmoothScroll())
       <header v-if="hasTopbar" class="wx-shell__topbar">
         <slot name="topbar" />
       </header>
+      <div v-if="hasBanners" class="wx-shell__banners">
+        <slot name="banners" />
+      </div>
       <div class="wx-shell__body">
         <aside v-if="hasSidebar" class="wx-shell__sidebar" data-part="sidebar">
           <slot name="sidebar" />
@@ -237,8 +251,15 @@ onBeforeUnmount(() => stopSmoothScroll())
 .wx-shell__topbar {
   flex-shrink: 0;
   height: var(--wx-shell-topbar-h);
-  z-index: var(--wx-z-sticky);
+  z-index: var(--wx-z-header);
   border-bottom: 1px solid var(--wx-border-subtle);
+}
+/* Thấp hơn topbar (z-header) để popover trong topbar (menu tài khoản…) luôn nằm TRÊN banner,
+   nhưng vẫn cao hơn sidebar/main để banner phủ lên nội dung. */
+.wx-shell__banners {
+  flex-shrink: 0;
+  position: relative;
+  z-index: var(--wx-z-sticky);
 }
 .wx-shell__topbar--full {
   background: var(--wx-surface-base);
@@ -286,6 +307,20 @@ onBeforeUnmount(() => stopSmoothScroll())
   scroll-behavior: smooth;
 }
 
+/* ── contentStyle="card": khung nền + card nội dung bo góc ── */
+.wx-shell[data-content='card'][data-variant='sidebar'] .wx-shell__body {
+  background: var(--wx-shell-frame-bg);
+}
+.wx-shell[data-content='card'][data-variant='sidebar'] .wx-shell__main {
+  margin: 6px var(--wx-shell-gutter) var(--wx-shell-gutter);
+  height: auto;
+  border-radius: var(--wx-shell-card-radius);
+  background: var(--wx-shell-card-bg);
+  box-shadow: var(--wx-shell-card-shadow);
+  border: 1px solid var(--wx-border-subtle);
+}
+.wx-shell[data-content='card'][data-variant='sidebar'] .wx-shell__topbar { border-bottom: none; }
+
 /* ── Topnav variant ── */
 .wx-shell__main--centered {
   width: 100%;
@@ -322,7 +357,7 @@ onBeforeUnmount(() => stopSmoothScroll())
 }
 .wx-shell__split-handle:hover,
 .wx-shell__split--resizing .wx-shell__split-handle {
-  background: rgba(37, 99, 235, 0.1);
+  background: color-mix(in srgb, var(--wx-brand-primary) 10%, transparent);
 }
 .wx-shell__split-handle:focus-visible {
   outline: 2px solid var(--wx-border-focus);
@@ -360,6 +395,12 @@ onBeforeUnmount(() => stopSmoothScroll())
 /* ── Mobile ── */
 @media (max-width: 767px) {
   .wx-shell__sub-sidebar { display: none; }
+  .wx-shell[data-content='card'][data-variant='sidebar'] .wx-shell__main {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
   .wx-shell__split { flex-direction: column; }
   .wx-shell__split-master {
     width: 100% !important;

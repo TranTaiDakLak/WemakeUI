@@ -1,5 +1,8 @@
 <script setup lang="ts">
-defineProps<{
+import { computed } from 'vue'
+import type { Component } from 'vue'
+
+const props = defineProps<{
   variant?: 'primary' | 'secondary' | 'neutral' | 'ghost' | 'danger' | 'success' | 'warning' | 'cta' | 'link' | 'text'
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'icon'
   type?: 'button' | 'submit' | 'reset'
@@ -8,31 +11,64 @@ defineProps<{
   icon?: string
   iconRight?: string
   block?: boolean
+  /** thẻ/component gốc, vd 'a' hoặc RouterLink. Mặc định: 'a' nếu có `href`, ngược lại 'button' */
+  tag?: string | Component
+  /** có href → render <a> (trừ khi truyền `tag` khác) */
+  href?: string
+  target?: string
+  /** target="_blank" mà không truyền rel → tự dùng "noopener noreferrer" */
+  rel?: string
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   click: [event: MouseEvent]
 }>()
+
+const resolvedTag = computed<string | Component>(() => props.tag ?? (props.href ? 'a' : 'button'))
+const isNativeButton = computed(() => resolvedTag.value === 'button')
+const isInert = computed(() => Boolean(props.disabled || props.loading))
+/** Thẻ không phải <button> không có `disabled` native → phải tự chặn tương tác */
+const blocksInteraction = computed(() => !isNativeButton.value && isInert.value)
+const resolvedRel = computed(() => props.rel ?? (props.target === '_blank' ? 'noopener noreferrer' : undefined))
+
+// Pha capture: chạy trước handler điều hướng của chính thẻ (vd RouterLink.navigate) nên chặn được cả điều hướng.
+function onClickCapture(e: MouseEvent) {
+  if (!blocksInteraction.value) return
+  e.preventDefault()
+  e.stopPropagation()
+}
+function onClick(e: MouseEvent) {
+  if (blocksInteraction.value) { e.preventDefault(); return }
+  emit('click', e)
+}
 </script>
 
 <template>
-  <button
+  <component
+    :is="resolvedTag"
     class="wx-btn"
     :class="[
       `wx-btn--${variant ?? 'primary'}`,
       `wx-btn--${size ?? 'md'}`,
       { 'wx-btn--loading': loading, 'wx-btn--block': block },
     ]"
-    :type="type ?? 'button'"
-    :disabled="disabled || loading"
-    @click="$emit('click', $event)"
+    :type="isNativeButton ? (type ?? 'button') : undefined"
+    :disabled="isNativeButton ? (disabled || loading) : undefined"
+    :href="isNativeButton ? undefined : href"
+    :target="isNativeButton ? undefined : target"
+    :rel="isNativeButton ? undefined : resolvedRel"
+    :aria-disabled="blocksInteraction ? 'true' : undefined"
+    :tabindex="blocksInteraction ? -1 : undefined"
+    @click.capture="onClickCapture"
+    @click="onClick"
   >
     <span v-if="loading" class="wx-btn__spinner" aria-hidden="true" />
     <span v-else-if="icon" class="wx-btn__icon" v-html="icon" aria-hidden="true" />
     <span v-if="$slots.default" class="wx-btn__label"><slot /></span>
     <span v-if="iconRight && !loading" class="wx-btn__icon" v-html="iconRight" aria-hidden="true" />
-    <span v-if="variant === 'primary' || variant === 'cta'" class="wx-btn__shine" aria-hidden="true" />
-  </button>
+    <!-- Shine chỉ cho CTA (marketing). Nút primary giữ nhận diện "solid" — không lấn phần còn lại. -->
+    <span v-if="variant === 'cta'" class="wx-btn__shine" aria-hidden="true" />
+  </component>
 </template>
 
 <style scoped>
@@ -42,8 +78,8 @@ defineEmits<{
   align-items: center;
   justify-content: center;
   gap: var(--wx-space-2);
-  border: none;
-  border-radius: var(--wx-radius-lg);
+  border: 1px solid transparent;
+  border-radius: var(--wx-radius-ctrl);
   font-family: var(--wx-font-primary);
   font-weight: var(--wx-fw-semibold);
   cursor: pointer;
@@ -57,110 +93,93 @@ defineEmits<{
   white-space: nowrap;
   line-height: 1;
   overflow: hidden;
+  text-decoration: none; /* khi render là <a> (href/tag): bỏ gạch chân mặc định của link */
   letter-spacing: var(--wx-tracking-normal, 0);
   -webkit-user-select: none;
   user-select: none;
 }
 
-/* Accessibility: focus ring */
+/* Accessibility: focus ring (nguồn: 2px, offset 2px) */
 .wx-btn:focus-visible {
   outline: 2px solid var(--wx-brand-focus);
   outline-offset: 2px;
 }
 
-.wx-btn:disabled {
-  opacity: 0.45;
+/* [aria-disabled] = bản tương đương của :disabled cho thẻ không phải <button> (<a>, RouterLink…) */
+.wx-btn:disabled,
+.wx-btn[aria-disabled="true"] {
+  opacity: 0.6;
   cursor: not-allowed;
   pointer-events: none;
+  box-shadow: none;
 }
 
+/* Nhấn xuống 1px — cảm giác "cơ học" của nguồn, thay cho scale */
 .wx-btn:active:not(:disabled) {
-  transform: scale(0.975);
+  transform: translateY(1px);
 }
 
 .wx-btn--block { width: 100%; }
 
-/* ── Sizes ── */
-/* Padding/gap snap to the 4px design-token scale (--wx-space-1..6 → 4/8/12/16/20/24).
-   Old values (13/18/22 px, gaps 5/7) drifted off-scale and showed up in the
-   2026-05-25 design audit. Heights also raised to hit WCAG/iOS-HIG touch
-   target floors (44px at --lg, 40px at --md). */
-.wx-btn--sm   { padding: 6px var(--wx-space-3);  font-size: var(--wx-fs-12); gap: var(--wx-space-1);  min-height: 32px; }
-.wx-btn--md   { padding: var(--wx-space-2) var(--wx-space-4);  font-size: var(--wx-fs-14); gap: var(--wx-space-2);  min-height: 40px; }
-.wx-btn--lg   { padding: var(--wx-space-3) var(--wx-space-5); font-size: var(--wx-fs-15); gap: var(--wx-space-2);  min-height: 44px; }
-.wx-btn--xl   { padding: var(--wx-space-4) 28px; font-size: var(--wx-fs-16); gap: var(--wx-space-3); min-height: 52px; border-radius: var(--wx-radius-xl); }
+/* ── Sizes ──
+   Chiều cao theo token control (34px chuẩn desktop; tự nâng lên 44px trên thiết bị cảm ứng
+   qua @media (pointer: coarse) trong tokens.css). Padding ngang suy ra từ --wx-control-px. */
+.wx-btn--sm   { min-height: var(--wx-control-h-sm); padding: 0 calc(var(--wx-control-px) - 2px); font-size: var(--wx-fs-12); gap: 6px; border-radius: var(--wx-radius-ctrl-sm); }
+.wx-btn--md   { min-height: var(--wx-control-h-md); padding: 0 calc(var(--wx-control-px) + 2px); font-size: var(--wx-control-fs); gap: var(--wx-space-2); }
+.wx-btn--lg   { min-height: var(--wx-control-h-lg); padding: 0 calc(var(--wx-control-px) + 6px); font-size: var(--wx-fs-14); gap: var(--wx-space-2); }
+.wx-btn--xl   { min-height: var(--wx-control-h-xl); padding: 0 var(--wx-space-5); font-size: var(--wx-fs-15); gap: var(--wx-space-3); border-radius: var(--wx-radius-menu); }
 .wx-btn--icon {
   padding: 0;
-  /* 40px square = touch-target compliant; old 36px failed audit. */
-  width: 40px; height: 40px;
-  border-radius: var(--wx-radius-md);
+  width: var(--wx-control-h-md);
+  height: var(--wx-control-h-md);
+  min-height: 0;
   flex-shrink: 0;
 }
 
-/* ── Primary — gradient button token ── */
+/* ── Primary — solid blue (brand-500 → brand-600), bóng xanh mềm ── */
 .wx-btn--primary {
-  background: var(--wx-gradient-button);
+  background: var(--wx-gradient-primary);
   color: var(--wx-text-on-brand);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 1px 3px rgba(0, 0, 0, 0.12),
-    0 4px 14px -2px rgba(37, 99, 235, 0.45),
-    0 8px 24px -4px rgba(0, 51, 102, 0.20);
+  box-shadow: var(--wx-shadow-btn);
 }
 .wx-btn--primary:hover:not(:disabled) {
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 2px 4px rgba(0, 0, 0, 0.12),
-    0 8px 22px -2px rgba(37, 99, 235, 0.55),
-    0 12px 32px -4px rgba(0, 51, 102, 0.25);
-  filter: brightness(1.06);
-  transform: translateY(-1px);
-}
-.wx-btn--primary:active:not(:disabled) {
-  filter: brightness(0.95);
-  transform: scale(0.975);
+  background: var(--wx-gradient-primary-hover);
+  box-shadow: var(--wx-shadow-btn-hover);
 }
 
-/* ── CTA — deeper gradient ── */
+/* ── CTA — deeper gradient (marketing / hero) ── */
 .wx-btn--cta {
   background: var(--wx-gradient-cta);
   color: var(--wx-text-on-brand);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 14px -2px rgba(58, 123, 213, 0.35);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--wx-text-on-brand) 18%, transparent), 0 4px 14px -2px color-mix(in srgb, var(--wx-brand-500) 35%, transparent);
 }
 .wx-btn--cta:hover:not(:disabled) {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 22px -2px rgba(58, 123, 213, 0.5);
-  transform: translateY(-1px);
-}
-.wx-btn--cta:active:not(:disabled) {
-  transform: translateY(0) scale(0.975);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--wx-text-on-brand) 18%, transparent), 0 8px 22px -2px color-mix(in srgb, var(--wx-brand-500) 50%, transparent);
+  filter: brightness(1.05);
 }
 
-/* ── Secondary — surface card ── */
+/* ── Secondary — nền surface, viền slate, hover nền trung tính + viền đậm hơn ── */
 .wx-btn--secondary {
   background: var(--wx-surface-elevated);
-  color: var(--wx-text-primary);
-  border: 1px solid var(--wx-border-default);
-  box-shadow: var(--wx-shadow-sm);
+  color: var(--wx-text-secondary);
+  border-color: var(--wx-border-default);
 }
 .wx-btn--secondary:hover:not(:disabled) {
-  background: var(--wx-hover-bg);
-  box-shadow: var(--wx-shadow-md);
-  transform: translateY(-1px);
-}
-.wx-btn--secondary:active:not(:disabled) {
-  transform: scale(0.975);
+  background: var(--wx-hover-neutral-raised);
+  border-color: var(--wx-border-control);
+  color: var(--wx-text-primary);
 }
 
 /* ── Neutral — subtle filled ── */
 .wx-btn--neutral {
   background: var(--wx-neutral-bg);
   color: var(--wx-neutral-text);
-  border: 1px solid var(--wx-neutral-border);
+  border-color: var(--wx-neutral-border);
 }
 .wx-btn--neutral:hover:not(:disabled) {
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral);
   color: var(--wx-text-primary);
-  border-color: var(--wx-border-default);
+  border-color: var(--wx-border-control);
 }
 
 /* ── Ghost — transparent ── */
@@ -169,43 +188,39 @@ defineEmits<{
   color: var(--wx-text-secondary);
 }
 .wx-btn--ghost:hover:not(:disabled) {
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral);
   color: var(--wx-text-primary);
 }
 
-/* ── Danger — gradient ── */
+/* ── Danger / Success / Warning — gradient tông ngữ nghĩa, bóng theo màu ── */
 .wx-btn--danger {
   background: var(--wx-gradient-danger);
   color: var(--wx-text-on-brand);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(220, 38, 38, 0.25);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--wx-danger-solid) 34%, transparent);
 }
 .wx-btn--danger:hover:not(:disabled) {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 20px -2px rgba(220, 38, 38, 0.4);
-  filter: brightness(1.07);
-  transform: translateY(-1px);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--wx-danger-solid) 44%, transparent);
+  filter: brightness(1.06);
 }
-.wx-btn--danger:active:not(:disabled) { transform: scale(0.975); }
 
-/* ── Success — gradient ── */
 .wx-btn--success {
   background: var(--wx-gradient-success);
   color: var(--wx-text-on-brand);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(22, 163, 74, 0.25);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--wx-success-solid) 34%, transparent);
 }
 .wx-btn--success:hover:not(:disabled) {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 20px -2px rgba(22, 163, 74, 0.4);
-  filter: brightness(1.07);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--wx-success-solid) 44%, transparent);
+  filter: brightness(1.06);
 }
 
-/* ── Warning — gradient ── */
 .wx-btn--warning {
   background: var(--wx-gradient-warning);
   color: var(--wx-text-on-brand);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 4px 12px -2px rgba(217, 119, 6, 0.25);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--wx-warning-solid) 34%, transparent);
 }
 .wx-btn--warning:hover:not(:disabled) {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 20px -2px rgba(217, 119, 6, 0.4);
-  filter: brightness(1.07);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--wx-warning-solid) 44%, transparent);
+  filter: brightness(1.06);
 }
 
 /* ── Link / Text — text link minimal ── */
@@ -218,7 +233,7 @@ defineEmits<{
   overflow: visible;
 }
 .wx-btn--text:hover:not(:disabled) {
-  background: var(--wx-hover-bg);
+  background: var(--wx-hover-neutral);
   color: var(--wx-text-primary);
 }
 
@@ -235,12 +250,12 @@ defineEmits<{
   text-underline-offset: 2px;
 }
 
-/* ── Shine sweep — primary & cta only ── */
+/* ── Shine sweep — cta only ── */
 .wx-btn__shine {
   position: absolute;
   inset: 0;
   transform: translateX(calc(-100% - 2px));
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--wx-text-on-brand) 18%, transparent) 50%, transparent 100%);
   pointer-events: none;
   transition: transform var(--wx-d-decorative) var(--wx-ease-accelerate);
 }
@@ -252,11 +267,20 @@ defineEmits<{
 .wx-btn__spinner {
   width: 14px;
   height: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid color-mix(in srgb, var(--wx-text-on-brand) 30%, transparent);
   border-top-color: currentColor;
   border-radius: var(--wx-radius-full);
   animation: wx-btn-spin 0.6s linear infinite;
   flex-shrink: 0;
+}
+/* Nút không nền đặc: vòng quay dùng màu chữ thay vì trắng mờ */
+.wx-btn--secondary .wx-btn__spinner,
+.wx-btn--neutral .wx-btn__spinner,
+.wx-btn--ghost .wx-btn__spinner,
+.wx-btn--text .wx-btn__spinner,
+.wx-btn--link .wx-btn__spinner {
+  border-color: color-mix(in srgb, currentColor 25%, transparent);
+  border-top-color: currentColor;
 }
 @keyframes wx-btn-spin { to { transform: rotate(360deg); } }
 
@@ -276,16 +300,10 @@ defineEmits<{
   gap: 6px;
 }
 
-/* ── Dark mode ── */
-.wx-dark .wx-btn--secondary {
-  background: var(--wx-surface-elevated);
-  color: var(--wx-text-primary);
-  border-color: var(--wx-border-default);
-}
-.wx-dark .wx-btn--secondary:hover:not(:disabled) { background: var(--wx-hover-bg); }
-.wx-dark .wx-btn--neutral { background: var(--wx-neutral-bg); color: var(--wx-neutral-text); }
-.wx-dark .wx-btn--ghost:hover:not(:disabled) {
-  background: var(--wx-hover-bg);
-  color: var(--wx-text-primary);
+/* Dark mode: không cần override — surface/hover/border/shadow đều là token đã tự đổi theo theme. */
+
+@media (prefers-reduced-motion: reduce) {
+  .wx-btn { transition: none; }
+  .wx-btn__shine { display: none; }
 }
 </style>

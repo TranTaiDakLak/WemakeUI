@@ -10,7 +10,10 @@ import {
   BaseButton, BaseInput, BaseSelectMenu, BaseCheckbox, BaseRadio, BaseToggle,
   BaseBadge, BaseProgress, BaseSkeleton,
   BaseTextarea, BaseAvatar, BaseAvatarGroup, BaseSpinner, BaseTag, ShimmerBlock,
+  BaseIconTile, BaseKbd, BaseStatusDot, BaseFormPanel, BaseOptionRow, BaseOptionCard,
+  BaseSegmented, BaseUpdateBanner, BaseLiquidLoader, BaseGuideHint,
 } from '../../components/common'
+import type { SegmentedOption } from '../../types'
 
 const form = reactive({
   text: '',
@@ -41,16 +44,43 @@ const planRadioOptions = [
   { value: 'custom', label: 'tuỳ chỉnh' },
 ]
 
+/* ── 16. primitives theo ngôn ngữ MindAds ── */
+const ICON_COLUMNS = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18"/></svg>'
+const ICON_SHEET = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>'
+const ICON_CODE = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>'
+
+const langOptions: SegmentedOption<string>[] = [
+  { value: 'vi', label: 'VI' },
+  { value: 'en', label: 'EN' },
+]
+const rangeOptions: SegmentedOption<string>[] = [
+  { value: 'day', label: 'Ngày' },
+  { value: 'week', label: 'Tuần' },
+  { value: 'month', label: 'Tháng' },
+  { value: 'year', label: 'Năm', disabled: true },
+]
+const lang = ref('vi')
+const range = ref('week')
+const cols = reactive({ name: true, status: true, attachment: false, note: false })
+const reloadMode = ref<'all' | 'selected'>('all')
+const exportPick = ref<string | null>(null)
+const bannerShow = ref(true)
+const loaderShow = ref(false)
+function showLoaderBriefly() {
+  loaderShow.value = true
+  setTimeout(() => { loaderShow.value = false }, 2600)
+}
+
 </script>
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="phase 1 — base primitives" />
+    <AppTopbar title="MindUI" subtitle="phase 1 — base primitives" />
 
     <main class="main">
       <PageHeader
         title="phase 1 — base primitives"
-        description="15 component nguyên tử với các state (default / hover / focus / disabled / loading / invalid). dùng tab phím để thử focus ring."
+        description="15 component nguyên tử + bộ primitive MindAds (segmented, form panel, option row/card, update banner, liquid loader…) với các state (default / hover / focus / disabled / loading / invalid). dùng tab phím để thử focus ring."
       />
 
       <!-- ── 1. Button ────────────────────────────── -->
@@ -390,6 +420,117 @@ const planRadioOptions = [
         </div>
       </section>
 
+      <!-- ── 16. MindAds primitives ───────────────── -->
+      <section id="mindads" class="card">
+        <h2 class="h">16. primitives MindAds — segmented, form panel, option, banner…</h2>
+        <p class="muted">port ngôn ngữ thiết kế của app MindAds: control cao 34px, bo 9px, nút chính xanh đặc, viền slate, focus ring 3px.</p>
+
+        <h3 class="sub">segmented — tone primary / neutral / size / block</h3>
+        <div class="row">
+          <BaseSegmented v-model="lang" :options="langOptions" aria-label="Ngôn ngữ" />
+          <BaseSegmented v-model="range" :options="rangeOptions" tone="neutral" aria-label="Khoảng thời gian" />
+          <BaseSegmented v-model="range" :options="rangeOptions" size="sm" aria-label="Khoảng thời gian (sm)" />
+        </div>
+        <div class="block-row">
+          <BaseSegmented v-model="range" :options="rangeOptions" block tone="neutral" aria-label="Khoảng thời gian (block)" />
+        </div>
+
+        <h3 class="sub">icon-tile · kbd · status dot</h3>
+        <div class="row align-center">
+          <BaseIconTile :icon="ICON_COLUMNS" size="sm" />
+          <BaseIconTile :icon="ICON_COLUMNS" />
+          <BaseIconTile :icon="ICON_COLUMNS" size="lg" />
+          <BaseIconTile :icon="ICON_SHEET" tone="success" />
+          <BaseIconTile :icon="ICON_CODE" tone="blue" />
+          <BaseIconTile :icon="ICON_SHEET" tone="warning" />
+          <BaseIconTile :icon="ICON_SHEET" tone="danger" />
+          <BaseIconTile :icon="ICON_SHEET" tone="neutral" />
+          <span class="sep" />
+          <BaseKbd>Esc</BaseKbd>
+          <BaseKbd>Ctrl</BaseKbd><BaseKbd>K</BaseKbd>
+          <span class="sep" />
+          <BaseStatusDot tone="success" pulse label="Hoạt động" show-label />
+          <BaseStatusDot tone="danger" pulse label="Lỗi" show-label />
+          <BaseStatusDot tone="warning" label="Chờ duyệt" show-label />
+          <BaseStatusDot tone="neutral" label="Chưa kiểm tra" show-label />
+        </div>
+
+        <h3 class="sub">form panel — head (icon-tile) / body (option row, option card) / foot</h3>
+        <div class="grid-2" style="align-items: start">
+          <BaseFormPanel
+            title="Cột hiển thị"
+            subtitle="Bật/tắt cột trong bảng"
+            :icon="ICON_COLUMNS"
+            closable
+            close-on-esc
+            :body-max-height="220"
+          >
+            <BaseOptionRow v-model="cols.name" label="Tên tài khoản" badge="Bắt buộc" />
+            <BaseOptionRow v-model="cols.status" label="Trạng thái" highlight />
+            <BaseOptionRow v-model="cols.attachment" label="Tệp đính kèm" description="Chỉ hiện khi bản ghi có tệp" />
+            <BaseOptionRow v-model="cols.note" label="Ghi chú" />
+            <template #footer-hint>Kéo để sắp xếp</template>
+            <template #footer>
+              <BaseButton size="sm" variant="secondary">Mặc định</BaseButton>
+              <BaseButton size="sm">Áp dụng</BaseButton>
+            </template>
+          </BaseFormPanel>
+
+          <BaseFormPanel title="Nạp lại / xuất dữ liệu" subtitle="Chọn phạm vi và định dạng" :icon="ICON_SHEET" tone="blue" kbd="Esc">
+            <BaseOptionRow
+              :model-value="reloadMode === 'all'"
+              indicator="radio"
+              label="Tất cả tài khoản"
+              @update:model-value="reloadMode = 'all'"
+            />
+            <BaseOptionRow
+              :model-value="reloadMode === 'selected'"
+              indicator="radio"
+              label="Chỉ các dòng đã chọn"
+              @update:model-value="reloadMode = 'selected'"
+            />
+            <div class="panel-stack">
+              <BaseOptionCard title="Xuất Excel" description="Tệp .xlsx đầy đủ cột" :icon="ICON_SHEET" tone="success" :selected="exportPick === 'xlsx'" @click="exportPick = 'xlsx'" />
+              <BaseOptionCard title="Xuất JSON" description="Dành cho tích hợp" :icon="ICON_CODE" tone="blue" :selected="exportPick === 'json'" @click="exportPick = 'json'" />
+              <BaseOptionCard title="Xuất PDF" description="Chưa hỗ trợ" :icon="ICON_SHEET" tone="neutral" disabled />
+            </div>
+          </BaseFormPanel>
+        </div>
+
+        <h3 class="sub">update banner — inline / có các bước</h3>
+        <div class="stack">
+          <BaseUpdateBanner
+            v-model:show="bannerShow"
+            title="Có bản MindAds 1.4.0 mới"
+            description="Bạn đang dùng 1.3.2 · Cải thiện tốc độ bảng dữ liệu"
+            action-label="Xem thay đổi"
+          />
+          <BaseUpdateBanner tone="warning" title="Có phiên bản web mới" description="Tải lại để nạp bản mới nhất." action-label="Tải lại" />
+          <BaseUpdateBanner
+            tone="warning"
+            title="Cập nhật extension lên 2.1.0"
+            description="Đang cài 2.0.4"
+            action-label="Tải bản mới"
+            action-href="#"
+            :steps="['Tải tệp .zip về máy', 'Giải nén vào thư mục cố định', 'Mở chrome://extensions và bấm Tải lại']"
+          />
+          <BaseButton v-if="!bannerShow" size="sm" variant="secondary" @click="bannerShow = true">Hiện lại banner</BaseButton>
+        </div>
+
+        <h3 class="sub">guide hint · liquid loader</h3>
+        <div class="row align-center">
+          <span class="muted">Chọn tài khoản</span>
+          <BaseGuideHint title="Cách chọn tài khoản" :steps="['Bấm vào hàng để chọn', 'Giữ Shift để chọn nhiều hàng', 'Chuột phải để mở menu thao tác']" />
+          <BaseGuideHint label="Tài liệu hướng dẫn" title="Hướng dẫn" :steps="['Mở tài liệu ở tab mới']" />
+          <span class="sep" />
+          <BaseButton variant="secondary" @click="showLoaderBriefly">Hiện liquid loader (2,6 giây)</BaseButton>
+        </div>
+        <div class="loader-demo">
+          <span class="muted">khung demo — loader chỉ phủ vùng này (fullscreen = false)</span>
+          <BaseLiquidLoader :show="loaderShow" :fullscreen="false" />
+        </div>
+      </section>
+
     </main>
   </div>
 </template>
@@ -475,6 +616,7 @@ code {
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
 }
 
+/* Ô nền tối CỐ ĐỊNH (demo icon/logo trắng trên nền tối, không theo theme) */
 .dark-bg {
   display: inline-flex;
   align-items: center;
@@ -483,7 +625,7 @@ code {
   height: 32px;
   background: #0f172a;
   border-radius: var(--wx-radius-md);
-  color: #fff;
+  color: var(--wx-text-on-brand);
 }
 
 .inline-status {
@@ -531,6 +673,23 @@ code {
   display: flex;
   flex-direction: column;
   gap: var(--wx-space-1);
+}
+
+/* ── 16. MindAds primitives ─── */
+.sep { width: 1px; height: 20px; background: var(--wx-border-default); }
+.stack { display: flex; flex-direction: column; gap: var(--wx-space-3); }
+.panel-stack { display: flex; flex-direction: column; gap: var(--wx-space-2); margin-top: var(--wx-space-3); }
+.loader-demo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  margin-top: var(--wx-space-3);
+  border: 1px dashed var(--wx-border-control);
+  border-radius: var(--wx-radius-lg);
+  background: var(--wx-surface-sunken);
+  overflow: hidden;
 }
 
 </style>

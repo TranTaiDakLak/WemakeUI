@@ -66,24 +66,31 @@
 /* ── Input Baseline ───────────────────────────────────── */
 .wx-input-base {
   font-family: var(--wx-font-primary);
-  font-size: var(--wx-density-font-size);
-  height: var(--wx-density-input-height);
-  padding: 0 var(--wx-density-cell-px);
-  border-radius: var(--wx-radius-lg);
-  border: 1px solid var(--wx-border-default);
+  font-size: var(--wx-control-fs);
+  height: var(--wx-control-h-md);
+  padding: 0 var(--wx-control-px);
+  border-radius: var(--wx-radius-ctrl);
+  border: 1px solid var(--wx-border-control);
   background: var(--wx-surface-base);
   color: var(--wx-text-primary);
-  transition: all var(--wx-duration-fast) var(--wx-easing-default);
+  transition:
+    border-color var(--wx-d-fast) var(--wx-ease-standard),
+    box-shadow var(--wx-d-fast) var(--wx-ease-standard),
+    background var(--wx-d-fast) var(--wx-ease-standard);
 }
 
 .wx-input-base::placeholder {
-  color: var(--wx-text-muted);
+  color: var(--wx-text-placeholder);
+}
+
+.wx-input-base:hover:not(:disabled):not(:focus) {
+  border-color: var(--wx-border-control-hover);
 }
 
 .wx-input-base:focus {
   outline: none;
   border-color: var(--wx-border-focus);
-  box-shadow: var(--wx-shadow-focus);
+  box-shadow: var(--wx-ring-focus);
 }
 
 .wx-input-base:disabled {

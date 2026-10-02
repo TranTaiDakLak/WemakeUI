@@ -102,9 +102,9 @@ const TEAMS = [
         <template #header><span class="card-label">Thông tin tổ chức</span></template>
         <template #body>
           <div class="settings-form">
-            <div class="form-row"><label class="form-label">Tên tổ chức</label><input class="form-input" value="WemakeUI Corp" /></div>
-            <div class="form-row"><label class="form-label">Slug</label><input class="form-input" value="wemakeui" /></div>
-            <div class="form-row"><label class="form-label">Website</label><input class="form-input" value="https://wemakeui.vn" /></div>
+            <div class="form-row"><label class="form-label">Tên tổ chức</label><input class="form-input" value="MindUI Corp" /></div>
+            <div class="form-row"><label class="form-label">Slug</label><input class="form-input" value="mindui" /></div>
+            <div class="form-row"><label class="form-label">Website</label><input class="form-input" value="https://mindui.vn" /></div>
             <BaseButton variant="primary" size="sm">Lưu thay đổi</BaseButton>
           </div>
         </template>
@@ -126,7 +126,7 @@ const TEAMS = [
 </template>
 
 <style scoped>
-.member-table-wrap { background: var(--wx-bg-base); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-lg); overflow: hidden; }
+.member-table-wrap { background: var(--wx-bg-base); border: 1px solid var(--wx-border-default); border-radius: var(--wx-radius-lg); overflow-x: auto; }
 .member-table { width: 100%; border-collapse: collapse; font-size: var(--wx-fs-14); }
 .member-table th { padding: var(--wx-space-3) var(--wx-space-4); text-align: left; font-size: var(--wx-fs-12); font-weight: var(--wx-fw-semibold); color: var(--wx-content-muted); background: var(--wx-bg-sunken); border-bottom: 1px solid var(--wx-border-default); }
 .member-table td { padding: var(--wx-space-3) var(--wx-space-4); border-bottom: 1px solid var(--wx-border-subtle); }

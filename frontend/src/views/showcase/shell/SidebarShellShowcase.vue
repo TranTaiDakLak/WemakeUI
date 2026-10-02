@@ -82,7 +82,7 @@ const sections: SidebarSection[] = [
 /* ── form state cho main demo ── */
 const form = ref({
   name: 'Nguyễn Văn A',
-  email: 'a@wemake.vn',
+  email: 'a@mind.vn',
   plan: 'pro',
   newsletter: true,
   bio: '',
@@ -112,7 +112,7 @@ function onSelect(item: { id: string }) {
 <template>
   <AppShell variant="sidebar" :topbar-height="56">
     <template #topbar>
-      <AppTopbar title="WemakeUI" subtitle="sidebar shell demo">
+      <AppTopbar title="MindUI" subtitle="sidebar shell demo">
         <template #actions>
         </template>
       </AppTopbar>
@@ -123,7 +123,7 @@ function onSelect(item: { id: string }) {
         :sections="sections"
         :active-id="activeId"
         :collapsed="sidebarCollapsed"
-        brand="WemakeUI"
+        brand="MindUI"
         logo-src="/logo.png"
         @update:collapsed="(v: boolean) => sidebarCollapsed = v"
         @select="onSelect"
@@ -356,7 +356,7 @@ function onSelect(item: { id: string }) {
   width: 28px; height: 28px;
   border-radius: var(--wx-radius-full);
   background: var(--wx-gradient-button);
-  color: white;
+  color: var(--wx-text-on-brand);
   font-weight: var(--wx-fw-semibold);
   font-size: var(--wx-fs-12);
   flex-shrink: 0;

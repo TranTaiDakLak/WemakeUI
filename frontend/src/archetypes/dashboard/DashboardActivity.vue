@@ -120,7 +120,7 @@ const tabItems = computed(() => [
               <td class="cell-warn">{{ acc.expiresIn }}</td>
               <td>
                 <BaseBadge
-                  :text="acc.status === 'checkpoint' ? 'Checkpoint' : 'Sắp hết hạn'"
+                  :text="acc.status === 'checkpoint' ? 'Chờ xác minh' : 'Sắp hết hạn'"
                   :variant="acc.status === 'checkpoint' ? 'warning' : 'neutral'"
                   dot
                 />

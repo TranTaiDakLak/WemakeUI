@@ -48,7 +48,7 @@ function settingRows(): SettingRow[] {
 
 <template>
   <div class="fp">
-    <AppTopbar title="WemakeUI" subtitle="forms — drawer form" />
+    <AppTopbar title="MindUI" subtitle="forms — drawer form" />
     <main class="fp__main">
 
       <div class="fp__hdr">

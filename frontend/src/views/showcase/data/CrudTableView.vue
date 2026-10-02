@@ -171,7 +171,7 @@ const densityMap: Record<Density, { td: string; th: string }> = {
 
 <template>
   <div class="page">
-    <AppTopbar title="WemakeUI" subtitle="data · crud-table" />
+    <AppTopbar title="MindUI" subtitle="data · crud-table" />
 
     <main class="main">
       <PageHeader
@@ -306,9 +306,9 @@ const densityMap: Record<Density, { td: string; th: string }> = {
 }
 .density-btn:hover { border-color: var(--wx-brand-primary); color: var(--wx-brand-primary); }
 .density-btn--active {
-  background: var(--wx-brand-primary);
-  border-color: var(--wx-brand-primary);
-  color: #fff;
+  background: var(--wx-brand-solid);
+  border-color: var(--wx-brand-solid);
+  color: var(--wx-text-on-brand);
 }
 .density-note {
   margin: var(--wx-space-2) 0 0;

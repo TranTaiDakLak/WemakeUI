@@ -8,12 +8,18 @@ const props = withDefaults(defineProps<{
   expiryDate?: string
   version?: string
   progress?: number
+  /** Nhãn segment "Live" mặc định (đổi khi dữ liệu không phải tài khoản, vd "Hoạt động") */
+  liveLabel?: string
+  /** Nhãn segment "Die" mặc định (vd "Không hoạt động") */
+  dieLabel?: string
 }>(), {
   statusText: 'Sẵn sàng',
   userName: '',
   expiryDate: '',
   version: '',
   progress: -1,
+  liveLabel: 'Live',
+  dieLabel: 'Die',
 })
 
 const emit = defineEmits<{
@@ -24,8 +30,8 @@ const emit = defineEmits<{
 <template>
   <div class="app-statusbar">
     <div class="statusbar-group">
-      <!-- Default stats (if provided) -->
-      <template v-if="props.stats">
+      <!-- Default stats (if provided) — nhường chỗ cho slot #left khi consumer tự truyền -->
+      <template v-if="props.stats && !$slots.left">
         <span
           class="statusbar-item statusbar-item--clickable"
           role="button"
@@ -33,7 +39,7 @@ const emit = defineEmits<{
           @click="emit('segment-click', 'live')"
           @keydown.enter.space.prevent="emit('segment-click', 'live')"
         >
-          Live: <b class="sb-val sb-live">{{ props.stats.live }}</b>
+          {{ props.liveLabel }}: <b class="sb-val sb-live">{{ props.stats.live }}</b>
         </span>
         <span class="sb-sep" />
         <span
@@ -43,7 +49,7 @@ const emit = defineEmits<{
           @click="emit('segment-click', 'die')"
           @keydown.enter.space.prevent="emit('segment-click', 'die')"
         >
-          Die: <b class="sb-val sb-die">{{ props.stats.total - props.stats.live }}</b>
+          {{ props.dieLabel }}: <b class="sb-val sb-die">{{ props.stats.total - props.stats.live }}</b>
         </span>
         <span class="sb-sep" />
         <span
@@ -102,24 +108,27 @@ const emit = defineEmits<{
       <!-- Custom right slot -->
       <slot name="right" />
 
-      <span v-if="props.statusText" class="statusbar-item">
-        <b class="sb-val sb-status">{{ props.statusText }}</b>
-      </span>
-      <template v-if="props.userName">
-        <span class="sb-sep" />
-        <span class="statusbar-item">
-          <b class="sb-val sb-user">{{ props.userName }}</b>
+      <!-- Default segments — chỉ hiện khi KHÔNG truyền slot #right, tránh chồng chéo -->
+      <template v-if="!$slots.right">
+        <span v-if="props.statusText" class="statusbar-item">
+          <b class="sb-val sb-status">{{ props.statusText }}</b>
         </span>
-      </template>
-      <template v-if="props.expiryDate">
-        <span class="sb-sep" />
-        <span class="statusbar-item">
-          HSD: <b class="sb-val sb-expiry">{{ props.expiryDate }}</b>
-        </span>
-      </template>
-      <template v-if="props.version">
-        <span class="sb-sep" />
-        <span class="statusbar-item sb-version">{{ props.version }}</span>
+        <template v-if="props.userName">
+          <span class="sb-sep" />
+          <span class="statusbar-item">
+            <b class="sb-val sb-user">{{ props.userName }}</b>
+          </span>
+        </template>
+        <template v-if="props.expiryDate">
+          <span class="sb-sep" />
+          <span class="statusbar-item">
+            HSD: <b class="sb-val sb-expiry">{{ props.expiryDate }}</b>
+          </span>
+        </template>
+        <template v-if="props.version">
+          <span class="sb-sep" />
+          <span class="statusbar-item sb-version">{{ props.version }}</span>
+        </template>
       </template>
     </div>
   </div>

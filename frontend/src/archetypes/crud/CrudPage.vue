@@ -66,6 +66,18 @@ const paginated = computed(() => {
   return filtered.value.slice(start, start + pageSize.value)
 })
 
+/** STT built-in; tự tắt nếu config đã tự khai báo cột `stt` (tránh hai cột STT liền nhau) */
+const showRowIndex = computed(() =>
+  props.config.showRowIndex !== false && !props.config.columns.some(c => c.key === 'stt'),
+)
+
+/** Tuỳ chọn cỡ trang — luôn chứa cỡ hiện tại để ô chọn không rơi về placeholder "Chọn…" */
+const pageSizeOptions = computed(() => {
+  const sizes = [10, 20, 50, 100]
+  if (!sizes.includes(pageSize.value)) sizes.push(pageSize.value)
+  return sizes.sort((a, b) => a - b).map(n => ({ value: String(n), label: n + '/trang' }))
+})
+
 const _isAllSelected = computed(() => isAllSelected(paginated.value as any))
 const _isIndeterminate = computed(() => isIndeterminate(paginated.value as any))
 
@@ -244,7 +256,7 @@ defineExpose({ openAdd: handleOpenAdd })
               with `config.showRowIndex: false`. Number resets per page (uses
               global paginated index = (page-1)*pageSize + rowIdx + 1).
             -->
-            <th v-if="config.showRowIndex !== false" class="col-stt text-center">STT</th>
+            <th v-if="showRowIndex" class="col-stt text-center">STT</th>
             <th
               v-for="col in config.columns"
               :key="col.key"
@@ -279,7 +291,7 @@ defineExpose({ openAdd: handleOpenAdd })
             </td>
 
             <!-- STT (row-number) cell — matches header on/off rule -->
-            <td v-if="config.showRowIndex !== false" class="col-stt text-center">
+            <td v-if="showRowIndex" class="col-stt text-center">
               {{ (currentPage - 1) * pageSize + rowIdx + 1 }}
             </td>
 
@@ -363,7 +375,7 @@ defineExpose({ openAdd: handleOpenAdd })
         </span>
         <BaseSelectMenu
           :model-value="String(pageSize)"
-          :options="[{value:'10',label:'10/trang'},{value:'20',label:'20/trang'},{value:'50',label:'50/trang'},{value:'100',label:'100/trang'}]"
+          :options="pageSizeOptions"
           size="sm"
           @update:model-value="v => pageSize = Number(v)"
         />
@@ -690,7 +702,7 @@ defineExpose({ openAdd: handleOpenAdd })
   border-color: color-mix(in srgb, var(--wx-brand-primary) 25%, transparent);
 }
 .row-btn--edit:hover {
-  background: var(--wx-brand-primary);
+  background: var(--wx-brand-600);
   color: var(--wx-text-on-brand);
   border-color: var(--wx-brand-primary);
   box-shadow: 0 3px 10px -2px color-mix(in srgb, var(--wx-brand-primary) 50%, transparent);
@@ -702,11 +714,11 @@ defineExpose({ openAdd: handleOpenAdd })
 
 /* Delete — red */
 .row-btn--delete {
-  color: var(--wx-danger-solid);
+  color: var(--wx-danger-text);
   border-color: color-mix(in srgb, var(--wx-danger-solid) 25%, transparent);
 }
 .row-btn--delete:hover {
-  background: var(--wx-danger-solid);
+  background: var(--wx-shell-solid-danger);
   color: var(--wx-text-on-brand);
   border-color: var(--wx-danger-solid);
   box-shadow: 0 3px 10px -2px color-mix(in srgb, var(--wx-danger-solid) 50%, transparent);

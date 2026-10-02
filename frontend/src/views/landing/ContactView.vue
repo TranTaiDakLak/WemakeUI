@@ -17,9 +17,9 @@ function submit() {
 }
 
 const CONTACTS: { icon: LucideIcon; label: string; value: string }[] = [
-  { icon: Mail,          label: 'Email',       value: 'hello@wemakeui.vn' },
-  { icon: MessageSquare, label: 'Discord',     value: 'discord.gg/wemakeui' },
-  { icon: Twitter,       label: 'Twitter / X', value: '@wemakeui' },
+  { icon: Mail,          label: 'Email',       value: 'hello@mindui.vn' },
+  { icon: MessageSquare, label: 'Discord',     value: 'discord.gg/mindui' },
+  { icon: Twitter,       label: 'Twitter / X', value: '@mindui' },
   { icon: Building2,     label: 'Địa chỉ',     value: '123 Lê Lợi, Quận 1, TP.HCM' },
 ]
 </script>
@@ -86,7 +86,7 @@ const CONTACTS: { icon: LucideIcon; label: string; value: string }[] = [
 </template>
 
 <style scoped>
-.contact-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-8); background: var(--wx-gradient-bg); text-align: center; }
+.contact-hero { padding: var(--wx-space-12) var(--wx-space-5) var(--wx-space-8); background: var(--wx-shell-hero-bg); text-align: center; }
 .contact-title { font-size: var(--wx-fs-40); font-weight: 800; letter-spacing: var(--wx-tracking-tight); margin-bottom: var(--wx-space-3); }
 .contact-desc { font-size: var(--wx-fs-18); color: var(--wx-content-secondary); margin: 0; }
 

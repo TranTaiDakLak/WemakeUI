@@ -30,11 +30,14 @@ defineProps<{
 </template>
 
 <style scoped>
+/* Chữ success/warning/info pha thêm ~12% đen để giữ AA (>=4.5:1) cả khi badge nằm trên nền sunken; dark mode ghi đè lại bằng token (xem cuối file) */
+/* Badge có viền tint mảnh (như nhãn 'Bắt buộc' / trạng thái của nguồn): nền nhạt + viền cùng tông + chữ đậm */
 .base-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 2px var(--wx-space-2);
+  padding: 1px 7px;
+  border: 1px solid transparent;
   border-radius: var(--wx-radius-full);
   font-size: 11px;
   font-weight: 600;
@@ -44,16 +47,16 @@ defineProps<{
 }
 
 .base-badge--primary { background: var(--wx-neutral-bg); color: var(--wx-text-primary); border: 1px solid var(--wx-border-default); }
-.base-badge--success { background: color-mix(in srgb, var(--wx-success-solid) 12%, transparent); color: var(--wx-success-text); }
-.base-badge--warning { background: color-mix(in srgb, var(--wx-warning-solid) 12%, transparent); color: var(--wx-warning-text); }
-.base-badge--danger  { background: color-mix(in srgb, var(--wx-danger-solid) 12%, transparent);  color: var(--wx-danger-text); }
-.base-badge--info    { background: color-mix(in srgb, var(--wx-brand-primary) 12%, transparent); color: var(--wx-brand-primary); }
+.base-badge--success { background: color-mix(in srgb, var(--wx-success-solid) 12%, transparent); color: color-mix(in srgb, var(--wx-success-text) 88%, black); border-color: color-mix(in srgb, var(--wx-success-solid) 28%, transparent); }
+.base-badge--warning { background: color-mix(in srgb, var(--wx-warning-solid) 12%, transparent); color: color-mix(in srgb, var(--wx-warning-text) 88%, black); border-color: color-mix(in srgb, var(--wx-warning-solid) 30%, transparent); }
+.base-badge--danger  { background: color-mix(in srgb, var(--wx-danger-solid) 12%, transparent);  color: var(--wx-danger-text);  border-color: color-mix(in srgb, var(--wx-danger-solid) 28%, transparent); }
+.base-badge--info    { background: color-mix(in srgb, var(--wx-brand-primary) 12%, transparent); color: color-mix(in srgb, var(--wx-brand-primary) 88%, black); border-color: color-mix(in srgb, var(--wx-brand-primary) 28%, transparent); }
 .base-badge--ghost   { background: transparent; color: var(--wx-text-secondary); border: 1px solid var(--wx-border-default); }
 .base-badge--neutral { background: var(--wx-neutral-bg); color: var(--wx-neutral-text); border: 1px solid var(--wx-neutral-border); }
 
-.base-badge--sm { font-size: 10px; padding: 1px 6px; }
-.base-badge--md { font-size: 11px; padding: 2px var(--wx-space-2); }
-.base-badge--lg { font-size: 12px; padding: 3px 10px; }
+.base-badge--sm { font-size: 10px; padding: 0 5px; }
+.base-badge--md { font-size: 11px; padding: 1px 7px; }
+.base-badge--lg { font-size: 12px; padding: 2px 9px; }
 
 /* Dot indicator inline (dot=true + has text) */
 .base-badge--with-dot { gap: 5px; }
@@ -75,6 +78,7 @@ defineProps<{
   width: 8px;
   height: 8px;
   padding: 0;
+  border: none;
   border-radius: 50%;
 }
 .base-badge--dot-only.base-badge--primary { background: var(--wx-brand-primary); border: none; }
@@ -85,28 +89,29 @@ defineProps<{
 
 /* Solid (notification count style) — luôn bg đậm + chữ trắng + viền trắng */
 .base-badge--solid {
-  color: #fff;
-  border: 2px solid #fff;
+  color: var(--wx-text-on-brand);
+  border: 2px solid var(--wx-surface-base);
   min-width: 20px;
   height: 20px;
   padding: 0 6px;
   font-size: 11px;
   font-weight: 700;
   line-height: 1;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);   /* bóng trung tính (đen alpha) — không có token tương đương, giữ nguyên ở cả light/dark */
 }
-.base-badge--solid.base-badge--danger  { background: var(--wx-danger-solid); box-shadow: 0 2px 6px rgba(239, 68, 68, 0.45); }
-.base-badge--solid.base-badge--success { background: var(--wx-success-solid); box-shadow: 0 2px 6px rgba(34, 197, 94, 0.45); }
-.base-badge--solid.base-badge--warning { background: var(--wx-warning-solid); box-shadow: 0 2px 6px rgba(245, 158, 11, 0.45); }
-.base-badge--solid.base-badge--info    { background: var(--wx-brand-primary); box-shadow: 0 2px 6px rgba(59, 130, 246, 0.45); }
-.base-badge--solid.base-badge--primary { background: var(--wx-brand-primary); }
+/* nền đặc + chữ trắng: pha thêm đen để đạt AA (success-solid #22c55e / danger-solid #ef4444 chỉ 2.3–3.8:1 với chữ trắng); warning dùng chữ tối */
+.base-badge--solid.base-badge--danger  { background: color-mix(in srgb, var(--wx-danger-solid) 84%, black); box-shadow: 0 2px 6px color-mix(in srgb, var(--wx-danger-solid) 45%, transparent); }
+.base-badge--solid.base-badge--success { background: color-mix(in srgb, var(--wx-success-solid) 66%, black); box-shadow: 0 2px 6px color-mix(in srgb, var(--wx-success-solid) 45%, transparent); }
+.base-badge--solid.base-badge--warning { background: var(--wx-warning-solid); color: var(--wx-text-on-warning); box-shadow: 0 2px 6px color-mix(in srgb, var(--wx-warning-solid) 45%, transparent); }
+.base-badge--solid.base-badge--info    { background: var(--wx-brand-solid); box-shadow: 0 2px 6px color-mix(in srgb, var(--wx-brand-solid) 45%, transparent); }
+.base-badge--solid.base-badge--primary { background: var(--wx-brand-solid); }
 .base-badge--solid.base-badge--neutral { background: var(--wx-text-secondary); }
-.wx-dark .base-badge--solid { border-color: var(--wx-surface-base); }
 
-/* Dark mode — brighten feedback hues one step to keep WCAG AA contrast on dark surfaces */
-.wx-dark .base-badge--success { background: var(--wx-success-bg); color: var(--wx-success-text); }
-.wx-dark .base-badge--warning { background: var(--wx-warning-bg); color: var(--wx-warning-text); }
-.wx-dark .base-badge--danger  { background: var(--wx-danger-bg);  color: var(--wx-danger-text); }
+/* Dark mode — (loại trừ biến thể solid: nền đặc + chữ trắng giữ nguyên ở dark) brighten feedback hues one step to keep WCAG AA contrast on dark surfaces */
+.wx-dark .base-badge--success:not(.base-badge--solid) { background: var(--wx-success-bg); color: var(--wx-success-text); border-color: var(--wx-success-border); }
+.wx-dark .base-badge--warning:not(.base-badge--solid) { background: var(--wx-warning-bg); color: var(--wx-warning-text); border-color: var(--wx-warning-border); }
+.wx-dark .base-badge--danger:not(.base-badge--solid)  { background: var(--wx-danger-bg);  color: var(--wx-danger-text);  border-color: var(--wx-danger-border); }
+.wx-dark .base-badge--info:not(.base-badge--solid) { color: var(--wx-brand-primary); }
 /* Dot overrides removed (round 21): light-mode dot rules above now use var(--wx-success-text)/
    var(--wx-warning-text)/var(--wx-danger-text) directly, which already cascade to the dark-mode
    token values via .wx-dark on an ancestor — the old duplicate rules here were pixel-identical. */

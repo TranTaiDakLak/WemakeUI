@@ -113,12 +113,12 @@ const hasUnread = computed(() => store.unreadCount > 0)
   background: transparent;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  color: #fff;
+  color: var(--wx-text-on-brand);
   transition: all var(--wx-d-fast);
 }
 .nc-trigger:hover, .nc-trigger--active {
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
+  background: color-mix(in srgb, var(--wx-text-on-brand) 18%, transparent);
+  color: var(--wx-text-on-brand);
 }
 .nc-bell { width: 18px; height: 18px; }
 .nc-badge {
@@ -127,14 +127,14 @@ const hasUnread = computed(() => store.unreadCount > 0)
   min-width: 20px; height: 20px;
   padding: 0 6px;
   border-radius: var(--wx-radius-full);
-  background: #ef4444;       /* red-500 — luôn đỏ tươi */
-  color: #fff;
+  background: color-mix(in srgb, var(--wx-danger-solid) 84%, black);   /* đỏ đậm: chữ trắng đạt AA (danger-solid thuần chỉ ~3.8:1) */
+  color: var(--wx-text-on-brand);
   font-size: 11px;
   font-weight: 700;
   display: flex; align-items: center; justify-content: center;
-  border: 2px solid #fff;    /* trắng — viền nổi trên topbar gradient */
+  border: 2px solid var(--wx-text-on-brand);    /* trắng cố định — viền nổi trên topbar gradient */
   line-height: 1;
-  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.45);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--wx-danger-solid) 45%, transparent);
   z-index: 1;
 }
 /* Dark mode: viền dùng topbar bg để blend, vẫn đỏ tươi */
@@ -254,7 +254,9 @@ const hasUnread = computed(() => store.unreadCount > 0)
   opacity: 0;
   transition: opacity var(--wx-d-fast);
 }
-.nc-item:hover .nc-item__dismiss { opacity: 1; }
+.nc-item:hover .nc-item__dismiss,
+.nc-item:focus-within .nc-item__dismiss { opacity: 1; }
+@media (hover: none) { .nc-item__dismiss { opacity: 1; } }
 .nc-item__dismiss:hover { background: var(--wx-surface-sunken); }
 
 /* panel transition */

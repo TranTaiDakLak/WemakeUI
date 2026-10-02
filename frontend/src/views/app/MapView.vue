@@ -124,7 +124,7 @@ import { computed } from 'vue'
 .location-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--wx-space-2); overflow-y: auto; flex: 1; }
 .loc-item { display: flex; align-items: flex-start; gap: var(--wx-space-3); padding: var(--wx-space-3); border-radius: var(--wx-radius-md); cursor: pointer; border: 1px solid var(--wx-border-subtle); transition: all var(--wx-d-micro); }
 .loc-item:hover { border-color: var(--wx-brand-300); background: var(--wx-hover-bg); }
-.loc-item.active { border-color: var(--wx-brand-500); background: var(--wx-brand-50); }
+.loc-item.active { border-color: var(--wx-brand-500); background: var(--wx-selected-bg); }
 .loc-icon { font-size: 20px; flex-shrink: 0; }
 .loc-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
 .loc-name { font-size: var(--wx-fs-13); font-weight: var(--wx-fw-medium); }
